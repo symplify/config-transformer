@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Tests\Converter\ConfigTransformer;
+namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter;
 
 use Iterator;
-use Migrify\ConfigTransformer\Converter\ConfigTransformer;
+use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Nette\Utils\FileSystem;
@@ -21,7 +21,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class ConfigFormatConverterTest extends AbstractKernelTestCase
 {
     /**
-     * @var ConfigTransformer
+     * @var ConfigFormatConverter
      */
     private $configFormatConverter;
 
@@ -34,7 +34,7 @@ final class ConfigFormatConverterTest extends AbstractKernelTestCase
     {
         $this->bootKernel(ConfigTransformerKernel::class);
 
-        $this->configFormatConverter = self::$container->get(ConfigTransformer::class);
+        $this->configFormatConverter = self::$container->get(ConfigFormatConverter::class);
         $this->containerBuilderCleaner = self::$container->get(ContainerBuilderCleaner::class);
     }
 

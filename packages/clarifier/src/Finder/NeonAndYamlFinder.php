@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\ConfigClarity\Finder;
+namespace Migrify\ConfigTransformer\Clarifier\Finder;
 
 use Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;

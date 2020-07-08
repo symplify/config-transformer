@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\ConfigClarity\Tests\Clarifier\NeonYamlConfigClarifier;
+namespace Migrify\ConfigTransformer\Clarifier\Tests\Clarifier\NeonYamlConfigClarifier;
 
 use Iterator;
-use Migrify\ConfigTransformer\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
-use Migrify\ConfigTransformer\ConfigClarity\HttpKernel\ConfigClarityKernel;
+use Migrify\ConfigTransformer\Clarifier\Clarifier\NeonYamlConfigClarifier;
+use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Nette\Utils\Strings;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
@@ -21,7 +21,7 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
 
     protected function setUp(): void
     {
-        $this->bootKernel(ConfigClarityKernel::class);
+        $this->bootKernel(ConfigTransformerKernel::class);
         $this->neonYamlConfigClarifier = self::$container->get(NeonYamlConfigClarifier::class);
     }
 

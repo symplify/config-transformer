@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 
-final class ConfigFormatConverterKernel extends Kernel
+final class ConfigTransformerKernel extends Kernel
 {
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {

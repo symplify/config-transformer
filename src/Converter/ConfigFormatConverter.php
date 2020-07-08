@@ -12,7 +12,7 @@ use Migrify\ConfigTransformer\Exception\ShouldNotHappenException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Migrify\ConfigTransformer\Tests\Converter\ConfigTransformer\ConfigTransformerTest
+ * @see \Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\ConfigTransformerTest
  */
 final class ConfigFormatConverter
 {

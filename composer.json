@@ -18,13 +18,13 @@
     "autoload": {
         "psr-4": {
             "Migrify\\ConfigTransformer\\": "src",
-            "Migrify\\ConfigTransformer\\ConfigClarity\\": "packages/clarifier/src"
+            "Migrify\\ConfigTransformer\\Clarifier\\": "packages/clarifier/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Migrify\\ConfigTransformer\\Tests\\": "tests",
-            "Migrify\\ConfigTransformer\\ConfigClarity\\Tests\\": "packages/clarifier/tests"
+            "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/clarifier/tests"
 
         }
     }

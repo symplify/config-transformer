@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\Command;
 
 use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Converter\ConfigTransformer;
+use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\Finder\ConfigFileFinder;
 use Migrify\ConfigTransformer\ValueObject\Option;
 use Nette\Utils\FileSystem;
@@ -33,7 +33,7 @@ final class ConvertCommand extends Command
     private $configFileFinder;
 
     /**
-     * @var ConfigTransformer
+     * @var ConfigFormatConverter
      */
     private $configFormatConverter;
 
@@ -45,7 +45,7 @@ final class ConvertCommand extends Command
     public function __construct(
         SymfonyStyle $symfonyStyle,
         ConfigFileFinder $configFileFinder,
-        ConfigTransformer $configFormatConverter,
+        ConfigFormatConverter $configFormatConverter,
         Configuration $configuration
     ) {
         parent::__construct();
