@@ -66,20 +66,24 @@ final class SwitchFormatCommand extends Command
         $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
         $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output');
 
-        $this->addOption(Option::DELETE, null, InputOption::VALUE_NONE, 'Delete original files');
         $this->addOption(
             Option::TARGET_SYMFONY_VERSION,
             null,
             InputOption::VALUE_REQUIRED,
             'Symfony version to migrate config to'
         );
+
+        $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->configuration->populateFromInput($input);
 
-        $fileInfos = $this->configFileFinder->findInDirectory($this->configuration->getSource());
+        $fileInfos = $this->configFileFinder->findInDirectory(
+            $this->configuration->getSource(),
+            $this->configuration->getInputFormat()
+        );
 
         $convertedFileInfos = [];
 
@@ -89,16 +93,21 @@ final class SwitchFormatCommand extends Command
                 $this->configuration->getOutputFormat()
             );
 
-            // dump the file
             $newFileInfo = $this->dumpFile($fileInfo, $convertedContent);
+            if ($newFileInfo === null) {
+                continue;
+            }
+
             $convertedFileInfos[] = $newFileInfo;
         }
 
         $this->deleteOldFiles($fileInfos);
 
         $successMessage = sprintf(
-            '%d files were converted to YAML, while keeping original XML files.',
-            count($convertedFileInfos)
+            'Processed %d files from "%s" to "%s" format',
+            count($fileInfos),
+            $this->configuration->getInputFormat(),
+            $this->configuration->getOutputFormat()
         );
         $this->symfonyStyle->success($successMessage);
 
@@ -110,11 +119,11 @@ final class SwitchFormatCommand extends Command
      */
     private function deleteOldFiles(array $fileInfos): void
     {
-        if (count($fileInfos) === 0) {
+        if ($this->configuration->isDryRun()) {
             return;
         }
 
-        if (! $this->configuration->shouldDeleteOldFiles()) {
+        if (count($fileInfos) === 0) {
             return;
         }
 
@@ -126,13 +135,20 @@ final class SwitchFormatCommand extends Command
         $this->symfonyStyle->warning($deletedFilesMessage);
     }
 
-    private function dumpFile(SmartFileInfo $fileInfo, string $convertedContent): SmartFileInfo
+    private function dumpFile(SmartFileInfo $fileInfo, string $convertedContent): ?SmartFileInfo
     {
         $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
         $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
-        FileSystem::write($newFilePath, $convertedContent);
+
+        if ($this->configuration->isDryRun()) {
+            $message = sprintf('File %s would be dumped (is --dry-run))', $newFilePath);
+            $this->symfonyStyle->writeln($message);
+            return null;
+        }
 
         $newFileInfo = new SmartFileInfo($newFilePath);
+        FileSystem::write($newFileInfo->getRealPath(), $convertedContent);
+
         $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
         $this->symfonyStyle->writeln($message);
 

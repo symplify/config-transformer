@@ -16,9 +16,19 @@ final class Configuration
     private const ALLOWED_OUTPUT_FORMATS = ['yaml'];
 
     /**
+     * @var string[]
+     */
+    private const ALLOWED_INPUT_FORMATS = ['xml'];
+
+    /**
      * @var string
      */
     private $outputFormat;
+
+    /**
+     * @var string
+     */
+    private $inputFormat;
 
     /**
      * @var string
@@ -33,7 +43,7 @@ final class Configuration
     /**
      * @var bool
      */
-    private $shouldDeleteOldFiles = false;
+    private $dryRun = false;
 
     public function populateFromInput(InputInterface $input): void
     {
@@ -41,12 +51,10 @@ final class Configuration
 
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
 
-        $this->shouldDeleteOldFiles = boolval($input->getOption(Option::DELETE));
+        $this->dryRun = boolval($input->getOption(Option::DRY_RUN));
 
-        /** @var string $outputFormat */
-        $outputFormat = (string) $input->getOption(Option::OUTPUT_FORMAT);
-        $this->validateOutputFormatValue($outputFormat);
-        $this->outputFormat = $outputFormat;
+        $this->resolveInputFormat($input);
+        $this->resolveOutputFormat($input);
     }
 
     public function getOutputFormat(): string
@@ -59,38 +67,66 @@ final class Configuration
         return $this->source;
     }
 
-    public function getTargetSymfonyVersion(): float
-    {
-        return $this->targetSymfonyVersion;
-    }
-
     public function isAtLeastSymfonyVersion(float $symfonyVersion): bool
     {
         return $this->targetSymfonyVersion >= $symfonyVersion;
     }
 
-    public function shouldDeleteOldFiles(): bool
+    public function isDryRun(): bool
     {
-        return $this->shouldDeleteOldFiles;
+        return $this->dryRun;
     }
 
-    private function validateOutputFormatValue(string $outputFormat): void
+    public function getInputFormat(): string
     {
-        if ($outputFormat === '') {
-            $message = sprintf('Add missing "--%s" option to command line', Option::OUTPUT_FORMAT);
+        return $this->inputFormat;
+    }
+
+    private function resolveInputFormat(InputInterface $input): void
+    {
+        /** @var string $inputFormat */
+        $inputFormat = (string) $input->getOption(Option::INPUT_FORMAT);
+
+        $this->validateFormatValue($inputFormat, self::ALLOWED_INPUT_FORMATS, Option::INPUT_FORMAT, 'input');
+
+        $this->inputFormat = $inputFormat;
+    }
+
+    /**
+     * @param string[] $allowedValues
+     */
+    private function validateFormatValue(
+        string $formatValue,
+        array $allowedValues,
+        string $optionKey,
+        string $type
+    ): void {
+        if ($formatValue === '') {
+            $message = sprintf('Add missing "--%s" option to command line', $optionKey);
             throw new InvalidConfigurationException($message);
         }
 
-        if (in_array($outputFormat, self::ALLOWED_OUTPUT_FORMATS, true)) {
+        if (in_array($formatValue, $allowedValues, true)) {
             return;
         }
 
         $message = sprintf(
-            'Output format "%s" is not supported. Pick one of "%s"',
-            $outputFormat,
-            implode('", ', self::ALLOWED_OUTPUT_FORMATS)
+            '%s format "%s" is not supported. Pick one of "%s"',
+            ucfirst($type),
+            $formatValue,
+            implode('", ', $allowedValues)
         );
 
         throw new InvalidConfigurationException($message);
+    }
+
+    private function resolveOutputFormat(InputInterface $input): void
+    {
+        /** @var string $outputFormat */
+        $outputFormat = (string) $input->getOption(Option::OUTPUT_FORMAT);
+
+        $this->validateFormatValue($outputFormat, self::ALLOWED_OUTPUT_FORMATS, Option::OUTPUT_FORMAT, 'output');
+
+        $this->outputFormat = $outputFormat;
     }
 }
