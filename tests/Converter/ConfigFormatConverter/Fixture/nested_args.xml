@@ -7,7 +7,7 @@
     <services>
         <service id="advertentie.gateway.api.client" class="GuzzleHttp\Client" public="false">
             <argument type="collection">
-                <argument type="string" key="base_uri">https://%advertentie_api_host%/api/1.6/</argument>
+                <argument type="string" key="base_uri">https://%api_host%/api/1.6/</argument>
                 <argument type="collection" key="headers">
                     <argument type="string" key="Accept">application/json</argument>
                     <argument type="string" key="Content-Type">application/json</argument>
@@ -28,7 +28,7 @@
 services:
     advertentie.gateway.api.client:
         class: GuzzleHttp\Client
-        arguments: [{ base_uri: 'https://%advertentie_api_host%/api/1.6/', headers: { Accept: application/json, Content-Type: application/json } }]
+        arguments: [{ base_uri: 'https://%api_host%/api/1.6/', headers: { Accept: application/json, Content-Type: application/json } }]
 
     advertentie.gateway.reporting.client:
         class: GuzzleHttp\Client

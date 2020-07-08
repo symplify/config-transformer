@@ -86,13 +86,14 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         $definitions = $this->processAnonymousServicesInArguments($xpath, $suffix, $file, $definitions);
 
         $nodeWithIds = $xpath->query('//container:services/container:service[@id]');
-        $hasNamesServices = (bool) $nodeWithIds->length;
+        $hasNamedServices = (bool) $nodeWithIds->length;
 
         // anonymous services "in the wild"
         if (false !== $nodes = $xpath->query('//container:services/container:service[not(@id)]')) {
             foreach ($nodes as $node) {
-                if ($hasNamesServices) {
-                    $id = $this->createServiceNameFromClass($node->getAttribute('class'));
+                if ($hasNamedServices) {
+                    $className = $node->getAttribute('class');
+                    $id = $this->createServiceNameFromClass($className);
                 } else {
                     // give it a unique name
                     $id = sprintf('%d_%s', ++$this->count, hash('sha256', $file));
@@ -128,9 +129,16 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         if (false !== $nodes = $domxPath->query(
             '//container:argument[@type="service"][not(@id)]|//container:property[@type="service"][not(@id)]|//container:bind[not(@id)]|//container:factory[not(@service)]|//container:configurator[not(@service)]'
         )) {
+            /** @var DOMElement $node */
             foreach ($nodes as $node) {
+                // get current service id
+
+                $parentNode = $node->parentNode;
+                // @see https://stackoverflow.com/a/28944/1348344
+                $parentServiceId = $parentNode->getAttribute('id');
+
                 if ($services = $this->privatesCaller->callPrivateMethod($this, 'getChildren', $node, 'service')) {
-                    $id = $this->createUniqueServiceNameFromClass($services[0]);
+                    $id = $this->createUniqueServiceNameFromClass($services[0], $parentServiceId);
 
                     $node->setAttribute(self::ID, $id);
                     $node->setAttribute('service', $id);
@@ -148,10 +156,10 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         return $definitions;
     }
 
-    private function createUniqueServiceNameFromClass(DOMElement $serviceDomElement): string
+    private function createUniqueServiceNameFromClass(DOMElement $serviceDomElement, string $parentServiceId): string
     {
         $class = $serviceDomElement->getAttribute('class');
-        $serviceName = $this->createServiceNameFromClass($class);
+        $serviceName = $parentServiceId . '.' . $this->createServiceNameFromClass($class);
 
         if (isset($this->anonymousServicesNames[$serviceName])) {
             $serviceNameCounter = $this->anonymousServicesNames[$serviceName];

@@ -10,19 +10,22 @@
                 <service class="GuzzleHttp\Client"/>
             </argument>
             <argument type="service">
-                <service class="GuzzleHttp\Client"/>
+                <service class="GuzzleHttp\Client">
+                    <argument type="string" key="base_uri">https://%api_host%/api/1.6/</argument>
+                </service>
             </argument>
         </service>
     </services>
 </container>
 -----
 services:
-    guzzlehttp.client.2:
+    email.chart.url.guzzlehttp.client.2:
         class: GuzzleHttp\Client
+        arguments: { base_uri: 'https://%api_host%/api/1.6/' }
 
-    guzzlehttp.client:
+    email.chart.url.guzzlehttp.client:
         class: GuzzleHttp\Client
 
     email.chart.url:
         class: EmailBundle\Helper\ChartUrl
-        arguments: ['@guzzlehttp.client', '@guzzlehttp.client.2']
+        arguments: ['@email.chart.url.guzzlehttp.client', '@email.chart.url.guzzlehttp.client.2']

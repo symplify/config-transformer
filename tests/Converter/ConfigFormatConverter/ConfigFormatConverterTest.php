@@ -80,16 +80,15 @@ final class ConfigFormatConverterTest extends AbstractKernelTestCase
         FileSystem::write($fileInfo->getRealPath(), $newOriginalContent);
     }
 
-    private function doTestYamlContentIsLoadable(string $convertedContent): void
+    private function doTestYamlContentIsLoadable(string $yamlContent): void
     {
-        // test also converted content is loadable
         $containerBuilder = new ContainerBuilder();
 
-        $localFileYaml = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
-        FileSystem::write($localFileYaml, $convertedContent);
+        $localYamlFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
+        FileSystem::write($localYamlFile, $yamlContent);
 
         $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
-        $yamlFileLoader->load($localFileYaml);
+        $yamlFileLoader->load($localYamlFile);
 
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
 
