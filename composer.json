@@ -1,0 +1,31 @@
+{
+    "name": "migrify/config-transformer",
+    "description": "Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable one - all the useful utils around configs",
+    "license": "MIT",
+    "bin": "bin/config-transformer",
+    "require": {
+        "php": "^7.2",
+        "symfony/dependency-injection": "^4.4|^5.0",
+        "symfony/console": "^4.4|^5.0",
+        "symfony/http-kernel": "^4.4|^5.0",
+        "symfony/yaml": "^4.4|^5.0",
+        "nette/neon": "^3.0",
+        "nette/utils": "^3.1",
+        "symplify/package-builder": "^8.1",
+        "symplify/autowire-array-parameter": "^8.1",
+        "symplify/smart-file-system": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\ConfigTransformer\\": "src",
+            "Migrify\\ConfigTransformer\\ConfigClarity\\": "packages/clarifier/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\ConfigTransformer\\Tests\\": "tests",
+            "Migrify\\ConfigTransformer\\ConfigClarity\\Tests\\": "packages/clarifier/tests"
+
+        }
+    }
+}

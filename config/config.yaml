@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    Migrify\ConfigTransformer\:
+        resource: '../src'
+        exclude:
+            - '../src/HttpKernel/*'
+            - '../src/DependencyInjection/Loader/*'
+
+    Symplify\SmartFileSystem\Finder\FinderSanitizer: null
+
+    Symplify\PackageBuilder\Reflection\PrivatesAccessor: null
+
+    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
+    Symfony\Component\Console\Style\SymfonyStyle:
+        factory: ['@Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory', 'create']
