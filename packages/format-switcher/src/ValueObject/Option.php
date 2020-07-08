@@ -24,10 +24,10 @@ final class Option
     /**
      * @var string
      */
-    public const DELETE = 'delete';
+    public const TARGET_SYMFONY_VERSION = 'target-symfony-version';
 
     /**
      * @var string
      */
-    public const TARGET_SYMFONY_VERSION = 'target-symfony-version';
+    public const DRY_RUN = 'dry-run';
 }
