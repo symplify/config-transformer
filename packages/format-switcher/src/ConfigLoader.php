@@ -13,7 +13,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConfigLoader
 {
-    public function loadContainerBuilderFromFileInfo(SmartFileInfo $smartFileInfo): ContainerBuilder
+    public function createAndLoadContainerBuilderFromFileInfo(SmartFileInfo $smartFileInfo): ContainerBuilder
     {
         $containerBuilder = new ContainerBuilder();
 

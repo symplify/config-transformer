@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
 
-use Iterator;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Nette\Utils\FileSystem;
 use Rector\Core\Testing\ValueObject\SplitLine;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\FileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ConfigFormatConverterTest extends AbstractKernelTestCase
+abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
 {
     /**
      * @var ConfigFormatConverter
@@ -38,16 +39,13 @@ final class ConfigFormatConverterTest extends AbstractKernelTestCase
         $this->containerBuilderCleaner = self::$container->get(ContainerBuilderCleaner::class);
     }
 
-    /**
-     * @dataProvider provideData()
-     */
-    public function test(SmartFileInfo $fixtureFileInfo): void
+    protected function doTestOutput(SmartFileInfo $fixtureFileInfo, string $outputFormat): void
     {
         [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );
 
-        $convertedContent = $this->configFormatConverter->convert($inputFileInfo, 'yaml');
+        $convertedContent = $this->configFormatConverter->convert($inputFileInfo, $outputFormat);
 
         $this->updateFixture($fixtureFileInfo, $inputFileInfo, $convertedContent);
         $this->assertSame(
@@ -56,12 +54,7 @@ final class ConfigFormatConverterTest extends AbstractKernelTestCase
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );
 
-        $this->doTestYamlContentIsLoadable($convertedContent);
-    }
-
-    public function provideData(): Iterator
-    {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.xml');
+        $this->doTestContentIsLoadable($convertedContent, $outputFormat);
     }
 
     /**
@@ -80,20 +73,32 @@ final class ConfigFormatConverterTest extends AbstractKernelTestCase
         FileSystem::write($fileInfo->getRealPath(), $newOriginalContent);
     }
 
-    private function doTestYamlContentIsLoadable(string $yamlContent): void
+    private function doTestContentIsLoadable(string $yamlContent, string $format): void
     {
+        $localFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
+        FileSystem::write($localFile, $yamlContent);
+
         $containerBuilder = new ContainerBuilder();
-
-        $localYamlFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
-        FileSystem::write($localYamlFile, $yamlContent);
-
-        $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
-        $yamlFileLoader->load($localYamlFile);
+        $fileLoader = $this->createFileLoader($format, $containerBuilder);
+        $fileLoader->load($localFile);
 
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
 
         // at least 1 service is registered
         $definitionCount = count($containerBuilder->getDefinitions());
         $this->assertGreaterThanOrEqual(1, $definitionCount);
+    }
+
+    private function createFileLoader(string $format, ContainerBuilder $containerBuilder): FileLoader
+    {
+        if ($format === 'yaml') {
+            return new YamlFileLoader($containerBuilder, new FileLocator());
+        }
+
+        if ($format === 'php') {
+            return new PhpFileLoader($containerBuilder, new FileLocator());
+        }
+
+        throw new NotImplementedYetException($format);
     }
 }
