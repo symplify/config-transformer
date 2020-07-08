@@ -62,7 +62,10 @@ final class SwitchFormatCommand extends Command
         $this->setDescription('Converts all XML files to provided format');
 
         $this->addArgument(Option::SOURCE, InputArgument::REQUIRED, 'Path to directory with configs');
+
+        $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
         $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output');
+
         $this->addOption(Option::DELETE, null, InputOption::VALUE_NONE, 'Delete original files');
         $this->addOption(
             Option::TARGET_SYMFONY_VERSION,

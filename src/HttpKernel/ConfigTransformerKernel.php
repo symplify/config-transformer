@@ -12,6 +12,12 @@ use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArr
 
 final class ConfigTransformerKernel extends Kernel
 {
+    public function __construct(string $environment, bool $debug)
+    {
+        // rand is for container rebuild
+        parent::__construct($environment . random_int(1, 1000), $debug);
+    }
+
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/../../config/config.yaml');

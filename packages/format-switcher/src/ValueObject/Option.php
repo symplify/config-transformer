@@ -14,6 +14,11 @@ final class Option
     /**
      * @var string
      */
+    public const INPUT_FORMAT = 'input-format';
+
+    /**
+     * @var string
+     */
     public const OUTPUT_FORMAT = 'output-format';
 
     /**
