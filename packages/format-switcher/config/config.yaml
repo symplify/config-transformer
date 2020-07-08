@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    Migrify\ConfigTransformer\FormatSwitcher\:
+        resource: '../src'
+        exclude:
+            - '../src/DependencyInjection/Loader/*'
+
