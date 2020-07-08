@@ -18,14 +18,15 @@
     "autoload": {
         "psr-4": {
             "Migrify\\ConfigTransformer\\": "src",
-            "Migrify\\ConfigTransformer\\Clarifier\\": "packages/clarifier/src"
+            "Migrify\\ConfigTransformer\\Clarifier\\": "packages/clarifier/src",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\": "packages/format-switcher/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Migrify\\ConfigTransformer\\Tests\\": "tests",
-            "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/clarifier/tests"
-
+            "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/clarifier/tests",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/format-switcher/tests"
         }
     }
 }

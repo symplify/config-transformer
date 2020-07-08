@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Command;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Command;
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
-use Migrify\ConfigTransformer\Finder\ConfigFileFinder;
-use Migrify\ConfigTransformer\ValueObject\Option;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
+use Migrify\ConfigTransformer\FormatSwitcher\Finder\ConfigFileFinder;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
@@ -20,7 +20,7 @@ use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ConvertCommand extends Command
+final class SwitchFormatCommand extends Command
 {
     /**
      * @var SymfonyStyle

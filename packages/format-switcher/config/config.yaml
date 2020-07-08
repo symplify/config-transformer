@@ -4,5 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    Migrify\ConfigTransformer\Clarifier\:
+    Migrify\ConfigTransformer\FormatSwitcher\:
         resource: '../src'
+        exclude:
+            - '../src/DependencyInjection/Loader/*'
+

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
 
 use Iterator;
-use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
-use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
+use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
+use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Nette\Utils\FileSystem;
 use Rector\Core\Testing\ValueObject\SplitLine;

@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection\Loader;
+namespace Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
+use DOMNodeList;
 use DOMXPath;
 use Nette\Utils\Strings;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -85,20 +86,15 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
 
         $definitions = $this->processAnonymousServicesInArguments($xpath, $suffix, $file, $definitions);
 
+        /** @var DOMNodeList $nodeWithIds */
         $nodeWithIds = $xpath->query('//container:services/container:service[@id]');
         $hasNamedServices = (bool) $nodeWithIds->length;
 
         // anonymous services "in the wild"
         if (false !== $nodes = $xpath->query('//container:services/container:service[not(@id)]')) {
+            /** @var DOMElement $node */
             foreach ($nodes as $node) {
-                if ($hasNamedServices) {
-                    $className = $node->getAttribute('class');
-                    $id = $this->createServiceNameFromClass($className);
-                } else {
-                    // give it a unique name
-                    $id = sprintf('%d_%s', ++$this->count, hash('sha256', $file));
-                }
-
+                $id = $this->createAnonymousServiceId($hasNamedServices, $node, $file);
                 $node->setAttribute(self::ID, $id);
                 $definitions[$id] = [$node, $file, true];
             }
@@ -134,6 +130,8 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
                 // get current service id
 
                 $parentNode = $node->parentNode;
+                assert($parentNode instanceof DOMElement);
+
                 // @see https://stackoverflow.com/a/28944/1348344
                 $parentServiceId = $parentNode->getAttribute('id');
 
@@ -176,5 +174,17 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
     {
         $serviceName = Strings::replace($class, '#\\\\#', '.');
         return strtolower($serviceName);
+    }
+
+    private function createAnonymousServiceId(bool $hasNamedServices, DOMElement $domElement, string $file): string
+    {
+        if ($hasNamedServices) {
+            $className = $domElement->getAttribute('class');
+            $id = $this->createServiceNameFromClass($className);
+        } else {
+            // give it a unique name
+            $id = sprintf('%d_%s', ++$this->count, hash('sha256', $file));
+        }
+        return $id;
     }
 }

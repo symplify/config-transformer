@@ -15,13 +15,13 @@ composer require migrify/config-transformer --dev
 ### 1. Convert Config Formats From XML
 
 ```bash
-vendor/bin/config-transformer convert app/config --output-format yaml
+vendor/bin/config-transformer switch-format app/config --output-format yaml
 ```
 
 You can also add `target-symfony-version` to specify, what Symfony features should be used.
 
 ```bash
-vendor/bin/config-transformer convert app/config --output-format yaml --target-symfony-version 3.3
+vendor/bin/config-transformer switch-format app/config --output-format yaml --target-symfony-version 3.3
 ```
 
 ### 2. Make Configs Explicit

@@ -19,12 +19,12 @@ final class ConfigTransformerKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/config_format_converter';
+        return sys_get_temp_dir() . '/_migrify_config_transformer';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir() . '/config_format_converter_log';
+        return sys_get_temp_dir() . '/_migrify_config_transformer_log';
     }
 
     /**

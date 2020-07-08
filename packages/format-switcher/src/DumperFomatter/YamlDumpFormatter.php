@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DumperFomatter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter;
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 
 final class YamlDumpFormatter

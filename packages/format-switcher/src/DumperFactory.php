@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer;
+namespace Migrify\ConfigTransformer\FormatSwitcher;
 
-use Migrify\ConfigTransformer\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\Dumper;
 use Symfony\Component\DependencyInjection\Dumper\YamlDumper;

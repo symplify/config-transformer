@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Converter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
-use Migrify\ConfigTransformer\ConfigLoader;
-use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
-use Migrify\ConfigTransformer\DumperFactory;
-use Migrify\ConfigTransformer\DumperFomatter\YamlDumpFormatter;
-use Migrify\ConfigTransformer\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\ConfigLoader;
+use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
+use Migrify\ConfigTransformer\FormatSwitcher\DumperFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter\YamlDumpFormatter;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\ConfigTransformerTest
+ * @see \Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\ConfigFormatConverterTest
  */
 final class ConfigFormatConverter
 {

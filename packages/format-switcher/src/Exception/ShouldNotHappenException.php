@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Exception;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Exception;
 
 use Exception;
 

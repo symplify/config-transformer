@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer;
+namespace Migrify\ConfigTransformer\FormatSwitcher;
 
-use Migrify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
-use Migrify\ConfigTransformer\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader\IdAwareXmlFileLoader;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;

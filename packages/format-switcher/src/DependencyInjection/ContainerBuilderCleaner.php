@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection;
+namespace Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection;
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

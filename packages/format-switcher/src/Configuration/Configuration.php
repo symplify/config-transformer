@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Configuration;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Configuration;
 
-use Migrify\ConfigTransformer\Exception\InvalidConfigurationException;
-use Migrify\ConfigTransformer\ValueObject\Option;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\InvalidConfigurationException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Symfony\Component\Console\Input\InputInterface;
 
 final class Configuration
