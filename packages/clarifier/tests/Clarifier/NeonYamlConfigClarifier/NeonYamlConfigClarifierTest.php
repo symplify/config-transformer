@@ -7,8 +7,8 @@ namespace Migrify\ConfigTransformer\Clarifier\Tests\Clarifier\NeonYamlConfigClar
 use Iterator;
 use Migrify\ConfigTransformer\Clarifier\Clarifier\NeonYamlConfigClarifier;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use Nette\Utils\Strings;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
+use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -30,7 +30,7 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fileInfo): void
     {
-        [$inputContent, $expectedContent] = Strings::split($fileInfo->getContents(), "#-----\n#");
+        [$inputContent, $expectedContent] = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fileInfo);
 
         $changedContent = $this->neonYamlConfigClarifier->clarify($inputContent, $fileInfo->getSuffix());
         $this->assertSame($expectedContent . PHP_EOL, $changedContent);
