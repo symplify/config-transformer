@@ -10,9 +10,11 @@ Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable o
 composer require migrify/config-transformer --dev
 ```
 
-## Usage
+<br>
 
-### 1. Convert Config Formats From XML
+What features do we have here?
+
+## 1. Convert Config Formats From XML
 
 ```bash
 vendor/bin/config-transformer switch-format app/config --output-format yaml
@@ -24,7 +26,9 @@ You can also add `target-symfony-version` to specify, what Symfony features shou
 vendor/bin/config-transformer switch-format app/config --output-format yaml --target-symfony-version 3.3
 ```
 
-### 2. Make Configs Explicit
+<br>
+
+## 2. Make Configs Explicit
 
 Take NEON/YAML magic *pro* short syntax and reveal it to clear syntax readable by any developer.
 
