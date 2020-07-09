@@ -1,0 +1,14 @@
+parameters:
+    package_directories:
+        - 'packages'
+    package_directories_excludes: []
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return static function (ContainerConfigurator $containerConfigurator) {
+    $parameters = $containerConfigurator->parameters();
+    $parameters->set('package_directories', ['packages']);
+    $parameters->set('package_directories_excludes', []);
+};
