@@ -30,7 +30,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
 
     public function provideData(): Iterator
     {
-        yield [new SmartFileInfo(__DIR__ . '/FixtureYamlToPhp/some.yaml')];
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/normal', '*.yaml');
     }
 
     public function provideDataWithDirectory(): Iterator
