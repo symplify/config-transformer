@@ -8,7 +8,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\Finder\ConfigFileFinder;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -42,11 +42,17 @@ final class SwitchFormatCommand extends Command
      */
     private $configuration;
 
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         ConfigFileFinder $configFileFinder,
         ConfigFormatConverter $configFormatConverter,
-        Configuration $configuration
+        Configuration $configuration,
+        Filesystem $filesystem
     ) {
         parent::__construct();
 
@@ -54,6 +60,7 @@ final class SwitchFormatCommand extends Command
         $this->configFileFinder = $configFileFinder;
         $this->configFormatConverter = $configFormatConverter;
         $this->configuration = $configuration;
+        $this->filesystem = $filesystem;
     }
 
     protected function configure(): void
@@ -61,7 +68,11 @@ final class SwitchFormatCommand extends Command
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Converts all XML files to provided format');
 
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED, 'Path to directory with configs');
+        $this->addArgument(
+            Option::SOURCE,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'Path to directory with configs'
+        );
 
         $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
         $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output');
@@ -79,14 +90,12 @@ final class SwitchFormatCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->configuration->populateFromInput($input);
-
-        $fileInfos = $this->configFileFinder->findInDirectory(
+        $fileInfos = $this->configFileFinder->findInSourceBySuffix(
             $this->configuration->getSource(),
             $this->configuration->getInputFormat()
         );
 
         $convertedFileInfos = [];
-
         foreach ($fileInfos as $fileInfo) {
             $convertedContent = $this->configFormatConverter->convert(
                 $fileInfo,
@@ -127,9 +136,7 @@ final class SwitchFormatCommand extends Command
             return;
         }
 
-        foreach ($fileInfos as $fileInfo) {
-            FileSystem::delete($fileInfo->getRealPath());
-        }
+        $this->filesystem->remove($fileInfos);
 
         $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
         $this->symfonyStyle->warning($deletedFilesMessage);
@@ -141,17 +148,24 @@ final class SwitchFormatCommand extends Command
         $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
 
         if ($this->configuration->isDryRun()) {
-            $message = sprintf('File %s would be dumped (is --dry-run))', $newFilePath);
-            $this->symfonyStyle->writeln($message);
+            $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFilePath);
+            $message = sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
+            $this->symfonyStyle->note($message);
             return null;
         }
 
         $newFileInfo = new SmartFileInfo($newFilePath);
-        FileSystem::write($newFileInfo->getRealPath(), $convertedContent);
+        $this->filesystem->dumpFile($newFileInfo->getRealPath(), $convertedContent);
 
         $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
         $this->symfonyStyle->writeln($message);
 
         return $newFileInfo;
+    }
+
+    private function getRelativePathOfNonExistingFile(string $newFilePath): string
+    {
+        $relativeFilePath = $this->filesystem->makePathRelative($newFilePath, getcwd());
+        return rtrim($relativeFilePath, '/');
     }
 }

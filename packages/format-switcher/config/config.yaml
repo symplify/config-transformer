@@ -12,3 +12,5 @@ services:
     PhpParser\BuilderFactory: null
     PhpParser\PrettyPrinter\Standard: null
     Symfony\Component\Yaml\Parser: null
+
+    Symplify\SmartFileSystem\FileSystemFilter: null
