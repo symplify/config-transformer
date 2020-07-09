@@ -13,12 +13,12 @@ final class Configuration
     /**
      * @var string[]
      */
-    private const ALLOWED_OUTPUT_FORMATS = ['yaml'];
+    private const ALLOWED_OUTPUT_FORMATS = ['yaml', 'php'];
 
     /**
      * @var string[]
      */
-    private const ALLOWED_INPUT_FORMATS = ['xml'];
+    private const ALLOWED_INPUT_FORMATS = ['xml', 'yaml'];
 
     /**
      * @var string
