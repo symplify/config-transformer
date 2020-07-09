@@ -8,18 +8,18 @@ use Iterator;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class XmlToYamlTest extends AbstractConfigFormatConverterTest
+final class YamlToPhpTest extends AbstractConfigFormatConverterTest
 {
     /**
      * @dataProvider provideData()
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        $this->doTestOutput($fixtureFileInfo, 'yaml');
+        $this->doTestOutput($fixtureFileInfo, 'php');
     }
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureXmlToYaml', '*.xml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp', '*.yaml');
     }
 }
