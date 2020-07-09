@@ -15,7 +15,7 @@ final class XmlToPhpTest extends AbstractConfigFormatConverterTest
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        $this->doTestOutput($fixtureFileInfo, 'php');
+        $this->doTestOutput($fixtureFileInfo, 'xml', 'php');
     }
 
     public function provideData(): Iterator
