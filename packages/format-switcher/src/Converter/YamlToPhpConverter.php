@@ -6,13 +6,21 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use InvalidArgumentException;
 use LogicException;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Nette\Utils\Strings;
 use PhpParser\Builder\Param;
 use PhpParser\BuilderFactory;
+use PhpParser\BuilderHelpers;
 use PhpParser\Node;
+use PhpParser\Node\Arg;
+use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\Closure;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\MagicConst\Dir;
+use PhpParser\Node\Scalar\String_;
+use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
@@ -69,34 +77,39 @@ final class YamlToPhpConverter
      */
     private $yamlParser;
 
-    public function __construct(BuilderFactory $builderFactory, Standard $printerStandard, Parser $yamlParser)
-    {
+    /**
+     * @var PhpNodeFactory
+     */
+    private $phpNodeFactory;
+
+    public function __construct(
+        BuilderFactory $builderFactory,
+        Standard $printerStandard,
+        Parser $yamlParser,
+        PhpNodeFactory $phpNodeFactory
+    ) {
         $this->builderFactory = $builderFactory;
         $this->printerStandard = $printerStandard;
         $this->yamlParser = $yamlParser;
+        $this->phpNodeFactory = $phpNodeFactory;
     }
 
     public function convert(string $yaml): string
     {
-        $namespaceBuilder = $this->builderFactory->namespace(
-            'Symfony\Component\DependencyInjection\Loader\Configurator'
-        );
+        $namespace = new Namespace_(new Name('Symfony\Component\DependencyInjection\Loader\Configurator'));
 
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS);
-        $closureStmts = $this->createClosureStmts($yamlArray, $namespaceBuilder);
+        $closureStmts = $this->createClosureStmts($yamlArray, $namespace);
 
-        $closure = $this->createClosureFromStmts($closureStmts);
+        $closure = $this->phpNodeFactory->createClosureFromStmts($closureStmts);
         $return = new Return_($closure);
 
         // add a blank line between the last use statement and the closure
         if ($this->useStatements !== []) {
-            $namespaceBuilder->addStmt(new Nop());
+            $namespace->stmts[] = new Nop();
         }
 
-        $namespaceBuilder->addStmt($return);
-
-        /** @var Namespace_ $namespace */
-        $namespace = $namespaceBuilder->getNode();
+        $namespace->stmts[] = $return;
 
         return $this->printerStandard->prettyPrintFile([$namespace]) . self::EOL_CHAR;
     }
@@ -104,7 +117,7 @@ final class YamlToPhpConverter
     /**
      * @return Node[]
      */
-    private function createClosureStmts(array $yamlData, $creatorFactory): array
+    private function createClosureStmts(array $yamlData, Namespace_ $namespace): array
     {
         foreach ($yamlData as $key => $values) {
             if ($values === null) {
@@ -132,35 +145,38 @@ final class YamlToPhpConverter
 
         sort($this->useStatements);
         foreach ($this->useStatements as $className) {
-            $use = $this->builderFactory->use($className);
-            $creatorFactory->addStmt($use);
+            $useBuilder = $this->builderFactory->use($className);
+            $namespace->stmts[] = $useBuilder->getNode();
         }
 
         // remove the last carriage return "\n" if exists.
         $lastStmt = $this->stmts[array_key_last($this->stmts)];
-        $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
+
+        if ($lastStmt instanceof Name) {
+            $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
+        }
+
+        $lastKey = array_key_last($this->stmts);
+        if ($this->stmts[$lastKey] instanceof Nop) {
+            unset($this->stmts[$lastKey]);
+        }
 
         return $this->stmts;
     }
 
     private function addParametersNodes(array $parameters): void
     {
-        $this->addLineStmt(
-            '// Put parameters here that don\'t need to change on each machine where the app is deployed.'
-        );
-        $this->addLineStmt(
-            '// https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration.'
-        );
-
-        $line = sprintf('$parameters = $%s->parameters();', self::CONTAINER_CONFIGURATOR_NAME);
-        $this->addLineStmt($line, true);
+        $assign = $this->phpNodeFactory->createAssignContainerCallToVariable('parameters', 'parameters');
+        $this->addNodeAsExpression($assign);
 
         foreach ($parameters as $parameterName => $value) {
-            $this->addLineStmt(sprintf(
-                '$parameters->set(%s, %s);',
-                $this->createStringArgument($parameterName),
-                $this->toString($value, true)
-            ), true);
+            $parametersSetMethodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
+            $this->addNodeAsExpression($parametersSetMethodCall);
+        }
+
+        // separater parameters by empty space
+        if (count($parameters)) {
+            $this->addNode(new Nop());
         }
     }
 
@@ -169,13 +185,20 @@ final class YamlToPhpConverter
         foreach ($imports as $import) {
             if (is_array($import)) {
                 $arguments = $this->sortArgumentsByKeyIfExists($import, ['resource', 'type', 'ignore_errors']);
-                $import = $this->createListFromArray($arguments);
-            } else {
-                $import = $this->createStringArgument($import);
+
+                $methodCall = $this->createImportMethodCall($arguments);
+                $this->addNodeAsExpression($methodCall);
+                continue;
             }
 
+            $import = $this->createStringArgument($import);
+
             $line = sprintf('$%s->import(%s);', self::CONTAINER_CONFIGURATOR_NAME, $import);
-            $this->addLineStmt($line, true);
+            $this->addLineStmt($line, false);
+        }
+
+        if (count($imports)) {
+            $this->addNode(new Nop());
         }
     }
 
@@ -186,7 +209,8 @@ final class YamlToPhpConverter
 
         foreach ($services as $serviceKey => $serviceValues) {
             if ($serviceKey === '_defaults') {
-                $this->addNode($this->builderFactory->methodCall(new Variable('services'), 'defaults'));
+                $methodCall = $this->builderFactory->methodCall(new Variable('services'), 'defaults');
+                $this->addNode($methodCall);
 
                 $this->convertServiceOptionsToNodes($serviceValues);
                 $this->addLineStmt(';', true);
@@ -213,18 +237,6 @@ final class YamlToPhpConverter
                 if (isset($serviceValues['namespace'])) {
                     $serviceKey = $serviceValues['namespace'];
                     unset($serviceValues['namespace']);
-                }
-
-                if ($serviceKey === 'App\\') {
-                    $this->addLineStmt('// makes classes in src/ available to be used as services');
-                    $this->addLineStmt(
-                        '// this creates a service per class whose id is the fully-qualified class name'
-                    );
-                }
-
-                if ($serviceKey === 'App\\Controller\\') {
-                    $this->addLineStmt('// controllers are imported separately to make sure services can be injected');
-                    $this->addLineStmt('// as action arguments even if you don\'t extend any base controller class');
                 }
 
                 $loadMethod = '$services->load(%s, %s)';
@@ -750,7 +762,7 @@ final class YamlToPhpConverter
         return $shortClassName . '::class';
     }
 
-    private function addNode($node): void
+    private function addNode(Node $node): void
     {
         $this->stmts[] = $node;
     }
@@ -794,19 +806,30 @@ final class YamlToPhpConverter
         return str_repeat(' ', $count * 4);
     }
 
-    /**
-     * @param Node[] $stmts
-     */
-    private function createClosureFromStmts(array $stmts): Closure
+    private function addNodeAsExpression(Node $node): void
     {
-        $paramBuilder = new Param(self::CONTAINER_CONFIGURATOR_NAME);
-        $paramBuilder->setType('ContainerConfigurator');
-        $param = $paramBuilder->getNode();
+        $this->addNode(new Expression($node));
+    }
 
-        return new Closure([
-            'params' => [$param],
-            'stmts' => $stmts,
-            'static' => true,
-        ]);
+    private function createImportMethodCall(array $arguments): MethodCall
+    {
+        $methodCall = new MethodCall(new Variable(self::CONTAINER_CONFIGURATOR_NAME), 'import');
+
+        foreach ($arguments as $argument) {
+            if (is_string($argument)) {
+                // preslash with dir
+                $argument = '/' . $argument;
+            }
+
+            $argumentValue = BuilderHelpers::normalizeValue($argument);
+
+            if ($argumentValue instanceof String_) {
+                $argumentValue = new Concat(new Dir(), $argumentValue);
+            }
+
+            $methodCall->args[] = new Arg($argumentValue);
+        }
+
+        return $methodCall;
     }
 }
