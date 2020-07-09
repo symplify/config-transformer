@@ -40,7 +40,7 @@ final class ConfigFileFinder
         }
 
         $directories = $this->fileSystemFilter->filterDirectories($source);
-        if (count($directories) !== 0) {
+        if (count($directories) === 0) {
             return $fileInfos;
         }
 
