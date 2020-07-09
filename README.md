@@ -14,16 +14,16 @@ composer require migrify/config-transformer --dev
 
 What features do we have here?
 
-## 1. Convert Config Formats From XML
+## 1. Convert Config Formats From XML/YAML to PHP/YAMl
 
 ```bash
-vendor/bin/config-transformer switch-format app/config --output-format yaml
+vendor/bin/config-transformer switch-format app/config --intput-format xml --output-format yaml
 ```
 
 You can also add `target-symfony-version` to specify, what Symfony features should be used.
 
 ```bash
-vendor/bin/config-transformer switch-format app/config --output-format yaml --target-symfony-version 3.3
+vendor/bin/config-transformer switch-format app/config --intput-format xml --output-format yaml --target-symfony-version 3.3
 ```
 
 <br>
