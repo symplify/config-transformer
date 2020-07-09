@@ -99,6 +99,7 @@ final class SwitchFormatCommand extends Command
         foreach ($fileInfos as $fileInfo) {
             $convertedContent = $this->configFormatConverter->convert(
                 $fileInfo,
+                $this->configuration->getInputFormat(),
                 $this->configuration->getOutputFormat()
             );
 

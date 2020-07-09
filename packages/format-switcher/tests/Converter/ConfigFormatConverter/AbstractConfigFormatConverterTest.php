@@ -6,14 +6,12 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatC
 
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Nette\Utils\FileSystem;
 use Rector\Core\Testing\ValueObject\SplitLine;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\FileLoader;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
@@ -24,7 +22,7 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
     /**
      * @var ConfigFormatConverter
      */
-    private $configFormatConverter;
+    protected $configFormatConverter;
 
     /**
      * @var ContainerBuilderCleaner
@@ -39,28 +37,25 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $this->containerBuilderCleaner = self::$container->get(ContainerBuilderCleaner::class);
     }
 
-    protected function doTestOutput(SmartFileInfo $fixtureFileInfo, string $outputFormat): void
+    protected function doTestOutput(SmartFileInfo $fixtureFileInfo, string $inputFormat, string $outputFormat): void
     {
         [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );
 
-        $convertedContent = $this->configFormatConverter->convert($inputFileInfo, $outputFormat);
-
-        $this->updateFixture($fixtureFileInfo, $inputFileInfo, $convertedContent);
-        $this->assertSame(
+        $this->doTestFileInfo(
+            $inputFileInfo,
             $expectedFileInfo->getContents(),
-            $convertedContent,
-            $fixtureFileInfo->getRelativeFilePathFromCwd()
+            $fixtureFileInfo,
+            $inputFormat,
+            $outputFormat
         );
-
-        $this->doTestContentIsLoadable($convertedContent, $outputFormat);
     }
 
     /**
      * @todo decouple to migrify/easy-testing
      */
-    private function updateFixture(
+    protected function updateFixture(
         SmartFileInfo $fileInfo,
         SmartFileInfo $inputFileInfo,
         string $convertedContent
@@ -73,13 +68,13 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         FileSystem::write($fileInfo->getRealPath(), $newOriginalContent);
     }
 
-    private function doTestContentIsLoadable(string $yamlContent, string $format): void
+    protected function doTestYamlContentIsLoadable(string $yamlContent): void
     {
         $localFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
         FileSystem::write($localFile, $yamlContent);
 
         $containerBuilder = new ContainerBuilder();
-        $fileLoader = $this->createFileLoader($format, $containerBuilder);
+        $fileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
         $fileLoader->load($localFile);
 
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
@@ -89,16 +84,20 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $this->assertGreaterThanOrEqual(1, $definitionCount);
     }
 
-    private function createFileLoader(string $format, ContainerBuilder $containerBuilder): FileLoader
-    {
-        if ($format === 'yaml') {
-            return new YamlFileLoader($containerBuilder, new FileLocator());
-        }
+    protected function doTestFileInfo(
+        SmartFileInfo $inputFileInfo,
+        string $expectedContent,
+        SmartFileInfo $fixtureFileInfo,
+        string $inputFormat,
+        string $outputFormat
+    ): void {
+        $convertedContent = $this->configFormatConverter->convert($inputFileInfo, $inputFormat, $outputFormat);
 
-        if ($format === 'php') {
-            return new PhpFileLoader($containerBuilder, new FileLocator());
-        }
+        $this->updateFixture($fixtureFileInfo, $inputFileInfo, $convertedContent);
+        $this->assertSame($expectedContent, $convertedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
 
-        throw new NotImplementedYetException($format);
+        if ($outputFormat === Format::YAML) {
+            $this->doTestYamlContentIsLoadable($convertedContent);
+        }
     }
 }
