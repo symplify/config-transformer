@@ -9,6 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetExceptio
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConfigLoader
@@ -27,6 +28,10 @@ final class ConfigLoader
     {
         if ($suffix === 'xml') {
             return new IdAwareXmlFileLoader($containerBuilder, new FileLocator());
+        }
+
+        if ($suffix === 'yaml') {
+            return new YamlFileLoader($containerBuilder, new FileLocator());
         }
 
         throw new NotImplementedYetException($suffix);

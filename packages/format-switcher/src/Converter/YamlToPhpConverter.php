@@ -14,6 +14,7 @@ use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\PrettyPrinter\Standard;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,51 +39,66 @@ final class YamlToPhpConverter
      */
     private const CONTAINER_CONFIGURATOR_NAME = 'containerConfigurator';
 
+    /**
+     * @var string
+     */
+    private const EOL_CHAR = "\n";
+
+    /**
+     * @var BuilderFactory
+     */
     private $builderFactory;
 
+    /**
+     * @var Node[]
+     */
     private $stmts = [];
 
+    /**
+     * @var string[]
+     */
     private $useStatements = [];
 
     /**
      * @var Standard
      */
-    private $standard;
+    private $printerStandard;
 
-    public function __construct()
+    /**
+     * @var Parser
+     */
+    private $yamlParser;
+
+    public function __construct(BuilderFactory $builderFactory, Standard $printerStandard, Parser $yamlParser)
     {
-        $this->builderFactory = new BuilderFactory();
-        $this->standard = new Standard();
+        $this->builderFactory = $builderFactory;
+        $this->printerStandard = $printerStandard;
+        $this->yamlParser = $yamlParser;
     }
 
     public function convert(string $yaml): string
     {
-        $creatorFactory = $this->builderFactory->namespace('Symfony\Component\DependencyInjection\Loader\Configurator');
-
-        $closureStmt = $this->createClosureStmts(
-            (new Parser())->parse($yaml, Yaml::PARSE_CUSTOM_TAGS),
-            $creatorFactory
+        $namespaceBuilder = $this->builderFactory->namespace(
+            'Symfony\Component\DependencyInjection\Loader\Configurator'
         );
 
-        $creatorFactory->addStmt(
-            new Return_(
-                new Closure([
-                    'params' => [
-                        (new Param(self::CONTAINER_CONFIGURATOR_NAME))->setType('ContainerConfigurator')->getNode(),
-                    ],
-                    'stmts' => $closureStmt,
-                    'static' => true,
-                ])
-            )
-        );
+        $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS);
+        $closureStmts = $this->createClosureStmts($yamlArray, $namespaceBuilder);
 
-        /** @var Namespace_ $node */
-        $node = $creatorFactory->getNode();
-        $beforeClosure = ! empty($this->useStatements) ? "\n" : null;
+        $closure = $this->createClosureFromStmts($closureStmts);
+        $return = new Return_($closure);
+
         // add a blank line between the last use statement and the closure
-        array_splice($node->stmts, -1, 0, [new Name($beforeClosure)]);
+        if ($this->useStatements !== []) {
+            $namespaceBuilder->addStmt(new Nop());
+        }
 
-        return $this->standard->prettyPrintFile([$node]) . "\n";
+        $namespaceBuilder->addStmt($return);
+
+        /** @var Namespace_ $namespace */
+        $namespace = $namespaceBuilder->getNode();
+
+        return $this->printerStandard->prettyPrintFile([$namespace]) . self::EOL_CHAR;
     }
 
     /**
@@ -116,12 +132,13 @@ final class YamlToPhpConverter
 
         sort($this->useStatements);
         foreach ($this->useStatements as $className) {
-            $creatorFactory->addStmt($this->builderFactory->use($className));
+            $use = $this->builderFactory->use($className);
+            $creatorFactory->addStmt($use);
         }
 
         // remove the last carriage return "\n" if exists.
         $lastStmt = $this->stmts[array_key_last($this->stmts)];
-        $lastStmt->parts[0] = rtrim($lastStmt->parts[0], "\n");
+        $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
 
         return $this->stmts;
     }
@@ -584,9 +601,9 @@ final class YamlToPhpConverter
     private function createSequentialArray(array $array, bool $transformInList = false): string
     {
         if ($this->isIndentationRequired($array)) {
-            $stringArray = "\n";
+            $stringArray = self::EOL_CHAR;
             foreach ($array as $subValue) {
-                $stringArray .= self::tab(3) . $this->toString($subValue, true) . ",\n";
+                $stringArray .= self::tab(3) . $this->toString($subValue, true) . ',' . self::EOL_CHAR;
             }
 
             if ($transformInList) {
@@ -613,7 +630,7 @@ final class YamlToPhpConverter
             $stringArray = "[\n";
             foreach ($array as $key => $value) {
                 $stringArray .= self::tab(4) . $this->toString($key) . ' => ' . $this->toString($value, true);
-                $stringArray .= count($array) > 1 ? ",\n" : "\n";
+                $stringArray .= count($array) > 1 ? ",\n" : self::EOL_CHAR;
             }
 
             return $stringArray . self::tab(3) . ']';
@@ -724,7 +741,7 @@ final class YamlToPhpConverter
 
     private function addLineStmt(string $line, ?bool $addBlankLine = null): void
     {
-        $addBlankLine = $addBlankLine ? "\n" : null;
+        $addBlankLine = $addBlankLine ? self::EOL_CHAR : null;
         $this->addNode(new Name($line . $addBlankLine));
     }
 
@@ -759,5 +776,21 @@ final class YamlToPhpConverter
     private function tab(int $count = 1): string
     {
         return str_repeat(' ', $count * 4);
+    }
+
+    /**
+     * @param Node[] $stmts
+     */
+    private function createClosureFromStmts(array $stmts): Closure
+    {
+        $paramBuilder = new Param(self::CONTAINER_CONFIGURATOR_NAME);
+        $paramBuilder->setType('ContainerConfigurator');
+        $param = $paramBuilder->getNode();
+
+        return new Closure([
+            'params' => [$param],
+            'stmts' => $stmts,
+            'static' => true,
+        ]);
     }
 }

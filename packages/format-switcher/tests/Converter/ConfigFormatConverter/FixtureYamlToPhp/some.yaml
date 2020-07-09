@@ -1,0 +1,36 @@
+services:
+    advertentie.gateway.api.client:
+        class: GuzzleHttp\Client
+        arguments: [{ base_uri: 'https://%api_host%/api/1.6/', headers: { Accept: application/json, Content-Type: application/json } }]
+
+    advertentie.gateway.reporting.client:
+        class: GuzzleHttp\Client
+        arguments: [{ base_uri: 'https://%moving_digital_advertentie_reporting_host%/api/1.6/', headers: { Content-Type: application/json } }]
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use GuzzleHttp\Client;
+
+return static function (ContainerConfigurator $containerConfigurator) {
+    $services = $containerConfigurator->services();
+
+    $services->set('advertentie.gateway.api.client', Client::class)
+        ->args([
+            [
+                'base_uri' => 'https://%api_host%/api/1.6/',
+                'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/json'],
+            ],
+        ])
+    ;
+
+    $services->set('advertentie.gateway.reporting.client', Client::class)
+        ->args([
+            [
+                'base_uri' => 'https://%moving_digital_advertentie_reporting_host%/api/1.6/',
+                'headers' => ['Content-Type' => 'application/json'],
+            ],
+        ])
+    ;
+};
