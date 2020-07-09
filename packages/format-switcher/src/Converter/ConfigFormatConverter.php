@@ -10,6 +10,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\DumperFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter\YamlDumpFormatter;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -57,26 +58,31 @@ final class ConfigFormatConverter
         $this->yamlToPhpConverter = $yamlToPhpConverter;
     }
 
-    public function convert(SmartFileInfo $smartFileInfo, string $outputFormat): string
+    public function convert(SmartFileInfo $smartFileInfo, string $inputFormat, string $outputFormat): string
     {
         $containerBuilder = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($smartFileInfo);
 
-        if ($outputFormat === 'yaml') {
-            return $this->convertToYaml($containerBuilder);
+        if ($outputFormat === Format::YAML) {
+            return $this->dumpContainerBuilderToYaml($containerBuilder);
         }
 
-        if ($outputFormat === 'php') {
-            $yamlContent = $this->convertToYaml($containerBuilder);
-            return $this->yamlToPhpConverter->convert($yamlContent);
+        if ($outputFormat === Format::PHP) {
+            if ($inputFormat === Format::YAML) {
+                return $this->yamlToPhpConverter->convert($smartFileInfo->getContents());
+            }
+
+            if ($inputFormat === Format::XML) {
+                $yamlContent = $this->dumpContainerBuilderToYaml($containerBuilder);
+                return $this->yamlToPhpConverter->convert($yamlContent);
+            }
         }
 
         throw new NotImplementedYetException($outputFormat);
     }
 
-    private function convertToYaml(ContainerBuilder $containerBuilder): string
+    private function dumpContainerBuilderToYaml(ContainerBuilder $containerBuilder): string
     {
-        $dumper = $this->dumperFactory->createFromContainerBuilderAndOutputFormat($containerBuilder, 'yaml');
-
+        $dumper = $this->dumperFactory->createFromContainerBuilderAndOutputFormat($containerBuilder, Format::YAML);
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
 
         $content = $dumper->dump();
