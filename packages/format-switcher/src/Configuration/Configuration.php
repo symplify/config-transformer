@@ -31,9 +31,9 @@ final class Configuration
     private $inputFormat;
 
     /**
-     * @var string
+     * @var string[]
      */
-    private $source;
+    private $source = [];
 
     /**
      * @var float
@@ -47,7 +47,7 @@ final class Configuration
 
     public function populateFromInput(InputInterface $input): void
     {
-        $this->source = (string) $input->getArgument(Option::SOURCE);
+        $this->source = (array) $input->getArgument(Option::SOURCE);
 
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
 
@@ -62,7 +62,7 @@ final class Configuration
         return $this->outputFormat;
     }
 
-    public function getSource(): string
+    public function getSource(): array
     {
         return $this->source;
     }

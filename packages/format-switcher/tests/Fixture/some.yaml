@@ -1,3 +1,0 @@
-services:
-    app.handler.verify:
-        class: App\CommandBus\Handler\Verification
