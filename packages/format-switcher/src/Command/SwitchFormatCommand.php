@@ -147,20 +147,20 @@ final class SwitchFormatCommand extends Command
         $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
         $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
 
+        $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFilePath);
+
         if ($this->configuration->isDryRun()) {
-            $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFilePath);
             $message = sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
             $this->symfonyStyle->note($message);
             return null;
         }
 
-        $newFileInfo = new SmartFileInfo($newFilePath);
-        $this->filesystem->dumpFile($newFileInfo->getRealPath(), $convertedContent);
+        $this->filesystem->dumpFile($newFilePath, $convertedContent);
 
-        $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
+        $message = sprintf('File "%s" was dumped', $relativeFilePath);
         $this->symfonyStyle->writeln($message);
 
-        return $newFileInfo;
+        return new SmartFileInfo($relativeFilePath);
     }
 
     private function getRelativePathOfNonExistingFile(string $newFilePath): string
