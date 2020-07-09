@@ -15,7 +15,7 @@ final class XmlToYamlTest extends AbstractConfigFormatConverterTest
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        $this->doTestOutput($fixtureFileInfo, 'yaml');
+        $this->doTestOutput($fixtureFileInfo, 'xml', 'yaml');
     }
 
     public function provideData(): Iterator

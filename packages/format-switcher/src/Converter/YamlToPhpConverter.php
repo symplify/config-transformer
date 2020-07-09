@@ -186,7 +186,6 @@ final class YamlToPhpConverter
 
         foreach ($services as $serviceKey => $serviceValues) {
             if ($serviceKey === '_defaults') {
-                $this->addLineStmt('// default configuration for services in *this* file');
                 $this->addNode($this->builderFactory->methodCall(new Variable('services'), 'defaults'));
 
                 $this->convertServiceOptionsToNodes($serviceValues);
@@ -306,6 +305,23 @@ final class YamlToPhpConverter
                 case 'shared':
                 case 'public':
                 case 'exclude':
+                    if (is_array($value)) {
+                        if ($this->isAssociativeArray($value)) {
+                            throw new InvalidArgumentException(sprintf(
+                                'The config key "%s" does not support an associative array',
+                                $serviceConfigKey
+                            ));
+                        }
+
+                        $this->addLineStmt($this->createMethod(
+                            $serviceConfigKey,
+                            // the handles converting all formats of the single arg
+                            $this->toString($value)
+                        ));
+
+                        break;
+                    }
+                    // no break
                 case 'autowire':
                 case 'autoconfigure':
                     if (is_array($value)) {
