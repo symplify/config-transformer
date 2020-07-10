@@ -1,0 +1,31 @@
+services:
+  Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService:
+    calls:
+      - [withMailer, ['@mailer'], false]
+      - [setLogger, ['@logger']]
+      - [setMailer, ['@mailer']]
+      - { method: withMailer, arguments: ['@mailer', 'argument'], returns_clone: false }
+      - setLogger: ['@logger']
+      - setMailer: ['@mailer']
+      # and there is also a "TaggedValue" allowed ONLY if you use this last syntax
+      - withLogger: !returns_clone ['@logger']
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService;
+
+return static function (ContainerConfigurator $containerConfigurator) : void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SimpleFakeClassService::class)
+        ->call('withMailer', [service('mailer')], false)
+        ->call('setLogger', [service('logger')])
+        ->call('setMailer', [service('mailer')])
+        ->call('withMailer', [service('mailer'), 'argument'], false)
+        ->call('setLogger', [service('logger')])
+        ->call('setMailer', [service('mailer')])
+        ->call('withLogger', [service('logger')], true)
+    ;
+};

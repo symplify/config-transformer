@@ -28,6 +28,22 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/FixtureYamlToPhp/nested', 'yaml', 'php');
     }
 
+    /**
+     * @source https://github.com/symfony/maker-bundle/pull/604
+     * @dataProvider provideDataMakerBundle()
+     */
+    public function testMakerBundle(SmartFileInfo $fileInfo): void
+    {
+        // needed for all the included
+        $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
+        FileSystem::write($temporaryPath . '/../src/SomeClass.php', '<?php namespace App { class SomeClass {} }');
+        require_once $temporaryPath . '/../src/SomeClass.php';
+        FileSystem::createDir($temporaryPath . '/../src/Controller');
+        FileSystem::createDir($temporaryPath . '/../src/Domain');
+
+        $this->doTestOutput($fileInfo, 'yaml', 'php');
+    }
+
     public function provideData(): Iterator
     {
         return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/normal', '*.yaml');
@@ -36,6 +52,11 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     public function provideDataWithDirectory(): Iterator
     {
         return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/nested', '*.yaml');
+    }
+
+    public function provideDataMakerBundle(): Iterator
+    {
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/maker-bundle', '*.yaml');
     }
 
     private function doTestOutputWithExtraDirectory(
