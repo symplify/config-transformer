@@ -82,6 +82,11 @@ final class Configuration
         return $this->inputFormat;
     }
 
+    public function changeSymfonyVersion(float $symfonyVersion): void
+    {
+        $this->targetSymfonyVersion = $symfonyVersion;
+    }
+
     private function resolveInputFormat(InputInterface $input): void
     {
         /** @var string $inputFormat */
