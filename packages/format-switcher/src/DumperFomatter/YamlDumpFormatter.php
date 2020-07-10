@@ -4,22 +4,10 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 
 final class YamlDumpFormatter
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
-
-    public function __construct(Configuration $configuration)
-    {
-        $this->configuration = $configuration;
-    }
-
     public function format(string $content): string
     {
         // not sure why, but sometimes there is extra value in the start
@@ -47,11 +35,6 @@ final class YamlDumpFormatter
 
     private function clearExtraTagZeroName(string $content): string
     {
-        // not needed, already supported by Symfony
-        if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME)) {
-            return $content;
-        }
-
         // remove pre-space in tags, kinda hacky
         return Strings::replace($content, '#- [\d]+: { (\w+):#', '- { $1:');
     }
