@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FeatureShifter\Command;
 
 use Migrify\ConfigTransformer\FeatureShifter\Yaml\ExplicitToAutodiscoveryConverter;
+use Migrify\ConfigTransformer\Finder\FileBySuffixFinder;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
@@ -13,12 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConvertYamlCommand extends Command
 {
@@ -48,20 +46,20 @@ final class ConvertYamlCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var FinderSanitizer
+     * @var FileBySuffixFinder
      */
-    private $finderSanitizer;
+    private $fileBySuffixFinder;
 
     public function __construct(
         ExplicitToAutodiscoveryConverter $explicitToAutodiscoveryConverter,
         SymfonyStyle $symfonyStyle,
-        FinderSanitizer $finderSanitizer
+        FileBySuffixFinder $fileBySuffixFinder
     ) {
         parent::__construct();
 
         $this->explicitToAutodiscoveryConverter = $explicitToAutodiscoveryConverter;
         $this->symfonyStyle = $symfonyStyle;
-        $this->finderSanitizer = $finderSanitizer;
+        $this->fileBySuffixFinder = $fileBySuffixFinder;
     }
 
     protected function configure(): void
@@ -73,7 +71,7 @@ final class ConvertYamlCommand extends Command
 
         $this->addArgument(
             self::ARGUMENT_SOURCE,
-            InputArgument::REQUIRED,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
             'Path to your application directory or single config file'
         );
 
@@ -95,24 +93,21 @@ final class ConvertYamlCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $source = (string) $input->getArgument(self::ARGUMENT_SOURCE);
-        if (is_file($source) && file_exists($source)) {
-            $yamlFileInfos = [new SmartFileInfo($source)];
-        } else {
-            $yamlFileInfos = $this->findServiceYamlFilesInDirectory($source);
-        }
+        $source = (array) $input->getArgument(self::ARGUMENT_SOURCE);
 
-        foreach ($yamlFileInfos as $yamlFileInfo) {
-            $this->symfonyStyle->section('Processing ' . $yamlFileInfo->getRealPath());
+        $fileInfos = $this->fileBySuffixFinder->findInSourceBySuffixes($source, ['yml', 'yaml']);
+
+        foreach ($fileInfos as $fileInfo) {
+            $this->symfonyStyle->section('Processing ' . $fileInfo->getRealPath());
 
             $nestingLevel = (int) $input->getOption(self::OPTION_NESTING_LEVEL);
             $filter = (string) $input->getOption(self::OPTION_FILTER);
 
-            $servicesYaml = Yaml::parse($yamlFileInfo->getContents());
+            $servicesYaml = Yaml::parse($fileInfo->getContents());
 
             $convertedYaml = $this->explicitToAutodiscoveryConverter->convert(
                 $servicesYaml,
-                $yamlFileInfo->getRealPath(),
+                $fileInfo->getRealPath(),
                 $nestingLevel,
                 $filter
             );
@@ -128,7 +123,7 @@ final class ConvertYamlCommand extends Command
             $convertedContent = Strings::replace($convertedContent, '#^( {4}([A-Z].*?): )(null)$#m', '$1~');
 
             // save
-            FileSystem::write($yamlFileInfo->getRealPath(), $convertedContent);
+            FileSystem::write($fileInfo->getRealPath(), $convertedContent);
 
             $this->symfonyStyle->note('File converted');
         }
@@ -136,17 +131,5 @@ final class ConvertYamlCommand extends Command
         $this->symfonyStyle->success('Done');
 
         return ShellCode::SUCCESS;
-    }
-
-    /**
-     * @return SmartFileInfo[]
-     */
-    private function findServiceYamlFilesInDirectory(string $directory): array
-    {
-        $finder = Finder::create()->files()
-            ->name('#(config|services)\.(\w+\.)?(yml|yaml)$#')
-            ->in($directory);
-
-        return $this->finderSanitizer->sanitize($finder);
     }
 }
