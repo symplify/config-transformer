@@ -621,7 +621,7 @@ final class YamlToPhpConverter
             case 'NULL':
                 return 'null';
             default:
-                return $value;
+                return (string) $value;
         }
     }
 
