@@ -57,7 +57,7 @@ final class ClarifyCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var array $source */
+        /** @var string[] $source */
         $source = (array) $input->getArgument(Option::SOURCE);
 
         $fileInfos = $this->fileBySuffixFinder->findInSourceBySuffixes($source, ['neon', 'yml', 'yaml']);
