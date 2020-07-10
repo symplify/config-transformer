@@ -88,16 +88,18 @@ final class ContainerBuilderCleaner
 
     private function resolvePolyfillForNameTag(Definition $definition): void
     {
-        if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME)) {
-            return;
-        }
-
         if ($definition->getTags() === []) {
             return;
         }
 
         $tags = $definition->getTags();
         foreach ($definition->getTags() as $name => $value) {
+            /** @var mixed[] $tagValues */
+            $tagValues = $value[0];
+            if ($this->shouldSkipNameTagInlining($tagValues)) {
+                continue;
+            }
+
             unset($tags[$name]);
 
             $tagValues = [];
@@ -110,5 +112,14 @@ final class ContainerBuilderCleaner
         }
 
         $definition->setTags($tags);
+    }
+
+    private function shouldSkipNameTagInlining(array $tagValues): bool
+    {
+        if (count($tagValues) !== 0) {
+            return false;
+        }
+
+        return $this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME);
     }
 }

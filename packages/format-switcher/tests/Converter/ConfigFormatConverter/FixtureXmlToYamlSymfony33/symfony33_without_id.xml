@@ -11,6 +11,6 @@
 </container>
 -----
 services:
-    commandbus.facebookposthandler:
+    -
         class: CommandBus\FacebookPostHandler
         public: true

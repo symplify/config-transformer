@@ -10,7 +10,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class XmlToYamlTest extends AbstractConfigFormatConverterTest
+final class XmlToYamlSymfony33Test extends AbstractConfigFormatConverterTest
 {
     protected function setUp(): void
     {
@@ -18,7 +18,7 @@ final class XmlToYamlTest extends AbstractConfigFormatConverterTest
 
         /** @var Configuration $configuration */
         $configuration = self::$container->get(Configuration::class);
-        $configuration->changeSymfonyVersion(SymfonyVersionFeature::SERVICE_WITHOUT_NAME - 0.1);
+        $configuration->changeSymfonyVersion(SymfonyVersionFeature::SERVICE_WITHOUT_NAME);
     }
 
     /**
@@ -31,6 +31,6 @@ final class XmlToYamlTest extends AbstractConfigFormatConverterTest
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureXmlToYaml', '*.xml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureXmlToYamlSymfony33', '*.xml');
     }
 }

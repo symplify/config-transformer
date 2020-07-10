@@ -7,10 +7,15 @@
     <services>
         <service class="CommandBus\FacebookPostHandler" public="true">
         </service>
+        <service class="CommandBus\FacebookPostHandler" public="false">
+        </service>
     </services>
 </container>
 -----
 services:
+    commandbus.facebookposthandler.2:
+        class: CommandBus\FacebookPostHandler
+
     commandbus.facebookposthandler:
         class: CommandBus\FacebookPostHandler
         public: true
