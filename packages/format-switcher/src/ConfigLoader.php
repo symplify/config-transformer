@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher;
 
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader\IdAwareXmlFileLoader;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
@@ -26,11 +27,11 @@ final class ConfigLoader
 
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): FileLoader
     {
-        if ($suffix === 'xml') {
+        if ($suffix === Format::XML) {
             return new IdAwareXmlFileLoader($containerBuilder, new FileLocator());
         }
 
-        if ($suffix === 'yaml') {
+        if ($suffix === Format::YAML) {
             return new YamlFileLoader($containerBuilder, new FileLocator());
         }
 
