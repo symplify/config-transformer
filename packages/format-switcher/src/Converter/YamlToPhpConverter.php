@@ -29,6 +29,8 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
+ *
+ * @see \Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\YamlToPhpTest
  */
 final class YamlToPhpConverter
 {
@@ -419,6 +421,15 @@ final class YamlToPhpConverter
 
     private function addAliasNode($serviceKey, $serviceValues): void
     {
+        if (class_exists($serviceKey) || interface_exists($serviceKey)) {
+            $shortClassName = $this->addUseStatementIfNecessary($serviceKey);
+            // extract '@' before calling method createStringArgument() because service() is not necessary.
+            $alias = $this->createStringArgument($serviceValues['alias']);
+
+            $this->addLineStmt(sprintf('$services->alias(%s, %s);', $shortClassName, $alias), true);
+            return;
+        }
+
         if ($fullClassName = strstr($serviceKey, ' $', true)) {
             $argument = strstr($serviceKey, '$');
             $shortClassName = $this->addUseStatementIfNecessary($fullClassName) . ".' " . $argument . "'";
