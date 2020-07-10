@@ -11,6 +11,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFa
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ParametersPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\SingleServicePhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use Migrify\ConfigTransformer\Naming\ClassNaming;
@@ -112,6 +113,11 @@ final class YamlToPhpConverter
      */
     private $classNaming;
 
+    /**
+     * @var SingleServicePhpNodeFactory
+     */
+    private $singleServicePhpNodeFactory;
+
     public function __construct(
         Parser $yamlParser,
         PhpNodeFactory $phpNodeFactory,
@@ -119,6 +125,7 @@ final class YamlToPhpConverter
         ClosureNodeFactory $closureNodeFactory,
         ParametersPhpNodeFactory $parametersPhpNodeFactory,
         FluentMethodCallPrinter $fluentMethodCallPrinter,
+        SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ClassNaming $classNaming
     ) {
         $this->yamlParser = $yamlParser;
@@ -128,6 +135,7 @@ final class YamlToPhpConverter
         $this->fluentMethodCallPrinter = $fluentMethodCallPrinter;
         $this->parametersPhpNodeFactory = $parametersPhpNodeFactory;
         $this->classNaming = $classNaming;
+        $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
 
     public function convert(string $yaml): string
@@ -265,31 +273,18 @@ final class YamlToPhpConverter
             }
 
             if (isset($serviceValues[self::CLASS_KEY])) {
-                $class = $serviceValues[self::CLASS_KEY];
-
-                $shortClass = $this->classNaming->getShortName($class);
-
                 $this->addUseStatementIfNecessary($serviceValues[self::CLASS_KEY]);
 
-                $argValues = [
-                    new Arg(new String_($serviceKey)),
-                    new Arg(new ClassConstFetch(new Name($shortClass), 'class')),
-                ];
-
-                $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $argValues);
-
-                unset($serviceValues[self::CLASS_KEY]);
-                $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
-
-                $this->addEmptyLine();
-
+                $this->createService($serviceValues, $serviceKey);
                 continue;
             }
 
             $classReference = $this->addUseStatementIfNecessary($serviceKey);
 
             if ($serviceValues === null) {
-                $this->addLineStmt(sprintf('$services->set(%s);', $classReference), true);
+                $setMethodCall = $this->singleServicePhpNodeFactory->createSetService($serviceKey);
+                $this->addNode($setMethodCall);
+                $this->addEmptyLine();
             } else {
                 $this->addLineStmt(sprintf('$services->set(%s)', $classReference));
                 $this->convertServiceOptionsToNodes($serviceValues);
@@ -883,5 +878,26 @@ final class YamlToPhpConverter
         }
 
         return $value;
+    }
+
+    private function createService(array $serviceValues, string $serviceKey): void
+    {
+        $class = $serviceValues[self::CLASS_KEY];
+
+        $shortClass = $this->classNaming->getShortName($class);
+        $argValues = $this->createArgs($serviceKey, $shortClass);
+
+        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $argValues);
+
+        unset($serviceValues[self::CLASS_KEY]);
+
+        $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
+
+        $this->addEmptyLine();
+    }
+
+    private function createArgs(string $serviceKey, string $shortClass): array
+    {
+        return [new Arg(new String_($serviceKey)), new Arg(new ClassConstFetch(new Name($shortClass), 'class'))];
     }
 }
