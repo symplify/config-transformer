@@ -1,0 +1,14 @@
+services:
+  Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService: ~
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService;
+
+return static function (ContainerConfigurator $containerConfigurator) : void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SimpleFakeClassService::class);
+};

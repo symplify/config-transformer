@@ -1,0 +1,35 @@
+services:
+
+  string_service_factory:
+    class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService
+    factory: '@factory_service_invokable'
+
+  array_service_factory:
+    class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService
+    factory: ['@factory_service', 'constructFoo']
+
+  array_static_factory:
+    class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService
+    factory: ['Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo', 'create']
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService;
+
+return static function (ContainerConfigurator $containerConfigurator) : void {
+    $services = $containerConfigurator->services();
+
+        ->factory(service('factory_service_invokable'))
+    $services->set('string_service_factory', SimpleFakeClassService::class);
+
+        ->factory([service('factory_service'), 'constructFoo'])
+    $services->set('array_service_factory', SimpleFakeClassService::class);
+
+        ->factory([
+            'Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo',
+            'create',
+        ])
+    $services->set('array_static_factory', SimpleFakeClassService::class);
+};

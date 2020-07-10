@@ -52,6 +52,11 @@ final class ServicesPhpNodeFactory
         $excludeMethodCall = new MethodCall($servicesLoadMethodCall, self::EXCLUDE);
 
         $excludeValue = [];
+
+        if (! is_array($exclude)) {
+            $exclude = [$exclude];
+        }
+
         foreach ($exclude as $key => $singleExclude) {
             $excludeValue[$key] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
