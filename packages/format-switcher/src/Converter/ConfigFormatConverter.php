@@ -14,9 +14,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-/**
- * @see \Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\ConfigFormatConverterTest
- */
 final class ConfigFormatConverter
 {
     /**
@@ -61,7 +58,6 @@ final class ConfigFormatConverter
     public function convert(SmartFileInfo $smartFileInfo, string $inputFormat, string $outputFormat): string
     {
         $containerBuilder = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($smartFileInfo);
-
         if ($outputFormat === Format::YAML) {
             return $this->dumpContainerBuilderToYaml($containerBuilder);
         }
