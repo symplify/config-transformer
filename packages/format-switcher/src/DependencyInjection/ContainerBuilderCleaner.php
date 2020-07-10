@@ -88,16 +88,18 @@ final class ContainerBuilderCleaner
 
     private function resolvePolyfillForNameTag(Definition $definition): void
     {
-        if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME)) {
-            return;
-        }
-
         if ($definition->getTags() === []) {
             return;
         }
 
         $tags = $definition->getTags();
         foreach ($definition->getTags() as $name => $value) {
+            if (count($value[0]) === 0) {
+                if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME)) {
+                    continue;
+                }
+            }
+
             unset($tags[$name]);
 
             $tagValues = [];
