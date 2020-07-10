@@ -12,8 +12,10 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNo
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter;
 use Nette\Utils\Strings;
 use PhpParser\Builder\Use_ as UseBuilder;
+use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
+use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
@@ -243,31 +245,31 @@ final class YamlToPhpConverter
                     $serviceValues
                 );
 
-                $lastMethodCall = $servicesLoadMethodCall;
-
-                $exclude = $serviceValues['exclude'] ?? [];
-                foreach ($exclude as $singleExclude) {
-                    $excludeMethodCall = new MethodCall($lastMethodCall, 'exclude');
-                    $excludeMethodCall->args[] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
-
-                    $lastMethodCall = $excludeMethodCall;
+                if (! isset($serviceValues['exclude'])) {
+                    $this->addNodeAsExpression($servicesLoadMethodCall);
+                    continue;
                 }
 
-                $this->addNodeAsExpression($lastMethodCall);
+                $exclude = $serviceValues['exclude'];
+                $excludeMethodCall = new MethodCall($servicesLoadMethodCall, 'exclude');
 
-                if (count($serviceValues) > 1) {
-                    unset($serviceValues['resource']);
-                    unset($serviceValues['exclude']);
-
-                    $this->convertServiceOptionsToNodes($serviceValues);
+                $excludeValue = [];
+                foreach ($exclude as $key => $singleExclude) {
+                    $excludeValue[$key] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
                 }
 
+                $excludeValue = BuilderHelpers::normalizeValue($excludeValue);
+                if ($excludeValue instanceof Array_) {
+                    $excludeValue->setAttribute('kind', Array_::KIND_SHORT);
+                }
+                $excludeMethodCall->args[] = new Arg($excludeValue);
+
+                $this->addNodeAsExpression($excludeMethodCall);
                 continue;
             }
 
             if ($this->isAlias($serviceKey, $serviceValues)) {
                 $this->addAliasNode($serviceKey, $serviceValues);
-
                 continue;
             }
 
