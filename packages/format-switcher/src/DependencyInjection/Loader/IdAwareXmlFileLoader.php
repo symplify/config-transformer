@@ -8,6 +8,9 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Naming\UniqueNaming;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -36,15 +39,26 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
     private $count;
 
     /**
-     * @var array<string, int>
+     * @var Configuration
      */
-    private $anonymousServicesNames = [];
+    private $configuration;
 
-    public function __construct(ContainerBuilder $containerBuilder, FileLocatorInterface $fileLocator)
-    {
+    /**
+     * @var UniqueNaming
+     */
+    private $uniqueNaming;
+
+    public function __construct(
+        ContainerBuilder $containerBuilder,
+        FileLocatorInterface $fileLocator,
+        Configuration $configuration,
+        UniqueNaming $uniqueNaming
+    ) {
         parent::__construct($containerBuilder, $fileLocator);
 
         $this->privatesCaller = new PrivatesCaller();
+        $this->configuration = $configuration;
+        $this->uniqueNaming = $uniqueNaming;
     }
 
     public function load($resource, ?string $type = null): void
@@ -159,32 +173,28 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         $class = $serviceDomElement->getAttribute('class');
         $serviceName = $parentServiceId . '.' . $this->createServiceNameFromClass($class);
 
-        if (isset($this->anonymousServicesNames[$serviceName])) {
-            $serviceNameCounter = $this->anonymousServicesNames[$serviceName];
-            $this->anonymousServicesNames[$serviceName] = ++$serviceNameCounter;
-            $serviceName .= '.' . $serviceNameCounter;
-        } else {
-            $this->anonymousServicesNames[$serviceName] = 1;
-        }
-
-        return $serviceName;
+        return $this->uniqueNaming->uniquateName($serviceName);
     }
 
     private function createServiceNameFromClass(string $class): string
     {
         $serviceName = Strings::replace($class, '#\\\\#', '.');
-        return strtolower($serviceName);
+        $serviceName = strtolower($serviceName);
+
+        return $this->uniqueNaming->uniquateName($serviceName);
     }
 
     private function createAnonymousServiceId(bool $hasNamedServices, DOMElement $domElement, string $file): string
     {
+        $className = $domElement->getAttribute('class');
         if ($hasNamedServices) {
-            $className = $domElement->getAttribute('class');
-            $id = $this->createServiceNameFromClass($className);
-        } else {
-            // give it a unique name
-            $id = sprintf('%d_%s', ++$this->count, hash('sha256', $file));
+            return $this->createServiceNameFromClass($className);
         }
-        return $id;
+
+        if (! $this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::SERVICE_WITHOUT_NAME)) {
+            return $this->createServiceNameFromClass($className);
+        }
+
+        return sprintf('%d_%s', ++$this->count, hash('sha256', $file));
     }
 }
