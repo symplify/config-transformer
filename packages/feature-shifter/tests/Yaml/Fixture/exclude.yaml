@@ -1,0 +1,14 @@
+services:
+    some_controller:
+        class: Migrify\ConfigTransformer\FeatureShifter\Tests\Source\KernelProjectDir\Controller\SomeController
+        autowire: true
+
+    Migrify\ConfigTransformer\FeatureShifter\Tests\Source\KernelProjectDir\Service\SomeService: null
+-----
+services:
+    _defaults:
+        autowire: true
+
+    Migrify\ConfigTransformer\FeatureShifter\Tests\:
+        resource: '../../../src'
+        exclude: '../../../src/{Exception}'
