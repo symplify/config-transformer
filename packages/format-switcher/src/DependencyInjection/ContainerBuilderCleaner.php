@@ -94,10 +94,10 @@ final class ContainerBuilderCleaner
 
         $tags = $definition->getTags();
         foreach ($definition->getTags() as $name => $value) {
-            if (count($value[0]) === 0) {
-                if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME)) {
-                    continue;
-                }
+            /** @var mixed[] $tagValues */
+            $tagValues = $value[0];
+            if ($this->shouldSkipNameTagInlining($tagValues)) {
+                continue;
             }
 
             unset($tags[$name]);
@@ -112,5 +112,14 @@ final class ContainerBuilderCleaner
         }
 
         $definition->setTags($tags);
+    }
+
+    private function shouldSkipNameTagInlining(array $tagValues): bool
+    {
+        if (count($tagValues) !== 0) {
+            return false;
+        }
+
+        return $this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::TAGS_WITHOUT_NAME);
     }
 }
