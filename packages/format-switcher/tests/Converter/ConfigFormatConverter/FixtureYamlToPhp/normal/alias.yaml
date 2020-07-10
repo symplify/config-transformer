@@ -1,0 +1,16 @@
+services:
+    Symfony\Component\EventDispatcher\EventDispatcherInterface:
+        alias: 'Symfony\Component\EventDispatcher\EventDispatcher'
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+return static function (ContainerConfigurator $containerConfigurator) : void {
+    $services = $containerConfigurator->services();
+
+    $services->alias(EventDispatcherInterface::class, EventDispatcher::class);
+};
