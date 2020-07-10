@@ -10,7 +10,8 @@ services:
             - '../src/DependencyInjection/Loader/*'
 
     PhpParser\BuilderFactory: null
-    PhpParser\PrettyPrinter\Standard: null
+    Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter: null
+
     Symfony\Component\Yaml\Parser: null
 
     Symplify\SmartFileSystem\FileSystemFilter: null

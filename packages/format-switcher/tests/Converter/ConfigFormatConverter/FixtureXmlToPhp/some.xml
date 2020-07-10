@@ -21,7 +21,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\Mime\MimeTypes;
 
-return static function (ContainerConfigurator $containerConfigurator) {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
 
     $services->set('mime_types', MimeTypes::class)
