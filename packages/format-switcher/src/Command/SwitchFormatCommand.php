@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Command;
 
+use Migrify\ConfigTransformer\Finder\FileBySuffixFinder;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
-use Migrify\ConfigTransformer\FormatSwitcher\Finder\ConfigFileFinder;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
@@ -28,11 +28,6 @@ final class SwitchFormatCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var ConfigFileFinder
-     */
-    private $configFileFinder;
-
-    /**
      * @var ConfigFormatConverter
      */
     private $configFormatConverter;
@@ -47,20 +42,25 @@ final class SwitchFormatCommand extends Command
      */
     private $filesystem;
 
+    /**
+     * @var FileBySuffixFinder
+     */
+    private $fileBySuffixFinder;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
-        ConfigFileFinder $configFileFinder,
         ConfigFormatConverter $configFormatConverter,
         Configuration $configuration,
+        FileBySuffixFinder $fileBySuffixFinder,
         Filesystem $filesystem
     ) {
         parent::__construct();
 
         $this->symfonyStyle = $symfonyStyle;
-        $this->configFileFinder = $configFileFinder;
         $this->configFormatConverter = $configFormatConverter;
         $this->configuration = $configuration;
         $this->filesystem = $filesystem;
+        $this->fileBySuffixFinder = $fileBySuffixFinder;
     }
 
     protected function configure(): void
@@ -90,9 +90,10 @@ final class SwitchFormatCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->configuration->populateFromInput($input);
-        $fileInfos = $this->configFileFinder->findInSourceBySuffix(
+
+        $fileInfos = $this->fileBySuffixFinder->findInSourceBySuffixes(
             $this->configuration->getSource(),
-            $this->configuration->getInputFormat()
+            [$this->configuration->getInputFormat()]
         );
 
         $convertedFileInfos = [];
