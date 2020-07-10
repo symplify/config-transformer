@@ -1,11 +1,11 @@
 services:
-    advertentie.gateway.api.client:
+    gateway.api.client:
         class: GuzzleHttp\Client
         arguments: [{ base_uri: 'https://%api_host%/api/1.6/', headers: { Accept: application/json, Content-Type: application/json } }]
 
-    advertentie.gateway.reporting.client:
+    gateway.reporting.client:
         class: GuzzleHttp\Client
-        arguments: [{ base_uri: 'https://%moving_digital_advertentie_reporting_host%/api/1.6/', headers: { Content-Type: application/json } }]
+        arguments: [{ base_uri: 'https://%reporting_host%/api/1.6/', headers: { Content-Type: application/json } }]
 -----
 <?php
 
@@ -16,7 +16,7 @@ use GuzzleHttp\Client;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
 
-    $services->set('advertentie.gateway.api.client', Client::class)
+    $services->set('gateway.api.client', Client::class)
         ->args([
             [
                 'base_uri' => 'https://%api_host%/api/1.6/',
@@ -25,10 +25,10 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
         ])
     ;
 
-    $services->set('advertentie.gateway.reporting.client', Client::class)
+    $services->set('gateway.reporting.client', Client::class)
         ->args([
             [
-                'base_uri' => 'https://%moving_digital_advertentie_reporting_host%/api/1.6/',
+                'base_uri' => 'https://%reporting_host%/api/1.6/',
                 'headers' => ['Content-Type' => 'application/json'],
             ],
         ])
