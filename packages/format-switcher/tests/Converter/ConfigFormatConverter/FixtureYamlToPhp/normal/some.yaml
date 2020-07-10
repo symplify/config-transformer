@@ -17,20 +17,8 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
 
     $services->set('gateway.api.client', Client::class)
-        ->args([
-            [
-                'base_uri' => 'https://%api_host%/api/1.6/',
-                'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/json'],
-            ],
-        ])
-    ;
+        ->args([['base_uri' => 'https://%api_host%/api/1.6/', 'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/json']]]);
 
     $services->set('gateway.reporting.client', Client::class)
-        ->args([
-            [
-                'base_uri' => 'https://%reporting_host%/api/1.6/',
-                'headers' => ['Content-Type' => 'application/json'],
-            ],
-        ])
-    ;
+        ->args([['base_uri' => 'https://%reporting_host%/api/1.6/', 'headers' => ['Content-Type' => 'application/json']]]);
 };
