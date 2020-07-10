@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Finder;
+namespace Migrify\ConfigTransformer\Finder;
 
 use Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\FileSystemFilter;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ConfigFileFinder
+final class FileBySuffixFinder
 {
     /**
      * @var FinderSanitizer
@@ -30,7 +30,7 @@ final class ConfigFileFinder
     /**
      * @return SmartFileInfo[]
      */
-    public function findInSourceBySuffix(array $source, string $suffix): array
+    public function findInSourceBySuffixes(array $source, array $suffixes): array
     {
         $files = $this->fileSystemFilter->filterFiles($source);
 
@@ -44,24 +44,15 @@ final class ConfigFileFinder
             return $fileInfos;
         }
 
-        $directoryFilesInfos = $this->findInDirectoriesBySuffix($directories, $suffix);
-        return array_merge($fileInfos, $directoryFilesInfos);
-    }
-
-    /**
-     * @return SmartFileInfo[]
-     */
-    private function findInDirectoriesBySuffix(array $directories, string $suffix): array
-    {
+        $suffixRegex = '#\.(' . implode('|', $suffixes) . ')$#i';
         $finder = Finder::create()
             ->files()
-            ->name('#\.' . $suffix . '#i')
+            ->in($directories)
+            ->name($suffixRegex)
             ->sortByName();
 
-        foreach ($directories as $directory) {
-            $finder->in($directory);
-        }
+        $directoryFileInfos = $this->finderSanitizer->sanitize($finder);
 
-        return $this->finderSanitizer->sanitize($finder);
+        return array_merge($fileInfos, $directoryFileInfos);
     }
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\Clarifier\Command;
 
 use Migrify\ConfigTransformer\Clarifier\Clarifier\NeonYamlConfigClarifier;
-use Migrify\ConfigTransformer\Clarifier\Finder\NeonAndYamlFinder;
 use Migrify\ConfigTransformer\Clarifier\ValueObject\Option;
+use Migrify\ConfigTransformer\Finder\FileBySuffixFinder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,40 +23,44 @@ final class ClarifyCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var NeonAndYamlFinder
-     */
-    private $neonAndYamlFinder;
-
-    /**
      * @var NeonYamlConfigClarifier
      */
     private $neonYamlConfigClarifier;
 
+    /**
+     * @var FileBySuffixFinder
+     */
+    private $fileBySuffixFinder;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
-        NeonAndYamlFinder $neonAndYamlFinder,
+        FileBySuffixFinder $fileBySuffixFinder,
         NeonYamlConfigClarifier $neonYamlConfigClarifier
     ) {
         parent::__construct();
 
         $this->symfonyStyle = $symfonyStyle;
-        $this->neonAndYamlFinder = $neonAndYamlFinder;
         $this->neonYamlConfigClarifier = $neonYamlConfigClarifier;
+        $this->fileBySuffixFinder = $fileBySuffixFinder;
     }
 
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Clarify NEON/YAML syntax in provided files');
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED, 'Path to directory with NEON/YAML files');
+        $this->addArgument(
+            Option::SOURCE,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'Paths to s/directories with NEON/YAML'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var string $source */
-        $source = (string) $input->getArgument(Option::SOURCE);
+        /** @var array $source */
+        $source = (array) $input->getArgument(Option::SOURCE);
 
-        $fileInfos = $this->neonAndYamlFinder->findYamlAndNeonFilesInSource($source);
+        $fileInfos = $this->fileBySuffixFinder->findInSourceBySuffixes($source, ['neon', 'yml', 'yaml']);
 
         foreach ($fileInfos as $fileInfo) {
             $message = sprintf('Processing "%s"', $fileInfo->getRelativeFilePathFromCwd());
