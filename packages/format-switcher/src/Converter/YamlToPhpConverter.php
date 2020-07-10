@@ -6,19 +6,25 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use InvalidArgumentException;
 use LogicException;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ParametersPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\ConfigTransformer\Naming\ClassNaming;
 use Nette\Utils\Strings;
 use PhpParser\Builder\Use_ as UseBuilder;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Nop;
@@ -39,12 +45,27 @@ final class YamlToPhpConverter
     /**
      * @var string
      */
-    private const CONTAINER_CONFIGURATOR_NAME = 'containerConfigurator';
+    private const EOL_CHAR = "\n";
 
     /**
      * @var string
      */
-    private const EOL_CHAR = "\n";
+    private const DEFAULTS = '_defaults';
+
+    /**
+     * @var string
+     */
+    private const INSTANCE_OF = '_instanceof';
+
+    /**
+     * @var string
+     */
+    private const RESOURCE = 'resource';
+
+    /**
+     * @var string
+     */
+    private const CLASS_KEY = 'class';
 
     /**
      * @var Node[]
@@ -81,18 +102,32 @@ final class YamlToPhpConverter
      */
     private $fluentMethodCallPrinter;
 
+    /**
+     * @var ParametersPhpNodeFactory
+     */
+    private $parametersPhpNodeFactory;
+
+    /**
+     * @var ClassNaming
+     */
+    private $classNaming;
+
     public function __construct(
         Parser $yamlParser,
         PhpNodeFactory $phpNodeFactory,
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
         ClosureNodeFactory $closureNodeFactory,
-        FluentMethodCallPrinter $fluentMethodCallPrinter
+        ParametersPhpNodeFactory $parametersPhpNodeFactory,
+        FluentMethodCallPrinter $fluentMethodCallPrinter,
+        ClassNaming $classNaming
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpNodeFactory = $phpNodeFactory;
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->closureNodeFactory = $closureNodeFactory;
         $this->fluentMethodCallPrinter = $fluentMethodCallPrinter;
+        $this->parametersPhpNodeFactory = $parametersPhpNodeFactory;
+        $this->classNaming = $classNaming;
     }
 
     public function convert(string $yaml): string
@@ -112,7 +147,7 @@ final class YamlToPhpConverter
 
         $namespace->stmts[] = $return;
 
-        return $this->fluentMethodCallPrinter->prettyPrintFile([$namespace]) . self::EOL_CHAR;
+        return $this->fluentMethodCallPrinter->prettyPrintFile([$namespace]);
     }
 
     /**
@@ -125,6 +160,7 @@ final class YamlToPhpConverter
                 // declare the variable ($parameters/$services) even if the key is written without values.
                 $values = [];
             }
+
             switch ($key) {
                 case 'parameters':
                     $this->addParametersNodes($values);
@@ -144,87 +180,64 @@ final class YamlToPhpConverter
             }
         }
 
-        sort($this->useStatements);
-        foreach ($this->useStatements as $className) {
-            $useBuilder = new UseBuilder($className, Use_::TYPE_NORMAL);
-            $namespace->stmts[] = $useBuilder->getNode();
-        }
-
-        // remove the last carriage return "\n" if exists.
-        $lastStmt = $this->stmts[array_key_last($this->stmts)];
-
-        if ($lastStmt instanceof Name) {
-            $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
-        }
-
-        $lastKey = array_key_last($this->stmts);
-        if ($this->stmts[$lastKey] instanceof Nop) {
-            unset($this->stmts[$lastKey]);
-        }
+        $this->addImportsToNamespace($namespace);
+        $this->removeLastEmptyLine();
 
         return $this->stmts;
     }
 
     private function addParametersNodes(array $parameters): void
     {
-        $assign = $this->phpNodeFactory->createAssignContainerCallToVariable('parameters', 'parameters');
-        $this->addNodeAsExpression($assign);
+        $initAssign = $this->parametersPhpNodeFactory->createParametersInit();
+        $this->addNode($initAssign);
 
         foreach ($parameters as $parameterName => $value) {
-            $parametersSetMethodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
-            $this->addNodeAsExpression($parametersSetMethodCall);
+            $methodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
+            $this->addNode($methodCall);
         }
 
         // separater parameters by empty space
-        if (count($parameters)) {
-            $this->addNode(new Nop());
-        }
+        $this->addNode(new Nop());
     }
 
     private function addImportsNodes(array $imports): void
     {
         foreach ($imports as $import) {
             if (is_array($import)) {
-                $arguments = $this->sortArgumentsByKeyIfExists($import, ['resource', 'type', 'ignore_errors']);
+                $arguments = $this->sortArgumentsByKeyIfExists($import, [self::RESOURCE, 'type', 'ignore_errors']);
 
                 $methodCall = $this->phpNodeFactory->createImportMethodCall($arguments);
-                $this->addNodeAsExpression($methodCall);
+                $this->addNode($methodCall);
                 continue;
             }
 
-            $import = $this->createStringArgument($import);
-
-            $line = sprintf('$%s->import(%s);', self::CONTAINER_CONFIGURATOR_NAME, $import);
-            $this->addLineStmt($line, false);
+            throw new NotImplementedYetException();
         }
 
-        if (count($imports)) {
-            $this->addNode(new Nop());
-        }
+        $this->addNode(new Nop());
     }
 
     private function addServicesNodes(array $services): void
     {
-        $line = sprintf('$services = $%s->services();', self::CONTAINER_CONFIGURATOR_NAME);
-        $this->addLineStmt($line, true);
+        $assign = $this->servicesPhpNodeFactory->createServicesInit();
+        $this->addNode($assign);
+
+        $this->addEmptyLine();
 
         foreach ($services as $serviceKey => $serviceValues) {
-            if ($serviceKey === '_defaults') {
-                $methodCall = new MethodCall(new Variable('services'), 'defaults');
-                $this->addNode($methodCall);
-
-                $this->convertServiceOptionsToNodes($serviceValues);
-                $this->addLineStmt(';', true);
+            if ($serviceKey === self::DEFAULTS) {
+                $defaults = $this->servicesPhpNodeFactory->createServiceDefaults($serviceValues);
+                $this->addNode($defaults);
+                $this->addEmptyLine();
 
                 continue;
             }
 
-            if ($serviceKey === '_instanceof') {
+            if ($serviceKey === self::INSTANCE_OF) {
                 foreach ($serviceValues as $instanceKey => $instanceValues) {
-                    $className = $this->addUseStatementIfNecessary($instanceKey);
+                    $classReference = $this->addUseStatementIfNecessary($instanceKey);
 
-                    $this->addLineStmt(sprintf('$services->instanceof(%s)', $className));
-
+                    $this->addLineStmt(sprintf('$services->instanceof(%s)', $classReference));
                     $this->convertServiceOptionsToNodes($instanceValues);
 
                     $this->addLineStmt(';', true);
@@ -233,38 +246,16 @@ final class YamlToPhpConverter
                 continue;
             }
 
-            if (isset($serviceValues['resource'])) {
+            if (isset($serviceValues[self::RESOURCE])) {
                 // Due to the yaml behavior that does not allow the declaration of several identical key names.
                 if (isset($serviceValues['namespace'])) {
                     $serviceKey = $serviceValues['namespace'];
                     unset($serviceValues['namespace']);
                 }
 
-                $servicesLoadMethodCall = $this->servicesPhpNodeFactory->createServicesLoadMethodCall(
-                    $serviceKey,
-                    $serviceValues
-                );
+                $resource = $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
+                $this->addNode($resource);
 
-                if (! isset($serviceValues['exclude'])) {
-                    $this->addNodeAsExpression($servicesLoadMethodCall);
-                    continue;
-                }
-
-                $exclude = $serviceValues['exclude'];
-                $excludeMethodCall = new MethodCall($servicesLoadMethodCall, 'exclude');
-
-                $excludeValue = [];
-                foreach ($exclude as $key => $singleExclude) {
-                    $excludeValue[$key] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
-                }
-
-                $excludeValue = BuilderHelpers::normalizeValue($excludeValue);
-                if ($excludeValue instanceof Array_) {
-                    $excludeValue->setAttribute('kind', Array_::KIND_SHORT);
-                }
-                $excludeMethodCall->args[] = new Arg($excludeValue);
-
-                $this->addNodeAsExpression($excludeMethodCall);
                 continue;
             }
 
@@ -273,35 +264,41 @@ final class YamlToPhpConverter
                 continue;
             }
 
-            if (isset($serviceValues['class'])) {
-                $className = $this->addUseStatementIfNecessary($serviceValues['class']);
+            if (isset($serviceValues[self::CLASS_KEY])) {
+                $class = $serviceValues[self::CLASS_KEY];
 
-                $this->addLineStmt(sprintf(
-                    '$services->set(%s, %s)',
-                    $this->createStringArgument($serviceKey),
-                    $className
-                ));
+                $shortClass = $this->classNaming->getShortName($class);
 
-                unset($serviceValues['class']);
-                $this->convertServiceOptionsToNodes($serviceValues);
-                $this->addLineStmt(';', true);
+                $this->addUseStatementIfNecessary($serviceValues[self::CLASS_KEY]);
+
+                $argValues = [
+                    new Arg(new String_($serviceKey)),
+                    new Arg(new ClassConstFetch(new Name($shortClass), 'class')),
+                ];
+
+                $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $argValues);
+
+                unset($serviceValues[self::CLASS_KEY]);
+                $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
+
+                $this->addEmptyLine();
 
                 continue;
             }
 
-            $className = $this->addUseStatementIfNecessary($serviceKey);
+            $classReference = $this->addUseStatementIfNecessary($serviceKey);
 
             if ($serviceValues === null) {
-                $this->addLineStmt(sprintf('$services->set(%s);', $className), true);
+                $this->addLineStmt(sprintf('$services->set(%s);', $classReference), true);
             } else {
-                $this->addLineStmt(sprintf('$services->set(%s)', $className));
+                $this->addLineStmt(sprintf('$services->set(%s)', $classReference));
                 $this->convertServiceOptionsToNodes($serviceValues);
                 $this->addLineStmt(';', true);
             }
         }
     }
 
-    private function convertServiceOptionsToNodes(array $servicesValues): void
+    private function convertServiceOptionsToNodes(array $servicesValues, ?MethodCall $methodCall = null): void
     {
         foreach ($servicesValues as $serviceConfigKey => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
@@ -387,8 +384,19 @@ final class YamlToPhpConverter
                     break;
 
                 case 'calls':
-                    if ($this->isAssociativeArray($value)) {
-                        throw new InvalidArgumentException('Unexpected associative array for "calls" config.');
+                    if ($methodCall !== null) {
+                        foreach ($value as $singleCall) {
+                            $methodName = new String_($singleCall[0]);
+
+                            // @todo can be more items
+                            $args = [];
+                            $args[] = new Arg($methodName);
+                            $args[] = new Arg($this->normalizeValue($singleCall[1]));
+
+                            $methodCall = new MethodCall($methodCall, 'call', $args);
+                        }
+
+                        break;
                     }
 
                     foreach ($value as $argValue) {
@@ -407,7 +415,12 @@ final class YamlToPhpConverter
                             ));
                         }
                     } else {
-                        $this->addLineStmt($this->createMethod('args', $this->createSequentialArray($value)));
+                        if ($methodCall !== null) {
+                            $value = BuilderHelpers::normalizeValue($value);
+                            $methodCall = new MethodCall($methodCall, 'args', [new Arg($value)]);
+                        } else {
+                            $this->addLineStmt($this->createMethod('args', $this->createSequentialArray($value)));
+                        }
                     }
 
                     break;
@@ -417,6 +430,11 @@ final class YamlToPhpConverter
                         'Unexpected service configuration option: "%s".',
                         $serviceConfigKey
                     ));
+            }
+
+            if ($methodCall !== null) {
+                $methodCallExpression = new Expression($methodCall);
+                $this->addNode($methodCallExpression);
             }
         }
     }
@@ -615,7 +633,7 @@ final class YamlToPhpConverter
     private function createTaggedValue($value): string
     {
         if ($value->getTag() === 'service') {
-            $className = $this->addUseStatementIfNecessary($value->getValue()['class']);
+            $className = $this->addUseStatementIfNecessary($value->getValue()[self::CLASS_KEY]);
 
             return 'inline_service(' . $className . ')';
         }
@@ -788,7 +806,7 @@ final class YamlToPhpConverter
         $this->addNode(new Name($line . $addBlankLine));
     }
 
-    private function isAlias($serviceKey, $serviceValues): bool
+    private function isAlias(string $serviceKey, $serviceValues): bool
     {
         return isset($serviceValues['alias'])
             || strstr($serviceKey, ' $', true)
@@ -821,8 +839,49 @@ final class YamlToPhpConverter
         return str_repeat(' ', $count * 4);
     }
 
-    private function addNodeAsExpression(Node $node): void
+    private function addEmptyLine(): void
     {
-        $this->addNode(new Expression($node));
+        $this->stmts[] = new Nop();
+    }
+
+    private function addImportsToNamespace(Namespace_ $namespace): void
+    {
+        sort($this->useStatements);
+
+        foreach ($this->useStatements as $className) {
+            $useBuilder = new UseBuilder($className, Use_::TYPE_NORMAL);
+            $namespace->stmts[] = $useBuilder->getNode();
+        }
+    }
+
+    private function removeLastEmptyLine(): void
+    {
+        // remove the last carriage return "\n" if exists.
+        $lastStmt = $this->stmts[array_key_last($this->stmts)];
+
+        if ($lastStmt instanceof Name) {
+            $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
+        }
+
+        $lastKey = array_key_last($this->stmts);
+        if ($this->stmts[$lastKey] instanceof Nop) {
+            unset($this->stmts[$lastKey]);
+        }
+    }
+
+    private function normalizeValue($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $singleValue) {
+                if (Strings::startsWith($singleValue, '@')) {
+                    $singleValue = ltrim($singleValue, '@');
+                    $value[$key] = new FuncCall(new Name('service'), [new Arg(new String_($singleValue))]);
+                }
+            }
+
+            return BuilderHelpers::normalizeValue($value);
+        }
+
+        return $value;
     }
 }

@@ -11,6 +11,9 @@
             <call method="setDefault">
                 <argument type="service" id="mime_types" />
             </call>
+            <call method="setExtra">
+                <argument type="string">10000</argument>
+            </call>
         </service>
     </services>
 </container>
@@ -26,5 +29,5 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
 
     $services->set('mime_types', MimeTypes::class)
         ->call('setDefault', [service('mime_types')])
-    ;
+        ->call('setExtra', ['10000']);
 };
