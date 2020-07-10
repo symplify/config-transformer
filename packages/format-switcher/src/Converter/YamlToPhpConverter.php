@@ -6,36 +6,26 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use InvalidArgumentException;
 use LogicException;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter;
 use Nette\Utils\Strings;
-use PhpParser\Builder\Param;
-use PhpParser\BuilderFactory;
-use PhpParser\BuilderHelpers;
+use PhpParser\Builder\Use_ as UseBuilder;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr\BinaryOp\Concat;
-use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
-use PhpParser\Node\Scalar\MagicConst\Dir;
-use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
-use PhpParser\PrettyPrinter\Standard;
+use PhpParser\Node\Stmt\Use_;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 use Symfony\Component\Yaml\Yaml;
-use function count;
-use function gettype;
-use function in_array;
-use function is_array;
-use function is_bool;
-use function is_string;
-use function strlen;
 
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
@@ -53,11 +43,6 @@ final class YamlToPhpConverter
     private const EOL_CHAR = "\n";
 
     /**
-     * @var BuilderFactory
-     */
-    private $builderFactory;
-
-    /**
      * @var Node[]
      */
     private $stmts = [];
@@ -66,11 +51,6 @@ final class YamlToPhpConverter
      * @var string[]
      */
     private $useStatements = [];
-
-    /**
-     * @var Standard
-     */
-    private $printerStandard;
 
     /**
      * @var Parser
@@ -82,16 +62,33 @@ final class YamlToPhpConverter
      */
     private $phpNodeFactory;
 
+    /**
+     * @var ServicesPhpNodeFactory
+     */
+    private $servicesPhpNodeFactory;
+
+    /**
+     * @var ClosureNodeFactory
+     */
+    private $closureNodeFactory;
+
+    /**
+     * @var FluentMethodCallPrinter
+     */
+    private $fluentMethodCallPrinter;
+
     public function __construct(
-        BuilderFactory $builderFactory,
-        Standard $printerStandard,
         Parser $yamlParser,
-        PhpNodeFactory $phpNodeFactory
+        PhpNodeFactory $phpNodeFactory,
+        ServicesPhpNodeFactory $servicesPhpNodeFactory,
+        ClosureNodeFactory $closureNodeFactory,
+        FluentMethodCallPrinter $fluentMethodCallPrinter
     ) {
-        $this->builderFactory = $builderFactory;
-        $this->printerStandard = $printerStandard;
         $this->yamlParser = $yamlParser;
         $this->phpNodeFactory = $phpNodeFactory;
+        $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
+        $this->closureNodeFactory = $closureNodeFactory;
+        $this->fluentMethodCallPrinter = $fluentMethodCallPrinter;
     }
 
     public function convert(string $yaml): string
@@ -101,7 +98,7 @@ final class YamlToPhpConverter
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS);
         $closureStmts = $this->createClosureStmts($yamlArray, $namespace);
 
-        $closure = $this->phpNodeFactory->createClosureFromStmts($closureStmts);
+        $closure = $this->closureNodeFactory->createClosureFromStmts($closureStmts);
         $return = new Return_($closure);
 
         // add a blank line between the last use statement and the closure
@@ -111,7 +108,7 @@ final class YamlToPhpConverter
 
         $namespace->stmts[] = $return;
 
-        return $this->printerStandard->prettyPrintFile([$namespace]) . self::EOL_CHAR;
+        return $this->fluentMethodCallPrinter->prettyPrintFile([$namespace]) . self::EOL_CHAR;
     }
 
     /**
@@ -145,7 +142,7 @@ final class YamlToPhpConverter
 
         sort($this->useStatements);
         foreach ($this->useStatements as $className) {
-            $useBuilder = $this->builderFactory->use($className);
+            $useBuilder = new UseBuilder($className, Use_::TYPE_NORMAL);
             $namespace->stmts[] = $useBuilder->getNode();
         }
 
@@ -186,7 +183,7 @@ final class YamlToPhpConverter
             if (is_array($import)) {
                 $arguments = $this->sortArgumentsByKeyIfExists($import, ['resource', 'type', 'ignore_errors']);
 
-                $methodCall = $this->createImportMethodCall($arguments);
+                $methodCall = $this->phpNodeFactory->createImportMethodCall($arguments);
                 $this->addNodeAsExpression($methodCall);
                 continue;
             }
@@ -209,7 +206,7 @@ final class YamlToPhpConverter
 
         foreach ($services as $serviceKey => $serviceValues) {
             if ($serviceKey === '_defaults') {
-                $methodCall = $this->builderFactory->methodCall(new Variable('services'), 'defaults');
+                $methodCall = new MethodCall(new Variable('services'), 'defaults');
                 $this->addNode($methodCall);
 
                 $this->convertServiceOptionsToNodes($serviceValues);
@@ -239,22 +236,28 @@ final class YamlToPhpConverter
                     unset($serviceValues['namespace']);
                 }
 
-                $loadMethod = '$services->load(%s, %s)';
-                $loadMethod .= count($serviceValues) === 1 ? ';' : '';
-
-                $this->addLineStmt(
-                    sprintf(
-                        $loadMethod,
-                        $this->createStringArgument($serviceKey),
-                        $this->createStringArgument($serviceValues['resource'])
-                    )
+                $servicesLoadMethodCall = $this->servicesPhpNodeFactory->createServicesLoadMethodCall(
+                    $serviceKey,
+                    $serviceValues
                 );
+
+                $lastMethodCall = $servicesLoadMethodCall;
+
+                $exclude = $serviceValues['exclude'] ?? [];
+                foreach ($exclude as $singleExclude) {
+                    $excludeMethodCall = new MethodCall($lastMethodCall, 'exclude');
+                    $excludeMethodCall->args[] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
+
+                    $lastMethodCall = $excludeMethodCall;
+                }
+
+                $this->addNodeAsExpression($lastMethodCall);
 
                 if (count($serviceValues) > 1) {
                     unset($serviceValues['resource']);
+                    unset($serviceValues['exclude']);
 
                     $this->convertServiceOptionsToNodes($serviceValues);
-                    $this->addLineStmt(';', true);
                 }
 
                 continue;
@@ -316,7 +319,6 @@ final class YamlToPhpConverter
                 // simple "key: value" options
                 case 'shared':
                 case 'public':
-                case 'exclude':
                     if (is_array($value)) {
                         if ($this->isAssociativeArray($value)) {
                             throw new InvalidArgumentException(sprintf(
@@ -809,27 +811,5 @@ final class YamlToPhpConverter
     private function addNodeAsExpression(Node $node): void
     {
         $this->addNode(new Expression($node));
-    }
-
-    private function createImportMethodCall(array $arguments): MethodCall
-    {
-        $methodCall = new MethodCall(new Variable(self::CONTAINER_CONFIGURATOR_NAME), 'import');
-
-        foreach ($arguments as $argument) {
-            if (is_string($argument)) {
-                // preslash with dir
-                $argument = '/' . $argument;
-            }
-
-            $argumentValue = BuilderHelpers::normalizeValue($argument);
-
-            if ($argumentValue instanceof String_) {
-                $argumentValue = new Concat(new Dir(), $argumentValue);
-            }
-
-            $methodCall->args[] = new Arg($argumentValue);
-        }
-
-        return $methodCall;
     }
 }

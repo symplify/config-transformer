@@ -6,14 +6,15 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use PhpParser\Builder\Param;
 use PhpParser\BuilderHelpers;
-use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\Closure;
+use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Scalar\MagicConst\Dir;
+use PhpParser\Node\Scalar\String_;
 
 final class PhpNodeFactory
 {
@@ -21,23 +22,6 @@ final class PhpNodeFactory
      * @var string
      */
     private const CONTAINER_CONFIGURATOR_NAME = 'containerConfigurator';
-
-    /**
-     * @param Node[] $stmts
-     */
-    public function createClosureFromStmts(array $stmts): Closure
-    {
-        $paramBuilder = new Param(self::CONTAINER_CONFIGURATOR_NAME);
-        $paramBuilder->setType('ContainerConfigurator');
-
-        $param = $paramBuilder->getNode();
-
-        return new Closure([
-            'params' => [$param],
-            'stmts' => $stmts,
-            'static' => true,
-        ]);
-    }
 
     public function createAssignContainerCallToVariable(string $variableName, string $methodCallName): Assign
     {
@@ -56,6 +40,38 @@ final class PhpNodeFactory
         $parametersSetMethodCall->args[] = new Arg($parameterValue);
 
         return $parametersSetMethodCall;
+    }
+
+    /**
+     * @param mixed[] $arguments
+     */
+    public function createImportMethodCall(array $arguments): MethodCall
+    {
+        $containerConfiguratorVariable = new Variable(self::CONTAINER_CONFIGURATOR_NAME);
+        $methodCall = new MethodCall($containerConfiguratorVariable, 'import');
+
+        foreach ($arguments as $argument) {
+            $expr = $this->createAbsoluteDirExpr($argument);
+            $methodCall->args[] = new Arg($expr);
+        }
+
+        return $methodCall;
+    }
+
+    public function createAbsoluteDirExpr($argument): Expr
+    {
+        if (is_string($argument)) {
+            // preslash with dir
+            $argument = '/' . $argument;
+        }
+
+        $argumentValue = BuilderHelpers::normalizeValue($argument);
+
+        if ($argumentValue instanceof String_) {
+            $argumentValue = new Concat(new Dir(), $argumentValue);
+        }
+
+        return $argumentValue;
     }
 
     private function createParamValue($value): Expr

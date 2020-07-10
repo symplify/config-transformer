@@ -10,7 +10,7 @@ services:
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (ContainerConfigurator $containerConfigurator) {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
 
     $services->defaults()
@@ -18,5 +18,5 @@ return static function (ContainerConfigurator $containerConfigurator) {
         ->public()
     ;
 
-    $services->load('Symplify\\Autodiscovery\\', '../src');
+    $services->load('Symplify\\Autodiscovery\\', __DIR__ . '/../src');
 };
