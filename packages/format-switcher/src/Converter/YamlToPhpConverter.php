@@ -10,15 +10,14 @@ use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetExceptio
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ImportNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ParametersPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\SingleServicePhpNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentPhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Migrify\ConfigTransformer\Naming\ClassNaming;
 use Nette\Utils\Strings;
 use PhpParser\Builder\Use_ as UseBuilder;
 use PhpParser\BuilderHelpers;
@@ -26,7 +25,6 @@ use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\BinaryOp\Concat;
-use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
@@ -38,7 +36,6 @@ use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Use_;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 use Symfony\Component\Yaml\Yaml;
@@ -50,7 +47,10 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class YamlToPhpConverter
 {
-    public const INLINE_SERVICE = 'inline_service';
+    /**
+     * @var string
+     */
+    private const INLINE_SERVICE = 'inline_service';
 
     /**
      * @var string
@@ -143,19 +143,9 @@ final class YamlToPhpConverter
     private $closureNodeFactory;
 
     /**
-     * @var FluentMethodCallPrinter
-     */
-    private $fluentMethodCallPrinter;
-
-    /**
      * @var ParametersPhpNodeFactory
      */
     private $parametersPhpNodeFactory;
-
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
 
     /**
      * @var SingleServicePhpNodeFactory
@@ -168,14 +158,19 @@ final class YamlToPhpConverter
     private $importNodeFactory;
 
     /**
-     * @var CommonFactory
+     * @var CommonNodeFactory
      */
-    private $commonFactory;
+    private $commonNodeFactory;
 
     /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
+
+    /**
+     * @var FluentPhpConfigurationPrinter
+     */
+    private $fluentPhpConfigurationPrinter;
 
     /**
      * @todo decopule to collector pattern, listen to key name
@@ -186,24 +181,22 @@ final class YamlToPhpConverter
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
         ClosureNodeFactory $closureNodeFactory,
         ParametersPhpNodeFactory $parametersPhpNodeFactory,
-        FluentMethodCallPrinter $fluentMethodCallPrinter,
+        FluentPhpConfigurationPrinter $fluentPhpConfigurationPrinter,
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ImportNodeFactory $importNodeFactory,
-        CommonFactory $commonFactory,
-        ArgsNodeFactory $argsNodeFactory,
-        ClassNaming $classNaming
+        CommonNodeFactory $commonFactory,
+        ArgsNodeFactory $argsNodeFactory
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpNodeFactory = $phpNodeFactory;
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->closureNodeFactory = $closureNodeFactory;
-        $this->fluentMethodCallPrinter = $fluentMethodCallPrinter;
         $this->parametersPhpNodeFactory = $parametersPhpNodeFactory;
-        $this->classNaming = $classNaming;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
         $this->importNodeFactory = $importNodeFactory;
-        $this->commonFactory = $commonFactory;
+        $this->commonNodeFactory = $commonFactory;
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->fluentPhpConfigurationPrinter = $fluentPhpConfigurationPrinter;
     }
 
     public function convert(string $yaml): string
@@ -224,15 +217,18 @@ final class YamlToPhpConverter
 
         $namespace->stmts[] = $return;
 
-        return $this->fluentMethodCallPrinter->prettyPrintFile([$namespace]);
+        return $this->fluentPhpConfigurationPrinter->prettyPrintFile([$namespace]);
     }
 
     public function createTaggedValue(TaggedValue $taggedValue): Node
     {
         if ($taggedValue->getTag() === self::TAG_SERVICE) {
-            $className = $this->addUseStatementIfNecessary($taggedValue->getValue()[self::CLASS_KEY]);
+            $class = $taggedValue->getValue()[self::CLASS_KEY];
 
-            return 'inline_service(' . $className . ')';
+            $classReference = $this->commonNodeFactory->createClassReference($class);
+            $args = $this->argsNodeFactory->createFromValues([$classReference]);
+
+            return new FuncCall(new Name('inline_service'), $args);
         }
 
         if (is_array($taggedValue->getValue())) {
@@ -334,12 +330,10 @@ final class YamlToPhpConverter
 
             if ($serviceKey === self::INSTANCE_OF) {
                 foreach ($serviceValues as $instanceKey => $instanceValues) {
-                    $this->addUseStatementIfNecessary($instanceKey);
-
-                    $shortClassReference = $this->commonFactory->createShortClassReference($instanceKey);
+                    $classReference = $this->commonNodeFactory->createClassReference($instanceKey);
 
                     $servicesVariable = new Variable(VariableName::SERVICES);
-                    $args = [new Arg($shortClassReference)];
+                    $args = [new Arg($classReference)];
                     $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
                     $instanceofMethodCall = $this->convertServiceOptionsToNodes($instanceValues, $instanceofMethodCall);
 
@@ -373,19 +367,14 @@ final class YamlToPhpConverter
             }
 
             if (isset($serviceValues[self::CLASS_KEY])) {
-                $class = $serviceValues[self::CLASS_KEY];
-                $this->addUseStatementIfNecessary($class);
-
                 $this->createService($serviceValues, $serviceKey);
                 continue;
             }
 
-            $this->addUseStatementIfNecessary($serviceKey);
-
             if ($serviceValues === null) {
                 $setMethodCall = $this->singleServicePhpNodeFactory->createSetService($serviceKey);
             } else {
-                $classReference = $this->commonFactory->createShortClassReference($serviceKey);
+                $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
                 $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [
                     new Arg($classReference),
                 ]);
@@ -601,10 +590,10 @@ final class YamlToPhpConverter
         $servicesVariable = new Variable('services');
 
         if (class_exists($serviceKey) || interface_exists($serviceKey)) {
-            $shortClassName = $this->addUseStatementIfNecessary($serviceKey);
-            $this->addUseStatementIfNecessary($serviceValues[self::ALIAS]);
+            // $this->addUseStatementIfNecessary($serviceValues[self::ALIAS]); - @todo import alias
 
-            $args = $this->argsNodeFactory->createFromValues([$shortClassName, $serviceValues[self::ALIAS]]);
+            $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
+            $args = $this->argsNodeFactory->createFromValues([$classReference, $serviceValues[self::ALIAS]]);
 
             $methodCall = new MethodCall($servicesVariable, 'alias', $args);
             $methodCallExpression = new Expression($methodCall);
@@ -623,18 +612,18 @@ final class YamlToPhpConverter
         }
 
         if (isset($serviceValues[self::ALIAS])) {
-            $className = $this->addUseStatementIfNecessary($serviceValues[self::ALIAS]);
-            $args = $this->argsNodeFactory->createFromValues([$serviceKey, $className]);
+            $className = $serviceValues[self::ALIAS];
+
+            $classReference = $this->commonNodeFactory->createClassReference($className);
+            $args = $this->argsNodeFactory->createFromValues([$serviceKey, $classReference]);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
             unset($serviceValues[self::ALIAS]);
         }
 
         if (is_string($serviceValues) && $serviceValues[0] === '@') {
-            $this->addUseStatementIfNecessary($serviceKey);
+            $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
 
-            $shortClassReference = $this->commonFactory->createShortClassReference($serviceKey);
-
-            $args = $this->argsNodeFactory->createFromValues([$shortClassReference, $serviceValues], true);
+            $args = $this->argsNodeFactory->createFromValues([$classReference, $serviceValues], true);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
         }
 
@@ -670,10 +659,16 @@ final class YamlToPhpConverter
         ]);
 
         if (isset($arguments['decoration_on_invalid'])) {
-            $this->addUseStatementIfNecessary(ContainerInterface::class);
+            // @todo use normal nodes with FQN
             $arguments['decoration_on_invalid'] = $arguments['decoration_on_invalid'] === 'exception'
-                ? 'ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE'
-                : 'ContainerInterface::IGNORE_ON_INVALID_REFERENCE';
+                ? $this->commonNodeFactory->createConstFetch(
+                    'Symfony\Component\DependencyInjection\ContainerInterface',
+                    'EXCEPTION_ON_INVALID_REFERENCE'
+                )
+                : $this->commonNodeFactory->createConstFetch(
+                    'Symfony\Component\DependencyInjection\ContainerInterface',
+                    'IGNORE_ON_INVALID_REFERENCE'
+                );
         }
 
         // Don't write the next arguments if they are null.
@@ -684,18 +679,13 @@ final class YamlToPhpConverter
                 unset($arguments['decoration_inner_name']);
             }
         }
+
         array_unshift($arguments, $value['decorates']);
 
         $args = [];
         foreach ($arguments as $argument) {
             // is class const refrence
-            if (is_string($argument) && Strings::contains($argument, '::') && substr_count($argument, '::') === 1) {
-                [$class, $constant] = explode('::', $argument);
-                $value = $this->commonFactory->createConstFetch($class, $constant);
-            } else {
-                $value = BuilderHelpers::normalizeValue($argument);
-            }
-
+            $value = BuilderHelpers::normalizeValue($argument);
             $args[] = new Arg($value);
         }
 
@@ -757,19 +747,6 @@ final class YamlToPhpConverter
         }
 
         return $argumentsInOrder;
-    }
-
-    /**
-     * @todo remove here, handle once in the end before printing
-     */
-    private function addUseStatementIfNecessary(string $className): string
-    {
-        if (! in_array($className, $this->useStatements, true)) {
-            $this->useStatements[] = $className;
-        }
-
-        $shortClassName = Strings::after($className, '\\', -1);
-        return $shortClassName . '::class';
     }
 
     private function addNode(Node $node): void
@@ -853,8 +830,7 @@ final class YamlToPhpConverter
     {
         $class = $serviceValues[self::CLASS_KEY];
 
-        $shortClass = $this->classNaming->getShortName($class);
-        $argValues = $this->createArgs($serviceKey, $shortClass);
+        $argValues = $this->createArgs($serviceKey, $class);
 
         $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $argValues);
 
@@ -867,9 +843,15 @@ final class YamlToPhpConverter
         $this->addEmptyLine();
     }
 
-    private function createArgs(string $serviceKey, string $shortClass): array
+    /**
+     * @deprecated
+     * @todo use ArgNodesFactory
+     */
+    private function createArgs(string $serviceKey, string $class): array
     {
-        return [new Arg(new String_($serviceKey)), new Arg(new ClassConstFetch(new Name($shortClass), 'class'))];
+        $classReference = $this->commonNodeFactory->createClassReference($class);
+
+        return [new Arg(new String_($serviceKey)), new Arg($classReference)];
     }
 
     private function createFalse(): ConstFetch
@@ -895,11 +877,9 @@ final class YamlToPhpConverter
     private function createTaggedValueInlineService(TaggedValue $nestedValue): FuncCall
     {
         $className = $nestedValue->getValue()['class'];
-        $this->addUseStatementIfNecessary($className);
+        $classReference = $this->commonNodeFactory->createClassReference($className);
 
-        $shortClassReference = $this->commonFactory->createShortClassReference($className);
-
-        return new FuncCall(new Name(self::INLINE_SERVICE), [new Arg($shortClassReference)]);
+        return new FuncCall(new Name(self::INLINE_SERVICE), [new Arg($classReference)]);
     }
 
     private function createServiceFuncCall(string $value): FuncCall
@@ -914,11 +894,9 @@ final class YamlToPhpConverter
     {
         $argument = strstr($serviceKey, '$');
 
-        $this->addUseStatementIfNecessary($fullClassName);
-
         $methodCall = new MethodCall(new Variable(VariableName::SERVICES), self::ALIAS);
 
-        $classConstReference = $this->commonFactory->createShortClassReference($fullClassName);
+        $classConstReference = $this->commonNodeFactory->createClassReference($fullClassName);
         $concat = new Concat($classConstReference, new String_(' ' . $argument));
 
         $methodCall->args[] = new Arg($concat);
