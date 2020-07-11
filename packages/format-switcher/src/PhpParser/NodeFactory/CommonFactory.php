@@ -44,6 +44,11 @@ final class CommonFactory
     public function createShortClassReference(string $className): ClassConstFetch
     {
         $shortClassName = $this->classNaming->getShortName($className);
-        return new ClassConstFetch(new Name($shortClassName), 'class');
+        return $this->createConstFetch($shortClassName, 'class');
+    }
+
+    public function createConstFetch(string $className, string $constantName): ClassConstFetch
+    {
+        return new ClassConstFetch(new Name($className), $constantName);
     }
 }

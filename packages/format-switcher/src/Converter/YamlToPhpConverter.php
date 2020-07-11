@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 use InvalidArgumentException;
 use LogicException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ImportNodeFactory;
@@ -22,6 +23,7 @@ use PhpParser\Builder\Use_ as UseBuilder;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
+use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
@@ -46,6 +48,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class YamlToPhpConverter
 {
+    public const INLINE_SERVICE = 'inline_service';
+
     /**
      * @var string
      */
@@ -200,6 +204,28 @@ final class YamlToPhpConverter
         return $this->fluentMethodCallPrinter->prettyPrintFile([$namespace]);
     }
 
+    public function createTaggedValue($value): string
+    {
+        if ($value->getTag() === 'service') {
+            $className = $this->addUseStatementIfNecessary($value->getValue()[self::CLASS_KEY]);
+
+            return 'inline_service(' . $className . ')';
+        }
+
+        if (is_array($value->getValue())) {
+            $argumentsInOrder = $this->sortArgumentsByKeyIfExists(
+                $value->getValue(),
+                ['tag', 'index_by', 'default_index_method']
+            );
+
+            $args = $this->createListFromArray($argumentsInOrder);
+        } else {
+            $args = $this->toString($value->getValue());
+        }
+
+        return $value->getTag() . '(' . $args . ')';
+    }
+
     /**
      * @return Node[]
      */
@@ -309,6 +335,8 @@ final class YamlToPhpConverter
                 $resource = $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
                 $this->addNode($resource);
 
+                $this->addEmptyLine();
+
                 continue;
             }
 
@@ -355,7 +383,12 @@ final class YamlToPhpConverter
 
             switch ($serviceConfigKey) {
                 case 'decorates':
-                    $this->addLineStmt($this->createDecorateMethod($servicesValues));
+                    if ($methodCall === null) {
+                        throw new ShouldNotHappenException();
+                    }
+
+                    $methodCall = $this->createDecorateMethod($servicesValues, $methodCall);
+//                    $this->addNode($methodCall);
 
                     break;
 
@@ -407,6 +440,39 @@ final class YamlToPhpConverter
 
                 case self::FACTORY:
                 case self::CONFIGURATOR:
+                    $arrayItems = [];
+
+                    // @todo possibly generic?
+                    if (is_array($value)) {
+                        foreach ($value as $singleValue) {
+                            if ($singleValue instanceof TaggedValue && $singleValue->getTag() === 'service') {
+                                $inlineService = $this->createTaggedValueInlineService($value[0]);
+                                $arrayItems[] = new Arg($inlineService);
+                            } elseif (Strings::startsWith($singleValue, '@')) {
+                                $serviceFuncCall = $this->createServiceFuncCall($singleValue);
+                                $arrayItems[] = new Arg($serviceFuncCall);
+                            } else {
+                                $arrayItems[] = new Arg(BuilderHelpers::normalizeValue($singleValue));
+                            }
+                        }
+
+                        $valueExpr = new Array_($arrayItems);
+                    } else {
+                        if (Strings::startsWith($value, '@')) {
+                            $serviceFuncCall = $this->createServiceFuncCall($value);
+                            $valueExpr = new Array_([$serviceFuncCall]);
+                        } else {
+                            throw new NotImplementedYetException();
+                        }
+                    }
+
+                $args = [new Arg($valueExpr)];
+
+                if ($methodCall !== null) {
+                    $methodCall = new MethodCall($methodCall, 'factory', $args);
+                    break;
+                }
+
                     $this->addLineStmt($this->createMethod(
                         $serviceConfigKey,
                         // the handles converting all formats of the single arg
@@ -448,12 +514,25 @@ final class YamlToPhpConverter
                 case self::CALLS:
                     if ($methodCall !== null) {
                         foreach ($value as $singleCall) {
-                            $methodName = new String_($singleCall[0]);
+                            $methodName = new String_($singleCall[0] ?? $singleCall['method'] ?? key($singleCall));
 
                             // @todo can be more items
                             $args = [];
                             $args[] = new Arg($methodName);
-                            $args[] = new Arg($this->normalizeValue($singleCall[1]));
+                            $args[] = new Arg($this->normalizeValue(
+                                $singleCall[1] ?? $singleCall['arguments'] ?? current($singleCall)
+                            ));
+
+                            if (isset($singleCall[2]) || isset($singleCall['returns_clone'])) {
+                                $returnsCloneValue = $singleCall[2] ?? $singleCall['returns_clone'];
+                                $lastMethodCallValue = BuilderHelpers::normalizeValue($returnsCloneValue);
+                                $args[] = new Arg($lastMethodCallValue);
+                            }
+
+                            $currentArray = current($singleCall);
+                            if ($currentArray instanceof TaggedValue) {
+                                $args[] = new Arg(BuilderHelpers::normalizeValue(true));
+                            }
 
                             $methodCall = new MethodCall($methodCall, 'call', $args);
                         }
@@ -470,6 +549,18 @@ final class YamlToPhpConverter
                 case self::ARGUMENTS:
                     if ($this->isAssociativeArray($value)) {
                         foreach ($value as $argKey => $argValue) {
+                            if ($methodCall !== null) {
+                                $methodCall = new MethodCall($methodCall, 'arg');
+                                $string = $this->createStringArgument($argKey);
+                                $string = trim($string, '\'');
+
+                                $argValue = $this->toString($argValue);
+
+                                $methodCall->args[] = new Arg(new String_($string));
+                                $methodCall->args[] = new Arg(new String_($argValue));
+                                continue;
+                            }
+
                             $this->addLineStmt($this->createMethod(
                                 'arg',
                                 $this->createStringArgument($argKey),
@@ -478,6 +569,18 @@ final class YamlToPhpConverter
                         }
                     } else {
                         if ($methodCall !== null) {
+                            foreach ($value as $key => $nestedValue) {
+                                if ($nestedValue instanceof TaggedValue) {
+                                    if ($nestedValue->getTag() === 'service') {
+                                        $value = $this->createTaggedValueInlineService($nestedValue);
+                                        $value = new Array_([$value]);
+                                        break;
+                                    }
+
+                                    $value[$key] = $this->toString($nestedValue);
+                                }
+                            }
+
                             $value = BuilderHelpers::normalizeValue($value);
                             $methodCall = new MethodCall($methodCall, 'args', [new Arg($value)]);
                         } else {
@@ -561,7 +664,7 @@ final class YamlToPhpConverter
         return self::tab() . sprintf('->%s(%s)', $method, implode(', ', $argumentStrings));
     }
 
-    private function createDecorateMethod(array $value): string
+    private function createDecorateMethod(array $value, MethodCall $methodCall): MethodCall
     {
         $arguments = $this->sortArgumentsByKeyIfExists($value, [
             'decoration_inner_name' => null,
@@ -586,7 +689,20 @@ final class YamlToPhpConverter
         }
         array_unshift($arguments, $value['decorates']);
 
-        return sprintf(self::tab() . '->decorate(%s)', $this->createListFromArray($arguments));
+        $args = [];
+        foreach ($arguments as $argument) {
+            // is class const refrence
+            if (is_string($argument) && Strings::contains($argument, '::') && substr_count($argument, '::') === 1) {
+                [$class, $constant] = explode('::', $argument);
+                $value = $this->commonFactory->createConstFetch($class, $constant);
+            } else {
+                $value = BuilderHelpers::normalizeValue($argument);
+            }
+
+            $args[] = new Arg($value);
+        }
+
+        return new MethodCall($methodCall, 'decorate', $args);
     }
 
     private function createCallMethod($values): string
@@ -687,28 +803,6 @@ final class YamlToPhpConverter
             default:
                 return (string) $value;
         }
-    }
-
-    private function createTaggedValue($value): string
-    {
-        if ($value->getTag() === 'service') {
-            $className = $this->addUseStatementIfNecessary($value->getValue()[self::CLASS_KEY]);
-
-            return 'inline_service(' . $className . ')';
-        }
-
-        if (is_array($value->getValue())) {
-            $argumentsInOrder = $this->sortArgumentsByKeyIfExists(
-                $value->getValue(),
-                ['tag', 'index_by', 'default_index_method']
-            );
-
-            $args = $this->createListFromArray($argumentsInOrder);
-        } else {
-            $args = $this->toString($value->getValue());
-        }
-
-        return $value->getTag() . '(' . $args . ')';
     }
 
     private function createArrayArgument(array $values): string
@@ -930,6 +1024,10 @@ final class YamlToPhpConverter
 
     private function normalizeValue($value)
     {
+        if ($value instanceof TaggedValue) {
+            return $this->createServiceReferenceFromTaggedValue($value);
+        }
+
         if (is_array($value)) {
             foreach ($value as $key => $singleValue) {
                 if (Strings::startsWith($singleValue, '@')) {
@@ -968,5 +1066,38 @@ final class YamlToPhpConverter
     private function createFalse(): ConstFetch
     {
         return new ConstFetch(new Name('false'));
+    }
+
+    private function createServiceReferenceFromTaggedValue(TaggedValue $taggedValue): Array_
+    {
+        // that's the only value
+        if ($taggedValue->getTag() !== 'returns_clone') {
+            throw new NotImplementedYetException();
+        }
+
+        $serviceName = $taggedValue->getValue()[0];
+
+        $serviceName = ltrim($serviceName, '@');
+        $serviceFuncCall = new FuncCall(new Name('service'), [new Arg(new String_($serviceName))]);
+
+        return new Array_([$serviceFuncCall]);
+    }
+
+    private function createTaggedValueInlineService(TaggedValue $nestedValue): FuncCall
+    {
+        $className = $nestedValue->getValue()['class'];
+        $this->addUseStatementIfNecessary($className);
+
+        $shortClassReference = $this->commonFactory->createShortClassReference($className);
+
+        return new FuncCall(new Name(self::INLINE_SERVICE), [new Arg($shortClassReference)]);
+    }
+
+    private function createServiceFuncCall(string $value): FuncCall
+    {
+        $value = ltrim($value, '@');
+        $value = new String_($value);
+
+        return new FuncCall(new Name('service'), [new Arg($value)]);
     }
 }
