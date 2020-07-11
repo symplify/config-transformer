@@ -64,7 +64,9 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
             return;
         }
 
-        $newOriginalContent = $inputFileInfo->getContents() . SplitLine::LINE . rtrim($convertedContent) . PHP_EOL;
+        $newOriginalContent = rtrim($inputFileInfo->getContents()) . PHP_EOL . SplitLine::LINE . rtrim(
+            $convertedContent
+        ) . PHP_EOL;
         FileSystem::write($fileInfo->getRealPath(), $newOriginalContent);
     }
 

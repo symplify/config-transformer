@@ -8,8 +8,10 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;
+use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Expression;
 
@@ -18,16 +20,21 @@ final class ServicesPhpNodeFactory
     /**
      * @var string
      */
+    private const BIND = 'bind';
+
+    /**
+     * @var string
+     */
     private const EXCLUDE = 'exclude';
 
     /**
-     * @var PhpNodeFactory
+     * @var CommonFactory
      */
-    private $phpNodeFactory;
+    private $commonFactory;
 
-    public function __construct(PhpNodeFactory $phpNodeFactory)
+    public function __construct(CommonFactory $commonFactory)
     {
-        $this->phpNodeFactory = $phpNodeFactory;
+        $this->commonFactory = $commonFactory;
     }
 
     public function createServicesInit(): Expression
@@ -36,7 +43,6 @@ final class ServicesPhpNodeFactory
         $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
 
         $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, 'services'));
-
         return new Expression($assign);
     }
 
@@ -52,8 +58,13 @@ final class ServicesPhpNodeFactory
         $excludeMethodCall = new MethodCall($servicesLoadMethodCall, self::EXCLUDE);
 
         $excludeValue = [];
+
+        if (! is_array($exclude)) {
+            $exclude = [$exclude];
+        }
+
         foreach ($exclude as $key => $singleExclude) {
-            $excludeValue[$key] = $this->phpNodeFactory->createAbsoluteDirExpr($singleExclude);
+            $excludeValue[$key] = $this->commonFactory->createAbsoluteDirExpr($singleExclude);
         }
 
         $excludeValue = BuilderHelpers::normalizeValue($excludeValue);
@@ -66,9 +77,16 @@ final class ServicesPhpNodeFactory
     {
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
 
-        foreach (array_keys($serviceValues) as $key) {
+        foreach ($serviceValues as $key => $value) {
             if (in_array($key, ['autowire', 'autoconfigure', 'public'], true)) {
                 $methodCall = new MethodCall($methodCall, $key);
+                if ($value === false) {
+                    $methodCall->args[] = new Arg($this->createFalse());
+                }
+            }
+
+            if ($key === self::BIND) {
+                $methodCall = $this->createBindMethodCall($methodCall, $serviceValues[self::BIND]);
             }
         }
 
@@ -83,13 +101,30 @@ final class ServicesPhpNodeFactory
 
         $args = [];
         $args[] = new Arg(new String_($serviceKey));
-        $args[] = new Arg($this->phpNodeFactory->createAbsoluteDirExpr($resource));
+        $args[] = new Arg($this->commonFactory->createAbsoluteDirExpr($resource));
 
         return new MethodCall($servicesVariable, 'load', $args);
+    }
+
+    private function createBindMethodCall(MethodCall $methodCall, array $serviceValues): MethodCall
+    {
+        $bindValues = $serviceValues;
+        foreach ($bindValues as $key => $value) {
+            $methodCall = new MethodCall($methodCall, self::BIND);
+            $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($key));
+            $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($value));
+        }
+
+        return $methodCall;
     }
 
     private function createServicesVariable(): Variable
     {
         return new Variable(VariableName::SERVICES);
+    }
+
+    private function createFalse(): ConstFetch
+    {
+        return new ConstFetch(new Name('false'));
     }
 }

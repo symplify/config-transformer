@@ -23,7 +23,28 @@ final class FluentMethodCallPrinter extends Standard
         // remove trailing spaces
         $printedContent = Strings::replace($printedContent, '#^[ ]+\n#m', "\n");
 
+        // remove space before " :" in main closure
+        $printedContent = Strings::replace(
+            $printedContent,
+            '#containerConfigurator\) : void#',
+            'containerConfigurator): void'
+        );
+
         return $printedContent . self::EOL_CHAR;
+    }
+
+    /**
+     * Do not preslash all slashes (parent behavior), but only those:
+     *
+     * - followed by "\"
+     * - by "'"
+     * - or the end of the string
+     *
+     * Prevents `Vendor\Class` => `Vendor\\Class`.
+     */
+    protected function pSingleQuotedString(string $string): string
+    {
+        return "'" . Strings::replace($string, "#'|\\\\(?=[\\\\']|$)#", '\\\\$0') . "'";
     }
 
     protected function pExpr_Array(Array_ $array): string

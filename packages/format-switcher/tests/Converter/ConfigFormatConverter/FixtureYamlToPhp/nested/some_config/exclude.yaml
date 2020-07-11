@@ -13,13 +13,13 @@ services:
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->defaults()
         ->autowire()
         ->public();
 
-    $services->load('Symplify\\Autodiscovery\\', __DIR__ . '/../src')
+    $services->load('Symplify\Autodiscovery\\', __DIR__ . '/../src')
         ->exclude([__DIR__ . '/../src/HttpKernel/*', __DIR__ . '/../src/That/*']);
 };
