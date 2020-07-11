@@ -10,7 +10,7 @@ services:
             - '../src/DependencyInjection/Loader/*'
 
     PhpParser\BuilderFactory: null
-    Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentMethodCallPrinter: null
+    PhpParser\NodeFinder: null
 
     Symfony\Component\Yaml\Parser: null
 
