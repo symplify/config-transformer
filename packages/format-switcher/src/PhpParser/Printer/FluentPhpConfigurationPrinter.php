@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\NodeFinder;
@@ -110,26 +111,8 @@ final class FluentPhpConfigurationPrinter extends Standard
         $newStmts = [];
 
         foreach ($closure->stmts as $key => $closureStmt) {
-            if ($key === 0 || ! $closureStmt instanceof Expression) {
-                $newStmts[] = $closureStmt;
-                continue;
-            }
-
-            $closureStmtExpr = $closureStmt->expr;
-
-            // before each assign
-            if ($closureStmtExpr instanceof Assign) {
+            if ($this->shouldAddEmptyLineBeforeStatement($key, $closureStmt)) {
                 $newStmts[] = new Nop();
-                $newStmts[] = $closureStmt;
-                continue;
-            }
-
-            // before each chained method call
-            // is standalone method call or first in the chain call
-            if ($closureStmtExpr instanceof MethodCall) {
-                $newStmts[] = new Nop();
-                $newStmts[] = $closureStmt;
-                continue;
             }
 
             $newStmts[] = $closureStmt;
@@ -138,5 +121,24 @@ final class FluentPhpConfigurationPrinter extends Standard
         $closure->stmts = $newStmts;
 
         return $stmts;
+    }
+
+    private function shouldAddEmptyLineBeforeStatement(int $key, Stmt $stmt): bool
+    {
+        // do not add space before first item
+        if ($key === 0) {
+            return false;
+        }
+
+        if (! $stmt instanceof Expression) {
+            return false;
+        }
+
+        $expr = $stmt->expr;
+        if ($expr instanceof Assign) {
+            return true;
+        }
+
+        return $expr instanceof MethodCall;
     }
 }

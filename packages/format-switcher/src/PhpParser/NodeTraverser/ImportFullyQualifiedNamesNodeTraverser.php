@@ -46,14 +46,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      */
     public function traverseNodes(array $nodes): array
     {
-        $nodeTraverser = new NodeTraverser();
-        $nodeTraverser->addVisitor($this->importFullyQualifiedNamesNodeVisitor);
-
-        $nodes = $nodeTraverser->traverse($nodes);
-
-        $nameImports = $this->importFullyQualifiedNamesNodeVisitor->getNameImports();
-        $nameImports = array_unique($nameImports);
-
+        $nameImports = $this->collectNameImportsFromNodes($nodes);
         if (count($nameImports) === 0) {
             return $nodes;
         }
@@ -83,5 +76,19 @@ final class ImportFullyQualifiedNamesNodeTraverser
         $useImports[] = new Nop();
 
         $namespace->stmts = array_merge($useImports, $namespace->stmts);
+    }
+
+    /**
+     * @param Node[] $nodes
+     * @return string[]
+     */
+    private function collectNameImportsFromNodes(array $nodes): array
+    {
+        $nodeTraverser = new NodeTraverser();
+        $nodeTraverser->addVisitor($this->importFullyQualifiedNamesNodeVisitor);
+        $nodeTraverser->traverse($nodes);
+
+        $nameImports = $this->importFullyQualifiedNamesNodeVisitor->getNameImports();
+        return array_unique($nameImports);
     }
 }
