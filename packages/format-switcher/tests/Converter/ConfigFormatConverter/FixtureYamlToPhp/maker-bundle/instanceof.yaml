@@ -21,11 +21,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->instanceof(SimpleFakeClassService::class)
         ->public()
-        ->tag('app.domain_loader')
-    ;
+        ->tag('app.domain_loader');
 
     $services->instanceof(SimpleFakeClassServiceTwo::class)
         ->private()
-        ->tag('app.domain_loader')
-    ;
+        ->tag('app.domain_loader');
 };
