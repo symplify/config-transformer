@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use LogicException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ImportNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ParametersPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
@@ -119,6 +120,11 @@ final class YamlToPhpConverter
      */
     private $singleServicePhpNodeFactory;
 
+    /**
+     * @var ImportNodeFactory
+     */
+    private $importNodeFactory;
+
     public function __construct(
         Parser $yamlParser,
         PhpNodeFactory $phpNodeFactory,
@@ -127,6 +133,7 @@ final class YamlToPhpConverter
         ParametersPhpNodeFactory $parametersPhpNodeFactory,
         FluentMethodCallPrinter $fluentMethodCallPrinter,
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
+        ImportNodeFactory $importNodeFactory,
         ClassNaming $classNaming
     ) {
         $this->yamlParser = $yamlParser;
@@ -137,6 +144,7 @@ final class YamlToPhpConverter
         $this->parametersPhpNodeFactory = $parametersPhpNodeFactory;
         $this->classNaming = $classNaming;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
+        $this->importNodeFactory = $importNodeFactory;
     }
 
     public function convert(string $yaml): string
@@ -215,7 +223,7 @@ final class YamlToPhpConverter
             if (is_array($import)) {
                 $arguments = $this->sortArgumentsByKeyIfExists($import, [self::RESOURCE, 'type', 'ignore_errors']);
 
-                $methodCall = $this->phpNodeFactory->createImportMethodCall($arguments);
+                $methodCall = $this->importNodeFactory->createImportMethodCall($arguments);
                 $this->addNode($methodCall);
                 continue;
             }
