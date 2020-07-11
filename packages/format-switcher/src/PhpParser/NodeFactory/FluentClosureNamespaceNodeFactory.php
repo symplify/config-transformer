@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
@@ -88,11 +89,6 @@ final class FluentClosureNamespaceNodeFactory
     private const ALIAS = 'alias';
 
     /**
-     * @var Node[]
-     */
-    private $stmts = [];
-
-    /**
      * @var PhpNodeFactory
      */
     private $phpNodeFactory;
@@ -133,7 +129,12 @@ final class FluentClosureNamespaceNodeFactory
     private $argsNodeFactory;
 
     /**
-     * @todo decopule to collector pattern, listen to key name
+     * @var KeyYamlToPhpFactoryInterface[]
+     */
+    private $keyYamlToPhpFactories = [];
+
+    /**
+     * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
      */
     public function __construct(
         PhpNodeFactory $phpNodeFactory,
@@ -143,7 +144,8 @@ final class FluentClosureNamespaceNodeFactory
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ImportNodeFactory $importNodeFactory,
         CommonNodeFactory $commonNodeFactory,
-        ArgsNodeFactory $argsNodeFactory
+        ArgsNodeFactory $argsNodeFactory,
+        array $keyYamlToPhpFactories
     ) {
         $this->phpNodeFactory = $phpNodeFactory;
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
@@ -153,6 +155,7 @@ final class FluentClosureNamespaceNodeFactory
         $this->importNodeFactory = $importNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->keyYamlToPhpFactories = $keyYamlToPhpFactories;
     }
 
     public function createFromYamlArray(array $yamlArray): Namespace_
@@ -171,7 +174,16 @@ final class FluentClosureNamespaceNodeFactory
      */
     private function createClosureStmts(array $yamlData): array
     {
+        $nodes = [];
+
         foreach ($yamlData as $key => $values) {
+            foreach ($this->keyYamlToPhpFactories as $keyYamlToPhpFactory) {
+                if ($keyYamlToPhpFactory->getKey() === $key) {
+                    $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
+                    $nodes = array_merge($nodes, $freshNodes);
+                }
+            }
+
             if ($values === null) {
                 // declare the variable ($parameters/$services) even if the key is written without values.
                 $values = [];
@@ -179,13 +191,18 @@ final class FluentClosureNamespaceNodeFactory
 
             switch ($key) {
                 case 'parameters':
-                    $this->addParametersNodes($values);
+                    $parametersNodes = $this->addParametersNodes($values);
+                    $nodes = array_merge($nodes, $parametersNodes);
                     break;
+
                 case 'imports':
-                    $this->addImportsNodes($values);
+                    $importNodes = $this->addImportsNodes($values);
+                    $nodes = array_merge($nodes, $importNodes);
                     break;
+
                 case 'services':
-                    $this->addServicesNodes($values);
+                    $serviceNodes = $this->addServicesNodes($values);
+                    $nodes = array_merge($nodes, $serviceNodes);
                     break;
                 default:
                     throw new ShouldNotHappenException(sprintf(
@@ -195,66 +212,84 @@ final class FluentClosureNamespaceNodeFactory
             }
         }
 
-        return $this->stmts;
+        return $nodes;
     }
 
-    private function addParametersNodes(array $parameters): void
+    /**
+     * @return Node[]
+     */
+    private function addParametersNodes(array $parameters): array
     {
+        $nodes = [];
+
         $initAssign = $this->parametersPhpNodeFactory->createParametersInit();
-        $this->addNode($initAssign);
+
+        $nodes[] = $initAssign;
 
         foreach ($parameters as $parameterName => $value) {
             $methodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
-            $this->addNode($methodCall);
+            $nodes[] = $methodCall;
         }
+
+        return $nodes;
     }
 
-    private function addImportsNodes(array $imports): void
+    /**
+     * @return Node[]
+     */
+    private function addImportsNodes(array $imports): array
     {
+        $nodes = [];
+
         foreach ($imports as $import) {
             if (is_array($import)) {
                 $arguments = $this->sortArgumentsByKeyIfExists($import, [self::RESOURCE, 'type', 'ignore_errors']);
 
-                $methodCall = $this->importNodeFactory->createImportMethodCall($arguments);
-                $this->addNode($methodCall);
+                $nodes[] = $this->importNodeFactory->createImportMethodCall($arguments);
                 continue;
             }
 
             throw new NotImplementedYetException();
         }
+
+        return $nodes;
     }
 
-    private function addServicesNodes(array $services): void
+    /**
+     * @return Node[]
+     */
+    private function addServicesNodes(array $services): array
     {
-        $assign = $this->servicesPhpNodeFactory->createServicesInit();
-        $this->addNode($assign);
+        $nodes = [];
+        $nodes[] = $this->servicesPhpNodeFactory->createServicesInit();
 
         foreach ($services as $serviceKey => $serviceValues) {
             if ($serviceKey === self::DEFAULTS) {
-                $defaults = $this->servicesPhpNodeFactory->createServiceDefaults($serviceValues);
-                $this->addNode($defaults);
-
+                $nodes[] = $this->servicesPhpNodeFactory->createServiceDefaults($serviceValues);
                 continue;
             }
 
             if ($serviceKey === self::INSTANCE_OF) {
-                $this->resolveInstanceOf($serviceValues);
+                $instanceOfNodes = $this->resolveInstanceOf($serviceValues);
+                $nodes = array_merge($nodes, $instanceOfNodes);
                 continue;
             }
 
             if (isset($serviceValues[self::RESOURCE])) {
-                $this->resolveResource($serviceKey, $serviceValues);
-
+                $resourceNodes = $this->resolveResource($serviceKey, $serviceValues);
+                $nodes = array_merge($nodes, $resourceNodes);
                 continue;
             }
 
             if ($this->isAlias($serviceKey, $serviceValues)) {
-                $this->addAliasNode($serviceKey, $serviceValues);
+                $aliasNodes = $this->addAliasNode($serviceKey, $serviceValues);
+                $nodes = array_merge($nodes, $aliasNodes);
                 continue;
             }
 
             if (isset($serviceValues[self::CLASS_KEY])) {
-                $this->createService($serviceValues, $serviceKey);
+                $serviceNodes = $this->createService($serviceValues, $serviceKey);
+                $nodes = array_merge($nodes, $serviceNodes);
                 continue;
             }
 
@@ -267,9 +302,10 @@ final class FluentClosureNamespaceNodeFactory
                 $setMethodCall = $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
             }
 
-            $setMethodCallExpression = new Expression($setMethodCall);
-            $this->addNode($setMethodCallExpression);
+            $nodes[] = new Expression($setMethodCall);
         }
+
+        return $nodes;
     }
 
     private function convertServiceOptionsToNodes(array $servicesValues, MethodCall $methodCall): MethodCall
@@ -370,8 +406,13 @@ final class FluentClosureNamespaceNodeFactory
         return $methodCall;
     }
 
-    private function addAliasNode($serviceKey, $serviceValues): void
+    /**
+     * @return Node[]
+     */
+    private function addAliasNode($serviceKey, $serviceValues): array
     {
+        $nodes = [];
+
         $servicesVariable = new Variable('services');
 
         if (class_exists($serviceKey) || interface_exists($serviceKey)) {
@@ -385,16 +426,12 @@ final class FluentClosureNamespaceNodeFactory
             $args = $this->argsNodeFactory->createFromValues($values, true);
 
             $methodCall = new MethodCall($servicesVariable, 'alias', $args);
-            $methodCallExpression = new Expression($methodCall);
-            $this->addNode($methodCallExpression);
-            return;
+            return [new Expression($methodCall)];
         }
 
         if ($fullClassName = strstr($serviceKey, ' $', true)) {
             $methodCall = $this->createAliasNode($serviceKey, $fullClassName, $serviceValues);
-            $methodCallExpression = new Expression($methodCall);
-            $this->addNode($methodCallExpression);
-            return;
+            return [new Expression($methodCall)];
         }
 
         if (isset($serviceValues[self::ALIAS])) {
@@ -416,8 +453,9 @@ final class FluentClosureNamespaceNodeFactory
             $methodCall = $this->convertServiceOptionsToNodes($serviceValues, $methodCall);
         }
 
-        $methodCallExpression = new Expression($methodCall);
-        $this->addNode($methodCallExpression);
+        $nodes[] = new Expression($methodCall);
+
+        return $nodes;
     }
 
     private function createDecorateMethod(array $value, MethodCall $methodCall): MethodCall
@@ -502,11 +540,6 @@ final class FluentClosureNamespaceNodeFactory
         return $argumentsInOrder;
     }
 
-    private function addNode(Node $node): void
-    {
-        $this->stmts[] = $node;
-    }
-
     private function isAlias(string $serviceKey, $serviceValues): bool
     {
         return isset($serviceValues[self::ALIAS])
@@ -519,16 +552,22 @@ final class FluentClosureNamespaceNodeFactory
         return array_keys($array) !== range(0, count($array) - 1);
     }
 
-    private function createService(array $serviceValues, string $serviceKey): void
+    /**
+     * @return Node[]
+     */
+    private function createService(array $serviceValues, string $serviceKey): array
     {
+        $nodes = [];
+
         $args = $this->argsNodeFactory->createFromValues([$serviceKey, $serviceValues[self::CLASS_KEY]]);
         $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
 
         unset($serviceValues[self::CLASS_KEY]);
 
         $setMethodCall = $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
-        $setMethodCallExpression = new Expression($setMethodCall);
-        $this->addNode($setMethodCallExpression);
+        $nodes[] = new Expression($setMethodCall);
+
+        return $nodes;
     }
 
     private function createAliasNode($serviceKey, string $fullClassName, $serviceValues): MethodCall
@@ -548,8 +587,12 @@ final class FluentClosureNamespaceNodeFactory
         return $methodCall;
     }
 
-    private function resolveInstanceOf($serviceValues): void
+    /**
+     * @return Node[]
+     */
+    private function resolveInstanceOf($serviceValues): array
     {
+        $nodes = [];
         foreach ($serviceValues as $instanceKey => $instanceValues) {
             $classReference = $this->commonNodeFactory->createClassReference($instanceKey);
 
@@ -559,12 +602,16 @@ final class FluentClosureNamespaceNodeFactory
             $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
             $instanceofMethodCall = $this->convertServiceOptionsToNodes($instanceValues, $instanceofMethodCall);
 
-            $instanceofMethodCallExpression = new Expression($instanceofMethodCall);
-            $this->addNode($instanceofMethodCallExpression);
+            $nodes[] = new Expression($instanceofMethodCall);
         }
+
+        return $nodes;
     }
 
-    private function resolveResource($serviceKey, $serviceValues): void
+    /**
+     * @return Node[]
+     */
+    private function resolveResource($serviceKey, $serviceValues): array
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($serviceValues['namespace'])) {
@@ -573,7 +620,7 @@ final class FluentClosureNamespaceNodeFactory
         }
 
         $resource = $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
-        $this->addNode($resource);
+        return [$resource];
     }
 
     private function createNamespace(): Namespace_
