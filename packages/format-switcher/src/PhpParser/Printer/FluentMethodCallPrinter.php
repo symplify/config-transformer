@@ -23,6 +23,9 @@ final class FluentMethodCallPrinter extends Standard
         // remove trailing spaces
         $printedContent = Strings::replace($printedContent, '#^[ ]+\n#m', "\n");
 
+        // remove space before " :" in main closure
+        $printedContent = Strings::replace($printedContent, '#containerConfigurator\) : void#', 'containerConfigurator): void');
+
         return $printedContent . self::EOL_CHAR;
     }
 

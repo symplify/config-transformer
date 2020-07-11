@@ -32,7 +32,7 @@ parameters:
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set('app.admin_email', 'something@example.com');
     $parameters->set('app.enable_v2_protocol', true);
