@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
-use Migrify\ConfigTransformer\Naming\ClassNaming;
 use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
@@ -20,13 +19,13 @@ use PhpParser\Node\Name;
 final class ArgsNodeFactory
 {
     /**
-     * @var ClassNaming
+     * @var CommonNodeFactory
      */
-    private $classNaming;
+    private $commonNodeFactory;
 
-    public function __construct(ClassNaming $classNaming)
+    public function __construct(CommonNodeFactory $commonNodeFactory)
     {
-        $this->classNaming = $classNaming;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
     /**
@@ -77,8 +76,7 @@ final class ArgsNodeFactory
     {
         if (is_string($value)) {
             if (class_exists($value) || interface_exists($value)) {
-                $shortClassName = $this->classNaming->getShortName($value);
-                return new ClassConstFetch(new Name($shortClassName), 'class');
+                return $this->commonNodeFactory->createClassReference($value);
             }
 
             if (Strings::startsWith($value, '@=')) {

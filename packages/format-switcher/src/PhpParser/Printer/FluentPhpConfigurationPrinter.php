@@ -4,20 +4,35 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer;
 
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\PrettyPrinter\Standard;
 
-final class FluentMethodCallPrinter extends Standard
+final class FluentPhpConfigurationPrinter extends Standard
 {
     /**
      * @var string
      */
     private const EOL_CHAR = "\n";
 
+    /**
+     * @var ImportFullyQualifiedNamesNodeTraverser
+     */
+    private $importFullyQualifiedNamesNodeTraverser;
+
+    public function __construct(ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser)
+    {
+        $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
+
+        parent::__construct();
+    }
+
     public function prettyPrintFile(array $stmts): string
     {
+        $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
+
         $printedContent = parent::prettyPrintFile($stmts);
 
         // remove trailing spaces
