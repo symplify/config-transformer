@@ -36,13 +36,10 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
         ->autowire()
         ->autoconfigure();
 
+    $services->set('service1', SimpleFakeClass::class)
         ->autowire(false)
-    $services->set('service1', SimpleFakeClass::class);
-    $services->set('service1', SimpleFakeClass::class)
-        ->args(['service1_arg']);
-        ->tag('service1_tag')
-    $services->set('service1', SimpleFakeClass::class)
-        ->args(['service1_arg']);
+        ->args(['service1_arg'])
+        ->tag('service1_tag');
 
     $services->set('service2', SimpleFakeClass::class)
         ->args(['service2_arg']);
