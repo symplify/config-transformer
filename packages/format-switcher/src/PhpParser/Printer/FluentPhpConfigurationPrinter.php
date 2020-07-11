@@ -45,9 +45,8 @@ final class FluentPhpConfigurationPrinter extends Standard
 
     public function prettyPrintFile(array $stmts): string
     {
-        $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
-
-        $stmts = $this->completeEmptyLines($stmts);
+        $this->importFullyQualifiedNames($stmts);
+        $this->completeEmptyLines($stmts);
 
         $printedContent = parent::prettyPrintFile($stmts);
 
@@ -100,12 +99,12 @@ final class FluentPhpConfigurationPrinter extends Standard
     /**
      * @todo decouple to own service
      */
-    private function completeEmptyLines(array $stmts): array
+    private function completeEmptyLines(array $stmts): void
     {
         /** @var Closure|null $closure */
         $closure = $this->betterNodeFinder->findFirstInstanceOf($stmts, Closure::class);
         if ($closure === null) {
-            return $stmts;
+            return;
         }
 
         $newStmts = [];
@@ -119,8 +118,6 @@ final class FluentPhpConfigurationPrinter extends Standard
         }
 
         $closure->stmts = $newStmts;
-
-        return $stmts;
     }
 
     private function shouldAddEmptyLineBeforeStatement(int $key, Stmt $stmt): bool
@@ -140,5 +137,10 @@ final class FluentPhpConfigurationPrinter extends Standard
         }
 
         return $expr instanceof MethodCall;
+    }
+
+    private function importFullyQualifiedNames(array $stmts): void
+    {
+        $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
     }
 }
