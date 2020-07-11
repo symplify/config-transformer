@@ -14,13 +14,13 @@ use PhpParser\Node\Stmt\Expression;
 final class ImportNodeFactory
 {
     /**
-     * @var CommonFactory
+     * @var CommonNodeFactory
      */
-    private $commonFactory;
+    private $commonNodeFactory;
 
-    public function __construct(CommonFactory $commonFactory)
+    public function __construct(CommonNodeFactory $commonNodeFactory)
     {
-        $this->commonFactory = $commonFactory;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
     /**
@@ -35,7 +35,7 @@ final class ImportNodeFactory
             if (is_bool($argument) || in_array($argument, ['annotations', 'directory', 'glob'], true)) {
                 $expr = BuilderHelpers::normalizeValue($argument);
             } else {
-                $expr = $this->commonFactory->createAbsoluteDirExpr($argument);
+                $expr = $this->commonNodeFactory->createAbsoluteDirExpr($argument);
             }
 
             $methodCall->args[] = new Arg($expr);

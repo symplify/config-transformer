@@ -12,18 +12,18 @@ use PhpParser\Node\Expr\Variable;
 final class SingleServicePhpNodeFactory
 {
     /**
-     * @var CommonFactory
+     * @var CommonNodeFactory
      */
-    private $commonFactory;
+    private $commonNodeFactory;
 
-    public function __construct(CommonFactory $commonFactory)
+    public function __construct(CommonNodeFactory $commonNodeFactory)
     {
-        $this->commonFactory = $commonFactory;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
     public function createSetService(string $serviceKey): MethodCall
     {
-        $classReference = $this->commonFactory->createShortClassReference($serviceKey);
+        $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
 
         return new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
     }
