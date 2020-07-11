@@ -7,7 +7,12 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\Assign;
+use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Stmt\Expression;
+use PhpParser\Node\Stmt\Nop;
+use PhpParser\NodeFinder;
 use PhpParser\PrettyPrinter\Standard;
 
 final class FluentPhpConfigurationPrinter extends Standard
@@ -22,9 +27,17 @@ final class FluentPhpConfigurationPrinter extends Standard
      */
     private $importFullyQualifiedNamesNodeTraverser;
 
-    public function __construct(ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser)
-    {
+    /**
+     * @var NodeFinder
+     */
+    private $betterNodeFinder;
+
+    public function __construct(
+        ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser,
+        NodeFinder $nodeFinder
+    ) {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
+        $this->betterNodeFinder = $nodeFinder;
 
         parent::__construct();
     }
@@ -32,6 +45,8 @@ final class FluentPhpConfigurationPrinter extends Standard
     public function prettyPrintFile(array $stmts): string
     {
         $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
+
+        $stmts = $this->completeEmptyLines($stmts);
 
         $printedContent = parent::prettyPrintFile($stmts);
 
@@ -79,5 +94,49 @@ final class FluentPhpConfigurationPrinter extends Standard
     {
         $nextCallIndentReplacement = ')' . PHP_EOL . Strings::indent('->', 8, ' ');
         return Strings::replace($content, '#\)->#', $nextCallIndentReplacement);
+    }
+
+    /**
+     * @todo decouple to own service
+     */
+    private function completeEmptyLines(array $stmts): array
+    {
+        /** @var Closure|null $closure */
+        $closure = $this->betterNodeFinder->findFirstInstanceOf($stmts, Closure::class);
+        if ($closure === null) {
+            return $stmts;
+        }
+
+        $newStmts = [];
+
+        foreach ($closure->stmts as $key => $closureStmt) {
+            if ($key === 0 || ! $closureStmt instanceof Expression) {
+                $newStmts[] = $closureStmt;
+                continue;
+            }
+
+            $closureStmtExpr = $closureStmt->expr;
+
+            // before each assign
+            if ($closureStmtExpr instanceof Assign) {
+                $newStmts[] = new Nop();
+                $newStmts[] = $closureStmt;
+                continue;
+            }
+
+            // before each chained method call
+            // is standalone method call or first in the chain call
+            if ($closureStmtExpr instanceof MethodCall) {
+                $newStmts[] = new Nop();
+                $newStmts[] = $closureStmt;
+                continue;
+            }
+
+            $newStmts[] = $closureStmt;
+        }
+
+        $closure->stmts = $newStmts;
+
+        return $stmts;
     }
 }
