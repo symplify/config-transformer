@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\BuilderHelpers;
-use PhpParser\Node\Arg;
-use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 
 final class PhpNodeFactory
 {
-    public function createParameterSetMethodCall(string $parameterName, $value): Expression
+    /**
+     * @var ArgsNodeFactory
+     */
+    private $argsNodeFactory;
+
+    public function __construct(ArgsNodeFactory $argsNodeFactory)
     {
-        $methodCall = new MethodCall(new Variable(VariableName::PARAMETERS), 'set');
-        $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($parameterName));
-
-        $parameterValue = $this->createParamValue($value);
-        $methodCall->args[] = new Arg($parameterValue);
-
-        return new Expression($methodCall);
+        $this->argsNodeFactory = $argsNodeFactory;
     }
 
-    private function createParamValue($value): Expr
+    public function createParameterSetMethodCall(string $parameterName, $value): Expression
     {
-        return BuilderHelpers::normalizeValue($value);
+        $args = $this->argsNodeFactory->createFromValues([$parameterName, $value]);
+
+        $parametersVariable = new Variable(VariableName::PARAMETERS);
+        $methodCall = new MethodCall($parametersVariable, 'set', $args);
+        return new Expression($methodCall);
     }
 }
