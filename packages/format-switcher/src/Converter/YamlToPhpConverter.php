@@ -327,6 +327,7 @@ final class YamlToPhpConverter
                         break;
                     }
                     // no break
+                case 'bind':
                 case 'autowire':
                 case 'autoconfigure':
                     $method = $serviceConfigKey;
