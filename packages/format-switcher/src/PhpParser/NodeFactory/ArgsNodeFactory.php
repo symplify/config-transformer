@@ -12,12 +12,17 @@ use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
-use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
+use Symfony\Component\Yaml\Tag\TaggedValue;
 
 final class ArgsNodeFactory
 {
+    /**
+     * @var string
+     */
+    private const SERVICE = 'service';
+
     /**
      * @var CommonNodeFactory
      */
@@ -33,13 +38,14 @@ final class ArgsNodeFactory
      */
     public function createFromValuesAndWrapInArray($values): array
     {
-        $items = [];
-        foreach ($values as $value) {
-            $expr = $this->resolveExpr($value);
-            $items[] = new ArrayItem($expr);
+        if (is_array($values)) {
+            $array = $this->resolveExprFromArray($values);
+        } else {
+            $expr = $this->resolveExpr($values);
+            $items = [new ArrayItem($expr)];
+            $array = new Array_($items);
         }
 
-        $array = new Array_($items);
         $arg = new Arg($array);
         return [$arg];
     }
@@ -69,39 +75,44 @@ final class ArgsNodeFactory
             }
         }
 
+        if (is_string($values)) {
+            $expr = $this->resolveExpr($values);
+            return [new Arg($expr)];
+        }
+
         throw new NotImplementedYetException();
     }
 
-    private function resolveExpr($value, bool $skipServiceReference = false): Expr
+    public function resolveExpr($value, bool $skipServiceReference = false): Expr
     {
         if (is_string($value)) {
-            if (class_exists($value) || interface_exists($value)) {
-                return $this->commonNodeFactory->createClassReference($value);
+            return $this->resolveStringExpr($value, $skipServiceReference);
+        }
+
+        if ($value instanceof Expr) {
+            return $value;
+        }
+
+        if ($value instanceof TaggedValue) {
+            return $this->createServiceReferenceFromTaggedValue($value);
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $nestedKey => $nestedValue) {
+                $value[$nestedKey] = $this->resolveExpr($nestedValue);
             }
 
-            if (Strings::startsWith($value, '@=')) {
-                $value = ltrim($value, '@=');
-                $expr = $this->resolveExpr($value);
-                $args = [new Arg($expr)];
-                return new FuncCall(new Name('expr'), $args);
-            }
-
-            // is service reference
-            if (Strings::startsWith($value, '@')) {
-                return $this->resolveServiceReferenceExpr($value, $skipServiceReference);
-            }
-
-            if (Strings::contains($value, '::')) {
-                [$class, $constant] = explode('::', $value);
-                return new ClassConstFetch(new Name($class), $constant);
-            }
+            return new Array_($value);
         }
 
         return BuilderHelpers::normalizeValue($value);
     }
 
-    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference): Expr
-    {
+    private function resolveServiceReferenceExpr(
+        string $value,
+        bool $skipServiceReference,
+        string $functionName = self::SERVICE
+    ): Expr {
         $value = ltrim($value, '@');
         $expr = $this->resolveExpr($value);
 
@@ -110,6 +121,76 @@ final class ArgsNodeFactory
         }
 
         $args = [new Arg($expr)];
-        return new FuncCall(new Name('service'), $args);
+        return new FuncCall(new Name($functionName), $args);
+    }
+
+    private function resolveExprFromArray(array $values): Array_
+    {
+        $arrayItems = [];
+        foreach ($values as $key => $value) {
+            $expr = is_array($value) ? $this->resolveExprFromArray($value) : $this->resolveExpr($value);
+
+            if (! is_int($key)) {
+                $keyExpr = $this->resolveExpr($key);
+                $arrayItem = new ArrayItem($expr, $keyExpr);
+            } else {
+                $arrayItem = new ArrayItem($expr);
+            }
+
+            $arrayItems[] = $arrayItem;
+        }
+
+        return new Array_($arrayItems);
+    }
+
+    private function createServiceReferenceFromTaggedValue(TaggedValue $taggedValue): Expr
+    {
+        $shouldWrapInArray = false;
+
+        // that's the only value
+        if ($taggedValue->getTag() === 'returns_clone') {
+            $serviceName = $taggedValue->getValue()[0];
+            $functionName = self::SERVICE;
+            $shouldWrapInArray = true;
+        } elseif ($taggedValue->getTag() === self::SERVICE) {
+            $serviceName = $taggedValue->getValue()['class'];
+            $functionName = 'inline_service';
+        } else {
+            if (is_array($taggedValue->getValue())) {
+                $args = $this->createFromValues($taggedValue->getValue());
+            } else {
+                $args = $this->createFromValues([$taggedValue->getValue()]);
+            }
+
+            return new FuncCall(new Name($taggedValue->getTag()), $args);
+        }
+
+        $funcCall = $this->resolveServiceReferenceExpr($serviceName, false, $functionName);
+        if ($shouldWrapInArray) {
+            return new Array_([new ArrayItem($funcCall)]);
+        }
+
+        return $funcCall;
+    }
+
+    private function resolveStringExpr(string $value, bool $skipServiceReference)
+    {
+        if (class_exists($value) || interface_exists($value)) {
+            return $this->commonNodeFactory->createClassReference($value);
+        }
+
+        if (Strings::startsWith($value, '@=')) {
+            $value = ltrim($value, '@=');
+            $args = $this->createFromValues($value);
+
+            return new FuncCall(new Name('expr'), $args);
+        }
+
+        // is service reference
+        if (Strings::startsWith($value, '@')) {
+            return $this->resolveServiceReferenceExpr($value, $skipServiceReference);
+        }
+
+        return BuilderHelpers::normalizeValue($value);
     }
 }
