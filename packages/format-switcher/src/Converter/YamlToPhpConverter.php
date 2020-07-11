@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use LogicException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ImportNodeFactory;
@@ -159,6 +160,10 @@ final class YamlToPhpConverter
      * @var CommonFactory
      */
     private $commonFactory;
+    /**
+     * @var ArgsNodeFactory
+     */
+    private $argsNodeFactory;
 
     public function __construct(
         Parser $yamlParser,
@@ -170,6 +175,7 @@ final class YamlToPhpConverter
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ImportNodeFactory $importNodeFactory,
         CommonFactory $commonFactory,
+        ArgsNodeFactory $argsNodeFactory,
         ClassNaming $classNaming
     ) {
         $this->yamlParser = $yamlParser;
@@ -182,6 +188,7 @@ final class YamlToPhpConverter
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
         $this->importNodeFactory = $importNodeFactory;
         $this->commonFactory = $commonFactory;
+        $this->argsNodeFactory = $argsNodeFactory;
     }
 
     public function convert(string $yaml): string
@@ -388,8 +395,6 @@ final class YamlToPhpConverter
                     }
 
                     $methodCall = $this->createDecorateMethod($servicesValues, $methodCall);
-//                    $this->addNode($methodCall);
-
                     break;
 
                 case 'deprecated':
@@ -577,11 +582,18 @@ final class YamlToPhpConverter
                                         break;
                                     }
 
+
                                     $value[$key] = $this->toString($nestedValue);
                                 }
                             }
 
                             $value = BuilderHelpers::normalizeValue($value);
+
+                            $args = $this->argsNodeFactory->createFromValues($value);
+                            dump($args);
+                            dump($value);
+                            die;
+
                             $methodCall = new MethodCall($methodCall, 'args', [new Arg($value)]);
                         } else {
                             $this->addLineStmt($this->createMethod('args', $this->createSequentialArray($value)));
