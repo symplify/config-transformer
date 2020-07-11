@@ -23,14 +23,12 @@ use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\BinaryOp\Concat;
-use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Namespace_;
-use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Use_;
 use Symfony\Component\Yaml\Parser;
@@ -67,11 +65,6 @@ final class YamlToPhpConverter
      * @var string
      */
     private const FACTORY = 'factory';
-
-    /**
-     * @var string
-     */
-    private const EOL_CHAR = "\n";
 
     /**
      * @var string
@@ -197,10 +190,6 @@ final class YamlToPhpConverter
         $return = new Return_($closure);
 
         // add a blank line between the last use statement and the closure
-        if ($this->useStatements !== []) {
-            $namespace->stmts[] = new Nop();
-        }
-
         $namespace->stmts[] = $return;
 
         return $this->fluentPhpConfigurationPrinter->prettyPrintFile([$namespace]);
@@ -237,7 +226,6 @@ final class YamlToPhpConverter
         }
 
         $this->addImportsToNamespace($namespace);
-        $this->removeLastEmptyLine();
 
         return $this->stmts;
     }
@@ -251,9 +239,6 @@ final class YamlToPhpConverter
             $methodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
             $this->addNode($methodCall);
         }
-
-        // separater parameters by empty space
-        $this->addNode(new Nop());
     }
 
     private function addImportsNodes(array $imports): void
@@ -269,8 +254,6 @@ final class YamlToPhpConverter
 
             throw new NotImplementedYetException();
         }
-
-        $this->addNode(new Nop());
     }
 
     private function addServicesNodes(array $services): void
@@ -278,13 +261,10 @@ final class YamlToPhpConverter
         $assign = $this->servicesPhpNodeFactory->createServicesInit();
         $this->addNode($assign);
 
-        $this->addEmptyLine();
-
         foreach ($services as $serviceKey => $serviceValues) {
             if ($serviceKey === self::DEFAULTS) {
                 $defaults = $this->servicesPhpNodeFactory->createServiceDefaults($serviceValues);
                 $this->addNode($defaults);
-                $this->addEmptyLine();
 
                 continue;
             }
@@ -301,8 +281,6 @@ final class YamlToPhpConverter
 
                     $instanceofMethodCallExpression = new Expression($instanceofMethodCall);
                     $this->addNode($instanceofMethodCallExpression);
-
-                    $this->addEmptyLine();
                 }
 
                 continue;
@@ -317,8 +295,6 @@ final class YamlToPhpConverter
 
                 $resource = $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
                 $this->addNode($resource);
-
-                $this->addEmptyLine();
 
                 continue;
             }
@@ -344,7 +320,6 @@ final class YamlToPhpConverter
 
             $setMethodCallExpression = new Expression($setMethodCall);
             $this->addNode($setMethodCallExpression);
-            $this->addEmptyLine();
         }
     }
 
@@ -393,7 +368,7 @@ final class YamlToPhpConverter
 
                     $methodCall = new MethodCall($methodCall, $method);
                     if ($value === false) {
-                        $methodCall->args[] = new Arg($this->createFalse());
+                        $methodCall->args[] = new Arg($this->commonNodeFactory->createFalse());
                     }
 
                     break;
@@ -468,7 +443,6 @@ final class YamlToPhpConverter
             $methodCall = new MethodCall($servicesVariable, 'alias', $args);
             $methodCallExpression = new Expression($methodCall);
             $this->addNode($methodCallExpression);
-            $this->addEmptyLine();
             return;
         }
 
@@ -476,8 +450,6 @@ final class YamlToPhpConverter
             $methodCall = $this->createAliasNode($serviceKey, $fullClassName, $serviceValues);
             $methodCallExpression = new Expression($methodCall);
             $this->addNode($methodCallExpression);
-            $this->addEmptyLine();
-
             return;
         }
 
@@ -501,7 +473,6 @@ final class YamlToPhpConverter
 
         $methodCallExpression = new Expression($methodCall);
         $this->addNode($methodCallExpression);
-        $this->addEmptyLine();
     }
 
     private function createDecorateMethod(array $value, MethodCall $methodCall): MethodCall
@@ -603,15 +574,6 @@ final class YamlToPhpConverter
         return array_keys($array) !== range(0, count($array) - 1);
     }
 
-    /**
-     * @deprecated
-     * @todo remove from here and handle in the printer, once in the end
-     */
-    private function addEmptyLine(): void
-    {
-        $this->stmts[] = new Nop();
-    }
-
     private function addImportsToNamespace(Namespace_ $namespace): void
     {
         sort($this->useStatements);
@@ -622,52 +584,16 @@ final class YamlToPhpConverter
         }
     }
 
-    private function removeLastEmptyLine(): void
-    {
-        // remove the last carriage return "\n" if exists.
-        $lastStmt = $this->stmts[array_key_last($this->stmts)];
-
-        if ($lastStmt instanceof Name) {
-            $lastStmt->parts[0] = rtrim($lastStmt->parts[0], self::EOL_CHAR);
-        }
-
-        $lastKey = array_key_last($this->stmts);
-        if ($this->stmts[$lastKey] instanceof Nop) {
-            unset($this->stmts[$lastKey]);
-        }
-    }
-
     private function createService(array $serviceValues, string $serviceKey): void
     {
-        $class = $serviceValues[self::CLASS_KEY];
-
-        $argValues = $this->createArgs($serviceKey, $class);
-
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $argValues);
+        $args = $this->argsNodeFactory->createFromValues([$serviceKey, $serviceValues[self::CLASS_KEY]]);
+        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
 
         unset($serviceValues[self::CLASS_KEY]);
 
         $setMethodCall = $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
         $setMethodCallExpression = new Expression($setMethodCall);
         $this->addNode($setMethodCallExpression);
-
-        $this->addEmptyLine();
-    }
-
-    /**
-     * @deprecated
-     * @todo use ArgNodesFactory
-     */
-    private function createArgs(string $serviceKey, string $class): array
-    {
-        $classReference = $this->commonNodeFactory->createClassReference($class);
-
-        return [new Arg(new String_($serviceKey)), new Arg($classReference)];
-    }
-
-    private function createFalse(): ConstFetch
-    {
-        return new ConstFetch(new Name('false'));
     }
 
     private function createAliasNode($serviceKey, string $fullClassName, $serviceValues): MethodCall
