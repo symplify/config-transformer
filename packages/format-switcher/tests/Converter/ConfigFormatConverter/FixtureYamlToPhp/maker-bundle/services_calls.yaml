@@ -26,6 +26,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('withMailer', [service('mailer'), 'argument'], false)
         ->call('setLogger', [service('logger')])
         ->call('setMailer', [service('mailer')])
-        ->call('withLogger', [service('logger')], true)
-    ;
+        ->call('withLogger', [service('logger')], true);
 };
