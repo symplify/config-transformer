@@ -32,9 +32,9 @@ final class ServicesPhpNodeFactory
      */
     private $commonNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonFactory)
+    public function __construct(CommonNodeFactory $commonNodeFactory)
     {
-        $this->commonNodeFactory = $commonFactory;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
     public function createServicesInit(): Expression
