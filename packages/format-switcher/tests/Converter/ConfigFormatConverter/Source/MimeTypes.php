@@ -6,5 +6,4 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatC
 
 final class MimeTypes
 {
-
 }
