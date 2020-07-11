@@ -98,11 +98,8 @@ final class ArgsNodeFactory
         }
 
         if (is_array($value)) {
-            foreach ($value as $nestedKey => $nestedValue) {
-                $value[$nestedKey] = $this->resolveExpr($nestedValue);
-            }
-
-            return new Array_($value);
+            $arrayItems = $this->resolveArrayItems($value);
+            return new Array_($arrayItems);
         }
 
         return BuilderHelpers::normalizeValue($value);
@@ -192,5 +189,27 @@ final class ArgsNodeFactory
         }
 
         return BuilderHelpers::normalizeValue($value);
+    }
+
+    /**
+     * @param mixed[] $value
+     * @return ArrayItem[]
+     */
+    private function resolveArrayItems(array $value): array
+    {
+        $arrayItems = [];
+
+        foreach ($value as $nestedKey => $nestedValue) {
+            $valueExpr = $this->resolveExpr($nestedValue);
+
+            if (! is_int($nestedKey)) {
+                $keyExpr = $this->resolveExpr($nestedKey);
+                $arrayItems[] = new ArrayItem($valueExpr, $keyExpr);
+            } else {
+                $arrayItems[] = new ArrayItem($valueExpr);
+            }
+        }
+
+        return $arrayItems;
     }
 }
