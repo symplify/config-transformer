@@ -1,12 +1,12 @@
 services:
-  Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService: '@fake.simple_class'
+    Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService: '@fake.simple_class'
 
-  Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo $variable: '@App\Fake\Class'
+    Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo $variable: '@App\Fake\Class'
 
-  fake.simple_class_two:
-    public: false
-    alias: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassTwo
-    deprecated: 'The "%alias_id%" alias is deprecated. Do not use it anymore.'
+    fake.simple_class_two:
+        public: false
+        alias: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassTwo
+        deprecated: 'The "%alias_id%" alias is deprecated. Do not use it anymore.'
 -----
 <?php
 
@@ -21,10 +21,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->alias(SimpleFakeClassService::class, 'fake.simple_class');
 
-    $services->alias(SimpleFakeClassServiceTwo::class.' $variable', 'App\Fake\Class');
+    $services->alias(SimpleFakeClassServiceTwo::class . ' $variable', 'App\Fake\Class');
 
     $services->alias('fake.simple_class_two', SimpleFakeClassTwo::class)
         ->private()
-        ->deprecate('The "%alias_id%" alias is deprecated. Do not use it anymore.')
-    ;
+        ->deprecate('The "%alias_id%" alias is deprecated. Do not use it anymore.');
 };
