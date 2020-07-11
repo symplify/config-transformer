@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\ConstFetch;
@@ -32,9 +31,15 @@ final class ServicesPhpNodeFactory
      */
     private $commonNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonNodeFactory)
+    /**
+     * @var ArgsNodeFactory
+     */
+    private $argsNodeFactory;
+
+    public function __construct(CommonNodeFactory $commonNodeFactory, ArgsNodeFactory $argsNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
+        $this->argsNodeFactory = $argsNodeFactory;
     }
 
     public function createServicesInit(): Expression
@@ -55,20 +60,17 @@ final class ServicesPhpNodeFactory
         }
 
         $exclude = $serviceValues[self::EXCLUDE];
-        $excludeMethodCall = new MethodCall($servicesLoadMethodCall, self::EXCLUDE);
-
-        $excludeValue = [];
-
         if (! is_array($exclude)) {
             $exclude = [$exclude];
         }
 
+        $excludeValue = [];
         foreach ($exclude as $key => $singleExclude) {
             $excludeValue[$key] = $this->commonNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
 
-        $excludeValue = BuilderHelpers::normalizeValue($excludeValue);
-        $excludeMethodCall->args[] = new Arg($excludeValue);
+        $args = $this->argsNodeFactory->createFromValues([$excludeValue]);
+        $excludeMethodCall = new MethodCall($servicesLoadMethodCall, self::EXCLUDE, $args);
 
         return new Expression($excludeMethodCall);
     }
@@ -106,13 +108,11 @@ final class ServicesPhpNodeFactory
         return new MethodCall($servicesVariable, 'load', $args);
     }
 
-    private function createBindMethodCall(MethodCall $methodCall, array $serviceValues): MethodCall
+    private function createBindMethodCall(MethodCall $methodCall, array $bindValues): MethodCall
     {
-        $bindValues = $serviceValues;
         foreach ($bindValues as $key => $value) {
-            $methodCall = new MethodCall($methodCall, self::BIND);
-            $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($key));
-            $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($value));
+            $args = $this->argsNodeFactory->createFromValues([$key, $value]);
+            $methodCall = new MethodCall($methodCall, self::BIND, $args);
         }
 
         return $methodCall;
