@@ -1,8 +1,7 @@
 services:
-  # default configuration for services in *this* file
-  _defaults:
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    _defaults:
+        autowire: true
+        autoconfigure: false
 -----
 <?php
 
@@ -13,5 +12,5 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
 
     $services->defaults()
         ->autowire()
-        ->autoconfigure();
+        ->autoconfigure(false);
 };
