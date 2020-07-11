@@ -21,6 +21,7 @@ use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -273,7 +274,8 @@ final class YamlToPhpConverter
             }
 
             if (isset($serviceValues[self::CLASS_KEY])) {
-                $this->addUseStatementIfNecessary($serviceValues[self::CLASS_KEY]);
+                $class = $serviceValues[self::CLASS_KEY];
+                $this->addUseStatementIfNecessary($class);
 
                 $this->createService($serviceValues, $serviceKey);
                 continue;
@@ -316,13 +318,6 @@ final class YamlToPhpConverter
                 case 'shared':
                 case 'public':
                     if (is_array($value)) {
-                        if ($this->isAssociativeArray($value)) {
-                            throw new InvalidArgumentException(sprintf(
-                                'The config key "%s" does not support an associative array',
-                                $serviceConfigKey
-                            ));
-                        }
-
                         $this->addLineStmt($this->createMethod(
                             $serviceConfigKey,
                             // the handles converting all formats of the single arg
@@ -334,16 +329,18 @@ final class YamlToPhpConverter
                     // no break
                 case 'autowire':
                 case 'autoconfigure':
-                    if (is_array($value)) {
-                        throw new InvalidArgumentException(sprintf(
-                            'The "%s" service option does not support being set to an array value.',
-                            $serviceConfigKey
-                        ));
-                    }
-
                     $method = $serviceConfigKey;
                     if ($serviceConfigKey === 'shared') {
                         $method = 'share';
+                    }
+
+                    if ($methodCall !== null) {
+                        $methodCall = new MethodCall($methodCall, $method);
+                        if ($value === false) {
+                            $methodCall->args[] = new Arg($this->createFalse());
+                        }
+
+                        break;
                     }
 
                     $this->addLineStmt($this->createMethod($method, $this->toString($value)));
@@ -352,13 +349,6 @@ final class YamlToPhpConverter
 
                 case 'factory':
                 case 'configurator':
-                    if (is_array($value) && $this->isAssociativeArray($value)) {
-                        throw new InvalidArgumentException(sprintf(
-                            'The config key "%s" does not support an associative array',
-                            $serviceConfigKey
-                        ));
-                    }
-
                     $this->addLineStmt($this->createMethod(
                         $serviceConfigKey,
                         // the handles converting all formats of the single arg
@@ -368,8 +358,15 @@ final class YamlToPhpConverter
                     break;
 
                 case 'tags':
-                    if (is_array($value) && $this->isAssociativeArray($value)) {
-                        throw new InvalidArgumentException('Unexpected associative array value for "tags"');
+                    if ($methodCall !== null) {
+                        if (count($value) === 1 && is_string($value[0])) {
+                            $tagValue = new String_($value[0]);
+                        } else {
+                            throw new NotImplementedYetException();
+                        }
+
+                        $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
+                        break;
                     }
 
                     foreach ($value as $argValue) {
@@ -426,11 +423,11 @@ final class YamlToPhpConverter
                         $serviceConfigKey
                     ));
             }
+        }
 
-            if ($methodCall !== null) {
-                $methodCallExpression = new Expression($methodCall);
-                $this->addNode($methodCallExpression);
-            }
+        if ($methodCall !== null) {
+            $methodCallExpression = new Expression($methodCall);
+            $this->addNode($methodCallExpression);
         }
     }
 
@@ -597,9 +594,6 @@ final class YamlToPhpConverter
         );
     }
 
-    /**
-     * @param $value
-     */
     private function toString($value, bool $preserveValueIfTrueBoolean = false): string
     {
         if ($value instanceof TaggedValue) {
@@ -899,5 +893,10 @@ final class YamlToPhpConverter
     private function createArgs(string $serviceKey, string $shortClass): array
     {
         return [new Arg(new String_($serviceKey)), new Arg(new ClassConstFetch(new Name($shortClass), 'class'))];
+    }
+
+    private function createFalse(): ConstFetch
+    {
+        return new ConstFetch(new Name('false'));
     }
 }
