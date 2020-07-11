@@ -8,7 +8,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Stmt\Expression;
 
 final class SingleServicePhpNodeFactory
 {
@@ -22,11 +21,10 @@ final class SingleServicePhpNodeFactory
         $this->commonFactory = $commonFactory;
     }
 
-    public function createSetService(string $serviceKey): Expression
+    public function createSetService(string $serviceKey): MethodCall
     {
         $classReference = $this->commonFactory->createShortClassReference($serviceKey);
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
 
-        return new Expression($setMethodCall);
+        return new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
     }
 }

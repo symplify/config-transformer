@@ -44,5 +44,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('service2', SimpleFakeClass::class)
         ->args(['service2_arg']);
 
-    $services->alias(SimpleFakeClassServiceTwo::class.' $variable', 'service1');
+    $services->alias(SimpleFakeClassServiceTwo::class . ' $variable', 'service1');
 };
