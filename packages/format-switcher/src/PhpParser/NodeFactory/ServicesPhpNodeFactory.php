@@ -28,13 +28,13 @@ final class ServicesPhpNodeFactory
     private const EXCLUDE = 'exclude';
 
     /**
-     * @var CommonFactory
+     * @var CommonNodeFactory
      */
-    private $commonFactory;
+    private $commonNodeFactory;
 
-    public function __construct(CommonFactory $commonFactory)
+    public function __construct(CommonNodeFactory $commonFactory)
     {
-        $this->commonFactory = $commonFactory;
+        $this->commonNodeFactory = $commonFactory;
     }
 
     public function createServicesInit(): Expression
@@ -64,7 +64,7 @@ final class ServicesPhpNodeFactory
         }
 
         foreach ($exclude as $key => $singleExclude) {
-            $excludeValue[$key] = $this->commonFactory->createAbsoluteDirExpr($singleExclude);
+            $excludeValue[$key] = $this->commonNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
 
         $excludeValue = BuilderHelpers::normalizeValue($excludeValue);
@@ -101,7 +101,7 @@ final class ServicesPhpNodeFactory
 
         $args = [];
         $args[] = new Arg(new String_($serviceKey));
-        $args[] = new Arg($this->commonFactory->createAbsoluteDirExpr($resource));
+        $args[] = new Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
 
         return new MethodCall($servicesVariable, 'load', $args);
     }
