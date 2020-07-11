@@ -8,6 +8,8 @@ use PhpParser\BuilderHelpers;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\MagicConst\Dir;
 use PhpParser\Node\Scalar\String_;
@@ -38,5 +40,10 @@ final class CommonNodeFactory
     public function createConstFetch(string $className, string $constantName): ClassConstFetch
     {
         return new ClassConstFetch(new FullyQualified($className), $constantName);
+    }
+
+    public function createFalse(): ConstFetch
+    {
+        return new ConstFetch(new Name('false'));
     }
 }
