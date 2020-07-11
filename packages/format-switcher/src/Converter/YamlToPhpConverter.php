@@ -49,6 +49,31 @@ final class YamlToPhpConverter
     /**
      * @var string
      */
+    private const ARGUMENTS = 'arguments';
+
+    /**
+     * @var string
+     */
+    private const CALLS = 'calls';
+
+    /**
+     * @var string
+     */
+    private const TAGS = 'tags';
+
+    /**
+     * @var string
+     */
+    private const CONFIGURATOR = 'configurator';
+
+    /**
+     * @var string
+     */
+    private const FACTORY = 'factory';
+
+    /**
+     * @var string
+     */
     private const EOL_CHAR = "\n";
 
     /**
@@ -300,17 +325,23 @@ final class YamlToPhpConverter
                 continue;
             }
 
-            $classReference = $this->addUseStatementIfNecessary($serviceKey);
+            $this->addUseStatementIfNecessary($serviceKey);
 
             if ($serviceValues === null) {
                 $setMethodCall = $this->singleServicePhpNodeFactory->createSetService($serviceKey);
-                $this->addNode($setMethodCall);
-                $this->addEmptyLine();
             } else {
-                $this->addLineStmt(sprintf('$services->set(%s)', $classReference));
-                $this->convertServiceOptionsToNodes($serviceValues);
-                $this->addLineStmt(';', true);
+                $classReference = $this->commonFactory->createShortClassReference($serviceKey);
+                $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [
+                    new Arg($classReference),
+                ]);
+
+                $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
+                $this->addEmptyLine();
+                continue;
             }
+
+            $this->addNode($setMethodCall);
+            $this->addEmptyLine();
         }
     }
 
@@ -374,8 +405,8 @@ final class YamlToPhpConverter
 
                     break;
 
-                case 'factory':
-                case 'configurator':
+                case self::FACTORY:
+                case self::CONFIGURATOR:
                     $this->addLineStmt($this->createMethod(
                         $serviceConfigKey,
                         // the handles converting all formats of the single arg
@@ -384,15 +415,27 @@ final class YamlToPhpConverter
 
                     break;
 
-                case 'tags':
+                case self::TAGS:
                     if ($methodCall !== null) {
                         if (count($value) === 1 && is_string($value[0])) {
                             $tagValue = new String_($value[0]);
-                        } else {
-                            throw new NotImplementedYetException();
+                            $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
+                            break;
                         }
 
-                        $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
+                        foreach ($value as $singleValue) {
+                            $argValues = [];
+                            foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
+                                if ($singleNestedKey === 'name') {
+                                    $argValues[] = BuilderHelpers::normalizeValue($singleNestedValue);
+                                    unset($singleValue[$singleNestedKey]);
+                                }
+                            }
+
+                            $argValues[] = BuilderHelpers::normalizeValue($singleValue);
+                            $methodCall = new MethodCall($methodCall, 'tag', $argValues);
+                        }
+
                         break;
                     }
 
@@ -402,7 +445,7 @@ final class YamlToPhpConverter
 
                     break;
 
-                case 'calls':
+                case self::CALLS:
                     if ($methodCall !== null) {
                         foreach ($value as $singleCall) {
                             $methodName = new String_($singleCall[0]);
@@ -424,7 +467,7 @@ final class YamlToPhpConverter
 
                     break;
 
-                case 'arguments':
+                case self::ARGUMENTS:
                     if ($this->isAssociativeArray($value)) {
                         foreach ($value as $argKey => $argValue) {
                             $this->addLineStmt($this->createMethod(
@@ -511,7 +554,7 @@ final class YamlToPhpConverter
             $argumentStrings[0] = null;
         }
 
-        if ($method === 'arguments') {
+        if ($method === self::ARGUMENTS) {
             $method = 'args';
         }
 
@@ -551,8 +594,8 @@ final class YamlToPhpConverter
         if (isset($values['method'])) {
             $method = $values['method'];
 
-            if (isset($values['arguments'])) {
-                $values[1] = $values['arguments'];
+            if (isset($values[self::ARGUMENTS])) {
+                $values[1] = $values[self::ARGUMENTS];
             }
 
             if (isset($values['returns_clone'])) {
