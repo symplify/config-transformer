@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use LogicException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ClosureNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ImportNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ParametersPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
@@ -125,6 +126,11 @@ final class YamlToPhpConverter
      */
     private $importNodeFactory;
 
+    /**
+     * @var CommonFactory
+     */
+    private $commonFactory;
+
     public function __construct(
         Parser $yamlParser,
         PhpNodeFactory $phpNodeFactory,
@@ -134,6 +140,7 @@ final class YamlToPhpConverter
         FluentMethodCallPrinter $fluentMethodCallPrinter,
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ImportNodeFactory $importNodeFactory,
+        CommonFactory $commonFactory,
         ClassNaming $classNaming
     ) {
         $this->yamlParser = $yamlParser;
@@ -145,6 +152,7 @@ final class YamlToPhpConverter
         $this->classNaming = $classNaming;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
         $this->importNodeFactory = $importNodeFactory;
+        $this->commonFactory = $commonFactory;
     }
 
     public function convert(string $yaml): string
@@ -252,12 +260,15 @@ final class YamlToPhpConverter
 
             if ($serviceKey === self::INSTANCE_OF) {
                 foreach ($serviceValues as $instanceKey => $instanceValues) {
-                    $classReference = $this->addUseStatementIfNecessary($instanceKey);
+                    $this->addUseStatementIfNecessary($instanceKey);
 
-                    $this->addLineStmt(sprintf('$services->instanceof(%s)', $classReference));
-                    $this->convertServiceOptionsToNodes($instanceValues);
+                    $shortClassReference = $this->commonFactory->createShortClassReference($instanceKey);
+                    $instanceofMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'instanceof', [
+                        new Arg($shortClassReference),
+                    ]);
+                    $this->convertServiceOptionsToNodes($instanceValues, $instanceofMethodCall);
 
-                    $this->addLineStmt(';', true);
+                    $this->addEmptyLine();
                 }
 
                 continue;
@@ -325,6 +336,13 @@ final class YamlToPhpConverter
                 // simple "key: value" options
                 case 'shared':
                 case 'public':
+                    if ($methodCall !== null) {
+                        if ($serviceConfigKey === 'public' && $value === false) {
+                            $methodCall = new MethodCall($methodCall, 'private');
+                            break;
+                        }
+                    }
+
                     if (is_array($value)) {
                         $this->addLineStmt($this->createMethod(
                             $serviceConfigKey,
