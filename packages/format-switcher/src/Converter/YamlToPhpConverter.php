@@ -18,15 +18,12 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNo
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\SingleServicePhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentPhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Nette\Utils\Strings;
 use PhpParser\Builder\Use_ as UseBuilder;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\ConstFetch;
-use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
@@ -37,7 +34,6 @@ use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Use_;
 use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Tag\TaggedValue;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -47,11 +43,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class YamlToPhpConverter
 {
-    /**
-     * @var string
-     */
-    private const INLINE_SERVICE = 'inline_service';
-
     /**
      * @var string
      */
@@ -101,11 +92,6 @@ final class YamlToPhpConverter
      * @var string
      */
     private const CLASS_KEY = 'class';
-
-    /**
-     * @var string
-     */
-    private const TAG_SERVICE = 'service';
 
     /**
      * @var string
@@ -220,31 +206,6 @@ final class YamlToPhpConverter
         return $this->fluentPhpConfigurationPrinter->prettyPrintFile([$namespace]);
     }
 
-    public function createTaggedValue(TaggedValue $taggedValue): Node
-    {
-        if ($taggedValue->getTag() === self::TAG_SERVICE) {
-            $class = $taggedValue->getValue()[self::CLASS_KEY];
-
-            $classReference = $this->commonNodeFactory->createClassReference($class);
-            $args = $this->argsNodeFactory->createFromValues([$classReference]);
-
-            return new FuncCall(new Name('inline_service'), $args);
-        }
-
-        if (is_array($taggedValue->getValue())) {
-            $argumentsInOrder = $this->sortArgumentsByKeyIfExists(
-                $taggedValue->getValue(),
-                ['tag', 'index_by', 'default_index_method']
-            );
-
-            $args = $this->argsNodeFactory->createFromValues($argumentsInOrder);
-        } else {
-            $args = $this->argsNodeFactory->createFromValues([$taggedValue->getValue()]);
-        }
-
-        return new FuncCall(new Name($taggedValue->getTag()), $args);
-    }
-
     /**
      * @return Node[]
      */
@@ -334,6 +295,7 @@ final class YamlToPhpConverter
 
                     $servicesVariable = new Variable(VariableName::SERVICES);
                     $args = [new Arg($classReference)];
+
                     $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
                     $instanceofMethodCall = $this->convertServiceOptionsToNodes($instanceValues, $instanceofMethodCall);
 
@@ -374,10 +336,8 @@ final class YamlToPhpConverter
             if ($serviceValues === null) {
                 $setMethodCall = $this->singleServicePhpNodeFactory->createSetService($serviceKey);
             } else {
-                $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
-                $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [
-                    new Arg($classReference),
-                ]);
+                $args = $this->argsNodeFactory->createFromValues([$serviceKey]);
+                $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
 
                 $setMethodCall = $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
             }
@@ -412,23 +372,17 @@ final class YamlToPhpConverter
                 // simple "key: value" options
                 case 'shared':
                 case 'public':
-                    if ($methodCall !== null) {
-                        if ($serviceConfigKey === 'public' && $value === false) {
+                    if ($serviceConfigKey === 'public') {
+                        if ($value === false) {
                             $methodCall = new MethodCall($methodCall, 'private');
-                            break;
+                        } else {
+                            $methodCall = new MethodCall($methodCall, 'public');
                         }
-                    }
-
-                    if (is_array($value)) {
-                        $this->addLineStmt($this->createMethod(
-                            $serviceConfigKey,
-                            // the handles converting all formats of the single arg
-                            $this->toString($value)
-                        ));
-
                         break;
                     }
-                    // no break
+
+                    throw new NotImplementedYetException();
+
                 case 'bind':
                 case 'autowire':
                 case 'autoconfigure':
@@ -437,140 +391,48 @@ final class YamlToPhpConverter
                         $method = 'share';
                     }
 
-                    if ($methodCall !== null) {
-                        $methodCall = new MethodCall($methodCall, $method);
-                        if ($value === false) {
-                            $methodCall->args[] = new Arg($this->createFalse());
-                        }
-
-                        break;
+                    $methodCall = new MethodCall($methodCall, $method);
+                    if ($value === false) {
+                        $methodCall->args[] = new Arg($this->createFalse());
                     }
-
-                    $this->addLineStmt($this->createMethod($method, $this->toString($value)));
 
                     break;
 
                 case self::FACTORY:
                 case self::CONFIGURATOR:
-                    $arrayItems = [];
-
-                    // @todo possibly generic?
-                    if (is_array($value)) {
-                        foreach ($value as $singleValue) {
-                            if ($singleValue instanceof TaggedValue && $singleValue->getTag() === 'service') {
-                                $inlineService = $this->createTaggedValueInlineService($value[0]);
-                                $arrayItems[] = new Arg($inlineService);
-                            } elseif (Strings::startsWith($singleValue, '@')) {
-                                $serviceFuncCall = $this->createServiceFuncCall($singleValue);
-                                $arrayItems[] = new Arg($serviceFuncCall);
-                            } else {
-                                $arrayItems[] = new Arg(BuilderHelpers::normalizeValue($singleValue));
-                            }
-                        }
-
-                        $valueExpr = new Array_($arrayItems);
-                    } else {
-                        if (Strings::startsWith($value, '@')) {
-                            $serviceFuncCall = $this->createServiceFuncCall($value);
-                            $valueExpr = new Array_([$serviceFuncCall]);
-                        } else {
-                            throw new NotImplementedYetException();
-                        }
-                    }
-
-                $args = [new Arg($valueExpr)];
-
-                if ($methodCall !== null) {
+                    $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
                     $methodCall = new MethodCall($methodCall, 'factory', $args);
-                    break;
-                }
-
-                    $this->addLineStmt($this->createMethod(
-                        $serviceConfigKey,
-                        // the handles converting all formats of the single arg
-                        $this->toString($value)
-                    ));
-
                     break;
 
                 case self::TAGS:
-                    if ($methodCall !== null) {
-                        if (count($value) === 1 && is_string($value[0])) {
-                            $tagValue = new String_($value[0]);
-                            $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
-                            break;
-                        }
-
-                        foreach ($value as $singleValue) {
-                            $argValues = [];
-                            foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
-                                if ($singleNestedKey === 'name') {
-                                    $argValues[] = BuilderHelpers::normalizeValue($singleNestedValue);
-                                    unset($singleValue[$singleNestedKey]);
-                                }
-                            }
-
-                            $argValues[] = BuilderHelpers::normalizeValue($singleValue);
-                            $methodCall = new MethodCall($methodCall, 'tag', $argValues);
-                        }
-
+                    if (count($value) === 1 && is_string($value[0])) {
+                        $tagValue = new String_($value[0]);
+                        $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
                         break;
                     }
 
-                    foreach ($value as $argValue) {
-                        $this->addLineStmt($this->createTagMethod($argValue));
+                    foreach ($value as $singleValue) {
+                        $argValues = [];
+                        foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
+                            if ($singleNestedKey === 'name') {
+                                $argValues[] = BuilderHelpers::normalizeValue($singleNestedValue);
+                                unset($singleValue[$singleNestedKey]);
+                            }
+                        }
+
+                        $argValues[] = BuilderHelpers::normalizeValue($singleValue);
+                        $methodCall = new MethodCall($methodCall, 'tag', $argValues);
                     }
 
                     break;
 
                 case self::CALLS:
-                    foreach ($value as $singleCall) {
-                        $methodName = new String_($singleCall[0] ?? $singleCall['method'] ?? key($singleCall));
-
-                        // @todo can be more items
-                        $args = [];
-                        $args[] = new Arg($methodName);
-                        $args[] = new Arg($this->normalizeValue(
-                            $singleCall[1] ?? $singleCall['arguments'] ?? current($singleCall)
-                        ));
-
-                        if (isset($singleCall[2]) || isset($singleCall['returns_clone'])) {
-                            $returnsCloneValue = $singleCall[2] ?? $singleCall['returns_clone'];
-                            $lastMethodCallValue = BuilderHelpers::normalizeValue($returnsCloneValue);
-                            $args[] = new Arg($lastMethodCallValue);
-                        }
-
-                        $currentArray = current($singleCall);
-                        if ($currentArray instanceof TaggedValue) {
-                            $args[] = new Arg(BuilderHelpers::normalizeValue(true));
-                        }
-
-                        $methodCall = new MethodCall($methodCall, 'call', $args);
-                    }
-
+                    $methodCall = $this->singleServicePhpNodeFactory->createCalls($methodCall, $value);
                     break;
 
                 case self::ARGUMENTS:
-                    if ($this->isAssociativeArray($value)) {
-                        foreach ($value as $argKey => $argValue) {
-                            $args = $this->argsNodeFactory->createFromValues([$argKey, $argValue]);
-                            $methodCall = new MethodCall($methodCall, 'arg', $args);
-                        }
-                    } else {
-                        foreach ($value as $key => $nestedValue) {
-                            if ($nestedValue instanceof TaggedValue) {
-                                if ($nestedValue->getTag() === 'service') {
-                                    $value = [$this->createTaggedValueInlineService($nestedValue)];
-                                    break;
-                                }
-
-                                $value[$key] = $this->createTaggedValue($nestedValue);
-                            }
-                        }
-
-                        $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
-                        $methodCall = new MethodCall($methodCall, 'args', $args);
-                    }
+                    $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
+                    $methodCall = new MethodCall($methodCall, 'args', $args);
 
                     break;
 
@@ -593,7 +455,15 @@ final class YamlToPhpConverter
             // $this->addUseStatementIfNecessary($serviceValues[self::ALIAS]); - @todo import alias
 
             $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
-            $args = $this->argsNodeFactory->createFromValues([$classReference, $serviceValues[self::ALIAS]]);
+
+            $values = [$classReference];
+            if (isset($serviceValues[self::ALIAS])) {
+                $values[] = $serviceValues[self::ALIAS];
+            } else {
+                $values[] = $serviceValues;
+            }
+
+            $args = $this->argsNodeFactory->createFromValues($values, true);
 
             $methodCall = new MethodCall($servicesVariable, 'alias', $args);
             $methodCallExpression = new Expression($methodCall);
@@ -621,9 +491,7 @@ final class YamlToPhpConverter
         }
 
         if (is_string($serviceValues) && $serviceValues[0] === '@') {
-            $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
-
-            $args = $this->argsNodeFactory->createFromValues([$classReference, $serviceValues], true);
+            $args = $this->argsNodeFactory->createFromValues([$serviceValues], true);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
         }
 
@@ -636,20 +504,6 @@ final class YamlToPhpConverter
         $this->addEmptyLine();
     }
 
-    private function createMethod(string $method, ...$argumentStrings): string
-    {
-        if ($method === 'public' && $argumentStrings[0] === 'false') {
-            $method = 'private';
-            $argumentStrings[0] = null;
-        }
-
-        if ($method === self::ARGUMENTS) {
-            $method = 'args';
-        }
-
-        return sprintf('->%s(%s)', $method, implode(', ', $argumentStrings));
-    }
-
     private function createDecorateMethod(array $value, MethodCall $methodCall): MethodCall
     {
         $arguments = $this->sortArgumentsByKeyIfExists($value, [
@@ -659,7 +513,6 @@ final class YamlToPhpConverter
         ]);
 
         if (isset($arguments['decoration_on_invalid'])) {
-            // @todo use normal nodes with FQN
             $arguments['decoration_on_invalid'] = $arguments['decoration_on_invalid'] === 'exception'
                 ? $this->commonNodeFactory->createConstFetch(
                     'Symfony\Component\DependencyInjection\ContainerInterface',
@@ -690,22 +543,6 @@ final class YamlToPhpConverter
         }
 
         return new MethodCall($methodCall, 'decorate', $args);
-    }
-
-    private function createTagMethod($value): string
-    {
-        if (! is_array($value)) {
-            $value = ['name' => $value];
-        }
-
-        $name = $this->toString($value['name']);
-        unset($value['name']);
-
-        if (empty($value)) {
-            return $this->createMethod('tag', $name);
-        }
-
-        return $this->createMethod('tag', $name, $this->createAssociativeArray($value));
     }
 
     private function createDeprecateMethod($value, MethodCall $methodCall): MethodCall
@@ -754,12 +591,6 @@ final class YamlToPhpConverter
         $this->stmts[] = $node;
     }
 
-    private function addLineStmt(string $line, ?bool $addBlankLine = null): void
-    {
-        $addBlankLine = $addBlankLine ? self::EOL_CHAR : null;
-        $this->addNode(new Name($line . $addBlankLine));
-    }
-
     private function isAlias(string $serviceKey, $serviceValues): bool
     {
         return isset($serviceValues[self::ALIAS])
@@ -806,26 +637,6 @@ final class YamlToPhpConverter
         }
     }
 
-    private function normalizeValue($value)
-    {
-        if ($value instanceof TaggedValue) {
-            return $this->createServiceReferenceFromTaggedValue($value);
-        }
-
-        if (is_array($value)) {
-            foreach ($value as $key => $singleValue) {
-                if (Strings::startsWith($singleValue, '@')) {
-                    $singleValue = ltrim($singleValue, '@');
-                    $value[$key] = new FuncCall(new Name('service'), [new Arg(new String_($singleValue))]);
-                }
-            }
-
-            return BuilderHelpers::normalizeValue($value);
-        }
-
-        return $value;
-    }
-
     private function createService(array $serviceValues, string $serviceKey): void
     {
         $class = $serviceValues[self::CLASS_KEY];
@@ -859,37 +670,6 @@ final class YamlToPhpConverter
         return new ConstFetch(new Name('false'));
     }
 
-    private function createServiceReferenceFromTaggedValue(TaggedValue $taggedValue): Array_
-    {
-        // that's the only value
-        if ($taggedValue->getTag() !== 'returns_clone') {
-            throw new NotImplementedYetException();
-        }
-
-        $serviceName = $taggedValue->getValue()[0];
-
-        $serviceName = ltrim($serviceName, '@');
-        $serviceFuncCall = new FuncCall(new Name('service'), [new Arg(new String_($serviceName))]);
-
-        return new Array_([$serviceFuncCall]);
-    }
-
-    private function createTaggedValueInlineService(TaggedValue $nestedValue): FuncCall
-    {
-        $className = $nestedValue->getValue()['class'];
-        $classReference = $this->commonNodeFactory->createClassReference($className);
-
-        return new FuncCall(new Name(self::INLINE_SERVICE), [new Arg($classReference)]);
-    }
-
-    private function createServiceFuncCall(string $value): FuncCall
-    {
-        $value = ltrim($value, '@');
-        $value = new String_($value);
-
-        return new FuncCall(new Name('service'), [new Arg($value)]);
-    }
-
     private function createAliasNode($serviceKey, string $fullClassName, $serviceValues): MethodCall
     {
         $argument = strstr($serviceKey, '$');
@@ -900,8 +680,10 @@ final class YamlToPhpConverter
         $concat = new Concat($classConstReference, new String_(' ' . $argument));
 
         $methodCall->args[] = new Arg($concat);
+
         $serviceName = ltrim($serviceValues, '@');
         $methodCall->args[] = new Arg(new String_($serviceName));
+
         return $methodCall;
     }
 }

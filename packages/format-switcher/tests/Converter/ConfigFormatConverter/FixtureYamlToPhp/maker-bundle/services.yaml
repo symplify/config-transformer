@@ -8,23 +8,23 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     service1:
-        class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass
+        class: Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass
         autowire: false
         arguments: [service1_arg]
         tags: [service1_tag]
 
     service2:
-        class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass
+        class: Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass
         arguments: [service2_arg]
 
-    Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo $variable: '@service1'
+    Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass $variable: '@service1'
 -----
 <?php
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass;
-use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -36,13 +36,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->set('service1', SimpleFakeClass::class)
+    $services->set('service1', FakeClass::class)
         ->autowire(false)
         ->args(['service1_arg'])
         ->tag('service1_tag');
 
-    $services->set('service2', SimpleFakeClass::class)
+    $services->set('service2', FakeClass::class)
         ->args(['service2_arg']);
 
-    $services->alias(SimpleFakeClassServiceTwo::class . ' $variable', 'service1');
+    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
 };
