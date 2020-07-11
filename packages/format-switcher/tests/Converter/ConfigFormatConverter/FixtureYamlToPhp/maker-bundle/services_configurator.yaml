@@ -16,13 +16,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(SimpleFakeClass::class)
-        ->configurator([
-            service('Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassTwo'),
-            'configure',
-        ])
-    ;
+        ->factory([service('Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassTwo'), 'configure']);
 
     $services->set(SimpleFakeClassTwo::class)
-        ->configurator(service('Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass'))
-    ;
+        ->factory([service('Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass')]);
 };

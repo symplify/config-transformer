@@ -4,11 +4,6 @@ services:
       - !service
         class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\AnonymousBar
 
-  Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo:
-    arguments:
-      - !service
-        class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass
-
   Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceThree:
     factory: [ !service { class: Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\AnonymousBar }, 'constructFoo' ]
 -----
@@ -17,23 +12,15 @@ services:
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\AnonymousBar;
-use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClass;
 use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassService;
 use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceThree;
-use Symfony\Bundle\MakerBundle\Tests\Util\yaml_php_convert_fixtures\FakeClass\SimpleFakeClassServiceTwo;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(SimpleFakeClassService::class)
-        ->args([inline_service(AnonymousBar::class)])
-    ;
-
-    $services->set(SimpleFakeClassServiceTwo::class)
-        ->args([inline_service(SimpleFakeClass::class)])
-    ;
+        ->args([inline_service(AnonymousBar::class)]);
 
     $services->set(SimpleFakeClassServiceThree::class)
-        ->factory([inline_service(AnonymousBar::class), 'constructFoo'])
-    ;
+        ->factory([inline_service(AnonymousBar::class), 'constructFoo']);
 };
