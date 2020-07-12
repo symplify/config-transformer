@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
@@ -68,11 +69,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     /**
      * @var string
      */
-    private const DEFAULTS = '_defaults';
-
-    /**
-     * @var string
-     */
     private const INSTANCE_OF = '_instanceof';
 
     /**
@@ -120,18 +116,28 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
      */
     private $singleServicePhpNodeFactory;
 
+    /**
+     * @var ServiceKeyYamlToPhpFactoryInterface[]
+     */
+    private $serviceKeyYamlToPhpFactories = [];
+
+    /**
+     * @param ServiceKeyYamlToPhpFactoryInterface[] $serviceKeyYamlToPhpFactories
+     */
     public function __construct(
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
         CommonNodeFactory $commonNodeFactory,
         ArgsNodeFactory $argsNodeFactory,
         YamlArgumentSorter $yamlArgumentSorter,
-        SingleServicePhpNodeFactory $singleServicePhpNodeFactory
+        SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
+        array $serviceKeyYamlToPhpFactories
     ) {
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->yamlArgumentSorter = $yamlArgumentSorter;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
+        $this->serviceKeyYamlToPhpFactories = $serviceKeyYamlToPhpFactories;
     }
 
     public function getKey(): string
@@ -148,9 +154,12 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $nodes[] = $this->servicesPhpNodeFactory->createServicesInit();
 
         foreach ($services as $serviceKey => $serviceValues) {
-            if ($serviceKey === self::DEFAULTS) {
-                $nodes[] = $this->servicesPhpNodeFactory->createServiceDefaults($serviceValues);
-                continue;
+            foreach ($this->serviceKeyYamlToPhpFactories as $serviceKeyYamlToPhpFactory) {
+                if ($serviceKeyYamlToPhpFactory->getSubServiceKey() === $serviceKey) {
+                    $freshNodes = $serviceKeyYamlToPhpFactory->convertYamlToNodes($serviceValues);
+                    $nodes = array_merge($nodes, $freshNodes);
+                    continue 2;
+                }
             }
 
             if ($serviceKey === self::INSTANCE_OF) {
@@ -182,7 +191,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             } else {
                 $args = $this->argsNodeFactory->createFromValues([$serviceKey]);
                 $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
-
                 $setMethodCall = $this->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
             }
 
