@@ -19,7 +19,6 @@ use PhpParser\Node\Stmt\Expression;
  * services:
  *     _instanceof: <---
  */
-
 final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
