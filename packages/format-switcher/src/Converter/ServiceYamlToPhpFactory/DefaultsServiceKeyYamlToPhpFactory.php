@@ -47,12 +47,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         $this->commonNodeFactory = $commonNodeFactory;
     }
 
-    public function getSubServiceKey(): string
-    {
-        return self::DEFAULTS;
-    }
-
-    public function convertYamlToNodes(array $serviceValues): array
+    public function convertYamlToNodes($key, $serviceValues): array
     {
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
 
@@ -70,6 +65,11 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         }
 
         return [new Expression($methodCall)];
+    }
+
+    public function isMatch($key, $values): bool
+    {
+        return $key === self::DEFAULTS;
     }
 
     private function createServicesVariable(): Variable
