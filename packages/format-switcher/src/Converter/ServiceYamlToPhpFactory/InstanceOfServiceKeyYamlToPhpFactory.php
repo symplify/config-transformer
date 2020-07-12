@@ -45,12 +45,7 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function getSubServiceKey(): string
-    {
-        return self::_INSTANCEOF;
-    }
-
-    public function convertYamlToNodes(array $serviceValues): array
+    public function convertYamlToNodes($key, $serviceValues): array
     {
         $nodes = [];
 
@@ -70,5 +65,10 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         }
 
         return $nodes;
+    }
+
+    public function isMatch($key, $values): bool
+    {
+        return $key === self::_INSTANCEOF;
     }
 }
