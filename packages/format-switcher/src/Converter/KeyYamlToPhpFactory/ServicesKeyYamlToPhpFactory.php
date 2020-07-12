@@ -26,11 +26,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     /**
      * @var string
      */
-    private const CLASS_KEY = 'class';
-
-    /**
-     * @var string
-     */
     private const SERVICES = 'services';
 
     /**
@@ -99,12 +94,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
                 }
             }
 
-            if (isset($serviceValues[self::CLASS_KEY])) {
-                $serviceNodes = $this->createService($serviceValues, $serviceKey);
-                $nodes = array_merge($nodes, $serviceNodes);
-                continue;
-            }
-
             if ($serviceValues === null) {
                 $setMethodCall = $this->singleServicePhpNodeFactory->createSetService($serviceKey);
             } else {
@@ -118,24 +107,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
             $nodes[] = new Expression($setMethodCall);
         }
-
-        return $nodes;
-    }
-
-    /**
-     * @return Node[]
-     */
-    private function createService(array $serviceValues, string $serviceKey): array
-    {
-        $nodes = [];
-
-        $args = $this->argsNodeFactory->createFromValues([$serviceKey, $serviceValues[self::CLASS_KEY]]);
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
-
-        unset($serviceValues[self::CLASS_KEY]);
-
-        $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($serviceValues, $setMethodCall);
-        $nodes[] = new Expression($setMethodCall);
 
         return $nodes;
     }
