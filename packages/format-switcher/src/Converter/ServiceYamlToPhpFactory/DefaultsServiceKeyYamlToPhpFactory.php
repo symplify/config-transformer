@@ -29,7 +29,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
     /**
      * @var string
      */
-    private const DEFAULTS = '_defaults';
+    private const _DEFAULTS = '_defaults';
 
     /**
      * @var ArgsNodeFactory
@@ -69,7 +69,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
 
     public function isMatch($key, $values): bool
     {
-        return $key === self::DEFAULTS;
+        return $key === self::_DEFAULTS;
     }
 
     private function createServicesVariable(): Variable
