@@ -13,6 +13,11 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 
+/**
+ * Handles this part:
+ *
+ * parameters: <---
+ */
 final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 {
     /**
