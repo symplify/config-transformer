@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
@@ -21,27 +22,7 @@ final class ServiceOptionNodeFactory
     /**
      * @var string
      */
-    private const ARGUMENTS = 'arguments';
-
-    /**
-     * @var string
-     */
-    private const CALLS = 'calls';
-
-    /**
-     * @var string
-     */
-    private const TAGS = 'tags';
-
-    /**
-     * @var string
-     */
     private const CONFIGURATOR = 'configurator';
-
-    /**
-     * @var string
-     */
-    private const FACTORY = 'factory';
 
     /**
      * @var string
@@ -136,13 +117,13 @@ final class ServiceOptionNodeFactory
 
                     break;
 
-                case self::FACTORY:
+                case YamlKey::FACTORY:
                 case self::CONFIGURATOR:
                     $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
                     $methodCall = new MethodCall($methodCall, 'factory', $args);
                     break;
 
-                case self::TAGS:
+                case YamlKey::TAGS:
                     /** @var mixed[] $value */
                     if (count($value) === 1 && is_string($value[0])) {
                         $tagValue = new String_($value[0]);
@@ -167,11 +148,11 @@ final class ServiceOptionNodeFactory
 
                     break;
 
-                case self::CALLS:
+                case YamlKey::CALLS:
                     $methodCall = $this->singleServicePhpNodeFactory->createCalls($methodCall, $value);
                     break;
 
-                case self::ARGUMENTS:
+                case YamlKey::ARGUMENTS:
                     $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
                     $methodCall = new MethodCall($methodCall, 'args', $args);
 

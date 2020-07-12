@@ -35,4 +35,39 @@ final class YamlKey
      * @var string
      */
     public const RESOURCE = 'resource';
+
+    /**
+     * @var string
+     */
+    public const _INSTANCEOF = '_instanceof';
+
+    /**
+     * @var string
+     */
+    public const _DEFAULTS = '_defaults';
+
+    /**
+     * @var string
+     */
+    public const BIND = 'bind';
+
+    /**
+     * @var string
+     */
+    public const IMPORTS = 'imports';
+
+    /**
+     * @var string
+     */
+    public const ARGUMENTS = 'arguments';
+
+    /**
+     * @var string
+     */
+    public const CALLS = 'calls';
+
+    /**
+     * @var string
+     */
+    public const FACTORY = 'factory';
 }
