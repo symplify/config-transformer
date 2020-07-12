@@ -44,7 +44,6 @@ final class YamlToPhpConverter
     public function convert(string $yaml): string
     {
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS);
-
         $namespace = $this->fluentClosureNamespaceNodeFactory->createFromYamlArray($yamlArray);
 
         return $this->fluentPhpConfigurationPrinter->prettyPrintFile([$namespace]);
