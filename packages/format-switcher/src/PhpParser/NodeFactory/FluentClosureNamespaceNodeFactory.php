@@ -89,11 +89,6 @@ final class FluentClosureNamespaceNodeFactory
     private const ALIAS = 'alias';
 
     /**
-     * @var PhpNodeFactory
-     */
-    private $phpNodeFactory;
-
-    /**
      * @var ServicesPhpNodeFactory
      */
     private $servicesPhpNodeFactory;
@@ -102,11 +97,6 @@ final class FluentClosureNamespaceNodeFactory
      * @var ClosureNodeFactory
      */
     private $closureNodeFactory;
-
-    /**
-     * @var ParametersPhpNodeFactory
-     */
-    private $parametersPhpNodeFactory;
 
     /**
      * @var SingleServicePhpNodeFactory
@@ -137,20 +127,16 @@ final class FluentClosureNamespaceNodeFactory
      * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
      */
     public function __construct(
-        PhpNodeFactory $phpNodeFactory,
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
         ClosureNodeFactory $closureNodeFactory,
-        ParametersPhpNodeFactory $parametersPhpNodeFactory,
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
         ImportNodeFactory $importNodeFactory,
         CommonNodeFactory $commonNodeFactory,
         ArgsNodeFactory $argsNodeFactory,
         array $keyYamlToPhpFactories
     ) {
-        $this->phpNodeFactory = $phpNodeFactory;
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->closureNodeFactory = $closureNodeFactory;
-        $this->parametersPhpNodeFactory = $parametersPhpNodeFactory;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
         $this->importNodeFactory = $importNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
@@ -177,24 +163,23 @@ final class FluentClosureNamespaceNodeFactory
         $nodes = [];
 
         foreach ($yamlData as $key => $values) {
-            foreach ($this->keyYamlToPhpFactories as $keyYamlToPhpFactory) {
-                if ($keyYamlToPhpFactory->getKey() === $key) {
-                    $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
-                    $nodes = array_merge($nodes, $freshNodes);
-                }
-            }
-
+            // normalize values
             if ($values === null) {
                 // declare the variable ($parameters/$services) even if the key is written without values.
                 $values = [];
             }
 
-            switch ($key) {
-                case 'parameters':
-                    $parametersNodes = $this->addParametersNodes($values);
-                    $nodes = array_merge($nodes, $parametersNodes);
-                    break;
+            foreach ($this->keyYamlToPhpFactories as $keyYamlToPhpFactory) {
+                if ($keyYamlToPhpFactory->getKey() !== $key) {
+                    continue;
+                }
 
+                $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
+                $nodes = array_merge($nodes, $freshNodes);
+                continue 2;
+            }
+
+            switch ($key) {
                 case 'imports':
                     $importNodes = $this->addImportsNodes($values);
                     $nodes = array_merge($nodes, $importNodes);
@@ -210,25 +195,6 @@ final class FluentClosureNamespaceNodeFactory
                         $key
                     ));
             }
-        }
-
-        return $nodes;
-    }
-
-    /**
-     * @return Node[]
-     */
-    private function addParametersNodes(array $parameters): array
-    {
-        $nodes = [];
-
-        $initAssign = $this->parametersPhpNodeFactory->createParametersInit();
-
-        $nodes[] = $initAssign;
-
-        foreach ($parameters as $parameterName => $value) {
-            $methodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
-            $nodes[] = $methodCall;
         }
 
         return $nodes;
