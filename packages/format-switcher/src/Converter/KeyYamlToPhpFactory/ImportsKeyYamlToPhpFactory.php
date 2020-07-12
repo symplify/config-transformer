@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
@@ -24,16 +25,6 @@ use PhpParser\Node\Stmt\Expression;
 final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 {
     /**
-     * @var string
-     */
-    private const IMPORTS = 'imports';
-
-    /**
-     * @var string
-     */
-    private const RESOURCE = 'resource';
-
-    /**
      * @var YamlArgumentSorter
      */
     private $yamlArgumentSorter;
@@ -51,7 +42,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
     public function getKey(): string
     {
-        return self::IMPORTS;
+        return YamlKey::IMPORTS;
     }
 
     /**
@@ -66,7 +57,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             if (is_array($import)) {
                 $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists(
                     $import,
-                    [self::RESOURCE, 'type', 'ignore_errors']
+                    [YamlKey::RESOURCE, 'type', 'ignore_errors']
                 );
 
                 $nodes[] = $this->createImportMethodCall($arguments);

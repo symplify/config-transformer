@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
 
@@ -16,11 +17,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNo
  */
 final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
-    /**
-     * @var string
-     */
-    private const RESOURCE = 'resource';
-
     /**
      * @var ServicesPhpNodeFactory
      */
@@ -45,6 +41,6 @@ final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
 
     public function isMatch($key, $values): bool
     {
-        return isset($values[self::RESOURCE]);
+        return isset($values[YamlKey::RESOURCE]);
     }
 }

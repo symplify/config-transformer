@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
@@ -22,11 +23,6 @@ use PhpParser\Node\Stmt\Expression;
 final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
-     * @var string
-     */
-    private const _INSTANCEOF = '_instanceof';
-
-    /**
      * @var CommonNodeFactory
      */
     private $commonNodeFactory;
@@ -44,11 +40,11 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNodes($key, $serviceValues): array
+    public function convertYamlToNodes($key, $yaml): array
     {
         $nodes = [];
 
-        foreach ($serviceValues as $instanceKey => $instanceValues) {
+        foreach ($yaml as $instanceKey => $instanceValues) {
             $classReference = $this->commonNodeFactory->createClassReference($instanceKey);
 
             $servicesVariable = new Variable(VariableName::SERVICES);
@@ -68,6 +64,6 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
 
     public function isMatch($key, $values): bool
     {
-        return $key === self::_INSTANCEOF;
+        return $key === YamlKey::_INSTANCEOF;
     }
 }
