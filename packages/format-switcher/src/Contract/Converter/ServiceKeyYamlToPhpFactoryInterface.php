@@ -8,11 +8,11 @@ use PhpParser\Node;
 
 interface ServiceKeyYamlToPhpFactoryInterface
 {
-    public function getSubServiceKey(): string;
-
     /**
      * @param mixed[] $yaml
      * @return Node[]
      */
-    public function convertYamlToNodes(array $yaml): array;
+    public function convertYamlToNodes($key, $yaml): array;
+
+    public function isMatch($key, $values): bool;
 }

@@ -30,11 +30,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     /**
      * @var string
      */
-    private const RESOURCE = 'resource';
-
-    /**
-     * @var string
-     */
     private const CLASS_KEY = 'class';
 
     /**
@@ -110,18 +105,14 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $nodes[] = $this->servicesPhpNodeFactory->createServicesInit();
 
         foreach ($services as $serviceKey => $serviceValues) {
+            $serviceValues = $serviceValues ?? [];
+
             foreach ($this->serviceKeyYamlToPhpFactories as $serviceKeyYamlToPhpFactory) {
-                if ($serviceKeyYamlToPhpFactory->getSubServiceKey() === $serviceKey) {
-                    $freshNodes = $serviceKeyYamlToPhpFactory->convertYamlToNodes($serviceValues);
+                if ($serviceKeyYamlToPhpFactory->isMatch($serviceKey, $serviceValues)) {
+                    $freshNodes = $serviceKeyYamlToPhpFactory->convertYamlToNodes($serviceKey, $serviceValues);
                     $nodes = array_merge($nodes, $freshNodes);
                     continue 2;
                 }
-            }
-
-            if (isset($serviceValues[self::RESOURCE])) {
-                $resourceNodes = $this->resolveResource($serviceKey, $serviceValues);
-                $nodes = array_merge($nodes, $resourceNodes);
-                continue;
             }
 
             if ($this->isAlias($serviceKey, $serviceValues)) {
@@ -245,20 +236,5 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $methodCall->args[] = new Arg(new String_($serviceName));
 
         return $methodCall;
-    }
-
-    /**
-     * @return Node[]
-     */
-    private function resolveResource($serviceKey, $serviceValues): array
-    {
-        // Due to the yaml behavior that does not allow the declaration of several identical key names.
-        if (isset($serviceValues['namespace'])) {
-            $serviceKey = $serviceValues['namespace'];
-            unset($serviceValues['namespace']);
-        }
-
-        $resource = $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
-        return [$resource];
     }
 }
