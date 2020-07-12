@@ -11,7 +11,8 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNo
  * Handles this part:
  *
  * services:
- *     resorce: <---
+ *     App\\: <--
+ *          source: '../src'
  */
 final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
