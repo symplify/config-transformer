@@ -54,7 +54,7 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNodes($key, $values): array
+    public function convertYamlToNodes($key, $yaml): array
     {
         $nodes = [];
 
@@ -67,7 +67,7 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
 
             $argValues = [];
             $argValues[] = $classReference;
-            $argValues[] = $values[self::ALIAS] ?? $values;
+            $argValues[] = $yaml[self::ALIAS] ?? $yaml;
 
             $args = $this->argsNodeFactory->createFromValues($argValues, true);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
@@ -76,27 +76,27 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
 
         // handles: "SomeClass $someVariable: ..."
         if ($fullClassName = strstr($key, ' $', true)) {
-            $methodCall = $this->createAliasNode($key, $fullClassName, $values);
+            $methodCall = $this->createAliasNode($key, $fullClassName, $yaml);
             return [new Expression($methodCall)];
         }
 
-        if (isset($values[self::ALIAS])) {
-            $className = $values[self::ALIAS];
+        if (isset($yaml[self::ALIAS])) {
+            $className = $yaml[self::ALIAS];
 
             $classReference = $this->commonNodeFactory->createClassReference($className);
             $args = $this->argsNodeFactory->createFromValues([$key, $classReference]);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
 
-            unset($values[self::ALIAS]);
+            unset($yaml[self::ALIAS]);
         }
 
-        /** @var string|mixed[] $values */
-        if (is_string($values) && $values[0] === '@') {
-            $args = $this->argsNodeFactory->createFromValues([$values], true);
+        /** @var string|mixed[] $yaml */
+        if (is_string($yaml) && $yaml[0] === '@') {
+            $args = $this->argsNodeFactory->createFromValues([$yaml], true);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
-        } elseif (is_array($values)) {
+        } elseif (is_array($yaml)) {
             /** @var MethodCall $methodCall */
-            $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
+            $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
         }
 
         $nodes[] = new Expression($methodCall);
