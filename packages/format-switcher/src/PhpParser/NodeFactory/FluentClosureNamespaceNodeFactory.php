@@ -7,7 +7,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use PhpParser\Node;
-use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
@@ -54,7 +53,6 @@ final class FluentClosureNamespaceNodeFactory
         foreach ($yamlData as $key => $values) {
             // normalize values
             if ($values === null) {
-                // declare the variable ($parameters/$services) even if the key is written without values.
                 $values = [];
             }
 
@@ -68,10 +66,7 @@ final class FluentClosureNamespaceNodeFactory
                 continue 2;
             }
 
-            throw new ShouldNotHappenException(sprintf(
-                'The key %s is not supported by the converter: only service config can live in services.yaml for conversion.',
-                $key
-            ));
+            throw new ShouldNotHappenException(sprintf('Key "%s" is not supported', $key));
         }
 
         return $nodes;
