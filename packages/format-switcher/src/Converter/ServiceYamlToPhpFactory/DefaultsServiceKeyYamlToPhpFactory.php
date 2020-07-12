@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
@@ -22,16 +23,6 @@ use PhpParser\Node\Stmt\Expression;
 final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
-     * @var string
-     */
-    private const BIND = 'bind';
-
-    /**
-     * @var string
-     */
-    private const _DEFAULTS = '_defaults';
-
-    /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
@@ -47,11 +38,14 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         $this->commonNodeFactory = $commonNodeFactory;
     }
 
-    public function convertYamlToNodes($key, $serviceValues): array
+    /**
+     * @return Expression[]
+     */
+    public function convertYamlToNodes($key, $yaml): array
     {
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
 
-        foreach ($serviceValues as $key => $value) {
+        foreach ($yaml as $key => $value) {
             if (in_array($key, ['autowire', 'autoconfigure', 'public'], true)) {
                 $methodCall = new MethodCall($methodCall, $key);
                 if ($value === false) {
@@ -59,8 +53,8 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
                 }
             }
 
-            if ($key === self::BIND) {
-                $methodCall = $this->createBindMethodCall($methodCall, $serviceValues[self::BIND]);
+            if ($key === YamlKey::BIND) {
+                $methodCall = $this->createBindMethodCall($methodCall, $yaml[YamlKey::BIND]);
             }
         }
 
@@ -69,7 +63,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
 
     public function isMatch($key, $values): bool
     {
-        return $key === self::_DEFAULTS;
+        return $key === YamlKey::_DEFAULTS;
     }
 
     private function createServicesVariable(): Variable
@@ -81,7 +75,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
     {
         foreach ($bindValues as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value]);
-            $methodCall = new MethodCall($methodCall, self::BIND, $args);
+            $methodCall = new MethodCall($methodCall, YamlKey::BIND, $args);
         }
 
         return $methodCall;
