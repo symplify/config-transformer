@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
@@ -104,11 +105,6 @@ final class FluentClosureNamespaceNodeFactory
     private $singleServicePhpNodeFactory;
 
     /**
-     * @var ImportNodeFactory
-     */
-    private $importNodeFactory;
-
-    /**
      * @var CommonNodeFactory
      */
     private $commonNodeFactory;
@@ -124,24 +120,29 @@ final class FluentClosureNamespaceNodeFactory
     private $keyYamlToPhpFactories = [];
 
     /**
+     * @var YamlArgumentSorter
+     */
+    private $yamlArgumentSorter;
+
+    /**
      * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
      */
     public function __construct(
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
         ClosureNodeFactory $closureNodeFactory,
         SingleServicePhpNodeFactory $singleServicePhpNodeFactory,
-        ImportNodeFactory $importNodeFactory,
         CommonNodeFactory $commonNodeFactory,
         ArgsNodeFactory $argsNodeFactory,
+        YamlArgumentSorter $yamlArgumentSorter,
         array $keyYamlToPhpFactories
     ) {
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->closureNodeFactory = $closureNodeFactory;
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
-        $this->importNodeFactory = $importNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->keyYamlToPhpFactories = $keyYamlToPhpFactories;
+        $this->yamlArgumentSorter = $yamlArgumentSorter;
     }
 
     public function createFromYamlArray(array $yamlArray): Namespace_
@@ -180,11 +181,6 @@ final class FluentClosureNamespaceNodeFactory
             }
 
             switch ($key) {
-                case 'imports':
-                    $importNodes = $this->addImportsNodes($values);
-                    $nodes = array_merge($nodes, $importNodes);
-                    break;
-
                 case 'services':
                     $serviceNodes = $this->addServicesNodes($values);
                     $nodes = array_merge($nodes, $serviceNodes);
@@ -195,27 +191,6 @@ final class FluentClosureNamespaceNodeFactory
                         $key
                     ));
             }
-        }
-
-        return $nodes;
-    }
-
-    /**
-     * @return Node[]
-     */
-    private function addImportsNodes(array $imports): array
-    {
-        $nodes = [];
-
-        foreach ($imports as $import) {
-            if (is_array($import)) {
-                $arguments = $this->sortArgumentsByKeyIfExists($import, [self::RESOURCE, 'type', 'ignore_errors']);
-
-                $nodes[] = $this->importNodeFactory->createImportMethodCall($arguments);
-                continue;
-            }
-
-            throw new NotImplementedYetException();
         }
 
         return $nodes;
@@ -426,7 +401,7 @@ final class FluentClosureNamespaceNodeFactory
 
     private function createDecorateMethod(array $value, MethodCall $methodCall): MethodCall
     {
-        $arguments = $this->sortArgumentsByKeyIfExists($value, [
+        $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($value, [
             self::DECORATION_INNER_NAME => null,
             self::DECORATION_PRIORITY => 0,
             self::DECORATION_ON_INVALID => null,
@@ -479,43 +454,11 @@ final class FluentClosureNamespaceNodeFactory
         return new MethodCall($methodCall, 'deprecate', $args);
     }
 
-    /**
-     * @param array $inOrderKeys Pass an array of keys to sort if exists
-     *                           or an associative array following this logic [$key => $valueIfNotExists]
-     *
-     * @return array
-     */
-    private function sortArgumentsByKeyIfExists(array $arrayToSort, array $inOrderKeys)
-    {
-        $argumentsInOrder = [];
-
-        if ($this->isAssociativeArray($inOrderKeys)) {
-            foreach ($inOrderKeys as $key => $valueIfNotExists) {
-                $argumentsInOrder[$key] = $arrayToSort[$key] ?? $valueIfNotExists;
-            }
-
-            return $argumentsInOrder;
-        }
-
-        foreach ($inOrderKeys as $key) {
-            if (isset($arrayToSort[$key])) {
-                $argumentsInOrder[] = $arrayToSort[$key];
-            }
-        }
-
-        return $argumentsInOrder;
-    }
-
     private function isAlias(string $serviceKey, $serviceValues): bool
     {
         return isset($serviceValues[self::ALIAS])
             || strstr($serviceKey, ' $', true)
             || is_string($serviceValues) && $serviceValues[0] === '@';
-    }
-
-    private function isAssociativeArray(array $array): bool
-    {
-        return array_keys($array) !== range(0, count($array) - 1);
     }
 
     /**

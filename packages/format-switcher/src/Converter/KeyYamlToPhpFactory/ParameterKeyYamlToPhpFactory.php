@@ -46,7 +46,7 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         }
 
         $nodes = [];
-        $nodes[] = $this->createParametersInit(self::PARAMETERS);
+        $nodes[] = $this->createParametersInit();
 
         foreach ($yaml as $parameterName => $value) {
             /** @var string $parameterName */
@@ -57,12 +57,12 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         return $nodes;
     }
 
-    private function createParametersInit(string $parameterName): Expression
+    private function createParametersInit(): Expression
     {
-        $servicesVariable = new Variable($parameterName);
+        $servicesVariable = new Variable(self::PARAMETERS);
         $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
 
-        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, $parameterName));
+        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, self::PARAMETERS));
 
         return new Expression($assign);
     }
