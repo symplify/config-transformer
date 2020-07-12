@@ -13,6 +13,12 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 
+/**
+ * Handles this part:
+ *
+ * services:
+ *     _defaults: <---
+ */
 final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
