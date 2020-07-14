@@ -38,13 +38,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(SecondFakeClass::class . ' $shoutyTransformer', 'App\Util\UppercaseTransformer');
 
     $services->set(FakeClass::class)
-        ->args([service('string'), ['isaevsgdbfhhnth', 1234561456545, 'jean@vgbsetgil.com'], 456, ['App\FooCommand' => service('app.command_handler.foo'), 'App\BarCommand' => service('app.command_handler.bar')], tagged_locator('app.handler', 'key'), tagged_iterator('app.handler')]);
+        ->args([ref('string'), ['isaevsgdbfhhnth', 1234561456545, 'jean@vgbsetgil.com'], 456, ['App\FooCommand' => ref('app.command_handler.foo'), 'App\BarCommand' => ref('app.command_handler.bar')], tagged_locator('app.handler', 'key'), tagged_iterator('app.handler')]);
 
     $services->set(SecondFakeClass::class)
         ->args([tagged_locator('key', 'app.handler', 'myOwnMethodName')]);
 
     $services->set(ThirdFakeClass::class)
-        ->args(['$fake1' => service('id.fake.service'), '$fake2' => ['fake_argument', 123, 'jean@mail.com']]);
+        ->args(['$fake1' => ref('id.fake.service'), '$fake2' => ['fake_argument', 123, 'jean@mail.com']]);
 
     $services->set('site_update_manager.normal_users', ThirdFakeClass::class)
         ->args([expr('service("App\Mail\MailerConfiguration").getMailerMethod()')]);
