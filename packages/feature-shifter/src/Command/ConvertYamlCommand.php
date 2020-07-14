@@ -6,7 +6,6 @@ namespace Migrify\ConfigTransformer\FeatureShifter\Command;
 
 use Migrify\ConfigTransformer\FeatureShifter\Yaml\ExplicitToAutodiscoveryConverter;
 use Migrify\ConfigTransformer\Finder\FileBySuffixFinder;
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConvertYamlCommand extends Command
 {
@@ -50,16 +50,23 @@ final class ConvertYamlCommand extends Command
      */
     private $fileBySuffixFinder;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     public function __construct(
         ExplicitToAutodiscoveryConverter $explicitToAutodiscoveryConverter,
         SymfonyStyle $symfonyStyle,
-        FileBySuffixFinder $fileBySuffixFinder
+        FileBySuffixFinder $fileBySuffixFinder,
+        SmartFileSystem $smartFileSystem
     ) {
         parent::__construct();
 
         $this->explicitToAutodiscoveryConverter = $explicitToAutodiscoveryConverter;
         $this->symfonyStyle = $symfonyStyle;
         $this->fileBySuffixFinder = $fileBySuffixFinder;
+        $this->smartFileSystem = $smartFileSystem;
     }
 
     protected function configure(): void
@@ -123,7 +130,7 @@ final class ConvertYamlCommand extends Command
             $convertedContent = Strings::replace($convertedContent, '#^( {4}([A-Z].*?): )(null)$#m', '$1~');
 
             // save
-            FileSystem::write($fileInfo->getRealPath(), $convertedContent);
+            $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $convertedContent);
 
             $this->symfonyStyle->note('File converted');
         }
