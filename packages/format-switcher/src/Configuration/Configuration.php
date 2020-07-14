@@ -45,6 +45,11 @@ final class Configuration
      */
     private $dryRun = false;
 
+    /**
+     * @var bool
+     */
+    private $shouldKeepBcLayer = false;
+
     public function populateFromInput(InputInterface $input): void
     {
         $this->source = (array) $input->getArgument(Option::SOURCE);
@@ -55,6 +60,8 @@ final class Configuration
 
         $this->resolveInputFormat($input);
         $this->resolveOutputFormat($input);
+
+        $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
     }
 
     public function getOutputFormat(): string
@@ -85,6 +92,11 @@ final class Configuration
     public function changeSymfonyVersion(float $symfonyVersion): void
     {
         $this->targetSymfonyVersion = $symfonyVersion;
+    }
+
+    public function shouldKeepBcLayer(): bool
+    {
+        return $this->shouldKeepBcLayer;
     }
 
     private function resolveInputFormat(InputInterface $input): void
