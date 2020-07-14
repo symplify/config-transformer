@@ -8,6 +8,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(__DIR__ . '/../packages/**/config/**.php');
@@ -25,6 +26,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(FinderSanitizer::class);
 
     $services->set(PrivatesAccessor::class);
+
+    $services->set(SmartFileSystem::class);
 
     $services->set(SymfonyStyleFactory::class);
 
