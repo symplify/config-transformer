@@ -2,7 +2,7 @@
     "name": "migrify/config-transformer",
     "description": "Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable one - all the useful utils around configs",
     "license": "MIT",
-    "bin": "bin/config-transformer",
+    "bin": ["bin/config-transformer"],
     "require": {
         "php": "^7.2",
         "symfony/dependency-injection": "^4.4|^5.0",
