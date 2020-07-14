@@ -30,9 +30,15 @@ final class ArgsNodeFactory
      */
     private $commonNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonNodeFactory)
+    /**
+     * @var ConstantNodeFactory
+     */
+    private $constantNodeFactory;
+
+    public function __construct(CommonNodeFactory $commonNodeFactory, ConstantNodeFactory $constantNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
+        $this->constantNodeFactory = $constantNodeFactory;
     }
 
     /**
@@ -188,6 +194,11 @@ final class ArgsNodeFactory
         // is service reference
         if (Strings::startsWith($value, '@')) {
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference);
+        }
+
+        $constantValue = $this->constantNodeFactory->createConstantIfValue($value);
+        if ($constantValue !== null) {
+            return $constantValue;
         }
 
         return BuilderHelpers::normalizeValue($value);
