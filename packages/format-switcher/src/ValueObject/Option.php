@@ -24,6 +24,11 @@ final class Option
     /**
      * @var string
      */
+    public const BC_LAYER = 'bc-layer';
+
+    /**
+     * @var string
+     */
     public const TARGET_SYMFONY_VERSION = 'target-symfony-version';
 
     /**
