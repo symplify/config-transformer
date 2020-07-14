@@ -20,8 +20,10 @@ final class ArgsNodeFactory
 {
     /**
      * @var string
+     * @todo service() is available only since Symfony 5.1
+     * @see https://github.com/symfony/symfony/pull/36800
      */
-    private const SERVICE = 'service';
+    private const SERVICE = 'ref';
 
     /**
      * @var CommonNodeFactory
