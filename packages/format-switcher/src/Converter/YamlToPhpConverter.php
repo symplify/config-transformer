@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\FluentClosureNamespaceNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentPhpConfigurationPrinter;
+use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 
@@ -31,19 +32,28 @@ final class YamlToPhpConverter
      */
     private $fluentClosureNamespaceNodeFactory;
 
+    /**
+     * @var YamlContentProvider
+     */
+    private $yamlContentProvider;
+
     public function __construct(
         Parser $yamlParser,
         FluentPhpConfigurationPrinter $fluentPhpConfigurationPrinter,
-        FluentClosureNamespaceNodeFactory $fluentClosureNamespaceNodeFactory
+        FluentClosureNamespaceNodeFactory $fluentClosureNamespaceNodeFactory,
+        YamlContentProvider $yamlContentProvider
     ) {
         $this->yamlParser = $yamlParser;
         $this->fluentPhpConfigurationPrinter = $fluentPhpConfigurationPrinter;
         $this->fluentClosureNamespaceNodeFactory = $fluentClosureNamespaceNodeFactory;
+        $this->yamlContentProvider = $yamlContentProvider;
     }
 
     public function convert(string $yaml): string
     {
-        $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS);
+        $this->yamlContentProvider->setContent($yaml);
+
+        $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
         $namespace = $this->fluentClosureNamespaceNodeFactory->createFromYamlArray($yamlArray);
 
         return $this->fluentPhpConfigurationPrinter->prettyPrintFile([$namespace]);

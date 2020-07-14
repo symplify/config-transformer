@@ -55,8 +55,7 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
         foreach ($yaml as $parameterName => $value) {
             /** @var string $parameterName */
-            $methodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
-            $nodes[] = $methodCall;
+            $nodes[] = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
         }
 
         return $nodes;
