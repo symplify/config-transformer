@@ -8,7 +8,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use Nette\Utils\FileSystem;
 use Rector\Core\Testing\ValueObject\SplitLine;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,6 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
 {
@@ -29,12 +29,18 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
      */
     private $containerBuilderCleaner;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     protected function setUp(): void
     {
         $this->bootKernel(ConfigTransformerKernel::class);
 
         $this->configFormatConverter = self::$container->get(ConfigFormatConverter::class);
         $this->containerBuilderCleaner = self::$container->get(ContainerBuilderCleaner::class);
+        $this->smartFileSystem = self::$container->get(SmartFileSystem::class);
     }
 
     protected function doTestOutput(SmartFileInfo $fixtureFileInfo, string $inputFormat, string $outputFormat): void
@@ -67,13 +73,14 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $newOriginalContent = rtrim($inputFileInfo->getContents()) . PHP_EOL . SplitLine::LINE . rtrim(
             $convertedContent
         ) . PHP_EOL;
-        FileSystem::write($fileInfo->getRealPath(), $newOriginalContent);
+
+        $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $newOriginalContent);
     }
 
     protected function doTestYamlContentIsLoadable(string $yamlContent): void
     {
         $localFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
-        FileSystem::write($localFile, $yamlContent);
+        $this->smartFileSystem->dumpFile($localFile, $yamlContent);
 
         $containerBuilder = new ContainerBuilder();
         $fileLoader = new YamlFileLoader($containerBuilder, new FileLocator());

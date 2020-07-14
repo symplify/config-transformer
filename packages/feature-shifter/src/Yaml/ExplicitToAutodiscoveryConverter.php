@@ -10,8 +10,8 @@ use Migrify\ConfigTransformer\FeatureShifter\ValueObject\ServiceConfig;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
-use Symfony\Component\Filesystem\Filesystem;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ExplicitToAutodiscoveryConverter
 {
@@ -28,9 +28,9 @@ final class ExplicitToAutodiscoveryConverter
     ];
 
     /**
-     * @var Filesystem
+     * @var SmartFileSystem
      */
-    private $filesystem;
+    private $smartFileSystem;
 
     /**
      * @var CommonNamespaceResolver
@@ -48,11 +48,11 @@ final class ExplicitToAutodiscoveryConverter
     private $serviceConfig;
 
     public function __construct(
-        Filesystem $filesystem,
+        SmartFileSystem $smartFileSystem,
         CommonNamespaceResolver $commonNamespaceResolver,
         YamlServiceProcessor $yamlServiceProcessor
     ) {
-        $this->filesystem = $filesystem;
+        $this->smartFileSystem = $smartFileSystem;
         $this->commonNamespaceResolver = $commonNamespaceResolver;
         $this->yamlServiceProcessor = $yamlServiceProcessor;
     }
@@ -230,7 +230,7 @@ final class ExplicitToAutodiscoveryConverter
         $fileInfo = new SmartFileInfo($configFilePath);
         $configDirectory = dirname($fileInfo->getRealPath());
 
-        $relativePath = $this->filesystem->makePathRelative($classDirectory, $configDirectory);
+        $relativePath = $this->smartFileSystem->makePathRelative($classDirectory, $configDirectory);
 
         return rtrim($relativePath, '/');
     }
