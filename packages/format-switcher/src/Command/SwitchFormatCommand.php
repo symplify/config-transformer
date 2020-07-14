@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Command;
 use Migrify\ConfigTransformer\Finder\FileBySuffixFinder;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
@@ -16,6 +17,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Yaml;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -66,7 +68,7 @@ final class SwitchFormatCommand extends Command
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->setDescription('Converts all XML files to provided format');
+        $this->setDescription('Converts XML/YAML configs to YAML/PHP format');
 
         $this->addArgument(
             Option::SOURCE,
@@ -75,7 +77,9 @@ final class SwitchFormatCommand extends Command
         );
 
         $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
-        $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output');
+        $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output', Format::PHP);
+
+        $this->addOption(Option::BC_LAYER, null, InputOption::VALUE_NONE, 'Keep original config with include of new one, to prevent breaking of old config paths');
 
         $this->addOption(
             Option::TARGET_SYMFONY_VERSION,
@@ -96,23 +100,9 @@ final class SwitchFormatCommand extends Command
             [$this->configuration->getInputFormat()]
         );
 
-        $convertedFileInfos = [];
-        foreach ($fileInfos as $fileInfo) {
-            $convertedContent = $this->configFormatConverter->convert(
-                $fileInfo,
-                $this->configuration->getInputFormat(),
-                $this->configuration->getOutputFormat()
-            );
+        $this->dumpNewFileInfos($fileInfos);
 
-            $newFileInfo = $this->dumpFile($fileInfo, $convertedContent);
-            if ($newFileInfo === null) {
-                continue;
-            }
-
-            $convertedFileInfos[] = $newFileInfo;
-        }
-
-        $this->deleteOldFiles($fileInfos);
+        $this->processOldFileInfos($fileInfos);
 
         $successMessage = sprintf(
             'Processed %d files from "%s" to "%s" format',
@@ -128,7 +118,7 @@ final class SwitchFormatCommand extends Command
     /**
      * @param SmartFileInfo[] $fileInfos
      */
-    private function deleteOldFiles(array $fileInfos): void
+    private function processOldFileInfos(array $fileInfos): void
     {
         if ($this->configuration->isDryRun()) {
             return;
@@ -138,13 +128,22 @@ final class SwitchFormatCommand extends Command
             return;
         }
 
-        $this->filesystem->remove($fileInfos);
+        if ($this->configuration->shouldKeepBcLayer()) {
+            foreach ($fileInfos as $fileInfo) {
+                $yamlContent = $this->crateYamlWithPhpFileImport($fileInfo);
+                $this->filesystem->dumpFile($fileInfo->getRealPath(), $yamlContent);
+            }
 
-        $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
-        $this->symfonyStyle->warning($deletedFilesMessage);
+            $updatedFilesMessage = sprintf('updated %d with BC layer to new configs', count($fileInfos));
+            $this->symfonyStyle->warning($updatedFilesMessage);
+        } else {
+            $this->filesystem->remove($fileInfos);
+            $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
+            $this->symfonyStyle->warning($deletedFilesMessage);
+        }
     }
 
-    private function dumpFile(SmartFileInfo $fileInfo, string $convertedContent): ?SmartFileInfo
+    private function dumpFile(SmartFileInfo $fileInfo, string $convertedContent): void
     {
         $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
         $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
@@ -154,20 +153,47 @@ final class SwitchFormatCommand extends Command
         if ($this->configuration->isDryRun()) {
             $message = sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
             $this->symfonyStyle->note($message);
-            return null;
+            return;
         }
 
         $this->filesystem->dumpFile($newFilePath, $convertedContent);
 
         $message = sprintf('File "%s" was dumped', $relativeFilePath);
         $this->symfonyStyle->writeln($message);
-
-        return new SmartFileInfo($relativeFilePath);
     }
 
     private function getRelativePathOfNonExistingFile(string $newFilePath): string
     {
         $relativeFilePath = $this->filesystem->makePathRelative($newFilePath, getcwd());
         return rtrim($relativeFilePath, '/');
+    }
+
+    private function crateYamlWithPhpFileImport(SmartFileInfo $fileInfo): string
+    {
+        $yamlImportData = [
+            'imports' => [
+                [
+                    'resource' => $fileInfo->getBasenameWithoutSuffix() . '.php',
+                ],
+            ],
+        ];
+
+        return Yaml::dump($yamlImportData) . PHP_EOL;
+    }
+
+    /**
+     * @param SmartFileInfo[] $fileInfos
+     */
+    private function dumpNewFileInfos(array $fileInfos): void
+    {
+        foreach ($fileInfos as $fileInfo) {
+            $convertedContent = $this->configFormatConverter->convert(
+                $fileInfo,
+                $this->configuration->getInputFormat(),
+                $this->configuration->getOutputFormat()
+            );
+
+            $this->dumpFile($fileInfo, $convertedContent);
+        }
     }
 }
