@@ -19,8 +19,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(FakeClass::class)
-        ->args([inline_service(ExistingClass::class)]);
+        ->args([service(ExistingClass::class)]);
 
     $services->set(ThirdFakeClass::class)
-        ->factory([inline_service(ExistingClass::class), 'constructFoo']);
+        ->factory([service(ExistingClass::class), 'constructFoo']);
 };

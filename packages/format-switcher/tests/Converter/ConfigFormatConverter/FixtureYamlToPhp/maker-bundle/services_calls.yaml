@@ -20,11 +20,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(FakeClass::class)
-        ->call('withMailer', [service('mailer')], false)
-        ->call('setLogger', [service('logger')])
-        ->call('setMailer', [service('mailer')])
-        ->call('withMailer', [service('mailer'), 'argument'], false)
-        ->call('setLogger', [service('logger')])
-        ->call('setMailer', [service('mailer')])
-        ->call('withLogger', [service('logger')], true);
+        ->call('withMailer', [ref('mailer')], false)
+        ->call('setLogger', [ref('logger')])
+        ->call('setMailer', [ref('mailer')])
+        ->call('withMailer', [ref('mailer'), 'argument'], false)
+        ->call('setLogger', [ref('logger')])
+        ->call('setMailer', [ref('mailer')])
+        ->call('withLogger', [ref('logger')], true);
 };
