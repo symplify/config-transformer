@@ -16,11 +16,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class SwitchFormatCommand extends Command
 {
@@ -40,29 +40,29 @@ final class SwitchFormatCommand extends Command
     private $configuration;
 
     /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    /**
      * @var FileBySuffixFinder
      */
     private $fileBySuffixFinder;
+
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
 
     public function __construct(
         SymfonyStyle $symfonyStyle,
         ConfigFormatConverter $configFormatConverter,
         Configuration $configuration,
         FileBySuffixFinder $fileBySuffixFinder,
-        Filesystem $filesystem
+        SmartFileSystem $smartFileSystem
     ) {
         parent::__construct();
 
         $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;
         $this->configuration = $configuration;
-        $this->filesystem = $filesystem;
         $this->fileBySuffixFinder = $fileBySuffixFinder;
+        $this->smartFileSystem = $smartFileSystem;
     }
 
     protected function configure(): void
@@ -131,13 +131,13 @@ final class SwitchFormatCommand extends Command
         if ($this->configuration->shouldKeepBcLayer()) {
             foreach ($fileInfos as $fileInfo) {
                 $yamlContent = $this->crateYamlWithPhpFileImport($fileInfo);
-                $this->filesystem->dumpFile($fileInfo->getRealPath(), $yamlContent);
+                $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $yamlContent);
             }
 
             $updatedFilesMessage = sprintf('updated %d with BC layer to new configs', count($fileInfos));
             $this->symfonyStyle->warning($updatedFilesMessage);
         } else {
-            $this->filesystem->remove($fileInfos);
+            $this->smartFileSystem->remove($fileInfos);
             $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
             $this->symfonyStyle->warning($deletedFilesMessage);
         }
@@ -156,7 +156,7 @@ final class SwitchFormatCommand extends Command
             return;
         }
 
-        $this->filesystem->dumpFile($newFilePath, $convertedContent);
+        $this->smartFileSystem->dumpFile($newFilePath, $convertedContent);
 
         $message = sprintf('File "%s" was dumped', $relativeFilePath);
         $this->symfonyStyle->writeln($message);
@@ -164,7 +164,7 @@ final class SwitchFormatCommand extends Command
 
     private function getRelativePathOfNonExistingFile(string $newFilePath): string
     {
-        $relativeFilePath = $this->filesystem->makePathRelative($newFilePath, getcwd());
+        $relativeFilePath = $this->smartFileSystem->makePathRelative($newFilePath, getcwd());
         return rtrim($relativeFilePath, '/');
     }
 
