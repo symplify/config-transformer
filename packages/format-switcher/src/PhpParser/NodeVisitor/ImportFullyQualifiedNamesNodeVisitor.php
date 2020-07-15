@@ -27,6 +27,11 @@ final class ImportFullyQualifiedNamesNodeVisitor extends NodeVisitorAbstract
         $this->classNaming = $classNaming;
     }
 
+    public function beforeTraverse(array $nodes): void
+    {
+        $this->nameImports = [];
+    }
+
     public function enterNode(Node $node): ?Node
     {
         if (! $node instanceof FullyQualified) {
