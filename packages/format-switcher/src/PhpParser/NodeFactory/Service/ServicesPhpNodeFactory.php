@@ -59,7 +59,10 @@ final class ServicesPhpNodeFactory
     {
         $servicesLoadMethodCall = $this->createServicesLoadMethodCall($serviceKey, $serviceValues);
 
-        $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($serviceValues, $servicesLoadMethodCall);
+        $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls(
+            $serviceValues,
+            $servicesLoadMethodCall
+        );
 
         if (! isset($serviceValues[self::EXCLUDE])) {
             return new Expression($servicesLoadMethodCall);
