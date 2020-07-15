@@ -31,10 +31,19 @@ final class ServicesPhpNodeFactory
      */
     private $argsNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonNodeFactory, ArgsNodeFactory $argsNodeFactory)
-    {
+    /**
+     * @var AutoBindNodeFactory
+     */
+    private $autoBindNodeFactory;
+
+    public function __construct(
+        CommonNodeFactory $commonNodeFactory,
+        ArgsNodeFactory $argsNodeFactory,
+        AutoBindNodeFactory $autoBindNodeFactory
+    ) {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
 
     public function createServicesInit(): Expression
@@ -49,6 +58,8 @@ final class ServicesPhpNodeFactory
     public function createResource(string $serviceKey, array $serviceValues): Expression
     {
         $servicesLoadMethodCall = $this->createServicesLoadMethodCall($serviceKey, $serviceValues);
+
+        $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($serviceValues, $servicesLoadMethodCall);
 
         if (! isset($serviceValues[self::EXCLUDE])) {
             return new Expression($servicesLoadMethodCall);
