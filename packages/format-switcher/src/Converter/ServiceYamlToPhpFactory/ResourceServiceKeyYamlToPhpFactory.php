@@ -18,7 +18,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\Servi
 final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
-     * @var \Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory
+     * @var ServicesPhpNodeFactory
      */
     private $servicesPhpNodeFactory;
 
