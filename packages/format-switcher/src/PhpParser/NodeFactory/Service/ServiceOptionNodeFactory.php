@@ -9,7 +9,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetExceptio
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\SingleServicePhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
