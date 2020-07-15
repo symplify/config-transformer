@@ -159,7 +159,7 @@ final class SwitchFormatCommand extends Command
         $this->smartFileSystem->dumpFile($newFilePath, $convertedContent);
 
         $message = sprintf('File "%s" was dumped', $relativeFilePath);
-        $this->symfonyStyle->writeln($message);
+        $this->symfonyStyle->note($message);
     }
 
     private function getRelativePathOfNonExistingFile(string $newFilePath): string
