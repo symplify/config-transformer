@@ -71,6 +71,11 @@ final class ConfigLoader
             return $this->wrapToDelegatingLoader($yamlLoader, $containerBuilder);
         }
 
+        if ($suffix === Format::PHP) {
+            $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator());
+            return $this->wrapToDelegatingLoader($phpFileLoader, $containerBuilder);
+        }
+
         throw new NotImplementedYetException($suffix);
     }
 
