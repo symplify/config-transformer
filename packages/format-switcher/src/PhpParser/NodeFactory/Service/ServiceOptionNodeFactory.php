@@ -152,6 +152,10 @@ final class ServiceOptionNodeFactory
                     $methodCall = $this->singleServicePhpNodeFactory->createCalls($methodCall, $value);
                     break;
 
+                case YamlKey::PROPERTIES:
+                    $methodCall = $this->singleServicePhpNodeFactory->createProperties($methodCall, $value);
+                    break;
+
                 case YamlKey::ARGUMENTS:
                     $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($value);
                     $methodCall = new MethodCall($methodCall, 'args', $args);

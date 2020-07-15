@@ -38,10 +38,25 @@ final class SingleServicePhpNodeFactory
         return new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
     }
 
+    /**
+     * @see https://symfony.com/doc/current/service_container/injection_types.html
+     */
+    public function createProperties(MethodCall $methodCall, array $properties): MethodCall
+    {
+        foreach ($properties as $name => $value) {
+            $args = $this->argsNodeFactory->createFromValues([$name, $value]);
+            $methodCall = new MethodCall($methodCall, 'property', $args);
+        }
+
+        return $methodCall;
+    }
+
+    /**
+     * @see https://symfony.com/doc/current/service_container/injection_types.html
+     */
     public function createCalls(MethodCall $methodCall, array $calls): MethodCall
     {
         foreach ($calls as $call) {
-
             // @todo can be more items
             $args = [];
 
