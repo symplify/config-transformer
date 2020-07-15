@@ -8,8 +8,12 @@ use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\LoaderFactory\I
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\Loader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\FileLoader;
+use Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -35,16 +39,27 @@ final class ConfigLoader
         return $containerBuilder;
     }
 
-    private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): FileLoader
+    private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): Loader
     {
         if ($suffix === Format::XML) {
-            return $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
+            $xmlLoader = $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
+            return $this->wrapToDelegatingLoader($xmlLoader, $containerBuilder);
         }
 
         if ($suffix === Format::YAML) {
-            return new YamlFileLoader($containerBuilder, new FileLocator());
+            $yamlLoader = new YamlFileLoader($containerBuilder, new FileLocator());
+            return $this->wrapToDelegatingLoader($yamlLoader, $containerBuilder);
         }
 
         throw new NotImplementedYetException($suffix);
+    }
+
+    private function wrapToDelegatingLoader(Loader $loader, ContainerBuilder $containerBuilder): DelegatingLoader
+    {
+        return new DelegatingLoader(new LoaderResolver([
+            new GlobFileLoader($containerBuilder, new FileLocator()),
+            new PhpFileLoader($containerBuilder, new FileLocator()),
+            $loader,
+        ]));
     }
 }
