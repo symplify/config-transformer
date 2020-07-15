@@ -64,6 +64,11 @@ final class YamlKey
     /**
      * @var string
      */
+    public const PROPERTIES = 'properties';
+
+    /**
+     * @var string
+     */
     public const CALLS = 'calls';
 
     /**
