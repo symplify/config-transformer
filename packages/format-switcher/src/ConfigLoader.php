@@ -31,8 +31,10 @@ final class ConfigLoader
      */
     private $smartFileSystem;
 
-    public function __construct(IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory, SmartFileSystem $smartFileSystem)
-    {
+    public function __construct(
+        IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
+        SmartFileSystem $smartFileSystem
+    ) {
         $this->idAwareXmlFileLoaderFactory = $idAwareXmlFileLoaderFactory;
         $this->smartFileSystem = $smartFileSystem;
     }
