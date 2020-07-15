@@ -6,10 +6,8 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceYamlToPhpFac
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\AutoBindNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -23,19 +21,13 @@ use PhpParser\Node\Stmt\Expression;
 final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
-     * @var ArgsNodeFactory
+     * @var AutoBindNodeFactory
      */
-    private $argsNodeFactory;
+    private $autoBindNodeFactory;
 
-    /**
-     * @var CommonNodeFactory
-     */
-    private $commonNodeFactory;
-
-    public function __construct(ArgsNodeFactory $argsNodeFactory, CommonNodeFactory $commonNodeFactory)
+    public function __construct(AutoBindNodeFactory $autoBindNodeFactory)
     {
-        $this->argsNodeFactory = $argsNodeFactory;
-        $this->commonNodeFactory = $commonNodeFactory;
+        $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
 
     /**
@@ -45,18 +37,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
     {
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
 
-        foreach ($yaml as $key => $value) {
-            if (in_array($key, ['autowire', 'autoconfigure', 'public'], true)) {
-                $methodCall = new MethodCall($methodCall, $key);
-                if ($value === false) {
-                    $methodCall->args[] = new Arg($this->commonNodeFactory->createFalse());
-                }
-            }
-
-            if ($key === YamlKey::BIND) {
-                $methodCall = $this->createBindMethodCall($methodCall, $yaml[YamlKey::BIND]);
-            }
-        }
+        $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($yaml, $methodCall);
 
         return [new Expression($methodCall)];
     }
@@ -69,15 +50,5 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
     private function createServicesVariable(): Variable
     {
         return new Variable(VariableName::SERVICES);
-    }
-
-    private function createBindMethodCall(MethodCall $methodCall, array $bindValues): MethodCall
-    {
-        foreach ($bindValues as $key => $value) {
-            $args = $this->argsNodeFactory->createFromValues([$key, $value]);
-            $methodCall = new MethodCall($methodCall, YamlKey::BIND, $args);
-        }
-
-        return $methodCall;
     }
 }

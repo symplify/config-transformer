@@ -20,6 +20,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
         FileSystem::copy(__DIR__ . '/FixtureYamlToPhp/normal', $temporaryPath);
+        require_once $temporaryPath . '/another_dir/SomeClass.php';
 
         $this->doTestOutput($fixtureFileInfo, 'yaml', 'php');
     }
