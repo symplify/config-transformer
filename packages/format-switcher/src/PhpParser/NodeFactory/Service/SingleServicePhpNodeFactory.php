@@ -2,40 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service;
 
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 
 final class SingleServicePhpNodeFactory
 {
     /**
-     * @var CommonNodeFactory
-     */
-    private $commonNodeFactory;
-
-    /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonNodeFactory, ArgsNodeFactory $argsNodeFactory)
+    public function __construct(ArgsNodeFactory $argsNodeFactory)
     {
-        $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
-    }
-
-    public function createSetService(string $serviceKey): MethodCall
-    {
-        $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
-
-        return new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
     }
 
     /**

@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service;
 
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;

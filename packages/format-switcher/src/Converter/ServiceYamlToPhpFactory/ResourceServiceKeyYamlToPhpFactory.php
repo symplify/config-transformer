@@ -6,7 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceYamlToPhpFac
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory;
 
 /**
  * Handles this part:
@@ -18,7 +18,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ServicesPhpNo
 final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
 {
     /**
-     * @var ServicesPhpNodeFactory
+     * @var \Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory
      */
     private $servicesPhpNodeFactory;
 
