@@ -35,6 +35,7 @@ final class FileBySuffixFinder
         $files = $this->fileSystemFilter->filterFiles($source);
 
         $fileInfos = [];
+
         foreach ($files as $file) {
             $fileInfos[] = new SmartFileInfo($file);
         }
@@ -44,15 +45,17 @@ final class FileBySuffixFinder
             return $fileInfos;
         }
 
-        $suffixRegex = '#\.(' . implode('|', $suffixes) . ')$#i';
         $finder = Finder::create()
             ->files()
             ->in($directories)
-            ->name($suffixRegex)
             ->sortByName();
 
         $directoryFileInfos = $this->finderSanitizer->sanitize($finder);
 
-        return array_merge($fileInfos, $directoryFileInfos);
+        $fileInfos = array_merge($fileInfos, $directoryFileInfos);
+
+        return array_filter($fileInfos, function (SmartFileInfo $smartFileInfo) use ($suffixes) {
+            return in_array($smartFileInfo->getSuffix(), $suffixes, true);
+        });
     }
 }
