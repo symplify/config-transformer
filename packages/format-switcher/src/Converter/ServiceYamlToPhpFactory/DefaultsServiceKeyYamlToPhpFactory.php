@@ -36,7 +36,6 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
     public function convertYamlToNodes($key, $yaml): array
     {
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
-
         $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($yaml, $methodCall);
 
         return [new Expression($methodCall)];

@@ -28,6 +28,12 @@ final class AutoBindNodeFactory
         $this->argsNodeFactory = $argsNodeFactory;
     }
 
+    /**
+     * Decorated node with:
+     * ->autowire()
+     * ->autoconfigure()
+     * ->bind()
+     */
     public function createAutoBindCalls(array $yaml, MethodCall $methodCall): MethodCall
     {
         foreach ($yaml as $key => $value) {
