@@ -77,9 +77,20 @@ final class SwitchFormatCommand extends Command
         );
 
         $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
-        $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output', Format::PHP);
+        $this->addOption(
+            Option::OUTPUT_FORMAT,
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Config format to output',
+            Format::PHP
+        );
 
-        $this->addOption(Option::BC_LAYER, null, InputOption::VALUE_NONE, 'Keep original config with include of new one, to prevent breaking of old config paths');
+        $this->addOption(
+            Option::BC_LAYER,
+            null,
+            InputOption::VALUE_NONE,
+            'Keep original config with include of new one, to prevent breaking of old config paths'
+        );
 
         $this->addOption(
             Option::TARGET_SYMFONY_VERSION,
