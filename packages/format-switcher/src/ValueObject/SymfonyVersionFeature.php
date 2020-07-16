@@ -8,6 +8,12 @@ final class SymfonyVersionFeature
 {
     /**
      * @var float
+     * @see https://symfony.com/blog/new-in-symfony-3-4-services-are-private-by-default
+     */
+    public const PRIVATE_SERVICES_BY_DEFAULT = 3.4;
+
+    /**
+     * @var float
      * @see https://github.com/symfony/symfony/pull/20651
      */
     public const TAGS_WITHOUT_NAME = 3.3;
