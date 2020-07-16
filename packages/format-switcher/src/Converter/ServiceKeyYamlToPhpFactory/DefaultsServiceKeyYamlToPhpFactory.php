@@ -49,7 +49,11 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         }
 
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
-        $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($yaml, $methodCall);
+        $methodCall = $this->autoBindNodeFactory->createAutoBindCalls(
+            $yaml,
+            $methodCall,
+            AutoBindNodeFactory::TYPE_DEFAULTS
+        );
 
         $expression = new Expression($methodCall);
 
