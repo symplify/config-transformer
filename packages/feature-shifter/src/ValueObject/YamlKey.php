@@ -70,4 +70,9 @@ final class YamlKey
      * @var string
      */
     public const PARAMETERS = 'parameters';
+
+    /**
+     * @var string
+     */
+    public const PUBLIC = 'public';
 }

@@ -61,7 +61,8 @@ final class ServicesPhpNodeFactory
 
         $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls(
             $serviceValues,
-            $servicesLoadMethodCall
+            $servicesLoadMethodCall,
+            AutoBindNodeFactory::TYPE_SERVICE
         );
 
         if (! isset($serviceValues[self::EXCLUDE])) {
