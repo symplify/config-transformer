@@ -25,6 +25,11 @@ use PhpParser\Node\Stmt\Expression;
 final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 {
     /**
+     * @var string
+     */
+    private const IGNORE_ERRORS = 'ignore_errors';
+
+    /**
      * @var YamlArgumentSorter
      */
     private $yamlArgumentSorter;
@@ -57,7 +62,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             if (is_array($import)) {
                 $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists(
                     $import,
-                    [YamlKey::RESOURCE, 'type', 'ignore_errors']
+                    [YamlKey::RESOURCE => '', 'type' => null, self::IGNORE_ERRORS => false]
                 );
 
                 $nodes[] = $this->createImportMethodCall($arguments);
@@ -76,18 +81,54 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     private function createImportMethodCall(array $arguments): Expression
     {
         $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
-        $methodCall = new MethodCall($containerConfiguratorVariable, 'import');
 
-        foreach ($arguments as $argument) {
-            if (is_bool($argument) || in_array($argument, ['annotations', 'directory', 'glob'], true)) {
-                $expr = BuilderHelpers::normalizeValue($argument);
-            } else {
-                $expr = $this->commonNodeFactory->createAbsoluteDirExpr($argument);
-            }
-
-            $methodCall->args[] = new Arg($expr);
-        }
+        $args = $this->createArgs($arguments);
+        $methodCall = new MethodCall($containerConfiguratorVariable, 'import', $args);
 
         return new Expression($methodCall);
+    }
+
+    /**
+     * @param mixed[] $arguments
+     * @return Arg[]
+     */
+    private function createArgs(array $arguments): array
+    {
+        $args = [];
+        foreach ($arguments as $name => $value) {
+            if ($this->shouldSkipDefaultValue($name, $value, $arguments)) {
+                continue;
+            }
+
+            if (is_bool($value) || in_array($value, ['annotations', 'directory', 'glob'], true)) {
+                $expr = BuilderHelpers::normalizeValue($value);
+            } else {
+                $expr = $this->commonNodeFactory->createAbsoluteDirExpr($value);
+            }
+
+            $args[] = new Arg($expr);
+        }
+
+        return $args;
+    }
+
+    private function shouldSkipDefaultValue(string $name, $value, array $arguments): bool
+    {
+        // skip default value for "ignore_errors"
+        if ($name === self::IGNORE_ERRORS && $value === false) {
+            return true;
+        }
+
+        // check if default value for "type"
+        if ($name !== 'type') {
+            return false;
+        }
+
+        if ($value !== null) {
+            return false;
+        }
+
+        // follow by default value for "ignore_errors"
+        return isset($arguments[self::IGNORE_ERRORS]) && $arguments[self::IGNORE_ERRORS] === false;
     }
 }
