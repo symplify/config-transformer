@@ -10,6 +10,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\DumperFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter\YamlDumpFormatter;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -41,22 +42,31 @@ final class ConfigFormatConverter
      */
     private $yamlToPhpConverter;
 
+    /**
+     * @var CurrentFilePathProvider
+     */
+    private $currentFilePathProvider;
+
     public function __construct(
         ConfigLoader $configLoader,
         DumperFactory $dumperFactory,
         ContainerBuilderCleaner $containerBuilderCleaner,
         YamlDumpFormatter $yamlDumpFormatter,
-        YamlToPhpConverter $yamlToPhpConverter
+        YamlToPhpConverter $yamlToPhpConverter,
+        CurrentFilePathProvider $currentFilePathProvider
     ) {
         $this->configLoader = $configLoader;
         $this->dumperFactory = $dumperFactory;
         $this->containerBuilderCleaner = $containerBuilderCleaner;
         $this->yamlDumpFormatter = $yamlDumpFormatter;
         $this->yamlToPhpConverter = $yamlToPhpConverter;
+        $this->currentFilePathProvider = $currentFilePathProvider;
     }
 
     public function convert(SmartFileInfo $smartFileInfo, string $inputFormat, string $outputFormat): string
     {
+        $this->currentFilePathProvider->setFilePath($smartFileInfo->getRealPath());
+
         $containerBuilder = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($smartFileInfo);
         if ($outputFormat === Format::YAML) {
             return $this->dumpContainerBuilderToYaml($containerBuilder);

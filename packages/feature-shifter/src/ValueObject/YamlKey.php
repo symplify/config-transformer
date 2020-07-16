@@ -60,4 +60,14 @@ final class YamlKey
      * @var string
      */
     public const CONFIGURATOR = 'configurator';
+
+    /**
+     * @var string
+     */
+    public const IGNORE_ERRORS = 'ignore_errors';
+
+    /**
+     * @var string
+     */
+    public const PARAMETERS = 'parameters';
 }
