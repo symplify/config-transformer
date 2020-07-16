@@ -1,0 +1,19 @@
+services:
+    some_class:
+        class: GuzzleHttp\Client
+        arguments:
+            $replacesByMethodAndTypes:
+                2: go
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use GuzzleHttp\Client;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set('some_class', Client::class)
+        ->arg('$replacesByMethodAndTypes', [2 => 'go']);
+};
