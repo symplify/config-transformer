@@ -24,11 +24,6 @@ final class YamlKey
     /**
      * @var string
      */
-    public const TAGS = 'tags';
-
-    /**
-     * @var string
-     */
     public const AUTOCONFIGURE = 'autoconfigure';
 
     /**
@@ -59,20 +54,10 @@ final class YamlKey
     /**
      * @var string
      */
-    public const ARGUMENTS = 'arguments';
-
-    /**
-     * @var string
-     */
-    public const PROPERTIES = 'properties';
-
-    /**
-     * @var string
-     */
-    public const CALLS = 'calls';
-
-    /**
-     * @var string
-     */
     public const FACTORY = 'factory';
+
+    /**
+     * @var string
+     */
+    public const CONFIGURATOR = 'configurator';
 }
