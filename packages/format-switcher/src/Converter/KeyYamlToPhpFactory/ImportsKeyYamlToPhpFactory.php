@@ -25,11 +25,6 @@ use PhpParser\Node\Stmt\Expression;
 final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 {
     /**
-     * @var string
-     */
-    private const IGNORE_ERRORS = 'ignore_errors';
-
-    /**
      * @var YamlArgumentSorter
      */
     private $yamlArgumentSorter;
@@ -62,7 +57,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             if (is_array($import)) {
                 $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists(
                     $import,
-                    [YamlKey::RESOURCE => '', 'type' => null, self::IGNORE_ERRORS => false]
+                    [YamlKey::RESOURCE => '', 'type' => null, YamlKey::IGNORE_ERRORS => false]
                 );
 
                 $nodes[] = $this->createImportMethodCall($arguments);
@@ -115,7 +110,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     private function shouldSkipDefaultValue(string $name, $value, array $arguments): bool
     {
         // skip default value for "ignore_errors"
-        if ($name === self::IGNORE_ERRORS && $value === false) {
+        if ($name === YamlKey::IGNORE_ERRORS && $value === false) {
             return true;
         }
 
@@ -129,6 +124,6 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         }
 
         // follow by default value for "ignore_errors"
-        return isset($arguments[self::IGNORE_ERRORS]) && $arguments[self::IGNORE_ERRORS] === false;
+        return isset($arguments[YamlKey::IGNORE_ERRORS]) && $arguments[YamlKey::IGNORE_ERRORS] === false;
     }
 }

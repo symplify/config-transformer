@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
@@ -21,11 +22,6 @@ use PhpParser\Node\Stmt\Expression;
 final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 {
     /**
-     * @var string
-     */
-    private const PARAMETERS = 'parameters';
-
-    /**
      * @var PhpNodeFactory
      */
     private $phpNodeFactory;
@@ -37,7 +33,7 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
     public function getKey(): string
     {
-        return self::PARAMETERS;
+        return YamlKey::PARAMETERS;
     }
 
     /**
@@ -63,10 +59,10 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
     private function createParametersInit(): Expression
     {
-        $servicesVariable = new Variable(self::PARAMETERS);
+        $servicesVariable = new Variable(YamlKey::PARAMETERS);
         $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
 
-        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, self::PARAMETERS));
+        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, YamlKey::PARAMETERS));
 
         return new Expression($assign);
     }

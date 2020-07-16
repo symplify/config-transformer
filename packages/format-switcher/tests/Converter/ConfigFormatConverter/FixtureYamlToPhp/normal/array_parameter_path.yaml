@@ -1,0 +1,16 @@
+parameters:
+    keys: 'some_dir'
+    nested_keys:
+        - 'some_dir'
+-----
+<?php
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $parameters = $containerConfigurator->parameters();
+
+    $parameters->set('keys', __DIR__ . '/some_dir');
+
+    $parameters->set('nested_keys', [__DIR__ . '/some_dir']);
+};
