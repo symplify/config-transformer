@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Configuration;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\InvalidConfigurationException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Symfony\Component\Console\Input\InputInterface;
 
@@ -18,7 +19,7 @@ final class Configuration
     /**
      * @var string[]
      */
-    private const ALLOWED_INPUT_FORMATS = ['xml', 'yaml'];
+    private const ALLOWED_INPUT_FORMATS = ['xml', 'yml', 'yaml'];
 
     /**
      * @var string
@@ -105,6 +106,9 @@ final class Configuration
         $inputFormat = (string) $input->getOption(Option::INPUT_FORMAT);
 
         $this->validateFormatValue($inputFormat, self::ALLOWED_INPUT_FORMATS, Option::INPUT_FORMAT, 'input');
+        if ($inputFormat === Format::YML) {
+            $inputFormat = Format::YAML;
+        }
 
         $this->inputFormat = $inputFormat;
     }
