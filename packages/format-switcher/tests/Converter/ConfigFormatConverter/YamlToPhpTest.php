@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
 
 use Iterator;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Nette\Utils\FileSystem;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
@@ -12,6 +13,15 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class YamlToPhpTest extends AbstractConfigFormatConverterTest
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /** @var Configuration $configuration */
+        $configuration = self::$container->get(Configuration::class);
+        $configuration->changeSymfonyVersion(3.4);
+    }
+
     /**
      * @dataProvider provideDataForComments()
      */
