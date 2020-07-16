@@ -44,7 +44,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([tagged_locator('key', 'app.handler', 'myOwnMethodName')]);
 
     $services->set(ThirdFakeClass::class)
-        ->args(['$fake1' => ref('id.fake.service'), '$fake2' => ['fake_argument', 123, 'jean@mail.com']]);
+        ->arg('$fake1', ref('id.fake.service'))
+        ->arg('$fake2', ['fake_argument', 123, 'jean@mail.com']);
 
     $services->set('site_update_manager.normal_users', ThirdFakeClass::class)
         ->args([expr('service("App\Mail\MailerConfiguration").getMailerMethod()')]);
