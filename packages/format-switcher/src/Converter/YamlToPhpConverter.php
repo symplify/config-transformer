@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ReturnClosureNodesFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 
@@ -17,6 +18,22 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class YamlToPhpConverter
 {
+//    /**
+//     * @var string
+//     */
+//    public const COMMENT_PREFIX = '__COMMENT__';
+//
+//    /**
+//     * @see https://regex101.com/r/YMizb4/2
+//     * @var string
+//     */
+//    private const COMMENT_AFTER_CODE_PATTERN = '#^(?<pre_space>\s+)(?<content>\S.*?)\#(?<comment>.*?)$#ms';
+//
+//    /**
+//     * @var string
+//     */
+//    private const OWN_LINE_COMMENT_PATTERN = '#\#(?<comment>.*?)$#ms';
+
     /**
      * @var Parser
      */
@@ -37,25 +54,33 @@ final class YamlToPhpConverter
      */
     private $yamlContentProvider;
 
+    /**
+     * @var YamlCommentPreserver
+     */
+    private $yamlCommentPreserver;
+
     public function __construct(
         Parser $yamlParser,
         PhpConfigurationPrinter $phpConfigurationPrinter,
         ReturnClosureNodesFactory $returnClosureNodesFactory,
-        YamlContentProvider $yamlContentProvider
+        YamlContentProvider $yamlContentProvider,
+        YamlCommentPreserver $yamlCommentPreserver
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpConfigurationPrinter = $phpConfigurationPrinter;
         $this->returnClosureNodesFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
+        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function convert(string $yaml): string
     {
         $this->yamlContentProvider->setContent($yaml);
 
+        $yaml = $this->yamlCommentPreserver->replaceCommentsWithKeyValuePlaceholder($yaml);
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
-        $nodes = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
 
+        $nodes = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
         return $this->phpConfigurationPrinter->prettyPrintFile($nodes);
     }
 }

@@ -1,0 +1,14 @@
+#so close
+parameters:
+    key: value
+-----
+<?php
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $parameters = $containerConfigurator->parameters();
+
+    # so close
+    $parameters->set('key', 'value');
+};

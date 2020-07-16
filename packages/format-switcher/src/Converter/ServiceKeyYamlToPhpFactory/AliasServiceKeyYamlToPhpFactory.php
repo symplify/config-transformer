@@ -9,6 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFacto
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
@@ -54,10 +55,8 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNodes($key, $yaml): array
+    public function convertYamlToNode($key, $yaml): Node
     {
-        $nodes = [];
-
         $servicesVariable = new Variable('services');
 
         if (class_exists($key) || interface_exists($key)) {
@@ -71,13 +70,13 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
 
             $args = $this->argsNodeFactory->createFromValues($argValues, true);
             $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
-            return [new Expression($methodCall)];
+            return new Expression($methodCall);
         }
 
         // handles: "SomeClass $someVariable: ..."
         if ($fullClassName = strstr($key, ' $', true)) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $yaml);
-            return [new Expression($methodCall)];
+            return new Expression($methodCall);
         }
 
         if (isset($yaml[self::ALIAS])) {
@@ -99,9 +98,7 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
             $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
         }
 
-        $nodes[] = new Expression($methodCall);
-
-        return $nodes;
+        return new Expression($methodCall);
     }
 
     public function isMatch($key, $values): bool
