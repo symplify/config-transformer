@@ -10,6 +10,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
+use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
@@ -72,6 +73,12 @@ final class ServiceOptionNodeFactory
 
     public function convertServiceOptionsToNodes(array $servicesValues, MethodCall $methodCall): MethodCall
     {
+        if ($this->isNestedArguments($servicesValues)) {
+            $servicesValues = [
+                'arguments' => $servicesValues,
+            ];
+        }
+
         foreach ($servicesValues as $serviceConfigKey => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
             if (strstr($serviceConfigKey, 'decoration_')) {
@@ -123,28 +130,7 @@ final class ServiceOptionNodeFactory
                     break;
 
                 case YamlKey::TAGS:
-                    /** @var mixed[] $value */
-                    if (count($value) === 1 && is_string($value[0])) {
-                        $tagValue = new String_($value[0]);
-                        $methodCall = new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
-                        break;
-                    }
-
-                    foreach ($value as $singleValue) {
-                        $args = [];
-                        foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
-                            if ($singleNestedKey === 'name') {
-                                $args[] = new Arg(BuilderHelpers::normalizeValue($singleNestedValue));
-                                unset($singleValue[$singleNestedKey]);
-                            }
-                        }
-
-                        $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($singleValue);
-
-                        $args = array_merge($args, $restArgs);
-                        $methodCall = new MethodCall($methodCall, 'tag', $args);
-                    }
-
+                    $methodCall = $this->processTagsKey($value, $methodCall);
                     break;
 
                 case YamlKey::CALLS:
@@ -225,5 +211,46 @@ final class ServiceOptionNodeFactory
         }
 
         return new MethodCall($methodCall, 'deprecate', $args);
+    }
+
+    private function isNestedArguments(array $servicesValues): bool
+    {
+        if (count($servicesValues) === 0) {
+            return false;
+        }
+
+        foreach (array_keys($servicesValues) as $key) {
+            if (! Strings::startsWith((string) $key, '$')) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function processTagsKey($value, MethodCall $methodCall): MethodCall
+    {
+        /** @var mixed[] $value */
+        if (count($value) === 1 && is_string($value[0])) {
+            $tagValue = new String_($value[0]);
+            return new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
+        }
+
+        foreach ($value as $singleValue) {
+            $args = [];
+            foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
+                if ($singleNestedKey === 'name') {
+                    $args[] = new Arg(BuilderHelpers::normalizeValue($singleNestedValue));
+                    unset($singleValue[$singleNestedKey]);
+                }
+            }
+
+            $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($singleValue);
+
+            $args = array_merge($args, $restArgs);
+            $methodCall = new MethodCall($methodCall, 'tag', $args);
+        }
+
+        return $methodCall;
     }
 }
