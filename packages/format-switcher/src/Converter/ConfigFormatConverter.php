@@ -67,14 +67,19 @@ final class ConfigFormatConverter
     {
         $this->currentFilePathProvider->setFilePath($smartFileInfo->getRealPath());
 
-        $containerBuilder = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($smartFileInfo);
+        $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo(
+            $smartFileInfo
+        );
+
+        $containerBuilder = $containerBuilderAndFileContent->getContainerBuilder();
+
         if ($outputFormat === Format::YAML) {
             return $this->dumpContainerBuilderToYaml($containerBuilder);
         }
 
         if ($outputFormat === Format::PHP) {
             if ($inputFormat === Format::YAML) {
-                return $this->yamlToPhpConverter->convert($smartFileInfo->getContents());
+                return $this->yamlToPhpConverter->convert($containerBuilderAndFileContent->getFileContent());
             }
 
             if ($inputFormat === Format::XML) {
