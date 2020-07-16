@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FeatureShifter\Yaml;
 use Migrify\ConfigTransformer\FeatureShifter\Utils\StaticArrays;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\ServiceConfig;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlServiceKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
 
@@ -157,12 +158,12 @@ final class YamlServiceProcessor
      */
     private function processTags(array $service): array
     {
-        if (! isset($service[YamlKey::TAGS])) {
+        if (! isset($service[YamlServiceKey::TAGS])) {
             return $service;
         }
 
-        if ($this->tagAnalyzer->isAutoconfiguredTags($service[YamlKey::TAGS])) {
-            unset($service[YamlKey::TAGS]);
+        if ($this->tagAnalyzer->isAutoconfiguredTags($service[YamlServiceKey::TAGS])) {
+            unset($service[YamlServiceKey::TAGS]);
             $this->serviceConfig->enableAutoconfigure();
         }
 
