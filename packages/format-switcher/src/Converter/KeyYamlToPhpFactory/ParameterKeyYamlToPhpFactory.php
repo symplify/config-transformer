@@ -8,6 +8,7 @@ use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -26,9 +27,15 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
      */
     private $phpNodeFactory;
 
-    public function __construct(PhpNodeFactory $phpNodeFactory)
+    /**
+     * @var YamlCommentPreserver
+     */
+    private $yamlCommentPreserver;
+
+    public function __construct(PhpNodeFactory $phpNodeFactory, YamlCommentPreserver $yamlCommentPreserver)
     {
         $this->phpNodeFactory = $phpNodeFactory;
+        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function getKey(): string
@@ -50,8 +57,16 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $nodes[] = $this->createParametersInit();
 
         foreach ($yaml as $parameterName => $value) {
+            if ($this->yamlCommentPreserver->isCommentKey($parameterName)) {
+                $this->yamlCommentPreserver->collectComment($value);
+                continue;
+            }
+
             /** @var string $parameterName */
-            $nodes[] = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
+            $parameterMethodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
+            $this->yamlCommentPreserver->decorateNodeWithComments($parameterMethodCall);
+
+            $nodes[] = $parameterMethodCall;
         }
 
         return $nodes;

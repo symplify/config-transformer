@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ManyConfigurationInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node;
 
 /**
@@ -32,14 +34,21 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     private $serviceKeyYamlToPhpFactories = [];
 
     /**
+     * @var YamlCommentPreserver
+     */
+    private $yamlCommentPreserver;
+
+    /**
      * @param ServiceKeyYamlToPhpFactoryInterface[] $serviceKeyYamlToPhpFactories
      */
     public function __construct(
         ServicesPhpNodeFactory $servicesPhpNodeFactory,
+        YamlCommentPreserver $yamlCommentPreserver,
         array $serviceKeyYamlToPhpFactories
     ) {
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
         $this->serviceKeyYamlToPhpFactories = $serviceKeyYamlToPhpFactories;
+        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function getKey(): string
@@ -67,12 +76,42 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
                     continue;
                 }
 
-                $freshNodes = $serviceKeyYamlToPhpFactory->convertYamlToNodes($serviceKey, $serviceValues);
-                $nodes = array_merge($nodes, $freshNodes);
+                if ($this->yamlCommentPreserver->isCommentKey($serviceKey)) {
+                    $this->yamlCommentPreserver->collectComment($serviceValues);
+                    unset($yaml[$serviceKey]);
+                    continue;
+                }
+
+                if ($serviceKeyYamlToPhpFactory instanceof ManyConfigurationInterface) {
+                    foreach ($serviceValues as $subserviceKey => $subserviceValues) {
+                        if ($this->yamlCommentPreserver->isCommentKey($subserviceKey)) {
+                            $this->yamlCommentPreserver->collectComment($subserviceValues);
+                            unset($serviceValues[$subserviceKey]);
+                            continue;
+                        }
+
+                        $nodes[] = $this->processNode($serviceKeyYamlToPhpFactory, $subserviceKey, $subserviceValues);
+                    }
+
+                    continue 2;
+                }
+
+                $nodes[] = $this->processNode($serviceKeyYamlToPhpFactory, $serviceKey, $serviceValues);
                 continue 2;
             }
         }
 
         return $nodes;
+    }
+
+    private function processNode(
+        ServiceKeyYamlToPhpFactoryInterface $serviceKeyYamlToPhpFactory,
+        $subserviceKey,
+        $subserviceValues
+    ) {
+        $node = $serviceKeyYamlToPhpFactory->convertYamlToNode($subserviceKey, $subserviceValues);
+        $this->yamlCommentPreserver->decorateNodeWithComments($node);
+
+        return $node;
     }
 }
