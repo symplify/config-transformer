@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Return_;
 
@@ -22,12 +23,21 @@ final class ReturnClosureNodesFactory
     private $keyYamlToPhpFactories = [];
 
     /**
+     * @var YamlCommentPreserver
+     */
+    private $yamlCommentPreserver;
+
+    /**
      * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
      */
-    public function __construct(ClosureNodeFactory $closureNodeFactory, array $keyYamlToPhpFactories)
-    {
+    public function __construct(
+        ClosureNodeFactory $closureNodeFactory,
+        YamlCommentPreserver $yamlCommentPreserver,
+        array $keyYamlToPhpFactories
+    ) {
         $this->closureNodeFactory = $closureNodeFactory;
         $this->keyYamlToPhpFactories = $keyYamlToPhpFactories;
+        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     /**
@@ -48,10 +58,12 @@ final class ReturnClosureNodesFactory
     {
         $nodes = [];
 
+        $yamlData = $this->removeEmptyValues($yamlData);
+
         foreach ($yamlData as $key => $values) {
-            // normalize values
-            if ($values === null) {
-                $values = [];
+            if ($this->yamlCommentPreserver->isCommentKey($key)) {
+                $this->yamlCommentPreserver->collectComment($values);
+                continue;
             }
 
             foreach ($this->keyYamlToPhpFactories as $keyYamlToPhpFactory) {
@@ -61,6 +73,10 @@ final class ReturnClosureNodesFactory
 
                 $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
                 $nodes = array_merge($nodes, $freshNodes);
+
+                $firstNode = $nodes[0];
+                $this->yamlCommentPreserver->decorateNodeWithComments($firstNode);
+
                 continue 2;
             }
 
@@ -68,5 +84,10 @@ final class ReturnClosureNodesFactory
         }
 
         return $nodes;
+    }
+
+    private function removeEmptyValues(array $yamlData): array
+    {
+        return array_filter($yamlData);
     }
 }
