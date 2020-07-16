@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhp
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -30,15 +31,12 @@ final class NameOnlyServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         $this->commonNodeFactory = $commonNodeFactory;
     }
 
-    /**
-     * @return Expression[]
-     */
-    public function convertYamlToNodes($key, $yaml): array
+    public function convertYamlToNode($key, $yaml): Node
     {
         $classReference = $this->commonNodeFactory->createClassReference($key);
         $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
 
-        return [new Expression($setMethodCall)];
+        return new Expression($setMethodCall);
     }
 
     public function isMatch($key, $values): bool

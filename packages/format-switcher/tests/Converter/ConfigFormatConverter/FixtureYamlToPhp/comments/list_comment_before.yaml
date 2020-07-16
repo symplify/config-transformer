@@ -1,0 +1,17 @@
+services:
+    Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+        calls:
+            - [withMailer, ['@mailer'], false]
+            # and there is also a "TaggedValue" allowed ONLY if you use this last syntax
+-----
+<?php
+
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FakeClass::class)
+        ->call('withMailer', [ref('mailer')], false);
+};
