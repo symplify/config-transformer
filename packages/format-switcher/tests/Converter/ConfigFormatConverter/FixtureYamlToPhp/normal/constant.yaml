@@ -2,8 +2,8 @@ parameters:
     indentation: 'spaces'
     another: PHP_EOL
     line_ending: !php/const PHP_EOL
-    older_line_ending: !php/const PHP_EOL
-    older_line_ending_with_space: !php/const PHP_EOL
+    older_line_ending: !php/const:PHP_EOL
+    older_line_ending_with_space: !php/const: PHP_EOL
 -----
 <?php
 
