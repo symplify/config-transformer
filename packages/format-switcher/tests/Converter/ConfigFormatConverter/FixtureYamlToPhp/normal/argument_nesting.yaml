@@ -10,5 +10,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('SomeClass')
-        ->args(['$someArg' => 'someValue']);
+        ->arg('$someArg', 'someValue');
 };
