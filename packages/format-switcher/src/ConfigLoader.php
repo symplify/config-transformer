@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher;
 
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\ContainerBuilderAndFileContent;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Nette\Utils\Strings;
 use Symfony\Component\Config\FileLocator;
@@ -39,24 +40,28 @@ final class ConfigLoader
         $this->smartFileSystem = $smartFileSystem;
     }
 
-    public function createAndLoadContainerBuilderFromFileInfo(SmartFileInfo $smartFileInfo): ContainerBuilder
-    {
+    public function createAndLoadContainerBuilderFromFileInfo(
+        SmartFileInfo $smartFileInfo
+    ): ContainerBuilderAndFileContent {
         $containerBuilder = new ContainerBuilder();
 
         $loader = $this->createLoaderBySuffix($containerBuilder, $smartFileInfo->getSuffix());
+
+        $fileRealPath = $smartFileInfo->getRealPath();
 
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
         if (in_array($smartFileInfo->getSuffix(), ['yml', 'yaml'], true)) {
             $content = Strings::replace($content, '#\!php\/const\:( )?#', '!php/const ');
             if ($content !== $smartFileInfo->getContents()) {
-                $this->smartFileSystem->dumpFile($smartFileInfo->getRealPath(), $content);
+                $fileRealPath = sys_get_temp_dir() . '/_migrify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
+                $this->smartFileSystem->dumpFile($fileRealPath, $content);
             }
         }
 
-        $loader->load($smartFileInfo->getRealPath());
+        $loader->load($fileRealPath);
 
-        return $containerBuilder;
+        return new ContainerBuilderAndFileContent($containerBuilder, $content);
     }
 
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): Loader
