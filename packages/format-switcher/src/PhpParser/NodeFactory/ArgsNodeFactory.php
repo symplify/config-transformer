@@ -212,15 +212,18 @@ final class ArgsNodeFactory
     {
         $arrayItems = [];
 
+        $naturalKey = 0;
         foreach ($value as $nestedKey => $nestedValue) {
             $valueExpr = $this->resolveExpr($nestedValue);
 
-            if (! is_int($nestedKey)) {
+            if (! is_int($nestedKey) || $nestedKey !== $naturalKey) {
                 $keyExpr = $this->resolveExpr($nestedKey);
                 $arrayItems[] = new ArrayItem($valueExpr, $keyExpr);
             } else {
                 $arrayItems[] = new ArrayItem($valueExpr);
             }
+
+            ++$naturalKey;
         }
 
         return $arrayItems;
