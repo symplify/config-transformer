@@ -57,6 +57,7 @@ final class PhpNodeFactory
 
         $parametersVariable = new Variable(VariableName::PARAMETERS);
         $methodCall = new MethodCall($parametersVariable, 'set', $args);
+
         return new Expression($methodCall);
     }
 
