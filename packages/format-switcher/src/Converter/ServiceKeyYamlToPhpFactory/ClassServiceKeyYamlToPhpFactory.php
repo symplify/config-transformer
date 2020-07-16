@@ -45,22 +45,15 @@ final class ClassServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    /**
-     * @return Node[]
-     */
-    public function convertYamlToNodes($key, $yaml): array
+    public function convertYamlToNode($key, $yaml): Node
     {
-        $nodes = [];
-
         $args = $this->argsNodeFactory->createFromValues([$key, $yaml[self::CLASS_KEY]]);
         $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
 
         unset($yaml[self::CLASS_KEY]);
 
         $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $setMethodCall);
-        $nodes[] = new Expression($setMethodCall);
-
-        return $nodes;
+        return new Expression($setMethodCall);
     }
 
     public function isMatch($key, $values): bool

@@ -7,7 +7,6 @@ services:
       - { method: withMailer, arguments: ['@mailer', 'argument'], returns_clone: false }
       - setLogger: ['@logger']
       - setMailer: ['@mailer']
-      # and there is also a "TaggedValue" allowed ONLY if you use this last syntax
       - withLogger: !returns_clone ['@logger']
 -----
 <?php
