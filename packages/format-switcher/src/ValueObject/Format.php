@@ -14,6 +14,11 @@ final class Format
     /**
      * @var string
      */
+    public const YML = 'yml';
+
+    /**
+     * @var string
+     */
     public const XML = 'xml';
 
     /**
