@@ -66,7 +66,7 @@ final class ConfigLoader
             return $this->wrapToDelegatingLoader($xmlLoader, $containerBuilder);
         }
 
-        if ($suffix === Format::YAML) {
+        if (in_array($suffix, [Format::YML, Format::YAML], true)) {
             $yamlLoader = new YamlFileLoader($containerBuilder, new FileLocator());
             return $this->wrapToDelegatingLoader($yamlLoader, $containerBuilder);
         }
