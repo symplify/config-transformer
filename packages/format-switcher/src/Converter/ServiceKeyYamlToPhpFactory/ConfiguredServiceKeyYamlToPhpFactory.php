@@ -9,6 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlTo
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -37,17 +38,14 @@ final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    /**
-     * @return Expression[]
-     */
-    public function convertYamlToNodes($key, $yaml): array
+    public function convertYamlToNode($key, $yaml): Node
     {
         $args = $this->argsNodeFactory->createFromValues([$key]);
         $methodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
 
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
 
-        return [new Expression($methodCall)];
+        return new Expression($methodCall);
     }
 
     public function isMatch($key, $values): bool

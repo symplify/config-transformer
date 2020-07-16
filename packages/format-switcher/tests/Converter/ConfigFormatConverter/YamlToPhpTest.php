@@ -13,9 +13,17 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class YamlToPhpTest extends AbstractConfigFormatConverterTest
 {
     /**
+     * @dataProvider provideDataForComments()
+     */
+    public function testComments(SmartFileInfo $fixtureFileInfo): void
+    {
+        $this->doTestOutput($fixtureFileInfo, 'yaml', 'php');
+    }
+
+    /**
      * @dataProvider provideData()
      */
-    public function testBasic(SmartFileInfo $fixtureFileInfo): void
+    public function testNormal(SmartFileInfo $fixtureFileInfo): void
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
@@ -52,6 +60,11 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     public function provideData(): Iterator
     {
         return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/normal', '*.yaml');
+    }
+
+    public function provideDataForComments(): Iterator
+    {
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/comments', '*.yaml');
     }
 
     public function provideDataWithDirectory(): Iterator

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ManyConfigurationInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -20,7 +22,7 @@ use PhpParser\Node\Stmt\Expression;
  * services:
  *     _instanceof: <---
  */
-final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
+final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface, ManyConfigurationInterface
 {
     /**
      * @var CommonNodeFactory
@@ -40,26 +42,20 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNodes($key, $yaml): array
+    public function convertYamlToNode($key, $yaml): Node
     {
-        $nodes = [];
+        $classReference = $this->commonNodeFactory->createClassReference($key);
 
-        foreach ($yaml as $instanceKey => $instanceValues) {
-            $classReference = $this->commonNodeFactory->createClassReference($instanceKey);
+        $servicesVariable = new Variable(VariableName::SERVICES);
+        $args = [new Arg($classReference)];
 
-            $servicesVariable = new Variable(VariableName::SERVICES);
-            $args = [new Arg($classReference)];
+        $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
+        $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes(
+            $yaml,
+            $instanceofMethodCall
+        );
 
-            $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
-            $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes(
-                $instanceValues,
-                $instanceofMethodCall
-            );
-
-            $nodes[] = new Expression($instanceofMethodCall);
-        }
-
-        return $nodes;
+        return new Expression($instanceofMethodCall);
     }
 
     public function isMatch($key, $values): bool

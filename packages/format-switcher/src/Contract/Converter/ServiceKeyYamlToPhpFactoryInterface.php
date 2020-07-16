@@ -10,9 +10,8 @@ interface ServiceKeyYamlToPhpFactoryInterface
 {
     /**
      * @param mixed[] $yaml
-     * @return Node[]
      */
-    public function convertYamlToNodes($key, $yaml): array;
+    public function convertYamlToNode($key, $yaml): Node;
 
     public function isMatch($key, $values): bool;
 }
