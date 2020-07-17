@@ -70,6 +70,9 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         string $inputFormat,
         string $outputFormat
     ): void {
+        $this->configuration->changeInputFormat($inputFormat);
+        $this->configuration->changeOutputFormat($outputFormat);
+
         [$inputContent, $expectedContent] = StaticFixtureSplitter::splitFileInfoToInputAndExpected(
             $fixtureFileInfo
         );

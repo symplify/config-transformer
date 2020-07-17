@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
 
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
@@ -25,6 +26,11 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
     protected $configFormatConverter;
 
     /**
+     * @var Configuration
+     */
+    protected $configuration;
+
+    /**
      * @var ContainerBuilderCleaner
      */
     private $containerBuilderCleaner;
@@ -41,10 +47,14 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $this->configFormatConverter = self::$container->get(ConfigFormatConverter::class);
         $this->containerBuilderCleaner = self::$container->get(ContainerBuilderCleaner::class);
         $this->smartFileSystem = self::$container->get(SmartFileSystem::class);
+        $this->configuration = self::$container->get(Configuration::class);
     }
 
     protected function doTestOutput(SmartFileInfo $fixtureFileInfo, string $inputFormat, string $outputFormat): void
     {
+        $this->configuration->changeInputFormat($inputFormat);
+        $this->configuration->changeOutputFormat($outputFormat);
+
         [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );
