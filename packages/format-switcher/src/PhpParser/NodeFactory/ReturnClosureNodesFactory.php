@@ -9,7 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Return_;
 
-final class FluentClosureNamespaceNodeFactory
+final class ReturnClosureNodesFactory
 {
     /**
      * @var ClosureNodeFactory

@@ -4,8 +4,7 @@ services:
 -----
 <?php
 
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
