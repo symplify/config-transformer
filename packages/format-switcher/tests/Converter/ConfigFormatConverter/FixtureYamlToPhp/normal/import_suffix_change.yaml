@@ -1,10 +1,10 @@
 imports:
-  - { 'type': 'annotations', resource: 'services_simple.yaml', ignore_errors: true }
+    - { resource: 'some_dir/*.yaml' }
 -----
 <?php
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__ . '/services_simple.php', 'annotations', true);
+    $containerConfigurator->import(__DIR__ . '/some_dir/*.php');
 };
