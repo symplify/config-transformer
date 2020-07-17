@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\FluentClosureNamespaceNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\FluentPhpConfigurationPrinter;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ReturnClosureNodesFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
@@ -23,14 +23,14 @@ final class YamlToPhpConverter
     private $yamlParser;
 
     /**
-     * @var FluentPhpConfigurationPrinter
+     * @var PhpConfigurationPrinter
      */
-    private $fluentPhpConfigurationPrinter;
+    private $phpConfigurationPrinter;
 
     /**
-     * @var FluentClosureNamespaceNodeFactory
+     * @var ReturnClosureNodesFactory
      */
-    private $fluentClosureNamespaceNodeFactory;
+    private $returnClosureNodesFactory;
 
     /**
      * @var YamlContentProvider
@@ -39,13 +39,13 @@ final class YamlToPhpConverter
 
     public function __construct(
         Parser $yamlParser,
-        FluentPhpConfigurationPrinter $fluentPhpConfigurationPrinter,
-        FluentClosureNamespaceNodeFactory $fluentClosureNamespaceNodeFactory,
+        PhpConfigurationPrinter $phpConfigurationPrinter,
+        ReturnClosureNodesFactory $returnClosureNodesFactory,
         YamlContentProvider $yamlContentProvider
     ) {
         $this->yamlParser = $yamlParser;
-        $this->fluentPhpConfigurationPrinter = $fluentPhpConfigurationPrinter;
-        $this->fluentClosureNamespaceNodeFactory = $fluentClosureNamespaceNodeFactory;
+        $this->phpConfigurationPrinter = $phpConfigurationPrinter;
+        $this->returnClosureNodesFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
     }
 
@@ -54,8 +54,8 @@ final class YamlToPhpConverter
         $this->yamlContentProvider->setContent($yaml);
 
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
-        $nodes = $this->fluentClosureNamespaceNodeFactory->createFromYamlArray($yamlArray);
+        $nodes = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
 
-        return $this->fluentPhpConfigurationPrinter->prettyPrintFile($nodes);
+        return $this->phpConfigurationPrinter->prettyPrintFile($nodes);
     }
 }

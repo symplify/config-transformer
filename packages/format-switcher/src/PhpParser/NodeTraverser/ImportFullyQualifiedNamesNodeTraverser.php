@@ -8,9 +8,8 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeVisitor\ImportFullyQu
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
 use PhpParser\Node\Name;
-use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Nop;
-use PhpParser\NodeFinder;
+use PhpParser\Node\Stmt\Use_;
 use PhpParser\NodeTraverser;
 
 final class ImportFullyQualifiedNamesNodeTraverser
@@ -54,21 +53,16 @@ final class ImportFullyQualifiedNamesNodeTraverser
      */
     private function addUseImportsToNamespace(array $nodes, array $nameImports): array
     {
-        sort($nameImports);
-
-        // /** @var Namespace_ $namespace */
-//        $namespace = $this->nodeFinder->findFirstInstanceOf($nodes, Namespace_::class);
-
-        $useImports = [];
-        foreach ($nameImports as $nameImport) {
-            $useBuilder = $this->builderFactory->use(new Name($nameImport));
-            $useImports[] = $useBuilder->getNode();
+        if (count($nameImports) === 0) {
+            return $nodes;
         }
 
+        sort($nameImports);
+
+        $useImports = $this->createUses($nameImports);
         $useImports[] = new Nop();
 
         return array_merge($useImports, $nodes);
-//        $namespace->stmts = array_merge($useImports, $namespace->stmts);
     }
 
     /**
@@ -83,5 +77,20 @@ final class ImportFullyQualifiedNamesNodeTraverser
 
         $nameImports = $this->importFullyQualifiedNamesNodeVisitor->getNameImports();
         return array_unique($nameImports);
+    }
+
+    /**
+     * @param string[] $nameImports
+     * @return Use_[]
+     */
+    private function createUses(array $nameImports): array
+    {
+        $useImports = [];
+        foreach ($nameImports as $nameImport) {
+            $useBuilder = $this->builderFactory->use(new Name($nameImport));
+            $useImports[] = $useBuilder->getNode();
+        }
+
+        return $useImports;
     }
 }
