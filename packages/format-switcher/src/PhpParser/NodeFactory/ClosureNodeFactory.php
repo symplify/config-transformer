@@ -9,6 +9,8 @@ use PhpParser\Builder\Param;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 final class ClosureNodeFactory
 {
@@ -18,7 +20,7 @@ final class ClosureNodeFactory
     public function createClosureFromStmts(array $stmts): Closure
     {
         $paramBuilder = new Param(VariableName::CONTAINER_CONFIGURATOR);
-        $paramBuilder->setType('ContainerConfigurator');
+        $paramBuilder->setType(new FullyQualified(ContainerConfigurator::class));
 
         $param = $paramBuilder->getNode();
 
