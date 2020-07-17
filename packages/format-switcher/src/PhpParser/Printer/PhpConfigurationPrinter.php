@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer;
 
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Nette\Utils\Strings;
+use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Closure;
@@ -16,7 +18,7 @@ use PhpParser\Node\Stmt\Nop;
 use PhpParser\NodeFinder;
 use PhpParser\PrettyPrinter\Standard;
 
-final class FluentPhpConfigurationPrinter extends Standard
+final class PhpConfigurationPrinter extends Standard
 {
     /**
      * @var string
@@ -31,14 +33,14 @@ final class FluentPhpConfigurationPrinter extends Standard
     /**
      * @var NodeFinder
      */
-    private $betterNodeFinder;
+    private $nodeFinder;
 
     public function __construct(
         ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser,
         NodeFinder $nodeFinder
     ) {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
-        $this->betterNodeFinder = $nodeFinder;
+        $this->nodeFinder = $nodeFinder;
 
         parent::__construct();
     }
@@ -102,9 +104,9 @@ final class FluentPhpConfigurationPrinter extends Standard
     private function completeEmptyLines(array $stmts): void
     {
         /** @var Closure|null $closure */
-        $closure = $this->betterNodeFinder->findFirstInstanceOf($stmts, Closure::class);
+        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, Closure::class);
         if ($closure === null) {
-            return;
+            throw new ShouldNotHappenException();
         }
 
         $newStmts = [];
@@ -140,8 +142,8 @@ final class FluentPhpConfigurationPrinter extends Standard
     }
 
     /**
-     * @param \PhpParser\Node[] $stmts
-     * @return \PhpParser\Node[]
+     * @param Node[] $stmts
+     * @return Node[]
      */
     private function importFullyQualifiedNames(array $stmts): array
     {
