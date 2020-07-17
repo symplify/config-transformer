@@ -15,7 +15,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     /**
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $fixtureFileInfo): void
+    public function testBasic(SmartFileInfo $fixtureFileInfo): void
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();

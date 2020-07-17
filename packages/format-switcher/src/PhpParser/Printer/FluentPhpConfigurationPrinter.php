@@ -45,7 +45,7 @@ final class FluentPhpConfigurationPrinter extends Standard
 
     public function prettyPrintFile(array $stmts): string
     {
-        $this->importFullyQualifiedNames($stmts);
+        $stmts = $this->importFullyQualifiedNames($stmts);
         $this->completeEmptyLines($stmts);
 
         $printedContent = parent::prettyPrintFile($stmts);
@@ -139,8 +139,12 @@ final class FluentPhpConfigurationPrinter extends Standard
         return $expr instanceof MethodCall;
     }
 
-    private function importFullyQualifiedNames(array $stmts): void
+    /**
+     * @param \PhpParser\Node[] $stmts
+     * @return \PhpParser\Node[]
+     */
+    private function importFullyQualifiedNames(array $stmts): array
     {
-        $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
+        return $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
     }
 }
