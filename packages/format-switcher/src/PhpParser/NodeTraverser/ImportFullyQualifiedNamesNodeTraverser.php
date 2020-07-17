@@ -21,22 +21,15 @@ final class ImportFullyQualifiedNamesNodeTraverser
     private $importFullyQualifiedNamesNodeVisitor;
 
     /**
-     * @var NodeFinder
-     */
-    private $nodeFinder;
-
-    /**
      * @var BuilderFactory
      */
     private $builderFactory;
 
     public function __construct(
         ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor,
-        NodeFinder $nodeFinder,
         BuilderFactory $builderFactory
     ) {
         $this->importFullyQualifiedNamesNodeVisitor = $importFullyQualifiedNamesNodeVisitor;
-        $this->nodeFinder = $nodeFinder;
         $this->builderFactory = $builderFactory;
     }
 
@@ -51,21 +44,20 @@ final class ImportFullyQualifiedNamesNodeTraverser
             return $nodes;
         }
 
-        $this->addUseImportsToNamespace($nodes, $nameImports);
-
-        return $nodes;
+        return $this->addUseImportsToNamespace($nodes, $nameImports);
     }
 
     /**
      * @param Node[] $nodes
      * @param string[] $nameImports
+     * @return Node[]
      */
-    private function addUseImportsToNamespace(array $nodes, array $nameImports): void
+    private function addUseImportsToNamespace(array $nodes, array $nameImports): array
     {
         sort($nameImports);
 
-        /** @var Namespace_ $namespace */
-        $namespace = $this->nodeFinder->findFirstInstanceOf($nodes, Namespace_::class);
+        // /** @var Namespace_ $namespace */
+//        $namespace = $this->nodeFinder->findFirstInstanceOf($nodes, Namespace_::class);
 
         $useImports = [];
         foreach ($nameImports as $nameImport) {
@@ -75,7 +67,8 @@ final class ImportFullyQualifiedNamesNodeTraverser
 
         $useImports[] = new Nop();
 
-        $namespace->stmts = array_merge($useImports, $namespace->stmts);
+        return array_merge($useImports, $nodes);
+//        $namespace->stmts = array_merge($useImports, $namespace->stmts);
     }
 
     /**

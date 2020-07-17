@@ -7,8 +7,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use PhpParser\Node;
-use PhpParser\Node\Name;
-use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
 
 final class FluentClosureNamespaceNodeFactory
@@ -32,15 +30,15 @@ final class FluentClosureNamespaceNodeFactory
         $this->keyYamlToPhpFactories = $keyYamlToPhpFactories;
     }
 
-    public function createFromYamlArray(array $yamlArray): Namespace_
+    /**
+     * @return Node[]
+     */
+    public function createFromYamlArray(array $yamlArray): array
     {
         $closureStmts = $this->createClosureStmts($yamlArray);
         $closure = $this->closureNodeFactory->createClosureFromStmts($closureStmts);
 
-        $namespace = $this->createNamespace();
-        $namespace->stmts[] = new Return_($closure);
-
-        return $namespace;
+        return [new Return_($closure)];
     }
 
     /**
@@ -70,11 +68,5 @@ final class FluentClosureNamespaceNodeFactory
         }
 
         return $nodes;
-    }
-
-    private function createNamespace(): Namespace_
-    {
-        $namespaceName = new Name('Symfony\Component\DependencyInjection\Loader\Configurator');
-        return new Namespace_($namespaceName);
     }
 }
