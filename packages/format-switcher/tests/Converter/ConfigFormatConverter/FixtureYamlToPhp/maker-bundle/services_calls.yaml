@@ -1,0 +1,29 @@
+services:
+  Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+    calls:
+      - [withMailer, ['@mailer'], false]
+      - [setLogger, ['@logger']]
+      - [setMailer, ['@mailer']]
+      - { method: withMailer, arguments: ['@mailer', 'argument'], returns_clone: false }
+      - setLogger: ['@logger']
+      - setMailer: ['@mailer']
+      # and there is also a "TaggedValue" allowed ONLY if you use this last syntax
+      - withLogger: !returns_clone ['@logger']
+-----
+<?php
+
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FakeClass::class)
+        ->call('withMailer', [ref('mailer')], false)
+        ->call('setLogger', [ref('logger')])
+        ->call('setMailer', [ref('mailer')])
+        ->call('withMailer', [ref('mailer'), 'argument'], false)
+        ->call('setLogger', [ref('logger')])
+        ->call('setMailer', [ref('mailer')])
+        ->call('withLogger', [ref('logger')], true);
+};

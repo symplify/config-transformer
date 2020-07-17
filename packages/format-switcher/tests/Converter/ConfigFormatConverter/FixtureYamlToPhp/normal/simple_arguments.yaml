@@ -1,0 +1,16 @@
+services:
+    gateway.api.client:
+        class: GuzzleHttp\Client
+        arguments: [key: 'value']
+-----
+<?php
+
+use GuzzleHttp\Client;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set('gateway.api.client', Client::class)
+        ->args([['key' => 'value']]);
+};
