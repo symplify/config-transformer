@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Configuration;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\InvalidConfigurationException;
+use Migrify\ConfigTransformer\FormatSwitcher\Guard\InputValidator;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,12 +14,12 @@ final class Configuration
     /**
      * @var string[]
      */
-    private const ALLOWED_OUTPUT_FORMATS = ['yaml', 'php'];
+    private const ALLOWED_OUTPUT_FORMATS = [Format::YAML, Format::PHP];
 
     /**
      * @var string[]
      */
-    private const ALLOWED_INPUT_FORMATS = ['xml', 'yml', 'yaml'];
+    private const ALLOWED_INPUT_FORMATS = [Format::XML, Format::YML, Format::YAML];
 
     /**
      * @var string
@@ -51,18 +51,25 @@ final class Configuration
      */
     private $shouldKeepBcLayer = false;
 
+    /**
+     * @var InputValidator
+     */
+    private $inputValidator;
+
+    public function __construct(InputValidator $inputValidator)
+    {
+        $this->inputValidator = $inputValidator;
+    }
+
     public function populateFromInput(InputInterface $input): void
     {
         $this->source = (array) $input->getArgument(Option::SOURCE);
-
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
-
         $this->dryRun = boolval($input->getOption(Option::DRY_RUN));
+        $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
 
         $this->resolveInputFormat($input);
         $this->resolveOutputFormat($input);
-
-        $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
     }
 
     public function getOutputFormat(): string
@@ -100,45 +107,22 @@ final class Configuration
         return $this->shouldKeepBcLayer;
     }
 
+    public function changeInputFormat(string $inputFormat): void
+    {
+        $this->setInputFormat($inputFormat);
+    }
+
+    public function changeOutputFormat(string $outputFormat): void
+    {
+        $this->setOutputFormat($outputFormat);
+    }
+
     private function resolveInputFormat(InputInterface $input): void
     {
         /** @var string $inputFormat */
         $inputFormat = (string) $input->getOption(Option::INPUT_FORMAT);
 
-        $this->validateFormatValue($inputFormat, self::ALLOWED_INPUT_FORMATS, Option::INPUT_FORMAT, 'input');
-        if ($inputFormat === Format::YML) {
-            $inputFormat = Format::YAML;
-        }
-
-        $this->inputFormat = $inputFormat;
-    }
-
-    /**
-     * @param string[] $allowedValues
-     */
-    private function validateFormatValue(
-        string $formatValue,
-        array $allowedValues,
-        string $optionKey,
-        string $type
-    ): void {
-        if ($formatValue === '') {
-            $message = sprintf('Add missing "--%s" option to command line', $optionKey);
-            throw new InvalidConfigurationException($message);
-        }
-
-        if (in_array($formatValue, $allowedValues, true)) {
-            return;
-        }
-
-        $message = sprintf(
-            '%s format "%s" is not supported. Pick one of "%s"',
-            ucfirst($type),
-            $formatValue,
-            implode('", ', $allowedValues)
-        );
-
-        throw new InvalidConfigurationException($message);
+        $this->setInputFormat($inputFormat);
     }
 
     private function resolveOutputFormat(InputInterface $input): void
@@ -146,8 +130,33 @@ final class Configuration
         /** @var string $outputFormat */
         $outputFormat = (string) $input->getOption(Option::OUTPUT_FORMAT);
 
-        $this->validateFormatValue($outputFormat, self::ALLOWED_OUTPUT_FORMATS, Option::OUTPUT_FORMAT, 'output');
+        $this->setOutputFormat($outputFormat);
+    }
+
+    private function setOutputFormat(string $outputFormat): void
+    {
+        $this->inputValidator->validateFormatValue(
+            $outputFormat,
+            self::ALLOWED_OUTPUT_FORMATS,
+            Option::OUTPUT_FORMAT,
+            'output'
+        );
 
         $this->outputFormat = $outputFormat;
+    }
+
+    private function setInputFormat(string $inputFormat): void
+    {
+        $this->inputValidator->validateFormatValue(
+            $inputFormat,
+            self::ALLOWED_INPUT_FORMATS,
+            Option::INPUT_FORMAT,
+            'input'
+        );
+        if ($inputFormat === Format::YML) {
+            $inputFormat = Format::YAML;
+        }
+
+        $this->inputFormat = $inputFormat;
     }
 }
