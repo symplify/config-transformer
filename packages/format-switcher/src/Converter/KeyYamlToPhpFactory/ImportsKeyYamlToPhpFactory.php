@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -34,10 +36,19 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
      */
     private $commonNodeFactory;
 
-    public function __construct(YamlArgumentSorter $yamlArgumentSorter, CommonNodeFactory $commonNodeFactory)
-    {
+    /**
+     * @var Configuration
+     */
+    private $configuration;
+
+    public function __construct(
+        YamlArgumentSorter $yamlArgumentSorter,
+        CommonNodeFactory $commonNodeFactory,
+        Configuration $configuration
+    ) {
         $this->yamlArgumentSorter = $yamlArgumentSorter;
         $this->commonNodeFactory = $commonNodeFactory;
+        $this->configuration = $configuration;
     }
 
     public function getKey(): string
@@ -98,6 +109,8 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             if (is_bool($value) || in_array($value, ['annotations', 'directory', 'glob'], true)) {
                 $expr = BuilderHelpers::normalizeValue($value);
             } else {
+                $value = $this->replaceImportedFileSuffix($value);
+
                 $expr = $this->commonNodeFactory->createAbsoluteDirExpr($value);
             }
 
@@ -125,5 +138,16 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
 
         // follow by default value for "ignore_errors"
         return isset($arguments[YamlKey::IGNORE_ERRORS]) && $arguments[YamlKey::IGNORE_ERRORS] === false;
+    }
+
+    private function replaceImportedFileSuffix($value)
+    {
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        $inputSuffixRegex = '#\.' . preg_quote($this->configuration->getInputFormat(), '#') . '$#';
+
+        return Strings::replace($value, $inputSuffixRegex, '.' . $this->configuration->getOutputFormat());
     }
 }
