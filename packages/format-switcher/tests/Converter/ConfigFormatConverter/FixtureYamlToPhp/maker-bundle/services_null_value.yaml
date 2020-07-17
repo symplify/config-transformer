@@ -3,9 +3,8 @@ services:
 -----
 <?php
 
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
