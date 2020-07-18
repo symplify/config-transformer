@@ -29,9 +29,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->exclude([__DIR__ . '/../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}']);
 
     $services->load('App\Controller\\', __DIR__ . '/../src/Controller')
+        ->tag('controller.service_arguments')
         ->exclude([__DIR__ . '/../src/Controller/SomeFile.php', __DIR__ . '/../src/Controller/OtherFile.php']);
 
-    $services->load('App\Domain\\', __DIR__ . '/../src/Domain/*/CommandHandler');
+    $services->load('App\Domain\\', __DIR__ . '/../src/Domain/*/CommandHandler')
+        ->tag('command_handler');
 
-    $services->load('App\Domain\\', __DIR__ . '/../src/Domain/*/EventSubscriber');
+    $services->load('App\Domain\\', __DIR__ . '/../src/Domain/*/EventSubscriber')
+        ->tag('event_subscriber');
 };
