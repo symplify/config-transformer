@@ -7,10 +7,10 @@ parameters:
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+# another line
+# parameters you know
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    # another line
-    # parameters you know
     $parameters->set('key', 'value');
 };
