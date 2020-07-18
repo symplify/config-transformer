@@ -9,7 +9,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
