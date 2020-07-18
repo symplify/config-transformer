@@ -75,4 +75,9 @@ final class YamlKey
      * @var string
      */
     public const PUBLIC = 'public';
+
+    /**
+     * @var string
+     */
+    public const TAGS = 'tags';
 }
