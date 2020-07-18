@@ -1,6 +1,6 @@
-#so close
 parameters:
-    key: value
+    # settype($value, 'int') → (int) $value
+    keys: 'whatever'
 -----
 <?php
 
@@ -9,6 +9,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    #so close
-    $parameters->set('key', 'value');
+    # settype($value, 'int') → (int) $value
+    $parameters->set('keys', 'whatever');
 };
