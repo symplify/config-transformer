@@ -1,0 +1,18 @@
+# service one here
+services:
+    # comment here
+    FakeClass:
+        public: true
+-----
+<?php
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+# service one here
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    # comment here
+    $services->set('FakeClass')
+        ->public();
+};
