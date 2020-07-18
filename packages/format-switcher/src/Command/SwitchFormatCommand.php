@@ -76,10 +76,10 @@ final class SwitchFormatCommand extends Command
             'Path to directory with configs'
         );
 
-        $this->addOption(Option::INPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to input');
+        $this->addOption(Option::INPUT_FORMAT, 'i', InputOption::VALUE_REQUIRED, 'Config format to input');
         $this->addOption(
             Option::OUTPUT_FORMAT,
-            null,
+            'o',
             InputOption::VALUE_REQUIRED,
             'Config format to output',
             Format::PHP
@@ -94,7 +94,7 @@ final class SwitchFormatCommand extends Command
 
         $this->addOption(
             Option::TARGET_SYMFONY_VERSION,
-            null,
+            's',
             InputOption::VALUE_REQUIRED,
             'Symfony version to migrate config to'
         );
