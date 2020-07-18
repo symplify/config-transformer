@@ -36,12 +36,22 @@ final class YamlCommentPreserver
      */
     private $collectedComments = [];
 
+    /**
+     * @var YamlListCommentRemover
+     */
+    private $yamlListCommentRemover;
+
+    public function __construct(YamlListCommentRemover $yamlListCommentRemover)
+    {
+        $this->yamlListCommentRemover = $yamlListCommentRemover;
+    }
+
     public function replaceCommentsWithKeyValuePlaceholder(string $yamlContent): string
     {
         // credit to genius of https://github.com/Kerrialn
         $this->commentCounter = 1;
 
-        $yamlContent = $this->removeListBreakingComments($yamlContent);
+        $yamlContent = $this->yamlListCommentRemover->remove($yamlContent);
 
         $yamlContent = Strings::replace($yamlContent, self::COMMENT_AFTER_CODE_PATTERN, function (array $match) {
             $standaloneCommentLine = $match['pre_space'] . $this->createCommentKeyValue($match['comment']) . PHP_EOL;
@@ -99,15 +109,5 @@ final class YamlCommentPreserver
         }
 
         return $comments;
-    }
-
-    private function removeListBreakingComments(string $yamlContent): string
-    {
-        // clear comments - ..., they break code and are unable to be attached to node above
-        // @see https://regex101.com/r/WMxTZN/1
-        $yamlContent = Strings::replace($yamlContent, '#(\n\s+\#.*?)(?<next_line>\s+\-)#', '$2');
-
-        // https://regex101.com/r/WMxTZN/2/
-        return Strings::replace($yamlContent, '#(?<previous>\s+\-(.*?))(\n\s+\#.*?)$#', '$1');
     }
 }
