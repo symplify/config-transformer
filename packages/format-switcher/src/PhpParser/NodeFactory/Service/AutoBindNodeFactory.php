@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
@@ -39,14 +40,21 @@ final class AutoBindNodeFactory
      */
     private $configuration;
 
+    /**
+     * @var TagsServiceOptionKeyYamlToPhpFactory
+     */
+    private $tagsServiceOptionKeyYamlToPhpFactory;
+
     public function __construct(
         CommonNodeFactory $commonNodeFactory,
         ArgsNodeFactory $argsNodeFactory,
-        Configuration $configuration
+        Configuration $configuration,
+        TagsServiceOptionKeyYamlToPhpFactory $tagsServiceOptionKeyYamlToPhpFactory
     ) {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->configuration = $configuration;
+        $this->tagsServiceOptionKeyYamlToPhpFactory = $tagsServiceOptionKeyYamlToPhpFactory;
     }
 
     /**
@@ -72,6 +80,10 @@ final class AutoBindNodeFactory
 
             if ($key === YamlKey::BIND) {
                 $methodCall = $this->createBindMethodCall($methodCall, $yaml[YamlKey::BIND]);
+            }
+
+            if ($key === YamlKey::TAGS) {
+                $methodCall = $this->createTagsMethodCall($methodCall, $value);
             }
         }
 
@@ -135,5 +147,10 @@ final class AutoBindNodeFactory
 
         $args = [new Arg($this->commonNodeFactory->createFalse())];
         return new MethodCall($methodCall, 'public', $args);
+    }
+
+    private function createTagsMethodCall(MethodCall $methodCall, $value): MethodCall
+    {
+        return $this->tagsServiceOptionKeyYamlToPhpFactory->decorateServiceMethodCall(null, $value, [], $methodCall);
     }
 }
