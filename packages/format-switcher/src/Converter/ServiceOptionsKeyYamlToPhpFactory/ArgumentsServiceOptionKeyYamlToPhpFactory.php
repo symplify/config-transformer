@@ -30,7 +30,8 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsK
         }
 
         foreach ($yaml as $key => $value) {
-            $args = $this->argsNodeFactory->createFromValues([$key, $value]);
+            $args = $this->argsNodeFactory->createFromValues([$key, $value], false, true);
+
             $methodCall = new MethodCall($methodCall, 'arg', $args);
         }
 
