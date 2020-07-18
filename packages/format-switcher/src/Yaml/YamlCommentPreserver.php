@@ -90,7 +90,7 @@ final class YamlCommentPreserver
     private function createCommentKeyValue(string $comment): string
     {
         $commentKey = self::COMMENT_PREFIX . $this->commentCounter;
-        $commentValue = '"' . trim($comment) . '"';
+        $commentValue = "'" . trim($comment) . "'";
 
         ++$this->commentCounter;
 
