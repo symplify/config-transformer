@@ -72,7 +72,6 @@ final class ConfigFormatConverter
         );
 
         $containerBuilder = $containerBuilderAndFileContent->getContainerBuilder();
-
         if ($outputFormat === Format::YAML) {
             return $this->dumpContainerBuilderToYaml($containerBuilder);
         }
@@ -88,7 +87,8 @@ final class ConfigFormatConverter
             }
         }
 
-        throw new NotImplementedYetException($outputFormat);
+        $message = sprintf('Converting from %s to %s it not support yet', $inputFormat, $outputFormat);
+        throw new NotImplementedYetException($message);
     }
 
     private function dumpContainerBuilderToYaml(ContainerBuilder $containerBuilder): string
