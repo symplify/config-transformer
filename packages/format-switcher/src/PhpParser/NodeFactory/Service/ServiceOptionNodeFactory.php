@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlServiceKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
 
@@ -18,16 +19,22 @@ final class ServiceOptionNodeFactory
     private $serviceOptionKeyYamlToPhpFactories = [];
 
     /**
+     * @var YamlCommentPreserver
+     */
+    private $yamlCommentPreserver;
+
+    /**
      * @param ServiceOptionsKeyYamlToPhpFactoryInterface[] $serviceOptionKeyYamlToPhpFactories
      */
-    public function __construct(array $serviceOptionKeyYamlToPhpFactories)
+    public function __construct(array $serviceOptionKeyYamlToPhpFactories, YamlCommentPreserver $yamlCommentPreserver)
     {
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
+        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function convertServiceOptionsToNodes(array $servicesValues, MethodCall $methodCall): MethodCall
     {
-        $servicesValues = $this->unnestArguments($servicesValues);
+        $servicesValues = $this->unNestArguments($servicesValues);
 
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
@@ -40,12 +47,19 @@ final class ServiceOptionNodeFactory
                     continue;
                 }
 
+                if (is_array($value)) {
+                    $value = $this->yamlCommentPreserver->collectCommentsFromArray($value);
+                }
+
                 $methodCall = $serviceOptionKeyYamlToPhpFactory->decorateServiceMethodCall(
                     $key,
                     $value,
                     $servicesValues,
                     $methodCall
                 );
+
+                $this->yamlCommentPreserver->decorateNodeWithComments($methodCall);
+
                 continue 2;
             }
 
@@ -71,7 +85,7 @@ final class ServiceOptionNodeFactory
         return true;
     }
 
-    private function unnestArguments(array $servicesValues): array
+    private function unNestArguments(array $servicesValues): array
     {
         if ($this->isNestedArguments($servicesValues)) {
             $servicesValues = [
