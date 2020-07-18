@@ -10,5 +10,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->load('TomasVotruba\Blog\Tests\\', __DIR__ . '/another_dir/*');
+    $services->load('TomasVotruba\Blog\Tests\\', __DIR__ . '/another_dir/*')
+        ->tag('controller.service_arguments');
 };
