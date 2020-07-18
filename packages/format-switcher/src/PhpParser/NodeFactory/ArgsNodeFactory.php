@@ -33,7 +33,17 @@ final class ArgsNodeFactory
     /**
      * @var string
      */
+    private const TAG_SERVICE = 'service';
+
+    /**
+     * @var string
+     */
     private const REF = 'ref';
+
+    /**
+     * @var string
+     */
+    private const TAG_RETURNS_CLONE = 'returns_clone';
 
     /**
      * @var CommonNodeFactory
@@ -172,11 +182,11 @@ final class ArgsNodeFactory
         $shouldWrapInArray = false;
 
         // that's the only value
-        if ($taggedValue->getTag() === 'returns_clone') {
+        if ($taggedValue->getTag() === self::TAG_RETURNS_CLONE) {
             $serviceName = $taggedValue->getValue()[0];
-            $functionName = self::SERVICE;
+            $functionName = $this->getRefOrServiceFunctionName();
             $shouldWrapInArray = true;
-        } elseif ($taggedValue->getTag() === self::SERVICE) {
+        } elseif ($taggedValue->getTag() === self::TAG_SERVICE) {
             $serviceName = $taggedValue->getValue()['class'];
             $functionName = self::INLINE_SERVICE;
         } else {
@@ -214,12 +224,7 @@ final class ArgsNodeFactory
 
         // is service reference
         if (Strings::startsWith($value, '@')) {
-            if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
-                $functionName = self::SERVICE;
-            } else {
-                $functionName = self::REF;
-            }
-
+            $functionName = $this->getRefOrServiceFunctionName();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $functionName);
         }
 
@@ -254,5 +259,14 @@ final class ArgsNodeFactory
         }
 
         return $arrayItems;
+    }
+
+    private function getRefOrServiceFunctionName(): string
+    {
+        if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
+            return self::SERVICE;
+        }
+
+        return self::REF;
     }
 }
