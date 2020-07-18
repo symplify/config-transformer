@@ -87,8 +87,13 @@ final class ImportFullyQualifiedNamesNodeTraverser
     {
         $useImports = [];
         foreach ($nameImports as $nameImport) {
-            $useBuilder = $this->builderFactory->use(new Name($nameImport));
-            $useImports[] = $useBuilder->getNode();
+            if (function_exists($nameImport)) {
+                $useBuilder = $this->builderFactory->useFunction(new Name($nameImport));
+                $useImports[] = $useBuilder->getNode();
+            } else {
+                $useBuilder = $this->builderFactory->use(new Name($nameImport));
+                $useImports[] = $useBuilder->getNode();
+            }
         }
 
         return $useImports;
