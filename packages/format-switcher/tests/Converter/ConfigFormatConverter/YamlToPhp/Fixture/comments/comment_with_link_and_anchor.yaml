@@ -1,0 +1,20 @@
+services:
+    Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+        # see https://github.com/doctrine/persistence/pull/71#this_line
+        $strings:
+            'Doctrine\Common\Persistence\Event\LifecycleEventArgs': 'Doctrine\Persistence\Event\LifecycleEventArgs'
+-----
+<?php
+
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FakeClass::class)
+        ->arg('$strings', [
+        # see https://github.com/doctrine/persistence/pull/71#this_line
+        'Doctrine\Common\Persistence\Event\LifecycleEventArgs' => 'Doctrine\Persistence\Event\LifecycleEventArgs',
+    ]);
+};
