@@ -24,4 +24,10 @@ final class SymfonyVersionFeature
      * @see https://github.com/symfony/symfony/issues/22146#issuecomment-288988780
      */
     public const SERVICE_WITHOUT_NAME = 3.3;
+
+    /**
+     * @var float
+     * @see https://github.com/symfony/symfony/pull/36800
+     */
+    public const REF_OVER_SERVICE = 5.1;
 }
