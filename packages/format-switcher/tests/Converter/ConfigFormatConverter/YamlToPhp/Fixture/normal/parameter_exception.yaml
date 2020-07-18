@@ -1,0 +1,12 @@
+parameters:
+    make_an: exception
+-----
+<?php
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $parameters = $containerConfigurator->parameters();
+
+    $parameters->set('make_an', 'exception');
+};
