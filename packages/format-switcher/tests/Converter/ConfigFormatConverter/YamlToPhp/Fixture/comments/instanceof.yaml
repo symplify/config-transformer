@@ -10,9 +10,7 @@ services:
 -----
 <?php
 
-use EventSubscriberInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Twig_ExtensionInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
