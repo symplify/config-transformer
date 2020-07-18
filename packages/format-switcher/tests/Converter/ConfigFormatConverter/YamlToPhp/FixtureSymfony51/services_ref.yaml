@@ -1,0 +1,15 @@
+services:
+    app.menu_builder:
+        class: App\Utils\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+-----
+<?php
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set('app.menu_builder', 'App\Utils\MenuBuilder')
+        ->args([service('knp_menu.factory')]);
+};
