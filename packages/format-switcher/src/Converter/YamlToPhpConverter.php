@@ -18,22 +18,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class YamlToPhpConverter
 {
-//    /**
-//     * @var string
-//     */
-//    public const COMMENT_PREFIX = '__COMMENT__';
-//
-//    /**
-//     * @see https://regex101.com/r/YMizb4/2
-//     * @var string
-//     */
-//    private const COMMENT_AFTER_CODE_PATTERN = '#^(?<pre_space>\s+)(?<content>\S.*?)\#(?<comment>.*?)$#ms';
-//
-//    /**
-//     * @var string
-//     */
-//    private const OWN_LINE_COMMENT_PATTERN = '#\#(?<comment>.*?)$#ms';
-
     /**
      * @var Parser
      */
