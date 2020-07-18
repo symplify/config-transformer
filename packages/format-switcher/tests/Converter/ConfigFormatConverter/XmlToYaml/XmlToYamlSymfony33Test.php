@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\XmlToYaml;
 
 use Iterator;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class XmlToYamlTest extends AbstractConfigFormatConverterTest
+final class XmlToYamlSymfony33Test extends AbstractConfigFormatConverterTest
 {
     protected function setUp(): void
     {
@@ -18,7 +19,7 @@ final class XmlToYamlTest extends AbstractConfigFormatConverterTest
 
         /** @var Configuration $configuration */
         $configuration = self::$container->get(Configuration::class);
-        $configuration->changeSymfonyVersion(SymfonyVersionFeature::SERVICE_WITHOUT_NAME - 0.1);
+        $configuration->changeSymfonyVersion(SymfonyVersionFeature::SERVICE_WITHOUT_NAME);
     }
 
     /**
@@ -31,6 +32,6 @@ final class XmlToYamlTest extends AbstractConfigFormatConverterTest
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureXmlToYaml', '*.xml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureSymfony33', '*.xml');
     }
 }
