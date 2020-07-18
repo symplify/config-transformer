@@ -18,6 +18,7 @@ use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Expression;
 
 /**
@@ -152,7 +153,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         }
 
         if ($value === 'not_found') {
-            return new Node\Scalar\String_('not_found');
+            return new String_('not_found');
         }
 
         $value = $this->replaceImportedFileSuffix($value);
