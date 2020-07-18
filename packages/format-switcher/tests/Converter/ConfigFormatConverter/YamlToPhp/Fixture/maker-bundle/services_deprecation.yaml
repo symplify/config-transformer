@@ -13,8 +13,8 @@ services:
 -----
 <?php
 
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use \Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
