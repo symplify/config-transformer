@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        public: true
+
+    Symplify\Autodiscovery\:
+        resource: '../src'
+-----
+<?php
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->defaults()
+        ->autowire()
+        ->public();
+
+    $services->load('Symplify\Autodiscovery\\', __DIR__ . '/../src');
+};
