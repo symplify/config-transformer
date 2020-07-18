@@ -2,7 +2,8 @@
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/migrify/config-transformer/stats)
 
-Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable one - all the useful utils around configs.
+Toolkit for quick operations around configs.
+Convert Symfony config formats or turn magic syntax to more readable one.
 
 ## Install
 
@@ -20,16 +21,13 @@ Why? Because YAML beats XML and [PHP beats YAML](https://tomasvotruba.com/blog/2
 
 ```bash
 vendor/bin/config-transformer switch-format app/config --input-format xml --output-format yaml
+
+# or in short
+vendor/bin/config-transformer switch-format app/config -i xml -o yaml
+
 ```
 
-You can also add `--target-symfony-version` to specify, what Symfony features should be used (3.2 is used by default).
-
-```bash
-vendor/bin/config-transformer switch-format app/config --input-format yaml --output-format php \
-    / --target-symfony-version 3.3
-```
-
-You can also use shortcuts:
+You can also add `--target-symfony-version/-s` to specify, what Symfony features should be used (3.2 is used by default).
 
 ```bash
 vendor/bin/config-transformer switch-format app/config -i yaml -o php -s 3.3
