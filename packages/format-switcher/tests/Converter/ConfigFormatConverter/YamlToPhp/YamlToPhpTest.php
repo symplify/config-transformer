@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\YamlToPhp;
 
 use Iterator;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
 use Nette\Utils\FileSystem;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
@@ -37,7 +38,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
-        FileSystem::copy(__DIR__ . '/FixtureYamlToPhp/normal', $temporaryPath);
+        FileSystem::copy(__DIR__ . '/Fixture/normal', $temporaryPath);
         require_once $temporaryPath . '/another_dir/SomeClass.php.inc';
 
         $this->doTestOutput($fixtureFileInfo, 'yaml', 'php');
@@ -48,7 +49,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
      */
     public function testSpecialCaseWithDirectory(SmartFileInfo $fileInfo): void
     {
-        $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/FixtureYamlToPhp/nested', 'yaml', 'php');
+        $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested', 'yaml', 'php');
     }
 
     /**
@@ -69,22 +70,22 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/normal', '*.yaml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/normal', '*.yaml');
     }
 
     public function provideDataForComments(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/comments', '*.yaml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/comments', '*.yaml');
     }
 
     public function provideDataWithDirectory(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/nested', '*.yaml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/nested', '*.yaml');
     }
 
     public function provideDataMakerBundle(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhp/maker-bundle', '*.yaml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/maker-bundle', '*.yaml');
     }
 
     private function doTestOutputWithExtraDirectory(
