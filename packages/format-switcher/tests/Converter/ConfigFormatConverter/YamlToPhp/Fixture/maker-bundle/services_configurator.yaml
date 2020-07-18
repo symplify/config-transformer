@@ -1,0 +1,22 @@
+services:
+  Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+    configurator: ['@Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass', 'configure']
+
+  Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass:
+    configurator: '@Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass'
+-----
+<?php
+
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FakeClass::class)
+        ->factory([ref(SecondFakeClass::class), 'configure']);
+
+    $services->set(SecondFakeClass::class)
+        ->factory([ref(FakeClass::class)]);
+};
