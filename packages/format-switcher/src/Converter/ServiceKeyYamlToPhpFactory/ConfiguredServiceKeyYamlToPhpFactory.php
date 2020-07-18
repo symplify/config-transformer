@@ -45,7 +45,9 @@ final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
 
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
 
-        return new Expression($methodCall);
+        $expression = new Expression($methodCall);
+        $expression->setAttribute('comments', $methodCall->getComments());
+        return $expression;
     }
 
     public function isMatch($key, $values): bool
