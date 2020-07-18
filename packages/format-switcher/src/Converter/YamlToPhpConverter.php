@@ -62,6 +62,7 @@ final class YamlToPhpConverter
         $this->yamlContentProvider->setContent($yaml);
 
         $yaml = $this->yamlCommentPreserver->replaceCommentsWithKeyValuePlaceholder($yaml);
+
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
 
         $nodes = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
