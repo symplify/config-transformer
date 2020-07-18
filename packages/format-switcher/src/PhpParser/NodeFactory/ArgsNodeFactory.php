@@ -17,6 +17,7 @@ use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 
 final class ArgsNodeFactory
@@ -95,12 +96,15 @@ final class ArgsNodeFactory
     /**
      * @return Arg[]
      */
-    public function createFromValues($values, bool $skipServiceReference = false): array
-    {
+    public function createFromValues(
+        $values,
+        bool $skipServiceReference = false,
+        bool $skipClassesToConstantReference = false
+    ): array {
         if (is_array($values)) {
             $args = [];
             foreach ($values as $value) {
-                $expr = $this->resolveExpr($value, $skipServiceReference);
+                $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
                 $args[] = new Arg($expr);
             }
 
@@ -125,10 +129,13 @@ final class ArgsNodeFactory
         throw new NotImplementedYetException();
     }
 
-    public function resolveExpr($value, bool $skipServiceReference = false): Expr
-    {
+    public function resolveExpr(
+        $value,
+        bool $skipServiceReference = false,
+        bool $skipClassesToConstantReference = false
+    ): Expr {
         if (is_string($value)) {
-            return $this->resolveStringExpr($value, $skipServiceReference);
+            return $this->resolveStringExpr($value, $skipServiceReference, $skipClassesToConstantReference);
         }
 
         if ($value instanceof Expr) {
@@ -140,7 +147,7 @@ final class ArgsNodeFactory
         }
 
         if (is_array($value)) {
-            $arrayItems = $this->resolveArrayItems($value);
+            $arrayItems = $this->resolveArrayItems($value, $skipClassesToConstantReference);
             return new Array_($arrayItems);
         }
 
@@ -212,11 +219,18 @@ final class ArgsNodeFactory
         return $funcCall;
     }
 
-    private function resolveStringExpr(string $value, bool $skipServiceReference)
-    {
+    private function resolveStringExpr(
+        string $value,
+        bool $skipServiceReference,
+        bool $skipClassesToConstantReference
+    ): Expr {
         $value = ltrim($value, '\\');
 
         if (ctype_upper($value[0]) && class_exists($value) || interface_exists($value)) {
+            if ($skipClassesToConstantReference) {
+                return new String_($value);
+            }
+
             return $this->commonNodeFactory->createClassReference($value);
         }
 
@@ -245,16 +259,16 @@ final class ArgsNodeFactory
      * @param mixed[] $value
      * @return ArrayItem[]
      */
-    private function resolveArrayItems(array $value): array
+    private function resolveArrayItems(array $value, bool $skipClassesToConstantReference): array
     {
         $arrayItems = [];
 
         $naturalKey = 0;
         foreach ($value as $nestedKey => $nestedValue) {
-            $valueExpr = $this->resolveExpr($nestedValue);
+            $valueExpr = $this->resolveExpr($nestedValue, false, $skipClassesToConstantReference);
 
             if (! is_int($nestedKey) || $nestedKey !== $naturalKey) {
-                $keyExpr = $this->resolveExpr($nestedKey);
+                $keyExpr = $this->resolveExpr($nestedKey, false, $skipClassesToConstantReference);
                 $arrayItems[] = new ArrayItem($valueExpr, $keyExpr);
             } else {
                 $arrayItems[] = new ArrayItem($valueExpr);

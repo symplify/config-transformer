@@ -55,7 +55,10 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
             $instanceofMethodCall
         );
 
-        return new Expression($instanceofMethodCall);
+        $expression = new Expression($instanceofMethodCall);
+        $expression->setAttribute('comments', $instanceofMethodCall->getComments());
+
+        return $expression;
     }
 
     public function isMatch($key, $values): bool
