@@ -54,6 +54,11 @@ final class YamlCommentPreserver
         $yamlContent = $this->yamlListCommentRemover->remove($yamlContent);
 
         $yamlContent = Strings::replace($yamlContent, self::COMMENT_AFTER_CODE_PATTERN, function (array $match) {
+            // standalone-line comment → skip
+            if (Strings::startsWith($match['content'], '#')) {
+                return $match[0];
+            }
+
             $standaloneCommentLine = $match['pre_space'] . $this->createCommentKeyValue($match['comment']) . PHP_EOL;
             $originalContentLine = $match['pre_space'] . $match['content'];
 
