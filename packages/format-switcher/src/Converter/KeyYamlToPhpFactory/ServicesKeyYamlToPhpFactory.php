@@ -71,14 +71,14 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         foreach ($yaml as $serviceKey => $serviceValues) {
             $serviceValues = $serviceValues ?? [];
 
+            if ($this->yamlCommentPreserver->isCommentKey($serviceKey)) {
+                $this->yamlCommentPreserver->collectComment($serviceValues);
+                unset($yaml[$serviceKey]);
+                continue;
+            }
+
             foreach ($this->serviceKeyYamlToPhpFactories as $serviceKeyYamlToPhpFactory) {
                 if (! $serviceKeyYamlToPhpFactory->isMatch($serviceKey, $serviceValues)) {
-                    continue;
-                }
-
-                if ($this->yamlCommentPreserver->isCommentKey($serviceKey)) {
-                    $this->yamlCommentPreserver->collectComment($serviceValues);
-                    unset($yaml[$serviceKey]);
                     continue;
                 }
 
