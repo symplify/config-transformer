@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeVisitor;
 
 use Migrify\ConfigTransformer\Naming\ClassNaming;
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
@@ -45,6 +46,16 @@ final class ImportFullyQualifiedNamesNodeVisitor extends NodeVisitorAbstract
         }
 
         $fullyQualifiedName = $node->toString();
+
+        // namespace-less class name
+        if (Strings::startsWith($fullyQualifiedName, '\\')) {
+            $fullyQualifiedName = ltrim($fullyQualifiedName, '\\');
+        }
+
+        if (! Strings::contains($fullyQualifiedName, '\\')) {
+            return new Name($fullyQualifiedName);
+        }
+
         $shortClassName = $this->classNaming->getShortName($fullyQualifiedName);
 
         $this->nameImports[] = $fullyQualifiedName;
