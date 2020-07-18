@@ -15,6 +15,7 @@ use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -106,14 +107,7 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
                 continue;
             }
 
-            if (is_bool($value) || in_array($value, ['annotations', 'directory', 'glob'], true)) {
-                $expr = BuilderHelpers::normalizeValue($value);
-            } else {
-                $value = $this->replaceImportedFileSuffix($value);
-
-                $expr = $this->commonNodeFactory->createAbsoluteDirExpr($value);
-            }
-
+            $expr = $this->resolveExpr($value);
             $args[] = new Arg($expr);
         }
 
@@ -149,5 +143,19 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $inputSuffixRegex = '#\.' . preg_quote($this->configuration->getInputFormat(), '#') . '$#';
 
         return Strings::replace($value, $inputSuffixRegex, '.' . $this->configuration->getOutputFormat());
+    }
+
+    private function resolveExpr($value): Expr
+    {
+        if (is_bool($value) || in_array($value, ['annotations', 'directory', 'glob'], true)) {
+            return BuilderHelpers::normalizeValue($value);
+        }
+
+        if ($value === 'not_found') {
+            return new Node\Scalar\String_('not_found');
+        }
+
+        $value = $this->replaceImportedFileSuffix($value);
+        return $this->commonNodeFactory->createAbsoluteDirExpr($value);
     }
 }
