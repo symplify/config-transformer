@@ -1,0 +1,21 @@
+services:
+    Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+        arguments:
+            - 'first'
+            # first line
+            # second line
+            - 'second'
+            # third line
+            # fourth line
+-----
+<?php
+
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FakeClass::class)
+        ->args(['first', 'second']);
+};
