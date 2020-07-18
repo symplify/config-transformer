@@ -199,6 +199,9 @@ final class SwitchFormatCommand extends Command
     private function dumpNewFileInfos(array $fileInfos): void
     {
         foreach ($fileInfos as $fileInfo) {
+            $message = sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
+            $this->symfonyStyle->note($message);
+
             $convertedContent = $this->configFormatConverter->convert(
                 $fileInfo,
                 $this->configuration->getInputFormat(),
