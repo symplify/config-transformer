@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
@@ -20,10 +22,18 @@ final class ArgsNodeFactory
 {
     /**
      * @var string
-     * @todo service() is available only since Symfony 5.1
-     * @see https://github.com/symfony/symfony/pull/36800
      */
-    private const SERVICE = 'ref';
+    private const INLINE_SERVICE = 'inline_service';
+
+    /**
+     * @var string
+     */
+    private const SERVICE = 'service';
+
+    /**
+     * @var string
+     */
+    private const REF = 'ref';
 
     /**
      * @var CommonNodeFactory
@@ -35,10 +45,19 @@ final class ArgsNodeFactory
      */
     private $constantNodeFactory;
 
-    public function __construct(CommonNodeFactory $commonNodeFactory, ConstantNodeFactory $constantNodeFactory)
-    {
+    /**
+     * @var Configuration
+     */
+    private $configuration;
+
+    public function __construct(
+        CommonNodeFactory $commonNodeFactory,
+        ConstantNodeFactory $constantNodeFactory,
+        Configuration $configuration
+    ) {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->constantNodeFactory = $constantNodeFactory;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -116,7 +135,7 @@ final class ArgsNodeFactory
     private function resolveServiceReferenceExpr(
         string $value,
         bool $skipServiceReference,
-        string $functionName = self::SERVICE
+        string $functionName
     ): Expr {
         $value = ltrim($value, '@');
         $expr = $this->resolveExpr($value);
@@ -159,7 +178,7 @@ final class ArgsNodeFactory
             $shouldWrapInArray = true;
         } elseif ($taggedValue->getTag() === self::SERVICE) {
             $serviceName = $taggedValue->getValue()['class'];
-            $functionName = 'inline_service';
+            $functionName = self::INLINE_SERVICE;
         } else {
             if (is_array($taggedValue->getValue())) {
                 $args = $this->createFromValues($taggedValue->getValue());
@@ -195,7 +214,13 @@ final class ArgsNodeFactory
 
         // is service reference
         if (Strings::startsWith($value, '@')) {
-            return $this->resolveServiceReferenceExpr($value, $skipServiceReference);
+            if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
+                $functionName = self::SERVICE;
+            } else {
+                $functionName = self::REF;
+            }
+
+            return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $functionName);
         }
 
         $constantValue = $this->constantNodeFactory->createConstantIfValue($value);
