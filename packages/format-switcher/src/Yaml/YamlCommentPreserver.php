@@ -90,11 +90,10 @@ final class YamlCommentPreserver
     private function createCommentKeyValue(string $comment): string
     {
         $commentKey = self::COMMENT_PREFIX . $this->commentCounter;
-        $commentValue = "'" . trim($comment) . "'";
 
         ++$this->commentCounter;
 
-        return $commentKey . ': ' . $commentValue;
+        return $commentKey . ': ' . $this->quoteComment($comment);
     }
 
     /**
@@ -105,9 +104,18 @@ final class YamlCommentPreserver
     {
         $comments = [];
         foreach ($collectedComments as $currentComment) {
-            $comments[] = new Comment('# ' . $currentComment);
+            $comments[] = new Comment('#' . $currentComment);
         }
 
         return $comments;
+    }
+
+    private function quoteComment(string $comment): string
+    {
+        if (Strings::contains($comment, "'")) {
+            return '"' . $comment . '"';
+        }
+
+        return "'" . $comment . "'";
     }
 }
