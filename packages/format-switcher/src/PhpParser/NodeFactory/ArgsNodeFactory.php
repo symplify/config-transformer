@@ -16,6 +16,7 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
+use PhpParser\Node\Name\FullyQualified;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 
 final class ArgsNodeFactory
@@ -23,22 +24,27 @@ final class ArgsNodeFactory
     /**
      * @var string
      */
-    private const INLINE_SERVICE = 'inline_service';
+    private const INLINE_SERVICE_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\inline_service';
 
     /**
      * @var string
      */
-    private const SERVICE = 'service';
+    private const SERVICE_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
+
+    /**
+     * @var string
+     */
+    private const REF_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\ref';
+
+    /**
+     * @var string
+     */
+    private const EXPR_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\expr';
 
     /**
      * @var string
      */
     private const TAG_SERVICE = 'service';
-
-    /**
-     * @var string
-     */
-    private const REF = 'ref';
 
     /**
      * @var string
@@ -83,8 +89,7 @@ final class ArgsNodeFactory
             $array = new Array_($items);
         }
 
-        $arg = new Arg($array);
-        return [$arg];
+        return [new Arg($array)];
     }
 
     /**
@@ -155,7 +160,7 @@ final class ArgsNodeFactory
         }
 
         $args = [new Arg($expr)];
-        return new FuncCall(new Name($functionName), $args);
+        return new FuncCall(new FullyQualified($functionName), $args);
     }
 
     private function resolveExprFromArray(array $values): Array_
@@ -188,7 +193,7 @@ final class ArgsNodeFactory
             $shouldWrapInArray = true;
         } elseif ($taggedValue->getTag() === self::TAG_SERVICE) {
             $serviceName = $taggedValue->getValue()['class'];
-            $functionName = self::INLINE_SERVICE;
+            $functionName = self::INLINE_SERVICE_FUNCTION_NAME;
         } else {
             if (is_array($taggedValue->getValue())) {
                 $args = $this->createFromValues($taggedValue->getValue());
@@ -219,7 +224,7 @@ final class ArgsNodeFactory
             $value = ltrim($value, '@=');
             $args = $this->createFromValues($value);
 
-            return new FuncCall(new Name('expr'), $args);
+            return new FuncCall(new FullyQualified(self::EXPR_FUNCTION_NAME), $args);
         }
 
         // is service reference
@@ -264,9 +269,9 @@ final class ArgsNodeFactory
     private function getRefOrServiceFunctionName(): string
     {
         if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
-            return self::SERVICE;
+            return self::SERVICE_FUNCTION_NAME;
         }
 
-        return self::REF;
+        return self::REF_FUNCTION_NAME;
     }
 }
