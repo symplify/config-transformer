@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
 use PhpParser\BuilderFactory;
 use PhpParser\NodeFinder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Yaml\Parser;
 use Symplify\SmartFileSystem\FileSystemFilter;
 
