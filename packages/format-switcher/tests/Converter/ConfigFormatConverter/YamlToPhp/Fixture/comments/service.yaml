@@ -8,10 +8,10 @@ services:
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+# service one here
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    # service one here
     # comment here
     $services->set('FakeClass')
         ->public();

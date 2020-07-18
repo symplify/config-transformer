@@ -1,4 +1,4 @@
-#so close
+# top level
 parameters:
     key: value
 -----
@@ -6,7 +6,7 @@ parameters:
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-#so close
+# top level
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
