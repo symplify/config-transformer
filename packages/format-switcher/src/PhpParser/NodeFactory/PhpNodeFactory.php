@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
@@ -13,11 +14,6 @@ use PhpParser\Node\Stmt\Expression;
 
 final class PhpNodeFactory
 {
-    /**
-     * @var string
-     */
-    private const SET_METHOD_NAME = 'set';
-
     /**
      * @var ArgsNodeFactory
      */
@@ -61,7 +57,7 @@ final class PhpNodeFactory
         $args = $this->argsNodeFactory->createFromValues([$parameterName, $value]);
 
         $parametersVariable = new Variable(VariableName::PARAMETERS);
-        $methodCall = new MethodCall($parametersVariable, self::SET_METHOD_NAME, $args);
+        $methodCall = new MethodCall($parametersVariable, MethodName::SET_METHOD_NAME, $args);
 
         return new Expression($methodCall);
     }
