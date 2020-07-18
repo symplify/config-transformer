@@ -9,6 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -96,7 +97,8 @@ final class SwitchFormatCommand extends Command
             Option::TARGET_SYMFONY_VERSION,
             's',
             InputOption::VALUE_REQUIRED,
-            'Symfony version to migrate config to'
+            'Symfony version to migrate config to',
+            3.2
         );
 
         $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
