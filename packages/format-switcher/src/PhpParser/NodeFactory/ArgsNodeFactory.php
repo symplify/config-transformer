@@ -180,7 +180,9 @@ final class ArgsNodeFactory
 
     private function resolveStringExpr(string $value, bool $skipServiceReference)
     {
-        if (class_exists($value) || interface_exists($value)) {
+        $value = ltrim($value, '\\');
+
+        if (ctype_upper($value[0]) && class_exists($value) || interface_exists($value)) {
             return $this->commonNodeFactory->createClassReference($value);
         }
 
