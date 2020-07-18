@@ -87,6 +87,20 @@ final class YamlCommentPreserver
         $this->collectedComments = [];
     }
 
+    public function collectCommentsFromArray(array $values): array
+    {
+        foreach ($values as $key => $value) {
+            if (! $this->isCommentKey($key)) {
+                continue;
+            }
+
+            $this->collectComment($value);
+            unset($values[$key]);
+        }
+
+        return $values;
+    }
+
     private function createCommentKeyValue(string $comment): string
     {
         $commentKey = self::COMMENT_PREFIX . $this->commentCounter;

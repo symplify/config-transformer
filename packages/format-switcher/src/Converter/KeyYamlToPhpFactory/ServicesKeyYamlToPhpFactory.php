@@ -83,17 +83,21 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
                 }
 
                 if ($serviceKeyYamlToPhpFactory instanceof ManyConfigurationInterface) {
-                    foreach ($serviceValues as $subserviceKey => $subserviceValues) {
-                        if ($this->yamlCommentPreserver->isCommentKey($subserviceKey)) {
-                            $this->yamlCommentPreserver->collectComment($subserviceValues);
-                            unset($serviceValues[$subserviceKey]);
+                    foreach ($serviceValues as $subServiceKey => $subServiceValues) {
+                        if ($this->yamlCommentPreserver->isCommentKey($subServiceKey)) {
+                            $this->yamlCommentPreserver->collectComment($subServiceValues);
+                            unset($serviceValues[$subServiceKey]);
                             continue;
                         }
 
-                        $nodes[] = $this->processNode($serviceKeyYamlToPhpFactory, $subserviceKey, $subserviceValues);
+                        $nodes[] = $this->processNode($serviceKeyYamlToPhpFactory, $subServiceKey, $subServiceValues);
                     }
 
                     continue 2;
+                }
+
+                if (is_array($serviceValues)) {
+                    $serviceValues = $this->yamlCommentPreserver->collectCommentsFromArray($serviceValues);
                 }
 
                 $nodes[] = $this->processNode($serviceKeyYamlToPhpFactory, $serviceKey, $serviceValues);
