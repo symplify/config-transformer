@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\YamlToPhp;
 
 use Iterator;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -31,6 +32,6 @@ final class YamlToPhpTestSymfony33Test extends AbstractConfigFormatConverterTest
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureYamlToPhpSymfony33', '*.yaml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/FixtureSymfony33', '*.yaml');
     }
 }
