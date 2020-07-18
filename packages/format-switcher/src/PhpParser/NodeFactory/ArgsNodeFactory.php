@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\FunctionName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Nette\Utils\Strings;
@@ -23,26 +24,6 @@ use Symfony\Component\Yaml\Tag\TaggedValue;
 
 final class ArgsNodeFactory
 {
-    /**
-     * @var string
-     */
-    private const INLINE_SERVICE_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\inline_service';
-
-    /**
-     * @var string
-     */
-    private const SERVICE_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
-
-    /**
-     * @var string
-     */
-    private const REF_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\ref';
-
-    /**
-     * @var string
-     */
-    private const EXPR_FUNCTION_NAME = 'Symfony\Component\DependencyInjection\Loader\Configurator\expr';
-
     /**
      * @var string
      */
@@ -208,7 +189,7 @@ final class ArgsNodeFactory
             $shouldWrapInArray = true;
         } elseif ($taggedValue->getTag() === self::TAG_SERVICE) {
             $serviceName = $taggedValue->getValue()['class'];
-            $functionName = self::INLINE_SERVICE_FUNCTION_NAME;
+            $functionName = FunctionName::INLINE_SERVICE_FUNCTION_NAME;
         } else {
             if (is_array($taggedValue->getValue())) {
                 $args = $this->createFromValues($taggedValue->getValue());
@@ -246,7 +227,7 @@ final class ArgsNodeFactory
             $value = ltrim($value, '@=');
             $args = $this->createFromValues($value);
 
-            return new FuncCall(new FullyQualified(self::EXPR_FUNCTION_NAME), $args);
+            return new FuncCall(new FullyQualified(FunctionName::EXPR_FUNCTION_NAME), $args);
         }
 
         // is service reference
@@ -301,9 +282,9 @@ final class ArgsNodeFactory
     private function getRefOrServiceFunctionName(): string
     {
         if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
-            return self::SERVICE_FUNCTION_NAME;
+            return FunctionName::SERVICE_FUNCTION_NAME;
         }
 
-        return self::REF_FUNCTION_NAME;
+        return FunctionName::REF_FUNCTION_NAME;
     }
 }
