@@ -14,6 +14,11 @@ use PhpParser\Node\Stmt\Expression;
 final class PhpNodeFactory
 {
     /**
+     * @var string
+     */
+    private const SET_METHOD_NAME = 'set';
+
+    /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
@@ -56,7 +61,7 @@ final class PhpNodeFactory
         $args = $this->argsNodeFactory->createFromValues([$parameterName, $value]);
 
         $parametersVariable = new Variable(VariableName::PARAMETERS);
-        $methodCall = new MethodCall($parametersVariable, 'set', $args);
+        $methodCall = new MethodCall($parametersVariable, self::SET_METHOD_NAME, $args);
 
         return new Expression($methodCall);
     }
