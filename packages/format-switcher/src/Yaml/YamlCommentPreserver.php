@@ -32,7 +32,7 @@ final class YamlCommentPreserver
     private $commentCounter = 1;
 
     /**
-     * @var string[]
+     * @var Comment[]
      */
     private $collectedComments = [];
 
@@ -77,17 +77,31 @@ final class YamlCommentPreserver
 
     public function collectComment(string $comment): void
     {
-        $this->collectedComments[] = $comment;
+        $this->collectedComments[] = new Comment('#' . $comment);
     }
 
-    public function decorateNodeWithComments(Node $node): void
+    /**
+     * @return Comment[]
+     */
+    public function getCollectedComments(): array
     {
+        $collectedComments = $this->collectedComments;
+        $this->collectedComments = [];
+
+        return $collectedComments;
+    }
+
+    public function decorateNodeWithComments(Node $node, array $comments = []): void
+    {
+        if ($comments !== []) {
+            $this->collectedComments = $comments;
+        }
+
         if ($this->collectedComments === []) {
             return;
         }
 
-        $comments = $this->createCommentFromStrings($this->collectedComments);
-        $node->setAttribute('comments', $comments);
+        $node->setAttribute('comments', $this->collectedComments);
 
         $this->collectedComments = [];
     }
@@ -113,20 +127,6 @@ final class YamlCommentPreserver
         ++$this->commentCounter;
 
         return $commentKey . ': ' . $this->quoteComment($comment);
-    }
-
-    /**
-     * @param string[] $collectedComments
-     * @return Comment[]
-     */
-    private function createCommentFromStrings(array $collectedComments): array
-    {
-        $comments = [];
-        foreach ($collectedComments as $currentComment) {
-            $comments[] = new Comment('#' . $currentComment);
-        }
-
-        return $comments;
     }
 
     private function quoteComment(string $comment): string
