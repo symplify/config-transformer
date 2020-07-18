@@ -15,6 +15,11 @@ use PhpParser\Node\Scalar\String_;
 final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
+     * @var string
+     */
+    private const TAG = 'tag';
+
+    /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
@@ -29,7 +34,7 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYam
         /** @var mixed[] $yaml */
         if (count($yaml) === 1 && is_string($yaml[0])) {
             $tagValue = new String_($yaml[0]);
-            return new MethodCall($methodCall, 'tag', [new Arg($tagValue)]);
+            return new MethodCall($methodCall, self::TAG, [new Arg($tagValue)]);
         }
 
         foreach ($yaml as $singleValue) {
@@ -44,7 +49,7 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYam
             $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($singleValue);
 
             $args = array_merge($args, $restArgs);
-            $methodCall = new MethodCall($methodCall, 'tag', $args);
+            $methodCall = new MethodCall($methodCall, self::TAG, $args);
         }
 
         return $methodCall;
