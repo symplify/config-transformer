@@ -40,13 +40,7 @@ final class DefaultsServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
 
     public function convertYamlToNode($key, $yaml): Node
     {
-        foreach ($yaml as $subKey => $subValue) {
-            if ($this->yamlCommentPreserver->isCommentKey($subKey)) {
-                $this->yamlCommentPreserver->collectComment($subValue);
-                unset($yaml[$subKey]);
-                continue;
-            }
-        }
+        $yaml = $this->yamlCommentPreserver->collectCommentsFromArray($yaml);
 
         $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
         $methodCall = $this->autoBindNodeFactory->createAutoBindCalls(
