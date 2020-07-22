@@ -40,10 +40,7 @@ final class ReturnClosureNodesFactory
         $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
-    /**
-     * @return Node[]
-     */
-    public function createFromYamlArray(array $yamlArray): array
+    public function createFromYamlArray(array $yamlArray): Return_
     {
         $yamlArray = $this->yamlCommentPreserver->collectCommentsFromArray($yamlArray);
         $collectedComments = $this->yamlCommentPreserver->getCollectedComments();
@@ -54,7 +51,7 @@ final class ReturnClosureNodesFactory
         $return = new Return_($closure);
         $this->yamlCommentPreserver->decorateNodeWithComments($return, $collectedComments);
 
-        return [$return];
+        return $return;
     }
 
     /**
