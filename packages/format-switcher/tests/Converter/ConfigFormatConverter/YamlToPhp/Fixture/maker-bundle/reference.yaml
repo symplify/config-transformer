@@ -9,6 +9,8 @@ services:
 -----
 <?php
 
+declare(strict_types=1);
+
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\ExistingClass;
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\ThirdFakeClass;
