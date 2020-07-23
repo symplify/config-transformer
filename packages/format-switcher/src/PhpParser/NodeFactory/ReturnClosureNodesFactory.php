@@ -7,7 +7,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
@@ -38,7 +37,7 @@ final class ReturnClosureNodesFactory
     /**
      * @var CaseConverterInterface[]
      */
-    private $caseConverters;
+    private $caseConverters = [];
 
     /**
      * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
@@ -81,6 +80,7 @@ final class ReturnClosureNodesFactory
         $nodes = $this->createNodesFromCaseConverters($yamlData);
 
         foreach ($yamlData as $key => $values) {
+            // handled else-where
             if ($this->yamlCommentPreserver->isCommentKey($key)) {
                 $this->yamlCommentPreserver->collectComment($values);
                 continue;
@@ -99,8 +99,6 @@ final class ReturnClosureNodesFactory
 
                 continue 2;
             }
-
-            throw new ShouldNotHappenException(sprintf('Key "%s" is not supported', $key));
         }
 
         return $nodes;
@@ -109,16 +107,6 @@ final class ReturnClosureNodesFactory
     private function removeEmptyValues(array $yamlData): array
     {
         return array_filter($yamlData);
-    }
-
-    private function createInitializeAssign(string $variableName, string $methodName): Expression
-    {
-        $servicesVariable = new Variable($variableName);
-        $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
-
-        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, $methodName));
-
-        return new Expression($assign);
     }
 
     /**
@@ -134,18 +122,46 @@ final class ReturnClosureNodesFactory
                 $nodes[] = $this->createInitializeAssign(VariableName::SERVICES, MethodName::SERVICES);
             }
 
+            if ($key === YamlKey::PARAMETERS) {
+                $nodes[] = $this->createInitializeAssign(VariableName::PARAMETERS, MethodName::PARAMETERS);
+            }
+
             foreach ($values as $nestedKey => $nestedValues) {
+                $expression = null;
                 foreach ($this->caseConverters as $caseConverter) {
                     if (! $caseConverter->match($key, $nestedKey, $nestedValues)) {
                         continue;
                     }
 
+                    if ($this->yamlCommentPreserver->isCommentKey($nestedKey)) {
+                        $this->yamlCommentPreserver->collectComment($nestedValues);
+                        continue;
+                    }
+
                     /** @var string $nestedKey */
-                    $nodes[] = $caseConverter->convertToMethodCall($nestedKey, $nestedValues);
+                    $expression = $caseConverter->convertToMethodCall($nestedKey, $nestedValues);
+                    break;
                 }
+
+                if ($expression === null) {
+                    continue;
+                }
+
+                $this->yamlCommentPreserver->decorateNodeWithComments($expression);
+                $nodes[] = $expression;
             }
         }
 
         return $nodes;
+    }
+
+    private function createInitializeAssign(string $variableName, string $methodName): Expression
+    {
+        $servicesVariable = new Variable($variableName);
+        $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
+
+        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, $methodName));
+
+        return new Expression($assign);
     }
 }

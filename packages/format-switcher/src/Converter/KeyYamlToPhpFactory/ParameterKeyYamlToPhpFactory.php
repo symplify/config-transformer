@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\PhpNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
-use PhpParser\Node;
-use PhpParser\Node\Expr\Assign;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -20,22 +21,31 @@ use PhpParser\Node\Stmt\Expression;
  *
  * parameters: <---
  */
-final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
+final class ParameterKeyYamlToPhpFactory implements CaseConverterInterface
 {
     /**
-     * @var PhpNodeFactory
+     * @var ArgsNodeFactory
      */
-    private $phpNodeFactory;
+    private $argsNodeFactory;
 
     /**
-     * @var YamlCommentPreserver
+     * @var CurrentFilePathProvider
      */
-    private $yamlCommentPreserver;
+    private $currentFilePathProvider;
 
-    public function __construct(PhpNodeFactory $phpNodeFactory, YamlCommentPreserver $yamlCommentPreserver)
-    {
-        $this->phpNodeFactory = $phpNodeFactory;
-        $this->yamlCommentPreserver = $yamlCommentPreserver;
+    /**
+     * @var CommonNodeFactory
+     */
+    private $commonNodeFactory;
+
+    public function __construct(
+        ArgsNodeFactory $argsNodeFactory,
+        CurrentFilePathProvider $currentFilePathProvider,
+        CommonNodeFactory $commonNodeFactory
+    ) {
+        $this->argsNodeFactory = $argsNodeFactory;
+        $this->currentFilePathProvider = $currentFilePathProvider;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
     public function getKey(): string
@@ -43,42 +53,46 @@ final class ParameterKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         return YamlKey::PARAMETERS;
     }
 
-    /**
-     * @param mixed[] $yaml
-     * @return Node[]
-     */
-    public function convertYamlToNodes(array $yaml): array
+    public function match(string $rootKey, $key, $values): bool
     {
-        if (count($yaml) === 0) {
-            return [];
-        }
-
-        $nodes = [];
-        $nodes[] = $this->createParametersInit();
-
-        foreach ($yaml as $parameterName => $value) {
-            if ($this->yamlCommentPreserver->isCommentKey($parameterName)) {
-                $this->yamlCommentPreserver->collectComment($value);
-                continue;
-            }
-
-            /** @var string $parameterName */
-            $parameterMethodCall = $this->phpNodeFactory->createParameterSetMethodCall($parameterName, $value);
-            $this->yamlCommentPreserver->decorateNodeWithComments($parameterMethodCall);
-
-            $nodes[] = $parameterMethodCall;
-        }
-
-        return $nodes;
+        return $rootKey === YamlKey::PARAMETERS;
     }
 
-    private function createParametersInit(): Expression
+    public function convertToMethodCall(string $key, $values): Expression
     {
-        $servicesVariable = new Variable(YamlKey::PARAMETERS);
-        $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
+        if (is_string($values)) {
+            $values = $this->prefixWithDirConstantIfExistingPath($values);
+        }
 
-        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, YamlKey::PARAMETERS));
+        if (is_array($values)) {
+            foreach ($values as $subKey => $subValue) {
+                if (! is_string($subValue)) {
+                    continue;
+                }
+                $values[$subKey] = $this->prefixWithDirConstantIfExistingPath($subValue);
+            }
+        }
 
-        return new Expression($assign);
+        $args = $this->argsNodeFactory->createFromValues([$key, $values]);
+
+        $parametersVariable = new Variable(VariableName::PARAMETERS);
+        $methodCall = new MethodCall($parametersVariable, MethodName::SET, $args);
+
+        return new Expression($methodCall);
+    }
+
+    /**
+     * @return Expr|string
+     */
+    private function prefixWithDirConstantIfExistingPath(string $value)
+    {
+        $configDirectory = dirname($this->currentFilePathProvider->getFilePath());
+
+        $possibleConfigPath = $configDirectory . '/' . $value;
+        if (is_file($possibleConfigPath) || is_dir($possibleConfigPath)) {
+            return $this->commonNodeFactory->createAbsoluteDirExpr($value);
+        }
+
+        return $value;
     }
 }
