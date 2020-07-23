@@ -44,10 +44,10 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
 
     public function convertYamlToNode($key, $yaml): Node
     {
-        $classReference = $this->commonNodeFactory->createClassReference($key);
+        $classConstFetch = $this->commonNodeFactory->createClassReference($key);
 
         $servicesVariable = new Variable(VariableName::SERVICES);
-        $args = [new Arg($classReference)];
+        $args = [new Arg($classConstFetch)];
 
         $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
         $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes(
