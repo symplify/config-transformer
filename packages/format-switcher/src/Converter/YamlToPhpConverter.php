@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ReturnClosureNodesFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
@@ -43,18 +44,25 @@ final class YamlToPhpConverter
      */
     private $yamlCommentPreserver;
 
+    /**
+     * @var CheckerServiceParametersShifter
+     */
+    private $checkerServiceParametersShifter;
+
     public function __construct(
         Parser $yamlParser,
         PhpConfigurationPrinter $phpConfigurationPrinter,
         ReturnClosureNodesFactory $returnClosureNodesFactory,
         YamlContentProvider $yamlContentProvider,
-        YamlCommentPreserver $yamlCommentPreserver
+        YamlCommentPreserver $yamlCommentPreserver,
+        CheckerServiceParametersShifter $checkerServiceParametersShifter
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpConfigurationPrinter = $phpConfigurationPrinter;
         $this->returnClosureNodesFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
         $this->yamlCommentPreserver = $yamlCommentPreserver;
+        $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
     }
 
     public function convert(string $yaml): string
@@ -64,6 +72,7 @@ final class YamlToPhpConverter
         $yaml = $this->yamlCommentPreserver->replaceCommentsWithKeyValuePlaceholder($yaml);
 
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
+        $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
 
         $return = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
 
