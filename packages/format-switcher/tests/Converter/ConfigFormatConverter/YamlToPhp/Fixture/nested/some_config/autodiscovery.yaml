@@ -15,9 +15,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->load('Symplify\Autodiscovery\\', __DIR__ . '/../src');
-
     $services->defaults()
         ->autowire()
         ->public();
+
+    $services->load('Symplify\Autodiscovery\\', __DIR__ . '/../src');
 };
