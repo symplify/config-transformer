@@ -85,4 +85,9 @@ final class YamlKey
      * @var string
      */
     public const ALIAS = 'alias';
+
+    /**
+     * @var string
+     */
+    public const CLASS_KEY = 'class';
 }
