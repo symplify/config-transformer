@@ -1,6 +1,6 @@
 services:
     some_class:
-        class: GuzzleHttp\Client
+        class: Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle
         arguments:
             $replacesByMethodAndTypes:
                 2: go
@@ -9,12 +9,12 @@ services:
 
 declare(strict_types=1);
 
-use GuzzleHttp\Client;
+use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set('some_class', Client::class)
+    $services->set('some_class', FakeGuzzle::class)
         ->arg('$replacesByMethodAndTypes', [2 => 'go']);
 };
