@@ -15,4 +15,9 @@ final class MethodName
      * @var string
      */
     public const ALIAS = 'alias';
+
+    /**
+     * @var string
+     */
+    public const SERVICES = 'services';
 }

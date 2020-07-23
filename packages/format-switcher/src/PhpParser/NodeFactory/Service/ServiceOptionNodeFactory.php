@@ -38,7 +38,7 @@ final class ServiceOptionNodeFactory
 
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
-            if (Strings::startsWith($key, 'decoration_')) {
+            if (Strings::startsWith($key, 'decoration_') || $key === 'alias') {
                 continue;
             }
 

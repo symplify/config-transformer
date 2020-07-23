@@ -27,11 +27,13 @@ use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConvert
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
+
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set('app.admin_email', 'original@example.com');
-
-    $services = $containerConfigurator->services();
 
     $services->defaults()
         ->autowire()
@@ -44,6 +46,4 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set('service2', FakeClass::class)
         ->args(['service2_arg']);
-
-    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
 };
