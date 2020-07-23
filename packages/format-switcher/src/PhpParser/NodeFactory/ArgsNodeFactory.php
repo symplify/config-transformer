@@ -219,7 +219,7 @@ final class ArgsNodeFactory
         }
 
         // do not print "\n" as empty space, but use string value instead
-        if (in_array($value, ["\n", "\r\n"], true)) {
+        if (in_array($value, ["\r", "\n", "\r\n"], true)) {
             $string = new String_($value);
             $string->setAttribute('kind', String_::KIND_DOUBLE_QUOTED);
 
