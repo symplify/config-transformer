@@ -10,5 +10,5 @@ interface CaseConverterInterface
 {
     public function match(string $rootKey, $key, $values): bool;
 
-    public function convertToMethodCall(string $key, $values): Expression;
+    public function convertToMethodCall($key, $values): Expression;
 }
