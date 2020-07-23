@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher;
 
+use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\ContainerBuilderAndFileContent;
@@ -89,6 +90,8 @@ final class ConfigLoader
         return new DelegatingLoader(new LoaderResolver([
             new GlobFileLoader($containerBuilder, new FileLocator()),
             new PhpFileLoader($containerBuilder, new FileLocator()),
+            // for easier ECS migraiton
+            new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator()),
             $loader,
         ]));
     }
