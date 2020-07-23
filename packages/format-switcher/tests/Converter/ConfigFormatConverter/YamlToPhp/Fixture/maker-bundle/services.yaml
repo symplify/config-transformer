@@ -33,11 +33,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services = $containerConfigurator->services();
 
-    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
-
     $services->defaults()
         ->autowire()
         ->autoconfigure();
+
+    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
 
     $services->set('service1', FakeClass::class)
         ->autowire(false)
