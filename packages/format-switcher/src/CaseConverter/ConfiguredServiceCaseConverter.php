@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
@@ -21,7 +21,7 @@ use PhpParser\Node\Stmt\Expression;
  * services:
  *     SomeNamespace\SomeClass: null <---
  */
-final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
+final class ConfiguredServiceCaseConverter implements CaseConverterInterface
 {
     /**
      * @var ArgsNodeFactory
@@ -39,20 +39,30 @@ final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
-        $args = $this->argsNodeFactory->createFromValues([$key]);
+        $valuesForArgs = [$key];
+
+        if (isset($values[YamlKey::CLASS_KEY])) {
+            $valuesForArgs[] = $values[YamlKey::CLASS_KEY];
+        }
+
+        $args = $this->argsNodeFactory->createFromValues($valuesForArgs);
         $methodCall = new MethodCall(new Variable(VariableName::SERVICES), MethodName::SET, $args);
 
-        $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
+        $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
 
         $expression = new Expression($methodCall);
         $expression->setAttribute('comments', $methodCall->getComments());
         return $expression;
     }
 
-    public function isMatch($key, $values): bool
+    public function match(string $rootKey, $key, $values): bool
     {
+        if ($rootKey !== YamlKey::SERVICES) {
+            return false;
+        }
+
         if ($key === YamlKey::_DEFAULTS) {
             return false;
         }

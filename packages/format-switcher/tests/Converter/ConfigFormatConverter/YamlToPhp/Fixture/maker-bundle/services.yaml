@@ -37,8 +37,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
-
     $services->set('service1', FakeClass::class)
         ->autowire(false)
         ->args(['service1_arg'])
@@ -46,4 +44,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set('service2', FakeClass::class)
         ->args(['service2_arg']);
+
+    $services->alias(SecondFakeClass::class . ' $variable', 'service1');
 };

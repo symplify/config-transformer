@@ -12,10 +12,11 @@ declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+# default configuration for services in *this* file
 return static function (ContainerConfigurator $containerConfigurator): void {
-    # default configuration for services in *this* file
     $services = $containerConfigurator->services();
 
+    # default configuration for services in *this* file
     # Automatically injects dependencies in your services.
     # Automatically registers your services as commands, event subscribers, etc.
     $services->defaults()
