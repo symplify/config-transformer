@@ -20,4 +20,9 @@ final class MethodName
      * @var string
      */
     public const SERVICES = 'services';
+
+    /**
+     * @var string
+     */
+    public const PARAMETERS = 'parameters';
 }
