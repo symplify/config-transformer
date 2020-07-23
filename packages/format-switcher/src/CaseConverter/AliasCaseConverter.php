@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\CaseConverter;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
@@ -61,8 +61,6 @@ final class AliasCaseConverter implements CaseConverterInterface
         $servicesVariable = new Variable(VariableName::SERVICES);
 
         if (class_exists($key) || interface_exists($key)) {
-            // $this->addUseStatementIfNecessary($values[self::ALIAS]); - @todo import alias
-
             $classReference = $this->commonNodeFactory->createClassReference($key);
 
             $argValues = [];
