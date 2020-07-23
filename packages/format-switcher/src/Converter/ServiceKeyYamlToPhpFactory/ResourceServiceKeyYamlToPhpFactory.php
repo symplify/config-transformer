@@ -7,7 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhp
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory;
-use PhpParser\Node;
+use PhpParser\Node\Stmt\Expression;
 
 /**
  * Handles this part:
@@ -28,7 +28,7 @@ final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
     }
 
-    public function convertYamlToNode($serviceKey, $serviceValues): Node
+    public function convertYamlToNode($serviceKey, $serviceValues): Expression
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($serviceValues['namespace'])) {
