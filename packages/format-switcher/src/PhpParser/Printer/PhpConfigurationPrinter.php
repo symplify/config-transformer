@@ -12,7 +12,10 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt\Declare_;
+use PhpParser\Node\Stmt\DeclareDeclare;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\NodeFinder;
@@ -50,6 +53,9 @@ final class PhpConfigurationPrinter extends Standard
         $stmts = $this->importFullyQualifiedNames($stmts);
         $this->completeEmptyLines($stmts);
 
+        // adds "declare(strict_types=1);" to every file
+        $stmts = $this->prependStrictTypesDeclare($stmts);
+
         $printedContent = parent::prettyPrintFile($stmts);
 
         // remove trailing spaces
@@ -61,6 +67,9 @@ final class PhpConfigurationPrinter extends Standard
             '#containerConfigurator\) : void#',
             'containerConfigurator): void'
         );
+
+        // remove space between declare strict types
+        $printedContent = Strings::replace($printedContent, '#declare \(strict#', 'declare(strict');
 
         return $printedContent . self::EOL_CHAR;
     }
@@ -148,5 +157,22 @@ final class PhpConfigurationPrinter extends Standard
     private function importFullyQualifiedNames(array $stmts): array
     {
         return $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
+    }
+
+    /**
+     * @param Node[] $stmts
+     * @return Node[]
+     */
+    private function prependStrictTypesDeclare(array $stmts): array
+    {
+        $strictTypesDeclare = $this->createStrictTypesDeclare();
+        return array_merge([$strictTypesDeclare, new Nop()], $stmts);
+    }
+
+    private function createStrictTypesDeclare(): Declare_
+    {
+        $declareDeclare = new DeclareDeclare('strict_types', new LNumber(1));
+
+        return new Declare_([$declareDeclare]);
     }
 }
