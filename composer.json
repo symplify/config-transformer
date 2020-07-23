@@ -15,9 +15,9 @@
         "nette/neon": "^3.0",
         "nette/utils": "^3.1",
         "nikic/php-parser": "^4.5",
-        "symplify/package-builder": "^8.1",
-        "symplify/autowire-array-parameter": "^8.1",
-        "symplify/smart-file-system": "^8.1"
+        "symplify/package-builder": "^8.1.17",
+        "symplify/autowire-array-parameter": "^8.1.17",
+        "symplify/smart-file-system": "^8.1.17"
     },
     "autoload": {
         "psr-4": {
