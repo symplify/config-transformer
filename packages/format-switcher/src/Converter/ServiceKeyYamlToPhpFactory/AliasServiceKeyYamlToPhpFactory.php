@@ -118,9 +118,9 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
     {
         $args = [];
 
-        $classConstReference = $this->commonNodeFactory->createClassReference($fullClassName);
+        $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
         $argumentName = strstr($key, '$');
-        $concat = new Concat($classConstReference, new String_(' ' . $argumentName));
+        $concat = new Concat($classConstFetch, new String_(' ' . $argumentName));
         $args[] = new Arg($concat);
 
         $serviceName = ltrim($serviceValues, '@');
