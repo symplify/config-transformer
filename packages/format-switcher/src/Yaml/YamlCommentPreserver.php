@@ -13,7 +13,7 @@ final class YamlCommentPreserver
     /**
      * @var string
      */
-    private const COMMENT_PREFIX = '__COMMENT__';
+    public const COMMENT_PREFIX = '__COMMENT__';
 
     /**
      * @see https://regex101.com/r/YMizb4/2
@@ -101,7 +101,9 @@ final class YamlCommentPreserver
             return;
         }
 
-        $node->setAttribute('comments', $this->collectedComments);
+        // prevent accidental duplications
+        $uniqueComments = array_unique($this->collectedComments);
+        $node->setAttribute('comments', $uniqueComments);
 
         $this->collectedComments = [];
     }
