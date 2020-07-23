@@ -10,8 +10,5 @@ interface CaseConverterInterface
 {
     public function match(string $rootKey, $key, $values): bool;
 
-    /**
-     * @param mixed[] $values
-     */
     public function convertToMethodCall(string $key, $values): Expression;
 }
