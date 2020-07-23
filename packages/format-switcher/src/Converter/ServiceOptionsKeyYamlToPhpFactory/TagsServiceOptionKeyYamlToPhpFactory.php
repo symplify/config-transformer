@@ -33,8 +33,8 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYam
     {
         /** @var mixed[] $yaml */
         if (count($yaml) === 1 && is_string($yaml[0])) {
-            $tagValue = new String_($yaml[0]);
-            return new MethodCall($methodCall, self::TAG, [new Arg($tagValue)]);
+            $string = new String_($yaml[0]);
+            return new MethodCall($methodCall, self::TAG, [new Arg($string)]);
         }
 
         foreach ($yaml as $singleValue) {

@@ -33,8 +33,8 @@ final class NameOnlyServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
 
     public function convertYamlToNode($key, $yaml): Node
     {
-        $classReference = $this->commonNodeFactory->createClassReference($key);
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
+        $classConstFetch = $this->commonNodeFactory->createClassReference($key);
+        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classConstFetch)]);
 
         return new Expression($setMethodCall);
     }
