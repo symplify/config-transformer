@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory;
 use PhpParser\Node\Stmt\Expression;
 
@@ -16,7 +16,7 @@ use PhpParser\Node\Stmt\Expression;
  *     App\\: <--
  *          source: '../src'
  */
-final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
+final class ResourceCaseConverter implements CaseConverterInterface
 {
     /**
      * @var ServicesPhpNodeFactory
@@ -28,18 +28,18 @@ final class ResourceServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFac
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
     }
 
-    public function convertYamlToNode($serviceKey, $serviceValues): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
-        if (isset($serviceValues['namespace'])) {
-            $serviceKey = $serviceValues['namespace'];
-            unset($serviceValues['namespace']);
+        if (isset($values['namespace'])) {
+            $key = $values['namespace'];
+            unset($values['namespace']);
         }
 
-        return $this->servicesPhpNodeFactory->createResource($serviceKey, $serviceValues);
+        return $this->servicesPhpNodeFactory->createResource($key, $values);
     }
 
-    public function isMatch($key, $values): bool
+    public function match(string $rootKey, $key, $values): bool
     {
         return isset($values[YamlKey::RESOURCE]);
     }
