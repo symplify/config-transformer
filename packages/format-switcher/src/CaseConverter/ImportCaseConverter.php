@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
@@ -25,7 +25,7 @@ use PhpParser\Node\Stmt\Expression;
  *
  * imports: <---
  */
-final class ImportsKeyYamlToPhpFactory implements CaseConverterInterface
+final class ImportCaseConverter implements CaseConverterInterface
 {
     /**
      * @var YamlArgumentSorter
