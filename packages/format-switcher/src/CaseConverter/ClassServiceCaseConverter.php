@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
+use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -21,13 +23,8 @@ use PhpParser\Node\Stmt\Expression;
  *     Some:
  *         class: Other <---
  */
-final class ClassServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
+final class ClassServiceCaseConverter implements CaseConverterInterface
 {
-    /**
-     * @var string
-     */
-    private const CLASS_KEY = 'class';
-
     /**
      * @var ArgsNodeFactory
      */
@@ -46,19 +43,32 @@ final class ClassServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
-        $args = $this->argsNodeFactory->createFromValues([$key, $yaml[self::CLASS_KEY]]);
+        $args = $this->argsNodeFactory->createFromValues([$key, $values[YamlKey::CLASS_KEY]]);
         $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), MethodName::SET, $args);
 
-        unset($yaml[self::CLASS_KEY]);
+        unset($values[YamlKey::CLASS_KEY]);
 
-        $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $setMethodCall);
+        $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $setMethodCall);
         return new Expression($setMethodCall);
     }
 
-    public function isMatch($key, $values): bool
+    public function match(string $rootKey, $key, $values): bool
     {
-        return isset($values[self::CLASS_KEY]) && ! isset($values[YamlKey::ALIAS]);
+        if ($rootKey !== YamlKey::SERVICES) {
+            return false;
+        }
+
+        // comments → skip
+        if (Strings::startsWith($key, YamlCommentPreserver::COMMENT_PREFIX)) {
+            return false;
+        }
+
+        if (is_array($values) && count($values) !== 1) {
+            return false;
+        }
+
+        return isset($values[YamlKey::CLASS_KEY]) && ! isset($values[YamlKey::ALIAS]);
     }
 }
