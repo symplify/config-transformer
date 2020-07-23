@@ -80,4 +80,9 @@ final class YamlKey
      * @var string
      */
     public const TAGS = 'tags';
+
+    /**
+     * @var string
+     */
+    public const ALIAS = 'alias';
 }
