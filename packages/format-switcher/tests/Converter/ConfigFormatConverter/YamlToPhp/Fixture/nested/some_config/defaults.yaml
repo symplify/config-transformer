@@ -8,6 +8,8 @@ services:
 -----
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Filesystem\Filesystem;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
