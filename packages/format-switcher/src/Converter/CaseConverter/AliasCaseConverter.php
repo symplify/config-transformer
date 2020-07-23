@@ -6,6 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
@@ -51,8 +52,12 @@ final class AliasCaseConverter implements CaseConverterInterface
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertToMethodCall(string $key, $values): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
+        if (! is_string($key)) {
+            throw new ShouldNotHappenException();
+        }
+
         $servicesVariable = new Variable(VariableName::SERVICES);
 
         if (class_exists($key) || interface_exists($key)) {
