@@ -58,7 +58,7 @@ final class ParameterKeyYamlToPhpFactory implements CaseConverterInterface
         return $rootKey === YamlKey::PARAMETERS;
     }
 
-    public function convertToMethodCall(string $key, $values): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
         if (is_string($values)) {
             $values = $this->prefixWithDirConstantIfExistingPath($values);
