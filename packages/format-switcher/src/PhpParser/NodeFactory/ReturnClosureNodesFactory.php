@@ -118,13 +118,7 @@ final class ReturnClosureNodesFactory
         $nodes = [];
 
         foreach ($yamlData as $key => $values) {
-            if ($key === YamlKey::SERVICES) {
-                $nodes[] = $this->createInitializeAssign(VariableName::SERVICES, MethodName::SERVICES);
-            }
-
-            if ($key === YamlKey::PARAMETERS) {
-                $nodes[] = $this->createInitializeAssign(VariableName::PARAMETERS, MethodName::PARAMETERS);
-            }
+            $nodes = $this->createInitializeNode($key, $nodes);
 
             foreach ($values as $nestedKey => $nestedValues) {
                 $expression = null;
@@ -163,5 +157,18 @@ final class ReturnClosureNodesFactory
         $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, $methodName));
 
         return new Expression($assign);
+    }
+
+    private function createInitializeNode(string $key, array $nodes): array
+    {
+        if ($key === YamlKey::SERVICES) {
+            $nodes[] = $this->createInitializeAssign(VariableName::SERVICES, MethodName::SERVICES);
+        }
+
+        if ($key === YamlKey::PARAMETERS) {
+            $nodes[] = $this->createInitializeAssign(VariableName::PARAMETERS, MethodName::PARAMETERS);
+        }
+
+        return $nodes;
     }
 }
