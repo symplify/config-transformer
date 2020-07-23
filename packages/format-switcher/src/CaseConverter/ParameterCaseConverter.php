@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
@@ -21,7 +21,7 @@ use PhpParser\Node\Stmt\Expression;
  *
  * parameters: <---
  */
-final class ParameterKeyYamlToPhpFactory implements CaseConverterInterface
+final class ParameterCaseConverter implements CaseConverterInterface
 {
     /**
      * @var ArgsNodeFactory
