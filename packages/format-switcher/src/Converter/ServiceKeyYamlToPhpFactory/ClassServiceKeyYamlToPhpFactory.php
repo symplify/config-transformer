@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
 
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -45,10 +46,10 @@ final class ClassServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Node
+    public function convertYamlToNode($key, $yaml): Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$key, $yaml[self::CLASS_KEY]]);
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
+        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), MethodName::SET, $args);
 
         unset($yaml[self::CLASS_KEY]);
 
@@ -58,6 +59,6 @@ final class ClassServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
 
     public function isMatch($key, $values): bool
     {
-        return isset($values[self::CLASS_KEY]);
+        return isset($values[self::CLASS_KEY]) && ! isset($values[YamlKey::ALIAS]);
     }
 }
