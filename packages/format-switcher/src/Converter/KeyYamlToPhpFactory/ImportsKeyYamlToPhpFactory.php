@@ -70,7 +70,11 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
             if (is_array($import)) {
                 $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists(
                     $import,
-                    [YamlKey::RESOURCE => '', 'type' => null, YamlKey::IGNORE_ERRORS => false]
+                    [
+                        YamlKey::RESOURCE => '',
+                        'type' => null,
+                        YamlKey::IGNORE_ERRORS => false,
+                    ]
                 );
 
                 $nodes[] = $this->createImportMethodCall($arguments);

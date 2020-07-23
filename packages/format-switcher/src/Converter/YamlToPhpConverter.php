@@ -65,8 +65,8 @@ final class YamlToPhpConverter
 
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
 
-        $nodes = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
+        $return = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
 
-        return $this->phpConfigurationPrinter->prettyPrintFile($nodes);
+        return $this->phpConfigurationPrinter->prettyPrintFile([$return]);
     }
 }
