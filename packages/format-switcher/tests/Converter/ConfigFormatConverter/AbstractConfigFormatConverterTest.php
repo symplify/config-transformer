@@ -93,8 +93,8 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $this->smartFileSystem->dumpFile($localFile, $yamlContent);
 
         $containerBuilder = new ContainerBuilder();
-        $fileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
-        $fileLoader->load($localFile);
+        $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
+        $yamlFileLoader->load($localFile);
 
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
 
