@@ -9,5 +9,10 @@ final class MethodName
     /**
      * @var string
      */
-    public const SET_METHOD_NAME = 'set';
+    public const SET = 'set';
+
+    /**
+     * @var string
+     */
+    public const ALIAS = 'alias';
 }
