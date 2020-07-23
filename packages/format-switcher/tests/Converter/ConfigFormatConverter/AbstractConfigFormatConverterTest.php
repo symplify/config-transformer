@@ -68,25 +68,6 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         );
     }
 
-    /**
-     * @todo decouple to migrify/easy-testing
-     */
-    protected function updateFixture(
-        SmartFileInfo $fileInfo,
-        SmartFileInfo $inputFileInfo,
-        string $convertedContent
-    ): void {
-        if (! getenv('UPDATE_TESTS')) {
-            return;
-        }
-
-        $newOriginalContent = rtrim($inputFileInfo->getContents()) . PHP_EOL . SplitLine::LINE . rtrim(
-            $convertedContent
-        ) . PHP_EOL;
-
-        $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $newOriginalContent);
-    }
-
     protected function doTestYamlContentIsLoadable(string $yamlContent): void
     {
         $localFile = sys_get_temp_dir() . '/_migrify_temporary_yaml/some_file.yaml';
@@ -118,5 +99,24 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         if ($outputFormat === Format::YAML) {
             $this->doTestYamlContentIsLoadable($convertedContent);
         }
+    }
+
+    /**
+     * @todo decouple to migrify/easy-testing
+     */
+    private function updateFixture(
+        SmartFileInfo $fileInfo,
+        SmartFileInfo $inputFileInfo,
+        string $convertedContent
+    ): void {
+        if (! getenv('UPDATE_TESTS')) {
+            return;
+        }
+
+        $newOriginalContent = rtrim($inputFileInfo->getContents()) . PHP_EOL .
+            SplitLine::LINE .
+            rtrim($convertedContent) . PHP_EOL;
+
+        $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $newOriginalContent);
     }
 }

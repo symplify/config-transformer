@@ -189,7 +189,7 @@ final class ArgsNodeFactory
             $shouldWrapInArray = true;
         } elseif ($taggedValue->getTag() === self::TAG_SERVICE) {
             $serviceName = $taggedValue->getValue()['class'];
-            $functionName = FunctionName::INLINE_SERVICE_FUNCTION_NAME;
+            $functionName = FunctionName::INLINE_SERVICE;
         } else {
             if (is_array($taggedValue->getValue())) {
                 $args = $this->createFromValues($taggedValue->getValue());
@@ -213,6 +213,19 @@ final class ArgsNodeFactory
         bool $skipServiceReference,
         bool $skipClassesToConstantReference
     ): Expr {
+        $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
+        if ($constFetch !== null) {
+            return $constFetch;
+        }
+
+        // do not print "\n" as empty space, but use string value instead
+        if (in_array($value, ["\r", "\n", "\r\n"], true)) {
+            $string = new String_($value);
+            $string->setAttribute('kind', String_::KIND_DOUBLE_QUOTED);
+
+            return $string;
+        }
+
         $value = ltrim($value, '\\');
 
         if (ctype_upper($value[0]) && class_exists($value) || interface_exists($value)) {
@@ -227,18 +240,13 @@ final class ArgsNodeFactory
             $value = ltrim($value, '@=');
             $args = $this->createFromValues($value);
 
-            return new FuncCall(new FullyQualified(FunctionName::EXPR_FUNCTION_NAME), $args);
+            return new FuncCall(new FullyQualified(FunctionName::EXPR), $args);
         }
 
         // is service reference
         if (Strings::startsWith($value, '@')) {
             $refOrServiceFunctionName = $this->getRefOrServiceFunctionName();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
-        }
-
-        $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
-        if ($constFetch !== null) {
-            return $constFetch;
         }
 
         return BuilderHelpers::normalizeValue($value);
@@ -282,9 +290,9 @@ final class ArgsNodeFactory
     private function getRefOrServiceFunctionName(): string
     {
         if ($this->configuration->isAtLeastSymfonyVersion(SymfonyVersionFeature::REF_OVER_SERVICE)) {
-            return FunctionName::SERVICE_FUNCTION_NAME;
+            return FunctionName::SERVICE;
         }
 
-        return FunctionName::REF_FUNCTION_NAME;
+        return FunctionName::REF;
     }
 }
