@@ -7,7 +7,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ManyConfigurationInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServicesPhpNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node;
 
@@ -24,11 +23,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     private const SERVICES = 'services';
 
     /**
-     * @var ServicesPhpNodeFactory
-     */
-    private $servicesPhpNodeFactory;
-
-    /**
      * @var ServiceKeyYamlToPhpFactoryInterface[]
      */
     private $serviceKeyYamlToPhpFactories = [];
@@ -41,12 +35,8 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
     /**
      * @param ServiceKeyYamlToPhpFactoryInterface[] $serviceKeyYamlToPhpFactories
      */
-    public function __construct(
-        ServicesPhpNodeFactory $servicesPhpNodeFactory,
-        YamlCommentPreserver $yamlCommentPreserver,
-        array $serviceKeyYamlToPhpFactories
-    ) {
-        $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
+    public function __construct(YamlCommentPreserver $yamlCommentPreserver, array $serviceKeyYamlToPhpFactories)
+    {
         $this->serviceKeyYamlToPhpFactories = $serviceKeyYamlToPhpFactories;
         $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
@@ -66,7 +56,6 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         }
 
         $nodes = [];
-        $nodes[] = $this->servicesPhpNodeFactory->createServicesInit();
 
         foreach ($yaml as $serviceKey => $serviceValues) {
             $serviceValues = $serviceValues ?? [];
@@ -113,9 +102,9 @@ final class ServicesKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         $subserviceKey,
         $subserviceValues
     ) {
-        $node = $serviceKeyYamlToPhpFactory->convertYamlToNode($subserviceKey, $subserviceValues);
-        $this->yamlCommentPreserver->decorateNodeWithComments($node);
+        $expression = $serviceKeyYamlToPhpFactory->convertYamlToNode($subserviceKey, $subserviceValues);
+        $this->yamlCommentPreserver->decorateNodeWithComments($expression);
 
-        return $node;
+        return $expression;
     }
 }

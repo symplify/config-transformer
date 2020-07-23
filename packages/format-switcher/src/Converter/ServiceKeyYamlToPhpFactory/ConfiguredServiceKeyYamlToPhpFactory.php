@@ -8,8 +8,9 @@ use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\Node;
+use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -38,10 +39,10 @@ final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Node
+    public function convertYamlToNode($key, $yaml): Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$key]);
-        $methodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', $args);
+        $methodCall = new MethodCall(new Variable(VariableName::SERVICES), MethodName::SET, $args);
 
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
 
@@ -64,10 +65,24 @@ final class ConfiguredServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
             return false;
         }
 
+        // handled by @see \Migrify\ConfigTransformer\FormatSwitcher\Converter\CaseConverter\AliasCaseConverter
+        if ($this->isAlias($values)) {
+            return false;
+        }
+
         if ($values === null) {
             return false;
         }
 
         return $values !== [];
+    }
+
+    private function isAlias($values): bool
+    {
+        if (isset($values[YamlKey::ALIAS])) {
+            return true;
+        }
+
+        return is_string($values) && Strings::startsWith($values, '@');
     }
 }
