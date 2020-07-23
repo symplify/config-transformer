@@ -57,7 +57,7 @@ final class PhpNodeFactory
         $args = $this->argsNodeFactory->createFromValues([$parameterName, $value]);
 
         $parametersVariable = new Variable(VariableName::PARAMETERS);
-        $methodCall = new MethodCall($parametersVariable, MethodName::SET_METHOD_NAME, $args);
+        $methodCall = new MethodCall($parametersVariable, MethodName::SET, $args);
 
         return new Expression($methodCall);
     }
