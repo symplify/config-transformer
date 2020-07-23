@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\AutoBindNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node\Expr\MethodCall;
@@ -41,7 +42,7 @@ final class ServicesDefaultsCaseConverter implements CaseConverterInterface
     {
         $values = $this->yamlCommentPreserver->collectCommentsFromArray($values);
 
-        $methodCall = new MethodCall($this->createServicesVariable(), 'defaults');
+        $methodCall = new MethodCall($this->createServicesVariable(), MethodName::DEFAULTS);
         $methodCall = $this->autoBindNodeFactory->createAutoBindCalls(
             $values,
             $methodCall,

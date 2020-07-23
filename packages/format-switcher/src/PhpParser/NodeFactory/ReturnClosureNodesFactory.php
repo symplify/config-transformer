@@ -94,9 +94,6 @@ final class ReturnClosureNodesFactory
                 $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
                 $nodes = array_merge($nodes, $freshNodes);
 
-                $firstNode = $nodes[0];
-                $this->yamlCommentPreserver->decorateNodeWithComments($firstNode);
-
                 continue 2;
             }
         }
