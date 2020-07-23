@@ -232,13 +232,13 @@ final class ArgsNodeFactory
 
         // is service reference
         if (Strings::startsWith($value, '@')) {
-            $functionName = $this->getRefOrServiceFunctionName();
-            return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $functionName);
+            $refOrServiceFunctionName = $this->getRefOrServiceFunctionName();
+            return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
 
-        $constantValue = $this->constantNodeFactory->createConstantIfValue($value);
-        if ($constantValue !== null) {
-            return $constantValue;
+        $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
+        if ($constFetch !== null) {
+            return $constFetch;
         }
 
         return BuilderHelpers::normalizeValue($value);
