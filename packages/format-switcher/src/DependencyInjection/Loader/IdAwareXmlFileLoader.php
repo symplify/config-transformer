@@ -95,17 +95,17 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         $definitions = [];
         $suffix = '~' . ContainerBuilder::hash($file);
 
-        $xpath = new DOMXPath($domDocument);
-        $xpath->registerNamespace('container', self::NS);
+        $domxPath = new DOMXPath($domDocument);
+        $domxPath->registerNamespace('container', self::NS);
 
-        $definitions = $this->processAnonymousServicesInArguments($xpath, $suffix, $file, $definitions);
+        $definitions = $this->processAnonymousServicesInArguments($domxPath, $suffix, $file, $definitions);
 
         /** @var DOMNodeList $nodeWithIds */
-        $nodeWithIds = $xpath->query('//container:services/container:service[@id]');
+        $nodeWithIds = $domxPath->query('//container:services/container:service[@id]');
         $hasNamedServices = (bool) $nodeWithIds->length;
 
         // anonymous services "in the wild"
-        if (false !== $nodes = $xpath->query('//container:services/container:service[not(@id)]')) {
+        if (false !== $nodes = $domxPath->query('//container:services/container:service[not(@id)]')) {
             /** @var DOMElement $node */
             foreach ($nodes as $node) {
                 $id = $this->createAnonymousServiceId($hasNamedServices, $node, $file);

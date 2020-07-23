@@ -67,13 +67,13 @@ final class ConfigLoader
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): Loader
     {
         if ($suffix === Format::XML) {
-            $xmlLoader = $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
-            return $this->wrapToDelegatingLoader($xmlLoader, $containerBuilder);
+            $idAwareXmlFileLoader = $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
+            return $this->wrapToDelegatingLoader($idAwareXmlFileLoader, $containerBuilder);
         }
 
         if (in_array($suffix, [Format::YML, Format::YAML], true)) {
-            $yamlLoader = new YamlFileLoader($containerBuilder, new FileLocator());
-            return $this->wrapToDelegatingLoader($yamlLoader, $containerBuilder);
+            $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
+            return $this->wrapToDelegatingLoader($yamlFileLoader, $containerBuilder);
         }
 
         if ($suffix === Format::PHP) {
