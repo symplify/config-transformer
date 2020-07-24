@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\KeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Sorter\YamlArgumentSorter;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
-use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
@@ -26,7 +25,7 @@ use PhpParser\Node\Stmt\Expression;
  *
  * imports: <---
  */
-final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
+final class ImportCaseConverter implements CaseConverterInterface
 {
     /**
      * @var YamlArgumentSorter
@@ -58,33 +57,24 @@ final class ImportsKeyYamlToPhpFactory implements KeyYamlToPhpFactoryInterface
         return YamlKey::IMPORTS;
     }
 
-    /**
-     * @param mixed[] $yaml
-     * @return Node[]
-     */
-    public function convertYamlToNodes(array $yaml): array
+    public function match(string $rootKey, $key, $values): bool
     {
-        $nodes = [];
+        return $rootKey === YamlKey::IMPORTS;
+    }
 
-        foreach ($yaml as $import) {
-            if (is_array($import)) {
-                $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists(
-                    $import,
-                    [
-                        YamlKey::RESOURCE => '',
-                        'type' => null,
-                        YamlKey::IGNORE_ERRORS => false,
-                    ]
-                );
+    public function convertToMethodCall($key, $values): Expression
+    {
+        if (is_array($values)) {
+            $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [
+                YamlKey::RESOURCE => '',
+                'type' => null,
+                YamlKey::IGNORE_ERRORS => false,
+            ]);
 
-                $nodes[] = $this->createImportMethodCall($arguments);
-                continue;
-            }
-
-            throw new NotImplementedYetException();
+            return $this->createImportMethodCall($arguments);
         }
 
-        return $nodes;
+        throw new NotImplementedYetException();
     }
 
     /**

@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
@@ -23,13 +25,8 @@ use PhpParser\Node\Stmt\Expression;
  * services:
  *     Some: Other <---
  */
-final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface
+final class AliasCaseConverter implements CaseConverterInterface
 {
-    /**
-     * @var string
-     */
-    private const ALIAS = 'alias';
-
     /**
      * @var CommonNodeFactory
      */
@@ -55,55 +52,61 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Node
+    public function convertToMethodCall($key, $values): Expression
     {
-        $servicesVariable = new Variable('services');
+        if (! is_string($key)) {
+            throw new ShouldNotHappenException();
+        }
+
+        $servicesVariable = new Variable(VariableName::SERVICES);
 
         if (class_exists($key) || interface_exists($key)) {
-            // $this->addUseStatementIfNecessary($values[self::ALIAS]); - @todo import alias
-
             $classReference = $this->commonNodeFactory->createClassReference($key);
 
             $argValues = [];
             $argValues[] = $classReference;
-            $argValues[] = $yaml[self::ALIAS] ?? $yaml;
+            $argValues[] = $values[MethodName::ALIAS] ?? $values;
 
             $args = $this->argsNodeFactory->createFromValues($argValues, true);
-            $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
+            $methodCall = new MethodCall($servicesVariable, MethodName::ALIAS, $args);
             return new Expression($methodCall);
         }
 
         // handles: "SomeClass $someVariable: ..."
         if ($fullClassName = strstr($key, ' $', true)) {
-            $methodCall = $this->createAliasNode($key, $fullClassName, $yaml);
+            $methodCall = $this->createAliasNode($key, $fullClassName, $values);
             return new Expression($methodCall);
         }
 
-        if (isset($yaml[self::ALIAS])) {
-            $className = $yaml[self::ALIAS];
+        if (isset($values[MethodName::ALIAS])) {
+            $className = $values[MethodName::ALIAS];
 
             $classReference = $this->commonNodeFactory->createClassReference($className);
             $args = $this->argsNodeFactory->createFromValues([$key, $classReference]);
-            $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
+            $methodCall = new MethodCall($servicesVariable, MethodName::ALIAS, $args);
 
-            unset($yaml[self::ALIAS]);
+            unset($values[MethodName::ALIAS]);
         }
 
-        /** @var string|mixed[] $yaml */
-        if (is_string($yaml) && $yaml[0] === '@') {
-            $args = $this->argsNodeFactory->createFromValues([$yaml], true);
-            $methodCall = new MethodCall($servicesVariable, self::ALIAS, $args);
-        } elseif (is_array($yaml)) {
+        /** @var string|mixed[] $values */
+        if (is_string($values) && $values[0] === '@') {
+            $args = $this->argsNodeFactory->createFromValues([$values], true);
+            $methodCall = new MethodCall($servicesVariable, MethodName::ALIAS, $args);
+        } elseif (is_array($values)) {
             /** @var MethodCall $methodCall */
-            $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($yaml, $methodCall);
+            $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
         }
 
         return new Expression($methodCall);
     }
 
-    public function isMatch($key, $values): bool
+    public function match(string $rootKey, $key, $values): bool
     {
-        if (isset($values[self::ALIAS])) {
+        if ($rootKey !== YamlKey::SERVICES) {
+            return false;
+        }
+
+        if (isset($values[YamlKey::ALIAS])) {
             return true;
         }
 
@@ -126,6 +129,6 @@ final class AliasServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactor
         $serviceName = ltrim($serviceValues, '@');
         $args[] = new Arg(new String_($serviceName));
 
-        return new MethodCall(new Variable(VariableName::SERVICES), self::ALIAS, $args);
+        return new MethodCall(new Variable(VariableName::SERVICES), MethodName::ALIAS, $args);
     }
 }

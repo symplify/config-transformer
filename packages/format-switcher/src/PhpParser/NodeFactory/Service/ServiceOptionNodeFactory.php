@@ -6,7 +6,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlServiceKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
@@ -34,11 +33,18 @@ final class ServiceOptionNodeFactory
 
     public function convertServiceOptionsToNodes(array $servicesValues, MethodCall $methodCall): MethodCall
     {
+        $servicesValues = $this->yamlCommentPreserver->collectCommentsFromArray($servicesValues);
+
         $servicesValues = $this->unNestArguments($servicesValues);
 
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
-            if (Strings::startsWith($key, 'decoration_')) {
+            if (Strings::startsWith($key, 'decoration_') || $key === 'alias') {
+                continue;
+            }
+
+            if ($this->yamlCommentPreserver->isCommentKey($key)) {
+                $this->yamlCommentPreserver->collectComment($value);
                 continue;
             }
 
@@ -58,13 +64,8 @@ final class ServiceOptionNodeFactory
                     $methodCall
                 );
 
-                $this->yamlCommentPreserver->decorateNodeWithComments($methodCall);
-
                 continue 2;
             }
-
-            $message = sprintf('Unexpected service configuration option "%s".', $key);
-            throw new ShouldNotHappenException($message);
         }
 
         return $methodCall;
@@ -87,11 +88,12 @@ final class ServiceOptionNodeFactory
 
     private function unNestArguments(array $servicesValues): array
     {
-        if ($this->isNestedArguments($servicesValues)) {
-            $servicesValues = [
-                YamlServiceKey::ARGUMENTS => $servicesValues,
-            ];
+        if (! $this->isNestedArguments($servicesValues)) {
+            return $servicesValues;
         }
-        return $servicesValues;
+
+        return [
+            YamlServiceKey::ARGUMENTS => $servicesValues,
+        ];
     }
 }
