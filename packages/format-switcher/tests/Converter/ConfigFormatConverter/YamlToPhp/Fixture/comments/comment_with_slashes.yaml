@@ -10,6 +10,8 @@ declare(strict_types=1);
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\ExistingClass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+# requires configuration
+#     Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\FakeClass
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
