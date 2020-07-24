@@ -6,7 +6,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\KeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\NestedCaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
@@ -25,11 +25,6 @@ final class ReturnClosureNodesFactory
     private $closureNodeFactory;
 
     /**
-     * @var KeyYamlToPhpFactoryInterface[]
-     */
-    private $keyYamlToPhpFactories = [];
-
-    /**
      * @var YamlCommentPreserver
      */
     private $yamlCommentPreserver;
@@ -40,19 +35,24 @@ final class ReturnClosureNodesFactory
     private $caseConverters = [];
 
     /**
-     * @param KeyYamlToPhpFactoryInterface[] $keyYamlToPhpFactories
+     * @var NestedCaseConverterInterface[]
+     */
+    private $nestedCaseConverters = [];
+
+    /**
      * @param CaseConverterInterface[] $caseConverters
+     * @param NestedCaseConverterInterface[] $nestedCaseConverters
      */
     public function __construct(
         ClosureNodeFactory $closureNodeFactory,
         YamlCommentPreserver $yamlCommentPreserver,
-        array $keyYamlToPhpFactories,
-        array $caseConverters
+        array $caseConverters,
+        array $nestedCaseConverters
     ) {
         $this->closureNodeFactory = $closureNodeFactory;
-        $this->keyYamlToPhpFactories = $keyYamlToPhpFactories;
         $this->yamlCommentPreserver = $yamlCommentPreserver;
         $this->caseConverters = $caseConverters;
+        $this->nestedCaseConverters = $nestedCaseConverters;
     }
 
     public function createFromYamlArray(array $yamlArray): Return_
@@ -76,29 +76,7 @@ final class ReturnClosureNodesFactory
     {
         $yamlData = $this->removeEmptyValues($yamlData);
 
-        // new single-interface approach to handle all cases
-        $nodes = $this->createNodesFromCaseConverters($yamlData);
-
-        foreach ($yamlData as $key => $values) {
-            // handled else-where
-            if ($this->yamlCommentPreserver->isCommentKey($key)) {
-                $this->yamlCommentPreserver->collectComment($values);
-                continue;
-            }
-
-            foreach ($this->keyYamlToPhpFactories as $keyYamlToPhpFactory) {
-                if ($keyYamlToPhpFactory->getKey() !== $key) {
-                    continue;
-                }
-
-                $freshNodes = $keyYamlToPhpFactory->convertYamlToNodes($values);
-                $nodes = array_merge($nodes, $freshNodes);
-
-                continue 2;
-            }
-        }
-
-        return $nodes;
+        return $this->createNodesFromCaseConverters($yamlData);
     }
 
     private function removeEmptyValues(array $yamlData): array
@@ -119,6 +97,31 @@ final class ReturnClosureNodesFactory
 
             foreach ($values as $nestedKey => $nestedValues) {
                 $expression = null;
+
+                $nestedNodes = [];
+                if (is_array($nestedValues)) {
+                    foreach ($nestedValues as $subNestedKey => $subNestedValue) {
+                        if ($this->yamlCommentPreserver->isCommentKey($subNestedKey)) {
+                            $this->yamlCommentPreserver->collectComment($subNestedValue);
+                            continue;
+                        }
+
+                        foreach ($this->nestedCaseConverters as $nestedCaseConverter) {
+                            if (! $nestedCaseConverter->match($key, $nestedKey)) {
+                                continue;
+                            }
+
+                            $expression = $nestedCaseConverter->convertToMethodCall($subNestedKey, $subNestedValue);
+                            $nestedNodes[] = $expression;
+                        }
+                    }
+                }
+
+                if ($nestedNodes !== []) {
+                    $nodes = array_merge($nodes, $nestedNodes);
+                    continue;
+                }
+
                 foreach ($this->caseConverters as $caseConverter) {
                     if (! $caseConverter->match($key, $nestedKey, $nestedValues)) {
                         continue;
