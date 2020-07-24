@@ -10,7 +10,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlTo
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -42,7 +41,7 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Node
+    public function convertYamlToNode($key, $yaml): Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
 

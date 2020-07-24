@@ -8,7 +8,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFacto
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String_;
@@ -44,15 +43,6 @@ final class ServicesPhpNodeFactory
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->autoBindNodeFactory = $autoBindNodeFactory;
-    }
-
-    public function createServicesInit(): Expression
-    {
-        $servicesVariable = new Variable(VariableName::SERVICES);
-        $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
-
-        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, 'services'));
-        return new Expression($assign);
     }
 
     public function createResource(string $serviceKey, array $serviceValues): Expression
