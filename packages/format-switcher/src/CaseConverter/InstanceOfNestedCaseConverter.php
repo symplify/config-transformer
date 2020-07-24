@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Converter\ServiceKeyYamlToPhpFactory;
+namespace Migrify\ConfigTransformer\FormatSwitcher\CaseConverter;
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ManyConfigurationInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceKeyYamlToPhpFactoryInterface;
+use Migrify\ConfigTransformer\FormatSwitcher\Contract\NestedCaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\CommonNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
@@ -21,7 +21,7 @@ use PhpParser\Node\Stmt\Expression;
  * services:
  *     _instanceof: <---
  */
-final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpFactoryInterface, ManyConfigurationInterface
+final class InstanceOfNestedCaseConverter implements NestedCaseConverterInterface
 {
     /**
      * @var CommonNodeFactory
@@ -41,16 +41,16 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
 
-    public function convertYamlToNode($key, $yaml): Expression
+    public function convertToMethodCall($key, $values): Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
 
         $servicesVariable = new Variable(VariableName::SERVICES);
         $args = [new Arg($classConstFetch)];
 
-        $instanceofMethodCall = new MethodCall($servicesVariable, 'instanceof', $args);
+        $instanceofMethodCall = new MethodCall($servicesVariable, MethodName::INSTANCEOF, $args);
         $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes(
-            $yaml,
+            $values,
             $instanceofMethodCall
         );
 
@@ -60,8 +60,16 @@ final class InstanceOfServiceKeyYamlToPhpFactory implements ServiceKeyYamlToPhpF
         return $expression;
     }
 
-    public function isMatch($key, $values): bool
+    public function match(string $rootKey, $subKey): bool
     {
-        return $key === YamlKey::_INSTANCEOF;
+        if ($rootKey !== YamlKey::SERVICES) {
+            return false;
+        }
+
+        if (! is_string($subKey)) {
+            return false;
+        }
+
+        return $subKey === YamlKey::_INSTANCEOF;
     }
 }
