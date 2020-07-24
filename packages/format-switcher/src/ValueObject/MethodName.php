@@ -30,4 +30,9 @@ final class MethodName
      * @var string
      */
     public const DEFAULTS = 'defaults';
+
+    /**
+     * @var string
+     */
+    public const INSTANCEOF = 'instanceof';
 }
