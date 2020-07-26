@@ -90,4 +90,12 @@ final class YamlKey
      * @var string
      */
     public const CLASS_KEY = 'class';
+
+    /**
+     * @return string[]
+     */
+    public function provideRootKeys(): array
+    {
+        return [self::PARAMETERS, self::IMPORTS, self::SERVICES];
+    }
 }

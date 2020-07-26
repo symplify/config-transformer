@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher;
 
+use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ExtensionFaker;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
@@ -33,12 +34,19 @@ final class ConfigLoader
      */
     private $smartFileSystem;
 
+    /**
+     * @var ExtensionFaker
+     */
+    private $extensionFaker;
+
     public function __construct(
         IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
-        SmartFileSystem $smartFileSystem
+        SmartFileSystem $smartFileSystem,
+        ExtensionFaker $extensionFaker
     ) {
         $this->idAwareXmlFileLoaderFactory = $idAwareXmlFileLoaderFactory;
         $this->smartFileSystem = $smartFileSystem;
+        $this->extensionFaker = $extensionFaker;
     }
 
     public function createAndLoadContainerBuilderFromFileInfo(
@@ -52,12 +60,15 @@ final class ConfigLoader
 
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
-        if (in_array($smartFileInfo->getSuffix(), ['yml', 'yaml'], true)) {
+
+        if (in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], true)) {
             $content = Strings::replace($content, '#\!php\/const\:( )?#', '!php/const ');
             if ($content !== $smartFileInfo->getContents()) {
                 $fileRealPath = sys_get_temp_dir() . '/_migrify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
                 $this->smartFileSystem->dumpFile($fileRealPath, $content);
             }
+
+            $this->extensionFaker->fakeInContainerBuilder($containerBuilder, $content);
         }
 
         $loader->load($fileRealPath);
