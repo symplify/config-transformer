@@ -17,7 +17,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure();
 
     $services->load('Migrify\ConfigTransformer\FormatSwitcher\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/DependencyInjection/Loader/*', __DIR__ . '/../src/ValueObject/*']);
+        ->exclude([
+            __DIR__ . '/../src/DependencyInjection/Loader/*',
+            __DIR__ . '/../src/ValueObject/*',
+            // configurable class for faking extensions
+            __DIR__ . '/../src/DependencyInjection/Extension/AliasConfigurableExtension.php',
+        ]);
 
     $services->set(BuilderFactory::class);
 
