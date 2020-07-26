@@ -35,4 +35,9 @@ final class MethodName
      * @var string
      */
     public const INSTANCEOF = 'instanceof';
+
+    /**
+     * @var string
+     */
+    public const EXTENSION = 'extension';
 }
