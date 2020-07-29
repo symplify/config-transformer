@@ -16,6 +16,16 @@ final class YamlCommentPreserver
     public const COMMENT_PREFIX = '__COMMENT__';
 
     /**
+     * @var string
+     */
+    private const CONTENT = 'content';
+
+    /**
+     * @var string
+     */
+    private const PRE_SPACE = 'pre_space';
+
+    /**
      * @see https://regex101.com/r/YMizb4/2
      * @var string
      */
@@ -55,12 +65,19 @@ final class YamlCommentPreserver
 
         $yamlContent = Strings::replace($yamlContent, self::COMMENT_AFTER_CODE_PATTERN, function (array $match) {
             // standalone-line comment → skip
-            if (Strings::startsWith($match['content'], '#')) {
+            if (Strings::startsWith($match[self::CONTENT], '#')) {
                 return $match[0];
             }
 
-            $standaloneCommentLine = $match['pre_space'] . $this->createCommentKeyValue($match['comment']) . PHP_EOL;
-            $originalContentLine = $match['pre_space'] . $match['content'];
+            // is part of list - needs to be removed - see https://github.com/migrify/migrify/issues/113
+            if (Strings::startsWith($match[self::CONTENT], '- ')) {
+                return $match[self::PRE_SPACE] . $match[self::CONTENT];
+            }
+
+            $standaloneCommentLine = $match[self::PRE_SPACE] . $this->createCommentKeyValue(
+                $match['comment']
+            ) . PHP_EOL;
+            $originalContentLine = $match[self::PRE_SPACE] . $match[self::CONTENT];
 
             return $standaloneCommentLine . $originalContentLine;
         });
