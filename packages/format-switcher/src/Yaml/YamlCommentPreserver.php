@@ -26,6 +26,11 @@ final class YamlCommentPreserver
     private const PRE_SPACE = 'pre_space';
 
     /**
+     * @var string
+     */
+    private const COMMENT = 'comment';
+
+    /**
      * @see https://regex101.com/r/YMizb4/2
      * @var string
      */
@@ -34,7 +39,7 @@ final class YamlCommentPreserver
     /**
      * @var string
      */
-    private const OWN_LINE_COMMENT_PATTERN = '#\#(?<comment>.*?)$#m';
+    private const OWN_LINE_COMMENT_PATTERN = '#^(?<pre_space>\s+)?\#(?<comment>.*?)$#m';
 
     /**
      * @var int
@@ -63,6 +68,8 @@ final class YamlCommentPreserver
 
         $yamlContent = $this->yamlListCommentRemover->remove($yamlContent);
 
+        $yamlContent = $this->indentCommentsConsistently($yamlContent);
+
         $yamlContent = Strings::replace($yamlContent, self::COMMENT_AFTER_CODE_PATTERN, function (array $match) {
             // standalone-line comment → skip
             if (Strings::startsWith($match[self::CONTENT], '#')) {
@@ -74,16 +81,17 @@ final class YamlCommentPreserver
                 return $match[self::PRE_SPACE] . $match[self::CONTENT];
             }
 
-            $standaloneCommentLine = $match[self::PRE_SPACE] . $this->createCommentKeyValue(
-                $match['comment']
-            ) . PHP_EOL;
+            $standaloneCommentLine = $match[self::PRE_SPACE] . $this->createCommentKeyValue($match[self::COMMENT])
+                . PHP_EOL;
+
             $originalContentLine = $match[self::PRE_SPACE] . $match[self::CONTENT];
 
             return $standaloneCommentLine . $originalContentLine;
         });
 
         return Strings::replace($yamlContent, self::OWN_LINE_COMMENT_PATTERN, function (array $match) {
-            return $this->createCommentKeyValue($match['comment']);
+            // get previous line indent to comply with it
+            return $match[self::PRE_SPACE] . $this->createCommentKeyValue($match[self::COMMENT]);
         });
     }
 
@@ -155,5 +163,69 @@ final class YamlCommentPreserver
         }
 
         return "'" . $comment . "'";
+    }
+
+    private function indentCommentsConsistently(string $yamlContent): string
+    {
+        $yamlContentLines = explode(PHP_EOL, $yamlContent);
+
+        $previousLineIndent = null;
+        foreach ($yamlContentLines as $key => $yamlContentLine) {
+            $ownLineComment = Strings::match($yamlContentLine, self::OWN_LINE_COMMENT_PATTERN);
+
+            if ($ownLineComment === null) {
+                $previousLineIndent = $this->getLineIndent($yamlContentLine);
+                continue;
+            }
+
+            $lineIndent = $ownLineComment[self::PRE_SPACE];
+
+            $reIndent = $this->matchReindent($previousLineIndent, $yamlContentLines, $key, $lineIndent);
+            if ($reIndent !== null) {
+                $yamlContentLines[$key] = $reIndent . ltrim($yamlContentLine);
+            }
+
+            $previousLineIndent = $lineIndent;
+        }
+
+        return implode(PHP_EOL, $yamlContentLines);
+    }
+
+    private function getLineIndent(string $yamlContentLine): string
+    {
+        $match = Strings::match($yamlContentLine, '#^(?<indent>\s+)(.*?)#');
+        if ($match === null) {
+            return '';
+        }
+
+        return $match['indent'];
+    }
+
+    private function matchReindent(
+        ?string $previousLineIndent,
+        array $yamlContentLines,
+        int $key,
+        string $currentLineIndent
+    ): ?string {
+        if ($previousLineIndent === null) {
+            return null;
+        }
+
+        if (! isset($yamlContentLines[$key + 1])) {
+            return null;
+        }
+
+        $nextLineIndent = $this->getLineIndent($yamlContentLines[$key + 1]);
+
+        if ($previousLineIndent === $nextLineIndent) {
+            return null;
+        }
+
+        // make this line has the same as next line
+        if ($currentLineIndent === $nextLineIndent) {
+            return null;
+        }
+
+        return $nextLineIndent;
     }
 }
