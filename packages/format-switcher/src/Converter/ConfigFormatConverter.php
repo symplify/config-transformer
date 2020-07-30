@@ -78,12 +78,15 @@ final class ConfigFormatConverter
 
         if ($outputFormat === Format::PHP) {
             if ($inputFormat === Format::YAML) {
-                return $this->yamlToPhpConverter->convert($containerBuilderAndFileContent->getFileContent());
+                return $this->yamlToPhpConverter->convert(
+                    $containerBuilderAndFileContent->getFileContent(),
+                    $smartFileInfo
+                );
             }
 
             if ($inputFormat === Format::XML) {
                 $yamlContent = $this->dumpContainerBuilderToYaml($containerBuilder);
-                return $this->yamlToPhpConverter->convert($yamlContent);
+                return $this->yamlToPhpConverter->convert($yamlContent, $smartFileInfo);
             }
         }
 

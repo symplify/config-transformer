@@ -16,7 +16,7 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
 
-final class ReturnClosureNodesFactory
+final class ContainerConfiguratorReturnClosureFactory
 {
     /**
      * @var ClosureNodeFactory
