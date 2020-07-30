@@ -10,8 +10,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFacto
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\ServiceOptionNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
-use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -57,11 +55,6 @@ final class ClassServiceCaseConverter implements CaseConverterInterface
     public function match(string $rootKey, $key, $values): bool
     {
         if ($rootKey !== YamlKey::SERVICES) {
-            return false;
-        }
-
-        // comments → skip
-        if (Strings::startsWith($key, YamlCommentPreserver::COMMENT_PREFIX)) {
             return false;
         }
 
