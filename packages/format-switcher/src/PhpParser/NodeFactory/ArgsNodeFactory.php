@@ -8,7 +8,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\FunctionName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\SymfonyVersionFeature;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Nette\Utils\Strings;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node;
@@ -49,21 +48,14 @@ final class ArgsNodeFactory
      */
     private $configuration;
 
-    /**
-     * @var YamlCommentPreserver
-     */
-    private $yamlCommentPreserver;
-
     public function __construct(
         CommonNodeFactory $commonNodeFactory,
         ConstantNodeFactory $constantNodeFactory,
-        Configuration $configuration,
-        YamlCommentPreserver $yamlCommentPreserver
+        Configuration $configuration
     ) {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->constantNodeFactory = $constantNodeFactory;
         $this->configuration = $configuration;
-        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     /**
@@ -258,12 +250,6 @@ final class ArgsNodeFactory
 
         $naturalKey = 0;
         foreach ($value as $nestedKey => $nestedValue) {
-            if ($this->yamlCommentPreserver->isCommentKey($nestedKey)) {
-                $this->yamlCommentPreserver->collectComment($nestedValue);
-                unset($value[$nestedKey]);
-                continue;
-            }
-
             $valueExpr = $this->resolveExpr($nestedValue, false, $skipClassesToConstantReference);
 
             if (! is_int($nestedKey) || $nestedKey !== $naturalKey) {
@@ -272,8 +258,6 @@ final class ArgsNodeFactory
             } else {
                 $arrayItem = new ArrayItem($valueExpr);
             }
-
-            $this->yamlCommentPreserver->decorateNodeWithComments($arrayItem);
 
             $arrayItems[] = $arrayItem;
 

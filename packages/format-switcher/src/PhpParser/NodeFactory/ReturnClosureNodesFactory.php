@@ -9,7 +9,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\NestedCaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -23,11 +22,6 @@ final class ReturnClosureNodesFactory
      * @var ClosureNodeFactory
      */
     private $closureNodeFactory;
-
-    /**
-     * @var YamlCommentPreserver
-     */
-    private $yamlCommentPreserver;
 
     /**
      * @var CaseConverterInterface[]
@@ -45,28 +39,20 @@ final class ReturnClosureNodesFactory
      */
     public function __construct(
         ClosureNodeFactory $closureNodeFactory,
-        YamlCommentPreserver $yamlCommentPreserver,
         array $caseConverters,
         array $nestedCaseConverters
     ) {
         $this->closureNodeFactory = $closureNodeFactory;
-        $this->yamlCommentPreserver = $yamlCommentPreserver;
         $this->caseConverters = $caseConverters;
         $this->nestedCaseConverters = $nestedCaseConverters;
     }
 
     public function createFromYamlArray(array $yamlArray): Return_
     {
-        $yamlArray = $this->yamlCommentPreserver->collectCommentsFromArray($yamlArray);
-        $collectedComments = $this->yamlCommentPreserver->getCollectedComments();
-
         $closureStmts = $this->createClosureStmts($yamlArray);
         $closure = $this->closureNodeFactory->createClosureFromStmts($closureStmts);
 
-        $return = new Return_($closure);
-        $this->yamlCommentPreserver->decorateNodeWithComments($return, $collectedComments);
-
-        return $return;
+        return new Return_($closure);
     }
 
     /**
@@ -101,11 +87,6 @@ final class ReturnClosureNodesFactory
                 $nestedNodes = [];
                 if (is_array($nestedValues)) {
                     foreach ($nestedValues as $subNestedKey => $subNestedValue) {
-                        if ($this->yamlCommentPreserver->isCommentKey($subNestedKey)) {
-                            $this->yamlCommentPreserver->collectComment($subNestedValue);
-                            continue;
-                        }
-
                         foreach ($this->nestedCaseConverters as $nestedCaseConverter) {
                             if (! $nestedCaseConverter->match($key, $nestedKey)) {
                                 continue;
@@ -127,11 +108,6 @@ final class ReturnClosureNodesFactory
                         continue;
                     }
 
-                    if ($this->yamlCommentPreserver->isCommentKey($nestedKey)) {
-                        $this->yamlCommentPreserver->collectComment($nestedValues);
-                        continue;
-                    }
-
                     /** @var string $nestedKey */
                     $expression = $caseConverter->convertToMethodCall($nestedKey, $nestedValues);
                     break;
@@ -141,7 +117,6 @@ final class ReturnClosureNodesFactory
                     continue;
                 }
 
-                $this->yamlCommentPreserver->decorateNodeWithComments($expression);
                 $nodes[] = $expression;
             }
         }

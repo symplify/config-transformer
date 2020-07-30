@@ -6,7 +6,6 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service
 
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlServiceKey;
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
 
@@ -18,23 +17,15 @@ final class ServiceOptionNodeFactory
     private $serviceOptionKeyYamlToPhpFactories = [];
 
     /**
-     * @var YamlCommentPreserver
-     */
-    private $yamlCommentPreserver;
-
-    /**
      * @param ServiceOptionsKeyYamlToPhpFactoryInterface[] $serviceOptionKeyYamlToPhpFactories
      */
-    public function __construct(array $serviceOptionKeyYamlToPhpFactories, YamlCommentPreserver $yamlCommentPreserver)
+    public function __construct(array $serviceOptionKeyYamlToPhpFactories)
     {
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
-        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function convertServiceOptionsToNodes(array $servicesValues, MethodCall $methodCall): MethodCall
     {
-        $servicesValues = $this->yamlCommentPreserver->collectCommentsFromArray($servicesValues);
-
         $servicesValues = $this->unNestArguments($servicesValues);
 
         foreach ($servicesValues as $key => $value) {
@@ -43,18 +34,9 @@ final class ServiceOptionNodeFactory
                 continue;
             }
 
-            if ($this->yamlCommentPreserver->isCommentKey($key)) {
-                $this->yamlCommentPreserver->collectComment($value);
-                continue;
-            }
-
             foreach ($this->serviceOptionKeyYamlToPhpFactories as $serviceOptionKeyYamlToPhpFactory) {
                 if (! $serviceOptionKeyYamlToPhpFactory->isMatch($key, $value)) {
                     continue;
-                }
-
-                if (is_array($value)) {
-                    $value = $this->yamlCommentPreserver->collectCommentsFromArray($value);
                 }
 
                 $methodCall = $serviceOptionKeyYamlToPhpFactory->decorateServiceMethodCall(
