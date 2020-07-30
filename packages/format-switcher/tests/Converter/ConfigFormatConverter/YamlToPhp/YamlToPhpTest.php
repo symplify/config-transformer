@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatC
 use Iterator;
 use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
+use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Nette\Utils\FileSystem;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
@@ -24,6 +25,19 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     }
 
     /**
+     * @dataProvider provideDataForRouting()
+     */
+    public function testRouting(SmartFileInfo $fileInfo): void
+    {
+        $this->doTestOutput($fileInfo, Format::YAML, Format::PHP);
+    }
+
+    public function provideDataForRouting(): Iterator
+    {
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/routing', '*.yaml');
+    }
+
+    /**
      * @dataProvider provideData()
      */
     public function testNormal(SmartFileInfo $fixtureFileInfo): void
@@ -33,7 +47,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         FileSystem::copy(__DIR__ . '/Fixture/normal', $temporaryPath);
         require_once $temporaryPath . '/another_dir/SomeClass.php.inc';
 
-        $this->doTestOutput($fixtureFileInfo, 'yaml', 'php');
+        $this->doTestOutput($fixtureFileInfo, Format::YAML, Format::PHP);
     }
 
     /**
@@ -41,7 +55,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
      */
     public function testSpecialCaseWithDirectory(SmartFileInfo $fileInfo): void
     {
-        $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested', 'yaml', 'php');
+        $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested', Format::YAML, Format::PHP);
     }
 
     /**
@@ -57,7 +71,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         FileSystem::createDir($temporaryPath . '/../src/Controller');
         FileSystem::createDir($temporaryPath . '/../src/Domain');
 
-        $this->doTestOutput($fileInfo, 'yaml', 'php');
+        $this->doTestOutput($fileInfo, Format::YAML, Format::PHP);
     }
 
     public function provideData(): Iterator
