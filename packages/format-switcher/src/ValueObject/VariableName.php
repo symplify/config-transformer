@@ -14,6 +14,11 @@ final class VariableName
     /**
      * @var string
      */
+    public const ROUTING_CONFIGURATOR = 'routingConfigurator';
+
+    /**
+     * @var string
+     */
     public const SERVICES = 'services';
 
     /**
