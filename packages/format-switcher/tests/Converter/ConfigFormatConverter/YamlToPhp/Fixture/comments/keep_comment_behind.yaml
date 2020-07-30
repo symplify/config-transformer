@@ -10,6 +10,5 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    # behind, boom!
     $parameters->set('keys', 'whatever');
 };
