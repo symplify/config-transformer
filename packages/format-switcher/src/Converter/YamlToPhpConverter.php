@@ -61,7 +61,12 @@ final class YamlToPhpConverter
     {
         $this->yamlContentProvider->setContent($yaml);
 
+        /** @var mixed[]|null $yamlArray */
         $yamlArray = $this->yamlParser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
+        if ($yamlArray === null) {
+            return '';
+        }
+
         $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
 
         $return = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
