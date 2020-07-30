@@ -12,6 +12,5 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    #    Rector\Php74\Rector\Property\TypedPropertyRector:
     $services->set(ContextGetByTypeToConstructorInjectionRector::class);
 };
