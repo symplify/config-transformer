@@ -232,7 +232,7 @@ final class ArgsNodeFactory
         }
 
         // is service reference
-        if (Strings::startsWith($value, '@') && ! $this->isTwigFilePath($value)) {
+        if (Strings::startsWith($value, '@') && ! $this->isFilePath($value)) {
             $refOrServiceFunctionName = $this->getRefOrServiceFunctionName();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
@@ -276,9 +276,9 @@ final class ArgsNodeFactory
         return FunctionName::REF;
     }
 
-    private function isTwigFilePath(string $value): bool
+    private function isFilePath(string $value): bool
     {
-        return (bool) Strings::match($value, '#\.(twig|html)$#');
+        return (bool) Strings::match($value, '#\.(twig|html|xml)$#');
     }
 
     private function resolveClassType(bool $skipClassesToConstantReference, string $value)

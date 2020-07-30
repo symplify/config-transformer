@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
@@ -45,10 +46,16 @@ final class YamlToPhpConverter
      */
     private $checkerServiceParametersShifter;
 
+    /**
+     * @var RoutingConfiguratorReturnClosureFactory
+     */
+    private $routingConfiguratorReturnClosureFactory;
+
     public function __construct(
         Parser $yamlParser,
         PhpConfigurationPrinter $phpConfigurationPrinter,
         ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory,
+        RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory,
         YamlContentProvider $yamlContentProvider,
         CheckerServiceParametersShifter $checkerServiceParametersShifter
     ) {
@@ -57,6 +64,7 @@ final class YamlToPhpConverter
         $this->containerConfiguratorReturnClosureFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
+        $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
     }
 
     public function convert(string $yaml, SmartFileInfo $smartFileInfo): string
@@ -69,13 +77,22 @@ final class YamlToPhpConverter
             return '';
         }
 
-        if (Strings::match($smartFileInfo->getRealPath(), '#routes\.(yml|yaml)#')) {
-            dump('ROUTEs');
-            die;
+        if ($this->isRouteFilePath($smartFileInfo)) {
+            $return = $this->routingConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
+        } else {
+            $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
+            $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         }
-        $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
-        $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
 
         return $this->phpConfigurationPrinter->prettyPrintFile([$return]);
+    }
+
+    private function isRouteFilePath(SmartFileInfo $smartFileInfo)
+    {
+        if (Strings::match($smartFileInfo->getRealPath(), '#routes\.(yml|yaml)$#')) {
+            return true;
+        }
+
+        return (bool) Strings::match($smartFileInfo->getRealPath(), '#\/routes\/#');
     }
 }
