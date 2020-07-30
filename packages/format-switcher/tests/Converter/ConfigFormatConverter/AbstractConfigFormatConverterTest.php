@@ -9,10 +9,10 @@ use Migrify\ConfigTransformer\FormatSwitcher\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use Rector\Core\Testing\ValueObject\SplitLine;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symplify\EasyTesting\DataProvider\StaticFixtureUpdater;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -93,30 +93,12 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
     ): void {
         $convertedContent = $this->configFormatConverter->convert($inputFileInfo, $inputFormat, $outputFormat);
 
-        $this->updateFixture($fixtureFileInfo, $inputFileInfo, $convertedContent);
+        StaticFixtureUpdater::updateFixtureContent($inputFileInfo, $convertedContent, $fixtureFileInfo);
+
         $this->assertSame($expectedContent, $convertedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
 
         if ($outputFormat === Format::YAML) {
             $this->doTestYamlContentIsLoadable($convertedContent);
         }
-    }
-
-    /**
-     * @todo decouple to migrify/easy-testing
-     */
-    private function updateFixture(
-        SmartFileInfo $fileInfo,
-        SmartFileInfo $inputFileInfo,
-        string $convertedContent
-    ): void {
-        if (! getenv('UPDATE_TESTS') && ! getenv('UT')) {
-            return;
-        }
-
-        $newOriginalContent = rtrim($inputFileInfo->getContents()) . PHP_EOL .
-            SplitLine::LINE .
-            rtrim($convertedContent) . PHP_EOL;
-
-        $this->smartFileSystem->dumpFile($fileInfo->getRealPath(), $newOriginalContent);
     }
 }
