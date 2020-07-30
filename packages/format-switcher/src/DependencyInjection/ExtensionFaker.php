@@ -24,6 +24,11 @@ final class ExtensionFaker
     public function fakeInContainerBuilder(ContainerBuilder $containerBuilder, string $yamlContent): void
     {
         $yaml = Yaml::parse($yamlContent, Yaml::PARSE_CUSTOM_TAGS);
+        // empty file
+        if ($yaml === null) {
+            return;
+        }
+
         $rootKeys = array_keys($yaml);
 
         /** @var string[] $extensionKeys */
