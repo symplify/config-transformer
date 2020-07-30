@@ -1,3 +1,4 @@
+
 # Config Format Converter
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/migrify/config-transformer/stats)
@@ -32,6 +33,8 @@ You can also add `--target-symfony-version/-s` to specify, what Symfony features
 ```bash
 vendor/bin/config-transformer switch-format app/config -i yaml -o php -s 3.3
 ```
+
+*Note: Symfony YAML parse removes all comments, so be sure to go through files and add still-relevant comments manauly. Often they can be removed, as dead-code.*
 
 <br>
 

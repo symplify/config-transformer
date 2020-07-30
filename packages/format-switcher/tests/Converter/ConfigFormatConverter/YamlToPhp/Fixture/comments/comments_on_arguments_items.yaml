@@ -15,8 +15,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(FakeClass::class)
-        ->arg('$oldToNewClasses', [
-        # move interface to "Contract"
-        'Knp\DoctrineBehaviors\Model\Tree\NodeInterface' => 'Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface',
-    ]);
+        ->arg('$oldToNewClasses', ['Knp\DoctrineBehaviors\Model\Tree\NodeInterface' => 'Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface']);
 };
