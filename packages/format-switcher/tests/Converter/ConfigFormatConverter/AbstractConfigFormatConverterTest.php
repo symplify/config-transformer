@@ -109,7 +109,7 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         SmartFileInfo $inputFileInfo,
         string $convertedContent
     ): void {
-        if (! getenv('UPDATE_TESTS')) {
+        if (! getenv('UPDATE_TESTS') && ! getenv('UT')) {
             return;
         }
 

@@ -229,11 +229,7 @@ final class ArgsNodeFactory
         $value = ltrim($value, '\\');
 
         if (ctype_upper($value[0]) && class_exists($value) || interface_exists($value)) {
-            if ($skipClassesToConstantReference) {
-                return new String_($value);
-            }
-
-            return $this->commonNodeFactory->createClassReference($value);
+            return $this->resolveClassType($skipClassesToConstantReference, $value);
         }
 
         if (Strings::startsWith($value, '@=')) {
@@ -244,7 +240,7 @@ final class ArgsNodeFactory
         }
 
         // is service reference
-        if (Strings::startsWith($value, '@')) {
+        if (Strings::startsWith($value, '@') && ! $this->isTwigFilePath($value)) {
             $refOrServiceFunctionName = $this->getRefOrServiceFunctionName();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
@@ -294,5 +290,19 @@ final class ArgsNodeFactory
         }
 
         return FunctionName::REF;
+    }
+
+    private function isTwigFilePath(string $value): bool
+    {
+        return (bool) Strings::match($value, '#\.(twig|html)$#');
+    }
+
+    private function resolveClassType(bool $skipClassesToConstantReference, string $value)
+    {
+        if ($skipClassesToConstantReference) {
+            return new String_($value);
+        }
+
+        return $this->commonNodeFactory->createClassReference($value);
     }
 }
