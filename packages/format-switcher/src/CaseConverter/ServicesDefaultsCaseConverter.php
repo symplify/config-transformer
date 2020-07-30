@@ -9,7 +9,6 @@ use Migrify\ConfigTransformer\FormatSwitcher\Contract\CaseConverterInterface;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\Service\AutoBindNodeFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\YamlCommentPreserver;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
@@ -27,21 +26,13 @@ final class ServicesDefaultsCaseConverter implements CaseConverterInterface
      */
     private $autoBindNodeFactory;
 
-    /**
-     * @var YamlCommentPreserver
-     */
-    private $yamlCommentPreserver;
-
-    public function __construct(AutoBindNodeFactory $autoBindNodeFactory, YamlCommentPreserver $yamlCommentPreserver)
+    public function __construct(AutoBindNodeFactory $autoBindNodeFactory)
     {
         $this->autoBindNodeFactory = $autoBindNodeFactory;
-        $this->yamlCommentPreserver = $yamlCommentPreserver;
     }
 
     public function convertToMethodCall($key, $values): Expression
     {
-        $values = $this->yamlCommentPreserver->collectCommentsFromArray($values);
-
         $methodCall = new MethodCall($this->createServicesVariable(), MethodName::DEFAULTS);
         $methodCall = $this->autoBindNodeFactory->createAutoBindCalls(
             $values,
@@ -49,11 +40,7 @@ final class ServicesDefaultsCaseConverter implements CaseConverterInterface
             AutoBindNodeFactory::TYPE_DEFAULTS
         );
 
-        $expression = new Expression($methodCall);
-
-        $this->yamlCommentPreserver->decorateNodeWithComments($expression);
-
-        return $expression;
+        return new Expression($methodCall);
     }
 
     public function match(string $rootKey, $key, $values): bool
