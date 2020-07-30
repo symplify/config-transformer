@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ReturnClosureNodesFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
+use Nette\Utils\Strings;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
@@ -29,9 +31,9 @@ final class YamlToPhpConverter
     private $phpConfigurationPrinter;
 
     /**
-     * @var ReturnClosureNodesFactory
+     * @var ContainerConfiguratorReturnClosureFactory
      */
-    private $returnClosureNodesFactory;
+    private $containerConfiguratorReturnClosureFactory;
 
     /**
      * @var YamlContentProvider
@@ -46,18 +48,18 @@ final class YamlToPhpConverter
     public function __construct(
         Parser $yamlParser,
         PhpConfigurationPrinter $phpConfigurationPrinter,
-        ReturnClosureNodesFactory $returnClosureNodesFactory,
+        ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory,
         YamlContentProvider $yamlContentProvider,
         CheckerServiceParametersShifter $checkerServiceParametersShifter
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpConfigurationPrinter = $phpConfigurationPrinter;
-        $this->returnClosureNodesFactory = $returnClosureNodesFactory;
+        $this->containerConfiguratorReturnClosureFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
     }
 
-    public function convert(string $yaml): string
+    public function convert(string $yaml, SmartFileInfo $smartFileInfo): string
     {
         $this->yamlContentProvider->setContent($yaml);
 
@@ -67,9 +69,12 @@ final class YamlToPhpConverter
             return '';
         }
 
+        if (Strings::match($smartFileInfo->getRealPath(), '#routes\.(yml|yaml)#')) {
+            dump('ROUTEs');
+            die;
+        }
         $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
-
-        $return = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
+        $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
 
         return $this->phpConfigurationPrinter->prettyPrintFile([$return]);
     }
