@@ -9,10 +9,8 @@ use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\RoutingConfig
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
-use Nette\Utils\Strings;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
@@ -21,6 +19,11 @@ use Symplify\SmartFileSystem\SmartFileInfo;
  */
 final class YamlToPhpConverter
 {
+    /**
+     * @var string[]
+     */
+    private const ROUTING_KEYS = ['resource', 'prefix', 'path', 'controller'];
+
     /**
      * @var Parser
      */
@@ -67,7 +70,7 @@ final class YamlToPhpConverter
         $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
     }
 
-    public function convert(string $yaml, SmartFileInfo $smartFileInfo): string
+    public function convert(string $yaml): string
     {
         $this->yamlContentProvider->setContent($yaml);
 
@@ -77,7 +80,7 @@ final class YamlToPhpConverter
             return '';
         }
 
-        if ($this->isRouteFilePath($smartFileInfo)) {
+        if ($this->isRouteYaml($yamlArray)) {
             $return = $this->routingConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         } else {
             $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
@@ -87,12 +90,16 @@ final class YamlToPhpConverter
         return $this->phpConfigurationPrinter->prettyPrintFile([$return]);
     }
 
-    private function isRouteFilePath(SmartFileInfo $smartFileInfo)
+    private function isRouteYaml(array $yaml): bool
     {
-        if (Strings::match($smartFileInfo->getRealPath(), '#routes\.(yml|yaml)$#')) {
-            return true;
+        foreach ($yaml as $value) {
+            foreach (self::ROUTING_KEYS as $routeKey) {
+                if (isset($value[$routeKey])) {
+                    return true;
+                }
+            }
         }
 
-        return (bool) Strings::match($smartFileInfo->getRealPath(), '#\/routes\/#');
+        return false;
     }
 }
