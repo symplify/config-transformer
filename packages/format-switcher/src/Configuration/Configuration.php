@@ -117,6 +117,18 @@ final class Configuration
         $this->setOutputFormat($outputFormat);
     }
 
+    /**
+     * @return string[]
+     */
+    public function getInputSuffixes(): array
+    {
+        if ($this->inputFormat === Format::YAML) {
+            return [Format::YAML, Format::YML];
+        }
+
+        return [$this->inputFormat];
+    }
+
     private function resolveInputFormat(InputInterface $input): void
     {
         /** @var string $inputFormat */
