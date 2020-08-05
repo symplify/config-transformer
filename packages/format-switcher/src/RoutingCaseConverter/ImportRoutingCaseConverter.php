@@ -12,6 +12,8 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
+use function explode;
+use function is_string;
 
 final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
 {
@@ -37,17 +39,14 @@ final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
     /**
      * @var string[]
      */
-    private const IMPORT_ARGS = [
-        self::RESOURCE,
-        self::TYPE,
-        self::EXCLUDE,
-    ];
+    private const IMPORT_ARGS = [self::RESOURCE, self::TYPE, self::EXCLUDE];
 
     /**
      * @var string[]
      */
     private const PREFIX_ARGS = [
-        self::PREFIX, // Add prefix itself as first argument
+        // Add prefix itself as first argument
+        self::PREFIX,
         'trailing_slash_on_root',
     ];
 
@@ -118,8 +117,8 @@ final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
             $nestedValues = $values[$nestedKey];
 
             // Transform methods as string GET|HEAD to array
-            if ($nestedKey === self::METHODS && \is_string($nestedValues)) {
-                $nestedValues = \explode('|', $nestedValues);
+            if ($nestedKey === self::METHODS && is_string($nestedValues)) {
+                $nestedValues = explode('|', $nestedValues);
             }
 
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
