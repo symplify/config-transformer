@@ -107,9 +107,10 @@ final class SwitchFormatCommand extends Command
     {
         $this->configuration->populateFromInput($input);
 
+        $suffixes = $this->configuration->getInputSuffixes();
         $fileInfos = $this->fileBySuffixFinder->findInSourceBySuffixes(
             $this->configuration->getSource(),
-            [$this->configuration->getInputFormat()]
+            $suffixes
         );
 
         $this->dumpNewFileInfos($fileInfos);
