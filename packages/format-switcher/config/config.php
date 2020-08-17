@@ -9,6 +9,9 @@ use Symfony\Component\Yaml\Parser;
 use Symplify\SmartFileSystem\FileSystemFilter;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // @todo add more paths for non-monorepo access or register services manaully here?
+    $containerConfigurator->import(__DIR__ . '/../../../../../packages/php-config-printer/config/config.php');
+
     $services = $containerConfigurator->services();
 
     $services->defaults()
