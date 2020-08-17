@@ -1,0 +1,13 @@
+services:
+    Migrify\ConfigTransformer\FeatureShifter\Tests\Yaml\Source\SomeClass: null
+
+    Migrify\ConfigTransformer\FeatureShifter\Tests\Yaml\Source\SomeInterface:
+        alias: 'Migrify\ConfigTransformer\FeatureShifter\Tests\Yaml\Source\AnotherClass'
+-----
+services:
+    _defaults:
+        autowire: true
+    Migrify\ConfigTransformer\FeatureShifter\Tests\Yaml\Source\SomeInterface:
+        alias: 'Migrify\ConfigTransformer\FeatureShifter\Tests\Yaml\Source\AnotherClass'
+    Migrify\ConfigTransformer\:
+        resource: '../Source'
