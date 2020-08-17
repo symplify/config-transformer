@@ -6,9 +6,9 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\RoutingConfiguratorReturnClosureFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
+use Migrify\PhpConfigPrinter\Printer\PhpConfigurationPrinter;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 
