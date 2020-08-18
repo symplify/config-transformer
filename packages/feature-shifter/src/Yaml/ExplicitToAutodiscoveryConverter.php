@@ -7,7 +7,7 @@ namespace Migrify\ConfigTransformer\FeatureShifter\Yaml;
 use Migrify\ConfigTransformer\FeatureShifter\Exception\ClassLocationNotFoundException;
 use Migrify\ConfigTransformer\FeatureShifter\Exception\ClassNotFoundException;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\ServiceConfig;
-use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
+use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
 use Symplify\SmartFileSystem\SmartFileInfo;

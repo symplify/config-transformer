@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\MethodName;
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use Migrify\PhpConfigPrinter\ValueObject\VariableName;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -20,7 +22,7 @@ final class PhpNodeFactory
     private $argsNodeFactory;
 
     /**
-     * @var CurrentFilePathProvider
+     * @var \Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider
      */
     private $currentFilePathProvider;
 
