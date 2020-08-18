@@ -6,8 +6,8 @@ namespace Migrify\ConfigTransformer\FeatureShifter\Yaml;
 
 use Migrify\ConfigTransformer\FeatureShifter\Utils\StaticArrays;
 use Migrify\ConfigTransformer\FeatureShifter\ValueObject\ServiceConfig;
-use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
-use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlServiceKey;
+use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
 

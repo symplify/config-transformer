@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use Migrify\ConfigTransformer\FormatSwitcher\Configuration\Configuration;
+use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
+use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+use Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
@@ -33,4 +37,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(SymfonyStyle::class)
         ->factory([ref(SymfonyStyleFactory::class), 'create']);
+
+    $services->alias(SymfonyVersionFeatureGuardInterface::class, Configuration::class);
+
+    $services->alias(YamlFileContentProviderInterface::class, YamlContentProvider::class);
 };
