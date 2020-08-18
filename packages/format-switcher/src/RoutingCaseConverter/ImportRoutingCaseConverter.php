@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\FormatSwitcher\RoutingCaseConverter;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Contract\RoutingCaseConverterInterface;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ArgsNodeFactory;
-use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
+use Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Migrify\PhpConfigPrinter\ValueObject\VariableName;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
