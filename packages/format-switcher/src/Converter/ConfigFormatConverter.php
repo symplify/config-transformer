@@ -10,8 +10,9 @@ use Migrify\ConfigTransformer\FormatSwitcher\DumperFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter\YamlDumpFormatter;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
-use Migrify\ConfigTransformer\FormatSwitcher\Provider\CurrentFilePathProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
+use Migrify\PhpConfigPrinter\CaseConverter\YamlToPhpConverter;
+use Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
