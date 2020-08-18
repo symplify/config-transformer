@@ -15,7 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure();
 
     $services->load('Migrify\ConfigTransformer\FeatureShifter\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/Utils/*']);
+        ->exclude([__DIR__ . '/../src/Utils']);
 
     $services->set(SmartFileSystem::class);
 };
