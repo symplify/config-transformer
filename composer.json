@@ -40,5 +40,7 @@
             "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/format-switcher/tests",
             "Migrify\\ConfigTransformer\\FeatureShifter\\Tests\\": "packages/feature-shifter/tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
