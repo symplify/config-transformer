@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Loader;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
+use Migrify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\PackageBuilder\Yaml\FileLoader\AbstractParameterMergingYamlFileLoader;
