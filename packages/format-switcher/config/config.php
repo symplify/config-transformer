@@ -9,8 +9,15 @@ use Symfony\Component\Yaml\Parser;
 use Symplify\SmartFileSystem\FileSystemFilter;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // @todo add more paths for non-monorepo access or register services manaully here?
-    $containerConfigurator->import(__DIR__ . '/../../../../../packages/php-config-printer/config/config.php');
+    // monorepo
+    $containerConfigurator->import(
+        __DIR__ . '/../../../../../packages/php-config-printer/config/config.php',
+        null,
+        'not_found'
+    );
+
+    // dependency
+    $containerConfigurator->import(__DIR__ . '/../../../../php-config-printer/config/config.php', null, 'not_found');
 
     $services = $containerConfigurator->services();
 
@@ -21,8 +28,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->load('Migrify\ConfigTransformer\FormatSwitcher\\', __DIR__ . '/../src')
         ->exclude([
-            __DIR__ . '/../src/DependencyInjection/Loader/*',
-            __DIR__ . '/../src/ValueObject/*',
+            __DIR__ . '/../src/DependencyInjection/Loader',
+            __DIR__ . '/../src/ValueObject',
             // configurable class for faking extensions
             __DIR__ . '/../src/DependencyInjection/Extension/AliasConfigurableExtension.php',
         ]);
