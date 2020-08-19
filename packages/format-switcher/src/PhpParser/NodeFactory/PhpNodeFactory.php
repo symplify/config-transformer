@@ -22,7 +22,7 @@ final class PhpNodeFactory
     private $argsNodeFactory;
 
     /**
-     * @var \Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider
+     * @var CurrentFilePathProvider
      */
     private $currentFilePathProvider;
 
