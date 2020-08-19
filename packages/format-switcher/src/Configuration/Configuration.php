@@ -7,9 +7,10 @@ namespace Migrify\ConfigTransformer\FormatSwitcher\Configuration;
 use Migrify\ConfigTransformer\FormatSwitcher\Guard\InputValidator;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
+use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symfony\Component\Console\Input\InputInterface;
 
-final class Configuration
+final class Configuration implements SymfonyVersionFeatureGuardInterface
 {
     /**
      * @var string[]
