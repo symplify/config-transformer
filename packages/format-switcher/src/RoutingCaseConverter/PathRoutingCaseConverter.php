@@ -25,7 +25,7 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
     private const PATH = 'path';
 
     /**
-     * @var \Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
+     * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
 
