@@ -1,0 +1,46 @@
+{
+    "name": "migrify/config-transformer",
+    "description": "Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable one - all the useful utils around configs",
+    "license": "MIT",
+    "bin": [
+        "bin/config-transformer"
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/dependency-injection": "^4.4|^5.0",
+        "symfony/console": "^4.4|^5.0",
+        "symfony/http-kernel": "^4.4|^5.0",
+        "symfony/expression-language": "^4.4|^5.0",
+        "symfony/yaml": "^4.4|^5.0",
+        "nette/neon": "^3.0",
+        "nette/utils": "^3.1",
+        "nikic/php-parser": "^4.9",
+        "symplify/package-builder": "^8.1.17",
+        "migrify/php-config-printer": "^0.4",
+        "symplify/autowire-array-parameter": "^8.1.17",
+        "symplify/smart-file-system": "^8.1.17"
+    },
+    "require-dev": {
+        "symplify/easy-testing": "^8.1.17",
+        "phpunit/phpunit": "^8.5|^9.0",
+        "symfony/framework-bundle": "^4.4|^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\ConfigTransformer\\": "src",
+            "Migrify\\ConfigTransformer\\Clarifier\\": "packages/clarifier/src",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\": "packages/format-switcher/src",
+            "Migrify\\ConfigTransformer\\FeatureShifter\\": "packages/feature-shifter/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\ConfigTransformer\\Tests\\": "tests",
+            "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/clarifier/tests",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/format-switcher/tests",
+            "Migrify\\ConfigTransformer\\FeatureShifter\\Tests\\": "packages/feature-shifter/tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

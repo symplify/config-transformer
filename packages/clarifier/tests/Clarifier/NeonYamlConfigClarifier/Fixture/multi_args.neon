@@ -1,0 +1,11 @@
+services:
+    - Somethings(%first%, %second%, ['key' = 'value'])
+-----
+services:
+    -
+        class: Somethings
+        arguments:
+            - %first%
+            - %second%
+            -
+                key: value
