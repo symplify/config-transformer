@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection;
 
-use Migrify\ConfigTransformer\FeatureShifter\ValueObject\YamlKey;
 use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\Extension\AliasConfigurableExtension;
+use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
 
