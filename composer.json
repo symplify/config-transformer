@@ -16,7 +16,7 @@
         "nette/utils": "^3.1",
         "nikic/php-parser": "^4.9",
         "symplify/package-builder": "^8.1.17",
-        "migrify/php-config-printer": "^0.4",
+        "migrify/php-config-printer": "^0.3.31",
         "symplify/autowire-array-parameter": "^8.1.17",
         "symplify/smart-file-system": "^8.1.17"
     },
