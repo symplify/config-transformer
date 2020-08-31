@@ -55,13 +55,11 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
         $this->configuration->changeInputFormat($inputFormat);
         $this->configuration->changeOutputFormat($outputFormat);
 
-        [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
-            $fixtureFileInfo
-        );
+        $inputAndExpected = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos($fixtureFileInfo);
 
         $this->doTestFileInfo(
-            $inputFileInfo,
-            $expectedFileInfo->getContents(),
+            $inputAndExpected->getInputFileInfo(),
+            $inputAndExpected->getExpectedFileInfo()->getContents(),
             $fixtureFileInfo,
             $inputFormat,
             $outputFormat

@@ -30,10 +30,13 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fileInfo): void
     {
-        [$inputContent, $expectedContent] = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fileInfo);
+        $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fileInfo);
 
-        $changedContent = $this->neonYamlConfigClarifier->clarify($inputContent, $fileInfo->getSuffix());
-        $this->assertSame($expectedContent . PHP_EOL, $changedContent);
+        $changedContent = $this->neonYamlConfigClarifier->clarify(
+            $inputAndExpected->getInput(),
+            $fileInfo->getSuffix()
+        );
+        $this->assertSame($inputAndExpected->getExpected() . PHP_EOL, $changedContent);
     }
 
     public function provideData(): Iterator
