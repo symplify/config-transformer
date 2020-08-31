@@ -98,9 +98,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         $this->configuration->changeInputFormat($inputFormat);
         $this->configuration->changeOutputFormat($outputFormat);
 
-        [$inputContent, $expectedContent] = StaticFixtureSplitter::splitFileInfoToInputAndExpected(
-            $fixtureFileInfo
-        );
+        $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fixtureFileInfo);
 
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
 
@@ -108,13 +106,19 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         FileSystem::copy($extraDirectory, $temporaryPath, true);
 
         $fileTemporaryPath = $temporaryPath . '/' . $fixtureFileInfo->getRelativeFilePathFromDirectory($extraDirectory);
-        FileSystem::write($fileTemporaryPath, $inputContent);
+        FileSystem::write($fileTemporaryPath, $inputAndExpected->getInput());
 
         // rquire class, so its autoloaded
         assert(file_exists($temporaryPath . '/src/SomeClass.php'));
         require_once $temporaryPath . '/src/SomeClass.php';
 
         $inputFileInfo = new SmartFileInfo($fileTemporaryPath);
-        $this->doTestFileInfo($inputFileInfo, $expectedContent, $fixtureFileInfo, $inputFormat, $outputFormat);
+        $this->doTestFileInfo(
+            $inputFileInfo,
+            $inputAndExpected->getExpected(),
+            $fixtureFileInfo,
+            $inputFormat,
+            $outputFormat
+        );
     }
 }
