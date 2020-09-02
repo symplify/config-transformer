@@ -8,6 +8,7 @@
         <defaults public="false" />
 
         <service id="mime_types" class="Migrify\ConfigTransformer\FormatSwitcher\Tests\Converter\ConfigFormatConverter\Source\MimeTypes">
+            <argument />
             <call method="setDefault">
                 <argument type="service" id="mime_types" />
             </call>
@@ -30,6 +31,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('mime_types', MimeTypes::class)
+        ->args([''])
         ->call('setDefault', [ref('mime_types')])
         ->call('setExtra', ['10000']);
 };
