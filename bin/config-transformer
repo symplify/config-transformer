@@ -3,9 +3,8 @@
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Console\ConfigTransformerApplication;
 use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -35,12 +34,6 @@ if (file_exists($codeSnifferAutoload)) {
     require_once $codeSnifferAutoload;
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$kernel = new ConfigTransformerKernel($environment, InputDetector::isDebug());
-$kernel->boot();
-
-$container = $kernel->getContainer();
-
-$application = $container->get(ConfigTransformerApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun
+(ConfigTransformerKernel::class);
+$kernelBootAndApplicationRun->run();
