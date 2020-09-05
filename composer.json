@@ -17,7 +17,7 @@
         "nikic/php-parser": "^4.9",
         "symplify/package-builder": "^8.2",
         "migrify/php-config-printer": "^0.4",
-        "symplify/autowire-array-parameter": "^8.2",
+        "migrify/migrify-kernel": "^0.4",
         "symplify/smart-file-system": "^8.2"
     },
     "require-dev": {
