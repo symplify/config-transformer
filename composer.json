@@ -6,7 +6,7 @@
         "bin/config-transformer"
     ],
     "require": {
-        "php": "^7.2|^8.0",
+        "php": ">=7.2",
         "symfony/dependency-injection": "^4.4|^5.1",
         "symfony/console": "^4.4|^5.1",
         "symfony/http-kernel": "^4.4|^5.1",
@@ -15,13 +15,13 @@
         "nette/neon": "^3.0",
         "nette/utils": "^3.1",
         "nikic/php-parser": "^4.9",
-        "symplify/package-builder": "^8.1.17",
+        "symplify/package-builder": "^8.2",
         "migrify/php-config-printer": "^0.4",
-        "symplify/autowire-array-parameter": "^8.1.17",
-        "symplify/smart-file-system": "^8.1.17"
+        "symplify/autowire-array-parameter": "^8.2",
+        "symplify/smart-file-system": "^8.2"
     },
     "require-dev": {
-        "symplify/easy-testing": "^8.1.17",
+        "symplify/easy-testing": "^8.2",
         "phpunit/phpunit": "^8.5|^9.0",
         "symfony/framework-bundle": "^4.4|^5.1"
     },
