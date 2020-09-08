@@ -9,8 +9,8 @@ use Migrify\ConfigTransformer\FormatSwitcher\DependencyInjection\ContainerBuilde
 use Migrify\ConfigTransformer\FormatSwitcher\DumperFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\DumperFomatter\YamlDumpFormatter;
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
 use Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
