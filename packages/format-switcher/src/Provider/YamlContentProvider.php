@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Provider;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 
 final class YamlContentProvider implements YamlFileContentProviderInterface
