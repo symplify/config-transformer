@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Exception\NotImplementedYetException;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
+use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\Dumper;
 use Symfony\Component\DependencyInjection\Dumper\YamlDumper;
