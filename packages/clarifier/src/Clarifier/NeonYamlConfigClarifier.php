@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\Clarifier\Clarifier;
 
-use Migrify\NeonToYaml\Exception\NotImplementedYetException;
+use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Nette\Neon\Entity;
 use Nette\Neon\Neon;
 use Nette\Utils\Strings;
