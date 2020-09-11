@@ -20,12 +20,25 @@ What features do we have here?
 
 Why? Because YAML beats XML and [PHP beats YAML](https://tomasvotruba.com/blog/2020/07/16/10-cool-features-you-get-after-switching-from-yaml-to-php-configs/).
 
+Do you need to convert 1 file to PHP? Just add it as argument:
+
+```bash
+vendor/bin/config-transformer switch-format ecs.yaml
+```
+
+If you need more files or directories, `--input-format/-i` must be provided:
+
 ```bash
 vendor/bin/config-transformer switch-format app/config --input-format xml --output-format yaml
 
 # or in short
 vendor/bin/config-transformer switch-format app/config -i xml -o yaml
 
+# to PHP?  
+vendor/bin/config-transformer switch-format app/config -i xml -o php
+
+# you can skip the -o value, as "php" is default value
+vendor/bin/config-transformer switch-format app/config -i xml
 ```
 
 You can also add `--target-symfony-version/-s` to specify, what Symfony features should be used (3.2 is used by default).
