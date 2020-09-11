@@ -9,6 +9,7 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Format;
 use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\Option;
 use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class Configuration implements SymfonyVersionFeatureGuardInterface
 {
@@ -134,6 +135,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
     {
         /** @var string $inputFormat */
         $inputFormat = (string) $input->getOption(Option::INPUT_FORMAT);
+        $inputFormat = $this->resolveEmptyInputFallback($input, $inputFormat);
 
         $this->setInputFormat($inputFormat);
     }
@@ -171,5 +173,33 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
         }
 
         $this->inputFormat = $inputFormat;
+    }
+
+    /**
+     * Autoresolve input format in case of 1 file is provided and no "--input-format"
+     */
+    private function resolveEmptyInputFallback(InputInterface $input, string $inputFormat): string
+    {
+        if ($inputFormat !== '') {
+            return $inputFormat;
+        }
+
+        $source = (array) $input->getArgument(Option::SOURCE);
+        // nothing we can do
+        if (count($source) !== 1) {
+            return '';
+        }
+
+        $singleSource = $source[0];
+        if (! file_exists($singleSource)) {
+            return '';
+        }
+
+        if (! is_file($singleSource)) {
+            return '';
+        }
+
+        $sourceFileInfo = new SmartFileInfo($singleSource);
+        return $sourceFileInfo->getSuffix();
     }
 }
