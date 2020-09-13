@@ -35,10 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
 
     $services->set(BuilderFactory::class);
-
     $services->set(NodeFinder::class);
-
     $services->set(Parser::class);
-
     $services->set(FileSystemFilter::class);
 };
