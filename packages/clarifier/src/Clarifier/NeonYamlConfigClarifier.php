@@ -45,7 +45,6 @@ final class NeonYamlConfigClarifier
             }
 
             if ($entity->attributes) {
-                $data['arguments'] = [];
                 $data['arguments'] = $entity->attributes;
             }
         }
