@@ -1,10 +1,8 @@
-
 # Config Format Converter
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/migrify/config-transformer/stats)
 
-Toolkit for quick operations around configs.
-Convert Symfony config formats or turn magic syntax to more readable one.
+Convert Symfony Config Formats From XML/YAML to YAML/PHP
 
 ## Install
 
