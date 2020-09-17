@@ -25,16 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Migrify\\ConfigTransformer\\": "src",
-            "Migrify\\ConfigTransformer\\FormatSwitcher\\": "packages/format-switcher/src",
-            "Migrify\\ConfigTransformer\\FeatureShifter\\": "packages/feature-shifter/src"
+            "Migrify\\ConfigTransformer\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Migrify\\ConfigTransformer\\Tests\\": "tests",
-            "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/format-switcher/tests",
-            "Migrify\\ConfigTransformer\\FeatureShifter\\Tests\\": "packages/feature-shifter/tests"
+            "Migrify\\ConfigTransformer\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",
