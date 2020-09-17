@@ -7,6 +7,7 @@ namespace Migrify\ConfigTransformer\Configuration;
 use Migrify\ConfigTransformer\Guard\InputValidator;
 use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\ConfigTransformer\ValueObject\Option;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -65,7 +66,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
 
     public function populateFromInput(InputInterface $input): void
     {
-        $this->source = (array) $input->getArgument(Option::SOURCE);
+        $this->source = (array) $input->getArgument(MigrifyOption::SOURCES);
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
         $this->dryRun = boolval($input->getOption(Option::DRY_RUN));
         $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
@@ -184,7 +185,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
             return $inputFormat;
         }
 
-        $source = (array) $input->getArgument(Option::SOURCE);
+        $source = (array) $input->getArgument(MigrifyOption::SOURCES);
         // nothing we can do
         if (count($source) !== 1) {
             return '';

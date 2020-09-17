@@ -9,11 +9,6 @@ final class Option
     /**
      * @var string
      */
-    public const SOURCE = 'source';
-
-    /**
-     * @var string
-     */
     public const INPUT_FORMAT = 'input-format';
 
     /**
