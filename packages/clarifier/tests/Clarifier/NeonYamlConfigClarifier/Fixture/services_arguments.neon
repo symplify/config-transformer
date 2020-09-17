@@ -1,9 +1,0 @@
-services:
-    - SomeClass(1, 2)
------
-services:
-    -
-        class: SomeClass
-        arguments:
-            - 1
-            - 2
