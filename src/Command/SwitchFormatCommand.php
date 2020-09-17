@@ -8,6 +8,7 @@ use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\ConfigTransformer\ValueObject\Option;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -71,7 +72,7 @@ final class SwitchFormatCommand extends Command
         $this->setDescription('Converts XML/YAML configs to YAML/PHP format');
 
         $this->addArgument(
-            Option::SOURCE,
+            MigrifyOption::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
             'Path to directory with configs'
         );
