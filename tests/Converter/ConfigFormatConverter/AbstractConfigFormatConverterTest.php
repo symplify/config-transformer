@@ -31,14 +31,14 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
     protected $configuration;
 
     /**
+     * @var SmartFileSystem
+     */
+    protected $smartFileSystem;
+
+    /**
      * @var ContainerBuilderCleaner
      */
     private $containerBuilderCleaner;
-
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
 
     protected function setUp(): void
     {
