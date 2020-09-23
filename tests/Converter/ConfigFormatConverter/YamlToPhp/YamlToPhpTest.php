@@ -8,7 +8,6 @@ use Iterator;
 use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
 use Migrify\ConfigTransformer\ValueObject\Format;
-use Nette\Utils\FileSystem;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -44,7 +43,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
-        FileSystem::copy(__DIR__ . '/Fixture/normal', $temporaryPath);
+        $this->smartFileSystem->mirror(__DIR__ . '/Fixture/normal', $temporaryPath);
         require_once $temporaryPath . '/another_dir/SomeClass.php.inc';
 
         $this->doTestOutput($fixtureFileInfo, Format::YAML, Format::PHP);
@@ -66,10 +65,14 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     {
         // needed for all the included
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
-        FileSystem::write($temporaryPath . '/../src/SomeClass.php', '<?php namespace App { class SomeClass {} }');
+        $this->smartFileSystem->dumpFile(
+            $temporaryPath . '/../src/SomeClass.php',
+            '<?php namespace App { class SomeClass {} }'
+        );
         require_once $temporaryPath . '/../src/SomeClass.php';
-        FileSystem::createDir($temporaryPath . '/../src/Controller');
-        FileSystem::createDir($temporaryPath . '/../src/Domain');
+
+        $this->smartFileSystem->mkdir($temporaryPath . '/../src/Controller');
+        $this->smartFileSystem->mkdir($temporaryPath . '/../src/Domain');
 
         $this->doTestOutput($fileInfo, Format::YAML, Format::PHP);
     }
@@ -103,10 +106,12 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
 
         // copy /src to temp directory, so Symfony FileLocator knows about it
-        FileSystem::copy($extraDirectory, $temporaryPath, true);
+        $this->smartFileSystem->mirror($extraDirectory, $temporaryPath, null, [
+            'override' => true,
+        ]);
 
         $fileTemporaryPath = $temporaryPath . '/' . $fixtureFileInfo->getRelativeFilePathFromDirectory($extraDirectory);
-        FileSystem::write($fileTemporaryPath, $inputAndExpected->getInput());
+        $this->smartFileSystem->dumpFile($fileTemporaryPath, $inputAndExpected->getInput());
 
         // rquire class, so its autoloaded
         assert(file_exists($temporaryPath . '/src/SomeClass.php'));
