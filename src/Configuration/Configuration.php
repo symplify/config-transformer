@@ -47,7 +47,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
     /**
      * @var bool
      */
-    private $dryRun = false;
+    private $isDryRun = false;
 
     /**
      * @var bool
@@ -68,7 +68,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
     {
         $this->source = (array) $input->getArgument(MigrifyOption::SOURCES);
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
-        $this->dryRun = boolval($input->getOption(Option::DRY_RUN));
+        $this->isDryRun = boolval($input->getOption(Option::DRY_RUN));
         $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
 
         $this->resolveInputFormat($input);
@@ -92,7 +92,7 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
 
     public function isDryRun(): bool
     {
-        return $this->dryRun;
+        return $this->isDryRun;
     }
 
     public function getInputFormat(): string
