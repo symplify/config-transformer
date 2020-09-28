@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\Converter;
 
+use Migrify\ConfigTransformer\Collector\XmlImportCollector;
 use Migrify\ConfigTransformer\ConfigLoader;
 use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
 use Migrify\ConfigTransformer\DumperFactory;
@@ -14,6 +15,7 @@ use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
 use Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Yaml\Yaml;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConfigFormatConverter
@@ -48,13 +50,19 @@ final class ConfigFormatConverter
      */
     private $currentFilePathProvider;
 
+    /**
+     * @var XmlImportCollector
+     */
+    private $xmlImportCollector;
+
     public function __construct(
         ConfigLoader $configLoader,
         DumperFactory $dumperFactory,
         ContainerBuilderCleaner $containerBuilderCleaner,
         YamlDumpFormatter $yamlDumpFormatter,
         YamlToPhpConverter $yamlToPhpConverter,
-        CurrentFilePathProvider $currentFilePathProvider
+        CurrentFilePathProvider $currentFilePathProvider,
+        XmlImportCollector $xmlImportCollector
     ) {
         $this->configLoader = $configLoader;
         $this->dumperFactory = $dumperFactory;
@@ -62,6 +70,7 @@ final class ConfigFormatConverter
         $this->yamlDumpFormatter = $yamlDumpFormatter;
         $this->yamlToPhpConverter = $yamlToPhpConverter;
         $this->currentFilePathProvider = $currentFilePathProvider;
+        $this->xmlImportCollector = $xmlImportCollector;
     }
 
     public function convert(SmartFileInfo $smartFileInfo, string $inputFormat, string $outputFormat): string
@@ -74,17 +83,23 @@ final class ConfigFormatConverter
 
         $containerBuilder = $containerBuilderAndFileContent->getContainerBuilder();
         if ($outputFormat === Format::YAML) {
-            return $this->dumpContainerBuilderToYaml($containerBuilder);
+            $dumpedYaml = $this->dumpContainerBuilderToYaml($containerBuilder);
+            return $this->decorateWithCollectedXmlImports($dumpedYaml);
         }
 
         if ($outputFormat === Format::PHP) {
             if ($inputFormat === Format::YAML) {
-                return $this->yamlToPhpConverter->convert($containerBuilderAndFileContent->getFileContent());
+                $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
+                $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
+
+                return $this->yamlToPhpConverter->convert($dumpedYaml);
             }
 
             if ($inputFormat === Format::XML) {
-                $yamlContent = $this->dumpContainerBuilderToYaml($containerBuilder);
-                return $this->yamlToPhpConverter->convert($yamlContent);
+                $dumpedYaml = $this->dumpContainerBuilderToYaml($containerBuilder);
+                $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
+
+                return $this->yamlToPhpConverter->convert($dumpedYaml);
             }
         }
 
@@ -103,5 +118,18 @@ final class ConfigFormatConverter
         }
 
         return $this->yamlDumpFormatter->format($content);
+    }
+
+    private function decorateWithCollectedXmlImports(string $dumpedYaml): string
+    {
+        $collectedXmlImports = $this->xmlImportCollector->provide();
+        if ($collectedXmlImports === []) {
+            return $dumpedYaml;
+        }
+
+        $yamlArray = Yaml::parse($dumpedYaml, Yaml::PARSE_CUSTOM_TAGS);
+        $yamlArray['imports'] = array_merge($yamlArray['imports'] ?? [], $collectedXmlImports);
+
+        return Yaml::dump($yamlArray, 10, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
     }
 }
