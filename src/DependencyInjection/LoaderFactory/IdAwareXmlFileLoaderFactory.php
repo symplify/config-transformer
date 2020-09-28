@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\DependencyInjection\LoaderFactory;
 
+use Migrify\ConfigTransformer\Collector\XmlImportCollector;
 use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
 use Migrify\ConfigTransformer\Naming\UniqueNaming;
@@ -22,10 +23,19 @@ final class IdAwareXmlFileLoaderFactory
      */
     private $uniqueNaming;
 
-    public function __construct(Configuration $configuration, UniqueNaming $uniqueNaming)
-    {
+    /**
+     * @var XmlImportCollector
+     */
+    private $xmlImportCollector;
+
+    public function __construct(
+        Configuration $configuration,
+        UniqueNaming $uniqueNaming,
+        XmlImportCollector $xmlImportCollector
+    ) {
         $this->configuration = $configuration;
         $this->uniqueNaming = $uniqueNaming;
+        $this->xmlImportCollector = $xmlImportCollector;
     }
 
     public function createFromContainerBuilder(ContainerBuilder $containerBuilder): IdAwareXmlFileLoader
@@ -34,7 +44,8 @@ final class IdAwareXmlFileLoaderFactory
             $containerBuilder,
             new FileLocator(),
             $this->configuration,
-            $this->uniqueNaming
+            $this->uniqueNaming,
+            $this->xmlImportCollector
         );
     }
 }
