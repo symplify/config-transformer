@@ -104,7 +104,9 @@ final class ContainerBuilderCleaner
 
             $tagValues = [];
             foreach ($value as $singleValue) {
-                $singleTag = array_merge(['name' => $name], $singleValue);
+                $singleTag = array_merge([
+                    'name' => $name,
+                ], $singleValue);
                 $tagValues[] = $singleTag;
             }
 
