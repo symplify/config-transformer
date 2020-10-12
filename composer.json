@@ -15,8 +15,8 @@
         "nette/neon": "^3.0",
         "nette/utils": "^3.1",
         "nikic/php-parser": "^4.9",
-        "migrify/php-config-printer": "^0.4",
-        "migrify/migrify-kernel": "^0.4"
+        "migrify/php-config-printer": "^0.3.49",
+        "migrify/migrify-kernel": "^0.3.49"
     },
     "require-dev": {
         "symplify/easy-testing": "^8.3.15",
