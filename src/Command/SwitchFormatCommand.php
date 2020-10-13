@@ -116,7 +116,7 @@ final class SwitchFormatCommand extends Command
         $this->processOldFileInfos($fileInfos);
 
         $successMessage = sprintf(
-            'Processed %d files from "%s" to "%s" format',
+            'Processed %d file(s) from "%s" to "%s" format',
             count($fileInfos),
             $this->configuration->getInputFormat(),
             $this->configuration->getOutputFormat()
@@ -149,7 +149,7 @@ final class SwitchFormatCommand extends Command
             $this->symfonyStyle->warning($updatedFilesMessage);
         } else {
             $this->smartFileSystem->remove($fileInfos);
-            $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
+            $deletedFilesMessage = sprintf('Deleted %d original file(s)', count($fileInfos));
             $this->symfonyStyle->warning($deletedFilesMessage);
         }
     }
