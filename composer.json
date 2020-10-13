@@ -19,7 +19,7 @@
         "migrify/migrify-kernel": "^0.4"
     },
     "require-dev": {
-        "symplify/easy-testing": "^8.3.15",
+        "symplify/easy-testing": "^8.3.33",
         "phpunit/phpunit": "^8.5|^9.0",
         "symfony/framework-bundle": "^4.4|^5.1"
     },
