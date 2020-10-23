@@ -98,11 +98,15 @@ final class ConfigLoader
 
     private function wrapToDelegatingLoader(Loader $loader, ContainerBuilder $containerBuilder): DelegatingLoader
     {
+        $globFileLoader = new GlobFileLoader($containerBuilder, new FileLocator());
+        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator());
+        $checkerTolerantYamlFileLoader = new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator());
+
         return new DelegatingLoader(new LoaderResolver([
-            new GlobFileLoader($containerBuilder, new FileLocator()),
-            new PhpFileLoader($containerBuilder, new FileLocator()),
+            $globFileLoader,
+            $phpFileLoader,
             // for easier ECS migraiton
-            new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator()),
+            $checkerTolerantYamlFileLoader,
             $loader,
         ]));
     }
