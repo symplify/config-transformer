@@ -123,9 +123,10 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         $hasNamedServices = (bool) $nodeWithIds->length;
 
         // anonymous services "in the wild"
-        if (false !== $nodes = $domxPath->query('//container:services/container:service[not(@id)]')) {
+        $anonymousServiceNodes = $domxPath->query('//container:services/container:service[not(@id)]');
+        if ($anonymousServiceNodes !== false) {
             /** @var DOMElement $node */
-            foreach ($nodes as $node) {
+            foreach ($anonymousServiceNodes as $node) {
                 $id = $this->createAnonymousServiceId($hasNamedServices, $node, $file);
                 $node->setAttribute(self::ID, $id);
                 $definitions[$id] = [$node, $file, true];
@@ -135,14 +136,17 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         // resolve definitions
         uksort($definitions, 'strnatcmp');
 
-        foreach (array_reverse($definitions) as $id => [$domElement, $file]) {
-            if (null !== $definition = $this->privatesCaller->callPrivateMethod(
+        $inversedDefinitions = array_reverse($definitions);
+        foreach ($inversedDefinitions as $id => [$domElement, $file]) {
+            $definition = $this->privatesCaller->callPrivateMethod(
                 $this,
                 'parseDefinition',
                 $domElement,
                 $file,
                 new Definition()
-            )) {
+            );
+
+            if ($definition !== null) {
                 $this->setDefinition($id, $definition);
             }
         }
@@ -154,9 +158,11 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         string $file,
         array $definitions
     ): array {
-        if (false !== $nodes = $domxPath->query(
+        $nodes = $domxPath->query(
             '//container:argument[@type="service"][not(@id)]|//container:property[@type="service"][not(@id)]|//container:bind[not(@id)]|//container:factory[not(@service)]|//container:configurator[not(@service)]'
-        )) {
+        );
+
+        if ($nodes !== false) {
             /** @var DOMElement $node */
             foreach ($nodes as $node) {
                 // get current service id
@@ -167,7 +173,8 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
                 // @see https://stackoverflow.com/a/28944/1348344
                 $parentServiceId = $parentNode->getAttribute('id');
 
-                if ($services = $this->privatesCaller->callPrivateMethod($this, 'getChildren', $node, 'service')) {
+                $services = $this->privatesCaller->callPrivateMethod($this, 'getChildren', $node, 'service');
+                if ($services !== []) {
                     $id = $this->createUniqueServiceNameFromClass($services[0], $parentServiceId);
 
                     $node->setAttribute(self::ID, $id);
