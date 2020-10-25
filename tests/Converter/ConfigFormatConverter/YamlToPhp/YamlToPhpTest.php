@@ -113,7 +113,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         $fileTemporaryPath = $temporaryPath . '/' . $fixtureFileInfo->getRelativeFilePathFromDirectory($extraDirectory);
         $this->smartFileSystem->dumpFile($fileTemporaryPath, $inputAndExpected->getInput());
 
-        // rquire class, so its autoloaded
+        // require class to autoload it
         assert(file_exists($temporaryPath . '/src/SomeClass.php'));
         require_once $temporaryPath . '/src/SomeClass.php';
 
