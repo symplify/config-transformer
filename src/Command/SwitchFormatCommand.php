@@ -8,28 +8,19 @@ use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\ConfigTransformer\ValueObject\Option;
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Nette\Utils\Strings;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Yaml\Yaml;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class SwitchFormatCommand extends Command
+final class SwitchFormatCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var ConfigFormatConverter
      */
@@ -40,35 +31,16 @@ final class SwitchFormatCommand extends Command
      */
     private $configuration;
 
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
-    /**
-     * @var SmartFinder
-     */
-    private $smartFinder;
-
-    public function __construct(
-        SymfonyStyle $symfonyStyle,
-        ConfigFormatConverter $configFormatConverter,
-        Configuration $configuration,
-        SmartFinder $smartFinder,
-        SmartFileSystem $smartFileSystem
-    ) {
+    public function __construct(ConfigFormatConverter $configFormatConverter, Configuration $configuration)
+    {
         parent::__construct();
 
-        $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;
         $this->configuration = $configuration;
-        $this->smartFileSystem = $smartFileSystem;
-        $this->smartFinder = $smartFinder;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Converts XML/YAML configs to YAML/PHP format');
 
         $this->addArgument(
