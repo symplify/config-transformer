@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer;
 
 use Migrify\ConfigTransformer\DependencyInjection\ExtensionFaker;
-use Migrify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
 use Migrify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Migrify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
 use Migrify\ConfigTransformer\ValueObject\Format;
@@ -100,13 +99,12 @@ final class ConfigLoader
     {
         $globFileLoader = new GlobFileLoader($containerBuilder, new FileLocator());
         $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator());
-        $checkerTolerantYamlFileLoader = new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator());
+        $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
 
         return new DelegatingLoader(new LoaderResolver([
             $globFileLoader,
             $phpFileLoader,
-            // for easier ECS migraiton
-            $checkerTolerantYamlFileLoader,
+            $yamlFileLoader,
             $loader,
         ]));
     }
