@@ -4,25 +4,15 @@ declare(strict_types=1);
 
 use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Provider\YamlContentProvider;
-use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-use Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use PhpParser\BuilderFactory;
 use PhpParser\NodeFinder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Yaml\Parser;
+use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use Symplify\SmartFileSystem\FileSystemFilter;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // monorepo
-    $containerConfigurator->import(
-        __DIR__ . '/../../../packages/php-config-printer/config/config.php',
-        null,
-        'not_found'
-    );
-
-    // dependency
-    $containerConfigurator->import(__DIR__ . '/../../php-config-printer/config/config.php', null, 'not_found');
-
     $services = $containerConfigurator->services();
 
     $services->defaults()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\Collector;
 
-use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 
 final class XmlImportCollector
 {

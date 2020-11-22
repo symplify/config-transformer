@@ -8,8 +8,8 @@ use Migrify\ConfigTransformer\Guard\InputValidator;
 use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\ConfigTransformer\ValueObject\Option;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
-use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class Configuration implements SymfonyVersionFeatureGuardInterface

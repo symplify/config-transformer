@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Migrify\ConfigTransformer\DependencyInjection;
 
 use Migrify\ConfigTransformer\DependencyInjection\Extension\AliasConfigurableExtension;
-use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 
 final class ExtensionFaker
 {

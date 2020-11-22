@@ -12,10 +12,10 @@ use Migrify\ConfigTransformer\DumperFomatter\YamlDumpFormatter;
 use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
-use Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use Symplify\PhpConfigPrinter\YamlToPhpConverter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConfigFormatConverter
