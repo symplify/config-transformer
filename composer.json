@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "symplify/easy-testing": "dev-master",
-        "phpunit/phpunit": "^8.5|^9.0",
+        "phpunit/phpunit": "^8.5|^9.4",
         "symfony/framework-bundle": "^4.4|^5.1"
     },
     "autoload": {
