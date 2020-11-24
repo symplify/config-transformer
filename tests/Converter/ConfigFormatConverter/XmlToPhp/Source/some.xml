@@ -7,7 +7,7 @@
     <services>
         <defaults public="false" />
 
-        <service id="mime_types" class="Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\MimeTypes">
+        <service id="mime_types" class="Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\MimeTypes">
             <argument />
             <call method="setDefault">
                 <argument type="service" id="mime_types" />

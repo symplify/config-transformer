@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\YamlToPhp;
+namespace Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\YamlToPhp;
 
 use Iterator;
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
-use Migrify\ConfigTransformer\ValueObject\Format;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
+use Symplify\ConfigTransformer\ValueObject\Format;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;

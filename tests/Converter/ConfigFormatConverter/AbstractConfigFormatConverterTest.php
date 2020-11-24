@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter;
+namespace Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter;
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Converter\ConfigFormatConverter;
-use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
-use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use Migrify\ConfigTransformer\ValueObject\Format;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
+use Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
+use Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
+use Symplify\ConfigTransformer\ValueObject\Format;
 use Symplify\EasyTesting\DataProvider\StaticFixtureUpdater;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
@@ -59,8 +59,7 @@ abstract class AbstractConfigFormatConverterTest extends AbstractKernelTestCase
 
         $this->doTestFileInfo(
             $inputAndExpected->getInputFileInfo(),
-            $inputAndExpected->getExpectedFileInfo()
-                ->getContents(),
+            $inputAndExpected->getExpectedFileContent(),
             $fixtureFileInfo,
             $inputFormat,
             $outputFormat

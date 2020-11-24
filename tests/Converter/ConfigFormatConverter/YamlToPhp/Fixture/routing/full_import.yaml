@@ -13,7 +13,7 @@ api_platform:
         my_option: 'my_value'
     utf8: false
     condition: 'context.getMethod() in ["GET", "HEAD"] and request.headers.get("User-Agent") matches "/firefox/i"'
-    host: 'https://github.com/migrify/config-transformer'
+    host: 'https://github.com/symplify/config-transformer'
     schemes: ['https']
     methods: 'GET|HEAD'
     controller: 'App\Controller\BlogApiController::show'
@@ -36,7 +36,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         ->options(['my_option' => 'my_value'])
         ->utf8(false)
         ->condition('context.getMethod() in ["GET", "HEAD"] and request.headers.get("User-Agent") matches "/firefox/i"')
-        ->host('https://github.com/migrify/config-transformer')
+        ->host('https://github.com/symplify/config-transformer')
         ->schemes(['https'])
         ->methods(['GET', 'HEAD'])
         ->controller('App\Controller\BlogApiController::show')

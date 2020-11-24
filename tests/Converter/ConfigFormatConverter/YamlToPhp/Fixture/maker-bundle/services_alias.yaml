@@ -1,20 +1,20 @@
 services:
-    Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass: '@fake.simple_class'
+    Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass: '@fake.simple_class'
 
-    Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass $variable: '@App\Fake\Class'
+    Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass $variable: '@App\Fake\Class'
 
     fake.simple_class_two:
         public: false
-        alias: Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass
+        alias: Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass
         deprecated: 'The "%alias_id%" alias is deprecated. Do not use it anymore.'
 -----
 <?php
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

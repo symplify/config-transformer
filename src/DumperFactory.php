@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer;
+namespace Symplify\ConfigTransformer;
 
-use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\Dumper;
 use Symfony\Component\DependencyInjection\Dumper\YamlDumper;
+use Symplify\ConfigTransformer\ValueObject\Format;
 
 final class DumperFactory
 {

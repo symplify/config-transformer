@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Provider\YamlContentProvider;
 use PhpParser\BuilderFactory;
 use PhpParser\NodeFinder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Yaml\Parser;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\Provider\YamlContentProvider;
 use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use Symplify\SmartFileSystem\FileSystemFilter;
@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('Migrify\ConfigTransformer\\', __DIR__ . '/../src')
+    $services->load('Symplify\ConfigTransformer\\', __DIR__ . '/../src')
         ->exclude([
             __DIR__ . '/../src/HttpKernel',
             __DIR__ . '/../src/DependencyInjection/Loader',

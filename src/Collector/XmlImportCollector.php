@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Collector;
+namespace Symplify\ConfigTransformer\Collector;
 
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\ValueObject;
+namespace Symplify\ConfigTransformer\ValueObject;
 
 final class SymfonyVersionFeature
 {

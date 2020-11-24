@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection\Loader;
+namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use Migrify\ConfigTransformer\Collector\XmlImportCollector;
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Naming\UniqueNaming;
-use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\Naming\UniqueNaming;
+use Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 
 /**

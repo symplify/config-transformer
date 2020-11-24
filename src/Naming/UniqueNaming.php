@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Naming;
+namespace Symplify\ConfigTransformer\Naming;
 
 final class UniqueNaming
 {

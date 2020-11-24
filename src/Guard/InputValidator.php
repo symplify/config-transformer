@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Guard;
+namespace Symplify\ConfigTransformer\Guard;
 
-use Migrify\ConfigTransformer\Exception\InvalidConfigurationException;
+use Symplify\ConfigTransformer\Exception\InvalidConfigurationException;
 
 final class InputValidator
 {

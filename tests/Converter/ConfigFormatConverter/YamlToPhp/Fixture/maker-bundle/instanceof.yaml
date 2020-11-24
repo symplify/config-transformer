@@ -1,11 +1,11 @@
 services:
 
   _instanceof:
-    Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
+    Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass:
       public: true
       tags: ['app.domain_loader']
 
-    Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass:
+    Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass:
       public: false
       tags: ['app.domain_loader']
 -----
@@ -13,9 +13,9 @@ services:
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\SecondFakeClass;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

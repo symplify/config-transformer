@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection\LoaderFactory;
+namespace Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
 
-use Migrify\ConfigTransformer\Collector\XmlImportCollector;
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
-use Migrify\ConfigTransformer\Naming\UniqueNaming;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
+use Symplify\ConfigTransformer\Naming\UniqueNaming;
 
 final class IdAwareXmlFileLoaderFactory
 {

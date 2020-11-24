@@ -1,13 +1,13 @@
 # Config Format Converter
 
-[![Downloads total](https://img.shields.io/packagist/dt/migrify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/migrify/config-transformer/stats)
+[![Downloads total](https://img.shields.io/packagist/dt/symplify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/symplify/config-transformer/stats)
 
 Convert Symfony Config Formats From XML/YAML to YAML/PHP
 
 ## Install
 
 ```bash
-composer require migrify/config-transformer --dev
+composer require symplify/config-transformer --dev
 ```
 
 <br>
@@ -34,7 +34,7 @@ vendor/bin/config-transformer switch-format app/config --input-format xml --outp
 # or in short
 vendor/bin/config-transformer switch-format app/config -i xml -o yaml
 
-# to PHP?  
+# to PHP?
 vendor/bin/config-transformer switch-format app/config -i xml -o php
 
 # you can omit the -o argument, as "php" is the default value

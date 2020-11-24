@@ -2,19 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection;
+namespace Symplify\ConfigTransformer\DependencyInjection;
 
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
 use Nette\Utils\Strings;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 
 final class ContainerBuilderCleaner
 {
+    /**
+     * @see https://regex101.com/r/0qo8RA/1
+     * @var string
+     */
+    private const ANONYMOUS_CLASS_REGEX = '#^[\d]+\_[\w]{64}$#';
+
     /**
      * @var PrivatesAccessor
      */
@@ -83,7 +89,7 @@ final class ContainerBuilderCleaner
 
     private function isGeneratedKeyForAnonymousClass(string $name): bool
     {
-        return (bool) Strings::match($name, '#^[\d]+\_[\w]{64}$#');
+        return (bool) Strings::match($name, self::ANONYMOUS_CLASS_REGEX);
     }
 
     private function resolvePolyfillForNameTag(Definition $definition): void

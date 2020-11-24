@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Converter;
+namespace Symplify\ConfigTransformer\Converter;
 
-use Migrify\ConfigTransformer\Collector\XmlImportCollector;
-use Migrify\ConfigTransformer\ConfigLoader;
-use Migrify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
-use Migrify\ConfigTransformer\DumperFactory;
-use Migrify\ConfigTransformer\DumperFomatter\YamlDumpFormatter;
-use Migrify\ConfigTransformer\ValueObject\Format;
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\ConfigLoader;
+use Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
+use Symplify\ConfigTransformer\DumperFactory;
+use Symplify\ConfigTransformer\DumperFomatter\YamlDumpFormatter;
+use Symplify\ConfigTransformer\ValueObject\Format;
 use Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
 use Symplify\PhpConfigPrinter\YamlToPhpConverter;
 use Symplify\SmartFileSystem\SmartFileInfo;

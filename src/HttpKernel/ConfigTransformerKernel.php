@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\HttpKernel;
+namespace Symplify\ConfigTransformer\HttpKernel;
 
 use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
 use Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;

@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\DependencyInjection;
+namespace Symplify\ConfigTransformer\DependencyInjection;
 
-use Migrify\ConfigTransformer\DependencyInjection\Extension\AliasConfigurableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\DependencyInjection\Extension\AliasConfigurableExtension;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 
+/**
+ * This fakes basic extensions, so loading of config is possible without loading real extensions and booting your whole project
+ */
 final class ExtensionFaker
 {
     /**

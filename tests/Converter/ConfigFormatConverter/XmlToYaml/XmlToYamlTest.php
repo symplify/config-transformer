@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\XmlToYaml;
+namespace Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\XmlToYaml;
 
 use Iterator;
-use Migrify\ConfigTransformer\Configuration\Configuration;
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
-use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
+use Symplify\ConfigTransformer\Configuration\Configuration;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
+use Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

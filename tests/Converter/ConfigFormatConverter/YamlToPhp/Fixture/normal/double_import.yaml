@@ -1,16 +1,16 @@
 services:
     gateway.api.client:
-        class: Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle
+        class: Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle
 
 parameters:
-    items: Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle
+    items: Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle
 -----
 <?php
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeGuzzle;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

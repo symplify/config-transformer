@@ -1,11 +1,11 @@
 
 services:
   fake.service.old_syntax:
-    class: \Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass
+    class: \Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass
     deprecated: 'The %service_id% service is deprecated'
 
   fake.service.new_syntax:
-    class: \Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass
+    class: \Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass
     deprecated:
       message: 'The %service_id% service is deprecated'
       package: 'symfony/foobar'
@@ -15,8 +15,8 @@ services:
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\Source\FakeClass;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

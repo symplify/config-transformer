@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
+use Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
 
 $possibleAutoloadPaths = [
     // after split package

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Configuration;
+namespace Symplify\ConfigTransformer\Configuration;
 
-use Migrify\ConfigTransformer\Guard\InputValidator;
-use Migrify\ConfigTransformer\ValueObject\Format;
-use Migrify\ConfigTransformer\ValueObject\Option;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symplify\ConfigTransformer\Guard\InputValidator;
+use Symplify\ConfigTransformer\ValueObject\Format;
+use Symplify\ConfigTransformer\ValueObject\Option;
 use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -50,11 +50,6 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
     private $isDryRun = false;
 
     /**
-     * @var bool
-     */
-    private $shouldKeepBcLayer = false;
-
-    /**
      * @var InputValidator
      */
     private $inputValidator;
@@ -69,7 +64,6 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
         $this->source = (array) $input->getArgument(MigrifyOption::SOURCES);
         $this->targetSymfonyVersion = floatval($input->getOption(Option::TARGET_SYMFONY_VERSION));
         $this->isDryRun = boolval($input->getOption(Option::DRY_RUN));
-        $this->shouldKeepBcLayer = (bool) $input->getOption(Option::BC_LAYER);
 
         $this->resolveInputFormat($input);
         $this->resolveOutputFormat($input);
@@ -103,11 +97,6 @@ final class Configuration implements SymfonyVersionFeatureGuardInterface
     public function changeSymfonyVersion(float $symfonyVersion): void
     {
         $this->targetSymfonyVersion = $symfonyVersion;
-    }
-
-    public function shouldKeepBcLayer(): bool
-    {
-        return $this->shouldKeepBcLayer;
     }
 
     public function changeInputFormat(string $inputFormat): void
