@@ -1,30 +1,26 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace ConfigTransformer20210601\Symplify\ConfigTransformer\Collector;
 
-namespace Symplify\ConfigTransformer\Collector;
-
-use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-
+use ConfigTransformer20210601\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class XmlImportCollector
 {
     /**
      * @var array<string, array<string, mixed>>|string[]
      */
     private $imports = [];
-
-    public function addImport($resource, $ignoreErrors): void
+    /**
+     * @return void
+     */
+    public function addImport($resource, $ignoreErrors)
     {
-        $this->imports[] = [
-            YamlKey::RESOURCE => $resource,
-            YamlKey::IGNORE_ERRORS => $ignoreErrors,
-        ];
+        $this->imports[] = [\ConfigTransformer20210601\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => $resource, \ConfigTransformer20210601\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => $ignoreErrors];
     }
-
     /**
      * @return mixed[]
      */
-    public function provide(): array
+    public function provide() : array
     {
         return $this->imports;
     }
