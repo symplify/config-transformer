@@ -1,23 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Symplify\ConfigTransformer\ValueObject;
+declare (strict_types=1);
+namespace ConfigTransformer20210604\Symplify\ConfigTransformer\ValueObject;
 
 final class Option
 {
     /**
      * @var string
      */
-    public const TARGET_SYMFONY_VERSION = 'target-symfony-version';
-
+    const TARGET_SYMFONY_VERSION = 'target-symfony-version';
     /**
      * @var string
      */
-    public const DRY_RUN = 'dry-run';
-
+    const DRY_RUN = 'dry-run';
     /**
      * @var string
      */
-    public const SOURCES = 'sources';
+    const SOURCES = 'sources';
 }
