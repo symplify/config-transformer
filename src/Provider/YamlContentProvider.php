@@ -1,28 +1,30 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer20210604\Symplify\ConfigTransformer\Provider;
+declare(strict_types=1);
 
-use ConfigTransformer20210604\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-use ConfigTransformer20210604\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-final class YamlContentProvider implements \ConfigTransformer20210604\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
+namespace Symplify\ConfigTransformer\Provider;
+
+use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+
+final class YamlContentProvider implements YamlFileContentProviderInterface
 {
     /**
      * @var string|null
      */
     private $yamlContent;
-    /**
-     * @return void
-     */
-    public function setContent(string $yamlContent)
+
+    public function setContent(string $yamlContent): void
     {
         $this->yamlContent = $yamlContent;
     }
-    public function getYamlContent() : string
+
+    public function getYamlContent(): string
     {
         if ($this->yamlContent === null) {
-            throw new \ConfigTransformer20210604\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new ShouldNotHappenException();
         }
+
         return $this->yamlContent;
     }
 }

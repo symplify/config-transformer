@@ -1,24 +1,28 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer20210604\Symplify\ConfigTransformer\ValueObject;
+declare(strict_types=1);
+
+namespace Symplify\ConfigTransformer\ValueObject;
 
 final class Format
 {
     /**
      * @var string
      */
-    const YAML = 'yaml';
+    public const YAML = 'yaml';
+
     /**
      * @var string
      */
-    const YML = 'yml';
+    public const YML = 'yml';
+
     /**
      * @var string
      */
-    const XML = 'xml';
+    public const XML = 'xml';
+
     /**
      * @var string
      */
-    const PHP = 'php';
+    public const PHP = 'php';
 }
