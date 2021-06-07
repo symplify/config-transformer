@@ -1,24 +1,27 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer20210607\Symplify\ConfigTransformer\HttpKernel;
+declare(strict_types=1);
 
-use ConfigTransformer20210607\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer20210607\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer20210607\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use ConfigTransformer20210607\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
-use ConfigTransformer20210607\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class ConfigTransformerKernel extends \ConfigTransformer20210607\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+namespace Symplify\ConfigTransformer\HttpKernel;
+
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
+use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+
+final class ConfigTransformerKernel extends AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\ConfigTransformer20210607\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
     }
+
     /**
      * @return BundleInterface[]
      */
-    public function registerBundles() : iterable
+    public function registerBundles(): iterable
     {
-        return [new \ConfigTransformer20210607\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer20210607\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new SymplifyKernelBundle(), new PhpConfigPrinterBundle()];
     }
 }
