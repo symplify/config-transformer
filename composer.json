@@ -1,11 +1,42 @@
 {
     "name": "symplify/config-transformer",
-    "description": "Prefixed version of Symfony YAML/XML to PHP/YAML config converter",
+    "description": "Convert Symfony YAML/XML format to PHP/YAML",
     "license": "MIT",
-    "require": {
-        "php": ">=7.1"
-    },
     "bin": [
         "bin/config-transformer"
-    ]
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-dom": "*",
+        "symfony/dependency-injection": "^5.2",
+        "symfony/console": "^4.4|^5.2",
+        "symfony/http-kernel": "^4.4|^5.2",
+        "symfony/expression-language": "^4.4|^5.2",
+        "symfony/yaml": "^4.4|^5.2",
+        "nette/neon": "^3.2",
+        "nette/utils": "^3.2",
+        "nikic/php-parser": "4.10.5",
+        "symplify/php-config-printer": "^9.3.22"
+    },
+    "require-dev": {
+        "symplify/easy-testing": "^9.3.22",
+        "phpunit/phpunit": "^9.5",
+        "symfony/framework-bundle": "^4.4|^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Symplify\\ConfigTransformer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Symplify\\ConfigTransformer\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": false
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
