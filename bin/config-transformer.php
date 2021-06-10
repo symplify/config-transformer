@@ -19,9 +19,10 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
         break;
     }
 }
-$scoperAutoloadFilepath = __DIR__ . '/../vendor/scoper-autoload.php';
-if (\file_exists($scoperAutoloadFilepath)) {
-    require_once $scoperAutoloadFilepath;
+// autoload local project path, if not installed ad vendor dependency
+$projectVendorAutoload = \getcwd() . '/vendor/autoload';
+if (\file_exists($projectVendorAutoload)) {
+    require_once $projectVendorAutoload;
 }
 $codeSnifferAutoload = \getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.php';
 if (\file_exists($codeSnifferAutoload)) {
