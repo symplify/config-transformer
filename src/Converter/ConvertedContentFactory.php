@@ -1,39 +1,38 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer202106111\Symplify\ConfigTransformer\Converter;
+declare(strict_types=1);
 
-use ConfigTransformer202106111\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202106111\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202106111\Symplify\SmartFileSystem\SmartFileInfo;
+namespace Symplify\ConfigTransformer\Converter;
+
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use Symplify\SmartFileSystem\SmartFileInfo;
+
 final class ConvertedContentFactory
 {
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $symfonyStyle;
-    /**
-     * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
-     */
-    private $configFormatConverter;
-    public function __construct(\ConfigTransformer202106111\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202106111\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
-    {
-        $this->symfonyStyle = $symfonyStyle;
-        $this->configFormatConverter = $configFormatConverter;
+    public function __construct(
+        private SymfonyStyle $symfonyStyle,
+        private ConfigFormatConverter $configFormatConverter
+    ) {
     }
+
     /**
      * @param SmartFileInfo[] $fileInfos
      * @return ConvertedContent[]
      */
-    public function createFromFileInfos(array $fileInfos) : array
+    public function createFromFileInfos(array $fileInfos): array
     {
         $convertedContentFromFileInfo = [];
+
         foreach ($fileInfos as $fileInfo) {
-            $message = \sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
+            $message = sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
             $this->symfonyStyle->note($message);
+
             $convertedContent = $this->configFormatConverter->convert($fileInfo);
-            $convertedContentFromFileInfo[] = new \ConfigTransformer202106111\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
+
+            $convertedContentFromFileInfo[] = new ConvertedContent($convertedContent, $fileInfo);
         }
+
         return $convertedContentFromFileInfo;
     }
 }
