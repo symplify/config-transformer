@@ -1,35 +1,29 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace ConfigTransformer2021061110\Symplify\ConfigTransformer\ValueObject;
 
-namespace Symplify\ConfigTransformer\ValueObject;
-
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
+use ConfigTransformer2021061110\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class ContainerBuilderAndFileContent
 {
     /**
      * @var ContainerBuilder
      */
     private $containerBuilder;
-
     /**
      * @var string
      */
     private $fileContent;
-
-    public function __construct(ContainerBuilder $containerBuilder, string $fileContent)
+    public function __construct(\ConfigTransformer2021061110\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $fileContent)
     {
         $this->containerBuilder = $containerBuilder;
         $this->fileContent = $fileContent;
     }
-
-    public function getContainerBuilder(): ContainerBuilder
+    public function getContainerBuilder() : \ConfigTransformer2021061110\Symfony\Component\DependencyInjection\ContainerBuilder
     {
         return $this->containerBuilder;
     }
-
-    public function getFileContent(): string
+    public function getFileContent() : string
     {
         return $this->fileContent;
     }
