@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106122\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 /**
  * Checks your services for circular references.
  *
@@ -22,14 +22,14 @@ use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Exception\S
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckCircularReferencesPass implements \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CheckCircularReferencesPass implements \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $currentPath;
     private $checkedNodes;
     /**
      * Checks the ContainerBuilder object for circular references.
      */
-    public function process(\ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $graph = $container->getCompiler()->getServiceReferenceGraph();
         $this->checkedNodes = [];
@@ -56,7 +56,7 @@ class CheckCircularReferencesPass implements \ConfigTransformer202106122\Symfony
                     $searchKey = \array_search($id, $this->currentPath);
                     $this->currentPath[] = $id;
                     if (\false !== $searchKey) {
-                        throw new \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_slice($this->currentPath, $searchKey));
+                        throw new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_slice($this->currentPath, $searchKey));
                     }
                     $this->checkOutEdges($node->getOutEdges());
                 }

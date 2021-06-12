@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202106122\Psr\Log;
+namespace ConfigTransformer2021061210\Psr\Log;
 
 /**
  * Basic Implementation of LoggerAwareInterface.
@@ -18,7 +18,7 @@ trait LoggerAwareTrait
      *
      * @param LoggerInterface $logger
      */
-    public function setLogger(\ConfigTransformer202106122\Psr\Log\LoggerInterface $logger)
+    public function setLogger(\ConfigTransformer2021061210\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106122\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021061210\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202106122\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021061210\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class NameNode extends \ConfigTransformer202106122\Symfony\Component\ExpressionLanguage\Node\Node
+class NameNode extends \ConfigTransformer2021061210\Symfony\Component\ExpressionLanguage\Node\Node
 {
     public function __construct(string $name)
     {
         parent::__construct([], ['name' => $name]);
     }
-    public function compile(\ConfigTransformer202106122\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer2021061210\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $compiler->raw('$' . $this->attributes['name']);
     }

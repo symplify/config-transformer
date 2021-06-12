@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106122\Symplify\PhpConfigPrinter\NodeVisitor;
+namespace ConfigTransformer2021061210\Symplify\PhpConfigPrinter\NodeVisitor;
 
-use ConfigTransformer202106122\Nette\Utils\Strings;
-use ConfigTransformer202106122\PhpParser\Node;
-use ConfigTransformer202106122\PhpParser\Node\Name;
-use ConfigTransformer202106122\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202106122\PhpParser\NodeVisitorAbstract;
-use ConfigTransformer202106122\Symplify\PhpConfigPrinter\Naming\ClassNaming;
-final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer202106122\PhpParser\NodeVisitorAbstract
+use ConfigTransformer2021061210\Nette\Utils\Strings;
+use ConfigTransformer2021061210\PhpParser\Node;
+use ConfigTransformer2021061210\PhpParser\Node\Name;
+use ConfigTransformer2021061210\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer2021061210\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Naming\ClassNaming;
+final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer2021061210\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var ClassNaming
@@ -19,7 +19,7 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer20210
      * @var string[]
      */
     private $nameImports = [];
-    public function __construct(\ConfigTransformer202106122\Symplify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
+    public function __construct(\ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
     {
         $this->classNaming = $classNaming;
     }
@@ -32,22 +32,22 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer20210
         $this->nameImports = [];
         return null;
     }
-    public function enterNode(\ConfigTransformer202106122\PhpParser\Node $node) : ?\ConfigTransformer202106122\PhpParser\Node
+    public function enterNode(\ConfigTransformer2021061210\PhpParser\Node $node) : ?\ConfigTransformer2021061210\PhpParser\Node
     {
-        if (!$node instanceof \ConfigTransformer202106122\PhpParser\Node\Name\FullyQualified) {
+        if (!$node instanceof \ConfigTransformer2021061210\PhpParser\Node\Name\FullyQualified) {
             return null;
         }
         $fullyQualifiedName = $node->toString();
         // namespace-less class name
-        if (\ConfigTransformer202106122\Nette\Utils\Strings::startsWith($fullyQualifiedName, '\\')) {
+        if (\ConfigTransformer2021061210\Nette\Utils\Strings::startsWith($fullyQualifiedName, '\\')) {
             $fullyQualifiedName = \ltrim($fullyQualifiedName, '\\');
         }
-        if (!\ConfigTransformer202106122\Nette\Utils\Strings::contains($fullyQualifiedName, '\\')) {
-            return new \ConfigTransformer202106122\PhpParser\Node\Name($fullyQualifiedName);
+        if (!\ConfigTransformer2021061210\Nette\Utils\Strings::contains($fullyQualifiedName, '\\')) {
+            return new \ConfigTransformer2021061210\PhpParser\Node\Name($fullyQualifiedName);
         }
         $shortClassName = $this->classNaming->getShortName($fullyQualifiedName);
         $this->nameImports[] = $fullyQualifiedName;
-        return new \ConfigTransformer202106122\PhpParser\Node\Name($shortClassName);
+        return new \ConfigTransformer2021061210\PhpParser\Node\Name($shortClassName);
     }
     /**
      * @return string[]

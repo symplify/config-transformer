@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106122\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer2021061210\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202106122\PhpParser\Lexer\Emulative;
-final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202106122\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer2021061210\PhpParser\Lexer\Emulative;
+final class NumericLiteralSeparatorEmulator extends \ConfigTransformer2021061210\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     const BIN = '(?:0b[01]+(?:_[01]+)*)';
     const HEX = '(?:0x[0-9a-f]+(?:_[0-9a-f]+)*)';
@@ -15,7 +15,7 @@ final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202106122\
     const NUMBER = '~' . self::FLOAT . '|' . self::BIN . '|' . self::HEX . '|' . self::DEC . '~iA';
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202106122\PhpParser\Lexer\Emulative::PHP_7_4;
+        return \ConfigTransformer2021061210\PhpParser\Lexer\Emulative::PHP_7_4;
     }
     public function isEmulationNeeded(string $code) : bool
     {

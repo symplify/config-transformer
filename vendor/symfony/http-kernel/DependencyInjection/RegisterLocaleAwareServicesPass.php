@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106122\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer2021061210\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Reference;
 /**
  * Register all services that have the "kernel.locale_aware" tag into the listener.
  *
  * @author Pierre Bobiet <pierrebobiet@gmail.com>
  */
-class RegisterLocaleAwareServicesPass implements \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterLocaleAwareServicesPass implements \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $listenerServiceId;
     private $localeAwareTag;
@@ -31,19 +31,19 @@ class RegisterLocaleAwareServicesPass implements \ConfigTransformer202106122\Sym
         $this->listenerServiceId = $listenerServiceId;
         $this->localeAwareTag = $localeAwareTag;
     }
-    public function process(\ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->listenerServiceId)) {
             return;
         }
         $services = [];
         foreach ($container->findTaggedServiceIds($this->localeAwareTag) as $id => $tags) {
-            $services[] = new \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Reference($id);
+            $services[] = new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Reference($id);
         }
         if (!$services) {
             $container->removeDefinition($this->listenerServiceId);
             return;
         }
-        $container->getDefinition($this->listenerServiceId)->setArgument(0, new \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
+        $container->getDefinition($this->listenerServiceId)->setArgument(0, new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
     }
 }
