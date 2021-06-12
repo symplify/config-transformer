@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106120\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer2021061210\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202106120\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202106120\Symfony\Component\HttpFoundation\StreamedResponse;
-use ConfigTransformer202106120\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202106120\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer2021061210\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer2021061210\Symfony\Component\HttpFoundation\StreamedResponse;
+use ConfigTransformer2021061210\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer2021061210\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * StreamedResponseListener is responsible for sending the Response
  * to the client.
@@ -22,23 +22,23 @@ use ConfigTransformer202106120\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final
  */
-class StreamedResponseListener implements \ConfigTransformer202106120\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class StreamedResponseListener implements \ConfigTransformer2021061210\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     /**
      * Filters the Response.
      */
-    public function onKernelResponse(\ConfigTransformer202106120\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
+    public function onKernelResponse(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
     {
         if (!$event->isMainRequest()) {
             return;
         }
         $response = $event->getResponse();
-        if ($response instanceof \ConfigTransformer202106120\Symfony\Component\HttpFoundation\StreamedResponse) {
+        if ($response instanceof \ConfigTransformer2021061210\Symfony\Component\HttpFoundation\StreamedResponse) {
             $response->send();
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202106120\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1024]];
+        return [\ConfigTransformer2021061210\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1024]];
     }
 }

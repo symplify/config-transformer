@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106120\Symplify\Astral\DependencyInjection\Extension;
+namespace ConfigTransformer2021061210\Symplify\Astral\DependencyInjection\Extension;
 
-use ConfigTransformer202106120\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202106120\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106120\Symfony\Component\DependencyInjection\Extension\Extension;
-use ConfigTransformer202106120\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class AstralExtension extends \ConfigTransformer202106120\Symfony\Component\DependencyInjection\Extension\Extension
+use ConfigTransformer2021061210\Symfony\Component\Config\FileLocator;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class AstralExtension extends \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Extension\Extension
 {
     /**
      * @param string[] $configs
      */
-    public function load(array $configs, \ConfigTransformer202106120\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
-        $phpFileLoader = new \ConfigTransformer202106120\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202106120\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer2021061210\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

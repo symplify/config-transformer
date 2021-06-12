@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106120\PhpParser\Node\Expr;
+namespace ConfigTransformer2021061210\PhpParser\Node\Expr;
 
-use ConfigTransformer202106120\PhpParser\Node\Expr;
-use ConfigTransformer202106120\PhpParser\Node\Name;
-class ConstFetch extends \ConfigTransformer202106120\PhpParser\Node\Expr
+use ConfigTransformer2021061210\PhpParser\Node\Expr;
+use ConfigTransformer2021061210\PhpParser\Node\Name;
+class ConstFetch extends \ConfigTransformer2021061210\PhpParser\Node\Expr
 {
     /** @var Name Constant name */
     public $name;
@@ -15,7 +15,7 @@ class ConstFetch extends \ConfigTransformer202106120\PhpParser\Node\Expr
      * @param Name  $name       Constant name
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202106120\PhpParser\Node\Name $name, array $attributes = [])
+    public function __construct(\ConfigTransformer2021061210\PhpParser\Node\Name $name, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->name = $name;
