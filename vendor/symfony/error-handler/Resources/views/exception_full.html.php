@@ -1,5 +1,5 @@
 <!-- <?php 
-namespace ConfigTransformer2021061210;
+namespace ConfigTransformer202106123;
 
 echo $_message = \sprintf('%s (%d %s)', $exceptionMessage, $statusCode, $statusText);
 ?> -->
@@ -32,7 +32,7 @@ echo $this->include('assets/css/exception_full.css');
         </script>
 
         <?php 
-if (\class_exists(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\Kernel::class)) {
+if (\class_exists(\ConfigTransformer202106123\Symfony\Component\HttpKernel\Kernel::class)) {
     ?>
             <header>
                 <div class="container">
@@ -42,7 +42,7 @@ if (\class_exists(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\Kern
 
                     <div class="help-link">
                         <a href="https://symfony.com/doc/<?php 
-    echo \ConfigTransformer2021061210\Symfony\Component\HttpKernel\Kernel::VERSION;
+    echo \ConfigTransformer202106123\Symfony\Component\HttpKernel\Kernel::VERSION;
     ?>/index.html">
                             <span class="icon"><?php 
     echo $this->include('assets/images/icon-book.svg');

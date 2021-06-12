@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2021061210\\Symfony\\Component\\ErrorHandler\\": ""
+            "ConfigTransformer202106123\\Symfony\\Component\\ErrorHandler\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

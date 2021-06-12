@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Dummy;
+namespace ConfigTransformer202106123\Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-final class DummySymfonyVersionFeatureGuard implements \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+final class DummySymfonyVersionFeatureGuard implements \ConfigTransformer202106123\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
 {
     public function isAtLeastSymfonyVersion(float $symfonyVersion) : bool
     {

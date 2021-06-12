@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021061210\PhpParser\Node\Expr;
+namespace ConfigTransformer202106123\PhpParser\Node\Expr;
 
-use ConfigTransformer2021061210\PhpParser\Node\Expr;
-class Yield_ extends \ConfigTransformer2021061210\PhpParser\Node\Expr
+use ConfigTransformer202106123\PhpParser\Node\Expr;
+class Yield_ extends \ConfigTransformer202106123\PhpParser\Node\Expr
 {
     /** @var null|Expr Key expression */
     public $key;
@@ -17,7 +17,7 @@ class Yield_ extends \ConfigTransformer2021061210\PhpParser\Node\Expr
      * @param null|Expr $key        Key expression
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021061210\PhpParser\Node\Expr $value = null, \ConfigTransformer2021061210\PhpParser\Node\Expr $key = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202106123\PhpParser\Node\Expr $value = null, \ConfigTransformer202106123\PhpParser\Node\Expr $key = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->key = $key;

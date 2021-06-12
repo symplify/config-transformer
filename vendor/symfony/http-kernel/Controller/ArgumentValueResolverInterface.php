@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202106123\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021061210\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202106123\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202106123\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Responsible for resolving the value of an argument based on its metadata.
  *
@@ -24,11 +24,11 @@ interface ArgumentValueResolverInterface
      *
      * @return bool
      */
-    public function supports(\ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021061210\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument);
+    public function supports(\ConfigTransformer202106123\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106123\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument);
     /**
      * Returns the possible value(s).
      *
      * @return iterable
      */
-    public function resolve(\ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021061210\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument);
+    public function resolve(\ConfigTransformer202106123\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106123\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument);
 }

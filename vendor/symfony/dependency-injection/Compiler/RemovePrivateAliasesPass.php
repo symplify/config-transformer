@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202106123\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Remove private aliases from the container. They were only used to establish
  * dependencies between services, and these dependencies have been resolved in
@@ -18,12 +18,12 @@ use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerB
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class RemovePrivateAliasesPass implements \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RemovePrivateAliasesPass implements \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * Removes private aliases from the ContainerBuilder.
      */
-    public function process(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getAliases() as $id => $alias) {
             if ($alias->isPublic()) {

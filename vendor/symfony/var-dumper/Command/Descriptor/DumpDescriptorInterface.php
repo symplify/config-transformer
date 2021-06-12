@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\VarDumper\Command\Descriptor;
+namespace ConfigTransformer202106123\Symfony\Component\VarDumper\Command\Descriptor;
 
-use ConfigTransformer2021061210\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer2021061210\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202106123\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202106123\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
 interface DumpDescriptorInterface
 {
-    public function describe(\ConfigTransformer2021061210\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer2021061210\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void;
+    public function describe(\ConfigTransformer202106123\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202106123\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void;
 }

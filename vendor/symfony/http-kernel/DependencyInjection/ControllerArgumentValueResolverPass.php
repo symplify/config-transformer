@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202106123\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer2021061210\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
-use ConfigTransformer2021061210\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202106123\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
+use ConfigTransformer202106123\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Gathers and configures the argument value resolvers.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-class ControllerArgumentValueResolverPass implements \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ControllerArgumentValueResolverPass implements \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
     private $argumentResolverService;
@@ -37,18 +37,18 @@ class ControllerArgumentValueResolverPass implements \ConfigTransformer202106121
         $this->argumentValueResolverTag = $argumentValueResolverTag;
         $this->traceableResolverStopwatch = $traceableResolverStopwatch;
     }
-    public function process(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->argumentResolverService)) {
             return;
         }
         $resolvers = $this->findAndSortTaggedServices($this->argumentValueResolverTag, $container);
-        if ($container->getParameter('kernel.debug') && \class_exists(\ConfigTransformer2021061210\Symfony\Component\Stopwatch\Stopwatch::class) && $container->has($this->traceableResolverStopwatch)) {
+        if ($container->getParameter('kernel.debug') && \class_exists(\ConfigTransformer202106123\Symfony\Component\Stopwatch\Stopwatch::class) && $container->has($this->traceableResolverStopwatch)) {
             foreach ($resolvers as $resolverReference) {
                 $id = (string) $resolverReference;
-                $container->register("debug.{$id}", \ConfigTransformer2021061210\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver::class)->setDecoratedService($id)->setArguments([new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Reference("debug.{$id}.inner"), new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Reference($this->traceableResolverStopwatch)]);
+                $container->register("debug.{$id}", \ConfigTransformer202106123\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver::class)->setDecoratedService($id)->setArguments([new \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Reference("debug.{$id}.inner"), new \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Reference($this->traceableResolverStopwatch)]);
             }
         }
-        $container->getDefinition($this->argumentResolverService)->replaceArgument(1, new \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Argument\IteratorArgument($resolvers));
+        $container->getDefinition($this->argumentResolverService)->replaceArgument(1, new \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Argument\IteratorArgument($resolvers));
     }
 }

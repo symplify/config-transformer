@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\HttpKernel\Profiler;
+namespace ConfigTransformer202106123\Symfony\Component\HttpKernel\Profiler;
 
-use ConfigTransformer2021061210\Psr\Log\LoggerInterface;
-use ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
-use ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021061210\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
-use ConfigTransformer2021061210\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
-use ConfigTransformer2021061210\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202106123\Psr\Log\LoggerInterface;
+use ConfigTransformer202106123\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use ConfigTransformer202106123\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202106123\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202106123\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use ConfigTransformer202106123\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use ConfigTransformer202106123\Symfony\Contracts\Service\ResetInterface;
 /**
  * Profiler.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service\ResetInterface
+class Profiler implements \ConfigTransformer202106123\Symfony\Contracts\Service\ResetInterface
 {
     private $storage;
     /**
@@ -32,7 +32,7 @@ class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service
     private $logger;
     private $initiallyEnabled = \true;
     private $enabled = \true;
-    public function __construct(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, \ConfigTransformer2021061210\Psr\Log\LoggerInterface $logger = null, bool $enable = \true)
+    public function __construct(\ConfigTransformer202106123\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, \ConfigTransformer202106123\Psr\Log\LoggerInterface $logger = null, bool $enable = \true)
     {
         $this->storage = $storage;
         $this->logger = $logger;
@@ -57,7 +57,7 @@ class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service
      *
      * @return Profile|null A Profile instance
      */
-    public function loadProfileFromResponse(\ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Response $response)
+    public function loadProfileFromResponse(\ConfigTransformer202106123\Symfony\Component\HttpFoundation\Response $response)
     {
         if (!($token = $response->headers->get('X-Debug-Token'))) {
             return null;
@@ -78,11 +78,11 @@ class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service
      *
      * @return bool
      */
-    public function saveProfile(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\Profiler\Profile $profile)
+    public function saveProfile(\ConfigTransformer202106123\Symfony\Component\HttpKernel\Profiler\Profile $profile)
     {
         // late collect
         foreach ($profile->getCollectors() as $collector) {
-            if ($collector instanceof \ConfigTransformer2021061210\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface) {
+            if ($collector instanceof \ConfigTransformer202106123\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface) {
                 $collector->lateCollect();
             }
         }
@@ -118,19 +118,19 @@ class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service
      *
      * @return Profile|null A Profile instance or null if the profiler is disabled
      */
-    public function collect(\ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\ConfigTransformer202106123\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106123\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         if (\false === $this->enabled) {
             return null;
         }
-        $profile = new \ConfigTransformer2021061210\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
+        $profile = new \ConfigTransformer202106123\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
         $profile->setTime(\time());
         $profile->setUrl($request->getUri());
         $profile->setMethod($request->getMethod());
         $profile->setStatusCode($response->getStatusCode());
         try {
             $profile->setIp($request->getClientIp());
-        } catch (\ConfigTransformer2021061210\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException $e) {
+        } catch (\ConfigTransformer202106123\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException $e) {
             $profile->setIp('Unknown');
         }
         if ($prevToken = $response->headers->get('X-Debug-Token')) {
@@ -175,7 +175,7 @@ class Profiler implements \ConfigTransformer2021061210\Symfony\Contracts\Service
     /**
      * Adds a Collector.
      */
-    public function add(\ConfigTransformer2021061210\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface $collector)
+    public function add(\ConfigTransformer202106123\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface $collector)
     {
         $this->collectors[$collector->getName()] = $collector;
     }

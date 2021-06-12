@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021061210\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
+namespace ConfigTransformer202106123\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
 
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202106123\Symfony\Component\DependencyInjection\Definition;
 /**
  * Lazy proxy instantiator, capable of instantiating a proxy given a container, the
  * service definitions and a callback that produces the real service instance.
@@ -28,5 +28,5 @@ interface InstantiatorInterface
      *
      * @return object
      */
-    public function instantiateProxy(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerInterface $container, \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator);
+    public function instantiateProxy(\ConfigTransformer202106123\Symfony\Component\DependencyInjection\ContainerInterface $container, \ConfigTransformer202106123\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator);
 }

@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021061210\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202106123\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer2021061210\PhpParser\Node\Arg;
-use ConfigTransformer2021061210\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2021061210\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2021061210\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202106123\PhpParser\Node\Arg;
+use ConfigTransformer202106123\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202106123\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202106123\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class InstanceOfNestedCaseConverter
 {
     /**
@@ -22,28 +22,28 @@ final class InstanceOfNestedCaseConverter
      * @var ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\ConfigTransformer2021061210\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\ConfigTransformer202106123\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202106123\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer2021061210\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202106123\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $servicesVariable = new \ConfigTransformer2021061210\PhpParser\Node\Expr\Variable(\ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
-        $args = [new \ConfigTransformer2021061210\PhpParser\Node\Arg($classConstFetch)];
-        $instanceofMethodCall = new \ConfigTransformer2021061210\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
+        $servicesVariable = new \ConfigTransformer202106123\PhpParser\Node\Expr\Variable(\ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $args = [new \ConfigTransformer202106123\PhpParser\Node\Arg($classConstFetch)];
+        $instanceofMethodCall = new \ConfigTransformer202106123\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
         $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $instanceofMethodCall);
-        return new \ConfigTransformer2021061210\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
+        return new \ConfigTransformer202106123\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
     }
     public function isMatch(string $rootKey, $subKey) : bool
     {
-        if ($rootKey !== \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
         if (!\is_string($subKey)) {
             return \false;
         }
-        return $subKey === \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF;
+        return $subKey === \ConfigTransformer202106123\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF;
     }
 }
