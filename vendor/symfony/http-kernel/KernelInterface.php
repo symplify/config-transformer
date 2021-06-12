@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202106125\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202106129\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202106129\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202106129\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202106125\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202106125\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202106125\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202106129\Symfony\Component\HttpKernel\Bundle\BundleInterfa
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \ConfigTransformer202106129\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \ConfigTransformer202106125\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.
@@ -35,7 +35,7 @@ interface KernelInterface extends \ConfigTransformer202106129\Symfony\Component\
     /**
      * Loads the container configuration.
      */
-    public function registerContainerConfiguration(\ConfigTransformer202106129\Symfony\Component\Config\Loader\LoaderInterface $loader);
+    public function registerContainerConfiguration(\ConfigTransformer202106125\Symfony\Component\Config\Loader\LoaderInterface $loader);
     /**
      * Boots the current kernel.
      */

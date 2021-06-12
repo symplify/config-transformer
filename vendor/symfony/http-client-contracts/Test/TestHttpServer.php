@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Contracts\HttpClient\Test;
+namespace ConfigTransformer202106125\Symfony\Contracts\HttpClient\Test;
 
-use ConfigTransformer202106129\Symfony\Component\Process\PhpExecutableFinder;
-use ConfigTransformer202106129\Symfony\Component\Process\Process;
+use ConfigTransformer202106125\Symfony\Component\Process\PhpExecutableFinder;
+use ConfigTransformer202106125\Symfony\Component\Process\Process;
 class TestHttpServer
 {
     private static $process = [];
@@ -24,8 +24,8 @@ class TestHttpServer
                 self::$process[$port]->stop();
             });
         }
-        $finder = new \ConfigTransformer202106129\Symfony\Component\Process\PhpExecutableFinder();
-        $process = new \ConfigTransformer202106129\Symfony\Component\Process\Process(\array_merge([$finder->find(\false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:' . $port]));
+        $finder = new \ConfigTransformer202106125\Symfony\Component\Process\PhpExecutableFinder();
+        $process = new \ConfigTransformer202106125\Symfony\Component\Process\Process(\array_merge([$finder->find(\false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:' . $port]));
         $process->setWorkingDirectory(__DIR__ . '/Fixtures/web');
         $process->start();
         self::$process[$port] = $process;

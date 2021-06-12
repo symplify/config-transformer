@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\VarDumper\Command\Descriptor;
+namespace ConfigTransformer202106125\Symfony\Component\VarDumper\Command\Descriptor;
 
-use ConfigTransformer202106129\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202106129\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202106129\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use ConfigTransformer202106125\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202106125\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202106125\Symfony\Component\VarDumper\Dumper\HtmlDumper;
 /**
  * Describe collected data clones for html output.
  *
@@ -20,15 +20,15 @@ use ConfigTransformer202106129\Symfony\Component\VarDumper\Dumper\HtmlDumper;
  *
  * @final
  */
-class HtmlDescriptor implements \ConfigTransformer202106129\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class HtmlDescriptor implements \ConfigTransformer202106125\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $initialized = \false;
-    public function __construct(\ConfigTransformer202106129\Symfony\Component\VarDumper\Dumper\HtmlDumper $dumper)
+    public function __construct(\ConfigTransformer202106125\Symfony\Component\VarDumper\Dumper\HtmlDumper $dumper)
     {
         $this->dumper = $dumper;
     }
-    public function describe(\ConfigTransformer202106129\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202106129\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void
+    public function describe(\ConfigTransformer202106125\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202106125\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void
     {
         if (!$this->initialized) {
             $styles = \file_get_contents(__DIR__ . '/../../Resources/css/htmlDescriptor.css');

@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202106125\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202106129\Psr\Container\ContainerInterface;
-use ConfigTransformer202106129\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202106129\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202106129\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202106129\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202106125\Psr\Container\ContainerInterface;
+use ConfigTransformer202106125\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202106125\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202106125\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202106125\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Provides an intuitive error message when controller fails because it is not registered as a service.
  *
  * @author Simeon Kolev <simeon.kolev9@gmail.com>
  */
-final class NotTaggedControllerValueResolver implements \ConfigTransformer202106129\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class NotTaggedControllerValueResolver implements \ConfigTransformer202106125\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202106129\Psr\Container\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202106125\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
      */
-    public function supports(\ConfigTransformer202106129\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106129\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\ConfigTransformer202106125\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106125\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         $controller = $request->attributes->get('_controller');
         if (\is_array($controller) && \is_callable($controller, \true) && \is_string($controller[0])) {
@@ -49,7 +49,7 @@ final class NotTaggedControllerValueResolver implements \ConfigTransformer202106
     /**
      * {@inheritdoc}
      */
-    public function resolve(\ConfigTransformer202106129\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106129\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\ConfigTransformer202106125\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106125\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         if (\is_array($controller = $request->attributes->get('_controller'))) {
             $controller = $controller[0] . '::' . $controller[1];
@@ -63,6 +63,6 @@ final class NotTaggedControllerValueResolver implements \ConfigTransformer202106
         }
         $what = \sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
         $message = \sprintf('Could not resolve %s, maybe you forgot to register the controller as a service or missed tagging it with the "controller.service_arguments"?', $what);
-        throw new \ConfigTransformer202106129\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
+        throw new \ConfigTransformer202106125\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
     }
 }

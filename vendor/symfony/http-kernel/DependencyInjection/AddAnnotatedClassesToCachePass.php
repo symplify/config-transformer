@@ -8,34 +8,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202106125\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202106129\Composer\Autoload\ClassLoader;
-use ConfigTransformer202106129\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use ConfigTransformer202106129\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202106129\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106129\Symfony\Component\ErrorHandler\DebugClassLoader;
-use ConfigTransformer202106129\Symfony\Component\HttpKernel\Kernel;
+use ConfigTransformer202106125\Composer\Autoload\ClassLoader;
+use ConfigTransformer202106125\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use ConfigTransformer202106125\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202106125\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202106125\Symfony\Component\ErrorHandler\DebugClassLoader;
+use ConfigTransformer202106125\Symfony\Component\HttpKernel\Kernel;
 /**
  * Sets the classes to compile in the cache for the container.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class AddAnnotatedClassesToCachePass implements \ConfigTransformer202106129\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AddAnnotatedClassesToCachePass implements \ConfigTransformer202106125\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $kernel;
-    public function __construct(\ConfigTransformer202106129\Symfony\Component\HttpKernel\Kernel $kernel)
+    public function __construct(\ConfigTransformer202106125\Symfony\Component\HttpKernel\Kernel $kernel)
     {
         $this->kernel = $kernel;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202106129\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202106125\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
         foreach ($container->getExtensions() as $extension) {
-            if ($extension instanceof \ConfigTransformer202106129\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
+            if ($extension instanceof \ConfigTransformer202106125\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
                 $annotatedClasses = \array_merge($annotatedClasses, $extension->getAnnotatedClassesToCompile());
             }
         }
@@ -76,10 +76,10 @@ class AddAnnotatedClassesToCachePass implements \ConfigTransformer202106129\Symf
             if (!\is_array($function)) {
                 continue;
             }
-            if ($function[0] instanceof \ConfigTransformer202106129\Symfony\Component\ErrorHandler\DebugClassLoader || $function[0] instanceof \ConfigTransformer202106129\Symfony\Component\Debug\DebugClassLoader) {
+            if ($function[0] instanceof \ConfigTransformer202106125\Symfony\Component\ErrorHandler\DebugClassLoader || $function[0] instanceof \ConfigTransformer202106125\Symfony\Component\Debug\DebugClassLoader) {
                 $function = $function[0]->getClassLoader();
             }
-            if (\is_array($function) && $function[0] instanceof \ConfigTransformer202106129\Composer\Autoload\ClassLoader) {
+            if (\is_array($function) && $function[0] instanceof \ConfigTransformer202106125\Composer\Autoload\ClassLoader) {
                 $classes += \array_filter($function[0]->getClassMap());
             }
         }

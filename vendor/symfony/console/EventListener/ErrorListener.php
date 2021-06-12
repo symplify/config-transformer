@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\Console\EventListener;
+namespace ConfigTransformer202106125\Symfony\Component\Console\EventListener;
 
-use ConfigTransformer202106129\Psr\Log\LoggerInterface;
-use ConfigTransformer202106129\Symfony\Component\Console\ConsoleEvents;
-use ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleEvent;
-use ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use ConfigTransformer202106129\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202106125\Psr\Log\LoggerInterface;
+use ConfigTransformer202106125\Symfony\Component\Console\ConsoleEvents;
+use ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleEvent;
+use ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use ConfigTransformer202106125\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @author James Halsall <james.t.halsall@googlemail.com>
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class ErrorListener implements \ConfigTransformer202106129\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ErrorListener implements \ConfigTransformer202106125\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $logger;
-    public function __construct(\ConfigTransformer202106129\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\ConfigTransformer202106125\Psr\Log\LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
-    public function onConsoleError(\ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleErrorEvent $event)
+    public function onConsoleError(\ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleErrorEvent $event)
     {
         if (null === $this->logger) {
             return;
@@ -39,7 +39,7 @@ class ErrorListener implements \ConfigTransformer202106129\Symfony\Component\Eve
         }
         $this->logger->critical('Error thrown while running command "{command}". Message: "{message}"', ['exception' => $error, 'command' => $inputString, 'message' => $error->getMessage()]);
     }
-    public function onConsoleTerminate(\ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleTerminateEvent $event)
+    public function onConsoleTerminate(\ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleTerminateEvent $event)
     {
         if (null === $this->logger) {
             return;
@@ -56,9 +56,9 @@ class ErrorListener implements \ConfigTransformer202106129\Symfony\Component\Eve
     }
     public static function getSubscribedEvents()
     {
-        return [\ConfigTransformer202106129\Symfony\Component\Console\ConsoleEvents::ERROR => ['onConsoleError', -128], \ConfigTransformer202106129\Symfony\Component\Console\ConsoleEvents::TERMINATE => ['onConsoleTerminate', -128]];
+        return [\ConfigTransformer202106125\Symfony\Component\Console\ConsoleEvents::ERROR => ['onConsoleError', -128], \ConfigTransformer202106125\Symfony\Component\Console\ConsoleEvents::TERMINATE => ['onConsoleTerminate', -128]];
     }
-    private static function getInputString(\ConfigTransformer202106129\Symfony\Component\Console\Event\ConsoleEvent $event) : ?string
+    private static function getInputString(\ConfigTransformer202106125\Symfony\Component\Console\Event\ConsoleEvent $event) : ?string
     {
         $commandName = $event->getCommand() ? $event->getCommand()->getName() : null;
         $input = $event->getInput();
