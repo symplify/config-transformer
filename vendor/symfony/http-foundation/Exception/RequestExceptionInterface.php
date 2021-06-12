@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\HttpFoundation\Exception;
+namespace ConfigTransformer202106122\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Interface for Request exceptions.

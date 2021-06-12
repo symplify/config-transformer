@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106129\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202106122\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202106129\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202106129\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\Response;
 /**
  * AjaxDataCollector.
  *
@@ -19,9 +19,9 @@ use ConfigTransformer202106129\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class AjaxDataCollector extends \ConfigTransformer202106129\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class AjaxDataCollector extends \ConfigTransformer202106122\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
-    public function collect(\ConfigTransformer202106129\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106129\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\ConfigTransformer202106122\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106122\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         // all collecting is done client side
     }

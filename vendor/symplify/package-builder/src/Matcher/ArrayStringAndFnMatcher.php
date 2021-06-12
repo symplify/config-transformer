@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106129\Symplify\PackageBuilder\Matcher;
+namespace ConfigTransformer202106122\Symplify\PackageBuilder\Matcher;
 
 final class ArrayStringAndFnMatcher
 {

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106129\PhpParser\Node\Stmt;
+namespace ConfigTransformer202106122\PhpParser\Node\Stmt;
 
-use ConfigTransformer202106129\PhpParser\Node;
-class Switch_ extends \ConfigTransformer202106129\PhpParser\Node\Stmt
+use ConfigTransformer202106122\PhpParser\Node;
+class Switch_ extends \ConfigTransformer202106122\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Condition */
     public $cond;
@@ -17,7 +17,7 @@ class Switch_ extends \ConfigTransformer202106129\PhpParser\Node\Stmt
      * @param Case_[]   $cases      Case list
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202106129\PhpParser\Node\Expr $cond, array $cases, array $attributes = [])
+    public function __construct(\ConfigTransformer202106122\PhpParser\Node\Expr $cond, array $cases, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;
