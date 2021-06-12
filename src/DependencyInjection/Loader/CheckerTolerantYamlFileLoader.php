@@ -1,37 +1,43 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer2021061210\Symplify\ConfigTransformer\DependencyInjection\Loader;
+declare(strict_types=1);
 
-use ConfigTransformer2021061210\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
+
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+
 /**
  * @see https://github.com/symplify/config-transformer/commit/0244abf3953eb0c5578d203b75749545f705c2a3
  */
-final class CheckerTolerantYamlFileLoader extends \ConfigTransformer2021061210\Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+final class CheckerTolerantYamlFileLoader extends YamlFileLoader
 {
     /**
      * @var CheckerServiceParametersShifter
      */
     private $checkerServiceParametersShifter;
-    public function __construct(\ConfigTransformer2021061210\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer2021061210\Symfony\Component\Config\FileLocatorInterface $fileLocator)
+
+    public function __construct(ContainerBuilder $containerBuilder, FileLocatorInterface $fileLocator)
     {
-        $this->checkerServiceParametersShifter = new \ConfigTransformer2021061210\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter();
+        $this->checkerServiceParametersShifter = new CheckerServiceParametersShifter();
+
         parent::__construct($containerBuilder, $fileLocator);
     }
+
     /**
      * @param string $file
      * @return mixed[]
      */
-    protected function loadFile($file) : array
+    protected function loadFile($file): array
     {
         /** @var mixed[]|null $configuration */
         $configuration = parent::loadFile($file);
         if ($configuration === null) {
             return [];
         }
+
         return $this->checkerServiceParametersShifter->process($configuration);
     }
 }
