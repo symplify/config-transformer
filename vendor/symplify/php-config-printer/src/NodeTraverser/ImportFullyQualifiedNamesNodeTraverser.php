@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\PhpConfigPrinter\NodeTraverser;
+namespace ConfigTransformer202106122\Symplify\PhpConfigPrinter\NodeTraverser;
 
-use ConfigTransformer202106124\Nette\Utils\Strings;
-use ConfigTransformer202106124\PhpParser\BuilderFactory;
-use ConfigTransformer202106124\PhpParser\Node;
-use ConfigTransformer202106124\PhpParser\Node\Name;
-use ConfigTransformer202106124\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202106124\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer202106124\PhpParser\NodeTraverser;
-use ConfigTransformer202106124\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use ConfigTransformer202106122\Nette\Utils\Strings;
+use ConfigTransformer202106122\PhpParser\BuilderFactory;
+use ConfigTransformer202106122\PhpParser\Node;
+use ConfigTransformer202106122\PhpParser\Node\Name;
+use ConfigTransformer202106122\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202106122\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202106122\PhpParser\NodeTraverser;
+use ConfigTransformer202106122\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
 final class ImportFullyQualifiedNamesNodeTraverser
 {
     /**
@@ -21,7 +21,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      * @var BuilderFactory
      */
     private $builderFactory;
-    public function __construct(\ConfigTransformer202106124\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \ConfigTransformer202106124\PhpParser\BuilderFactory $builderFactory)
+    public function __construct(\ConfigTransformer202106122\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \ConfigTransformer202106122\PhpParser\BuilderFactory $builderFactory)
     {
         $this->importFullyQualifiedNamesNodeVisitor = $importFullyQualifiedNamesNodeVisitor;
         $this->builderFactory = $builderFactory;
@@ -50,7 +50,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
         }
         \sort($nameImports);
         $useImports = $this->createUses($nameImports);
-        $useImports[] = new \ConfigTransformer202106124\PhpParser\Node\Stmt\Nop();
+        $useImports[] = new \ConfigTransformer202106122\PhpParser\Node\Stmt\Nop();
         return \array_merge($useImports, $nodes);
     }
     /**
@@ -59,7 +59,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      */
     private function collectNameImportsFromNodes(array $nodes) : array
     {
-        $nodeTraverser = new \ConfigTransformer202106124\PhpParser\NodeTraverser();
+        $nodeTraverser = new \ConfigTransformer202106122\PhpParser\NodeTraverser();
         $nodeTraverser->addVisitor($this->importFullyQualifiedNamesNodeVisitor);
         $nodeTraverser->traverse($nodes);
         $nameImports = $this->importFullyQualifiedNamesNodeVisitor->getNameImports();
@@ -73,14 +73,14 @@ final class ImportFullyQualifiedNamesNodeTraverser
     {
         $useImports = [];
         foreach ($nameImports as $nameImport) {
-            $shortNameImport = \ConfigTransformer202106124\Nette\Utils\Strings::after($nameImport, '\\', -1);
+            $shortNameImport = \ConfigTransformer202106122\Nette\Utils\Strings::after($nameImport, '\\', -1);
             if (\function_exists($nameImport) || $shortNameImport === 'ref') {
-                $useBuilder = $this->builderFactory->useFunction(new \ConfigTransformer202106124\PhpParser\Node\Name($nameImport));
+                $useBuilder = $this->builderFactory->useFunction(new \ConfigTransformer202106122\PhpParser\Node\Name($nameImport));
                 /** @var Use_ $use */
                 $use = $useBuilder->getNode();
                 $useImports[] = $use;
             } else {
-                $useBuilder = $this->builderFactory->use(new \ConfigTransformer202106124\PhpParser\Node\Name($nameImport));
+                $useBuilder = $this->builderFactory->use(new \ConfigTransformer202106122\PhpParser\Node\Name($nameImport));
                 /** @var Use_ $use */
                 $use = $useBuilder->getNode();
                 $useImports[] = $use;

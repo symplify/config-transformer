@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106124\Symfony\Component\Cache\Exception;
+namespace ConfigTransformer202106122\Symfony\Component\Cache\Exception;
 
-use ConfigTransformer202106124\Psr\Cache\InvalidArgumentException as Psr6CacheInterface;
-use ConfigTransformer202106124\Psr\SimpleCache\InvalidArgumentException as SimpleCacheInterface;
-if (\interface_exists(\ConfigTransformer202106124\Psr\SimpleCache\InvalidArgumentException::class)) {
-    class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202106124\Psr\Cache\InvalidArgumentException, \ConfigTransformer202106124\Psr\SimpleCache\InvalidArgumentException
+use ConfigTransformer202106122\Psr\Cache\InvalidArgumentException as Psr6CacheInterface;
+use ConfigTransformer202106122\Psr\SimpleCache\InvalidArgumentException as SimpleCacheInterface;
+if (\interface_exists(\ConfigTransformer202106122\Psr\SimpleCache\InvalidArgumentException::class)) {
+    class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202106122\Psr\Cache\InvalidArgumentException, \ConfigTransformer202106122\Psr\SimpleCache\InvalidArgumentException
     {
     }
 } else {
-    class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202106124\Psr\Cache\InvalidArgumentException
+    class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202106122\Psr\Cache\InvalidArgumentException
     {
     }
 }

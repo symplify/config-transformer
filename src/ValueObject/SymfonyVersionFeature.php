@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202106122\Symplify\ConfigTransformer\ValueObject;
 
 final class SymfonyVersionFeature
 {

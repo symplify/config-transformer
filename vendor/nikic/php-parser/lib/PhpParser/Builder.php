@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\PhpParser;
+namespace ConfigTransformer202106122\PhpParser;
 
 interface Builder
 {
@@ -10,5 +10,5 @@ interface Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \ConfigTransformer202106124\PhpParser\Node;
+    public function getNode() : \ConfigTransformer202106122\PhpParser\Node;
 }

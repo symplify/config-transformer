@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106124\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202106122\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202106124\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * StorageInterface.
  *
@@ -110,7 +110,7 @@ interface SessionStorageInterface
     /**
      * Registers a SessionBagInterface for use.
      */
-    public function registerBag(\ConfigTransformer202106124\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
+    public function registerBag(\ConfigTransformer202106122\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
     /**
      * @return MetadataBag
      */

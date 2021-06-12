@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace ConfigTransformer202106122\Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202106124\Nette\Utils\Strings;
-use ConfigTransformer202106124\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202106124\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202106124\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
-use ConfigTransformer202106124\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use ConfigTransformer202106122\Nette\Utils\Strings;
+use ConfigTransformer202106122\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202106122\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202106122\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
+use ConfigTransformer202106122\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 final class ServiceOptionNodeFactory
 {
     /**
@@ -21,7 +21,7 @@ final class ServiceOptionNodeFactory
     /**
      * @param ServiceOptionsKeyYamlToPhpFactoryInterface[] $serviceOptionKeyYamlToPhpFactories
      */
-    public function __construct(\ConfigTransformer202106124\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer $serviceOptionAnalyzer, array $serviceOptionKeyYamlToPhpFactories)
+    public function __construct(\ConfigTransformer202106122\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer $serviceOptionAnalyzer, array $serviceOptionKeyYamlToPhpFactories)
     {
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
         $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
@@ -29,7 +29,7 @@ final class ServiceOptionNodeFactory
     /**
      * @param mixed[] $servicesValues
      */
-    public function convertServiceOptionsToNodes(array $servicesValues, \ConfigTransformer202106124\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202106124\PhpParser\Node\Expr\MethodCall
+    public function convertServiceOptionsToNodes(array $servicesValues, \ConfigTransformer202106122\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202106122\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
@@ -54,12 +54,12 @@ final class ServiceOptionNodeFactory
         if (!$this->serviceOptionAnalyzer->hasNamedArguments($servicesValues)) {
             return $servicesValues;
         }
-        return [\ConfigTransformer202106124\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS => $servicesValues];
+        return [\ConfigTransformer202106122\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS => $servicesValues];
     }
     private function shouldSkip(string $key) : bool
     {
         // options started by decoration_<option> are used as options of the method decorate().
-        if (\ConfigTransformer202106124\Nette\Utils\Strings::startsWith($key, 'decoration_')) {
+        if (\ConfigTransformer202106122\Nette\Utils\Strings::startsWith($key, 'decoration_')) {
             return \true;
         }
         return $key === 'alias';

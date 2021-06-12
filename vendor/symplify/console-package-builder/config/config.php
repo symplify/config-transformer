@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124;
+namespace ConfigTransformer202106122;
 
-use ConfigTransformer202106124\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\ConfigTransformer202106124\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\ConfigTransformer202106122\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202106124\Symplify\ConsolePackageBuilder\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Bundle']);
+    $services->load('ConfigTransformer202106122\Symplify\ConsolePackageBuilder\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Bundle']);
 };

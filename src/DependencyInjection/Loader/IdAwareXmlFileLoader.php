@@ -1,27 +1,27 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\ConfigTransformer\DependencyInjection\Loader;
+namespace ConfigTransformer202106122\Symplify\ConfigTransformer\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
-use ConfigTransformer202106124\Nette\Utils\Strings;
-use ConfigTransformer202106124\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202106124\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106124\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202106124\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use ConfigTransformer202106124\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202106124\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202106124\Symplify\ConfigTransformer\Naming\UniqueNaming;
-use ConfigTransformer202106124\Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
-use ConfigTransformer202106124\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202106122\Nette\Utils\Strings;
+use ConfigTransformer202106122\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202106122\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ConfigTransformer202106122\Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use ConfigTransformer202106122\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer202106122\Symplify\ConfigTransformer\Naming\UniqueNaming;
+use ConfigTransformer202106122\Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
+use ConfigTransformer202106122\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * Mimics https://github.com/symfony/symfony/commit/b8c68da0107a4f433dd414a355ea5589da0da0e8 for Symfony 3.3-
  */
-final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+final class IdAwareXmlFileLoader extends \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
 {
     /**
      * @var string
@@ -47,13 +47,13 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Com
      * @var \Symplify\ConfigTransformer\Collector\XmlImportCollector
      */
     private $xmlImportCollector;
-    public function __construct(\ConfigTransformer202106124\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202106124\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202106124\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202106124\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202106124\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
+    public function __construct(\ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202106122\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202106122\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202106122\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202106122\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
     {
         $this->configuration = $configuration;
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;
         parent::__construct($containerBuilder, $fileLocator);
-        $this->privatesCaller = new \ConfigTransformer202106124\Symplify\PackageBuilder\Reflection\PrivatesCaller();
+        $this->privatesCaller = new \ConfigTransformer202106122\Symplify\PackageBuilder\Reflection\PrivatesCaller();
     }
     public function import($resource, $type = null, $ignoreErrors = \false, $sourceResource = null, $exclude = null) : void
     {
@@ -84,7 +84,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Com
     {
         $this->count = 0;
         $definitions = [];
-        $suffix = '~' . \ConfigTransformer202106124\Symfony\Component\DependencyInjection\ContainerBuilder::hash($file);
+        $suffix = '~' . \ConfigTransformer202106122\Symfony\Component\DependencyInjection\ContainerBuilder::hash($file);
         $domxPath = new \DOMXPath($domDocument);
         $domxPath->registerNamespace('container', self::NS);
         $definitions = $this->processAnonymousServicesInArguments($domxPath, $suffix, $file, $definitions);
@@ -105,7 +105,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Com
         \uksort($definitions, 'strnatcmp');
         $inversedDefinitions = \array_reverse($definitions);
         foreach ($inversedDefinitions as $id => [$domElement, $file]) {
-            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202106124\Symfony\Component\DependencyInjection\Definition()]);
+            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202106122\Symfony\Component\DependencyInjection\Definition()]);
             if ($definition !== null) {
                 $this->setDefinition($id, $definition);
             }
@@ -148,7 +148,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Com
     }
     private function createServiceNameFromClass(string $class) : string
     {
-        $serviceName = \ConfigTransformer202106124\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
+        $serviceName = \ConfigTransformer202106122\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
         $serviceName = \strtolower($serviceName);
         return $this->uniqueNaming->uniquateName($serviceName);
     }
@@ -158,7 +158,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202106124\Symfony\Com
         if ($hasNamedServices) {
             return $this->createServiceNameFromClass($className);
         }
-        if (!$this->configuration->isAtLeastSymfonyVersion(\ConfigTransformer202106124\Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature::SERVICE_WITHOUT_NAME)) {
+        if (!$this->configuration->isAtLeastSymfonyVersion(\ConfigTransformer202106122\Symplify\ConfigTransformer\ValueObject\SymfonyVersionFeature::SERVICE_WITHOUT_NAME)) {
             return $this->createServiceNameFromClass($className);
         }
         $hashedFileName = \hash('sha256', $file);

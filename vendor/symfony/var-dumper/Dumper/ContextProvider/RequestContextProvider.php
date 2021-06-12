@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106124\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace ConfigTransformer202106122\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use ConfigTransformer202106124\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202106124\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use ConfigTransformer202106124\Symfony\Component\VarDumper\Cloner\VarCloner;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202106122\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use ConfigTransformer202106122\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * Tries to provide context from a request.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class RequestContextProvider implements \ConfigTransformer202106124\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class RequestContextProvider implements \ConfigTransformer202106122\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $requestStack;
     private $cloner;
-    public function __construct(\ConfigTransformer202106124\Symfony\Component\HttpFoundation\RequestStack $requestStack)
+    public function __construct(\ConfigTransformer202106122\Symfony\Component\HttpFoundation\RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->cloner = new \ConfigTransformer202106124\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $this->cloner = new \ConfigTransformer202106122\Symfony\Component\VarDumper\Cloner\VarCloner();
         $this->cloner->setMaxItems(0);
-        $this->cloner->addCasters(\ConfigTransformer202106124\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
+        $this->cloner->addCasters(\ConfigTransformer202106122\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
     }
     public function getContext() : ?array
     {

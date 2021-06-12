@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202106122\Symplify\EasyTesting\ValueObject;
 
-use ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202106124\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202106122\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ExpectedAndOutputFileInfoPair
 {
     /**
@@ -15,7 +15,7 @@ final class ExpectedAndOutputFileInfoPair
      * @var SmartFileInfo|null
      */
     private $outputFileInfo;
-    public function __construct(\ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileInfo $expectedFileInfo, ?\ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileInfo $outputFileInfo)
+    public function __construct(\ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileInfo $expectedFileInfo, ?\ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileInfo $outputFileInfo)
     {
         $this->expectedFileInfo = $expectedFileInfo;
         $this->outputFileInfo = $outputFileInfo;
@@ -32,8 +32,8 @@ final class ExpectedAndOutputFileInfoPair
      */
     public function getOutputFileContent() : string
     {
-        if (!$this->outputFileInfo instanceof \ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileInfo) {
-            throw new \ConfigTransformer202106124\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        if (!$this->outputFileInfo instanceof \ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileInfo) {
+            throw new \ConfigTransformer202106122\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $this->outputFileInfo->getContents();
     }

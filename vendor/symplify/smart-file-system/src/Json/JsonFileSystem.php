@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106124\Symplify\SmartFileSystem\Json;
+namespace ConfigTransformer202106122\Symplify\SmartFileSystem\Json;
 
-use ConfigTransformer202106124\Nette\Utils\Arrays;
-use ConfigTransformer202106124\Nette\Utils\Json;
-use ConfigTransformer202106124\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202106122\Nette\Utils\Arrays;
+use ConfigTransformer202106122\Nette\Utils\Json;
+use ConfigTransformer202106122\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Json\JsonFileSystem\JsonFileSystemTest
  */
@@ -20,7 +20,7 @@ final class JsonFileSystem
      * @var SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\ConfigTransformer202106124\Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard, \ConfigTransformer202106124\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(\ConfigTransformer202106122\Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard, \ConfigTransformer202106122\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
     {
         $this->fileSystemGuard = $fileSystemGuard;
         $this->smartFileSystem = $smartFileSystem;
@@ -32,14 +32,14 @@ final class JsonFileSystem
     {
         $this->fileSystemGuard->ensureFileExists($filePath, __METHOD__);
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \ConfigTransformer202106124\Nette\Utils\Json::decode($fileContent, \ConfigTransformer202106124\Nette\Utils\Json::FORCE_ARRAY);
+        return \ConfigTransformer202106122\Nette\Utils\Json::decode($fileContent, \ConfigTransformer202106122\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @param array<string, mixed> $jsonArray
      */
     public function writeJsonToFilePath(array $jsonArray, string $filePath) : void
     {
-        $jsonContent = \ConfigTransformer202106124\Nette\Utils\Json::encode($jsonArray, \ConfigTransformer202106124\Nette\Utils\Json::PRETTY) . \PHP_EOL;
+        $jsonContent = \ConfigTransformer202106122\Nette\Utils\Json::encode($jsonArray, \ConfigTransformer202106122\Nette\Utils\Json::PRETTY) . \PHP_EOL;
         $this->smartFileSystem->dumpFile($filePath, $jsonContent);
     }
     /**
@@ -48,7 +48,7 @@ final class JsonFileSystem
     public function mergeArrayToJsonFile(string $filePath, array $newJsonArray) : void
     {
         $jsonArray = $this->loadFilePathToJson($filePath);
-        $newComposerJsonArray = \ConfigTransformer202106124\Nette\Utils\Arrays::mergeTree($jsonArray, $newJsonArray);
+        $newComposerJsonArray = \ConfigTransformer202106122\Nette\Utils\Arrays::mergeTree($jsonArray, $newJsonArray);
         $this->writeJsonToFilePath($newComposerJsonArray, $filePath);
     }
 }

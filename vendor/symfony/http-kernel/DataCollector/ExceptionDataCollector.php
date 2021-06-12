@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106124\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202106122\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202106124\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use ConfigTransformer202106124\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202106124\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202106122\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202106122\Symfony\Component\HttpFoundation\Response;
 /**
  * ExceptionDataCollector.
  *
@@ -20,15 +20,15 @@ use ConfigTransformer202106124\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class ExceptionDataCollector extends \ConfigTransformer202106124\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class ExceptionDataCollector extends \ConfigTransformer202106122\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * {@inheritdoc}
      */
-    public function collect(\ConfigTransformer202106124\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106124\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\ConfigTransformer202106122\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106122\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         if (null !== $exception) {
-            $this->data = ['exception' => \ConfigTransformer202106124\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
+            $this->data = ['exception' => \ConfigTransformer202106122\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
         }
     }
     /**
