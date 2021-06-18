@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106183\PhpParser;
+namespace ConfigTransformer202106188\PhpParser;
 
-use ConfigTransformer202106183\PhpParser\Parser\Tokens;
+use ConfigTransformer202106188\PhpParser\Parser\Tokens;
 class Lexer
 {
     protected $code;
@@ -61,10 +61,10 @@ class Lexer
      * @param ErrorHandler|null $errorHandler Error handler to use for lexing errors. Defaults to
      *                                        ErrorHandler\Throwing
      */
-    public function startLexing(string $code, \ConfigTransformer202106183\PhpParser\ErrorHandler $errorHandler = null)
+    public function startLexing(string $code, \ConfigTransformer202106188\PhpParser\ErrorHandler $errorHandler = null)
     {
         if (null === $errorHandler) {
-            $errorHandler = new \ConfigTransformer202106183\PhpParser\ErrorHandler\Throwing();
+            $errorHandler = new \ConfigTransformer202106188\PhpParser\ErrorHandler\Throwing();
         }
         $this->code = $code;
         // keep the code around for __halt_compiler() handling
@@ -81,7 +81,7 @@ class Lexer
             \ini_set('xdebug.scream', $scream);
         }
     }
-    private function handleInvalidCharacterRange($start, $end, $line, \ConfigTransformer202106183\PhpParser\ErrorHandler $errorHandler)
+    private function handleInvalidCharacterRange($start, $end, $line, \ConfigTransformer202106188\PhpParser\ErrorHandler $errorHandler)
     {
         $tokens = [];
         for ($i = $start; $i < $end; $i++) {
@@ -93,7 +93,7 @@ class Lexer
                 $errorMsg = \sprintf('Unexpected character "%s" (ASCII %d)', $chr, \ord($chr));
             }
             $tokens[] = [\T_BAD_CHARACTER, $chr, $line];
-            $errorHandler->handleError(new \ConfigTransformer202106183\PhpParser\Error($errorMsg, ['startLine' => $line, 'endLine' => $line, 'startFilePos' => $i, 'endFilePos' => $i]));
+            $errorHandler->handleError(new \ConfigTransformer202106188\PhpParser\Error($errorMsg, ['startLine' => $line, 'endLine' => $line, 'startFilePos' => $i, 'endFilePos' => $i]));
         }
         return $tokens;
     }
@@ -106,7 +106,7 @@ class Lexer
     {
         return ($token[0] === \T_COMMENT || $token[0] === \T_DOC_COMMENT) && \substr($token[1], 0, 2) === '/*' && \substr($token[1], -2) !== '*/';
     }
-    protected function postprocessTokens(\ConfigTransformer202106183\PhpParser\ErrorHandler $errorHandler)
+    protected function postprocessTokens(\ConfigTransformer202106188\PhpParser\ErrorHandler $errorHandler)
     {
         // PHP's error handling for token_get_all() is rather bad, so if we want detailed
         // error information we need to compute it ourselves. Invalid character errors are
@@ -198,7 +198,7 @@ class Lexer
             if (\substr($this->code, $filePos, 2) === '/*') {
                 // Unlike PHP, HHVM will drop unterminated comments entirely
                 $comment = \substr($this->code, $filePos);
-                $errorHandler->handleError(new \ConfigTransformer202106183\PhpParser\Error('Unterminated comment', ['startLine' => $line, 'endLine' => $line + \substr_count($comment, "\n"), 'startFilePos' => $filePos, 'endFilePos' => $filePos + \strlen($comment)]));
+                $errorHandler->handleError(new \ConfigTransformer202106188\PhpParser\Error('Unterminated comment', ['startLine' => $line, 'endLine' => $line + \substr_count($comment, "\n"), 'startFilePos' => $filePos, 'endFilePos' => $filePos + \strlen($comment)]));
                 // Emulate the PHP behavior
                 $isDocComment = isset($comment[3]) && $comment[3] === '*';
                 $this->tokens[] = [$isDocComment ? \T_DOC_COMMENT : \T_COMMENT, $comment, $line];
@@ -213,7 +213,7 @@ class Lexer
             // Check for unterminated comment
             $lastToken = $this->tokens[\count($this->tokens) - 1];
             if ($this->isUnterminatedComment($lastToken)) {
-                $errorHandler->handleError(new \ConfigTransformer202106183\PhpParser\Error('Unterminated comment', ['startLine' => $line - \substr_count($lastToken[1], "\n"), 'endLine' => $line, 'startFilePos' => $filePos - \strlen($lastToken[1]), 'endFilePos' => $filePos]));
+                $errorHandler->handleError(new \ConfigTransformer202106188\PhpParser\Error('Unterminated comment', ['startLine' => $line - \substr_count($lastToken[1], "\n"), 'endLine' => $line, 'startFilePos' => $filePos - \strlen($lastToken[1]), 'endFilePos' => $filePos]));
             }
         }
     }
@@ -286,7 +286,7 @@ class Lexer
                 $this->filePos += \strlen($token[1]);
                 if (\T_COMMENT === $token[0] || \T_DOC_COMMENT === $token[0]) {
                     if ($this->attributeCommentsUsed) {
-                        $comment = \T_DOC_COMMENT === $token[0] ? new \ConfigTransformer202106183\PhpParser\Comment\Doc($token[1], $origLine, $origFilePos, $this->pos, $this->line, $this->filePos - 1, $this->pos) : new \ConfigTransformer202106183\PhpParser\Comment($token[1], $origLine, $origFilePos, $this->pos, $this->line, $this->filePos - 1, $this->pos);
+                        $comment = \T_DOC_COMMENT === $token[0] ? new \ConfigTransformer202106188\PhpParser\Comment\Doc($token[1], $origLine, $origFilePos, $this->pos, $this->line, $this->filePos - 1, $this->pos) : new \ConfigTransformer202106188\PhpParser\Comment($token[1], $origLine, $origFilePos, $this->pos, $this->line, $this->filePos - 1, $this->pos);
                         $startAttributes['comments'][] = $comment;
                     }
                 }
@@ -332,7 +332,7 @@ class Lexer
         // this simplifies the situation, by not allowing any comments
         // in between of the tokens.
         if (!\preg_match('~^\\s*\\(\\s*\\)\\s*(?:;|\\?>\\r?\\n?)~', $textAfter, $matches)) {
-            throw new \ConfigTransformer202106183\PhpParser\Error('__HALT_COMPILER must be followed by "();"');
+            throw new \ConfigTransformer202106188\PhpParser\Error('__HALT_COMPILER must be followed by "();"');
         }
         // prevent the lexer from returning any further tokens
         $this->pos = \count($this->tokens);
@@ -405,18 +405,18 @@ class Lexer
         for ($i = 256; $i < 1000; ++$i) {
             if (\T_DOUBLE_COLON === $i) {
                 // T_DOUBLE_COLON is equivalent to T_PAAMAYIM_NEKUDOTAYIM
-                $tokenMap[$i] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_PAAMAYIM_NEKUDOTAYIM;
+                $tokenMap[$i] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_PAAMAYIM_NEKUDOTAYIM;
             } elseif (\T_OPEN_TAG_WITH_ECHO === $i) {
                 // T_OPEN_TAG_WITH_ECHO with dropped T_OPEN_TAG results in T_ECHO
-                $tokenMap[$i] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_ECHO;
+                $tokenMap[$i] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_ECHO;
             } elseif (\T_CLOSE_TAG === $i) {
                 // T_CLOSE_TAG is equivalent to ';'
                 $tokenMap[$i] = \ord(';');
             } elseif ('UNKNOWN' !== ($name = \token_name($i))) {
                 if ('T_HASHBANG' === $name) {
                     // HHVM uses a special token for #! hashbang lines
-                    $tokenMap[$i] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_INLINE_HTML;
-                } elseif (\defined($name = \ConfigTransformer202106183\PhpParser\Parser\Tokens::class . '::' . $name)) {
+                    $tokenMap[$i] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_INLINE_HTML;
+                } elseif (\defined($name = \ConfigTransformer202106188\PhpParser\Parser\Tokens::class . '::' . $name)) {
                     // Other tokens can be mapped directly
                     $tokenMap[$i] = \constant($name);
                 }
@@ -424,22 +424,22 @@ class Lexer
         }
         // HHVM uses a special token for numbers that overflow to double
         if (\defined('T_ONUMBER')) {
-            $tokenMap[\T_ONUMBER] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_DNUMBER;
+            $tokenMap[\T_ONUMBER] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_DNUMBER;
         }
         // HHVM also has a separate token for the __COMPILER_HALT_OFFSET__ constant
         if (\defined('T_COMPILER_HALT_OFFSET')) {
-            $tokenMap[\T_COMPILER_HALT_OFFSET] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_STRING;
+            $tokenMap[\T_COMPILER_HALT_OFFSET] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_STRING;
         }
         // Assign tokens for which we define compatibility constants, as token_name() does not know them.
-        $tokenMap[\T_FN] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_FN;
-        $tokenMap[\T_COALESCE_EQUAL] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_COALESCE_EQUAL;
-        $tokenMap[\T_NAME_QUALIFIED] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_NAME_QUALIFIED;
-        $tokenMap[\T_NAME_FULLY_QUALIFIED] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_NAME_FULLY_QUALIFIED;
-        $tokenMap[\T_NAME_RELATIVE] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_NAME_RELATIVE;
-        $tokenMap[\T_MATCH] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_MATCH;
-        $tokenMap[\T_NULLSAFE_OBJECT_OPERATOR] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_NULLSAFE_OBJECT_OPERATOR;
-        $tokenMap[\T_ATTRIBUTE] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_ATTRIBUTE;
-        $tokenMap[\T_ENUM] = \ConfigTransformer202106183\PhpParser\Parser\Tokens::T_ENUM;
+        $tokenMap[\T_FN] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_FN;
+        $tokenMap[\T_COALESCE_EQUAL] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_COALESCE_EQUAL;
+        $tokenMap[\T_NAME_QUALIFIED] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_NAME_QUALIFIED;
+        $tokenMap[\T_NAME_FULLY_QUALIFIED] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_NAME_FULLY_QUALIFIED;
+        $tokenMap[\T_NAME_RELATIVE] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_NAME_RELATIVE;
+        $tokenMap[\T_MATCH] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_MATCH;
+        $tokenMap[\T_NULLSAFE_OBJECT_OPERATOR] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_NULLSAFE_OBJECT_OPERATOR;
+        $tokenMap[\T_ATTRIBUTE] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_ATTRIBUTE;
+        $tokenMap[\T_ENUM] = \ConfigTransformer202106188\PhpParser\Parser\Tokens::T_ENUM;
         return $tokenMap;
     }
     private function createIdentifierTokenMap() : array

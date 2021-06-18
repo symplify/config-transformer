@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202106183\\Symplify\\SymplifyKernel\\": "src"
+            "ConfigTransformer202106188\\Symplify\\SymplifyKernel\\": "src"
         }
     },
     "extra": {

@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106183\PhpParser\Builder;
+namespace ConfigTransformer202106188\PhpParser\Builder;
 
-use ConfigTransformer202106183\PhpParser;
-use ConfigTransformer202106183\PhpParser\BuilderHelpers;
-use ConfigTransformer202106183\PhpParser\Node\Const_;
-use ConfigTransformer202106183\PhpParser\Node\Identifier;
-use ConfigTransformer202106183\PhpParser\Node\Stmt;
-class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
+use ConfigTransformer202106188\PhpParser;
+use ConfigTransformer202106188\PhpParser\BuilderHelpers;
+use ConfigTransformer202106188\PhpParser\Node\Const_;
+use ConfigTransformer202106188\PhpParser\Node\Identifier;
+use ConfigTransformer202106188\PhpParser\Node\Stmt;
+class ClassConst implements \ConfigTransformer202106188\PhpParser\Builder
 {
     protected $flags = 0;
     protected $attributes = [];
@@ -21,7 +21,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function __construct($name, $value)
     {
-        $this->constants = [new \ConfigTransformer202106183\PhpParser\Node\Const_($name, \ConfigTransformer202106183\PhpParser\BuilderHelpers::normalizeValue($value))];
+        $this->constants = [new \ConfigTransformer202106188\PhpParser\Node\Const_($name, \ConfigTransformer202106188\PhpParser\BuilderHelpers::normalizeValue($value))];
     }
     /**
      * Add another constant to const group
@@ -33,7 +33,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function addConst($name, $value)
     {
-        $this->constants[] = new \ConfigTransformer202106183\PhpParser\Node\Const_($name, \ConfigTransformer202106183\PhpParser\BuilderHelpers::normalizeValue($value));
+        $this->constants[] = new \ConfigTransformer202106188\PhpParser\Node\Const_($name, \ConfigTransformer202106188\PhpParser\BuilderHelpers::normalizeValue($value));
         return $this;
     }
     /**
@@ -43,7 +43,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function makePublic()
     {
-        $this->flags = \ConfigTransformer202106183\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106183\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->flags = \ConfigTransformer202106188\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106188\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -53,7 +53,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function makeProtected()
     {
-        $this->flags = \ConfigTransformer202106183\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106183\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->flags = \ConfigTransformer202106188\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106188\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -63,7 +63,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function makePrivate()
     {
-        $this->flags = \ConfigTransformer202106183\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106183\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->flags = \ConfigTransformer202106188\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202106188\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -75,7 +75,7 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      */
     public function setDocComment($docComment)
     {
-        $this->attributes = ['comments' => [\ConfigTransformer202106183\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
+        $this->attributes = ['comments' => [\ConfigTransformer202106188\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
         return $this;
     }
     /**
@@ -83,8 +83,8 @@ class ClassConst implements \ConfigTransformer202106183\PhpParser\Builder
      *
      * @return Stmt\ClassConst The built constant node
      */
-    public function getNode() : \ConfigTransformer202106183\PhpParser\Node
+    public function getNode() : \ConfigTransformer202106188\PhpParser\Node
     {
-        return new \ConfigTransformer202106183\PhpParser\Node\Stmt\ClassConst($this->constants, $this->flags, $this->attributes);
+        return new \ConfigTransformer202106188\PhpParser\Node\Stmt\ClassConst($this->constants, $this->flags, $this->attributes);
     }
 }

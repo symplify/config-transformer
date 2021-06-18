@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106183\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202106188\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202106183\Symfony\Component\Config\Loader\ParamConfigurator;
-class EnvConfigurator extends \ConfigTransformer202106183\Symfony\Component\Config\Loader\ParamConfigurator
+use ConfigTransformer202106188\Symfony\Component\Config\Loader\ParamConfigurator;
+class EnvConfigurator extends \ConfigTransformer202106188\Symfony\Component\Config\Loader\ParamConfigurator
 {
     /**
      * @var string[]
@@ -30,7 +30,7 @@ class EnvConfigurator extends \ConfigTransformer202106183\Symfony\Component\Conf
      */
     public function __call(string $name, array $arguments)
     {
-        $processor = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202106183\\1_\\2', $name));
+        $processor = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202106188\\1_\\2', $name));
         $this->custom($processor, ...$arguments);
         return $this;
     }

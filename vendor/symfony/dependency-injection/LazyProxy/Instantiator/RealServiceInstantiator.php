@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106183\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
+namespace ConfigTransformer202106188\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
 
-use ConfigTransformer202106183\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202106183\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202106188\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202106188\Symfony\Component\DependencyInjection\Definition;
 /**
  * {@inheritdoc}
  *
@@ -19,12 +19,12 @@ use ConfigTransformer202106183\Symfony\Component\DependencyInjection\Definition;
  *
  * @author Marco Pivetta <ocramius@gmail.com>
  */
-class RealServiceInstantiator implements \ConfigTransformer202106183\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface
+class RealServiceInstantiator implements \ConfigTransformer202106188\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function instantiateProxy(\ConfigTransformer202106183\Symfony\Component\DependencyInjection\ContainerInterface $container, \ConfigTransformer202106183\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator)
+    public function instantiateProxy(\ConfigTransformer202106188\Symfony\Component\DependencyInjection\ContainerInterface $container, \ConfigTransformer202106188\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator)
     {
         return $realInstantiator();
     }
