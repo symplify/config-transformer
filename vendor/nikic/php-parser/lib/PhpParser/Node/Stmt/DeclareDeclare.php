@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106196\PhpParser\Node\Stmt;
+namespace ConfigTransformer202106199\PhpParser\Node\Stmt;
 
-use ConfigTransformer202106196\PhpParser\Node;
-class DeclareDeclare extends \ConfigTransformer202106196\PhpParser\Node\Stmt
+use ConfigTransformer202106199\PhpParser\Node;
+class DeclareDeclare extends \ConfigTransformer202106199\PhpParser\Node\Stmt
 {
     /** @var Node\Identifier Key */
     public $key;
@@ -17,10 +17,10 @@ class DeclareDeclare extends \ConfigTransformer202106196\PhpParser\Node\Stmt
      * @param Node\Expr              $value      Value
      * @param array                  $attributes Additional attributes
      */
-    public function __construct($key, \ConfigTransformer202106196\PhpParser\Node\Expr $value, array $attributes = [])
+    public function __construct($key, \ConfigTransformer202106199\PhpParser\Node\Expr $value, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->key = \is_string($key) ? new \ConfigTransformer202106196\PhpParser\Node\Identifier($key) : $key;
+        $this->key = \is_string($key) ? new \ConfigTransformer202106199\PhpParser\Node\Identifier($key) : $key;
         $this->value = $value;
     }
     public function getSubNodeNames() : array

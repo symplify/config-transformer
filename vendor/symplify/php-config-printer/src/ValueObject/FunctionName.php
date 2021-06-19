@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106196\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202106199\Symplify\PhpConfigPrinter\ValueObject;
 
 final class FunctionName
 {
     /**
      * @var string
      */
-    public const INLINE_SERVICE = 'ConfigTransformer202106196\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
+    public const INLINE_SERVICE = 'ConfigTransformer202106199\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
     /**
      * @var string
      */
-    public const SERVICE = 'ConfigTransformer202106196\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
+    public const SERVICE = 'ConfigTransformer202106199\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
     /**
      * @var string
      */
-    public const REF = 'ConfigTransformer202106196\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
+    public const REF = 'ConfigTransformer202106199\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
     /**
      * @var string
      */
-    public const EXPR = 'ConfigTransformer202106196\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
+    public const EXPR = 'ConfigTransformer202106199\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
 }

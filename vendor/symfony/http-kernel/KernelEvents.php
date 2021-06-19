@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106196\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202106199\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ViewEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ViewEvent;
 /**
  * Contains all events thrown in the HttpKernel component.
  *
@@ -105,5 +105,5 @@ final class KernelEvents
      *
      * These aliases can be consumed by RegisterListenersPass.
      */
-    public const ALIASES = [\ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class => self::CONTROLLER_ARGUMENTS, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ControllerEvent::class => self::CONTROLLER, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ResponseEvent::class => self::RESPONSE, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class => self::FINISH_REQUEST, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\RequestEvent::class => self::REQUEST, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ViewEvent::class => self::VIEW, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\ExceptionEvent::class => self::EXCEPTION, \ConfigTransformer202106196\Symfony\Component\HttpKernel\Event\TerminateEvent::class => self::TERMINATE];
+    public const ALIASES = [\ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class => self::CONTROLLER_ARGUMENTS, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ControllerEvent::class => self::CONTROLLER, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ResponseEvent::class => self::RESPONSE, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class => self::FINISH_REQUEST, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\RequestEvent::class => self::REQUEST, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ViewEvent::class => self::VIEW, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\ExceptionEvent::class => self::EXCEPTION, \ConfigTransformer202106199\Symfony\Component\HttpKernel\Event\TerminateEvent::class => self::TERMINATE];
 }

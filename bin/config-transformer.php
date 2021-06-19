@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106196;
+namespace ConfigTransformer202106199;
 
-use ConfigTransformer202106196\Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
-use ConfigTransformer202106196\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use ConfigTransformer202106199\Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
+use ConfigTransformer202106199\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
     // after split package
     __DIR__ . '/../vendor/autoload.php',
@@ -27,5 +27,5 @@ $codeSnifferAutoload = \getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.p
 if (\file_exists($codeSnifferAutoload)) {
     require_once $codeSnifferAutoload;
 }
-$kernelBootAndApplicationRun = new \ConfigTransformer202106196\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun(\ConfigTransformer202106196\Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel::class);
+$kernelBootAndApplicationRun = new \ConfigTransformer202106199\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun(\ConfigTransformer202106199\Symplify\ConfigTransformer\HttpKernel\ConfigTransformerKernel::class);
 $kernelBootAndApplicationRun->run();

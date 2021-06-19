@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106196\PhpParser\Node\Expr;
+namespace ConfigTransformer202106199\PhpParser\Node\Expr;
 
-use ConfigTransformer202106196\PhpParser\Node;
-use ConfigTransformer202106196\PhpParser\Node\Expr;
-class New_ extends \ConfigTransformer202106196\PhpParser\Node\Expr
+use ConfigTransformer202106199\PhpParser\Node;
+use ConfigTransformer202106199\PhpParser\Node\Expr;
+class New_ extends \ConfigTransformer202106199\PhpParser\Node\Expr
 {
     /** @var Node\Name|Expr|Node\Stmt\Class_ Class name */
     public $class;
