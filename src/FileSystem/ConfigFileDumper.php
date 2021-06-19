@@ -1,46 +1,49 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace ConfigTransformer202106194\Symplify\ConfigTransformer\FileSystem;
 
-namespace Symplify\ConfigTransformer\FileSystem;
-
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\ConfigTransformer\Configuration\Configuration;
-use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use Symplify\SmartFileSystem\SmartFileSystem;
-
+use ConfigTransformer202106194\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202106194\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer202106194\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202106194\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
-    public function __construct(
-        private Configuration $configuration,
-        private SymfonyStyle $symfonyStyle,
-        private SmartFileSystem $smartFileSystem
-    ) {
+    /**
+     * @var \Symplify\ConfigTransformer\Configuration\Configuration
+     */
+    private $configuration;
+    /**
+     * @var \Symfony\Component\Console\Style\SymfonyStyle
+     */
+    private $symfonyStyle;
+    /**
+     * @var \Symplify\SmartFileSystem\SmartFileSystem
+     */
+    private $smartFileSystem;
+    public function __construct(\ConfigTransformer202106194\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202106194\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202106194\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    {
+        $this->configuration = $configuration;
+        $this->symfonyStyle = $symfonyStyle;
+        $this->smartFileSystem = $smartFileSystem;
     }
-
-    public function dumpFile(ConvertedContent $convertedContent): void
+    public function dumpFile(\ConfigTransformer202106194\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
-
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
-
         $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFileRealPath);
-
         if ($this->configuration->isDryRun()) {
-            $message = sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
+            $message = \sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
             $this->symfonyStyle->note($message);
             return;
         }
-
         $this->smartFileSystem->dumpFile($newFileRealPath, $convertedContent->getConvertedContent());
-
-        $message = sprintf('File "%s" was dumped', $relativeFilePath);
+        $message = \sprintf('File "%s" was dumped', $relativeFilePath);
         $this->symfonyStyle->note($message);
     }
-
-    private function getRelativePathOfNonExistingFile(string $newFilePath): string
+    private function getRelativePathOfNonExistingFile(string $newFilePath) : string
     {
-        $relativeFilePath = $this->smartFileSystem->makePathRelative($newFilePath, getcwd());
-        return rtrim($relativeFilePath, '/');
+        $relativeFilePath = $this->smartFileSystem->makePathRelative($newFilePath, \getcwd());
+        return \rtrim($relativeFilePath, '/');
     }
 }
