@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer2021061910\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202106199\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202106199\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202106199\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021061910\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer2021061910\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a non-variadic argument's value from the request attributes.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class RequestAttributeValueResolver implements \ConfigTransformer202106199\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class RequestAttributeValueResolver implements \ConfigTransformer2021061910\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function supports(\ConfigTransformer202106199\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106199\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021061910\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         return !$argument->isVariadic() && $request->attributes->has($argument->getName());
     }
     /**
      * {@inheritdoc}
      */
-    public function resolve(\ConfigTransformer202106199\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202106199\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021061910\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         (yield $request->attributes->get($argument->getName()));
     }

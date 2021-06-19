@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106199\Symplify\ConfigTransformer\DependencyInjection\Extension;
+namespace ConfigTransformer2021061910\Symplify\ConfigTransformer\DependencyInjection\Extension;
 
-use ConfigTransformer202106199\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202106199\Symfony\Component\DependencyInjection\Extension\Extension;
-final class AliasConfigurableExtension extends \ConfigTransformer202106199\Symfony\Component\DependencyInjection\Extension\Extension
+use ConfigTransformer2021061910\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021061910\Symfony\Component\DependencyInjection\Extension\Extension;
+final class AliasConfigurableExtension extends \ConfigTransformer2021061910\Symfony\Component\DependencyInjection\Extension\Extension
 {
     /**
      * @var string
@@ -22,7 +22,7 @@ final class AliasConfigurableExtension extends \ConfigTransformer202106199\Symfo
     /**
      * @param string[] $configs
      */
-    public function load(array $configs, \ConfigTransformer202106199\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \ConfigTransformer2021061910\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
     }
 }

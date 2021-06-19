@@ -1,6 +1,6 @@
 <table class="logs" data-filter-level="Emergency,Alert,Critical,Error,Warning,Notice,Info,Debug" data-filters>
 <?php 
-namespace ConfigTransformer202106199;
+namespace ConfigTransformer2021061910;
 
 $channelIsDefined = isset($logs[0]['channel']);
 ?>

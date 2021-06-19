@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106199\Symplify\ConfigTransformer\FileSystem;
+namespace ConfigTransformer2021061910\Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202106199\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202106199\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202106199\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202106199\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer2021061910\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer2021061910\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer2021061910\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer2021061910\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     /**
@@ -21,13 +21,13 @@ final class ConfigFileDumper
      * @var \Symplify\SmartFileSystem\SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\ConfigTransformer202106199\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202106199\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202106199\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(\ConfigTransformer2021061910\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer2021061910\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer2021061910\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
     {
         $this->configuration = $configuration;
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
     }
-    public function dumpFile(\ConfigTransformer202106199\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
+    public function dumpFile(\ConfigTransformer2021061910\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';

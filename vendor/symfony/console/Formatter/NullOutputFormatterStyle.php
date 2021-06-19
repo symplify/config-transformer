@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer2021061910\Symfony\Component\Console\Formatter;
 
 /**
  * @author Tien Xuan Vo <tien.xuan.vo@gmail.com>
  */
-final class NullOutputFormatterStyle implements \ConfigTransformer202106199\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+final class NullOutputFormatterStyle implements \ConfigTransformer2021061910\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     /**
      * {@inheritdoc}

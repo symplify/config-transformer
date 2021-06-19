@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\Config\Loader;
+namespace ConfigTransformer2021061910\Symfony\Component\Config\Loader;
 
 /**
  * GlobFileLoader loads files from a glob pattern.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class GlobFileLoader extends \ConfigTransformer202106199\Symfony\Component\Config\Loader\FileLoader
+class GlobFileLoader extends \ConfigTransformer2021061910\Symfony\Component\Config\Loader\FileLoader
 {
     /**
      * {@inheritdoc}

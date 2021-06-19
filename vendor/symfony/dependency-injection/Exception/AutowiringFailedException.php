@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021061910\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when a definition cannot be autowired.
  */
-class AutowiringFailedException extends \ConfigTransformer202106199\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class AutowiringFailedException extends \ConfigTransformer2021061910\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     private $serviceId;
     private $messageCallback;

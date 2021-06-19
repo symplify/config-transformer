@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ConditionalNode extends \ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Node\Node
+class ConditionalNode extends \ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Node\Node
 {
-    public function __construct(\ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Node\Node $expr1, \ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Node\Node $expr2, \ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Node\Node $expr3)
+    public function __construct(\ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Node\Node $expr1, \ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Node\Node $expr2, \ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Node\Node $expr3)
     {
         parent::__construct(['expr1' => $expr1, 'expr2' => $expr2, 'expr3' => $expr3]);
     }
-    public function compile(\ConfigTransformer202106199\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer2021061910\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $compiler->raw('((')->compile($this->nodes['expr1'])->raw(') ? (')->compile($this->nodes['expr2'])->raw(') : (')->compile($this->nodes['expr3'])->raw('))');
     }

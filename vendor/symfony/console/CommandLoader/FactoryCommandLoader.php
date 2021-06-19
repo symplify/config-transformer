@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer2021061910\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202106199\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer2021061910\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class FactoryCommandLoader implements \ConfigTransformer202106199\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class FactoryCommandLoader implements \ConfigTransformer2021061910\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $factories;
     /**
@@ -39,7 +39,7 @@ class FactoryCommandLoader implements \ConfigTransformer202106199\Symfony\Compon
     public function get(string $name)
     {
         if (!isset($this->factories[$name])) {
-            throw new \ConfigTransformer202106199\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \ConfigTransformer2021061910\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         $factory = $this->factories[$name];
         return $factory();

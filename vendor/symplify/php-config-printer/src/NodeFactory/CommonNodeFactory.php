@@ -1,44 +1,44 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106199\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer2021061910\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202106199\PhpParser\BuilderHelpers;
-use ConfigTransformer202106199\PhpParser\Node\Expr;
-use ConfigTransformer202106199\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer202106199\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202106199\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202106199\PhpParser\Node\Name;
-use ConfigTransformer202106199\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202106199\PhpParser\Node\Scalar\MagicConst\Dir;
-use ConfigTransformer202106199\PhpParser\Node\Scalar\String_;
+use ConfigTransformer2021061910\PhpParser\BuilderHelpers;
+use ConfigTransformer2021061910\PhpParser\Node\Expr;
+use ConfigTransformer2021061910\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer2021061910\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer2021061910\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer2021061910\PhpParser\Node\Name;
+use ConfigTransformer2021061910\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer2021061910\PhpParser\Node\Scalar\MagicConst\Dir;
+use ConfigTransformer2021061910\PhpParser\Node\Scalar\String_;
 final class CommonNodeFactory
 {
-    public function createAbsoluteDirExpr($argument) : \ConfigTransformer202106199\PhpParser\Node\Expr
+    public function createAbsoluteDirExpr($argument) : \ConfigTransformer2021061910\PhpParser\Node\Expr
     {
         if ($argument === '') {
-            return new \ConfigTransformer202106199\PhpParser\Node\Scalar\String_('');
+            return new \ConfigTransformer2021061910\PhpParser\Node\Scalar\String_('');
         }
         if (\is_string($argument)) {
             // preslash with dir
             $argument = '/' . $argument;
         }
-        $argumentValue = \ConfigTransformer202106199\PhpParser\BuilderHelpers::normalizeValue($argument);
-        if ($argumentValue instanceof \ConfigTransformer202106199\PhpParser\Node\Scalar\String_) {
-            $argumentValue = new \ConfigTransformer202106199\PhpParser\Node\Expr\BinaryOp\Concat(new \ConfigTransformer202106199\PhpParser\Node\Scalar\MagicConst\Dir(), $argumentValue);
+        $argumentValue = \ConfigTransformer2021061910\PhpParser\BuilderHelpers::normalizeValue($argument);
+        if ($argumentValue instanceof \ConfigTransformer2021061910\PhpParser\Node\Scalar\String_) {
+            $argumentValue = new \ConfigTransformer2021061910\PhpParser\Node\Expr\BinaryOp\Concat(new \ConfigTransformer2021061910\PhpParser\Node\Scalar\MagicConst\Dir(), $argumentValue);
         }
         return $argumentValue;
     }
-    public function createClassReference(string $className) : \ConfigTransformer202106199\PhpParser\Node\Expr\ClassConstFetch
+    public function createClassReference(string $className) : \ConfigTransformer2021061910\PhpParser\Node\Expr\ClassConstFetch
     {
         return $this->createConstFetch($className, 'class');
     }
-    public function createConstFetch(string $className, string $constantName) : \ConfigTransformer202106199\PhpParser\Node\Expr\ClassConstFetch
+    public function createConstFetch(string $className, string $constantName) : \ConfigTransformer2021061910\PhpParser\Node\Expr\ClassConstFetch
     {
-        return new \ConfigTransformer202106199\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202106199\PhpParser\Node\Name\FullyQualified($className), $constantName);
+        return new \ConfigTransformer2021061910\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer2021061910\PhpParser\Node\Name\FullyQualified($className), $constantName);
     }
-    public function createFalse() : \ConfigTransformer202106199\PhpParser\Node\Expr\ConstFetch
+    public function createFalse() : \ConfigTransformer2021061910\PhpParser\Node\Expr\ConstFetch
     {
-        return new \ConfigTransformer202106199\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202106199\PhpParser\Node\Name('false'));
+        return new \ConfigTransformer2021061910\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer2021061910\PhpParser\Node\Name('false'));
     }
 }

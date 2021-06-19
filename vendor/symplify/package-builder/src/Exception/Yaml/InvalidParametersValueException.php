@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106199\Symplify\PackageBuilder\Exception\Yaml;
+namespace ConfigTransformer2021061910\Symplify\PackageBuilder\Exception\Yaml;
 
 use Exception;
 final class InvalidParametersValueException extends \Exception

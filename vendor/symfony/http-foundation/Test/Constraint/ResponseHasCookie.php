@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202106199\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202106199\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202106199\Symfony\Component\HttpFoundation\Cookie;
-use ConfigTransformer202106199\Symfony\Component\HttpFoundation\Response;
-final class ResponseHasCookie extends \ConfigTransformer202106199\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer2021061910\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Cookie;
+use ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Response;
+final class ResponseHasCookie extends \ConfigTransformer2021061910\PHPUnit\Framework\Constraint\Constraint
 {
     private $name;
     private $path;
@@ -56,10 +56,10 @@ final class ResponseHasCookie extends \ConfigTransformer202106199\PHPUnit\Framew
     {
         return 'the Response ' . $this->toString();
     }
-    private function getCookie(\ConfigTransformer202106199\Symfony\Component\HttpFoundation\Response $response) : ?\ConfigTransformer202106199\Symfony\Component\HttpFoundation\Cookie
+    private function getCookie(\ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Response $response) : ?\ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Cookie
     {
         $cookies = $response->headers->getCookies();
-        $filteredCookies = \array_filter($cookies, function (\ConfigTransformer202106199\Symfony\Component\HttpFoundation\Cookie $cookie) {
+        $filteredCookies = \array_filter($cookies, function (\ConfigTransformer2021061910\Symfony\Component\HttpFoundation\Cookie $cookie) {
             return $cookie->getName() === $this->name && $cookie->getPath() === $this->path && $cookie->getDomain() === $this->domain;
         });
         return \reset($filteredCookies) ?: null;

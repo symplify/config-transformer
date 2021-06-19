@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106199\PhpParser\Builder;
+namespace ConfigTransformer2021061910\PhpParser\Builder;
 
-use ConfigTransformer202106199\PhpParser;
-use ConfigTransformer202106199\PhpParser\BuilderHelpers;
-use ConfigTransformer202106199\PhpParser\Node\Stmt;
-class Trait_ extends \ConfigTransformer202106199\PhpParser\Builder\Declaration
+use ConfigTransformer2021061910\PhpParser;
+use ConfigTransformer2021061910\PhpParser\BuilderHelpers;
+use ConfigTransformer2021061910\PhpParser\Node\Stmt;
+class Trait_ extends \ConfigTransformer2021061910\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $uses = [];
@@ -30,12 +30,12 @@ class Trait_ extends \ConfigTransformer202106199\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer202106199\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \ConfigTransformer202106199\PhpParser\Node\Stmt\Property) {
+        $stmt = \ConfigTransformer2021061910\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \ConfigTransformer2021061910\PhpParser\Node\Stmt\Property) {
             $this->properties[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer202106199\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \ConfigTransformer2021061910\PhpParser\Node\Stmt\ClassMethod) {
             $this->methods[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer202106199\PhpParser\Node\Stmt\TraitUse) {
+        } elseif ($stmt instanceof \ConfigTransformer2021061910\PhpParser\Node\Stmt\TraitUse) {
             $this->uses[] = $stmt;
         } else {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -47,8 +47,8 @@ class Trait_ extends \ConfigTransformer202106199\PhpParser\Builder\Declaration
      *
      * @return Stmt\Trait_ The built interface node
      */
-    public function getNode() : \ConfigTransformer202106199\PhpParser\Node
+    public function getNode() : \ConfigTransformer2021061910\PhpParser\Node
     {
-        return new \ConfigTransformer202106199\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods)], $this->attributes);
+        return new \ConfigTransformer2021061910\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods)], $this->attributes);
     }
 }
