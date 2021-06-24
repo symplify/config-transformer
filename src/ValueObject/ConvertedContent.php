@@ -1,29 +1,25 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer202106239\Symplify\ConfigTransformer\ValueObject;
+declare(strict_types=1);
 
-use ConfigTransformer202106239\Symplify\SmartFileSystem\SmartFileInfo;
+namespace Symplify\ConfigTransformer\ValueObject;
+
+use Symplify\SmartFileSystem\SmartFileInfo;
+
 final class ConvertedContent
 {
-    /**
-     * @var string
-     */
-    private $convertedContent;
-    /**
-     * @var \Symplify\SmartFileSystem\SmartFileInfo
-     */
-    private $originalFileInfo;
-    public function __construct(string $convertedContent, \ConfigTransformer202106239\Symplify\SmartFileSystem\SmartFileInfo $originalFileInfo)
-    {
-        $this->convertedContent = $convertedContent;
-        $this->originalFileInfo = $originalFileInfo;
+    public function __construct(
+        private string $convertedContent,
+        private SmartFileInfo $originalFileInfo
+    ) {
     }
-    public function getConvertedContent() : string
+
+    public function getConvertedContent(): string
     {
         return $this->convertedContent;
     }
-    public function getOriginalFilePathWithoutSuffix() : string
+
+    public function getOriginalFilePathWithoutSuffix(): string
     {
         return $this->originalFileInfo->getRealPathWithoutSuffix();
     }
