@@ -10,22 +10,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer202106261\Symfony\Polyfill\Php73 as p;
+use ConfigTransformer202106266\Symfony\Polyfill\Php73 as p;
 if (\PHP_VERSION_ID >= 70300) {
     return;
 }
 if (!\function_exists('is_countable')) {
     function is_countable($value)
     {
-        return \is_array($value) || $value instanceof \Countable || $value instanceof \ResourceBundle || $value instanceof \ConfigTransformer202106261\SimpleXmlElement;
+        return \is_array($value) || $value instanceof \Countable || $value instanceof \ResourceBundle || $value instanceof \ConfigTransformer202106266\SimpleXmlElement;
     }
 }
 if (!\function_exists('hrtime')) {
     require_once __DIR__ . '/Php73.php';
-    \ConfigTransformer202106261\Symfony\Polyfill\Php73\Php73::$startAt = (int) \microtime(\true);
+    \ConfigTransformer202106266\Symfony\Polyfill\Php73\Php73::$startAt = (int) \microtime(\true);
     function hrtime($as_number = \false)
     {
-        return \ConfigTransformer202106261\Symfony\Polyfill\Php73\Php73::hrtime($as_number);
+        return \ConfigTransformer202106266\Symfony\Polyfill\Php73\Php73::hrtime($as_number);
     }
 }
 if (!\function_exists('array_key_first')) {

@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202106261\Symplify\ConfigTransformer\HttpKernel;
+namespace ConfigTransformer202106266\Symplify\ConfigTransformer\HttpKernel;
 
-use ConfigTransformer202106261\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202106261\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer202106261\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use ConfigTransformer202106261\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
-use ConfigTransformer202106261\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class ConfigTransformerKernel extends \ConfigTransformer202106261\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202106266\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202106266\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202106266\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use ConfigTransformer202106266\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
+use ConfigTransformer202106266\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class ConfigTransformerKernel extends \ConfigTransformer202106266\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\ConfigTransformer202106261\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\ConfigTransformer202106266\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
     }
@@ -19,6 +19,6 @@ final class ConfigTransformerKernel extends \ConfigTransformer202106261\Symplify
      */
     public function registerBundles() : iterable
     {
-        return [new \ConfigTransformer202106261\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer202106261\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new \ConfigTransformer202106266\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer202106266\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
     }
 }

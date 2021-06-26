@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="<?php 
-namespace ConfigTransformer202106261;
+namespace ConfigTransformer202106266;
 
 echo $this->charset;
 ?>" />
