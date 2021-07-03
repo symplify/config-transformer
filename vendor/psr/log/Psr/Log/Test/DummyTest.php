@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202107032\Psr\Log\Test;
+namespace ConfigTransformer202107038\Psr\Log\Test;
 
 /**
  * This class is internal and does not follow the BC promise.
