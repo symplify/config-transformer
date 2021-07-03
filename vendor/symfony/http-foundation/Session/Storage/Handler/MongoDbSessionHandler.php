@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107033\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202107031\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using the mongodb/mongodb package and MongoDB driver extension.
@@ -18,7 +18,7 @@ namespace ConfigTransformer202107033\Symfony\Component\HttpFoundation\Session\St
  * @see https://packagist.org/packages/mongodb/mongodb
  * @see https://php.net/mongodb
  */
-class MongoDbSessionHandler extends \ConfigTransformer202107033\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MongoDbSessionHandler extends \ConfigTransformer202107031\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $mongo;
     /**
@@ -59,7 +59,7 @@ class MongoDbSessionHandler extends \ConfigTransformer202107033\Symfony\Componen
      *
      * @throws \InvalidArgumentException When "database" or "collection" not provided
      */
-    public function __construct(\ConfigTransformer202107033\MongoDB\Client $mongo, array $options)
+    public function __construct(\ConfigTransformer202107031\MongoDB\Client $mongo, array $options)
     {
         if (!isset($options['database']) || !isset($options['collection'])) {
             throw new \InvalidArgumentException('You must provide the "database" and "collection" option for MongoDBSessionHandler.');
@@ -120,7 +120,7 @@ class MongoDbSessionHandler extends \ConfigTransformer202107033\Symfony\Componen
         }
         return $dbData[$this->options['data_field']]->getData();
     }
-    private function getCollection() : \ConfigTransformer202107033\MongoDB\Collection
+    private function getCollection() : \ConfigTransformer202107031\MongoDB\Collection
     {
         if (null === $this->collection) {
             $this->collection = $this->mongo->selectCollection($this->options['database'], $this->options['collection']);
