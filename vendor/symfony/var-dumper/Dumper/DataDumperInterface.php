@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107051\Symfony\Component\VarDumper\Dumper;
+namespace ConfigTransformer202107050\Symfony\Component\VarDumper\Dumper;
 
-use ConfigTransformer202107051\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202107050\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * DataDumperInterface for dumping Data objects.
  *
@@ -18,5 +18,5 @@ use ConfigTransformer202107051\Symfony\Component\VarDumper\Cloner\Data;
  */
 interface DataDumperInterface
 {
-    public function dump(\ConfigTransformer202107051\Symfony\Component\VarDumper\Cloner\Data $data);
+    public function dump(\ConfigTransformer202107050\Symfony\Component\VarDumper\Cloner\Data $data);
 }

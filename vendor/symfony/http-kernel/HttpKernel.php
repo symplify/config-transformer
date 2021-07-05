@@ -8,71 +8,71 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107051\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202107050\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202107051\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107051\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ViewEvent;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use ConfigTransformer202107051\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ViewEvent;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use ConfigTransformer202107050\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\LegacyEventDispatcherProxy::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ExceptionEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\RequestEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ResponseEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\TerminateEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ViewEvent::class);
-\class_exists(\ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\LegacyEventDispatcherProxy::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ExceptionEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\RequestEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ResponseEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\TerminateEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ViewEvent::class);
+\class_exists(\ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::class);
 /**
  * HttpKernel notifies events to convert a Request object to a Response one.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKernel\HttpKernelInterface, \ConfigTransformer202107051\Symfony\Component\HttpKernel\TerminableInterface
+class HttpKernel implements \ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpKernelInterface, \ConfigTransformer202107050\Symfony\Component\HttpKernel\TerminableInterface
 {
     protected $dispatcher;
     protected $resolver;
     protected $requestStack;
     private $argumentResolver;
-    public function __construct(\ConfigTransformer202107051\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher, \ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer202107051\Symfony\Component\HttpFoundation\RequestStack $requestStack = null, \ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $argumentResolver = null)
+    public function __construct(\ConfigTransformer202107050\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher, \ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\RequestStack $requestStack = null, \ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $argumentResolver = null)
     {
         $this->dispatcher = $dispatcher;
         $this->resolver = $resolver;
-        $this->requestStack = $requestStack ?? new \ConfigTransformer202107051\Symfony\Component\HttpFoundation\RequestStack();
+        $this->requestStack = $requestStack ?? new \ConfigTransformer202107050\Symfony\Component\HttpFoundation\RequestStack();
         $this->argumentResolver = $argumentResolver;
         if (null === $this->argumentResolver) {
-            $this->argumentResolver = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Controller\ArgumentResolver();
+            $this->argumentResolver = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Controller\ArgumentResolver();
         }
     }
     /**
      * {@inheritdoc}
      */
-    public function handle(\ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, int $type = \ConfigTransformer202107051\Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST, bool $catch = \true)
+    public function handle(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, int $type = \ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST, bool $catch = \true)
     {
         $request->headers->set('X-Php-Ob-Level', (string) \ob_get_level());
         try {
             return $this->handleRaw($request, $type);
         } catch (\Exception $e) {
-            if ($e instanceof \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
-                $e = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\BadRequestHttpException($e->getMessage(), $e);
+            if ($e instanceof \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+                $e = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\BadRequestHttpException($e->getMessage(), $e);
             }
             if (\false === $catch) {
                 $this->finishRequest($request, $type);
@@ -84,14 +84,14 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
     /**
      * {@inheritdoc}
      */
-    public function terminate(\ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response $response)
+    public function terminate(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response $response)
     {
-        $this->dispatcher->dispatch(new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\TerminateEvent($this, $request, $response), \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::TERMINATE);
+        $this->dispatcher->dispatch(new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\TerminateEvent($this, $request, $response), \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::TERMINATE);
     }
     /**
      * @internal
      */
-    public function terminateWithException(\Throwable $exception, \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request = null)
+    public function terminateWithException(\Throwable $exception, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request = null)
     {
         if (!($request = $request ?: $this->requestStack->getMainRequest())) {
             throw $exception;
@@ -109,34 +109,34 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
      * @throws \LogicException       If one of the listener does not behave as expected
      * @throws NotFoundHttpException When controller cannot be found
      */
-    private function handleRaw(\ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, int $type = self::MAIN_REQUEST) : \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response
+    private function handleRaw(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, int $type = self::MAIN_REQUEST) : \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response
     {
         $this->requestStack->push($request);
         // request
-        $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\RequestEvent($this, $request, $type);
-        $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::REQUEST);
+        $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\RequestEvent($this, $request, $type);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::REQUEST);
         if ($event->hasResponse()) {
             return $this->filterResponse($event->getResponse(), $request, $type);
         }
         // load controller
         if (\false === ($controller = $this->resolver->getController($request))) {
-            throw new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\NotFoundHttpException(\sprintf('Unable to find the controller for path "%s". The route is wrongly configured.', $request->getPathInfo()));
+            throw new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\NotFoundHttpException(\sprintf('Unable to find the controller for path "%s". The route is wrongly configured.', $request->getPathInfo()));
         }
-        $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerEvent($this, $controller, $request, $type);
-        $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER);
+        $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerEvent($this, $controller, $request, $type);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER);
         $controller = $event->getController();
         // controller arguments
         $arguments = $this->argumentResolver->getArguments($request, $controller);
-        $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent($this, $controller, $arguments, $request, $type);
-        $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS);
+        $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent($this, $controller, $arguments, $request, $type);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS);
         $controller = $event->getController();
         $arguments = $event->getArguments();
         // call controller
         $response = $controller(...$arguments);
         // view
-        if (!$response instanceof \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response) {
-            $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ViewEvent($this, $request, $type, $response);
-            $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::VIEW);
+        if (!$response instanceof \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response) {
+            $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ViewEvent($this, $request, $type, $response);
+            $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::VIEW);
             if ($event->hasResponse()) {
                 $response = $event->getResponse();
             } else {
@@ -145,7 +145,7 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
                 if (null === $response) {
                     $msg .= ' Did you forget to add a return statement somewhere in your controller?';
                 }
-                throw new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException($msg, $controller, __FILE__, __LINE__ - 17);
+                throw new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException($msg, $controller, __FILE__, __LINE__ - 17);
             }
         }
         return $this->filterResponse($response, $request, $type);
@@ -155,10 +155,10 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
      *
      * @throws \RuntimeException if the passed object is not a Response instance
      */
-    private function filterResponse(\ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response $response, \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, int $type) : \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response
+    private function filterResponse(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response $response, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, int $type) : \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response
     {
-        $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ResponseEvent($this, $request, $type, $response);
-        $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::RESPONSE);
+        $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ResponseEvent($this, $request, $type, $response);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::RESPONSE);
         $this->finishRequest($request, $type);
         return $event->getResponse();
     }
@@ -169,9 +169,9 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
      * operations such as {@link RequestStack::getParentRequest()} can lead to
      * weird results.
      */
-    private function finishRequest(\ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, int $type)
+    private function finishRequest(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, int $type)
     {
-        $this->dispatcher->dispatch(new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\FinishRequestEvent($this, $request, $type), \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST);
+        $this->dispatcher->dispatch(new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\FinishRequestEvent($this, $request, $type), \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST);
         $this->requestStack->pop();
     }
     /**
@@ -179,10 +179,10 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
      *
      * @throws \Exception
      */
-    private function handleThrowable(\Throwable $e, \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Request $request, int $type) : \ConfigTransformer202107051\Symfony\Component\HttpFoundation\Response
+    private function handleThrowable(\Throwable $e, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, int $type) : \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response
     {
-        $event = new \ConfigTransformer202107051\Symfony\Component\HttpKernel\Event\ExceptionEvent($this, $request, $type, $e);
-        $this->dispatcher->dispatch($event, \ConfigTransformer202107051\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION);
+        $event = new \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\ExceptionEvent($this, $request, $type, $e);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202107050\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION);
         // a listener might have replaced the exception
         $e = $event->getThrowable();
         if (!$event->hasResponse()) {
@@ -193,7 +193,7 @@ class HttpKernel implements \ConfigTransformer202107051\Symfony\Component\HttpKe
         // the developer asked for a specific status code
         if (!$event->isAllowingCustomResponseCode() && !$response->isClientError() && !$response->isServerError() && !$response->isRedirect()) {
             // ensure that we actually have an error response
-            if ($e instanceof \ConfigTransformer202107051\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+            if ($e instanceof \ConfigTransformer202107050\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
                 // keep the HTTP status code and headers
                 $response->setStatusCode($e->getStatusCode());
                 $response->headers->add($e->getHeaders());
