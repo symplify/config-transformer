@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107056\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer2021070510\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202107056\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202107056\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
-if (!\class_exists(\ConfigTransformer202107056\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
+use ConfigTransformer2021070510\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer2021070510\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
+if (!\class_exists(\ConfigTransformer2021070510\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
     return;
 }
 /**
@@ -22,15 +22,15 @@ if (!\class_exists(\ConfigTransformer202107056\Symfony\Component\ExpressionLangu
  *
  * @see ExpressionLanguageProvider
  */
-class ExpressionLanguage extends \ConfigTransformer202107056\Symfony\Component\ExpressionLanguage\ExpressionLanguage
+class ExpressionLanguage extends \ConfigTransformer2021070510\Symfony\Component\ExpressionLanguage\ExpressionLanguage
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(\ConfigTransformer202107056\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [], callable $serviceCompiler = null)
+    public function __construct(\ConfigTransformer2021070510\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [], callable $serviceCompiler = null)
     {
         // prepend the default provider to let users override it easily
-        \array_unshift($providers, new \ConfigTransformer202107056\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
+        \array_unshift($providers, new \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
         parent::__construct($cache, $providers);
     }
 }
