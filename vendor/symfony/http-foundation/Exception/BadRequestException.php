@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107055\Symfony\Component\HttpFoundation\Exception;
+namespace ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Raised when a user sends a malformed request.
  */
-class BadRequestException extends \UnexpectedValueException implements \ConfigTransformer202107055\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+class BadRequestException extends \UnexpectedValueException implements \ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
 }

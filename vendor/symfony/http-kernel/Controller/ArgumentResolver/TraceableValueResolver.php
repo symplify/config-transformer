@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107055\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107055\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202107055\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use ConfigTransformer202107055\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer2021070510\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer2021070510\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Provides timing information via the stopwatch.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class TraceableValueResolver implements \ConfigTransformer202107055\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class TraceableValueResolver implements \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $inner;
     private $stopwatch;
-    public function __construct(\ConfigTransformer202107055\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \ConfigTransformer202107055\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \ConfigTransformer2021070510\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->inner = $inner;
         $this->stopwatch = $stopwatch;
@@ -31,7 +31,7 @@ final class TraceableValueResolver implements \ConfigTransformer202107055\Symfon
     /**
      * {@inheritdoc}
      */
-    public function supports(\ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107055\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021070510\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
@@ -42,7 +42,7 @@ final class TraceableValueResolver implements \ConfigTransformer202107055\Symfon
     /**
      * {@inheritdoc}
      */
-    public function resolve(\ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107055\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021070510\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
