@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response;
 /**
  * Esi implements the ESI capabilities to Request and Response instances.
  *
@@ -23,7 +23,7 @@ use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Esi extends \ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Esi extends \ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     public function getName()
     {
@@ -32,7 +32,7 @@ class Esi extends \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Http
     /**
      * {@inheritdoc}
      */
-    public function addSurrogateControl(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response $response)
+    public function addSurrogateControl(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response $response)
     {
         if (\false !== \strpos($response->getContent(), '<esi:include')) {
             $response->headers->set('Surrogate-Control', 'content="ESI/1.0"');
@@ -52,7 +52,7 @@ class Esi extends \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Http
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response $response)
+    public function process(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {

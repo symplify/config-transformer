@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202107050\Symfony\Component\DependencyInjection\Attribute;
 
 /**
  * An attribute to tell how a base type should be tagged.
@@ -16,7 +16,7 @@ namespace ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Attr
  * @author Nicolas Grekas <p@tchwork.com>
  * @annotation
  */
-class AutoconfigureTag extends \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Attribute\Autoconfigure
+class AutoconfigureTag extends \ConfigTransformer202107050\Symfony\Component\DependencyInjection\Attribute\Autoconfigure
 {
     public function __construct(string $name = null, array $attributes = [])
     {

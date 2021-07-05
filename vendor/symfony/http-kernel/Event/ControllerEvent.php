@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202107050\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows filtering of a controller callable.
  *
@@ -23,10 +23,10 @@ use ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpKernelInterface
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ControllerEvent extends \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ControllerEvent extends \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $controller;
-    public function __construct(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, callable $controller, \ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
+    public function __construct(\ConfigTransformer202107050\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, callable $controller, \ConfigTransformer202107050\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setController($controller);

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202107050\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response;
 /**
  * Allows to create a response for a request.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class RequestEvent extends \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\KernelEvent
+class RequestEvent extends \ConfigTransformer202107050\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
     /**
@@ -35,7 +35,7 @@ class RequestEvent extends \ConfigTransformer2021070510\Symfony\Component\HttpKe
     /**
      * Sets a response and stops event propagation.
      */
-    public function setResponse(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Response $response)
+    public function setResponse(\ConfigTransformer202107050\Symfony\Component\HttpFoundation\Response $response)
     {
         $this->response = $response;
         $this->stopPropagation();

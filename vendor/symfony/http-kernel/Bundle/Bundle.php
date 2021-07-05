@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\Bundle;
+namespace ConfigTransformer202107050\Symfony\Component\HttpKernel\Bundle;
 
-use ConfigTransformer2021070510\Symfony\Component\Console\Application;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202107050\Symfony\Component\Console\Application;
+use ConfigTransformer202107050\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202107050\Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use ConfigTransformer202107050\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107050\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * An implementation of BundleInterface that adds a few conventions for DependencyInjection extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Bundle implements \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Bundle\BundleInterface
+abstract class Bundle implements \ConfigTransformer202107050\Symfony\Component\HttpKernel\Bundle\BundleInterface
 {
     use ContainerAwareTrait;
     protected $name;
@@ -45,7 +45,7 @@ abstract class Bundle implements \ConfigTransformer2021070510\Symfony\Component\
      * This method can be overridden to register compilation passes,
      * other extensions, ...
      */
-    public function build(\ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function build(\ConfigTransformer202107050\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
     }
     /**
@@ -60,12 +60,12 @@ abstract class Bundle implements \ConfigTransformer2021070510\Symfony\Component\
         if (null === $this->extension) {
             $extension = $this->createContainerExtension();
             if (null !== $extension) {
-                if (!$extension instanceof \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Extension\ExtensionInterface) {
+                if (!$extension instanceof \ConfigTransformer202107050\Symfony\Component\DependencyInjection\Extension\ExtensionInterface) {
                     throw new \LogicException(\sprintf('Extension "%s" must implement Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface.', \get_debug_type($extension)));
                 }
                 // check naming convention
                 $basename = \preg_replace('/Bundle$/', '', $this->getName());
-                $expectedAlias = \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Container::underscore($basename);
+                $expectedAlias = \ConfigTransformer202107050\Symfony\Component\DependencyInjection\Container::underscore($basename);
                 if ($expectedAlias != $extension->getAlias()) {
                     throw new \LogicException(\sprintf('Users will expect the alias of the default extension of a bundle to be the underscored version of the bundle name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.', $expectedAlias, $extension->getAlias()));
                 }
@@ -107,7 +107,7 @@ abstract class Bundle implements \ConfigTransformer2021070510\Symfony\Component\
         }
         return $this->name;
     }
-    public function registerCommands(\ConfigTransformer2021070510\Symfony\Component\Console\Application $application)
+    public function registerCommands(\ConfigTransformer202107050\Symfony\Component\Console\Application $application)
     {
     }
     /**
