@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107058\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202107056\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202107058\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202107058\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
-use ConfigTransformer202107058\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202107056\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202107056\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use ConfigTransformer202107056\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
  */
-class ReflectionClassResource implements \ConfigTransformer202107058\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ReflectionClassResource implements \ConfigTransformer202107056\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $files = [];
     private $className;
@@ -198,18 +198,18 @@ class ReflectionClassResource implements \ConfigTransformer202107058\Symfony\Com
         if ($class->isAbstract() || $class->isInterface() || $class->isTrait()) {
             return;
         }
-        if (\interface_exists(\ConfigTransformer202107058\Symfony\Component\EventDispatcher\EventSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107058\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
-            (yield \ConfigTransformer202107058\Symfony\Component\EventDispatcher\EventSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202107056\Symfony\Component\EventDispatcher\EventSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107056\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
+            (yield \ConfigTransformer202107056\Symfony\Component\EventDispatcher\EventSubscriberInterface::class);
             (yield \print_r($class->name::getSubscribedEvents(), \true));
         }
-        if (\interface_exists(\ConfigTransformer202107058\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107058\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class)) {
-            (yield \ConfigTransformer202107058\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202107056\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107056\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class)) {
+            (yield \ConfigTransformer202107056\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class);
             foreach ($class->name::getHandledMessages() as $key => $value) {
                 (yield $key . \print_r($value, \true));
             }
         }
-        if (\interface_exists(\ConfigTransformer202107058\Symfony\Contracts\Service\ServiceSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107058\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
-            (yield \ConfigTransformer202107058\Symfony\Contracts\Service\ServiceSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202107056\Symfony\Contracts\Service\ServiceSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202107056\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
+            (yield \ConfigTransformer202107056\Symfony\Contracts\Service\ServiceSubscriberInterface::class);
             (yield \print_r($class->name::getSubscribedServices(), \true));
         }
     }

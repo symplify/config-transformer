@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107058\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202107056\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202107058\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202107058\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107056\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202107056\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Removes empty service-locators registered for ServiceValueResolver.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class RemoveEmptyControllerArgumentLocatorsPass implements \ConfigTransformer202107058\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RemoveEmptyControllerArgumentLocatorsPass implements \ConfigTransformer202107056\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $controllerLocator;
     public function __construct(string $controllerLocator = 'argument_resolver.controller_locator')
@@ -27,7 +27,7 @@ class RemoveEmptyControllerArgumentLocatorsPass implements \ConfigTransformer202
         }
         $this->controllerLocator = $controllerLocator;
     }
-    public function process(\ConfigTransformer202107058\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202107056\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $controllerLocator = $container->findDefinition($this->controllerLocator);
         $controllers = $controllerLocator->getArgument(0);
