@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202107055\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202107055\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107055\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202107055\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces all references to aliases with references to the actual service.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveReferencesToAliasesPass extends \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveReferencesToAliasesPass extends \ConfigTransformer202107055\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202107055\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         parent::process($container);
         foreach ($container->getAliases() as $id => $alias) {
@@ -39,13 +39,13 @@ class ResolveReferencesToAliasesPass extends \ConfigTransformer2021070510\Symfon
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Reference) {
+        if (!$value instanceof \ConfigTransformer202107055\Symfony\Component\DependencyInjection\Reference) {
             return parent::processValue($value, $isRoot);
         }
         $defId = $this->getDefinitionId($id = (string) $value, $this->container);
-        return $defId !== $id ? new \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Reference($defId, $value->getInvalidBehavior()) : $value;
+        return $defId !== $id ? new \ConfigTransformer202107055\Symfony\Component\DependencyInjection\Reference($defId, $value->getInvalidBehavior()) : $value;
     }
-    private function getDefinitionId(string $id, \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\ContainerBuilder $container) : string
+    private function getDefinitionId(string $id, \ConfigTransformer202107055\Symfony\Component\DependencyInjection\ContainerBuilder $container) : string
     {
         if (!$container->hasAlias($id)) {
             return $id;
@@ -61,7 +61,7 @@ class ResolveReferencesToAliasesPass extends \ConfigTransformer2021070510\Symfon
         $seen = [];
         do {
             if (isset($seen[$id])) {
-                throw new \ConfigTransformer2021070510\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($seen), [$id]));
+                throw new \ConfigTransformer202107055\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($seen), [$id]));
             }
             $seen[$id] = \true;
             $id = (string) $container->getAlias($id);

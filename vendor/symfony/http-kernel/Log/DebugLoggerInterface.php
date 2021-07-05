@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\Log;
+namespace ConfigTransformer202107055\Symfony\Component\HttpKernel\Log;
 
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request;
 /**
  * DebugLoggerInterface.
  *
@@ -27,13 +27,13 @@ interface DebugLoggerInterface
      *
      * @return array An array of logs
      */
-    public function getLogs(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request = null);
+    public function getLogs(\ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request $request = null);
     /**
      * Returns the number of errors.
      *
      * @return int The number of errors
      */
-    public function countErrors(\ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request = null);
+    public function countErrors(\ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request $request = null);
     /**
      * Removes all log records.
      */

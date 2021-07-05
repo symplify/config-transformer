@@ -8,40 +8,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070510\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202107055\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer2021070510\Psr\Log\LoggerInterface;
-use ConfigTransformer2021070510\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
-use ConfigTransformer2021070510\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use ConfigTransformer2021070510\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpKernelInterface;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\KernelEvents;
-use ConfigTransformer2021070510\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use ConfigTransformer202107055\Psr\Log\LoggerInterface;
+use ConfigTransformer202107055\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use ConfigTransformer202107055\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer202107055\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202107055\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ErrorListener implements \ConfigTransformer202107055\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     protected $controller;
     protected $logger;
     protected $debug;
-    public function __construct($controller, \ConfigTransformer2021070510\Psr\Log\LoggerInterface $logger = null, bool $debug = \false)
+    public function __construct($controller, \ConfigTransformer202107055\Psr\Log\LoggerInterface $logger = null, bool $debug = \false)
     {
         $this->controller = $controller;
         $this->logger = $logger;
         $this->debug = $debug;
     }
-    public function logKernelException(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
+    public function logKernelException(\ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
     {
-        $e = \ConfigTransformer2021070510\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($event->getThrowable());
+        $e = \ConfigTransformer202107055\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($event->getThrowable());
         $this->logException($event->getThrowable(), \sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', $e->getClass(), $e->getMessage(), $e->getFile(), $e->getLine()));
     }
-    public function onKernelException(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
+    public function onKernelException(\ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
     {
         if (null === $this->controller) {
             return;
@@ -49,9 +49,9 @@ class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\Ev
         $exception = $event->getThrowable();
         $request = $this->duplicateRequest($exception, $event->getRequest());
         try {
-            $response = $event->getKernel()->handle($request, \ConfigTransformer2021070510\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST, \false);
+            $response = $event->getKernel()->handle($request, \ConfigTransformer202107055\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST, \false);
         } catch (\Exception $e) {
-            $f = \ConfigTransformer2021070510\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($e);
+            $f = \ConfigTransformer202107055\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($e);
             $this->logException($e, \sprintf('Exception thrown when handling an exception (%s: %s at %s line %s)', $f->getClass(), $f->getMessage(), $e->getFile(), $e->getLine()));
             $prev = $e;
             do {
@@ -69,13 +69,13 @@ class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\Ev
             $event->getRequest()->attributes->set('_remove_csp_headers', \true);
         }
     }
-    public function removeCspHeader(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ResponseEvent $event) : void
+    public function removeCspHeader(\ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ResponseEvent $event) : void
     {
         if ($this->debug && $event->getRequest()->attributes->get('_remove_csp_headers', \false)) {
             $event->getResponse()->headers->remove('Content-Security-Policy');
         }
     }
-    public function onControllerArguments(\ConfigTransformer2021070510\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent $event)
+    public function onControllerArguments(\ConfigTransformer202107055\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent $event)
     {
         $e = $event->getRequest()->attributes->get('exception');
         if (!$e instanceof \Throwable || \false === ($k = \array_search($e, $event->getArguments(), \true))) {
@@ -83,15 +83,15 @@ class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\Ev
         }
         $r = new \ReflectionFunction(\Closure::fromCallable($event->getController()));
         $r = $r->getParameters()[$k] ?? null;
-        if ($r && (!($r = $r->getType()) instanceof \ReflectionNamedType || \in_array($r->getName(), [\ConfigTransformer2021070510\Symfony\Component\ErrorHandler\Exception\FlattenException::class, \ConfigTransformer2021070510\Symfony\Component\Debug\Exception\FlattenException::class], \true))) {
+        if ($r && (!($r = $r->getType()) instanceof \ReflectionNamedType || \in_array($r->getName(), [\ConfigTransformer202107055\Symfony\Component\ErrorHandler\Exception\FlattenException::class, \ConfigTransformer202107055\Symfony\Component\Debug\Exception\FlattenException::class], \true))) {
             $arguments = $event->getArguments();
-            $arguments[$k] = \ConfigTransformer2021070510\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($e);
+            $arguments[$k] = \ConfigTransformer202107055\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($e);
             $event->setArguments($arguments);
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer2021070510\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS => 'onControllerArguments', \ConfigTransformer2021070510\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => [['logKernelException', 0], ['onKernelException', -128]], \ConfigTransformer2021070510\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['removeCspHeader', -128]];
+        return [\ConfigTransformer202107055\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS => 'onControllerArguments', \ConfigTransformer202107055\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => [['logKernelException', 0], ['onKernelException', -128]], \ConfigTransformer202107055\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['removeCspHeader', -128]];
     }
     /**
      * Logs an exception.
@@ -99,7 +99,7 @@ class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\Ev
     protected function logException(\Throwable $exception, string $message) : void
     {
         if (null !== $this->logger) {
-            if (!$exception instanceof \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface || $exception->getStatusCode() >= 500) {
+            if (!$exception instanceof \ConfigTransformer202107055\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface || $exception->getStatusCode() >= 500) {
                 $this->logger->critical($message, ['exception' => $exception]);
             } else {
                 $this->logger->error($message, ['exception' => $exception]);
@@ -109,9 +109,9 @@ class ErrorListener implements \ConfigTransformer2021070510\Symfony\Component\Ev
     /**
      * Clones the request for the exception.
      */
-    protected function duplicateRequest(\Throwable $exception, \ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer2021070510\Symfony\Component\HttpFoundation\Request
+    protected function duplicateRequest(\Throwable $exception, \ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202107055\Symfony\Component\HttpFoundation\Request
     {
-        $attributes = ['_controller' => $this->controller, 'exception' => $exception, 'logger' => $this->logger instanceof \ConfigTransformer2021070510\Symfony\Component\HttpKernel\Log\DebugLoggerInterface ? $this->logger : null];
+        $attributes = ['_controller' => $this->controller, 'exception' => $exception, 'logger' => $this->logger instanceof \ConfigTransformer202107055\Symfony\Component\HttpKernel\Log\DebugLoggerInterface ? $this->logger : null];
         $request = $request->duplicate(null, null, $attributes);
         $request->setMethod('GET');
         return $request;
