@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107051\PhpParser\Node\Expr\BinaryOp;
+namespace ConfigTransformer202107056\PhpParser\Node\Expr\BinaryOp;
 
-use ConfigTransformer202107051\PhpParser\Node\Expr\BinaryOp;
-class Plus extends \ConfigTransformer202107051\PhpParser\Node\Expr\BinaryOp
+use ConfigTransformer202107056\PhpParser\Node\Expr\BinaryOp;
+class Plus extends \ConfigTransformer202107056\PhpParser\Node\Expr\BinaryOp
 {
     public function getOperatorSigil() : string
     {

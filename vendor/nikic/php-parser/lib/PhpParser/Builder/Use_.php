@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107051\PhpParser\Builder;
+namespace ConfigTransformer202107056\PhpParser\Builder;
 
-use ConfigTransformer202107051\PhpParser\Builder;
-use ConfigTransformer202107051\PhpParser\BuilderHelpers;
-use ConfigTransformer202107051\PhpParser\Node;
-use ConfigTransformer202107051\PhpParser\Node\Stmt;
-class Use_ implements \ConfigTransformer202107051\PhpParser\Builder
+use ConfigTransformer202107056\PhpParser\Builder;
+use ConfigTransformer202107056\PhpParser\BuilderHelpers;
+use ConfigTransformer202107056\PhpParser\Node;
+use ConfigTransformer202107056\PhpParser\Node\Stmt;
+class Use_ implements \ConfigTransformer202107056\PhpParser\Builder
 {
     protected $name;
     protected $type;
@@ -20,7 +20,7 @@ class Use_ implements \ConfigTransformer202107051\PhpParser\Builder
      */
     public function __construct($name, int $type)
     {
-        $this->name = \ConfigTransformer202107051\PhpParser\BuilderHelpers::normalizeName($name);
+        $this->name = \ConfigTransformer202107056\PhpParser\BuilderHelpers::normalizeName($name);
         $this->type = $type;
     }
     /**
@@ -40,8 +40,8 @@ class Use_ implements \ConfigTransformer202107051\PhpParser\Builder
      *
      * @return Stmt\Use_ The built node
      */
-    public function getNode() : \ConfigTransformer202107051\PhpParser\Node
+    public function getNode() : \ConfigTransformer202107056\PhpParser\Node
     {
-        return new \ConfigTransformer202107051\PhpParser\Node\Stmt\Use_([new \ConfigTransformer202107051\PhpParser\Node\Stmt\UseUse($this->name, $this->alias)], $this->type);
+        return new \ConfigTransformer202107056\PhpParser\Node\Stmt\Use_([new \ConfigTransformer202107056\PhpParser\Node\Stmt\UseUse($this->name, $this->alias)], $this->type);
     }
 }

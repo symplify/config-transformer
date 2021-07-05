@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107051\PhpParser\Node\Stmt;
+namespace ConfigTransformer202107056\PhpParser\Node\Stmt;
 
-use ConfigTransformer202107051\PhpParser\Node;
-class Case_ extends \ConfigTransformer202107051\PhpParser\Node\Stmt
+use ConfigTransformer202107056\PhpParser\Node;
+class Case_ extends \ConfigTransformer202107056\PhpParser\Node\Stmt
 {
     /** @var null|Node\Expr Condition (null for default) */
     public $cond;
