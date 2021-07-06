@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107069\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202107061\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202107069\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202107069\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107069\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107061\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202107061\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107061\Symfony\Component\HttpFoundation\Response;
 /**
  * Asserts that the response is in the given format.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-final class ResponseFormatSame extends \ConfigTransformer202107069\PHPUnit\Framework\Constraint\Constraint
+final class ResponseFormatSame extends \ConfigTransformer202107061\PHPUnit\Framework\Constraint\Constraint
 {
     private $request;
     private $format;
-    public function __construct(\ConfigTransformer202107069\Symfony\Component\HttpFoundation\Request $request, ?string $format)
+    public function __construct(\ConfigTransformer202107061\Symfony\Component\HttpFoundation\Request $request, ?string $format)
     {
         $this->request = $request;
         $this->format = $format;
