@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107061\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202107069\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202107061\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer202107061\Symfony\Component\String\UnicodeString;
+use ConfigTransformer202107069\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202107069\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \ConfigTransformer202107061\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \ConfigTransformer202107069\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\ConfigTransformer202107061\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\ConfigTransformer202107069\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -54,7 +54,7 @@ abstract class Helper implements \ConfigTransformer202107061\Symfony\Component\C
     {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
-            return (new \ConfigTransformer202107061\Symfony\Component\String\UnicodeString($string))->width(\false);
+            return (new \ConfigTransformer202107069\Symfony\Component\String\UnicodeString($string))->width(\false);
         }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
@@ -69,7 +69,7 @@ abstract class Helper implements \ConfigTransformer202107061\Symfony\Component\C
     {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
-            return (new \ConfigTransformer202107061\Symfony\Component\String\UnicodeString($string))->length();
+            return (new \ConfigTransformer202107069\Symfony\Component\String\UnicodeString($string))->length();
         }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
@@ -119,12 +119,12 @@ abstract class Helper implements \ConfigTransformer202107061\Symfony\Component\C
     /**
      * @deprecated since 5.3
      */
-    public static function strlenWithoutDecoration(\ConfigTransformer202107061\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
+    public static function strlenWithoutDecoration(\ConfigTransformer202107069\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
         trigger_deprecation('symfony/console', '5.3', 'Method "%s()" is deprecated and will be removed in Symfony 6.0. Use Helper::removeDecoration() instead.', __METHOD__);
         return self::width(self::removeDecoration($formatter, $string));
     }
-    public static function removeDecoration(\ConfigTransformer202107061\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
+    public static function removeDecoration(\ConfigTransformer202107069\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
         $isDecorated = $formatter->isDecorated();
         $formatter->setDecorated(\false);

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107061\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107069\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107061\Psr\SimpleCache\CacheInterface;
-use ConfigTransformer202107061\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202107061\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202107061\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202107069\Psr\SimpleCache\CacheInterface;
+use ConfigTransformer202107069\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202107069\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202107069\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-16 cache into a PSR-6 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Adapter extends \ConfigTransformer202107061\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202107061\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202107061\Symfony\Component\Cache\ResettableInterface
+class Psr16Adapter extends \ConfigTransformer202107069\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202107069\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202107069\Symfony\Component\Cache\ResettableInterface
 {
     /**
      * @internal
@@ -27,7 +27,7 @@ class Psr16Adapter extends \ConfigTransformer202107061\Symfony\Component\Cache\A
     protected const NS_SEPARATOR = '_';
     use ProxyTrait;
     private $miss;
-    public function __construct(\ConfigTransformer202107061\Psr\SimpleCache\CacheInterface $pool, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\ConfigTransformer202107069\Psr\SimpleCache\CacheInterface $pool, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct($namespace, $defaultLifetime);
         $this->pool = $pool;

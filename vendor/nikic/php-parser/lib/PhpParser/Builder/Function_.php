@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107061\PhpParser\Builder;
+namespace ConfigTransformer202107069\PhpParser\Builder;
 
-use ConfigTransformer202107061\PhpParser;
-use ConfigTransformer202107061\PhpParser\BuilderHelpers;
-use ConfigTransformer202107061\PhpParser\Node;
-use ConfigTransformer202107061\PhpParser\Node\Stmt;
-class Function_ extends \ConfigTransformer202107061\PhpParser\Builder\FunctionLike
+use ConfigTransformer202107069\PhpParser;
+use ConfigTransformer202107069\PhpParser\BuilderHelpers;
+use ConfigTransformer202107069\PhpParser\Node;
+use ConfigTransformer202107069\PhpParser\Node\Stmt;
+class Function_ extends \ConfigTransformer202107069\PhpParser\Builder\FunctionLike
 {
     protected $name;
     protected $stmts = [];
@@ -29,7 +29,7 @@ class Function_ extends \ConfigTransformer202107061\PhpParser\Builder\FunctionLi
      */
     public function addStmt($stmt)
     {
-        $this->stmts[] = \ConfigTransformer202107061\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \ConfigTransformer202107069\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -37,8 +37,8 @@ class Function_ extends \ConfigTransformer202107061\PhpParser\Builder\FunctionLi
      *
      * @return Stmt\Function_ The built function node
      */
-    public function getNode() : \ConfigTransformer202107061\PhpParser\Node
+    public function getNode() : \ConfigTransformer202107069\PhpParser\Node
     {
-        return new \ConfigTransformer202107061\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
+        return new \ConfigTransformer202107069\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
     }
 }
