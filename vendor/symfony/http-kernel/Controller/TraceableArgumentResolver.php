@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107069\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107065\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202107069\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107069\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202107065\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107065\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableArgumentResolver implements \ConfigTransformer202107069\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+class TraceableArgumentResolver implements \ConfigTransformer202107065\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
 {
     private $resolver;
     private $stopwatch;
-    public function __construct(\ConfigTransformer202107069\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $resolver, \ConfigTransformer202107069\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer202107065\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $resolver, \ConfigTransformer202107065\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->resolver = $resolver;
         $this->stopwatch = $stopwatch;
@@ -27,7 +27,7 @@ class TraceableArgumentResolver implements \ConfigTransformer202107069\Symfony\C
     /**
      * {@inheritdoc}
      */
-    public function getArguments(\ConfigTransformer202107069\Symfony\Component\HttpFoundation\Request $request, callable $controller)
+    public function getArguments(\ConfigTransformer202107065\Symfony\Component\HttpFoundation\Request $request, callable $controller)
     {
         $e = $this->stopwatch->start('controller.get_arguments');
         $ret = $this->resolver->getArguments($request, $controller);

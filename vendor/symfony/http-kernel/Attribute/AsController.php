@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107069\Symfony\Component\HttpKernel\Attribute;
+namespace ConfigTransformer202107065\Symfony\Component\HttpKernel\Attribute;
 
 /**
  * Service tag to autoconfigure controllers.
