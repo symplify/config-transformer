@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107063\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202107067\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202107063\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107063\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202107063\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use ConfigTransformer202107063\Symfony\Component\HttpKernel\UriSigner;
+use ConfigTransformer202107067\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107067\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202107067\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202107067\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Generates a fragment URI.
  *
  * @author Kévin Dunglas <kevin@dunglas.fr>
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class FragmentUriGenerator implements \ConfigTransformer202107063\Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+final class FragmentUriGenerator implements \ConfigTransformer202107067\Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
 {
     private $fragmentPath;
     private $signer;
     private $requestStack;
-    public function __construct(string $fragmentPath, \ConfigTransformer202107063\Symfony\Component\HttpKernel\UriSigner $signer = null, \ConfigTransformer202107063\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(string $fragmentPath, \ConfigTransformer202107067\Symfony\Component\HttpKernel\UriSigner $signer = null, \ConfigTransformer202107067\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->fragmentPath = $fragmentPath;
         $this->signer = $signer;
@@ -34,7 +34,7 @@ final class FragmentUriGenerator implements \ConfigTransformer202107063\Symfony\
     /**
      * {@inheritDoc}
      */
-    public function generate(\ConfigTransformer202107063\Symfony\Component\HttpKernel\Controller\ControllerReference $controller, \ConfigTransformer202107063\Symfony\Component\HttpFoundation\Request $request = null, bool $absolute = \false, bool $strict = \true, bool $sign = \true) : string
+    public function generate(\ConfigTransformer202107067\Symfony\Component\HttpKernel\Controller\ControllerReference $controller, \ConfigTransformer202107067\Symfony\Component\HttpFoundation\Request $request = null, bool $absolute = \false, bool $strict = \true, bool $sign = \true) : string
     {
         if (null === $request && (null === $this->requestStack || null === ($request = $this->requestStack->getCurrentRequest()))) {
             throw new \LogicException('Generating a fragment URL can only be done when handling a Request.');

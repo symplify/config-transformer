@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107063\Symplify\Astral\NodeTraverser;
+namespace ConfigTransformer202107067\Symplify\Astral\NodeTraverser;
 
-use ConfigTransformer202107063\PhpParser\Node;
-use ConfigTransformer202107063\PhpParser\Node\Expr;
-use ConfigTransformer202107063\PhpParser\Node\Stmt;
-use ConfigTransformer202107063\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202107063\PhpParser\NodeTraverser;
-use ConfigTransformer202107063\PhpParser\NodeVisitor;
-use ConfigTransformer202107063\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202107067\PhpParser\Node;
+use ConfigTransformer202107067\PhpParser\Node\Expr;
+use ConfigTransformer202107067\PhpParser\Node\Stmt;
+use ConfigTransformer202107067\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202107067\PhpParser\NodeTraverser;
+use ConfigTransformer202107067\PhpParser\NodeVisitor;
+use ConfigTransformer202107067\PhpParser\NodeVisitorAbstract;
 final class SimpleCallableNodeTraverser
 {
     /**
@@ -26,14 +26,14 @@ final class SimpleCallableNodeTraverser
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $nodeTraverser = new \ConfigTransformer202107063\PhpParser\NodeTraverser();
+        $nodeTraverser = new \ConfigTransformer202107067\PhpParser\NodeTraverser();
         $callableNodeVisitor = $this->createNodeVisitor($callable);
         $nodeTraverser->addVisitor($callableNodeVisitor);
         $nodeTraverser->traverse($nodes);
     }
-    private function createNodeVisitor(callable $callable) : \ConfigTransformer202107063\PhpParser\NodeVisitor
+    private function createNodeVisitor(callable $callable) : \ConfigTransformer202107067\PhpParser\NodeVisitor
     {
-        return new class($callable) extends \ConfigTransformer202107063\PhpParser\NodeVisitorAbstract
+        return new class($callable) extends \ConfigTransformer202107067\PhpParser\NodeVisitorAbstract
         {
             /**
              * @var callable
@@ -46,14 +46,14 @@ final class SimpleCallableNodeTraverser
             /**
              * @return int|Node|null
              */
-            public function enterNode(\ConfigTransformer202107063\PhpParser\Node $node)
+            public function enterNode(\ConfigTransformer202107067\PhpParser\Node $node)
             {
                 $originalNode = $node;
                 $callable = $this->callable;
                 /** @var int|Node|null $newNode */
                 $newNode = $callable($node);
-                if ($originalNode instanceof \ConfigTransformer202107063\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer202107063\PhpParser\Node\Expr) {
-                    return new \ConfigTransformer202107063\PhpParser\Node\Stmt\Expression($newNode);
+                if ($originalNode instanceof \ConfigTransformer202107067\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer202107067\PhpParser\Node\Expr) {
+                    return new \ConfigTransformer202107067\PhpParser\Node\Stmt\Expression($newNode);
                 }
                 return $newNode;
             }

@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107063\Symfony\Component\VarDumper\Dumper;
+namespace ConfigTransformer202107067\Symfony\Component\VarDumper\Dumper;
 
-use ConfigTransformer202107063\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202107063\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use ConfigTransformer202107067\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202107067\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
 /**
  * @author Kévin Thérage <therage.kevin@gmail.com>
  */
-class ContextualizedDumper implements \ConfigTransformer202107063\Symfony\Component\VarDumper\Dumper\DataDumperInterface
+class ContextualizedDumper implements \ConfigTransformer202107067\Symfony\Component\VarDumper\Dumper\DataDumperInterface
 {
     private $wrappedDumper;
     private $contextProviders;
     /**
      * @param ContextProviderInterface[] $contextProviders
      */
-    public function __construct(\ConfigTransformer202107063\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper, array $contextProviders)
+    public function __construct(\ConfigTransformer202107067\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper, array $contextProviders)
     {
         $this->wrappedDumper = $wrappedDumper;
         $this->contextProviders = $contextProviders;
     }
-    public function dump(\ConfigTransformer202107063\Symfony\Component\VarDumper\Cloner\Data $data)
+    public function dump(\ConfigTransformer202107067\Symfony\Component\VarDumper\Cloner\Data $data)
     {
         $context = [];
         foreach ($this->contextProviders as $contextProvider) {
