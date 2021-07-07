@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107071\Symplify\ConfigTransformer\Configuration;
+namespace ConfigTransformer202107076\Symplify\ConfigTransformer\Configuration;
 
-use ConfigTransformer202107071\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Format;
-use ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202107071\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-final class Configuration implements \ConfigTransformer202107071\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
+use ConfigTransformer202107076\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Format;
+use ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202107076\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+final class Configuration implements \ConfigTransformer202107076\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
 {
     /**
      * @var string[]
@@ -21,11 +21,11 @@ final class Configuration implements \ConfigTransformer202107071\Symplify\PhpCon
      * @var bool
      */
     private $isDryRun = \false;
-    public function populateFromInput(\ConfigTransformer202107071\Symfony\Component\Console\Input\InputInterface $input) : void
+    public function populateFromInput(\ConfigTransformer202107076\Symfony\Component\Console\Input\InputInterface $input) : void
     {
-        $this->source = (array) $input->getArgument(\ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
-        $this->targetSymfonyVersion = \floatval($input->getOption(\ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION));
-        $this->isDryRun = \boolval($input->getOption(\ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
+        $this->source = (array) $input->getArgument(\ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
+        $this->targetSymfonyVersion = \floatval($input->getOption(\ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION));
+        $this->isDryRun = \boolval($input->getOption(\ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
     }
     /**
      * @return string[]
@@ -51,6 +51,6 @@ final class Configuration implements \ConfigTransformer202107071\Symplify\PhpCon
      */
     public function getInputSuffixes() : array
     {
-        return [\ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202107071\Symplify\ConfigTransformer\ValueObject\Format::XML];
+        return [\ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202107076\Symplify\ConfigTransformer\ValueObject\Format::XML];
     }
 }

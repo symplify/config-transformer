@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107071\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107076\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202107071\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107071\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107076\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107076\Symfony\Component\HttpFoundation\Response;
 /**
  * Ssi implements the SSI capabilities to Request and Response instances.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class Ssi extends \ConfigTransformer202107071\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Ssi extends \ConfigTransformer202107076\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class Ssi extends \ConfigTransformer202107071\Symfony\Component\HttpKernel\HttpC
     /**
      * {@inheritdoc}
      */
-    public function addSurrogateControl(\ConfigTransformer202107071\Symfony\Component\HttpFoundation\Response $response)
+    public function addSurrogateControl(\ConfigTransformer202107076\Symfony\Component\HttpFoundation\Response $response)
     {
         if (\false !== \strpos($response->getContent(), '<!--#include')) {
             $response->headers->set('Surrogate-Control', 'content="SSI/1.0"');
@@ -45,7 +45,7 @@ class Ssi extends \ConfigTransformer202107071\Symfony\Component\HttpKernel\HttpC
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202107071\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107071\Symfony\Component\HttpFoundation\Response $response)
+    public function process(\ConfigTransformer202107076\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107076\Symfony\Component\HttpFoundation\Response $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {
