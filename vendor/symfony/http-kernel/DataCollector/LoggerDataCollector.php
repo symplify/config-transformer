@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107076\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202107072\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202107076\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
-use ConfigTransformer202107076\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107076\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202107076\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202107076\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use ConfigTransformer202107072\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use ConfigTransformer202107072\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107072\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202107072\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107072\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * LogDataCollector.
  *
@@ -22,15 +22,15 @@ use ConfigTransformer202107076\Symfony\Component\HttpKernel\Log\DebugLoggerInter
  *
  * @final
  */
-class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202107076\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class LoggerDataCollector extends \ConfigTransformer202107072\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202107072\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     private $logger;
     private $containerPathPrefix;
     private $currentRequest;
     private $requestStack;
-    public function __construct($logger = null, string $containerPathPrefix = null, \ConfigTransformer202107076\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct($logger = null, string $containerPathPrefix = null, \ConfigTransformer202107072\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
-        if (null !== $logger && $logger instanceof \ConfigTransformer202107076\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
+        if (null !== $logger && $logger instanceof \ConfigTransformer202107072\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
             $this->logger = $logger;
         }
         $this->containerPathPrefix = $containerPathPrefix;
@@ -39,7 +39,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function collect(\ConfigTransformer202107076\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107076\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\ConfigTransformer202107072\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107072\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         $this->currentRequest = $this->requestStack && $this->requestStack->getMainRequest() !== $request ? $request : null;
     }
@@ -48,7 +48,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
      */
     public function reset()
     {
-        if ($this->logger instanceof \ConfigTransformer202107076\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
+        if ($this->logger instanceof \ConfigTransformer202107072\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
             $this->logger->clear();
         }
         $this->data = [];
@@ -115,7 +115,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
         $bootTime = \filemtime($file);
         $logs = [];
         foreach (\unserialize($logContent) as $log) {
-            $log['context'] = ['exception' => new \ConfigTransformer202107076\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext($log['type'], $log['file'], $log['line'], $log['trace'], $log['count'])];
+            $log['context'] = ['exception' => new \ConfigTransformer202107072\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext($log['type'], $log['file'], $log['line'], $log['trace'], $log['count'])];
             $log['timestamp'] = $bootTime;
             $log['priority'] = 100;
             $log['priorityName'] = 'DEBUG';
@@ -152,7 +152,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
             }
             $message = '_' . $log['message'];
             $exception = $log['context']['exception'];
-            if ($exception instanceof \ConfigTransformer202107076\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+            if ($exception instanceof \ConfigTransformer202107072\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
                 if (isset($silencedLogs[$h = \spl_object_hash($exception)])) {
                     continue;
                 }
@@ -179,7 +179,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
             return \false;
         }
         $exception = $log['context']['exception'];
-        if ($exception instanceof \ConfigTransformer202107076\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+        if ($exception instanceof \ConfigTransformer202107072\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
             return \true;
         }
         if ($exception instanceof \ErrorException && \in_array($exception->getSeverity(), [\E_DEPRECATED, \E_USER_DEPRECATED], \true)) {
@@ -202,7 +202,7 @@ class LoggerDataCollector extends \ConfigTransformer202107076\Symfony\Component\
             }
             if ($this->isSilencedOrDeprecationErrorLog($log)) {
                 $exception = $log['context']['exception'];
-                if ($exception instanceof \ConfigTransformer202107076\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+                if ($exception instanceof \ConfigTransformer202107072\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
                     if (isset($silencedLogs[$h = \spl_object_hash($exception)])) {
                         continue;
                     }

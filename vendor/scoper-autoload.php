@@ -6,131 +6,131 @@ $loader = require_once __DIR__.'/autoload.php';
 
 // Aliases for the whitelisted classes. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#class-whitelisting
-if (!class_exists('ComposerAutoloaderInitcda487aa2447d7ccda734ad8621a7bfb', false) && !interface_exists('ComposerAutoloaderInitcda487aa2447d7ccda734ad8621a7bfb', false) && !trait_exists('ComposerAutoloaderInitcda487aa2447d7ccda734ad8621a7bfb', false)) {
-    spl_autoload_call('ConfigTransformer202107076\ComposerAutoloaderInitcda487aa2447d7ccda734ad8621a7bfb');
+if (!class_exists('ComposerAutoloaderInitb5e105fcd2150a0e58fb76a6b791b4b4', false) && !interface_exists('ComposerAutoloaderInitb5e105fcd2150a0e58fb76a6b791b4b4', false) && !trait_exists('ComposerAutoloaderInitb5e105fcd2150a0e58fb76a6b791b4b4', false)) {
+    spl_autoload_call('ConfigTransformer202107072\ComposerAutoloaderInitb5e105fcd2150a0e58fb76a6b791b4b4');
 }
 if (!class_exists('Normalizer', false) && !interface_exists('Normalizer', false) && !trait_exists('Normalizer', false)) {
-    spl_autoload_call('ConfigTransformer202107076\Normalizer');
+    spl_autoload_call('ConfigTransformer202107072\Normalizer');
 }
 if (!class_exists('JsonException', false) && !interface_exists('JsonException', false) && !trait_exists('JsonException', false)) {
-    spl_autoload_call('ConfigTransformer202107076\JsonException');
+    spl_autoload_call('ConfigTransformer202107072\JsonException');
 }
 if (!class_exists('Attribute', false) && !interface_exists('Attribute', false) && !trait_exists('Attribute', false)) {
-    spl_autoload_call('ConfigTransformer202107076\Attribute');
+    spl_autoload_call('ConfigTransformer202107072\Attribute');
 }
 if (!class_exists('Stringable', false) && !interface_exists('Stringable', false) && !trait_exists('Stringable', false)) {
-    spl_autoload_call('ConfigTransformer202107076\Stringable');
+    spl_autoload_call('ConfigTransformer202107072\Stringable');
 }
 if (!class_exists('UnhandledMatchError', false) && !interface_exists('UnhandledMatchError', false) && !trait_exists('UnhandledMatchError', false)) {
-    spl_autoload_call('ConfigTransformer202107076\UnhandledMatchError');
+    spl_autoload_call('ConfigTransformer202107072\UnhandledMatchError');
 }
 if (!class_exists('ValueError', false) && !interface_exists('ValueError', false) && !trait_exists('ValueError', false)) {
-    spl_autoload_call('ConfigTransformer202107076\ValueError');
+    spl_autoload_call('ConfigTransformer202107072\ValueError');
 }
 if (!class_exists('ReturnTypeWillChange', false) && !interface_exists('ReturnTypeWillChange', false) && !trait_exists('ReturnTypeWillChange', false)) {
-    spl_autoload_call('ConfigTransformer202107076\ReturnTypeWillChange');
+    spl_autoload_call('ConfigTransformer202107072\ReturnTypeWillChange');
 }
 
 // Functions whitelisting. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#functions-whitelisting
-if (!function_exists('composerRequirecda487aa2447d7ccda734ad8621a7bfb')) {
-    function composerRequirecda487aa2447d7ccda734ad8621a7bfb() {
-        return \ConfigTransformer202107076\composerRequirecda487aa2447d7ccda734ad8621a7bfb(...func_get_args());
+if (!function_exists('composerRequireb5e105fcd2150a0e58fb76a6b791b4b4')) {
+    function composerRequireb5e105fcd2150a0e58fb76a6b791b4b4() {
+        return \ConfigTransformer202107072\composerRequireb5e105fcd2150a0e58fb76a6b791b4b4(...func_get_args());
     }
 }
 if (!function_exists('parseArgs')) {
     function parseArgs() {
-        return \ConfigTransformer202107076\parseArgs(...func_get_args());
+        return \ConfigTransformer202107072\parseArgs(...func_get_args());
     }
 }
 if (!function_exists('showHelp')) {
     function showHelp() {
-        return \ConfigTransformer202107076\showHelp(...func_get_args());
+        return \ConfigTransformer202107072\showHelp(...func_get_args());
     }
 }
 if (!function_exists('formatErrorMessage')) {
     function formatErrorMessage() {
-        return \ConfigTransformer202107076\formatErrorMessage(...func_get_args());
+        return \ConfigTransformer202107072\formatErrorMessage(...func_get_args());
     }
 }
 if (!function_exists('preprocessGrammar')) {
     function preprocessGrammar() {
-        return \ConfigTransformer202107076\preprocessGrammar(...func_get_args());
+        return \ConfigTransformer202107072\preprocessGrammar(...func_get_args());
     }
 }
 if (!function_exists('resolveNodes')) {
     function resolveNodes() {
-        return \ConfigTransformer202107076\resolveNodes(...func_get_args());
+        return \ConfigTransformer202107072\resolveNodes(...func_get_args());
     }
 }
 if (!function_exists('resolveMacros')) {
     function resolveMacros() {
-        return \ConfigTransformer202107076\resolveMacros(...func_get_args());
+        return \ConfigTransformer202107072\resolveMacros(...func_get_args());
     }
 }
 if (!function_exists('resolveStackAccess')) {
     function resolveStackAccess() {
-        return \ConfigTransformer202107076\resolveStackAccess(...func_get_args());
+        return \ConfigTransformer202107072\resolveStackAccess(...func_get_args());
     }
 }
 if (!function_exists('magicSplit')) {
     function magicSplit() {
-        return \ConfigTransformer202107076\magicSplit(...func_get_args());
+        return \ConfigTransformer202107072\magicSplit(...func_get_args());
     }
 }
 if (!function_exists('assertArgs')) {
     function assertArgs() {
-        return \ConfigTransformer202107076\assertArgs(...func_get_args());
+        return \ConfigTransformer202107072\assertArgs(...func_get_args());
     }
 }
 if (!function_exists('removeTrailingWhitespace')) {
     function removeTrailingWhitespace() {
-        return \ConfigTransformer202107076\removeTrailingWhitespace(...func_get_args());
+        return \ConfigTransformer202107072\removeTrailingWhitespace(...func_get_args());
     }
 }
 if (!function_exists('regex')) {
     function regex() {
-        return \ConfigTransformer202107076\regex(...func_get_args());
+        return \ConfigTransformer202107072\regex(...func_get_args());
     }
 }
 if (!function_exists('execCmd')) {
     function execCmd() {
-        return \ConfigTransformer202107076\execCmd(...func_get_args());
+        return \ConfigTransformer202107072\execCmd(...func_get_args());
     }
 }
 if (!function_exists('ensureDirExists')) {
     function ensureDirExists() {
-        return \ConfigTransformer202107076\ensureDirExists(...func_get_args());
+        return \ConfigTransformer202107072\ensureDirExists(...func_get_args());
     }
 }
 if (!function_exists('setproctitle')) {
     function setproctitle() {
-        return \ConfigTransformer202107076\setproctitle(...func_get_args());
+        return \ConfigTransformer202107072\setproctitle(...func_get_args());
     }
 }
 if (!function_exists('array_is_list')) {
     function array_is_list() {
-        return \ConfigTransformer202107076\array_is_list(...func_get_args());
+        return \ConfigTransformer202107072\array_is_list(...func_get_args());
     }
 }
 if (!function_exists('enum_exists')) {
     function enum_exists() {
-        return \ConfigTransformer202107076\enum_exists(...func_get_args());
+        return \ConfigTransformer202107072\enum_exists(...func_get_args());
     }
 }
 if (!function_exists('includeIfExists')) {
     function includeIfExists() {
-        return \ConfigTransformer202107076\includeIfExists(...func_get_args());
+        return \ConfigTransformer202107072\includeIfExists(...func_get_args());
     }
 }
 if (!function_exists('dump')) {
     function dump() {
-        return \ConfigTransformer202107076\dump(...func_get_args());
+        return \ConfigTransformer202107072\dump(...func_get_args());
     }
 }
 if (!function_exists('dd')) {
     function dd() {
-        return \ConfigTransformer202107076\dd(...func_get_args());
+        return \ConfigTransformer202107072\dd(...func_get_args());
     }
 }
 
