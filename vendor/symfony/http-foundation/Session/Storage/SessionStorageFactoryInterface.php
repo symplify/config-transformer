@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107079\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202107075\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202107079\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107075\Symfony\Component\HttpFoundation\Request;
 /**
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
@@ -19,5 +19,5 @@ interface SessionStorageFactoryInterface
     /**
      * Creates a new instance of SessionStorageInterface
      */
-    public function createStorage(?\ConfigTransformer202107079\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202107079\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
+    public function createStorage(?\ConfigTransformer202107075\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202107075\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 }

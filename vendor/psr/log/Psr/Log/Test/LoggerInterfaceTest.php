@@ -1,17 +1,17 @@
 <?php
 
-namespace ConfigTransformer202107079\Psr\Log\Test;
+namespace ConfigTransformer202107075\Psr\Log\Test;
 
-use ConfigTransformer202107079\Psr\Log\LoggerInterface;
-use ConfigTransformer202107079\Psr\Log\LogLevel;
-use ConfigTransformer202107079\PHPUnit\Framework\TestCase;
+use ConfigTransformer202107075\Psr\Log\LoggerInterface;
+use ConfigTransformer202107075\Psr\Log\LogLevel;
+use ConfigTransformer202107075\PHPUnit\Framework\TestCase;
 /**
  * Provides a base test class for ensuring compliance with the LoggerInterface.
  *
  * Implementors can extend the class and implement abstract methods to run this
  * as part of their test suite.
  */
-abstract class LoggerInterfaceTest extends \ConfigTransformer202107079\PHPUnit\Framework\TestCase
+abstract class LoggerInterfaceTest extends \ConfigTransformer202107075\PHPUnit\Framework\TestCase
 {
     /**
      * @return LoggerInterface
@@ -29,7 +29,7 @@ abstract class LoggerInterfaceTest extends \ConfigTransformer202107079\PHPUnit\F
     public abstract function getLogs();
     public function testImplements()
     {
-        $this->assertInstanceOf('ConfigTransformer202107079\\Psr\\Log\\LoggerInterface', $this->getLogger());
+        $this->assertInstanceOf('ConfigTransformer202107075\\Psr\\Log\\LoggerInterface', $this->getLogger());
     }
     /**
      * @dataProvider provideLevelsAndMessages
@@ -44,7 +44,7 @@ abstract class LoggerInterfaceTest extends \ConfigTransformer202107079\PHPUnit\F
     }
     public function provideLevelsAndMessages()
     {
-        return array(\ConfigTransformer202107079\Psr\Log\LogLevel::EMERGENCY => array(\ConfigTransformer202107079\Psr\Log\LogLevel::EMERGENCY, 'message of level emergency with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::ALERT => array(\ConfigTransformer202107079\Psr\Log\LogLevel::ALERT, 'message of level alert with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::CRITICAL => array(\ConfigTransformer202107079\Psr\Log\LogLevel::CRITICAL, 'message of level critical with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::ERROR => array(\ConfigTransformer202107079\Psr\Log\LogLevel::ERROR, 'message of level error with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::WARNING => array(\ConfigTransformer202107079\Psr\Log\LogLevel::WARNING, 'message of level warning with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::NOTICE => array(\ConfigTransformer202107079\Psr\Log\LogLevel::NOTICE, 'message of level notice with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::INFO => array(\ConfigTransformer202107079\Psr\Log\LogLevel::INFO, 'message of level info with context: {user}'), \ConfigTransformer202107079\Psr\Log\LogLevel::DEBUG => array(\ConfigTransformer202107079\Psr\Log\LogLevel::DEBUG, 'message of level debug with context: {user}'));
+        return array(\ConfigTransformer202107075\Psr\Log\LogLevel::EMERGENCY => array(\ConfigTransformer202107075\Psr\Log\LogLevel::EMERGENCY, 'message of level emergency with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::ALERT => array(\ConfigTransformer202107075\Psr\Log\LogLevel::ALERT, 'message of level alert with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::CRITICAL => array(\ConfigTransformer202107075\Psr\Log\LogLevel::CRITICAL, 'message of level critical with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::ERROR => array(\ConfigTransformer202107075\Psr\Log\LogLevel::ERROR, 'message of level error with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::WARNING => array(\ConfigTransformer202107075\Psr\Log\LogLevel::WARNING, 'message of level warning with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::NOTICE => array(\ConfigTransformer202107075\Psr\Log\LogLevel::NOTICE, 'message of level notice with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::INFO => array(\ConfigTransformer202107075\Psr\Log\LogLevel::INFO, 'message of level info with context: {user}'), \ConfigTransformer202107075\Psr\Log\LogLevel::DEBUG => array(\ConfigTransformer202107075\Psr\Log\LogLevel::DEBUG, 'message of level debug with context: {user}'));
     }
     /**
      * @expectedException \Psr\Log\InvalidArgumentException
@@ -64,9 +64,9 @@ abstract class LoggerInterfaceTest extends \ConfigTransformer202107079\PHPUnit\F
     public function testObjectCastToString()
     {
         if (\method_exists($this, 'createPartialMock')) {
-            $dummy = $this->createPartialMock('ConfigTransformer202107079\\Psr\\Log\\Test\\DummyTest', array('__toString'));
+            $dummy = $this->createPartialMock('ConfigTransformer202107075\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         } else {
-            $dummy = $this->getMock('ConfigTransformer202107079\\Psr\\Log\\Test\\DummyTest', array('__toString'));
+            $dummy = $this->getMock('ConfigTransformer202107075\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         }
         $dummy->expects($this->once())->method('__toString')->will($this->returnValue('DUMMY'));
         $this->getLogger()->warning($dummy);
@@ -77,7 +77,7 @@ abstract class LoggerInterfaceTest extends \ConfigTransformer202107079\PHPUnit\F
     {
         $closed = \fopen('php://memory', 'r');
         \fclose($closed);
-        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new \ConfigTransformer202107079\Psr\Log\Test\DummyTest()), 'object' => new \DateTime(), 'resource' => \fopen('php://memory', 'r'), 'closed' => $closed);
+        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new \ConfigTransformer202107075\Psr\Log\Test\DummyTest()), 'object' => new \DateTime(), 'resource' => \fopen('php://memory', 'r'), 'closed' => $closed);
         $this->getLogger()->warning('Crazy context data', $context);
         $expected = array('warning Crazy context data');
         $this->assertEquals($expected, $this->getLogs());

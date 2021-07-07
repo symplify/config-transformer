@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107079\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107075\Symfony\Component\HttpFoundation;
 
 /**
  * ResponseHeaderBag is a container for Response HTTP headers.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseHeaderBag extends \ConfigTransformer202107079\Symfony\Component\HttpFoundation\HeaderBag
+class ResponseHeaderBag extends \ConfigTransformer202107075\Symfony\Component\HttpFoundation\HeaderBag
 {
     public const COOKIES_FLAT = 'flat';
     public const COOKIES_ARRAY = 'array';
@@ -96,7 +96,7 @@ class ResponseHeaderBag extends \ConfigTransformer202107079\Symfony\Component\Ht
                 $this->cookies = [];
             }
             foreach ((array) $values as $cookie) {
-                $this->setCookie(\ConfigTransformer202107079\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
+                $this->setCookie(\ConfigTransformer202107075\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
             }
             $this->headerNames[$uniqueKey] = $key;
             return;
@@ -143,7 +143,7 @@ class ResponseHeaderBag extends \ConfigTransformer202107079\Symfony\Component\Ht
     {
         return \array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
     }
-    public function setCookie(\ConfigTransformer202107079\Symfony\Component\HttpFoundation\Cookie $cookie)
+    public function setCookie(\ConfigTransformer202107075\Symfony\Component\HttpFoundation\Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
@@ -197,14 +197,14 @@ class ResponseHeaderBag extends \ConfigTransformer202107079\Symfony\Component\Ht
      */
     public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = \false, bool $httpOnly = \true, string $sameSite = null)
     {
-        $this->setCookie(new \ConfigTransformer202107079\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
+        $this->setCookie(new \ConfigTransformer202107075\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
     }
     /**
      * @see HeaderUtils::makeDisposition()
      */
     public function makeDisposition(string $disposition, string $filename, string $filenameFallback = '')
     {
-        return \ConfigTransformer202107079\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
+        return \ConfigTransformer202107075\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
     }
     /**
      * Returns the calculated value of the cache-control header.
