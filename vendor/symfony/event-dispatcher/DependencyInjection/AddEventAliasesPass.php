@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070710\Symfony\Component\EventDispatcher\DependencyInjection;
+namespace ConfigTransformer202107073\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use ConfigTransformer2021070710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2021070710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107073\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202107073\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This pass allows bundles to extend the list of event aliases.
  *
  * @author Alexander M. Turek <me@derrabus.de>
  */
-class AddEventAliasesPass implements \ConfigTransformer2021070710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AddEventAliasesPass implements \ConfigTransformer202107073\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $eventAliases;
     private $eventAliasesParameter;
@@ -29,7 +29,7 @@ class AddEventAliasesPass implements \ConfigTransformer2021070710\Symfony\Compon
         $this->eventAliases = $eventAliases;
         $this->eventAliasesParameter = $eventAliasesParameter;
     }
-    public function process(\ConfigTransformer2021070710\Symfony\Component\DependencyInjection\ContainerBuilder $container) : void
+    public function process(\ConfigTransformer202107073\Symfony\Component\DependencyInjection\ContainerBuilder $container) : void
     {
         $eventAliases = $container->hasParameter($this->eventAliasesParameter) ? $container->getParameter($this->eventAliasesParameter) : [];
         $container->setParameter($this->eventAliasesParameter, \array_merge($eventAliases, $this->eventAliases));

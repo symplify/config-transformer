@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021070710\Symplify\PackageBuilder\Console;
+namespace ConfigTransformer202107073\Symplify\PackageBuilder\Console;
 
 final class ShellCode
 {

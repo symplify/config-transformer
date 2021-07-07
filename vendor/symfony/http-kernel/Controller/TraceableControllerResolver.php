@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer2021070710\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021070710\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202107073\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107073\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableControllerResolver implements \ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class TraceableControllerResolver implements \ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $resolver;
     private $stopwatch;
-    public function __construct(\ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer2021070710\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer202107073\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->resolver = $resolver;
         $this->stopwatch = $stopwatch;
@@ -27,7 +27,7 @@ class TraceableControllerResolver implements \ConfigTransformer2021070710\Symfon
     /**
      * {@inheritdoc}
      */
-    public function getController(\ConfigTransformer2021070710\Symfony\Component\HttpFoundation\Request $request)
+    public function getController(\ConfigTransformer202107073\Symfony\Component\HttpFoundation\Request $request)
     {
         $e = $this->stopwatch->start('controller.get_callable');
         $ret = $this->resolver->getController($request);

@@ -1,35 +1,35 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021070710\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202107073\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer2021070710\PhpParser\Node\Arg;
-use ConfigTransformer2021070710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2021070710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class NameOnlyServiceCaseConverter implements \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202107073\PhpParser\Node\Arg;
+use ConfigTransformer202107073\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202107073\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202107073\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202107073\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202107073\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202107073\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202107073\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class NameOnlyServiceCaseConverter implements \ConfigTransformer202107073\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202107073\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202107073\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $setMethodCall = new \ConfigTransformer2021070710\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer2021070710\PhpParser\Node\Expr\Variable(\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \ConfigTransformer2021070710\PhpParser\Node\Arg($classConstFetch)]);
-        return new \ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression($setMethodCall);
+        $setMethodCall = new \ConfigTransformer202107073\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202107073\PhpParser\Node\Expr\Variable(\ConfigTransformer202107073\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \ConfigTransformer202107073\PhpParser\Node\Arg($classConstFetch)]);
+        return new \ConfigTransformer202107073\PhpParser\Node\Stmt\Expression($setMethodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer202107073\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
         return $values === null || $values === [];

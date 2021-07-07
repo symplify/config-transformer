@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer2021070710\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021070710\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202107073\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107073\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableArgumentResolver implements \ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+class TraceableArgumentResolver implements \ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
 {
     private $resolver;
     private $stopwatch;
-    public function __construct(\ConfigTransformer2021070710\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $resolver, \ConfigTransformer2021070710\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer202107073\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $resolver, \ConfigTransformer202107073\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->resolver = $resolver;
         $this->stopwatch = $stopwatch;
@@ -27,7 +27,7 @@ class TraceableArgumentResolver implements \ConfigTransformer2021070710\Symfony\
     /**
      * {@inheritdoc}
      */
-    public function getArguments(\ConfigTransformer2021070710\Symfony\Component\HttpFoundation\Request $request, callable $controller)
+    public function getArguments(\ConfigTransformer202107073\Symfony\Component\HttpFoundation\Request $request, callable $controller)
     {
         $e = $this->stopwatch->start('controller.get_arguments');
         $ret = $this->resolver->getArguments($request, $controller);
