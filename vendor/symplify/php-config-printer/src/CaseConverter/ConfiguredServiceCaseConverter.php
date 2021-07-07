@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107072\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer2021070710\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202107072\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202107072\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202107072\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class ConfiguredServiceCaseConverter implements \ConfigTransformer202107072\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer2021070710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2021070710\PhpParser\Node\Expr\Variable;
+use ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class ConfiguredServiceCaseConverter implements \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
@@ -22,34 +22,34 @@ final class ConfiguredServiceCaseConverter implements \ConfigTransformer20210707
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\ConfigTransformer202107072\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202107072\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202107072\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression
     {
         $valuesForArgs = [$key];
-        if (isset($values[\ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY])) {
-            $valuesForArgs[] = $values[\ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY];
+        if (isset($values[\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY])) {
+            $valuesForArgs[] = $values[\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY];
         }
         $args = $this->argsNodeFactory->createFromValues($valuesForArgs);
-        $methodCall = new \ConfigTransformer202107072\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202107072\PhpParser\Node\Expr\Variable(\ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        $methodCall = new \ConfigTransformer2021070710\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer2021070710\PhpParser\Node\Expr\Variable(\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
-        return new \ConfigTransformer202107072\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \ConfigTransformer2021070710\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
-        if ($key === \ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS) {
+        if ($key === \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS) {
             return \false;
         }
-        if ($key === \ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF) {
+        if ($key === \ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF) {
             return \false;
         }
-        if (isset($values[\ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE])) {
+        if (isset($values[\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE])) {
             return \false;
         }
         // handled by @see \Symplify\PhpConfigPrinter\CaseConverter\CaseConverter\AliasCaseConverter
@@ -63,7 +63,7 @@ final class ConfiguredServiceCaseConverter implements \ConfigTransformer20210707
     }
     private function isAlias($values) : bool
     {
-        if (isset($values[\ConfigTransformer202107072\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
+        if (isset($values[\ConfigTransformer2021070710\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
         if (!\is_string($values)) {
