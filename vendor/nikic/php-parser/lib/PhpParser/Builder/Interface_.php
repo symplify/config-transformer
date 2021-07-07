@@ -1,18 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107073\PhpParser\Builder;
+namespace ConfigTransformer202107079\PhpParser\Builder;
 
-use ConfigTransformer202107073\PhpParser;
-use ConfigTransformer202107073\PhpParser\BuilderHelpers;
-use ConfigTransformer202107073\PhpParser\Node\Name;
-use ConfigTransformer202107073\PhpParser\Node\Stmt;
-class Interface_ extends \ConfigTransformer202107073\PhpParser\Builder\Declaration
+use ConfigTransformer202107079\PhpParser;
+use ConfigTransformer202107079\PhpParser\BuilderHelpers;
+use ConfigTransformer202107079\PhpParser\Node;
+use ConfigTransformer202107079\PhpParser\Node\Name;
+use ConfigTransformer202107079\PhpParser\Node\Stmt;
+class Interface_ extends \ConfigTransformer202107079\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $extends = [];
     protected $constants = [];
     protected $methods = [];
+    /** @var Node\AttributeGroup[] */
+    protected $attributeGroups = [];
     /**
      * Creates an interface builder.
      *
@@ -32,7 +35,7 @@ class Interface_ extends \ConfigTransformer202107073\PhpParser\Builder\Declarati
     public function extend(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->extends[] = \ConfigTransformer202107073\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->extends[] = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -45,10 +48,10 @@ class Interface_ extends \ConfigTransformer202107073\PhpParser\Builder\Declarati
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer202107073\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \ConfigTransformer202107073\PhpParser\Node\Stmt\ClassConst) {
+        $stmt = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \ConfigTransformer202107079\PhpParser\Node\Stmt\ClassConst) {
             $this->constants[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer202107073\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \ConfigTransformer202107079\PhpParser\Node\Stmt\ClassMethod) {
             // we erase all statements in the body of an interface method
             $stmt->stmts = null;
             $this->methods[] = $stmt;
@@ -58,12 +61,24 @@ class Interface_ extends \ConfigTransformer202107073\PhpParser\Builder\Declarati
         return $this;
     }
     /**
+     * Adds an attribute group.
+     *
+     * @param Node\Attribute|Node\AttributeGroup $attribute
+     *
+     * @return $this The builder instance (for fluid interface)
+     */
+    public function addAttribute($attribute)
+    {
+        $this->attributeGroups[] = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        return $this;
+    }
+    /**
      * Returns the built interface node.
      *
      * @return Stmt\Interface_ The built interface node
      */
-    public function getNode() : \ConfigTransformer202107073\PhpParser\Node
+    public function getNode() : \ConfigTransformer202107079\PhpParser\Node
     {
-        return new \ConfigTransformer202107073\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods)], $this->attributes);
+        return new \ConfigTransformer202107079\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

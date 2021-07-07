@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107073\PhpParser\Builder;
+namespace ConfigTransformer202107079\PhpParser\Builder;
 
-use ConfigTransformer202107073\PhpParser;
-use ConfigTransformer202107073\PhpParser\BuilderHelpers;
-use ConfigTransformer202107073\PhpParser\Node;
-class Param implements \ConfigTransformer202107073\PhpParser\Builder
+use ConfigTransformer202107079\PhpParser;
+use ConfigTransformer202107079\PhpParser\BuilderHelpers;
+use ConfigTransformer202107079\PhpParser\Node;
+class Param implements \ConfigTransformer202107079\PhpParser\Builder
 {
     protected $name;
     protected $default = null;
@@ -14,6 +14,8 @@ class Param implements \ConfigTransformer202107073\PhpParser\Builder
     protected $type = null;
     protected $byRef = \false;
     protected $variadic = \false;
+    /** @var Node\AttributeGroup[] */
+    protected $attributeGroups = [];
     /**
      * Creates a parameter builder.
      *
@@ -32,7 +34,7 @@ class Param implements \ConfigTransformer202107073\PhpParser\Builder
      */
     public function setDefault($value)
     {
-        $this->default = \ConfigTransformer202107073\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->default = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -44,7 +46,7 @@ class Param implements \ConfigTransformer202107073\PhpParser\Builder
      */
     public function setType($type)
     {
-        $this->type = \ConfigTransformer202107073\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->type = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeType($type);
         if ($this->type == 'void') {
             throw new \LogicException('Parameter type cannot be void');
         }
@@ -84,12 +86,24 @@ class Param implements \ConfigTransformer202107073\PhpParser\Builder
         return $this;
     }
     /**
+     * Adds an attribute group.
+     *
+     * @param Node\Attribute|Node\AttributeGroup $attribute
+     *
+     * @return $this The builder instance (for fluid interface)
+     */
+    public function addAttribute($attribute)
+    {
+        $this->attributeGroups[] = \ConfigTransformer202107079\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        return $this;
+    }
+    /**
      * Returns the built parameter node.
      *
      * @return Node\Param The built parameter node
      */
-    public function getNode() : \ConfigTransformer202107073\PhpParser\Node
+    public function getNode() : \ConfigTransformer202107079\PhpParser\Node
     {
-        return new \ConfigTransformer202107073\PhpParser\Node\Param(new \ConfigTransformer202107073\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic);
+        return new \ConfigTransformer202107079\PhpParser\Node\Param(new \ConfigTransformer202107079\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic, [], 0, $this->attributeGroups);
     }
 }

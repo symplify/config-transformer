@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107073\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace ConfigTransformer202107079\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use ConfigTransformer202107073\Composer\Autoload\ClassLoader;
-use ConfigTransformer202107073\Symfony\Component\ErrorHandler\DebugClassLoader;
-use ConfigTransformer202107073\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
-use ConfigTransformer202107073\Symfony\Component\ErrorHandler\Error\FatalError;
+use ConfigTransformer202107079\Composer\Autoload\ClassLoader;
+use ConfigTransformer202107079\Symfony\Component\ErrorHandler\DebugClassLoader;
+use ConfigTransformer202107079\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
+use ConfigTransformer202107079\Symfony\Component\ErrorHandler\Error\FatalError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ClassNotFoundErrorEnhancer implements \ConfigTransformer202107073\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class ClassNotFoundErrorEnhancer implements \ConfigTransformer202107079\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class ClassNotFoundErrorEnhancer implements \ConfigTransformer202107073\Symfony\
     public function enhance(\Throwable $error) : ?\Throwable
     {
         // Some specific versions of PHP produce a fatal error when extending a not found class.
-        $message = !$error instanceof \ConfigTransformer202107073\Symfony\Component\ErrorHandler\Error\FatalError ? $error->getMessage() : $error->getError()['message'];
+        $message = !$error instanceof \ConfigTransformer202107079\Symfony\Component\ErrorHandler\Error\FatalError ? $error->getMessage() : $error->getError()['message'];
         if (!\preg_match('/^(Class|Interface|Trait) [\'"]([^\'"]+)[\'"] not found$/', $message, $matches)) {
             return null;
         }
@@ -50,7 +50,7 @@ class ClassNotFoundErrorEnhancer implements \ConfigTransformer202107073\Symfony\
             }
         }
         $message .= "\nDid you forget a \"use\" statement" . $tail;
-        return new \ConfigTransformer202107073\Symfony\Component\ErrorHandler\Error\ClassNotFoundError($message, $error);
+        return new \ConfigTransformer202107079\Symfony\Component\ErrorHandler\Error\ClassNotFoundError($message, $error);
     }
     /**
      * Tries to guess the full namespace for a given class name.
@@ -74,13 +74,13 @@ class ClassNotFoundErrorEnhancer implements \ConfigTransformer202107073\Symfony\
                 continue;
             }
             // get class loaders wrapped by DebugClassLoader
-            if ($function[0] instanceof \ConfigTransformer202107073\Symfony\Component\ErrorHandler\DebugClassLoader) {
+            if ($function[0] instanceof \ConfigTransformer202107079\Symfony\Component\ErrorHandler\DebugClassLoader) {
                 $function = $function[0]->getClassLoader();
                 if (!\is_array($function)) {
                     continue;
                 }
             }
-            if ($function[0] instanceof \ConfigTransformer202107073\Composer\Autoload\ClassLoader) {
+            if ($function[0] instanceof \ConfigTransformer202107079\Composer\Autoload\ClassLoader) {
                 foreach ($function[0]->getPrefixes() as $prefix => $paths) {
                     foreach ($paths as $path) {
                         $classes = \array_merge($classes, $this->findClassInPath($path, $class, $prefix));
