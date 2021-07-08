@@ -1,74 +1,74 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107075\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace ConfigTransformer202107084\Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202107075\PhpParser\BuilderHelpers;
-use ConfigTransformer202107075\PhpParser\Node\Arg;
-use ConfigTransformer202107075\PhpParser\Node\Expr;
-use ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202107075\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202107075\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202107075\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202107084\PhpParser\BuilderHelpers;
+use ConfigTransformer202107084\PhpParser\Node\Arg;
+use ConfigTransformer202107084\PhpParser\Node\Expr;
+use ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202107084\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202107084\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202107084\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 final class SingleServicePhpNodeFactory
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202107075\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202107084\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
     /**
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      */
-    public function createProperties(\ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall
+    public function createProperties(\ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall
     {
         foreach ($properties as $name => $value) {
             $args = $this->argsNodeFactory->createFromValues([$name, $value]);
-            $methodCall = new \ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall($methodCall, 'property', $args);
+            $methodCall = new \ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall($methodCall, 'property', $args);
         }
         return $methodCall;
     }
     /**
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      */
-    public function createCalls(\ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall $methodCall, array $calls) : \ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall
+    public function createCalls(\ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall $methodCall, array $calls) : \ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall
     {
         foreach ($calls as $call) {
             // @todo can be more items
             $args = [];
             $methodName = $this->resolveCallMethod($call);
-            $args[] = new \ConfigTransformer202107075\PhpParser\Node\Arg($methodName);
+            $args[] = new \ConfigTransformer202107084\PhpParser\Node\Arg($methodName);
             $argumentsExpr = $this->resolveCallArguments($call);
-            $args[] = new \ConfigTransformer202107075\PhpParser\Node\Arg($argumentsExpr);
+            $args[] = new \ConfigTransformer202107084\PhpParser\Node\Arg($argumentsExpr);
             $returnCloneExpr = $this->resolveCallReturnClone($call);
             if ($returnCloneExpr !== null) {
-                $args[] = new \ConfigTransformer202107075\PhpParser\Node\Arg($returnCloneExpr);
+                $args[] = new \ConfigTransformer202107084\PhpParser\Node\Arg($returnCloneExpr);
             }
             $currentArray = \current($call);
-            if ($currentArray instanceof \ConfigTransformer202107075\Symfony\Component\Yaml\Tag\TaggedValue) {
-                $args[] = new \ConfigTransformer202107075\PhpParser\Node\Arg(\ConfigTransformer202107075\PhpParser\BuilderHelpers::normalizeValue(\true));
+            if ($currentArray instanceof \ConfigTransformer202107084\Symfony\Component\Yaml\Tag\TaggedValue) {
+                $args[] = new \ConfigTransformer202107084\PhpParser\Node\Arg(\ConfigTransformer202107084\PhpParser\BuilderHelpers::normalizeValue(\true));
             }
-            $methodCall = new \ConfigTransformer202107075\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
+            $methodCall = new \ConfigTransformer202107084\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
         }
         return $methodCall;
     }
-    private function resolveCallMethod($call) : \ConfigTransformer202107075\PhpParser\Node\Scalar\String_
+    private function resolveCallMethod($call) : \ConfigTransformer202107084\PhpParser\Node\Scalar\String_
     {
-        return new \ConfigTransformer202107075\PhpParser\Node\Scalar\String_($call[0] ?? $call['method'] ?? \key($call));
+        return new \ConfigTransformer202107084\PhpParser\Node\Scalar\String_($call[0] ?? $call['method'] ?? \key($call));
     }
-    private function resolveCallArguments($call) : \ConfigTransformer202107075\PhpParser\Node\Expr
+    private function resolveCallArguments($call) : \ConfigTransformer202107084\PhpParser\Node\Expr
     {
         $arguments = $call[1] ?? $call['arguments'] ?? \current($call);
         return $this->argsNodeFactory->resolveExpr($arguments);
     }
-    private function resolveCallReturnClone(array $call) : ?\ConfigTransformer202107075\PhpParser\Node\Expr
+    private function resolveCallReturnClone(array $call) : ?\ConfigTransformer202107084\PhpParser\Node\Expr
     {
         if (isset($call[2]) || isset($call['returns_clone'])) {
             $returnsCloneValue = $call[2] ?? $call['returns_clone'];
-            return \ConfigTransformer202107075\PhpParser\BuilderHelpers::normalizeValue($returnsCloneValue);
+            return \ConfigTransformer202107084\PhpParser\BuilderHelpers::normalizeValue($returnsCloneValue);
         }
         return null;
     }
