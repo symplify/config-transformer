@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107087\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107088\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202107087\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107087\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107088\Symfony\Component\HttpFoundation\Response;
 interface SurrogateInterface
 {
     /**
@@ -31,23 +31,23 @@ interface SurrogateInterface
      *
      * @return bool true if one surrogate has Surrogate capability, false otherwise
      */
-    public function hasSurrogateCapability(\ConfigTransformer202107087\Symfony\Component\HttpFoundation\Request $request);
+    public function hasSurrogateCapability(\ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request $request);
     /**
      * Adds Surrogate-capability to the given Request.
      */
-    public function addSurrogateCapability(\ConfigTransformer202107087\Symfony\Component\HttpFoundation\Request $request);
+    public function addSurrogateCapability(\ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request $request);
     /**
      * Adds HTTP headers to specify that the Response needs to be parsed for Surrogate.
      *
      * This method only adds an Surrogate HTTP header if the Response has some Surrogate tags.
      */
-    public function addSurrogateControl(\ConfigTransformer202107087\Symfony\Component\HttpFoundation\Response $response);
+    public function addSurrogateControl(\ConfigTransformer202107088\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Checks that the Response needs to be parsed for Surrogate tags.
      *
      * @return bool true if the Response needs to be parsed, false otherwise
      */
-    public function needsParsing(\ConfigTransformer202107087\Symfony\Component\HttpFoundation\Response $response);
+    public function needsParsing(\ConfigTransformer202107088\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Renders a Surrogate tag.
      *
@@ -62,7 +62,7 @@ interface SurrogateInterface
      *
      * @return Response
      */
-    public function process(\ConfigTransformer202107087\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107087\Symfony\Component\HttpFoundation\Response $response);
+    public function process(\ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107088\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Handles a Surrogate from the cache.
      *
@@ -73,5 +73,5 @@ interface SurrogateInterface
      * @throws \RuntimeException
      * @throws \Exception
      */
-    public function handle(\ConfigTransformer202107087\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors);
+    public function handle(\ConfigTransformer202107088\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors);
 }

@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107087\Symplify\SymplifyKernel\HttpKernel;
+namespace ConfigTransformer202107088\Symplify\SymplifyKernel\HttpKernel;
 
-use ConfigTransformer202107087\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202107087\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer202107087\Symfony\Component\HttpKernel\Kernel;
-use ConfigTransformer202107087\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-use ConfigTransformer202107087\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202107087\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
-use ConfigTransformer202107087\Symplify\SymplifyKernel\Strings\KernelUniqueHasher;
-abstract class AbstractSymplifyKernel extends \ConfigTransformer202107087\Symfony\Component\HttpKernel\Kernel implements \ConfigTransformer202107087\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
+use ConfigTransformer202107088\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202107088\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202107088\Symfony\Component\HttpKernel\Kernel;
+use ConfigTransformer202107088\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
+use ConfigTransformer202107088\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202107088\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
+use ConfigTransformer202107088\Symplify\SymplifyKernel\Strings\KernelUniqueHasher;
+abstract class AbstractSymplifyKernel extends \ConfigTransformer202107088\Symfony\Component\HttpKernel\Kernel implements \ConfigTransformer202107088\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
 {
     /**
      * @var string[]
@@ -29,7 +29,7 @@ abstract class AbstractSymplifyKernel extends \ConfigTransformer202107087\Symfon
      */
     public function registerBundles() : iterable
     {
-        return [new \ConfigTransformer202107087\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle()];
+        return [new \ConfigTransformer202107088\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle()];
     }
     /**
      * @param string[]|SmartFileInfo[] $configs
@@ -37,13 +37,13 @@ abstract class AbstractSymplifyKernel extends \ConfigTransformer202107087\Symfon
     public function setConfigs(array $configs) : void
     {
         foreach ($configs as $config) {
-            if ($config instanceof \ConfigTransformer202107087\Symplify\SmartFileSystem\SmartFileInfo) {
+            if ($config instanceof \ConfigTransformer202107088\Symplify\SmartFileSystem\SmartFileInfo) {
                 $config = $config->getRealPath();
             }
             $this->configs[] = $config;
         }
     }
-    public function registerContainerConfiguration(\ConfigTransformer202107087\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\ConfigTransformer202107088\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         foreach ($this->configs as $config) {
             $loader->load($config);
@@ -51,7 +51,7 @@ abstract class AbstractSymplifyKernel extends \ConfigTransformer202107087\Symfon
     }
     private function getUniqueKernelHash() : string
     {
-        $kernelUniqueHasher = new \ConfigTransformer202107087\Symplify\SymplifyKernel\Strings\KernelUniqueHasher();
+        $kernelUniqueHasher = new \ConfigTransformer202107088\Symplify\SymplifyKernel\Strings\KernelUniqueHasher();
         return $kernelUniqueHasher->hashKernelClass(static::class);
     }
 }
