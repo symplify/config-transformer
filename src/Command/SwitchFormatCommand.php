@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\ConfigTransformer\Command;
+namespace ConfigTransformer202107080\Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer202107081\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202107081\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202107081\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202107081\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202107081\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202107081\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
-use ConfigTransformer202107081\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
-use ConfigTransformer202107081\Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202107081\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer202107081\Symplify\PackageBuilder\Console\ShellCode;
-final class SwitchFormatCommand extends \ConfigTransformer202107081\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+use ConfigTransformer202107080\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202107080\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202107080\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202107080\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202107080\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer202107080\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
+use ConfigTransformer202107080\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
+use ConfigTransformer202107080\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202107080\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer202107080\Symplify\PackageBuilder\Console\ShellCode;
+final class SwitchFormatCommand extends \ConfigTransformer202107080\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     /**
      * @var \Symplify\ConfigTransformer\Configuration\Configuration
@@ -27,7 +27,7 @@ final class SwitchFormatCommand extends \ConfigTransformer202107081\Symplify\Pac
      * @var \Symplify\ConfigTransformer\Converter\ConvertedContentFactory
      */
     private $convertedContentFactory;
-    public function __construct(\ConfigTransformer202107081\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202107081\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202107081\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
+    public function __construct(\ConfigTransformer202107080\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202107080\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202107080\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
     {
         $this->configuration = $configuration;
         $this->configFileDumper = $configFileDumper;
@@ -37,11 +37,11 @@ final class SwitchFormatCommand extends \ConfigTransformer202107081\Symplify\Pac
     protected function configure() : void
     {
         $this->setDescription('Converts XML/YAML configs to PHP format');
-        $this->addArgument(\ConfigTransformer202107081\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202107081\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202107081\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
-        $this->addOption(\ConfigTransformer202107081\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION, 's', \ConfigTransformer202107081\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Symfony version to migrate config to', '3.2');
-        $this->addOption(\ConfigTransformer202107081\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202107081\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addArgument(\ConfigTransformer202107080\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202107080\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202107080\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
+        $this->addOption(\ConfigTransformer202107080\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION, 's', \ConfigTransformer202107080\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Symfony version to migrate config to', '3.2');
+        $this->addOption(\ConfigTransformer202107080\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202107080\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
-    protected function execute(\ConfigTransformer202107081\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202107081\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\ConfigTransformer202107080\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202107080\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $this->configuration->populateFromInput($input);
         $suffixes = $this->configuration->getInputSuffixes();
@@ -56,6 +56,6 @@ final class SwitchFormatCommand extends \ConfigTransformer202107081\Symplify\Pac
         }
         $successMessage = \sprintf('Processed %d file(s) to "PHP" format', \count($fileInfos));
         $this->symfonyStyle->success($successMessage);
-        return \ConfigTransformer202107081\Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+        return \ConfigTransformer202107080\Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
     }
 }

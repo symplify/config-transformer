@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202107080\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202107081\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202107081\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202107081\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202107081\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202107081\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202107080\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202107080\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202107080\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202107080\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202107080\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202107081\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202107080\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202107081\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202107081\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202107080\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202107080\PhpParser\Node\Expr\MethodCall
     {
         // the old, simple format
         if (!\is_array($yaml)) {
@@ -26,10 +26,10 @@ final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \ConfigTransfo
             $items = [$yaml['package'] ?? '', $yaml['version'] ?? '', $yaml['message'] ?? ''];
             $args = $this->argsNodeFactory->createFromValues($items);
         }
-        return new \ConfigTransformer202107081\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
+        return new \ConfigTransformer202107080\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
     }
     public function isMatch($key, $values) : bool
     {
-        return $key === \ConfigTransformer202107081\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::DEPRECATED;
+        return $key === \ConfigTransformer202107080\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::DEPRECATED;
     }
 }
