@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107080\PhpParser\Node\Expr;
+namespace ConfigTransformer202107088\PhpParser\Node\Expr;
 
-use ConfigTransformer202107080\PhpParser\Node\Expr;
-class ShellExec extends \ConfigTransformer202107080\PhpParser\Node\Expr
+use ConfigTransformer202107088\PhpParser\Node\Expr;
+class ShellExec extends \ConfigTransformer202107088\PhpParser\Node\Expr
 {
     /** @var array Encapsed string array */
     public $parts;
