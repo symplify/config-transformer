@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107088\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107088\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to create a response for a thrown exception.
  *
@@ -25,14 +25,14 @@ use ConfigTransformer202107088\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ExceptionEvent extends \ConfigTransformer202107088\Symfony\Component\HttpKernel\Event\RequestEvent
+final class ExceptionEvent extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\Event\RequestEvent
 {
     private $throwable;
     /**
      * @var bool
      */
     private $allowCustomResponseCode = \false;
-    public function __construct(\ConfigTransformer202107088\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202107088\Symfony\Component\HttpFoundation\Request $request, int $requestType, \Throwable $e)
+    public function __construct(\ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, int $requestType, \Throwable $e)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setThrowable($e);

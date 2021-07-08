@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107088\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a function that can be used in an expression.
