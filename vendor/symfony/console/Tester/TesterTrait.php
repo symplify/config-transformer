@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107084\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202107087\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202107084\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202107084\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202107084\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202107084\Symfony\Component\Console\Output\StreamOutput;
+use ConfigTransformer202107087\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202107087\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202107087\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202107087\Symfony\Component\Console\Output\StreamOutput;
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>
  */
@@ -119,7 +119,7 @@ trait TesterTrait
     {
         $this->captureStreamsIndependently = \array_key_exists('capture_stderr_separately', $options) && $options['capture_stderr_separately'];
         if (!$this->captureStreamsIndependently) {
-            $this->output = new \ConfigTransformer202107084\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202107087\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             if (isset($options['decorated'])) {
                 $this->output->setDecorated($options['decorated']);
             }
@@ -127,8 +127,8 @@ trait TesterTrait
                 $this->output->setVerbosity($options['verbosity']);
             }
         } else {
-            $this->output = new \ConfigTransformer202107084\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer202107084\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
-            $errorOutput = new \ConfigTransformer202107084\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202107087\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer202107087\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
+            $errorOutput = new \ConfigTransformer202107087\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             $errorOutput->setFormatter($this->output->getFormatter());
             $errorOutput->setVerbosity($this->output->getVerbosity());
             $errorOutput->setDecorated($this->output->isDecorated());
