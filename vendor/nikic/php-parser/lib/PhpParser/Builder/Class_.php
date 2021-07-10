@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021071010\PhpParser\Builder;
+namespace ConfigTransformer202107105\PhpParser\Builder;
 
-use ConfigTransformer2021071010\PhpParser;
-use ConfigTransformer2021071010\PhpParser\BuilderHelpers;
-use ConfigTransformer2021071010\PhpParser\Node;
-use ConfigTransformer2021071010\PhpParser\Node\Name;
-use ConfigTransformer2021071010\PhpParser\Node\Stmt;
-class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
+use ConfigTransformer202107105\PhpParser;
+use ConfigTransformer202107105\PhpParser\BuilderHelpers;
+use ConfigTransformer202107105\PhpParser\Node;
+use ConfigTransformer202107105\PhpParser\Node\Name;
+use ConfigTransformer202107105\PhpParser\Node\Stmt;
+class Class_ extends \ConfigTransformer202107105\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $extends = null;
@@ -38,7 +38,7 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      */
     public function extend($class)
     {
-        $this->extends = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::normalizeName($class);
+        $this->extends = \ConfigTransformer202107105\PhpParser\BuilderHelpers::normalizeName($class);
         return $this;
     }
     /**
@@ -51,7 +51,7 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
     public function implement(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->implements[] = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->implements[] = \ConfigTransformer202107105\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -62,7 +62,7 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      */
     public function makeAbstract()
     {
-        $this->flags = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2021071010\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
+        $this->flags = \ConfigTransformer202107105\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202107105\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
         return $this;
     }
     /**
@@ -72,7 +72,7 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      */
     public function makeFinal()
     {
-        $this->flags = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2021071010\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
+        $this->flags = \ConfigTransformer202107105\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202107105\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
         return $this;
     }
     /**
@@ -84,8 +84,8 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        $targets = [\ConfigTransformer2021071010\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \ConfigTransformer2021071010\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \ConfigTransformer2021071010\PhpParser\Node\Stmt\Property::class => &$this->properties, \ConfigTransformer2021071010\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
+        $stmt = \ConfigTransformer202107105\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        $targets = [\ConfigTransformer202107105\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \ConfigTransformer202107105\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \ConfigTransformer202107105\PhpParser\Node\Stmt\Property::class => &$this->properties, \ConfigTransformer202107105\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
         $class = \get_class($stmt);
         if (!isset($targets[$class])) {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -102,7 +102,7 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer2021071010\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202107105\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -110,8 +110,8 @@ class Class_ extends \ConfigTransformer2021071010\PhpParser\Builder\Declaration
      *
      * @return Stmt\Class_ The built class node
      */
-    public function getNode() : \ConfigTransformer2021071010\PhpParser\Node
+    public function getNode() : \ConfigTransformer202107105\PhpParser\Node
     {
-        return new \ConfigTransformer2021071010\PhpParser\Node\Stmt\Class_($this->name, ['flags' => $this->flags, 'extends' => $this->extends, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->constants, $this->properties, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer202107105\PhpParser\Node\Stmt\Class_($this->name, ['flags' => $this->flags, 'extends' => $this->extends, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->constants, $this->properties, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021071010\Symplify\SmartFileSystem;
+namespace ConfigTransformer202107105\Symplify\SmartFileSystem;
 
-use ConfigTransformer2021071010\Nette\Utils\Strings;
-use ConfigTransformer2021071010\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer2021071010\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202107105\Nette\Utils\Strings;
+use ConfigTransformer202107105\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202107105\Symfony\Component\Filesystem\Filesystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
  */
-final class SmartFileSystem extends \ConfigTransformer2021071010\Symfony\Component\Filesystem\Filesystem
+final class SmartFileSystem extends \ConfigTransformer202107105\Symfony\Component\Filesystem\Filesystem
 {
     /**
      * @var string
@@ -25,16 +25,16 @@ final class SmartFileSystem extends \ConfigTransformer2021071010\Symfony\Compone
         $source = @\file_get_contents($filename);
         if (!$source) {
             $message = \sprintf('Failed to read "%s" file: "%s"', $filename, $this->getLastError());
-            throw new \ConfigTransformer2021071010\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
+            throw new \ConfigTransformer202107105\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
         }
         return $source;
     }
     /**
      * @param string $filename
      */
-    public function readFileToSmartFileInfo($filename) : \ConfigTransformer2021071010\Symplify\SmartFileSystem\SmartFileInfo
+    public function readFileToSmartFileInfo($filename) : \ConfigTransformer202107105\Symplify\SmartFileSystem\SmartFileInfo
     {
-        return new \ConfigTransformer2021071010\Symplify\SmartFileSystem\SmartFileInfo($filename);
+        return new \ConfigTransformer202107105\Symplify\SmartFileSystem\SmartFileInfo($filename);
     }
     /**
      * Converts given HTML code to plain text
@@ -68,6 +68,6 @@ final class SmartFileSystem extends \ConfigTransformer2021071010\Symfony\Compone
     {
         $message = \error_get_last()['message'] ?? '';
         $message = \ini_get('html_errors') ? $this->htmlToText($message) : $message;
-        return \ConfigTransformer2021071010\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
+        return \ConfigTransformer202107105\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
     }
 }

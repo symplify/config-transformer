@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021071010\PhpParser\Node\Expr;
+namespace ConfigTransformer202107105\PhpParser\Node\Expr;
 
-use ConfigTransformer2021071010\PhpParser\Node;
-use ConfigTransformer2021071010\PhpParser\Node\MatchArm;
-class Match_ extends \ConfigTransformer2021071010\PhpParser\Node\Expr
+use ConfigTransformer202107105\PhpParser\Node;
+use ConfigTransformer202107105\PhpParser\Node\MatchArm;
+class Match_ extends \ConfigTransformer202107105\PhpParser\Node\Expr
 {
     /** @var Node\Expr */
     public $cond;
@@ -14,7 +14,7 @@ class Match_ extends \ConfigTransformer2021071010\PhpParser\Node\Expr
     /**
      * @param MatchArm[] $arms
      */
-    public function __construct(\ConfigTransformer2021071010\PhpParser\Node\Expr $cond, array $arms = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202107105\PhpParser\Node\Expr $cond, array $arms = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;
