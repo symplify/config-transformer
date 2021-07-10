@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Definition;
 /**
  * Null dumper, negates any proxy code generation for any given service definition.
  *
@@ -18,26 +18,31 @@ use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Definition;
  *
  * @final
  */
-class NullDumper implements \ConfigTransformer202107081\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+class NullDumper implements \ConfigTransformer202107108\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
 {
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\DependencyInjection\Definition $definition
      */
-    public function isProxyCandidate(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\Definition $definition) : bool
+    public function isProxyCandidate($definition) : bool
     {
         return \false;
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\DependencyInjection\Definition $definition
+     * @param string $id
+     * @param string $factoryCode
      */
-    public function getProxyFactoryCode(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\Definition $definition, string $id, string $factoryCode) : string
+    public function getProxyFactoryCode($definition, $id, $factoryCode) : string
     {
         return '';
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\DependencyInjection\Definition $definition
      */
-    public function getProxyCode(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\Definition $definition) : string
+    public function getProxyCode($definition) : string
     {
         return '';
     }

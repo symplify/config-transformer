@@ -8,31 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107081\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202107108\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ApcuAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Adapter\AbstractAdapter
+class ApcuAdapter extends \ConfigTransformer202107108\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $marshaller;
     /**
      * @throws CacheException if APCu is not enabled
      */
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null, ?\ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null, ?\ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled.');
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled.');
         }
         if ('cli' === \PHP_SAPI) {
             \ini_set('apc.use_request_time', 0);
         }
         parent::__construct($namespace, $defaultLifetime);
         if (null !== $version) {
-            \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::validateKey($version);
+            \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::validateKey($version);
             if (!\apcu_exists($version . '@' . $namespace)) {
                 $this->doClear($namespace);
                 \apcu_add($version . '@' . $namespace, null);
@@ -46,8 +46,9 @@ class ApcuAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Ad
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $ids
      */
-    protected function doFetch(array $ids)
+    protected function doFetch($ids)
     {
         $unserializeCallbackHandler = \ini_set('unserialize_callback_func', __CLASS__ . '::handleUnserializeCallback');
         try {
@@ -82,8 +83,9 @@ class ApcuAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Ad
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $ids
      */
-    protected function doDelete(array $ids)
+    protected function doDelete($ids)
     {
         foreach ($ids as $id) {
             \apcu_delete($id);
@@ -92,9 +94,10 @@ class ApcuAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Ad
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
      * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave($values, $lifetime)
     {
         if (null !== $this->marshaller && !($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;

@@ -8,29 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202107081\Psr\Container\ContainerInterface;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202107108\Psr\Container\ContainerInterface;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a service keyed by _controller and argument name.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class ServiceValueResolver implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class ServiceValueResolver implements \ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202107081\Psr\Container\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202107108\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function supports(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107081\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports($request, $argument) : bool
     {
         $controller = $request->attributes->get('_controller');
         if (\is_array($controller) && \is_callable($controller, \true) && \is_string($controller[0])) {
@@ -48,8 +50,10 @@ final class ServiceValueResolver implements \ConfigTransformer202107081\Symfony\
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107081\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve($request, $argument) : iterable
     {
         if (\is_array($controller = $request->attributes->get('_controller'))) {
             $controller = $controller[0] . '::' . $controller[1];
@@ -63,7 +67,7 @@ final class ServiceValueResolver implements \ConfigTransformer202107081\Symfony\
         }
         try {
             (yield $this->container->get($controller)->get($argument->getName()));
-        } catch (\ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+        } catch (\ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
             $what = \sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
             $message = \preg_replace('/service "\\.service_locator\\.[^"]++"/', $what, $e->getMessage());
             if ($e->getMessage() === $message) {

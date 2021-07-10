@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
-use ConfigTransformer202107081\PhpParser\NodeVisitor\FindingVisitor;
-use ConfigTransformer202107081\PhpParser\NodeVisitor\FirstFindingVisitor;
+use ConfigTransformer202107108\PhpParser\NodeVisitor\FindingVisitor;
+use ConfigTransformer202107108\PhpParser\NodeVisitor\FirstFindingVisitor;
 class NodeFinder
 {
     /**
@@ -15,13 +15,13 @@ class NodeFinder
      *
      * @return Node[] Found nodes satisfying the filter callback
      */
-    public function find($nodes, callable $filter) : array
+    public function find($nodes, $filter) : array
     {
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \ConfigTransformer202107081\PhpParser\NodeVisitor\FindingVisitor($filter);
-        $traverser = new \ConfigTransformer202107081\PhpParser\NodeTraverser();
+        $visitor = new \ConfigTransformer202107108\PhpParser\NodeVisitor\FindingVisitor($filter);
+        $traverser = new \ConfigTransformer202107108\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNodes();
@@ -34,7 +34,7 @@ class NodeFinder
      *
      * @return Node[] Found nodes (all instances of $class)
      */
-    public function findInstanceOf($nodes, string $class) : array
+    public function findInstanceOf($nodes, $class) : array
     {
         return $this->find($nodes, function ($node) use($class) {
             return $node instanceof $class;
@@ -48,13 +48,13 @@ class NodeFinder
      *
      * @return null|Node Found node (or null if none found)
      */
-    public function findFirst($nodes, callable $filter)
+    public function findFirst($nodes, $filter)
     {
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \ConfigTransformer202107081\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
-        $traverser = new \ConfigTransformer202107081\PhpParser\NodeTraverser();
+        $visitor = new \ConfigTransformer202107108\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
+        $traverser = new \ConfigTransformer202107108\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNode();
@@ -67,7 +67,7 @@ class NodeFinder
      *
      * @return null|Node Found node, which is an instance of $class (or null if none found)
      */
-    public function findFirstInstanceOf($nodes, string $class)
+    public function findFirstInstanceOf($nodes, $class)
     {
         return $this->findFirst($nodes, function ($node) use($class) {
             return $node instanceof $class;

@@ -11,16 +11,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response;
 /**
  * Store implements all the logic for storing cache metadata (Request and Response headers).
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpCache\StoreInterface
+class Store implements \ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpCache\StoreInterface
 {
     protected $root;
     private $keyCache;
@@ -53,8 +53,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * Tries to lock the cache for a given Request, without blocking.
      *
      * @return bool|string true if the lock is acquired, the path to the current lock otherwise
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function lock(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    public function lock($request)
     {
         $key = $this->getCacheKey($request);
         if (!isset($this->locks[$key])) {
@@ -75,8 +76,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * Releases the lock for the given Request.
      *
      * @return bool False if the lock file does not exist or cannot be unlocked, true otherwise
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function unlock(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    public function unlock($request)
     {
         $key = $this->getCacheKey($request);
         if (isset($this->locks[$key])) {
@@ -87,7 +89,10 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
         }
         return \false;
     }
-    public function isLocked(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function isLocked($request)
     {
         $key = $this->getCacheKey($request);
         if (isset($this->locks[$key])) {
@@ -108,8 +113,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * Locates a cached Response for the Request provided.
      *
      * @return Response|null A Response instance, or null if no cache entry was found
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function lookup(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    public function lookup($request)
     {
         $key = $this->getCacheKey($request);
         if (!($entries = $this->getMetadata($key))) {
@@ -144,8 +150,10 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * @return string The key under which the response is stored
      *
      * @throws \RuntimeException
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    public function write(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response)
+    public function write($request, $response)
     {
         $key = $this->getCacheKey($request);
         $storedEnv = $this->persistRequest($request);
@@ -192,8 +200,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * Returns content digest for $response.
      *
      * @return string
+     * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    protected function generateContentDigest(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response)
+    protected function generateContentDigest($response)
     {
         return 'en' . \hash('sha256', $response->getContent());
     }
@@ -201,8 +210,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * Invalidates all cache entries that match the request.
      *
      * @throws \RuntimeException
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function invalidate(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    public function invalidate($request)
     {
         $modified = \false;
         $key = $this->getCacheKey($request);
@@ -262,8 +272,9 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * This method purges both the HTTP and the HTTPS version of the cache entry.
      *
      * @return bool true if the URL exists with either HTTP or HTTPS scheme and has been purged, false otherwise
+     * @param string $url
      */
-    public function purge(string $url)
+    public function purge($url)
     {
         $http = \preg_replace('#^https:#', 'http:', $url);
         $https = \preg_replace('#^http:#', 'https:', $url);
@@ -276,7 +287,7 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      */
     private function doPurge(string $url) : bool
     {
-        $key = $this->getCacheKey(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request::create($url));
+        $key = $this->getCacheKey(\ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request::create($url));
         if (isset($this->locks[$key])) {
             \flock($this->locks[$key], \LOCK_UN);
             \fclose($this->locks[$key]);
@@ -337,7 +348,10 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
         @\chmod($path, 0666 & ~\umask());
         return \true;
     }
-    public function getPath(string $key)
+    /**
+     * @param string $key
+     */
+    public function getPath($key)
     {
         return $this->root . \DIRECTORY_SEPARATOR . \substr($key, 0, 2) . \DIRECTORY_SEPARATOR . \substr($key, 2, 2) . \DIRECTORY_SEPARATOR . \substr($key, 4, 2) . \DIRECTORY_SEPARATOR . \substr($key, 6);
     }
@@ -352,15 +366,16 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
      * be stored independently under the same cache key.
      *
      * @return string A key for the given Request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    protected function generateCacheKey(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    protected function generateCacheKey($request)
     {
         return 'md' . \hash('sha256', $request->getUri());
     }
     /**
      * Returns a cache key for the given Request.
      */
-    private function getCacheKey(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request) : string
+    private function getCacheKey(\ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request $request) : string
     {
         if (isset($this->keyCache[$request])) {
             return $this->keyCache[$request];
@@ -370,14 +385,14 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
     /**
      * Persists the Request HTTP headers.
      */
-    private function persistRequest(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request) : array
+    private function persistRequest(\ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request $request) : array
     {
         return $request->headers->all();
     }
     /**
      * Persists the Response HTTP headers.
      */
-    private function persistResponse(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response) : array
+    private function persistResponse(\ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response $response) : array
     {
         $headers = $response->headers->all();
         $headers['X-Status'] = [$response->getStatusCode()];
@@ -386,13 +401,13 @@ class Store implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\
     /**
      * Restores a Response from the HTTP headers and body.
      */
-    private function restoreResponse(array $headers, string $path = null) : \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response
+    private function restoreResponse(array $headers, string $path = null) : \ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response
     {
         $status = $headers['X-Status'][0];
         unset($headers['X-Status']);
         if (null !== $path) {
             $headers['X-Body-File'] = [$path];
         }
-        return new \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response($path, $status, $headers);
+        return new \ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response($path, $status, $headers);
     }
 }

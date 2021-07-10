@@ -1,13 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
 class JsonDecoder
 {
     /** @var \ReflectionClass[] Node type to reflection class map */
     private $reflectionClassCache;
-    public function decode(string $json)
+    /**
+     * @param string $json
+     */
+    public function decode($json)
     {
         $value = \json_decode($json, \true);
         if (\json_last_error()) {
@@ -36,7 +39,7 @@ class JsonDecoder
         }
         return $decodedArray;
     }
-    private function decodeNode(array $value) : \ConfigTransformer202107081\PhpParser\Node
+    private function decodeNode(array $value) : \ConfigTransformer202107108\PhpParser\Node
     {
         $nodeType = $value['nodeType'];
         if (!\is_string($nodeType)) {
@@ -59,9 +62,9 @@ class JsonDecoder
         }
         return $node;
     }
-    private function decodeComment(array $value) : \ConfigTransformer202107081\PhpParser\Comment
+    private function decodeComment(array $value) : \ConfigTransformer202107108\PhpParser\Comment
     {
-        $className = $value['nodeType'] === 'Comment' ? \ConfigTransformer202107081\PhpParser\Comment::class : \ConfigTransformer202107081\PhpParser\Comment\Doc::class;
+        $className = $value['nodeType'] === 'Comment' ? \ConfigTransformer202107108\PhpParser\Comment::class : \ConfigTransformer202107108\PhpParser\Comment\Doc::class;
         if (!isset($value['text'])) {
             throw new \RuntimeException('Comment must have text');
         }

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202107108\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using the mongodb/mongodb package and MongoDB driver extension.
@@ -18,7 +18,7 @@ namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation\Session\St
  * @see https://packagist.org/packages/mongodb/mongodb
  * @see https://php.net/mongodb
  */
-class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MongoDbSessionHandler extends \ConfigTransformer202107108\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $mongo;
     /**
@@ -59,7 +59,7 @@ class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Componen
      *
      * @throws \InvalidArgumentException When "database" or "collection" not provided
      */
-    public function __construct(\ConfigTransformer202107081\MongoDB\Client $mongo, array $options)
+    public function __construct(\ConfigTransformer202107108\MongoDB\Client $mongo, array $options)
     {
         if (!isset($options['database']) || !isset($options['collection'])) {
             throw new \InvalidArgumentException('You must provide the "database" and "collection" option for MongoDBSessionHandler.');
@@ -76,8 +76,9 @@ class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Componen
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doDestroy(string $sessionId)
+    protected function doDestroy($sessionId)
     {
         $this->getCollection()->deleteOne([$this->options['id_field'] => $sessionId]);
         return \true;
@@ -92,8 +93,10 @@ class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Componen
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
+     * @param string $data
      */
-    protected function doWrite(string $sessionId, string $data)
+    protected function doWrite($sessionId, $data)
     {
         $expiry = new \MongoDB\BSON\UTCDateTime((\time() + (int) \ini_get('session.gc_maxlifetime')) * 1000);
         $fields = [$this->options['time_field'] => new \MongoDB\BSON\UTCDateTime(), $this->options['expiry_field'] => $expiry, $this->options['data_field'] => new \MongoDB\BSON\Binary($data, \MongoDB\BSON\Binary::TYPE_OLD_BINARY)];
@@ -111,8 +114,9 @@ class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Componen
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doRead(string $sessionId)
+    protected function doRead($sessionId)
     {
         $dbData = $this->getCollection()->findOne([$this->options['id_field'] => $sessionId, $this->options['expiry_field'] => ['$gte' => new \MongoDB\BSON\UTCDateTime()]]);
         if (null === $dbData) {
@@ -120,7 +124,7 @@ class MongoDbSessionHandler extends \ConfigTransformer202107081\Symfony\Componen
         }
         return $dbData[$this->options['data_field']]->getData();
     }
-    private function getCollection() : \ConfigTransformer202107081\MongoDB\Collection
+    private function getCollection() : \ConfigTransformer202107108\MongoDB\Collection
     {
         if (null === $this->collection) {
             $this->collection = $this->mongo->selectCollection($this->options['database'], $this->options['collection']);

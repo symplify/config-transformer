@@ -8,38 +8,47 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ArrayNode extends \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node
+class ArrayNode extends \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node
 {
     protected $index;
     public function __construct()
     {
         $this->index = -1;
     }
-    public function addElement(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $value, \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $key = null)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $value
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node|null $key
+     */
+    public function addElement($value, $key = null)
     {
         if (null === $key) {
-            $key = new \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\ConstantNode(++$this->index);
+            $key = new \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\ConstantNode(++$this->index);
         }
         \array_push($this->nodes, $key, $value);
     }
     /**
      * Compiles the node to PHP.
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
      */
-    public function compile(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile($compiler)
     {
         $compiler->raw('[');
         $this->compileArguments($compiler);
         $compiler->raw(']');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $result = [];
         foreach ($this->getKeyValuePairs() as $pair) {
@@ -57,7 +66,7 @@ class ArrayNode extends \ConfigTransformer202107081\Symfony\Component\Expression
         if ($this->isHash($value)) {
             foreach ($value as $k => $v) {
                 $array[] = ', ';
-                $array[] = new \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\ConstantNode($k);
+                $array[] = new \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\ConstantNode($k);
                 $array[] = ': ';
                 $array[] = $v;
             }
@@ -81,7 +90,10 @@ class ArrayNode extends \ConfigTransformer202107081\Symfony\Component\Expression
         }
         return $pairs;
     }
-    protected function compileArguments(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler $compiler, $withKeys = \true)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    protected function compileArguments($compiler, $withKeys = \true)
     {
         $first = \true;
         foreach ($this->getKeyValuePairs() as $pair) {

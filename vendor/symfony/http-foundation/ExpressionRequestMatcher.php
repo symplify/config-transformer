@@ -8,24 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107108\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 /**
  * ExpressionRequestMatcher uses an expression to match a Request.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ExpressionRequestMatcher extends \ConfigTransformer202107081\Symfony\Component\HttpFoundation\RequestMatcher
+class ExpressionRequestMatcher extends \ConfigTransformer202107108\Symfony\Component\HttpFoundation\RequestMatcher
 {
     private $language;
     private $expression;
-    public function setExpression(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\ExpressionLanguage $language, $expression)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguage $language
+     */
+    public function setExpression($language, $expression)
     {
         $this->language = $language;
         $this->expression = $expression;
     }
-    public function matches(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function matches($request)
     {
         if (!$this->language) {
             throw new \LogicException('Unable to match the request as the expression language is not available.');

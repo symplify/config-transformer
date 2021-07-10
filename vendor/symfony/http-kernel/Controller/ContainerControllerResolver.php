@@ -8,26 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202107081\Psr\Container\ContainerInterface;
-use ConfigTransformer202107081\Psr\Log\LoggerInterface;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202107108\Psr\Container\ContainerInterface;
+use ConfigTransformer202107108\Psr\Log\LoggerInterface;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Container;
 /**
  * A controller resolver searching for a controller in a psr-11 container when using the "service::method" notation.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ContainerControllerResolver extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ControllerResolver
+class ContainerControllerResolver extends \ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ControllerResolver
 {
     protected $container;
-    public function __construct(\ConfigTransformer202107081\Psr\Container\ContainerInterface $container, \ConfigTransformer202107081\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\ConfigTransformer202107108\Psr\Container\ContainerInterface $container, \ConfigTransformer202107108\Psr\Log\LoggerInterface $logger = null)
     {
         $this->container = $container;
         parent::__construct($logger);
     }
-    protected function createController(string $controller)
+    /**
+     * @param string $controller
+     */
+    protected function createController($controller)
     {
         if (1 === \substr_count($controller, ':')) {
             $controller = \str_replace(':', '::', $controller);
@@ -37,8 +40,9 @@ class ContainerControllerResolver extends \ConfigTransformer202107081\Symfony\Co
     }
     /**
      * {@inheritdoc}
+     * @param string $class
      */
-    protected function instantiateController(string $class)
+    protected function instantiateController($class)
     {
         $class = \ltrim($class, '\\');
         if ($this->container->has($class)) {
@@ -56,7 +60,7 @@ class ContainerControllerResolver extends \ConfigTransformer202107081\Symfony\Co
     }
     private function throwExceptionIfControllerWasRemoved(string $controller, \Throwable $previous)
     {
-        if ($this->container instanceof \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Container && isset($this->container->getRemovedIds()[$controller])) {
+        if ($this->container instanceof \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Container && isset($this->container->getRemovedIds()[$controller])) {
             throw new \InvalidArgumentException(\sprintf('Controller "%s" cannot be fetched from the container because it is private. Did you forget to tag the service with "controller.service_arguments"?', $controller), 0, $previous);
         }
     }

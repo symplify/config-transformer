@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107081\Predis\Connection\Aggregate\ClusterInterface;
-use ConfigTransformer202107081\Predis\Connection\Aggregate\PredisCluster;
-use ConfigTransformer202107081\Predis\Connection\Aggregate\ReplicationInterface;
-use ConfigTransformer202107081\Predis\Response\Status;
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\LogicException;
-use ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
-use ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer202107081\Symfony\Component\Cache\Traits\RedisTrait;
+use ConfigTransformer202107108\Predis\Connection\Aggregate\ClusterInterface;
+use ConfigTransformer202107108\Predis\Connection\Aggregate\PredisCluster;
+use ConfigTransformer202107108\Predis\Connection\Aggregate\ReplicationInterface;
+use ConfigTransformer202107108\Predis\Response\Status;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\LogicException;
+use ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
+use ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer202107108\Symfony\Component\Cache\Traits\RedisTrait;
 /**
  * Stores tag id <> cache id relationship as a Redis Set.
  *
@@ -39,7 +39,7 @@ use ConfigTransformer202107081\Symfony\Component\Cache\Traits\RedisTrait;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class RedisTagAwareAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
+class RedisTagAwareAdapter extends \ConfigTransformer202107108\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
 {
     use RedisTrait;
     /**
@@ -56,31 +56,33 @@ class RedisTagAwareAdapter extends \ConfigTransformer202107081\Symfony\Component
      * @param string                                                   $namespace       The default namespace
      * @param int                                                      $defaultLifetime The default lifetime
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        if ($redisClient instanceof \ConfigTransformer202107081\Predis\ClientInterface && $redisClient->getConnection() instanceof \ConfigTransformer202107081\Predis\Connection\Aggregate\ClusterInterface && !$redisClient->getConnection() instanceof \ConfigTransformer202107081\Predis\Connection\Aggregate\PredisCluster) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', \ConfigTransformer202107081\Predis\Connection\Aggregate\PredisCluster::class, \get_debug_type($redisClient->getConnection())));
+        if ($redisClient instanceof \ConfigTransformer202107108\Predis\ClientInterface && $redisClient->getConnection() instanceof \ConfigTransformer202107108\Predis\Connection\Aggregate\ClusterInterface && !$redisClient->getConnection() instanceof \ConfigTransformer202107108\Predis\Connection\Aggregate\PredisCluster) {
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', \ConfigTransformer202107108\Predis\Connection\Aggregate\PredisCluster::class, \get_debug_type($redisClient->getConnection())));
         }
         if (\defined('Redis::OPT_COMPRESSION') && ($redisClient instanceof \Redis || $redisClient instanceof \RedisArray || $redisClient instanceof \RedisCluster)) {
             $compression = $redisClient->getOption(\Redis::OPT_COMPRESSION);
             foreach (\is_array($compression) ? $compression : [$compression] as $c) {
                 if (\Redis::COMPRESSION_NONE !== $c) {
-                    throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('phpredis compression must be disabled when using "%s", use "%s" instead.', static::class, \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\DeflateMarshaller::class));
+                    throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('phpredis compression must be disabled when using "%s", use "%s" instead.', static::class, \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\DeflateMarshaller::class));
                 }
             }
         }
-        $this->init($redisClient, $namespace, $defaultLifetime, new \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller));
+        $this->init($redisClient, $namespace, $defaultLifetime, new \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller));
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
+     * @param int $lifetime
      * @param mixed[] $addTagData
      * @param mixed[] $delTagData
      */
-    protected function doSave(array $values, int $lifetime, $addTagData = [], $delTagData = []) : array
+    protected function doSave($values, $lifetime, $addTagData = [], $delTagData = []) : array
     {
         $eviction = $this->getRedisEvictionPolicy();
         if ('noeviction' !== $eviction && 0 !== \strpos($eviction, 'volatile-')) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\LogicException(\sprintf('Redis maxmemory-policy setting "%s" is *not* supported by RedisTagAwareAdapter, use "noeviction" or "volatile-*" eviction policies.', $eviction));
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\LogicException(\sprintf('Redis maxmemory-policy setting "%s" is *not* supported by RedisTagAwareAdapter, use "noeviction" or "volatile-*" eviction policies.', $eviction));
         }
         // serialize values
         if (!($serialized = $this->marshaller->marshall($values, $failed))) {
@@ -110,7 +112,7 @@ class RedisTagAwareAdapter extends \ConfigTransformer202107081\Symfony\Component
                 continue;
             }
             // setEx results
-            if (\true !== $result && (!$result instanceof \ConfigTransformer202107081\Predis\Response\Status || \ConfigTransformer202107081\Predis\Response\Status::get('OK') !== $result)) {
+            if (\true !== $result && (!$result instanceof \ConfigTransformer202107108\Predis\Response\Status || \ConfigTransformer202107108\Predis\Response\Status::get('OK') !== $result)) {
                 $failed[] = $id;
             }
         }
@@ -118,8 +120,9 @@ class RedisTagAwareAdapter extends \ConfigTransformer202107081\Symfony\Component
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $ids
      */
-    protected function doDeleteYieldTags(array $ids) : iterable
+    protected function doDeleteYieldTags($ids) : iterable
     {
         $lua = <<<'EOLUA'
             local v = redis.call('GET', KEYS[1])
@@ -137,7 +140,7 @@ class RedisTagAwareAdapter extends \ConfigTransformer202107081\Symfony\Component
 EOLUA;
         $results = $this->pipeline(function () use($ids, $lua) {
             foreach ($ids as $id) {
-                (yield 'eval' => $this->redis instanceof \ConfigTransformer202107081\Predis\ClientInterface ? [$lua, 1, $id] : [$lua, [$id], 1]);
+                (yield 'eval' => $this->redis instanceof \ConfigTransformer202107108\Predis\ClientInterface ? [$lua, 1, $id] : [$lua, [$id], 1]);
             }
         });
         foreach ($results as $id => $result) {
@@ -150,8 +153,9 @@ EOLUA;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $tagData
      */
-    protected function doDeleteTagRelations(array $tagData) : bool
+    protected function doDeleteTagRelations($tagData) : bool
     {
         $results = $this->pipeline(static function () use($tagData) {
             foreach ($tagData as $tagId => $idList) {
@@ -166,8 +170,9 @@ EOLUA;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $tagIds
      */
-    protected function doInvalidate(array $tagIds) : bool
+    protected function doInvalidate($tagIds) : bool
     {
         // This script scans the set of items linked to tag: it empties the set
         // and removes the linked items. When the set is still not empty after
@@ -199,13 +204,13 @@ EOLUA;
             return redis.call('SSCAN', '{'..id..'}'..id, '0', 'COUNT', 5000)
 EOLUA;
         $results = $this->pipeline(function () use($tagIds, $lua) {
-            if ($this->redis instanceof \ConfigTransformer202107081\Predis\ClientInterface) {
+            if ($this->redis instanceof \ConfigTransformer202107108\Predis\ClientInterface) {
                 $prefix = $this->redis->getOptions()->prefix ? $this->redis->getOptions()->prefix->getPrefix() : '';
             } elseif (\is_array($prefix = $this->redis->getOption(\Redis::OPT_PREFIX) ?? '')) {
                 $prefix = \current($prefix);
             }
             foreach ($tagIds as $id) {
-                (yield 'eval' => $this->redis instanceof \ConfigTransformer202107081\Predis\ClientInterface ? [$lua, 1, $id, $prefix] : [$lua, [$id, $prefix], 1]);
+                (yield 'eval' => $this->redis instanceof \ConfigTransformer202107108\Predis\ClientInterface ? [$lua, 1, $id, $prefix] : [$lua, [$id, $prefix], 1]);
             }
         });
         $lua = <<<'EOLUA'
@@ -220,7 +225,7 @@ EOLUA;
                 $this->doDelete($ids);
                 $evalArgs = [$id, $cursor];
                 \array_splice($evalArgs, 1, 0, $ids);
-                if ($this->redis instanceof \ConfigTransformer202107081\Predis\ClientInterface) {
+                if ($this->redis instanceof \ConfigTransformer202107108\Predis\ClientInterface) {
                     \array_unshift($evalArgs, $lua, 1);
                 } else {
                     $evalArgs = [$lua, $evalArgs, 1];
@@ -242,7 +247,7 @@ EOLUA;
         }
         $hosts = $this->getHosts();
         $host = \reset($hosts);
-        if ($host instanceof \ConfigTransformer202107081\Predis\Client && $host->getConnection() instanceof \ConfigTransformer202107081\Predis\Connection\Aggregate\ReplicationInterface) {
+        if ($host instanceof \ConfigTransformer202107108\Predis\Client && $host->getConnection() instanceof \ConfigTransformer202107108\Predis\Connection\Aggregate\ReplicationInterface) {
             // Predis supports info command only on the master in replication environments
             $hosts = [$host->getClientFor('master')];
         }

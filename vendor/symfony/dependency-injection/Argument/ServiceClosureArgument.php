@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\Argument;
 
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference;
 /**
  * Represents a service wrapped in a memoizing closure.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceClosureArgument implements \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+class ServiceClosureArgument implements \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     private $values;
-    public function __construct(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference $reference)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference $reference)
     {
         $this->values = [$reference];
     }
@@ -33,11 +33,12 @@ class ServiceClosureArgument implements \ConfigTransformer202107081\Symfony\Comp
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
      */
-    public function setValues(array $values)
+    public function setValues($values)
     {
-        if ([0] !== \array_keys($values) || !($values[0] instanceof \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference || null === $values[0])) {
-            throw new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('A ServiceClosureArgument must hold one and only one Reference.');
+        if ([0] !== \array_keys($values) || !($values[0] instanceof \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference || null === $values[0])) {
+            throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('A ServiceClosureArgument must hold one and only one Reference.');
         }
         $this->values = $values;
     }

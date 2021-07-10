@@ -8,35 +8,38 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Compresses values using gzdeflate().
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DeflateMarshaller implements \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DeflateMarshaller implements \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
-    public function __construct(\ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         if (!\function_exists('gzdeflate')) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException('The "zlib" PHP extension is not loaded.');
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException('The "zlib" PHP extension is not loaded.');
         }
         $this->marshaller = $marshaller;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
+     * @param mixed[]|null $failed
      */
-    public function marshall(array $values, ?array &$failed) : array
+    public function marshall($values, &$failed) : array
     {
         return \array_map('gzdeflate', $this->marshaller->marshall($values, $failed));
     }
     /**
      * {@inheritdoc}
+     * @param string $value
      */
-    public function unmarshall(string $value)
+    public function unmarshall($value)
     {
         if (\false !== ($inflatedValue = @\gzinflate($value))) {
             $value = $inflatedValue;

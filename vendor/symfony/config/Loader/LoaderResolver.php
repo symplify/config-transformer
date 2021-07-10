@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202107108\Symfony\Component\Config\Loader;
 
 /**
  * LoaderResolver selects a loader for a given resource.
@@ -18,7 +18,7 @@ namespace ConfigTransformer202107081\Symfony\Component\Config\Loader;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LoaderResolver implements \ConfigTransformer202107081\Symfony\Component\Config\Loader\LoaderResolverInterface
+class LoaderResolver implements \ConfigTransformer202107108\Symfony\Component\Config\Loader\LoaderResolverInterface
 {
     /**
      * @var LoaderInterface[] An array of LoaderInterface objects
@@ -35,8 +35,9 @@ class LoaderResolver implements \ConfigTransformer202107081\Symfony\Component\Co
     }
     /**
      * {@inheritdoc}
+     * @param string|null $type
      */
-    public function resolve($resource, string $type = null)
+    public function resolve($resource, $type = null)
     {
         foreach ($this->loaders as $loader) {
             if ($loader->supports($resource, $type)) {
@@ -45,7 +46,10 @@ class LoaderResolver implements \ConfigTransformer202107081\Symfony\Component\Co
         }
         return \false;
     }
-    public function addLoader(\ConfigTransformer202107081\Symfony\Component\Config\Loader\LoaderInterface $loader)
+    /**
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
+     */
+    public function addLoader($loader)
     {
         $this->loaders[] = $loader;
         $loader->setResolver($this);

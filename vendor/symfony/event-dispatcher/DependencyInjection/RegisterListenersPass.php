@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\EventDispatcher\DependencyInjection;
+namespace ConfigTransformer202107108\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventDispatcher;
-use ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202107081\Symfony\Contracts\EventDispatcher\Event;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventDispatcher;
+use ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202107108\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Compiler pass to register tagged services for an event dispatcher.
  */
-class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterListenersPass implements \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     protected $dispatcherService;
     protected $listenerTag;
@@ -43,8 +43,10 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
     }
     /**
      * @return $this
+     * @param mixed[] $hotPathEvents
+     * @param string $tagName
      */
-    public function setHotPathEvents(array $hotPathEvents, string $tagName = 'container.hot_path')
+    public function setHotPathEvents($hotPathEvents, $tagName = 'container.hot_path')
     {
         $this->hotPathEvents = \array_flip($hotPathEvents);
         $this->hotPathTagName = $tagName;
@@ -52,14 +54,19 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
     }
     /**
      * @return $this
+     * @param mixed[] $noPreloadEvents
+     * @param string $tagName
      */
-    public function setNoPreloadEvents(array $noPreloadEvents, string $tagName = 'container.no_preload')
+    public function setNoPreloadEvents($noPreloadEvents, $tagName = 'container.no_preload')
     {
         $this->noPreloadEvents = \array_flip($noPreloadEvents);
         $this->noPreloadTagName = $tagName;
         return $this;
     }
-    public function process(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function process($container)
     {
         if (!$container->hasDefinition($this->dispatcherService) && !$container->hasAlias($this->dispatcherService)) {
             return;
@@ -94,7 +101,7 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
                 if (isset($event['dispatcher'])) {
                     $dispatcherDefinition = $container->getDefinition($event['dispatcher']);
                 }
-                $dispatcherDefinition->addMethodCall('addListener', [$event['event'], [new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference($id)), $event['method']], $priority]);
+                $dispatcherDefinition->addMethodCall('addListener', [$event['event'], [new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference($id)), $event['method']], $priority]);
                 if (isset($this->hotPathEvents[$event['event']])) {
                     $container->getDefinition($id)->addTag($this->hotPathTagName);
                 } elseif (isset($this->noPreloadEvents[$event['event']])) {
@@ -105,16 +112,16 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
                 $container->getDefinition($id)->addTag($this->noPreloadTagName);
             }
         }
-        $extractingDispatcher = new \ConfigTransformer202107081\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
+        $extractingDispatcher = new \ConfigTransformer202107108\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
         foreach ($container->findTaggedServiceIds($this->subscriberTag, \true) as $id => $tags) {
             $def = $container->getDefinition($id);
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
             $class = $def->getClass();
             if (!($r = $container->getReflectionClass($class))) {
-                throw new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
-            if (!$r->isSubclassOf(\ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
-                throw new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventSubscriberInterface::class));
+            if (!$r->isSubclassOf(\ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventSubscriberInterface::class));
             }
             $class = $r->name;
             $dispatcherDefinitions = [];
@@ -128,11 +135,11 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
                 $dispatcherDefinitions = [$globalDispatcherDefinition];
             }
             $noPreload = 0;
-            \ConfigTransformer202107081\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
-            \ConfigTransformer202107081\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
+            \ConfigTransformer202107108\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
+            \ConfigTransformer202107108\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
             $extractingDispatcher->addSubscriber($extractingDispatcher);
             foreach ($extractingDispatcher->listeners as $args) {
-                $args[1] = [new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Reference($id)), $args[1]];
+                $args[1] = [new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Reference($id)), $args[1]];
                 foreach ($dispatcherDefinitions as $dispatcherDefinition) {
                     $dispatcherDefinition->addMethodCall('addListener', $args);
                 }
@@ -146,13 +153,13 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
                 $container->getDefinition($id)->addTag($this->noPreloadTagName);
             }
             $extractingDispatcher->listeners = [];
-            \ConfigTransformer202107081\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
+            \ConfigTransformer202107108\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
         }
     }
-    private function getEventFromTypeDeclaration(\ConfigTransformer202107081\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, string $method) : string
+    private function getEventFromTypeDeclaration(\ConfigTransformer202107108\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, string $method) : string
     {
-        if (null === ($class = $container->getDefinition($id)->getClass()) || !($r = $container->getReflectionClass($class, \false)) || !$r->hasMethod($method) || 1 > ($m = $r->getMethod($method))->getNumberOfParameters() || !($type = $m->getParameters()[0]->getType()) instanceof \ReflectionNamedType || $type->isBuiltin() || \ConfigTransformer202107081\Symfony\Contracts\EventDispatcher\Event::class === ($name = $type->getName())) {
-            throw new \ConfigTransformer202107081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, $this->listenerTag));
+        if (null === ($class = $container->getDefinition($id)->getClass()) || !($r = $container->getReflectionClass($class, \false)) || !$r->hasMethod($method) || 1 > ($m = $r->getMethod($method))->getNumberOfParameters() || !($type = $m->getParameters()[0]->getType()) instanceof \ReflectionNamedType || $type->isBuiltin() || \ConfigTransformer202107108\Symfony\Contracts\EventDispatcher\Event::class === ($name = $type->getName())) {
+            throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, $this->listenerTag));
         }
         return $name;
     }
@@ -160,12 +167,16 @@ class RegisterListenersPass implements \ConfigTransformer202107081\Symfony\Compo
 /**
  * @internal
  */
-class ExtractingEventDispatcher extends \ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventDispatcher implements \ConfigTransformer202107081\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ExtractingEventDispatcher extends \ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventDispatcher implements \ConfigTransformer202107108\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public $listeners = [];
     public static $aliases = [];
     public static $subscriber;
-    public function addListener(string $eventName, $listener, int $priority = 0)
+    /**
+     * @param string $eventName
+     * @param int $priority
+     */
+    public function addListener($eventName, $listener, $priority = 0)
     {
         $this->listeners[] = [$eventName, $listener[1], $priority];
     }

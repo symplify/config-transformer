@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107081\Doctrine\Common\Cache\CacheProvider;
+use ConfigTransformer202107108\Doctrine\Common\Cache\CacheProvider;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineAdapter extends \ConfigTransformer202107081\Symfony\Component\Cache\Adapter\AbstractAdapter
+class DoctrineAdapter extends \ConfigTransformer202107108\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $provider;
-    public function __construct(\ConfigTransformer202107081\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\ConfigTransformer202107108\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;
@@ -33,8 +33,9 @@ class DoctrineAdapter extends \ConfigTransformer202107081\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $ids
      */
-    protected function doFetch(array $ids)
+    protected function doFetch($ids)
     {
         $unserializeCallbackHandler = \ini_set('unserialize_callback_func', parent::class . '::handleUnserializeCallback');
         try {
@@ -73,8 +74,9 @@ class DoctrineAdapter extends \ConfigTransformer202107081\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $ids
      */
-    protected function doDelete(array $ids)
+    protected function doDelete($ids)
     {
         $ok = \true;
         foreach ($ids as $id) {
@@ -84,9 +86,10 @@ class DoctrineAdapter extends \ConfigTransformer202107081\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
      * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave($values, $lifetime)
     {
         return $this->provider->saveMultiple($values, $lifetime);
     }

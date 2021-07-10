@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a Token.
@@ -52,8 +52,9 @@ class Token
      * @param string $type The type to test
      *
      * @return bool
+     * @param string|null $value
      */
-    public function test($type, string $value = null)
+    public function test($type, $value = null)
     {
         return $this->type === $type && (null === $value || $this->value == $value);
     }

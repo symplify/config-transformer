@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107108\Symfony\Component\HttpFoundation;
 
 /**
  * StreamedResponse represents a streamed HTTP response.
@@ -23,7 +23,7 @@ namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StreamedResponse extends \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response
+class StreamedResponse extends \ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response
 {
     protected $callback;
     protected $streamed;
@@ -45,8 +45,10 @@ class StreamedResponse extends \ConfigTransformer202107081\Symfony\Component\Htt
      * @return static
      *
      * @deprecated since Symfony 5.1, use __construct() instead.
+     * @param int $status
+     * @param mixed[] $headers
      */
-    public static function create($callback = null, int $status = 200, array $headers = [])
+    public static function create($callback = null, $status = 200, $headers = [])
     {
         trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($callback, $status, $headers);
@@ -55,8 +57,9 @@ class StreamedResponse extends \ConfigTransformer202107081\Symfony\Component\Htt
      * Sets the PHP callback associated with this Response.
      *
      * @return $this
+     * @param callable $callback
      */
-    public function setCallback(callable $callback)
+    public function setCallback($callback)
     {
         $this->callback = $callback;
         return $this;
@@ -101,8 +104,9 @@ class StreamedResponse extends \ConfigTransformer202107081\Symfony\Component\Htt
      * @throws \LogicException when the content is not null
      *
      * @return $this
+     * @param string|null $content
      */
-    public function setContent(?string $content)
+    public function setContent($content)
     {
         if (null !== $content) {
             throw new \LogicException('The content cannot be set on a StreamedResponse instance.');

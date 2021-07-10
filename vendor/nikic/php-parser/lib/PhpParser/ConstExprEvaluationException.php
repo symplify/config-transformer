@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
 class ConstExprEvaluationException extends \Exception
 {

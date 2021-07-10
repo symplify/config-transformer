@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Contracts\HttpClient;
+namespace ConfigTransformer202107108\Symfony\Contracts\HttpClient;
 
-use ConfigTransformer202107081\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use ConfigTransformer202107081\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
+use ConfigTransformer202107108\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use ConfigTransformer202107108\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
 /**
  * Provides flexible methods for requesting HTTP resources synchronously or asynchronously.
  *
@@ -98,13 +98,16 @@ interface HttpClientInterface
      * when an unsupported option is passed.
      *
      * @throws TransportExceptionInterface When an unsupported option is passed
+     * @param string $method
+     * @param string $url
+     * @param mixed[] $options
      */
-    public function request(string $method, string $url, array $options = []) : \ConfigTransformer202107081\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function request($method, $url, $options = []) : \ConfigTransformer202107108\Symfony\Contracts\HttpClient\ResponseInterface;
     /**
      * Yields responses chunk by chunk as they complete.
      *
      * @param ResponseInterface|ResponseInterface[]|iterable $responses One or more responses created by the current HTTP client
      * @param float|null                                     $timeout   The idle timeout before yielding timeout chunks
      */
-    public function stream($responses, float $timeout = null) : \ConfigTransformer202107081\Symfony\Contracts\HttpClient\ResponseStreamInterface;
+    public function stream($responses, $timeout = null) : \ConfigTransformer202107108\Symfony\Contracts\HttpClient\ResponseStreamInterface;
 }

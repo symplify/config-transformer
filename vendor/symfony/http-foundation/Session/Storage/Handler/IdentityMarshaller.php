@@ -8,18 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202107108\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
-class IdentityMarshaller implements \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class IdentityMarshaller implements \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
+     * @param mixed[]|null $failed
      */
-    public function marshall(array $values, ?array &$failed) : array
+    public function marshall($values, &$failed) : array
     {
         foreach ($values as $key => $value) {
             if (!\is_string($value)) {
@@ -30,8 +32,9 @@ class IdentityMarshaller implements \ConfigTransformer202107081\Symfony\Componen
     }
     /**
      * {@inheritdoc}
+     * @param string $value
      */
-    public function unmarshall(string $value) : string
+    public function unmarshall($value) : string
     {
         return $value;
     }

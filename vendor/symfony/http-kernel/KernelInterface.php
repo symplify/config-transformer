@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202107081\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202107081\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202107108\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202107081\Symfony\Component\HttpKernel\Bundle\BundleInterfa
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.
@@ -34,8 +34,9 @@ interface KernelInterface extends \ConfigTransformer202107081\Symfony\Component\
     public function registerBundles();
     /**
      * Loads the container configuration.
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
      */
-    public function registerContainerConfiguration(\ConfigTransformer202107081\Symfony\Component\Config\Loader\LoaderInterface $loader);
+    public function registerContainerConfiguration($loader);
     /**
      * Boots the current kernel.
      */
@@ -58,8 +59,9 @@ interface KernelInterface extends \ConfigTransformer202107081\Symfony\Component\
      * @return BundleInterface A BundleInterface instance
      *
      * @throws \InvalidArgumentException when the bundle is not enabled
+     * @param string $name
      */
-    public function getBundle(string $name);
+    public function getBundle($name);
     /**
      * Returns the file path for a given bundle resource.
      *
@@ -76,8 +78,9 @@ interface KernelInterface extends \ConfigTransformer202107081\Symfony\Component\
      *
      * @throws \InvalidArgumentException if the file cannot be found or the name is not valid
      * @throws \RuntimeException         if the name contains invalid/unsafe characters
+     * @param string $name
      */
-    public function locateResource(string $name);
+    public function locateResource($name);
     /**
      * Gets the environment.
      *

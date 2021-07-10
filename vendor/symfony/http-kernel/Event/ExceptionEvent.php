@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to create a response for a thrown exception.
  *
@@ -25,14 +25,14 @@ use ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ExceptionEvent extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\Event\RequestEvent
+final class ExceptionEvent extends \ConfigTransformer202107108\Symfony\Component\HttpKernel\Event\RequestEvent
 {
     private $throwable;
     /**
      * @var bool
      */
     private $allowCustomResponseCode = \false;
-    public function __construct(\ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, int $requestType, \Throwable $e)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request $request, int $requestType, \Throwable $e)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setThrowable($e);
@@ -45,8 +45,9 @@ final class ExceptionEvent extends \ConfigTransformer202107081\Symfony\Component
      * Replaces the thrown exception.
      *
      * This exception will be thrown if no response is set in the event.
+     * @param \Throwable $exception
      */
-    public function setThrowable(\Throwable $exception) : void
+    public function setThrowable($exception) : void
     {
         $this->throwable = $exception;
     }

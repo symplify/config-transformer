@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\EventListener\FragmentListener;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\EventListener\FragmentListener;
 /**
  * Adds the possibility to generate a fragment URI for a given Controller.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class RoutableFragmentRenderer implements \ConfigTransformer202107081\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+abstract class RoutableFragmentRenderer implements \ConfigTransformer202107108\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
 {
     /**
      * @internal
@@ -28,8 +28,9 @@ abstract class RoutableFragmentRenderer implements \ConfigTransformer202107081\S
      * Sets the fragment path that triggers the fragment listener.
      *
      * @see FragmentListener
+     * @param string $path
      */
-    public function setFragmentPath(string $path)
+    public function setFragmentPath($path)
     {
         $this->fragmentPath = $path;
     }
@@ -40,9 +41,11 @@ abstract class RoutableFragmentRenderer implements \ConfigTransformer202107081\S
      * @param bool $strict   Whether to allow non-scalar attributes or not
      *
      * @return string A fragment URI
+     * @param \Symfony\Component\HttpKernel\Controller\ControllerReference $reference
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    protected function generateFragmentUri(\ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ControllerReference $reference, \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, bool $absolute = \false, bool $strict = \true)
+    protected function generateFragmentUri($reference, $request, $absolute = \false, $strict = \true)
     {
-        return (new \ConfigTransformer202107081\Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator($this->fragmentPath))->generate($reference, $request, $absolute, $strict, \false);
+        return (new \ConfigTransformer202107108\Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator($this->fragmentPath))->generate($reference, $request, $absolute, $strict, \false);
     }
 }

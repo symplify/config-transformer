@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202107081\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202107108\Symfony\Contracts\Service\ResetInterface;
 /**
  * Compiles a node to PHP code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Compiler implements \ConfigTransformer202107081\Symfony\Contracts\Service\ResetInterface
+class Compiler implements \ConfigTransformer202107108\Symfony\Contracts\Service\ResetInterface
 {
     private $source;
     private $functions;
@@ -24,7 +24,10 @@ class Compiler implements \ConfigTransformer202107081\Symfony\Contracts\Service\
     {
         $this->functions = $functions;
     }
-    public function getFunction(string $name)
+    /**
+     * @param string $name
+     */
+    public function getFunction($name)
     {
         return $this->functions[$name];
     }
@@ -46,13 +49,17 @@ class Compiler implements \ConfigTransformer202107081\Symfony\Contracts\Service\
      * Compiles a node.
      *
      * @return $this
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $node
      */
-    public function compile(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function compile($node)
     {
         $node->compile($this);
         return $this;
     }
-    public function subcompile(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $node
+     */
+    public function subcompile($node)
     {
         $current = $this->source;
         $this->source = '';
@@ -65,8 +72,9 @@ class Compiler implements \ConfigTransformer202107081\Symfony\Contracts\Service\
      * Adds a raw string to the compiled code.
      *
      * @return $this
+     * @param string $string
      */
-    public function raw(string $string)
+    public function raw($string)
     {
         $this->source .= $string;
         return $this;
@@ -75,8 +83,9 @@ class Compiler implements \ConfigTransformer202107081\Symfony\Contracts\Service\
      * Adds a quoted string to the compiled code.
      *
      * @return $this
+     * @param string $value
      */
-    public function string(string $value)
+    public function string($value)
     {
         $this->source .= \sprintf('"%s"', \addcslashes($value, "\0\t\"\$\\"));
         return $this;

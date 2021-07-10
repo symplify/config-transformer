@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\SmartFileSystem;
+namespace ConfigTransformer202107108\Symplify\SmartFileSystem;
 
-use ConfigTransformer202107081\Nette\Utils\Strings;
-use ConfigTransformer202107081\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202107081\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202107108\Nette\Utils\Strings;
+use ConfigTransformer202107108\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202107108\Symfony\Component\Filesystem\Filesystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
  */
-final class SmartFileSystem extends \ConfigTransformer202107081\Symfony\Component\Filesystem\Filesystem
+final class SmartFileSystem extends \ConfigTransformer202107108\Symfony\Component\Filesystem\Filesystem
 {
     /**
      * @var string
@@ -18,26 +18,31 @@ final class SmartFileSystem extends \ConfigTransformer202107081\Symfony\Componen
     private const BEFORE_COLLON_REGEX = '#^\\w+\\(.*?\\): #';
     /**
      * @see https://github.com/symfony/filesystem/pull/4/files
+     * @param string $filename
      */
-    public function readFile(string $filename) : string
+    public function readFile($filename) : string
     {
         $source = @\file_get_contents($filename);
         if (!$source) {
             $message = \sprintf('Failed to read "%s" file: "%s"', $filename, $this->getLastError());
-            throw new \ConfigTransformer202107081\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
+            throw new \ConfigTransformer202107108\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
         }
         return $source;
     }
-    public function readFileToSmartFileInfo(string $filename) : \ConfigTransformer202107081\Symplify\SmartFileSystem\SmartFileInfo
+    /**
+     * @param string $filename
+     */
+    public function readFileToSmartFileInfo($filename) : \ConfigTransformer202107108\Symplify\SmartFileSystem\SmartFileInfo
     {
-        return new \ConfigTransformer202107081\Symplify\SmartFileSystem\SmartFileInfo($filename);
+        return new \ConfigTransformer202107108\Symplify\SmartFileSystem\SmartFileInfo($filename);
     }
     /**
      * Converts given HTML code to plain text
      *
      * @source https://github.com/nette/utils/blob/e7bd59f1dd860d25dbbb1ac720dddd0fa1388f4c/src/Utils/Html.php#L325-L331
+     * @param string $html
      */
-    public function htmlToText(string $html) : string
+    public function htmlToText($html) : string
     {
         $content = \strip_tags($html);
         return \html_entity_decode($content, \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
@@ -46,7 +51,7 @@ final class SmartFileSystem extends \ConfigTransformer202107081\Symfony\Componen
      * @param SmartFileInfo[] $fileInfos
      * @return string[]
      */
-    public function resolveFilePathsFromFileInfos(array $fileInfos) : array
+    public function resolveFilePathsFromFileInfos($fileInfos) : array
     {
         $filePaths = [];
         foreach ($fileInfos as $fileInfo) {
@@ -63,6 +68,6 @@ final class SmartFileSystem extends \ConfigTransformer202107081\Symfony\Componen
     {
         $message = \error_get_last()['message'] ?? '';
         $message = \ini_get('html_errors') ? $this->htmlToText($message) : $message;
-        return \ConfigTransformer202107081\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
+        return \ConfigTransformer202107108\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
     }
 }

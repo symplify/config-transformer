@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultMarshaller implements \ConfigTransformer202107081\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DefaultMarshaller implements \ConfigTransformer202107108\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $useIgbinarySerialize = \true;
     public function __construct(bool $useIgbinarySerialize = null)
@@ -24,14 +24,16 @@ class DefaultMarshaller implements \ConfigTransformer202107081\Symfony\Component
         if (null === $useIgbinarySerialize) {
             $useIgbinarySerialize = \extension_loaded('igbinary') && (\PHP_VERSION_ID < 70400 || \version_compare('3.1.6', \phpversion('igbinary'), '<='));
         } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \PHP_VERSION_ID >= 70400 && \version_compare('3.1.6', \phpversion('igbinary'), '>'))) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') && \PHP_VERSION_ID >= 70400 ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') && \PHP_VERSION_ID >= 70400 ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
         }
         $this->useIgbinarySerialize = $useIgbinarySerialize;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $values
+     * @param mixed[]|null $failed
      */
-    public function marshall(array $values, ?array &$failed) : array
+    public function marshall($values, &$failed) : array
     {
         $serialized = $failed = [];
         foreach ($values as $id => $value) {
@@ -49,8 +51,9 @@ class DefaultMarshaller implements \ConfigTransformer202107081\Symfony\Component
     }
     /**
      * {@inheritdoc}
+     * @param string $value
      */
-    public function unmarshall(string $value)
+    public function unmarshall($value)
     {
         if ('b:0;' === $value) {
             return \false;
@@ -82,8 +85,9 @@ class DefaultMarshaller implements \ConfigTransformer202107081\Symfony\Component
     }
     /**
      * @internal
+     * @param string $class
      */
-    public static function handleUnserializeCallback(string $class)
+    public static function handleUnserializeCallback($class)
     {
         throw new \DomainException('Class not found: ' . $class);
     }

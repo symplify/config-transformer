@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\SmartFileSystem;
+namespace ConfigTransformer202107108\Symplify\SmartFileSystem;
 
-use ConfigTransformer202107081\Nette\Utils\Strings;
-use ConfigTransformer202107081\Symfony\Component\Finder\SplFileInfo;
-use ConfigTransformer202107081\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
-use ConfigTransformer202107081\Symplify\EasyTesting\StaticFixtureSplitter;
-use ConfigTransformer202107081\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
-use ConfigTransformer202107081\Symplify\SmartFileSystem\Exception\FileNotFoundException;
+use ConfigTransformer202107108\Nette\Utils\Strings;
+use ConfigTransformer202107108\Symfony\Component\Finder\SplFileInfo;
+use ConfigTransformer202107108\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use ConfigTransformer202107108\Symplify\EasyTesting\StaticFixtureSplitter;
+use ConfigTransformer202107108\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
+use ConfigTransformer202107108\Symplify\SmartFileSystem\Exception\FileNotFoundException;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileInfo\SmartFileInfoTest
  */
-final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\Finder\SplFileInfo
+final class SmartFileInfo extends \ConfigTransformer202107108\Symfony\Component\Finder\SplFileInfo
 {
     /**
      * @var string
@@ -25,10 +25,10 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     private $smartFileSystem;
     public function __construct(string $filePath)
     {
-        $this->smartFileSystem = new \ConfigTransformer202107081\Symplify\SmartFileSystem\SmartFileSystem();
+        $this->smartFileSystem = new \ConfigTransformer202107108\Symplify\SmartFileSystem\SmartFileSystem();
         // accepts also dirs
         if (!\file_exists($filePath)) {
-            throw new \ConfigTransformer202107081\Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File path "%s" was not found while creating "%s" object.', $filePath, self::class));
+            throw new \ConfigTransformer202107108\Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File path "%s" was not found while creating "%s" object.', $filePath, self::class));
         }
         // real path doesn't work in PHAR: https://www.php.net/manual/en/function.realpath.php
         if (\strncmp($filePath, 'phar://', \strlen('phar://')) === 0) {
@@ -52,13 +52,13 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     /**
      * @param string[] $suffixes
      */
-    public function hasSuffixes(array $suffixes) : bool
+    public function hasSuffixes($suffixes) : bool
     {
         return \in_array($this->getSuffix(), $suffixes, \true);
     }
     public function getRealPathWithoutSuffix() : string
     {
-        return \ConfigTransformer202107081\Nette\Utils\Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
+        return \ConfigTransformer202107108\Nette\Utils\Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
     public function getRelativeFilePath() : string
     {
@@ -68,10 +68,13 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     {
         return $this->getRelativePath();
     }
-    public function getRelativeFilePathFromDirectory(string $directory) : string
+    /**
+     * @param string $directory
+     */
+    public function getRelativeFilePathFromDirectory($directory) : string
     {
         if (!\file_exists($directory)) {
-            throw new \ConfigTransformer202107081\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException(\sprintf('Directory "%s" was not found in %s.', $directory, self::class));
+            throw new \ConfigTransformer202107108\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException(\sprintf('Directory "%s" was not found in %s.', $directory, self::class));
         }
         $relativeFilePath = $this->smartFileSystem->makePathRelative($this->getNormalizedRealPath(), (string) \realpath($directory));
         return \rtrim($relativeFilePath, '/');
@@ -79,8 +82,8 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     public function getRelativeFilePathFromCwdInTests() : string
     {
         // special case for tests
-        if (\ConfigTransformer202107081\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
-            return $this->getRelativeFilePathFromDirectory(\ConfigTransformer202107081\Symplify\EasyTesting\StaticFixtureSplitter::getTemporaryPath());
+        if (\ConfigTransformer202107108\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
+            return $this->getRelativeFilePathFromDirectory(\ConfigTransformer202107108\Symplify\EasyTesting\StaticFixtureSplitter::getTemporaryPath());
         }
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
@@ -88,11 +91,17 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     {
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
-    public function endsWith(string $string) : bool
+    /**
+     * @param string $string
+     */
+    public function endsWith($string) : bool
     {
         return \substr_compare($this->getNormalizedRealPath(), $string, -\strlen($string)) === 0;
     }
-    public function doesFnmatch(string $string) : bool
+    /**
+     * @param string $string
+     */
+    public function doesFnmatch($string) : bool
     {
         $normalizedPath = $this->normalizePath($string);
         if (\fnmatch($normalizedPath, $this->getNormalizedRealPath())) {
@@ -110,7 +119,10 @@ final class SmartFileInfo extends \ConfigTransformer202107081\Symfony\Component\
     {
         return \dirname($this->getRealPath());
     }
-    public function startsWith(string $partialPath) : bool
+    /**
+     * @param string $partialPath
+     */
+    public function startsWith($partialPath) : bool
     {
         return \strncmp($this->getNormalizedRealPath(), $partialPath, \strlen($partialPath)) === 0;
     }

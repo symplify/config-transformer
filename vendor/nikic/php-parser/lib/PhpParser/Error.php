@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
 class Error extends \RuntimeException
 {
@@ -65,7 +65,7 @@ class Error extends \RuntimeException
      *
      * @param array $attributes
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
         $this->updateMessage();
@@ -75,7 +75,7 @@ class Error extends \RuntimeException
      *
      * @param string $message Error message
      */
-    public function setRawMessage(string $message)
+    public function setRawMessage($message)
     {
         $this->rawMessage = $message;
         $this->updateMessage();
@@ -85,7 +85,7 @@ class Error extends \RuntimeException
      *
      * @param int $line Error start line
      */
-    public function setStartLine(int $line)
+    public function setStartLine($line)
     {
         $this->attributes['startLine'] = $line;
         $this->updateMessage();
@@ -107,7 +107,7 @@ class Error extends \RuntimeException
      * @param string $code Source code of the file
      * @return int
      */
-    public function getStartColumn(string $code) : int
+    public function getStartColumn($code) : int
     {
         if (!$this->hasColumnInfo()) {
             throw new \RuntimeException('Error does not have column information');
@@ -120,7 +120,7 @@ class Error extends \RuntimeException
      * @param string $code Source code of the file
      * @return int
      */
-    public function getEndColumn(string $code) : int
+    public function getEndColumn($code) : int
     {
         if (!$this->hasColumnInfo()) {
             throw new \RuntimeException('Error does not have column information');
@@ -134,7 +134,7 @@ class Error extends \RuntimeException
      *
      * @return string Formatted message
      */
-    public function getMessageWithColumnInfo(string $code) : string
+    public function getMessageWithColumnInfo($code) : string
     {
         return \sprintf('%s from %d:%d to %d:%d', $this->getRawMessage(), $this->getStartLine(), $this->getStartColumn($code), $this->getEndLine(), $this->getEndColumn($code));
     }

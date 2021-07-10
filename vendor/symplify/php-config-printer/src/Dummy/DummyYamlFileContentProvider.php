@@ -1,12 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\PhpConfigPrinter\Dummy;
+namespace ConfigTransformer202107108\Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer202107081\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-final class DummyYamlFileContentProvider implements \ConfigTransformer202107081\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
+use ConfigTransformer202107108\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+final class DummyYamlFileContentProvider implements \ConfigTransformer202107108\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
 {
-    public function setContent(string $yamlContent) : void
+    /**
+     * @param string $yamlContent
+     */
+    public function setContent($yamlContent) : void
     {
     }
     public function getYamlContent() : string

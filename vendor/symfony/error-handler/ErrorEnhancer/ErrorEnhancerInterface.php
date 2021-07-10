@@ -8,12 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace ConfigTransformer202107108\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
 interface ErrorEnhancerInterface
 {
     /**
      * Returns an \Throwable instance if the class is able to improve the error, null otherwise.
+     * @param \Throwable $error
      */
-    public function enhance(\Throwable $error) : ?\Throwable;
+    public function enhance($error) : ?\Throwable;
 }

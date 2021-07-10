@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202107108\Symfony\Component\Config\Builder;
 
 /**
  * Build PHP classes to generate config.
@@ -100,21 +100,36 @@ BODY
     {
         $this->require[] = $class;
     }
-    public function addUse(string $class) : void
+    /**
+     * @param string $class
+     */
+    public function addUse($class) : void
     {
         $this->use[$class] = \true;
     }
-    public function addImplements(string $interface) : void
+    /**
+     * @param string $interface
+     */
+    public function addImplements($interface) : void
     {
         $this->implements[] = '\\' . \ltrim($interface, '\\');
     }
-    public function addMethod(string $name, string $body, array $params = []) : void
+    /**
+     * @param string $name
+     * @param string $body
+     * @param mixed[] $params
+     */
+    public function addMethod($name, $body, $params = []) : void
     {
-        $this->methods[] = new \ConfigTransformer202107081\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
+        $this->methods[] = new \ConfigTransformer202107108\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
     }
-    public function addProperty(string $name, string $classType = null) : \ConfigTransformer202107081\Symfony\Component\Config\Builder\Property
+    /**
+     * @param string $name
+     * @param string|null $classType
+     */
+    public function addProperty($name, $classType = null) : \ConfigTransformer202107108\Symfony\Component\Config\Builder\Property
     {
-        $property = new \ConfigTransformer202107081\Symfony\Component\Config\Builder\Property($name, $this->camelCase($name));
+        $property = new \ConfigTransformer202107108\Symfony\Component\Config\Builder\Property($name, $this->camelCase($name));
         if (null !== $classType) {
             $property->setType($classType);
         }

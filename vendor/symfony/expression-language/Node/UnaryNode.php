@@ -8,26 +8,33 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class UnaryNode extends \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node
+class UnaryNode extends \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node
 {
     private const OPERATORS = ['!' => '!', 'not' => '!', '+' => '+', '-' => '-'];
-    public function __construct(string $operator, \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function __construct(string $operator, \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node $node)
     {
         parent::__construct(['node' => $node], ['operator' => $operator]);
     }
-    public function compile(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $compiler->raw('(')->raw(self::OPERATORS[$this->attributes['operator']])->compile($this->nodes['node'])->raw(')');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $value = $this->nodes['node']->evaluate($functions, $values);
         switch ($this->attributes['operator']) {

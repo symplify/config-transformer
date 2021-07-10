@@ -1,10 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer202107108\Symplify\PhpConfigPrinter\Contract;
 
 interface YamlFileContentProviderInterface
 {
-    public function setContent(string $yamlContent) : void;
+    /**
+     * @param string $yamlContent
+     */
+    public function setContent($yamlContent) : void;
     public function getYamlContent() : string;
 }

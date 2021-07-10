@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\StreamedResponse;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use ConfigTransformer202107081\Symfony\Component\HttpKernel\Exception\HttpException;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\StreamedResponse;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202107108\Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Renders a URI that represents a resource fragment.
  *
@@ -34,7 +34,7 @@ class FragmentHandler
      * @param FragmentRendererInterface[] $renderers An array of FragmentRendererInterface instances
      * @param bool                        $debug     Whether the debug mode is enabled or not
      */
-    public function __construct(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\RequestStack $requestStack, array $renderers = [], bool $debug = \false)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\HttpFoundation\RequestStack $requestStack, array $renderers = [], bool $debug = \false)
     {
         $this->requestStack = $requestStack;
         foreach ($renderers as $renderer) {
@@ -44,8 +44,9 @@ class FragmentHandler
     }
     /**
      * Adds a renderer.
+     * @param \Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer
      */
-    public function addRenderer(\ConfigTransformer202107081\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer)
+    public function addRenderer($renderer)
     {
         $this->renderers[$renderer->getName()] = $renderer;
     }
@@ -62,8 +63,10 @@ class FragmentHandler
      *
      * @throws \InvalidArgumentException when the renderer does not exist
      * @throws \LogicException           when no main request is being handled
+     * @param string $renderer
+     * @param mixed[] $options
      */
-    public function render($uri, string $renderer = 'inline', array $options = [])
+    public function render($uri, $renderer = 'inline', $options = [])
     {
         if (!isset($options['ignore_errors'])) {
             $options['ignore_errors'] = !$this->debug;
@@ -85,14 +88,15 @@ class FragmentHandler
      * @return string|null The Response content or null when the Response is streamed
      *
      * @throws \RuntimeException when the Response is not successful
+     * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    protected function deliver(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response)
+    protected function deliver($response)
     {
         if (!$response->isSuccessful()) {
             $responseStatusCode = $response->getStatusCode();
-            throw new \RuntimeException(\sprintf('Error when rendering "%s" (Status code is %d).', $this->requestStack->getCurrentRequest()->getUri(), $responseStatusCode), 0, new \ConfigTransformer202107081\Symfony\Component\HttpKernel\Exception\HttpException($responseStatusCode));
+            throw new \RuntimeException(\sprintf('Error when rendering "%s" (Status code is %d).', $this->requestStack->getCurrentRequest()->getUri(), $responseStatusCode), 0, new \ConfigTransformer202107108\Symfony\Component\HttpKernel\Exception\HttpException($responseStatusCode));
         }
-        if (!$response instanceof \ConfigTransformer202107081\Symfony\Component\HttpFoundation\StreamedResponse) {
+        if (!$response instanceof \ConfigTransformer202107108\Symfony\Component\HttpFoundation\StreamedResponse) {
             return $response->getContent();
         }
         $response->sendContent();

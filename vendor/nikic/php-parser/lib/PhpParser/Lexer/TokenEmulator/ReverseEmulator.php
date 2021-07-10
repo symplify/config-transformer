@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202107108\PhpParser\Lexer\TokenEmulator;
 
 /**
  * Reverses emulation direction of the inner emulator.
  */
-final class ReverseEmulator extends \ConfigTransformer202107081\PhpParser\Lexer\TokenEmulator\TokenEmulator
+final class ReverseEmulator extends \ConfigTransformer202107108\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     /** @var TokenEmulator Inner emulator */
     private $emulator;
-    public function __construct(\ConfigTransformer202107081\PhpParser\Lexer\TokenEmulator\TokenEmulator $emulator)
+    public function __construct(\ConfigTransformer202107108\PhpParser\Lexer\TokenEmulator\TokenEmulator $emulator)
     {
         $this->emulator = $emulator;
     }
@@ -18,19 +18,34 @@ final class ReverseEmulator extends \ConfigTransformer202107081\PhpParser\Lexer\
     {
         return $this->emulator->getPhpVersion();
     }
-    public function isEmulationNeeded(string $code) : bool
+    /**
+     * @param string $code
+     */
+    public function isEmulationNeeded($code) : bool
     {
         return $this->emulator->isEmulationNeeded($code);
     }
-    public function emulate(string $code, array $tokens) : array
+    /**
+     * @param string $code
+     * @param mixed[] $tokens
+     */
+    public function emulate($code, $tokens) : array
     {
         return $this->emulator->reverseEmulate($code, $tokens);
     }
-    public function reverseEmulate(string $code, array $tokens) : array
+    /**
+     * @param string $code
+     * @param mixed[] $tokens
+     */
+    public function reverseEmulate($code, $tokens) : array
     {
         return $this->emulator->emulate($code, $tokens);
     }
-    public function preprocessCode(string $code, array &$patches) : string
+    /**
+     * @param string $code
+     * @param mixed[] $patches
+     */
+    public function preprocessCode($code, &$patches) : string
     {
         return $code;
     }

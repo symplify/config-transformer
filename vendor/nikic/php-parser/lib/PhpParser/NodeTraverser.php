@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
-class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTraverserInterface
+class NodeTraverser implements \ConfigTransformer202107108\PhpParser\NodeTraverserInterface
 {
     /**
      * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes
@@ -49,7 +49,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
      *
      * @param NodeVisitor $visitor Visitor to add
      */
-    public function addVisitor(\ConfigTransformer202107081\PhpParser\NodeVisitor $visitor)
+    public function addVisitor($visitor)
     {
         $this->visitors[] = $visitor;
     }
@@ -58,7 +58,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
      *
      * @param NodeVisitor $visitor
      */
-    public function removeVisitor(\ConfigTransformer202107081\PhpParser\NodeVisitor $visitor)
+    public function removeVisitor($visitor)
     {
         foreach ($this->visitors as $index => $storedVisitor) {
             if ($storedVisitor === $visitor) {
@@ -74,7 +74,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
      *
      * @return Node[] Traversed array of nodes
      */
-    public function traverse(array $nodes) : array
+    public function traverse($nodes) : array
     {
         $this->stopTraversal = \false;
         foreach ($this->visitors as $visitor) {
@@ -97,7 +97,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
      *
      * @return Node Result of traversal (may be original node or new one)
      */
-    protected function traverseNode(\ConfigTransformer202107081\PhpParser\Node $node) : \ConfigTransformer202107081\PhpParser\Node
+    protected function traverseNode($node) : \ConfigTransformer202107108\PhpParser\Node
     {
         foreach ($node->getSubNodeNames() as $name) {
             $subNode =& $node->{$name};
@@ -106,13 +106,13 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
                 if ($this->stopTraversal) {
                     break;
                 }
-            } elseif ($subNode instanceof \ConfigTransformer202107081\PhpParser\Node) {
+            } elseif ($subNode instanceof \ConfigTransformer202107108\PhpParser\Node) {
                 $traverseChildren = \true;
                 $breakVisitorIndex = null;
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->enterNode($subNode);
                     if (null !== $return) {
-                        if ($return instanceof \ConfigTransformer202107081\PhpParser\Node) {
+                        if ($return instanceof \ConfigTransformer202107108\PhpParser\Node) {
                             $this->ensureReplacementReasonable($subNode, $return);
                             $subNode = $return;
                         } elseif (self::DONT_TRAVERSE_CHILDREN === $return) {
@@ -138,7 +138,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->leaveNode($subNode);
                     if (null !== $return) {
-                        if ($return instanceof \ConfigTransformer202107081\PhpParser\Node) {
+                        if ($return instanceof \ConfigTransformer202107108\PhpParser\Node) {
                             $this->ensureReplacementReasonable($subNode, $return);
                             $subNode = $return;
                         } elseif (self::STOP_TRAVERSAL === $return) {
@@ -165,17 +165,17 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
      *
      * @return array Result of traversal (may be original array or changed one)
      */
-    protected function traverseArray(array $nodes) : array
+    protected function traverseArray($nodes) : array
     {
         $doNodes = [];
         foreach ($nodes as $i => &$node) {
-            if ($node instanceof \ConfigTransformer202107081\PhpParser\Node) {
+            if ($node instanceof \ConfigTransformer202107108\PhpParser\Node) {
                 $traverseChildren = \true;
                 $breakVisitorIndex = null;
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->enterNode($node);
                     if (null !== $return) {
-                        if ($return instanceof \ConfigTransformer202107081\PhpParser\Node) {
+                        if ($return instanceof \ConfigTransformer202107108\PhpParser\Node) {
                             $this->ensureReplacementReasonable($node, $return);
                             $node = $return;
                         } elseif (self::DONT_TRAVERSE_CHILDREN === $return) {
@@ -201,7 +201,7 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->leaveNode($node);
                     if (null !== $return) {
-                        if ($return instanceof \ConfigTransformer202107081\PhpParser\Node) {
+                        if ($return instanceof \ConfigTransformer202107108\PhpParser\Node) {
                             $this->ensureReplacementReasonable($node, $return);
                             $node = $return;
                         } elseif (\is_array($return)) {
@@ -236,10 +236,10 @@ class NodeTraverser implements \ConfigTransformer202107081\PhpParser\NodeTravers
     }
     private function ensureReplacementReasonable($old, $new)
     {
-        if ($old instanceof \ConfigTransformer202107081\PhpParser\Node\Stmt && $new instanceof \ConfigTransformer202107081\PhpParser\Node\Expr) {
+        if ($old instanceof \ConfigTransformer202107108\PhpParser\Node\Stmt && $new instanceof \ConfigTransformer202107108\PhpParser\Node\Expr) {
             throw new \LogicException("Trying to replace statement ({$old->getType()}) " . "with expression ({$new->getType()}). Are you missing a " . "Stmt_Expression wrapper?");
         }
-        if ($old instanceof \ConfigTransformer202107081\PhpParser\Node\Expr && $new instanceof \ConfigTransformer202107081\PhpParser\Node\Stmt) {
+        if ($old instanceof \ConfigTransformer202107108\PhpParser\Node\Expr && $new instanceof \ConfigTransformer202107108\PhpParser\Node\Stmt) {
             throw new \LogicException("Trying to replace expression ({$old->getType()}) " . "with statement ({$new->getType()})");
         }
     }

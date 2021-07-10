@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Finder;
+namespace ConfigTransformer202107108\Symfony\Component\Finder;
 
 /**
  * Gitignore matches against text.
@@ -22,8 +22,9 @@ class Gitignore
      * Returns a regexp which is the equivalent of the gitignore pattern.
      *
      * Format specification: https://git-scm.com/docs/gitignore#_pattern_format
+     * @param string $gitignoreFileContent
      */
-    public static function toRegex(string $gitignoreFileContent) : string
+    public static function toRegex($gitignoreFileContent) : string
     {
         $gitignoreFileContent = \preg_replace('~(?<!\\\\)#[^\\n\\r]*~', '', $gitignoreFileContent);
         $gitignoreLines = \preg_split('~\\r\\n?|\\n~', $gitignoreFileContent);

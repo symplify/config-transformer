@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser\Node\Scalar;
+namespace ConfigTransformer202107108\PhpParser\Node\Scalar;
 
-use ConfigTransformer202107081\PhpParser\Node\Scalar;
-class DNumber extends \ConfigTransformer202107081\PhpParser\Node\Scalar
+use ConfigTransformer202107108\PhpParser\Node\Scalar;
+class DNumber extends \ConfigTransformer202107108\PhpParser\Node\Scalar
 {
     /** @var float Number value */
     public $value;
@@ -32,7 +32,7 @@ class DNumber extends \ConfigTransformer202107081\PhpParser\Node\Scalar
      *
      * @return float The parsed number
      */
-    public static function parse(string $str) : float
+    public static function parse($str) : float
     {
         $str = \str_replace('_', '', $str);
         // if string contains any of .eE just cast it to float

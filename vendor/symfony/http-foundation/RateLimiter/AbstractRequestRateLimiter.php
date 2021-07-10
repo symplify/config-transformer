@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpFoundation\RateLimiter;
+namespace ConfigTransformer202107108\Symfony\Component\HttpFoundation\RateLimiter;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\RateLimiter\LimiterInterface;
-use ConfigTransformer202107081\Symfony\Component\RateLimiter\Policy\NoLimiter;
-use ConfigTransformer202107081\Symfony\Component\RateLimiter\RateLimit;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\RateLimiter\LimiterInterface;
+use ConfigTransformer202107108\Symfony\Component\RateLimiter\Policy\NoLimiter;
+use ConfigTransformer202107108\Symfony\Component\RateLimiter\RateLimit;
 /**
  * An implementation of RequestRateLimiterInterface that
  * fits most use-cases.
@@ -22,13 +22,16 @@ use ConfigTransformer202107081\Symfony\Component\RateLimiter\RateLimit;
  *
  * @experimental in 5.3
  */
-abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107081\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
+abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107108\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
 {
-    public function consume(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202107081\Symfony\Component\RateLimiter\RateLimit
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function consume($request) : \ConfigTransformer202107108\Symfony\Component\RateLimiter\RateLimit
     {
         $limiters = $this->getLimiters($request);
         if (0 === \count($limiters)) {
-            $limiters = [new \ConfigTransformer202107081\Symfony\Component\RateLimiter\Policy\NoLimiter()];
+            $limiters = [new \ConfigTransformer202107108\Symfony\Component\RateLimiter\Policy\NoLimiter()];
         }
         $minimalRateLimit = null;
         foreach ($limiters as $limiter) {
@@ -39,7 +42,10 @@ abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107081
         }
         return $minimalRateLimit;
     }
-    public function reset(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request) : void
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function reset($request) : void
     {
         foreach ($this->getLimiters($request) as $limiter) {
             $limiter->reset();
@@ -47,6 +53,7 @@ abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107081
     }
     /**
      * @return LimiterInterface[] a set of limiters using keys extracted from the request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    protected abstract function getLimiters(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request) : array;
+    protected abstract function getLimiters($request) : array;
 }

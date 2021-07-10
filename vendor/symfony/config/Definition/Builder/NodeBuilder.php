@@ -8,27 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class provides a fluent interface for building a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+class NodeBuilder implements \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $parent;
     protected $nodeMapping;
     public function __construct()
     {
-        $this->nodeMapping = ['variable' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::class, 'scalar' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition::class, 'boolean' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition::class, 'integer' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition::class, 'float' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition::class, 'array' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition::class, 'enum' => \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition::class];
+        $this->nodeMapping = ['variable' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::class, 'scalar' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition::class, 'boolean' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition::class, 'integer' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition::class, 'float' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition::class, 'array' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition::class, 'enum' => \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition::class];
     }
     /**
      * Set the parent node.
      *
      * @return $this
+     * @param \Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface|null $parent
      */
-    public function setParent(\ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface $parent = null)
+    public function setParent($parent = null)
     {
         $this->parent = $parent;
         return $this;
@@ -37,8 +38,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child array node.
      *
      * @return ArrayNodeDefinition The child node
+     * @param string $name
      */
-    public function arrayNode(string $name)
+    public function arrayNode($name)
     {
         return $this->node($name, 'array');
     }
@@ -46,8 +48,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child scalar node.
      *
      * @return ScalarNodeDefinition The child node
+     * @param string $name
      */
-    public function scalarNode(string $name)
+    public function scalarNode($name)
     {
         return $this->node($name, 'scalar');
     }
@@ -55,8 +58,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child Boolean node.
      *
      * @return BooleanNodeDefinition The child node
+     * @param string $name
      */
-    public function booleanNode(string $name)
+    public function booleanNode($name)
     {
         return $this->node($name, 'boolean');
     }
@@ -64,8 +68,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child integer node.
      *
      * @return IntegerNodeDefinition The child node
+     * @param string $name
      */
-    public function integerNode(string $name)
+    public function integerNode($name)
     {
         return $this->node($name, 'integer');
     }
@@ -73,8 +78,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child float node.
      *
      * @return FloatNodeDefinition The child node
+     * @param string $name
      */
-    public function floatNode(string $name)
+    public function floatNode($name)
     {
         return $this->node($name, 'float');
     }
@@ -82,8 +88,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child EnumNode.
      *
      * @return EnumNodeDefinition
+     * @param string $name
      */
-    public function enumNode(string $name)
+    public function enumNode($name)
     {
         return $this->node($name, 'enum');
     }
@@ -91,8 +98,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      * Creates a child variable node.
      *
      * @return VariableNodeDefinition The builder of the child node
+     * @param string $name
      */
-    public function variableNode(string $name)
+    public function variableNode($name)
     {
         return $this->node($name, 'variable');
     }
@@ -112,8 +120,10 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      *
      * @throws \RuntimeException When the node type is not registered
      * @throws \RuntimeException When the node class is not found
+     * @param string|null $name
+     * @param string $type
      */
-    public function node(?string $name, string $type)
+    public function node($name, $type)
     {
         $class = $this->getNodeClass($type);
         $node = new $class($name);
@@ -134,10 +144,11 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      *     ;
      *
      * @return $this
+     * @param \Symfony\Component\Config\Definition\Builder\NodeDefinition $node
      */
-    public function append(\ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function append($node)
     {
-        if ($node instanceof \ConfigTransformer202107081\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
+        if ($node instanceof \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
             $builder = clone $this;
             $builder->setParent(null);
             $node->setBuilder($builder);
@@ -157,7 +168,7 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      *
      * @return $this
      */
-    public function setNodeClass(string $type, string $class)
+    public function setNodeClass($type, $class)
     {
         $this->nodeMapping[\strtolower($type)] = $class;
         return $this;
@@ -169,8 +180,9 @@ class NodeBuilder implements \ConfigTransformer202107081\Symfony\Component\Confi
      *
      * @throws \RuntimeException When the node type is not registered
      * @throws \RuntimeException When the node class is not found
+     * @param string $type
      */
-    protected function getNodeClass(string $type)
+    protected function getNodeClass($type)
     {
         $type = \strtolower($type);
         if (!isset($this->nodeMapping[$type])) {

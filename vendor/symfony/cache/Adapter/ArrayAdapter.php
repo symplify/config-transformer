@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107108\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107081\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202107081\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202107081\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202107081\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202107081\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202107081\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202107108\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202107108\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202107108\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202107108\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202107108\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202107081\Symfony\Contracts\Cache\CacheInterface;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202107081\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202107081\Psr\Log\LoggerAwareInterface, \ConfigTransformer202107081\Symfony\Component\Cache\ResettableInterface
+class ArrayAdapter implements \ConfigTransformer202107108\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202107108\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202107108\Psr\Log\LoggerAwareInterface, \ConfigTransformer202107108\Symfony\Component\Cache\ResettableInterface
 {
     use LoggerAwareTrait;
     private $storeSerialized;
@@ -40,27 +40,31 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
     public function __construct(int $defaultLifetime = 0, bool $storeSerialized = \true, float $maxLifetime = 0, int $maxItems = 0)
     {
         if (0 > $maxLifetime) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxLifetime must be positive, %F passed.', $maxLifetime));
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxLifetime must be positive, %F passed.', $maxLifetime));
         }
         if (0 > $maxItems) {
-            throw new \ConfigTransformer202107081\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxItems must be a positive integer, %d passed.', $maxItems));
+            throw new \ConfigTransformer202107108\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxItems must be a positive integer, %d passed.', $maxItems));
         }
         $this->defaultLifetime = $defaultLifetime;
         $this->storeSerialized = $storeSerialized;
         $this->maxLifetime = $maxLifetime;
         $this->maxItems = $maxItems;
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
-            $item = new \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem();
+            $item = new \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->isHit = $isHit;
             return $item;
-        }, null, \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
+     * @param string $key
+     * @param callable $callback
+     * @param float|null $beta
+     * @param mixed[]|null $metadata
      */
-    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+    public function get($key, $callback, $beta = null, &$metadata = null)
     {
         $item = $this->getItem($key);
         $metadata = $item->getMetadata();
@@ -73,8 +77,9 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
+     * @param string $key
      */
-    public function delete(string $key) : bool
+    public function delete($key) : bool
     {
         return $this->deleteItem($key);
     }
@@ -94,7 +99,7 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
             }
             return \true;
         }
-        \assert('' !== \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::validateKey($key));
+        \assert('' !== \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::validateKey($key));
         return isset($this->expiries[$key]) && !$this->deleteItem($key);
     }
     /**
@@ -115,8 +120,9 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $keys
      */
-    public function getItems(array $keys = [])
+    public function getItems($keys = [])
     {
         \assert(self::validateKeys($keys));
         return $this->generateItems($keys, \microtime(\true), self::$createCacheItem);
@@ -128,7 +134,7 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
      */
     public function deleteItem($key)
     {
-        \assert('' !== \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::validateKey($key));
+        \assert('' !== \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::validateKey($key));
         unset($this->values[$key], $this->expiries[$key]);
         return \true;
     }
@@ -136,8 +142,9 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
      * {@inheritdoc}
      *
      * @return bool
+     * @param mixed[] $keys
      */
-    public function deleteItems(array $keys)
+    public function deleteItems($keys)
     {
         foreach ($keys as $key) {
             $this->deleteItem($key);
@@ -148,10 +155,11 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
      * {@inheritdoc}
      *
      * @return bool
+     * @param \Psr\Cache\CacheItemInterface $item
      */
-    public function save(\ConfigTransformer202107081\Psr\Cache\CacheItemInterface $item)
+    public function save($item)
     {
-        if (!$item instanceof \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $item = (array) $item;
@@ -193,8 +201,9 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
      * {@inheritdoc}
      *
      * @return bool
+     * @param \Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred(\ConfigTransformer202107081\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred($item)
     {
         return $this->save($item);
     }
@@ -299,7 +308,7 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
                 unset($this->values[$key]);
                 $type = \get_debug_type($value);
                 $message = \sprintf('Failed to save key "{key}" of type %s: %s', $type, $e->getMessage());
-                \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+                \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
                 return;
             }
             // Keep value serialized if it contains any objects or any internal references
@@ -318,7 +327,7 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
             try {
                 $value = \unserialize($value);
             } catch (\Exception $e) {
-                \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+                \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
                 $value = \false;
             }
             if (\false === $value) {
@@ -335,7 +344,7 @@ class ArrayAdapter implements \ConfigTransformer202107081\Symfony\Component\Cach
     {
         foreach ($keys as $key) {
             if (!\is_string($key) || !isset($this->expiries[$key])) {
-                \ConfigTransformer202107081\Symfony\Component\Cache\CacheItem::validateKey($key);
+                \ConfigTransformer202107108\Symfony\Component\Cache\CacheItem::validateKey($key);
             }
         }
         return \true;

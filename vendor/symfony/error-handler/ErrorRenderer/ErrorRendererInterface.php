@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace ConfigTransformer202107108\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use ConfigTransformer202107081\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer202107108\Symfony\Component\ErrorHandler\Exception\FlattenException;
 /**
  * Formats an exception to be used as response content.
  *
@@ -20,6 +20,7 @@ interface ErrorRendererInterface
 {
     /**
      * Renders a Throwable as a FlattenException.
+     * @param \Throwable $exception
      */
-    public function render(\Throwable $exception) : \ConfigTransformer202107081\Symfony\Component\ErrorHandler\Exception\FlattenException;
+    public function render($exception) : \ConfigTransformer202107108\Symfony\Component\ErrorHandler\Exception\FlattenException;
 }

@@ -8,23 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class BinaryNode extends \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node
+class BinaryNode extends \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node
 {
     private const OPERATORS = ['~' => '.', 'and' => '&&', 'or' => '||'];
     private const FUNCTIONS = ['**' => 'pow', '..' => 'range', 'in' => 'in_array', 'not in' => '!in_array'];
-    public function __construct(string $operator, \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Node\Node $right)
+    public function __construct(string $operator, \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202107108\Symfony\Component\ExpressionLanguage\Node\Node $right)
     {
         parent::__construct(['left' => $left, 'right' => $right], ['operator' => $operator]);
     }
-    public function compile(\ConfigTransformer202107081\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $operator = $this->attributes['operator'];
         if ('matches' == $operator) {
@@ -40,7 +43,11 @@ class BinaryNode extends \ConfigTransformer202107081\Symfony\Component\Expressio
         }
         $compiler->raw('(')->compile($this->nodes['left'])->raw(' ')->raw($operator)->raw(' ')->compile($this->nodes['right'])->raw(')');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $operator = $this->attributes['operator'];
         $left = $this->nodes['left']->evaluate($functions, $values);

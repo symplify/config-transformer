@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107081\PhpParser;
+namespace ConfigTransformer202107108\PhpParser;
 
-abstract class NodeAbstract implements \ConfigTransformer202107081\PhpParser\Node, \JsonSerializable
+abstract class NodeAbstract implements \ConfigTransformer202107108\PhpParser\Node, \JsonSerializable
 {
     protected $attributes;
     /**
@@ -115,7 +115,7 @@ abstract class NodeAbstract implements \ConfigTransformer202107081\PhpParser\Nod
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
             $comment = $comments[$i];
-            if ($comment instanceof \ConfigTransformer202107081\PhpParser\Comment\Doc) {
+            if ($comment instanceof \ConfigTransformer202107108\PhpParser\Comment\Doc) {
                 return $comment;
             }
         }
@@ -128,11 +128,11 @@ abstract class NodeAbstract implements \ConfigTransformer202107081\PhpParser\Nod
      *
      * @param Comment\Doc $docComment Doc comment to set
      */
-    public function setDocComment(\ConfigTransformer202107081\PhpParser\Comment\Doc $docComment)
+    public function setDocComment($docComment)
     {
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
-            if ($comments[$i] instanceof \ConfigTransformer202107081\PhpParser\Comment\Doc) {
+            if ($comments[$i] instanceof \ConfigTransformer202107108\PhpParser\Comment\Doc) {
                 // Replace existing doc comment.
                 $comments[$i] = $docComment;
                 $this->setAttribute('comments', $comments);
@@ -143,15 +143,24 @@ abstract class NodeAbstract implements \ConfigTransformer202107081\PhpParser\Nod
         $comments[] = $docComment;
         $this->setAttribute('comments', $comments);
     }
-    public function setAttribute(string $key, $value)
+    /**
+     * @param string $key
+     */
+    public function setAttribute($key, $value)
     {
         $this->attributes[$key] = $value;
     }
-    public function hasAttribute(string $key) : bool
+    /**
+     * @param string $key
+     */
+    public function hasAttribute($key) : bool
     {
         return \array_key_exists($key, $this->attributes);
     }
-    public function getAttribute(string $key, $default = null)
+    /**
+     * @param string $key
+     */
+    public function getAttribute($key, $default = null)
     {
         if (\array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
@@ -162,7 +171,10 @@ abstract class NodeAbstract implements \ConfigTransformer202107081\PhpParser\Nod
     {
         return $this->attributes;
     }
-    public function setAttributes(array $attributes)
+    /**
+     * @param mixed[] $attributes
+     */
+    public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
     }

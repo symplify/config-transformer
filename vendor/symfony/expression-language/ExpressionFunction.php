@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202107108\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a function that can be used in an expression.
@@ -65,8 +65,9 @@ class ExpressionFunction
      * @throws \InvalidArgumentException if given PHP function name does not exist
      * @throws \InvalidArgumentException if given PHP function name is in namespace
      *                                   and expression function name is not defined
+     * @param string $phpFunctionName
      */
-    public static function fromPhp(string $phpFunctionName, string $expressionFunctionName = null)
+    public static function fromPhp($phpFunctionName, $expressionFunctionName = null)
     {
         $phpFunctionName = \ltrim($phpFunctionName, '\\');
         if (!\function_exists($phpFunctionName)) {

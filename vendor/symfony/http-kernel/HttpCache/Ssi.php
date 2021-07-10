@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107108\Symfony\Component\HttpFoundation\Response;
 /**
  * Ssi implements the SSI capabilities to Request and Response instances.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class Ssi extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Ssi extends \ConfigTransformer202107108\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     /**
      * {@inheritdoc}
@@ -28,8 +28,9 @@ class Ssi extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpC
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    public function addSurrogateControl(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response)
+    public function addSurrogateControl($response)
     {
         if (\false !== \strpos($response->getContent(), '<!--#include')) {
             $response->headers->set('Surrogate-Control', 'content="SSI/1.0"');
@@ -37,15 +38,21 @@ class Ssi extends \ConfigTransformer202107081\Symfony\Component\HttpKernel\HttpC
     }
     /**
      * {@inheritdoc}
+     * @param string $uri
+     * @param string|null $alt
+     * @param bool $ignoreErrors
+     * @param string $comment
      */
-    public function renderIncludeTag(string $uri, string $alt = null, bool $ignoreErrors = \true, string $comment = '')
+    public function renderIncludeTag($uri, $alt = null, $ignoreErrors = \true, $comment = '')
     {
         return \sprintf('<!--#include virtual="%s" -->', $uri);
     }
     /**
      * {@inheritdoc}
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    public function process(\ConfigTransformer202107081\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202107081\Symfony\Component\HttpFoundation\Response $response)
+    public function process($request, $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {
