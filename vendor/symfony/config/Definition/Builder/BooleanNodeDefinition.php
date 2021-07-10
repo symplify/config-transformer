@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107107\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202107107\Symfony\Component\Config\Definition\BooleanNode;
-use ConfigTransformer202107107\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202107108\Symfony\Component\Config\Definition\BooleanNode;
+use ConfigTransformer202107108\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class BooleanNodeDefinition extends \ConfigTransformer202107107\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class BooleanNodeDefinition extends \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $name, \ConfigTransformer202107107\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \ConfigTransformer202107108\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = \true;
@@ -34,7 +34,7 @@ class BooleanNodeDefinition extends \ConfigTransformer202107107\Symfony\Componen
      */
     protected function instantiateNode()
     {
-        return new \ConfigTransformer202107107\Symfony\Component\Config\Definition\BooleanNode($this->name, $this->parent, $this->pathSeparator);
+        return new \ConfigTransformer202107108\Symfony\Component\Config\Definition\BooleanNode($this->name, $this->parent, $this->pathSeparator);
     }
     /**
      * {@inheritdoc}
@@ -43,6 +43,6 @@ class BooleanNodeDefinition extends \ConfigTransformer202107107\Symfony\Componen
      */
     public function cannotBeEmpty()
     {
-        throw new \ConfigTransformer202107107\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to BooleanNodeDefinition.');
+        throw new \ConfigTransformer202107108\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to BooleanNodeDefinition.');
     }
 }
