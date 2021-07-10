@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107100;
+namespace ConfigTransformer202107107;
 
-use ConfigTransformer202107100\Symfony\Component\Console\Application;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202107100\Symplify\EasyTesting\Console\EasyTestingConsoleApplication;
-use ConfigTransformer202107100\Symplify\PackageBuilder\Console\Command\CommandNaming;
-return static function (\ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use ConfigTransformer202107107\Symfony\Component\Console\Application;
+use ConfigTransformer202107107\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202107107\Symplify\EasyTesting\Console\EasyTestingConsoleApplication;
+use ConfigTransformer202107107\Symplify\PackageBuilder\Console\Command\CommandNaming;
+return static function (\ConfigTransformer202107107\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202107100\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202107107\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202107100\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->alias(\ConfigTransformer202107100\Symfony\Component\Console\Application::class, \ConfigTransformer202107100\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->set(\ConfigTransformer202107100\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
+    $services->set(\ConfigTransformer202107107\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
+    $services->alias(\ConfigTransformer202107107\Symfony\Component\Console\Application::class, \ConfigTransformer202107107\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
+    $services->set(\ConfigTransformer202107107\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
 };
