@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107107\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202107101\Symfony\Component\ExpressionLanguage;
 
 /**
  * Lexes an expression.
@@ -45,50 +45,50 @@ class Lexer
                     $number = (int) $match[0];
                     // integers lower than the maximum
                 }
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::NUMBER_TYPE, $number, $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::NUMBER_TYPE, $number, $cursor + 1);
                 $cursor += \strlen($match[0]);
             } elseif (\false !== \strpos('([{', $expression[$cursor])) {
                 // opening bracket
                 $brackets[] = [$expression[$cursor], $cursor];
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
                 ++$cursor;
             } elseif (\false !== \strpos(')]}', $expression[$cursor])) {
                 // closing bracket
                 if (empty($brackets)) {
-                    throw new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unexpected "%s".', $expression[$cursor]), $cursor, $expression);
+                    throw new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unexpected "%s".', $expression[$cursor]), $cursor, $expression);
                 }
                 [$expect, $cur] = \array_pop($brackets);
                 if ($expression[$cursor] != \strtr($expect, '([{', ')]}')) {
-                    throw new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unclosed "%s".', $expect), $cur, $expression);
+                    throw new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unclosed "%s".', $expect), $cur, $expression);
                 }
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
                 ++$cursor;
             } elseif (\preg_match('/"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'/As', $expression, $match, 0, $cursor)) {
                 // strings
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::STRING_TYPE, \stripcslashes(\substr($match[0], 1, -1)), $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::STRING_TYPE, \stripcslashes(\substr($match[0], 1, -1)), $cursor + 1);
                 $cursor += \strlen($match[0]);
             } elseif (\preg_match('/(?<=^|[\\s(])not in(?=[\\s(])|\\!\\=\\=|(?<=^|[\\s(])not(?=[\\s(])|(?<=^|[\\s(])and(?=[\\s(])|\\=\\=\\=|\\>\\=|(?<=^|[\\s(])or(?=[\\s(])|\\<\\=|\\*\\*|\\.\\.|(?<=^|[\\s(])in(?=[\\s(])|&&|\\|\\||(?<=^|[\\s(])matches|\\=\\=|\\!\\=|\\*|~|%|\\/|\\>|\\||\\!|\\^|&|\\+|\\<|\\-/A', $expression, $match, 0, $cursor)) {
                 // operators
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::OPERATOR_TYPE, $match[0], $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::OPERATOR_TYPE, $match[0], $cursor + 1);
                 $cursor += \strlen($match[0]);
             } elseif (\false !== \strpos('.,?:', $expression[$cursor])) {
                 // punctuation
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
                 ++$cursor;
             } elseif (\preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/A', $expression, $match, 0, $cursor)) {
                 // names
-                $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::NAME_TYPE, $match[0], $cursor + 1);
+                $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::NAME_TYPE, $match[0], $cursor + 1);
                 $cursor += \strlen($match[0]);
             } else {
                 // unlexable
-                throw new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unexpected character "%s".', $expression[$cursor]), $cursor, $expression);
+                throw new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unexpected character "%s".', $expression[$cursor]), $cursor, $expression);
             }
         }
-        $tokens[] = new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\Token::EOF_TYPE, null, $cursor + 1);
+        $tokens[] = new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token(\ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\Token::EOF_TYPE, null, $cursor + 1);
         if (!empty($brackets)) {
             [$expect, $cur] = \array_pop($brackets);
-            throw new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unclosed "%s".', $expect), $cur, $expression);
+            throw new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Unclosed "%s".', $expect), $cur, $expression);
         }
-        return new \ConfigTransformer202107107\Symfony\Component\ExpressionLanguage\TokenStream($tokens, $expression);
+        return new \ConfigTransformer202107101\Symfony\Component\ExpressionLanguage\TokenStream($tokens, $expression);
     }
 }
