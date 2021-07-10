@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021071010\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace ConfigTransformer202107100\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use ConfigTransformer2021071010\Symfony\Component\ErrorHandler\Error\FatalError;
-use ConfigTransformer2021071010\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError;
+use ConfigTransformer202107100\Symfony\Component\ErrorHandler\Error\FatalError;
+use ConfigTransformer202107100\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class UndefinedFunctionErrorEnhancer implements \ConfigTransformer2021071010\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class UndefinedFunctionErrorEnhancer implements \ConfigTransformer202107100\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,7 @@ class UndefinedFunctionErrorEnhancer implements \ConfigTransformer2021071010\Sym
      */
     public function enhance($error) : ?\Throwable
     {
-        if ($error instanceof \ConfigTransformer2021071010\Symfony\Component\ErrorHandler\Error\FatalError) {
+        if ($error instanceof \ConfigTransformer202107100\Symfony\Component\ErrorHandler\Error\FatalError) {
             return null;
         }
         $message = $error->getMessage();
@@ -73,6 +73,6 @@ class UndefinedFunctionErrorEnhancer implements \ConfigTransformer2021071010\Sym
             }
             $message .= "\nDid you mean to call " . $candidates;
         }
-        return new \ConfigTransformer2021071010\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError($message, $error);
+        return new \ConfigTransformer202107100\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError($message, $error);
     }
 }

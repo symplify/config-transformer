@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021071010\Symfony\Component\HttpKernel\Profiler;
+namespace ConfigTransformer202107100\Symfony\Component\HttpKernel\Profiler;
 
 /**
  * ProfilerStorageInterface.
@@ -46,7 +46,7 @@ interface ProfilerStorageInterface
      * @return Profile|null The profile associated with token
      * @param string $token
      */
-    public function read($token) : ?\ConfigTransformer2021071010\Symfony\Component\HttpKernel\Profiler\Profile;
+    public function read($token) : ?\ConfigTransformer202107100\Symfony\Component\HttpKernel\Profiler\Profile;
     /**
      * Saves a Profile.
      *

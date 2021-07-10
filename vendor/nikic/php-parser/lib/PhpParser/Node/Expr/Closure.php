@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021071010\PhpParser\Node\Expr;
+namespace ConfigTransformer202107100\PhpParser\Node\Expr;
 
-use ConfigTransformer2021071010\PhpParser\Node;
-use ConfigTransformer2021071010\PhpParser\Node\Expr;
-use ConfigTransformer2021071010\PhpParser\Node\FunctionLike;
-class Closure extends \ConfigTransformer2021071010\PhpParser\Node\Expr implements \ConfigTransformer2021071010\PhpParser\Node\FunctionLike
+use ConfigTransformer202107100\PhpParser\Node;
+use ConfigTransformer202107100\PhpParser\Node\Expr;
+use ConfigTransformer202107100\PhpParser\Node\FunctionLike;
+class Closure extends \ConfigTransformer202107100\PhpParser\Node\Expr implements \ConfigTransformer202107100\PhpParser\Node\FunctionLike
 {
     /** @var bool Whether the closure is static */
     public $static;
@@ -43,7 +43,7 @@ class Closure extends \ConfigTransformer2021071010\PhpParser\Node\Expr implement
         $this->params = $subNodes['params'] ?? [];
         $this->uses = $subNodes['uses'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \ConfigTransformer2021071010\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \ConfigTransformer202107100\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }
