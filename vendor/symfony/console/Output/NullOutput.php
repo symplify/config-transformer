@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107108\Symfony\Component\Console\Output;
+namespace ConfigTransformer202107104\Symfony\Component\Console\Output;
 
-use ConfigTransformer202107108\Symfony\Component\Console\Formatter\NullOutputFormatter;
-use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202107104\Symfony\Component\Console\Formatter\NullOutputFormatter;
+use ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * NullOutput suppresses all output.
  *
@@ -20,14 +20,13 @@ use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatt
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class NullOutput implements \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface
+class NullOutput implements \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface
 {
     private $formatter;
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      */
-    public function setFormatter($formatter)
+    public function setFormatter(\ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         // do nothing
     }
@@ -40,13 +39,12 @@ class NullOutput implements \ConfigTransformer202107108\Symfony\Component\Consol
             return $this->formatter;
         }
         // to comply with the interface we must return a OutputFormatterInterface
-        return $this->formatter = new \ConfigTransformer202107108\Symfony\Component\Console\Formatter\NullOutputFormatter();
+        return $this->formatter = new \ConfigTransformer202107104\Symfony\Component\Console\Formatter\NullOutputFormatter();
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         // do nothing
     }
@@ -59,9 +57,8 @@ class NullOutput implements \ConfigTransformer202107108\Symfony\Component\Consol
     }
     /**
      * {@inheritdoc}
-     * @param int $level
      */
-    public function setVerbosity($level)
+    public function setVerbosity(int $level)
     {
         // do nothing
     }
@@ -102,18 +99,15 @@ class NullOutput implements \ConfigTransformer202107108\Symfony\Component\Consol
     }
     /**
      * {@inheritdoc}
-     * @param int $options
      */
-    public function writeln($messages, $options = self::OUTPUT_NORMAL)
+    public function writeln($messages, int $options = self::OUTPUT_NORMAL)
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param bool $newline
-     * @param int $options
      */
-    public function write($messages, $newline = \false, $options = self::OUTPUT_NORMAL)
+    public function write($messages, bool $newline = \false, int $options = self::OUTPUT_NORMAL)
     {
         // do nothing
     }

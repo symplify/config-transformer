@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107108\Symfony\Component\Console\Style;
+namespace ConfigTransformer202107104\Symfony\Component\Console\Style;
 
-use ConfigTransformer202107108\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202107108\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\ProgressBar;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\Table;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\TableCell;
-use ConfigTransformer202107108\Symfony\Component\Console\Helper\TableSeparator;
-use ConfigTransformer202107108\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202107108\Symfony\Component\Console\Output\TrimmedBufferOutput;
-use ConfigTransformer202107108\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202107108\Symfony\Component\Console\Question\ConfirmationQuestion;
-use ConfigTransformer202107108\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202107108\Symfony\Component\Console\Terminal;
+use ConfigTransformer202107104\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202107104\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\ProgressBar;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\Table;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\TableCell;
+use ConfigTransformer202107104\Symfony\Component\Console\Helper\TableSeparator;
+use ConfigTransformer202107104\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202107104\Symfony\Component\Console\Output\TrimmedBufferOutput;
+use ConfigTransformer202107104\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer202107104\Symfony\Component\Console\Question\ConfirmationQuestion;
+use ConfigTransformer202107104\Symfony\Component\Console\Question\Question;
+use ConfigTransformer202107104\Symfony\Component\Console\Terminal;
 /**
  * Output decorator helpers for the Symfony Style Guide.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console\Style\OutputStyle
+class SymfonyStyle extends \ConfigTransformer202107104\Symfony\Component\Console\Style\OutputStyle
 {
     public const MAX_LINE_LENGTH = 120;
     private $input;
@@ -39,12 +39,12 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     private $progressBar;
     private $lineLength;
     private $bufferedOutput;
-    public function __construct(\ConfigTransformer202107108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\ConfigTransformer202107104\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->input = $input;
-        $this->bufferedOutput = new \ConfigTransformer202107108\Symfony\Component\Console\Output\TrimmedBufferOutput(\DIRECTORY_SEPARATOR === '\\' ? 4 : 2, $output->getVerbosity(), \false, clone $output->getFormatter());
+        $this->bufferedOutput = new \ConfigTransformer202107104\Symfony\Component\Console\Output\TrimmedBufferOutput(\DIRECTORY_SEPARATOR === '\\' ? 4 : 2, $output->getVerbosity(), \false, clone $output->getFormatter());
         // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
-        $width = (new \ConfigTransformer202107108\Symfony\Component\Console\Terminal())->getWidth() ?: self::MAX_LINE_LENGTH;
+        $width = (new \ConfigTransformer202107104\Symfony\Component\Console\Terminal())->getWidth() ?: self::MAX_LINE_LENGTH;
         $this->lineLength = \min($width - (int) (\DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
         parent::__construct($output);
     }
@@ -52,13 +52,8 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
      * Formats a message as a block of text.
      *
      * @param string|array $messages The message to write in the block
-     * @param string|null $type
-     * @param string|null $style
-     * @param string $prefix
-     * @param bool $padding
-     * @param bool $escape
      */
-    public function block($messages, $type = null, $style = null, $prefix = ' ', $padding = \false, $escape = \true)
+    public function block($messages, string $type = null, string $style = null, string $prefix = ' ', bool $padding = \false, bool $escape = \true)
     {
         $messages = \is_array($messages) ? \array_values($messages) : [$messages];
         $this->autoPrependBlock();
@@ -67,29 +62,26 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param string $message
      */
-    public function title($message)
+    public function title(string $message)
     {
         $this->autoPrependBlock();
-        $this->writeln([\sprintf('<comment>%s</>', \ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($message)), \sprintf('<comment>%s</>', \str_repeat('=', \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message))))]);
+        $this->writeln([\sprintf('<comment>%s</>', \ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($message)), \sprintf('<comment>%s</>', \str_repeat('=', \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message))))]);
         $this->newLine();
     }
     /**
      * {@inheritdoc}
-     * @param string $message
      */
-    public function section($message)
+    public function section(string $message)
     {
         $this->autoPrependBlock();
-        $this->writeln([\sprintf('<comment>%s</>', \ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($message)), \sprintf('<comment>%s</>', \str_repeat('-', \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message))))]);
+        $this->writeln([\sprintf('<comment>%s</>', \ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($message)), \sprintf('<comment>%s</>', \str_repeat('-', \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message))))]);
         $this->newLine();
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $elements
      */
-    public function listing($elements)
+    public function listing(array $elements)
     {
         $this->autoPrependText();
         $elements = \array_map(function ($element) {
@@ -164,14 +156,12 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $headers
-     * @param mixed[] $rows
      */
-    public function table($headers, $rows)
+    public function table(array $headers, array $rows)
     {
-        $style = clone \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
+        $style = clone \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
         $style->setCellHeaderFormat('<info>%s</info>');
-        $table = new \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table($this);
+        $table = new \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table($this);
         $table->setHeaders($headers);
         $table->setRows($rows);
         $table->setStyle($style);
@@ -180,14 +170,12 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * Formats a horizontal table.
-     * @param mixed[] $headers
-     * @param mixed[] $rows
      */
-    public function horizontalTable($headers, $rows)
+    public function horizontalTable(array $headers, array $rows)
     {
-        $style = clone \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
+        $style = clone \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
         $style->setCellHeaderFormat('<info>%s</info>');
-        $table = new \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table($this);
+        $table = new \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table($this);
         $table->setHeaders($headers);
         $table->setRows($rows);
         $table->setStyle($style);
@@ -207,24 +195,24 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
      */
     public function definitionList(...$list)
     {
-        $style = clone \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
+        $style = clone \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table::getStyleDefinition('symfony-style-guide');
         $style->setCellHeaderFormat('<info>%s</info>');
-        $table = new \ConfigTransformer202107108\Symfony\Component\Console\Helper\Table($this);
+        $table = new \ConfigTransformer202107104\Symfony\Component\Console\Helper\Table($this);
         $headers = [];
         $row = [];
         foreach ($list as $value) {
-            if ($value instanceof \ConfigTransformer202107108\Symfony\Component\Console\Helper\TableSeparator) {
+            if ($value instanceof \ConfigTransformer202107104\Symfony\Component\Console\Helper\TableSeparator) {
                 $headers[] = $value;
                 $row[] = $value;
                 continue;
             }
             if (\is_string($value)) {
-                $headers[] = new \ConfigTransformer202107108\Symfony\Component\Console\Helper\TableCell($value, ['colspan' => 2]);
+                $headers[] = new \ConfigTransformer202107104\Symfony\Component\Console\Helper\TableCell($value, ['colspan' => 2]);
                 $row[] = null;
                 continue;
             }
             if (!\is_array($value)) {
-                throw new \ConfigTransformer202107108\Symfony\Component\Console\Exception\InvalidArgumentException('Value should be an array, string, or an instance of TableSeparator.');
+                throw new \ConfigTransformer202107104\Symfony\Component\Console\Exception\InvalidArgumentException('Value should be an array, string, or an instance of TableSeparator.');
             }
             $headers[] = \key($value);
             $row[] = \current($value);
@@ -238,64 +226,53 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param string $question
-     * @param string|null $default
-     * @param callable|null $validator
      */
-    public function ask($question, $default = null, $validator = null)
+    public function ask(string $question, string $default = null, callable $validator = null)
     {
-        $question = new \ConfigTransformer202107108\Symfony\Component\Console\Question\Question($question, $default);
+        $question = new \ConfigTransformer202107104\Symfony\Component\Console\Question\Question($question, $default);
         $question->setValidator($validator);
         return $this->askQuestion($question);
     }
     /**
      * {@inheritdoc}
-     * @param string $question
-     * @param callable|null $validator
      */
-    public function askHidden($question, $validator = null)
+    public function askHidden(string $question, callable $validator = null)
     {
-        $question = new \ConfigTransformer202107108\Symfony\Component\Console\Question\Question($question);
+        $question = new \ConfigTransformer202107104\Symfony\Component\Console\Question\Question($question);
         $question->setHidden(\true);
         $question->setValidator($validator);
         return $this->askQuestion($question);
     }
     /**
      * {@inheritdoc}
-     * @param string $question
-     * @param bool $default
      */
-    public function confirm($question, $default = \true)
+    public function confirm(string $question, bool $default = \true)
     {
-        return $this->askQuestion(new \ConfigTransformer202107108\Symfony\Component\Console\Question\ConfirmationQuestion($question, $default));
+        return $this->askQuestion(new \ConfigTransformer202107104\Symfony\Component\Console\Question\ConfirmationQuestion($question, $default));
     }
     /**
      * {@inheritdoc}
-     * @param string $question
-     * @param mixed[] $choices
      */
-    public function choice($question, $choices, $default = null)
+    public function choice(string $question, array $choices, $default = null)
     {
         if (null !== $default) {
             $values = \array_flip($choices);
             $default = $values[$default] ?? $default;
         }
-        return $this->askQuestion(new \ConfigTransformer202107108\Symfony\Component\Console\Question\ChoiceQuestion($question, $choices, $default));
+        return $this->askQuestion(new \ConfigTransformer202107104\Symfony\Component\Console\Question\ChoiceQuestion($question, $choices, $default));
     }
     /**
      * {@inheritdoc}
-     * @param int $max
      */
-    public function progressStart($max = 0)
+    public function progressStart(int $max = 0)
     {
         $this->progressBar = $this->createProgressBar($max);
         $this->progressBar->start();
     }
     /**
      * {@inheritdoc}
-     * @param int $step
      */
-    public function progressAdvance($step = 1)
+    public function progressAdvance(int $step = 1)
     {
         $this->getProgressBar()->advance($step);
     }
@@ -310,9 +287,8 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param int $max
      */
-    public function createProgressBar($max = 0)
+    public function createProgressBar(int $max = 0)
     {
         $progressBar = parent::createProgressBar($max);
         if ('\\' !== \DIRECTORY_SEPARATOR || 'Hyper' === \getenv('TERM_PROGRAM')) {
@@ -326,15 +302,14 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * @return mixed
-     * @param \Symfony\Component\Console\Question\Question $question
      */
-    public function askQuestion($question)
+    public function askQuestion(\ConfigTransformer202107104\Symfony\Component\Console\Question\Question $question)
     {
         if ($this->input->isInteractive()) {
             $this->autoPrependBlock();
         }
         if (!$this->questionHelper) {
-            $this->questionHelper = new \ConfigTransformer202107108\Symfony\Component\Console\Helper\SymfonyQuestionHelper();
+            $this->questionHelper = new \ConfigTransformer202107104\Symfony\Component\Console\Helper\SymfonyQuestionHelper();
         }
         $answer = $this->questionHelper->ask($this->input, $this, $question);
         if ($this->input->isInteractive()) {
@@ -345,9 +320,8 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param int $type
      */
-    public function writeln($messages, $type = self::OUTPUT_NORMAL)
+    public function writeln($messages, int $type = self::OUTPUT_NORMAL)
     {
         if (!\is_iterable($messages)) {
             $messages = [$messages];
@@ -359,10 +333,8 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param bool $newline
-     * @param int $type
      */
-    public function write($messages, $newline = \false, $type = self::OUTPUT_NORMAL)
+    public function write($messages, bool $newline = \false, int $type = self::OUTPUT_NORMAL)
     {
         if (!\is_iterable($messages)) {
             $messages = [$messages];
@@ -374,9 +346,8 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
-     * @param int $count
      */
-    public function newLine($count = 1)
+    public function newLine(int $count = 1)
     {
         parent::newLine($count);
         $this->bufferedOutput->write(\str_repeat("\n", $count));
@@ -390,10 +361,10 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     {
         return new self($this->input, $this->getErrorOutput());
     }
-    private function getProgressBar() : \ConfigTransformer202107108\Symfony\Component\Console\Helper\ProgressBar
+    private function getProgressBar() : \ConfigTransformer202107104\Symfony\Component\Console\Helper\ProgressBar
     {
         if (!$this->progressBar) {
-            throw new \ConfigTransformer202107108\Symfony\Component\Console\Exception\RuntimeException('The ProgressBar is not started.');
+            throw new \ConfigTransformer202107104\Symfony\Component\Console\Exception\RuntimeException('The ProgressBar is not started.');
         }
         return $this->progressBar;
     }
@@ -424,7 +395,7 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
     private function createBlock(iterable $messages, string $type = null, string $style = null, string $prefix = ' ', bool $padding = \false, bool $escape = \false) : array
     {
         $indentLength = 0;
-        $prefixLength = \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $prefix));
+        $prefixLength = \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $prefix));
         $lines = [];
         if (null !== $type) {
             $type = \sprintf('[%s] ', $type);
@@ -434,9 +405,9 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
         // wrap and add newlines for each element
         foreach ($messages as $key => $message) {
             if ($escape) {
-                $message = \ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter::escape($message);
+                $message = \ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter::escape($message);
             }
-            $decorationLength = \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width($message) - \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message));
+            $decorationLength = \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width($message) - \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $message));
             $messageLineLength = \min($this->lineLength - $prefixLength - $indentLength + $decorationLength, $this->lineLength);
             $messageLines = \explode(\PHP_EOL, \wordwrap($message, $messageLineLength, \PHP_EOL, \true));
             foreach ($messageLines as $messageLine) {
@@ -457,7 +428,7 @@ class SymfonyStyle extends \ConfigTransformer202107108\Symfony\Component\Console
                 $line = $firstLineIndex === $i ? $type . $line : $lineIndentation . $line;
             }
             $line = $prefix . $line;
-            $line .= \str_repeat(' ', \max($this->lineLength - \ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107108\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $line)), 0));
+            $line .= \str_repeat(' ', \max($this->lineLength - \ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202107104\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), $line)), 0));
             if ($style) {
                 $line = \sprintf('<%s>%s</>', $style, $line);
             }

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202107104\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202107108\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202107104\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202107104\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202107104\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202107104\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * ContainerInterface is the interface implemented by service container classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ContainerInterface extends \ConfigTransformer202107108\Psr\Container\ContainerInterface
+interface ContainerInterface extends \ConfigTransformer202107104\Psr\Container\ContainerInterface
 {
     public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
     public const EXCEPTION_ON_INVALID_REFERENCE = 1;
@@ -63,19 +63,17 @@ interface ContainerInterface extends \ConfigTransformer202107108\Psr\Container\C
      * @return array|bool|string|int|float|null
      *
      * @throws InvalidArgumentException if the parameter is not defined
-     * @param string $name
      */
-    public function getParameter($name);
+    public function getParameter(string $name);
     /**
      * @return bool
-     * @param string $name
      */
-    public function hasParameter($name);
+    public function hasParameter(string $name);
     /**
      * Sets a parameter.
      *
      * @param string                           $name  The parameter name
      * @param array|bool|string|int|float|null $value The parameter value
      */
-    public function setParameter($name, $value);
+    public function setParameter(string $name, $value);
 }

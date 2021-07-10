@@ -1,172 +1,109 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107108\PhpParser\PrettyPrinter;
+namespace ConfigTransformer202107104\PhpParser\PrettyPrinter;
 
-use ConfigTransformer202107108\PhpParser\Node;
-use ConfigTransformer202107108\PhpParser\Node\Expr;
-use ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp;
-use ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp;
-use ConfigTransformer202107108\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202107108\PhpParser\Node\Name;
-use ConfigTransformer202107108\PhpParser\Node\Scalar;
-use ConfigTransformer202107108\PhpParser\Node\Scalar\MagicConst;
-use ConfigTransformer202107108\PhpParser\Node\Stmt;
-use ConfigTransformer202107108\PhpParser\PrettyPrinterAbstract;
-class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstract
+use ConfigTransformer202107104\PhpParser\Node;
+use ConfigTransformer202107104\PhpParser\Node\Expr;
+use ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer202107104\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202107104\PhpParser\Node\Name;
+use ConfigTransformer202107104\PhpParser\Node\Scalar;
+use ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer202107104\PhpParser\Node\Stmt;
+use ConfigTransformer202107104\PhpParser\PrettyPrinterAbstract;
+class Standard extends \ConfigTransformer202107104\PhpParser\PrettyPrinterAbstract
 {
     // Special nodes
-    /**
-     * @param \PhpParser\Node\Param $node
-     */
-    protected function pParam($node)
+    protected function pParam(\ConfigTransformer202107104\PhpParser\Node\Param $node)
     {
         return $this->pAttrGroups($node->attrGroups, \true) . $this->pModifiers($node->flags) . ($node->type ? $this->p($node->type) . ' ' : '') . ($node->byRef ? '&' : '') . ($node->variadic ? '...' : '') . $this->p($node->var) . ($node->default ? ' = ' . $this->p($node->default) : '');
     }
-    /**
-     * @param \PhpParser\Node\Arg $node
-     */
-    protected function pArg($node)
+    protected function pArg(\ConfigTransformer202107104\PhpParser\Node\Arg $node)
     {
         return ($node->name ? $node->name->toString() . ': ' : '') . ($node->byRef ? '&' : '') . ($node->unpack ? '...' : '') . $this->p($node->value);
     }
-    /**
-     * @param \PhpParser\Node\Const_ $node
-     */
-    protected function pConst($node)
+    protected function pConst(\ConfigTransformer202107104\PhpParser\Node\Const_ $node)
     {
         return $node->name . ' = ' . $this->p($node->value);
     }
-    /**
-     * @param \PhpParser\Node\NullableType $node
-     */
-    protected function pNullableType($node)
+    protected function pNullableType(\ConfigTransformer202107104\PhpParser\Node\NullableType $node)
     {
         return '?' . $this->p($node->type);
     }
-    /**
-     * @param \PhpParser\Node\UnionType $node
-     */
-    protected function pUnionType($node)
+    protected function pUnionType(\ConfigTransformer202107104\PhpParser\Node\UnionType $node)
     {
         return $this->pImplode($node->types, '|');
     }
-    /**
-     * @param \PhpParser\Node\Identifier $node
-     */
-    protected function pIdentifier($node)
+    protected function pIdentifier(\ConfigTransformer202107104\PhpParser\Node\Identifier $node)
     {
         return $node->name;
     }
-    /**
-     * @param \PhpParser\Node\VarLikeIdentifier $node
-     */
-    protected function pVarLikeIdentifier($node)
+    protected function pVarLikeIdentifier(\ConfigTransformer202107104\PhpParser\Node\VarLikeIdentifier $node)
     {
         return '$' . $node->name;
     }
-    /**
-     * @param \PhpParser\Node\Attribute $node
-     */
-    protected function pAttribute($node)
+    protected function pAttribute(\ConfigTransformer202107104\PhpParser\Node\Attribute $node)
     {
         return $this->p($node->name) . ($node->args ? '(' . $this->pCommaSeparated($node->args) . ')' : '');
     }
-    /**
-     * @param \PhpParser\Node\AttributeGroup $node
-     */
-    protected function pAttributeGroup($node)
+    protected function pAttributeGroup(\ConfigTransformer202107104\PhpParser\Node\AttributeGroup $node)
     {
         return '#[' . $this->pCommaSeparated($node->attrs) . ']';
     }
     // Names
-    /**
-     * @param \PhpParser\Node\Name $node
-     */
-    protected function pName($node)
+    protected function pName(\ConfigTransformer202107104\PhpParser\Node\Name $node)
     {
         return \implode('\\', $node->parts);
     }
-    /**
-     * @param \PhpParser\Node\Name\FullyQualified $node
-     */
-    protected function pName_FullyQualified($node)
+    protected function pName_FullyQualified(\ConfigTransformer202107104\PhpParser\Node\Name\FullyQualified $node)
     {
         return '\\' . \implode('\\', $node->parts);
     }
-    /**
-     * @param \PhpParser\Node\Name\Relative $node
-     */
-    protected function pName_Relative($node)
+    protected function pName_Relative(\ConfigTransformer202107104\PhpParser\Node\Name\Relative $node)
     {
         return 'namespace\\' . \implode('\\', $node->parts);
     }
     // Magic Constants
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Class_ $node
-     */
-    protected function pScalar_MagicConst_Class($node)
+    protected function pScalar_MagicConst_Class(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Class_ $node)
     {
         return '__CLASS__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Dir $node
-     */
-    protected function pScalar_MagicConst_Dir($node)
+    protected function pScalar_MagicConst_Dir(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Dir $node)
     {
         return '__DIR__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\File $node
-     */
-    protected function pScalar_MagicConst_File($node)
+    protected function pScalar_MagicConst_File(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\File $node)
     {
         return '__FILE__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Function_ $node
-     */
-    protected function pScalar_MagicConst_Function($node)
+    protected function pScalar_MagicConst_Function(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Function_ $node)
     {
         return '__FUNCTION__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Line $node
-     */
-    protected function pScalar_MagicConst_Line($node)
+    protected function pScalar_MagicConst_Line(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Line $node)
     {
         return '__LINE__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Method $node
-     */
-    protected function pScalar_MagicConst_Method($node)
+    protected function pScalar_MagicConst_Method(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Method $node)
     {
         return '__METHOD__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Namespace_ $node
-     */
-    protected function pScalar_MagicConst_Namespace($node)
+    protected function pScalar_MagicConst_Namespace(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Namespace_ $node)
     {
         return '__NAMESPACE__';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\MagicConst\Trait_ $node
-     */
-    protected function pScalar_MagicConst_Trait($node)
+    protected function pScalar_MagicConst_Trait(\ConfigTransformer202107104\PhpParser\Node\Scalar\MagicConst\Trait_ $node)
     {
         return '__TRAIT__';
     }
     // Scalars
-    /**
-     * @param \PhpParser\Node\Scalar\String_ $node
-     */
-    protected function pScalar_String($node)
+    protected function pScalar_String(\ConfigTransformer202107104\PhpParser\Node\Scalar\String_ $node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED);
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED);
         switch ($kind) {
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_NOWDOC:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_NOWDOC:
                 $label = $node->getAttribute('docLabel');
                 if ($label && !$this->containsEndLabel($node->value, $label)) {
                     if ($node->value === '') {
@@ -175,9 +112,9 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
                     return "<<<'{$label}'\n{$node->value}\n{$label}" . $this->docStringEndToken;
                 }
             /* break missing intentionally */
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED:
                 return $this->pSingleQuotedString($node->value);
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_HEREDOC:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_HEREDOC:
                 $label = $node->getAttribute('docLabel');
                 if ($label && !$this->containsEndLabel($node->value, $label)) {
                     if ($node->value === '') {
@@ -187,20 +124,17 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
                     return "<<<{$label}\n" . $escaped . "\n{$label}" . $this->docStringEndToken;
                 }
             /* break missing intentionally */
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED:
                 return '"' . $this->escapeString($node->value, '"') . '"';
         }
         throw new \Exception('Invalid string kind');
     }
-    /**
-     * @param \PhpParser\Node\Scalar\Encapsed $node
-     */
-    protected function pScalar_Encapsed($node)
+    protected function pScalar_Encapsed(\ConfigTransformer202107104\PhpParser\Node\Scalar\Encapsed $node)
     {
-        if ($node->getAttribute('kind') === \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_HEREDOC) {
+        if ($node->getAttribute('kind') === \ConfigTransformer202107104\PhpParser\Node\Scalar\String_::KIND_HEREDOC) {
             $label = $node->getAttribute('docLabel');
             if ($label && !$this->encapsedContainsEndLabel($node->parts, $label)) {
-                if (\count($node->parts) === 1 && $node->parts[0] instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart && $node->parts[0]->value === '') {
+                if (\count($node->parts) === 1 && $node->parts[0] instanceof \ConfigTransformer202107104\PhpParser\Node\Scalar\EncapsedStringPart && $node->parts[0]->value === '') {
                     return "<<<{$label}\n{$label}" . $this->docStringEndToken;
                 }
                 return "<<<{$label}\n" . $this->pEncapsList($node->parts, null) . "\n{$label}" . $this->docStringEndToken;
@@ -208,18 +142,15 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         }
         return '"' . $this->pEncapsList($node->parts, '"') . '"';
     }
-    /**
-     * @param \PhpParser\Node\Scalar\LNumber $node
-     */
-    protected function pScalar_LNumber($node)
+    protected function pScalar_LNumber(\ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber $node)
     {
         if ($node->value === -\PHP_INT_MAX - 1) {
             // PHP_INT_MIN cannot be represented as a literal,
             // because the sign is not part of the literal
             return '(-' . \PHP_INT_MAX . '-1)';
         }
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_DEC);
-        if (\ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_DEC === $kind) {
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber::KIND_DEC);
+        if (\ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber::KIND_DEC === $kind) {
             return (string) $node->value;
         }
         if ($node->value < 0) {
@@ -230,19 +161,16 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
             $str = (string) $node->value;
         }
         switch ($kind) {
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_BIN:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber::KIND_BIN:
                 return $sign . '0b' . \base_convert($str, 10, 2);
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_OCT:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber::KIND_OCT:
                 return $sign . '0' . \base_convert($str, 10, 8);
-            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_HEX:
+            case \ConfigTransformer202107104\PhpParser\Node\Scalar\LNumber::KIND_HEX:
                 return $sign . '0x' . \base_convert($str, 10, 16);
         }
         throw new \Exception('Invalid number kind');
     }
-    /**
-     * @param \PhpParser\Node\Scalar\DNumber $node
-     */
-    protected function pScalar_DNumber($node)
+    protected function pScalar_DNumber(\ConfigTransformer202107104\PhpParser\Node\Scalar\DNumber $node)
     {
         if (!\is_finite($node->value)) {
             if ($node->value === \INF) {
@@ -265,694 +193,415 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         // ensure that number is really printed as float
         return \preg_match('/^-?[0-9]+$/', $stringValue) ? $stringValue . '.0' : $stringValue;
     }
-    /**
-     * @param \PhpParser\Node\Scalar\EncapsedStringPart $node
-     */
-    protected function pScalar_EncapsedStringPart($node)
+    protected function pScalar_EncapsedStringPart(\ConfigTransformer202107104\PhpParser\Node\Scalar\EncapsedStringPart $node)
     {
         throw new \LogicException('Cannot directly print EncapsedStringPart');
     }
     // Assignments
-    /**
-     * @param \PhpParser\Node\Expr\Assign $node
-     */
-    protected function pExpr_Assign($node)
+    protected function pExpr_Assign(\ConfigTransformer202107104\PhpParser\Node\Expr\Assign $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Assign::class, $node->var, ' = ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Assign::class, $node->var, ' = ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignRef $node
-     */
-    protected function pExpr_AssignRef($node)
+    protected function pExpr_AssignRef(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignRef $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignRef::class, $node->var, ' =& ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignRef::class, $node->var, ' =& ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Plus $node
-     */
-    protected function pExpr_AssignOp_Plus($node)
+    protected function pExpr_AssignOp_Plus(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Plus $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Plus::class, $node->var, ' += ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Plus::class, $node->var, ' += ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Minus $node
-     */
-    protected function pExpr_AssignOp_Minus($node)
+    protected function pExpr_AssignOp_Minus(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Minus $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Minus::class, $node->var, ' -= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Minus::class, $node->var, ' -= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Mul $node
-     */
-    protected function pExpr_AssignOp_Mul($node)
+    protected function pExpr_AssignOp_Mul(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Mul $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Mul::class, $node->var, ' *= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Mul::class, $node->var, ' *= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Div $node
-     */
-    protected function pExpr_AssignOp_Div($node)
+    protected function pExpr_AssignOp_Div(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Div $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Div::class, $node->var, ' /= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Div::class, $node->var, ' /= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Concat $node
-     */
-    protected function pExpr_AssignOp_Concat($node)
+    protected function pExpr_AssignOp_Concat(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Concat $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Concat::class, $node->var, ' .= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Concat::class, $node->var, ' .= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Mod $node
-     */
-    protected function pExpr_AssignOp_Mod($node)
+    protected function pExpr_AssignOp_Mod(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Mod $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Mod::class, $node->var, ' %= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Mod::class, $node->var, ' %= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\BitwiseAnd $node
-     */
-    protected function pExpr_AssignOp_BitwiseAnd($node)
+    protected function pExpr_AssignOp_BitwiseAnd(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseAnd $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseAnd::class, $node->var, ' &= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseAnd::class, $node->var, ' &= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\BitwiseOr $node
-     */
-    protected function pExpr_AssignOp_BitwiseOr($node)
+    protected function pExpr_AssignOp_BitwiseOr(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseOr $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseOr::class, $node->var, ' |= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseOr::class, $node->var, ' |= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\BitwiseXor $node
-     */
-    protected function pExpr_AssignOp_BitwiseXor($node)
+    protected function pExpr_AssignOp_BitwiseXor(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseXor $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseXor::class, $node->var, ' ^= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\BitwiseXor::class, $node->var, ' ^= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\ShiftLeft $node
-     */
-    protected function pExpr_AssignOp_ShiftLeft($node)
+    protected function pExpr_AssignOp_ShiftLeft(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\ShiftLeft $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\ShiftLeft::class, $node->var, ' <<= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\ShiftLeft::class, $node->var, ' <<= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\ShiftRight $node
-     */
-    protected function pExpr_AssignOp_ShiftRight($node)
+    protected function pExpr_AssignOp_ShiftRight(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\ShiftRight $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\ShiftRight::class, $node->var, ' >>= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\ShiftRight::class, $node->var, ' >>= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Pow $node
-     */
-    protected function pExpr_AssignOp_Pow($node)
+    protected function pExpr_AssignOp_Pow(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Pow $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Pow::class, $node->var, ' **= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Pow::class, $node->var, ' **= ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\AssignOp\Coalesce $node
-     */
-    protected function pExpr_AssignOp_Coalesce($node)
+    protected function pExpr_AssignOp_Coalesce(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Coalesce $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Coalesce::class, $node->var, ' ??= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\AssignOp\Coalesce::class, $node->var, ' ??= ', $node->expr);
     }
     // Binary expressions
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Plus $node
-     */
-    protected function pExpr_BinaryOp_Plus($node)
+    protected function pExpr_BinaryOp_Plus(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Plus $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Plus::class, $node->left, ' + ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Plus::class, $node->left, ' + ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Minus $node
-     */
-    protected function pExpr_BinaryOp_Minus($node)
+    protected function pExpr_BinaryOp_Minus(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Minus $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Minus::class, $node->left, ' - ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Minus::class, $node->left, ' - ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Mul $node
-     */
-    protected function pExpr_BinaryOp_Mul($node)
+    protected function pExpr_BinaryOp_Mul(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Mul $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Mul::class, $node->left, ' * ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Mul::class, $node->left, ' * ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Div $node
-     */
-    protected function pExpr_BinaryOp_Div($node)
+    protected function pExpr_BinaryOp_Div(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Div $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Div::class, $node->left, ' / ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Div::class, $node->left, ' / ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Concat $node
-     */
-    protected function pExpr_BinaryOp_Concat($node)
+    protected function pExpr_BinaryOp_Concat(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Concat $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Concat::class, $node->left, ' . ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Concat::class, $node->left, ' . ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Mod $node
-     */
-    protected function pExpr_BinaryOp_Mod($node)
+    protected function pExpr_BinaryOp_Mod(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Mod $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Mod::class, $node->left, ' % ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Mod::class, $node->left, ' % ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\BooleanAnd $node
-     */
-    protected function pExpr_BinaryOp_BooleanAnd($node)
+    protected function pExpr_BinaryOp_BooleanAnd(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BooleanAnd $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BooleanAnd::class, $node->left, ' && ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BooleanAnd::class, $node->left, ' && ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\BooleanOr $node
-     */
-    protected function pExpr_BinaryOp_BooleanOr($node)
+    protected function pExpr_BinaryOp_BooleanOr(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BooleanOr $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BooleanOr::class, $node->left, ' || ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BooleanOr::class, $node->left, ' || ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\BitwiseAnd $node
-     */
-    protected function pExpr_BinaryOp_BitwiseAnd($node)
+    protected function pExpr_BinaryOp_BitwiseAnd(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseAnd $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseAnd::class, $node->left, ' & ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseAnd::class, $node->left, ' & ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\BitwiseOr $node
-     */
-    protected function pExpr_BinaryOp_BitwiseOr($node)
+    protected function pExpr_BinaryOp_BitwiseOr(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseOr $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseOr::class, $node->left, ' | ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseOr::class, $node->left, ' | ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\BitwiseXor $node
-     */
-    protected function pExpr_BinaryOp_BitwiseXor($node)
+    protected function pExpr_BinaryOp_BitwiseXor(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseXor $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseXor::class, $node->left, ' ^ ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\BitwiseXor::class, $node->left, ' ^ ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\ShiftLeft $node
-     */
-    protected function pExpr_BinaryOp_ShiftLeft($node)
+    protected function pExpr_BinaryOp_ShiftLeft(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\ShiftLeft $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\ShiftLeft::class, $node->left, ' << ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\ShiftLeft::class, $node->left, ' << ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\ShiftRight $node
-     */
-    protected function pExpr_BinaryOp_ShiftRight($node)
+    protected function pExpr_BinaryOp_ShiftRight(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\ShiftRight $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\ShiftRight::class, $node->left, ' >> ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\ShiftRight::class, $node->left, ' >> ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Pow $node
-     */
-    protected function pExpr_BinaryOp_Pow($node)
+    protected function pExpr_BinaryOp_Pow(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Pow $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Pow::class, $node->left, ' ** ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Pow::class, $node->left, ' ** ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\LogicalAnd $node
-     */
-    protected function pExpr_BinaryOp_LogicalAnd($node)
+    protected function pExpr_BinaryOp_LogicalAnd(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalAnd $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalAnd::class, $node->left, ' and ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalAnd::class, $node->left, ' and ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\LogicalOr $node
-     */
-    protected function pExpr_BinaryOp_LogicalOr($node)
+    protected function pExpr_BinaryOp_LogicalOr(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalOr $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalOr::class, $node->left, ' or ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalOr::class, $node->left, ' or ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\LogicalXor $node
-     */
-    protected function pExpr_BinaryOp_LogicalXor($node)
+    protected function pExpr_BinaryOp_LogicalXor(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalXor $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalXor::class, $node->left, ' xor ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\LogicalXor::class, $node->left, ' xor ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Equal $node
-     */
-    protected function pExpr_BinaryOp_Equal($node)
+    protected function pExpr_BinaryOp_Equal(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Equal $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Equal::class, $node->left, ' == ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Equal::class, $node->left, ' == ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\NotEqual $node
-     */
-    protected function pExpr_BinaryOp_NotEqual($node)
+    protected function pExpr_BinaryOp_NotEqual(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\NotEqual $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\NotEqual::class, $node->left, ' != ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\NotEqual::class, $node->left, ' != ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Identical $node
-     */
-    protected function pExpr_BinaryOp_Identical($node)
+    protected function pExpr_BinaryOp_Identical(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Identical $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Identical::class, $node->left, ' === ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Identical::class, $node->left, ' === ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\NotIdentical $node
-     */
-    protected function pExpr_BinaryOp_NotIdentical($node)
+    protected function pExpr_BinaryOp_NotIdentical(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\NotIdentical $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\NotIdentical::class, $node->left, ' !== ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\NotIdentical::class, $node->left, ' !== ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Spaceship $node
-     */
-    protected function pExpr_BinaryOp_Spaceship($node)
+    protected function pExpr_BinaryOp_Spaceship(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Spaceship $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Spaceship::class, $node->left, ' <=> ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Spaceship::class, $node->left, ' <=> ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Greater $node
-     */
-    protected function pExpr_BinaryOp_Greater($node)
+    protected function pExpr_BinaryOp_Greater(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Greater $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Greater::class, $node->left, ' > ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Greater::class, $node->left, ' > ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\GreaterOrEqual $node
-     */
-    protected function pExpr_BinaryOp_GreaterOrEqual($node)
+    protected function pExpr_BinaryOp_GreaterOrEqual(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\GreaterOrEqual $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\GreaterOrEqual::class, $node->left, ' >= ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\GreaterOrEqual::class, $node->left, ' >= ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Smaller $node
-     */
-    protected function pExpr_BinaryOp_Smaller($node)
+    protected function pExpr_BinaryOp_Smaller(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Smaller $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Smaller::class, $node->left, ' < ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Smaller::class, $node->left, ' < ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\SmallerOrEqual $node
-     */
-    protected function pExpr_BinaryOp_SmallerOrEqual($node)
+    protected function pExpr_BinaryOp_SmallerOrEqual(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\SmallerOrEqual $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\SmallerOrEqual::class, $node->left, ' <= ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\SmallerOrEqual::class, $node->left, ' <= ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BinaryOp\Coalesce $node
-     */
-    protected function pExpr_BinaryOp_Coalesce($node)
+    protected function pExpr_BinaryOp_Coalesce(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Coalesce $node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Coalesce::class, $node->left, ' ?? ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BinaryOp\Coalesce::class, $node->left, ' ?? ', $node->right);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Instanceof_ $node
-     */
-    protected function pExpr_Instanceof($node)
+    protected function pExpr_Instanceof(\ConfigTransformer202107104\PhpParser\Node\Expr\Instanceof_ $node)
     {
-        list($precedence, $associativity) = $this->precedenceMap[\ConfigTransformer202107108\PhpParser\Node\Expr\Instanceof_::class];
+        list($precedence, $associativity) = $this->precedenceMap[\ConfigTransformer202107104\PhpParser\Node\Expr\Instanceof_::class];
         return $this->pPrec($node->expr, $precedence, $associativity, -1) . ' instanceof ' . $this->pNewVariable($node->class);
     }
     // Unary expressions
-    /**
-     * @param \PhpParser\Node\Expr\BooleanNot $node
-     */
-    protected function pExpr_BooleanNot($node)
+    protected function pExpr_BooleanNot(\ConfigTransformer202107104\PhpParser\Node\Expr\BooleanNot $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BooleanNot::class, '!', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BooleanNot::class, '!', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\BitwiseNot $node
-     */
-    protected function pExpr_BitwiseNot($node)
+    protected function pExpr_BitwiseNot(\ConfigTransformer202107104\PhpParser\Node\Expr\BitwiseNot $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BitwiseNot::class, '~', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\BitwiseNot::class, '~', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\UnaryMinus $node
-     */
-    protected function pExpr_UnaryMinus($node)
+    protected function pExpr_UnaryMinus(\ConfigTransformer202107104\PhpParser\Node\Expr\UnaryMinus $node)
     {
-        if ($node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\UnaryMinus || $node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\PreDec) {
+        if ($node->expr instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\UnaryMinus || $node->expr instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\PreDec) {
             // Enforce -(-$expr) instead of --$expr
             return '-(' . $this->p($node->expr) . ')';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\UnaryMinus::class, '-', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\UnaryMinus::class, '-', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\UnaryPlus $node
-     */
-    protected function pExpr_UnaryPlus($node)
+    protected function pExpr_UnaryPlus(\ConfigTransformer202107104\PhpParser\Node\Expr\UnaryPlus $node)
     {
-        if ($node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\UnaryPlus || $node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\PreInc) {
+        if ($node->expr instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\UnaryPlus || $node->expr instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\PreInc) {
             // Enforce +(+$expr) instead of ++$expr
             return '+(' . $this->p($node->expr) . ')';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\UnaryPlus::class, '+', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\UnaryPlus::class, '+', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\PreInc $node
-     */
-    protected function pExpr_PreInc($node)
+    protected function pExpr_PreInc(\ConfigTransformer202107104\PhpParser\Node\Expr\PreInc $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PreInc::class, '++', $node->var);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\PreInc::class, '++', $node->var);
     }
-    /**
-     * @param \PhpParser\Node\Expr\PreDec $node
-     */
-    protected function pExpr_PreDec($node)
+    protected function pExpr_PreDec(\ConfigTransformer202107104\PhpParser\Node\Expr\PreDec $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PreDec::class, '--', $node->var);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\PreDec::class, '--', $node->var);
     }
-    /**
-     * @param \PhpParser\Node\Expr\PostInc $node
-     */
-    protected function pExpr_PostInc($node)
+    protected function pExpr_PostInc(\ConfigTransformer202107104\PhpParser\Node\Expr\PostInc $node)
     {
-        return $this->pPostfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PostInc::class, $node->var, '++');
+        return $this->pPostfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\PostInc::class, $node->var, '++');
     }
-    /**
-     * @param \PhpParser\Node\Expr\PostDec $node
-     */
-    protected function pExpr_PostDec($node)
+    protected function pExpr_PostDec(\ConfigTransformer202107104\PhpParser\Node\Expr\PostDec $node)
     {
-        return $this->pPostfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PostDec::class, $node->var, '--');
+        return $this->pPostfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\PostDec::class, $node->var, '--');
     }
-    /**
-     * @param \PhpParser\Node\Expr\ErrorSuppress $node
-     */
-    protected function pExpr_ErrorSuppress($node)
+    protected function pExpr_ErrorSuppress(\ConfigTransformer202107104\PhpParser\Node\Expr\ErrorSuppress $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\ErrorSuppress::class, '@', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\ErrorSuppress::class, '@', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\YieldFrom $node
-     */
-    protected function pExpr_YieldFrom($node)
+    protected function pExpr_YieldFrom(\ConfigTransformer202107104\PhpParser\Node\Expr\YieldFrom $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\YieldFrom::class, 'yield from ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\YieldFrom::class, 'yield from ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Print_ $node
-     */
-    protected function pExpr_Print($node)
+    protected function pExpr_Print(\ConfigTransformer202107104\PhpParser\Node\Expr\Print_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Print_::class, 'print ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Print_::class, 'print ', $node->expr);
     }
     // Casts
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Int_ $node
-     */
-    protected function pExpr_Cast_Int($node)
+    protected function pExpr_Cast_Int(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Int_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Int_::class, '(int) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Int_::class, '(int) ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Double $node
-     */
-    protected function pExpr_Cast_Double($node)
+    protected function pExpr_Cast_Double(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double $node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE);
-        if ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE) {
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE);
+        if ($kind === \ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE) {
             $cast = '(double)';
-        } elseif ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_FLOAT) {
+        } elseif ($kind === \ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double::KIND_FLOAT) {
             $cast = '(float)';
-        } elseif ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_REAL) {
+        } elseif ($kind === \ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double::KIND_REAL) {
             $cast = '(real)';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::class, $cast . ' ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Double::class, $cast . ' ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\String_ $node
-     */
-    protected function pExpr_Cast_String($node)
+    protected function pExpr_Cast_String(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\String_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\String_::class, '(string) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\String_::class, '(string) ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Array_ $node
-     */
-    protected function pExpr_Cast_Array($node)
+    protected function pExpr_Cast_Array(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Array_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Array_::class, '(array) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Array_::class, '(array) ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Object_ $node
-     */
-    protected function pExpr_Cast_Object($node)
+    protected function pExpr_Cast_Object(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Object_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Object_::class, '(object) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Object_::class, '(object) ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Bool_ $node
-     */
-    protected function pExpr_Cast_Bool($node)
+    protected function pExpr_Cast_Bool(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Bool_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Bool_::class, '(bool) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Bool_::class, '(bool) ', $node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Cast\Unset_ $node
-     */
-    protected function pExpr_Cast_Unset($node)
+    protected function pExpr_Cast_Unset(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Unset_ $node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Unset_::class, '(unset) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Cast\Unset_::class, '(unset) ', $node->expr);
     }
     // Function calls and similar constructs
-    /**
-     * @param \PhpParser\Node\Expr\FuncCall $node
-     */
-    protected function pExpr_FuncCall($node)
+    protected function pExpr_FuncCall(\ConfigTransformer202107104\PhpParser\Node\Expr\FuncCall $node)
     {
         return $this->pCallLhs($node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\MethodCall $node
-     */
-    protected function pExpr_MethodCall($node)
+    protected function pExpr_MethodCall(\ConfigTransformer202107104\PhpParser\Node\Expr\MethodCall $node)
     {
         return $this->pDereferenceLhs($node->var) . '->' . $this->pObjectProperty($node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\NullsafeMethodCall $node
-     */
-    protected function pExpr_NullsafeMethodCall($node)
+    protected function pExpr_NullsafeMethodCall(\ConfigTransformer202107104\PhpParser\Node\Expr\NullsafeMethodCall $node)
     {
         return $this->pDereferenceLhs($node->var) . '?->' . $this->pObjectProperty($node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\StaticCall $node
-     */
-    protected function pExpr_StaticCall($node)
+    protected function pExpr_StaticCall(\ConfigTransformer202107104\PhpParser\Node\Expr\StaticCall $node)
     {
-        return $this->pDereferenceLhs($node->class) . '::' . ($node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr ? $node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\Variable ? $this->p($node->name) : '{' . $this->p($node->name) . '}' : $node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
+        return $this->pDereferenceLhs($node->class) . '::' . ($node->name instanceof \ConfigTransformer202107104\PhpParser\Node\Expr ? $node->name instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\Variable ? $this->p($node->name) : '{' . $this->p($node->name) . '}' : $node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Empty_ $node
-     */
-    protected function pExpr_Empty($node)
+    protected function pExpr_Empty(\ConfigTransformer202107104\PhpParser\Node\Expr\Empty_ $node)
     {
         return 'empty(' . $this->p($node->expr) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Isset_ $node
-     */
-    protected function pExpr_Isset($node)
+    protected function pExpr_Isset(\ConfigTransformer202107104\PhpParser\Node\Expr\Isset_ $node)
     {
         return 'isset(' . $this->pCommaSeparated($node->vars) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Eval_ $node
-     */
-    protected function pExpr_Eval($node)
+    protected function pExpr_Eval(\ConfigTransformer202107104\PhpParser\Node\Expr\Eval_ $node)
     {
         return 'eval(' . $this->p($node->expr) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Include_ $node
-     */
-    protected function pExpr_Include($node)
+    protected function pExpr_Include(\ConfigTransformer202107104\PhpParser\Node\Expr\Include_ $node)
     {
-        static $map = [\ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'include', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'include_once', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'require', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'require_once'];
+        static $map = [\ConfigTransformer202107104\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'include', \ConfigTransformer202107104\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'include_once', \ConfigTransformer202107104\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'require', \ConfigTransformer202107104\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'require_once'];
         return $map[$node->type] . ' ' . $this->p($node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\List_ $node
-     */
-    protected function pExpr_List($node)
+    protected function pExpr_List(\ConfigTransformer202107104\PhpParser\Node\Expr\List_ $node)
     {
         return 'list(' . $this->pCommaSeparated($node->items) . ')';
     }
     // Other
-    /**
-     * @param \PhpParser\Node\Expr\Error $node
-     */
-    protected function pExpr_Error($node)
+    protected function pExpr_Error(\ConfigTransformer202107104\PhpParser\Node\Expr\Error $node)
     {
         throw new \LogicException('Cannot pretty-print AST with Error nodes');
     }
-    /**
-     * @param \PhpParser\Node\Expr\Variable $node
-     */
-    protected function pExpr_Variable($node)
+    protected function pExpr_Variable(\ConfigTransformer202107104\PhpParser\Node\Expr\Variable $node)
     {
-        if ($node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr) {
+        if ($node->name instanceof \ConfigTransformer202107104\PhpParser\Node\Expr) {
             return '${' . $this->p($node->name) . '}';
         } else {
             return '$' . $node->name;
         }
     }
-    /**
-     * @param \PhpParser\Node\Expr\Array_ $node
-     */
-    protected function pExpr_Array($node)
+    protected function pExpr_Array(\ConfigTransformer202107104\PhpParser\Node\Expr\Array_ $node)
     {
-        $syntax = $node->getAttribute('kind', $this->options['shortArraySyntax'] ? \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_SHORT : \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_LONG);
-        if ($syntax === \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_SHORT) {
+        $syntax = $node->getAttribute('kind', $this->options['shortArraySyntax'] ? \ConfigTransformer202107104\PhpParser\Node\Expr\Array_::KIND_SHORT : \ConfigTransformer202107104\PhpParser\Node\Expr\Array_::KIND_LONG);
+        if ($syntax === \ConfigTransformer202107104\PhpParser\Node\Expr\Array_::KIND_SHORT) {
             return '[' . $this->pMaybeMultiline($node->items, \true) . ']';
         } else {
             return 'array(' . $this->pMaybeMultiline($node->items, \true) . ')';
         }
     }
-    /**
-     * @param \PhpParser\Node\Expr\ArrayItem $node
-     */
-    protected function pExpr_ArrayItem($node)
+    protected function pExpr_ArrayItem(\ConfigTransformer202107104\PhpParser\Node\Expr\ArrayItem $node)
     {
         return (null !== $node->key ? $this->p($node->key) . ' => ' : '') . ($node->byRef ? '&' : '') . ($node->unpack ? '...' : '') . $this->p($node->value);
     }
-    /**
-     * @param \PhpParser\Node\Expr\ArrayDimFetch $node
-     */
-    protected function pExpr_ArrayDimFetch($node)
+    protected function pExpr_ArrayDimFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\ArrayDimFetch $node)
     {
         return $this->pDereferenceLhs($node->var) . '[' . (null !== $node->dim ? $this->p($node->dim) : '') . ']';
     }
-    /**
-     * @param \PhpParser\Node\Expr\ConstFetch $node
-     */
-    protected function pExpr_ConstFetch($node)
+    protected function pExpr_ConstFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\ConstFetch $node)
     {
         return $this->p($node->name);
     }
-    /**
-     * @param \PhpParser\Node\Expr\ClassConstFetch $node
-     */
-    protected function pExpr_ClassConstFetch($node)
+    protected function pExpr_ClassConstFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\ClassConstFetch $node)
     {
         return $this->pDereferenceLhs($node->class) . '::' . $this->p($node->name);
     }
-    /**
-     * @param \PhpParser\Node\Expr\PropertyFetch $node
-     */
-    protected function pExpr_PropertyFetch($node)
+    protected function pExpr_PropertyFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\PropertyFetch $node)
     {
         return $this->pDereferenceLhs($node->var) . '->' . $this->pObjectProperty($node->name);
     }
-    /**
-     * @param \PhpParser\Node\Expr\NullsafePropertyFetch $node
-     */
-    protected function pExpr_NullsafePropertyFetch($node)
+    protected function pExpr_NullsafePropertyFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\NullsafePropertyFetch $node)
     {
         return $this->pDereferenceLhs($node->var) . '?->' . $this->pObjectProperty($node->name);
     }
-    /**
-     * @param \PhpParser\Node\Expr\StaticPropertyFetch $node
-     */
-    protected function pExpr_StaticPropertyFetch($node)
+    protected function pExpr_StaticPropertyFetch(\ConfigTransformer202107104\PhpParser\Node\Expr\StaticPropertyFetch $node)
     {
         return $this->pDereferenceLhs($node->class) . '::$' . $this->pObjectProperty($node->name);
     }
-    /**
-     * @param \PhpParser\Node\Expr\ShellExec $node
-     */
-    protected function pExpr_ShellExec($node)
+    protected function pExpr_ShellExec(\ConfigTransformer202107104\PhpParser\Node\Expr\ShellExec $node)
     {
         return '`' . $this->pEncapsList($node->parts, '`') . '`';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Closure $node
-     */
-    protected function pExpr_Closure($node)
+    protected function pExpr_Closure(\ConfigTransformer202107104\PhpParser\Node\Expr\Closure $node)
     {
         return $this->pAttrGroups($node->attrGroups, \true) . ($node->static ? 'static ' : '') . 'function ' . ($node->byRef ? '&' : '') . '(' . $this->pCommaSeparated($node->params) . ')' . (!empty($node->uses) ? ' use(' . $this->pCommaSeparated($node->uses) . ')' : '') . (null !== $node->returnType ? ' : ' . $this->p($node->returnType) : '') . ' {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Match_ $node
-     */
-    protected function pExpr_Match($node)
+    protected function pExpr_Match(\ConfigTransformer202107104\PhpParser\Node\Expr\Match_ $node)
     {
         return 'match (' . $this->p($node->cond) . ') {' . $this->pCommaSeparatedMultiline($node->arms, \true) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\MatchArm $node
-     */
-    protected function pMatchArm($node)
+    protected function pMatchArm(\ConfigTransformer202107104\PhpParser\Node\MatchArm $node)
     {
         return ($node->conds ? $this->pCommaSeparated($node->conds) : 'default') . ' => ' . $this->p($node->body);
     }
-    /**
-     * @param \PhpParser\Node\Expr\ArrowFunction $node
-     */
-    protected function pExpr_ArrowFunction($node)
+    protected function pExpr_ArrowFunction(\ConfigTransformer202107104\PhpParser\Node\Expr\ArrowFunction $node)
     {
         return $this->pAttrGroups($node->attrGroups, \true) . ($node->static ? 'static ' : '') . 'fn' . ($node->byRef ? '&' : '') . '(' . $this->pCommaSeparated($node->params) . ')' . (null !== $node->returnType ? ': ' . $this->p($node->returnType) : '') . ' => ' . $this->p($node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\ClosureUse $node
-     */
-    protected function pExpr_ClosureUse($node)
+    protected function pExpr_ClosureUse(\ConfigTransformer202107104\PhpParser\Node\Expr\ClosureUse $node)
     {
         return ($node->byRef ? '&' : '') . $this->p($node->var);
     }
-    /**
-     * @param \PhpParser\Node\Expr\New_ $node
-     */
-    protected function pExpr_New($node)
+    protected function pExpr_New(\ConfigTransformer202107104\PhpParser\Node\Expr\New_ $node)
     {
-        if ($node->class instanceof \ConfigTransformer202107108\PhpParser\Node\Stmt\Class_) {
+        if ($node->class instanceof \ConfigTransformer202107104\PhpParser\Node\Stmt\Class_) {
             $args = $node->args ? '(' . $this->pMaybeMultiline($node->args) . ')' : '';
             return 'new ' . $this->pClassCommon($node->class, $args);
         }
         return 'new ' . $this->pNewVariable($node->class) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
-    /**
-     * @param \PhpParser\Node\Expr\Clone_ $node
-     */
-    protected function pExpr_Clone($node)
+    protected function pExpr_Clone(\ConfigTransformer202107104\PhpParser\Node\Expr\Clone_ $node)
     {
         return 'clone ' . $this->p($node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Ternary $node
-     */
-    protected function pExpr_Ternary($node)
+    protected function pExpr_Ternary(\ConfigTransformer202107104\PhpParser\Node\Expr\Ternary $node)
     {
         // a bit of cheating: we treat the ternary as a binary op where the ?...: part is the operator.
         // this is okay because the part between ? and : never needs parentheses.
-        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Ternary::class, $node->cond, ' ?' . (null !== $node->if ? ' ' . $this->p($node->if) . ' ' : '') . ': ', $node->else);
+        return $this->pInfixOp(\ConfigTransformer202107104\PhpParser\Node\Expr\Ternary::class, $node->cond, ' ?' . (null !== $node->if ? ' ' . $this->p($node->if) . ' ' : '') . ': ', $node->else);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Exit_ $node
-     */
-    protected function pExpr_Exit($node)
+    protected function pExpr_Exit(\ConfigTransformer202107104\PhpParser\Node\Expr\Exit_ $node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Expr\Exit_::KIND_DIE);
-        return ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Exit_::KIND_EXIT ? 'exit' : 'die') . (null !== $node->expr ? '(' . $this->p($node->expr) . ')' : '');
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107104\PhpParser\Node\Expr\Exit_::KIND_DIE);
+        return ($kind === \ConfigTransformer202107104\PhpParser\Node\Expr\Exit_::KIND_EXIT ? 'exit' : 'die') . (null !== $node->expr ? '(' . $this->p($node->expr) . ')' : '');
     }
-    /**
-     * @param \PhpParser\Node\Expr\Throw_ $node
-     */
-    protected function pExpr_Throw($node)
+    protected function pExpr_Throw(\ConfigTransformer202107104\PhpParser\Node\Expr\Throw_ $node)
     {
         return 'throw ' . $this->p($node->expr);
     }
-    /**
-     * @param \PhpParser\Node\Expr\Yield_ $node
-     */
-    protected function pExpr_Yield($node)
+    protected function pExpr_Yield(\ConfigTransformer202107104\PhpParser\Node\Expr\Yield_ $node)
     {
         if ($node->value === null) {
             return 'yield';
@@ -962,10 +611,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         }
     }
     // Declarations
-    /**
-     * @param \PhpParser\Node\Stmt\Namespace_ $node
-     */
-    protected function pStmt_Namespace($node)
+    protected function pStmt_Namespace(\ConfigTransformer202107104\PhpParser\Node\Stmt\Namespace_ $node)
     {
         if ($this->canUseSemicolonNamespaces) {
             return 'namespace ' . $this->p($node->name) . ';' . $this->nl . $this->pStmts($node->stmts, \false);
@@ -973,359 +619,215 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
             return 'namespace' . (null !== $node->name ? ' ' . $this->p($node->name) : '') . ' {' . $this->pStmts($node->stmts) . $this->nl . '}';
         }
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Use_ $node
-     */
-    protected function pStmt_Use($node)
+    protected function pStmt_Use(\ConfigTransformer202107104\PhpParser\Node\Stmt\Use_ $node)
     {
         return 'use ' . $this->pUseType($node->type) . $this->pCommaSeparated($node->uses) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\GroupUse $node
-     */
-    protected function pStmt_GroupUse($node)
+    protected function pStmt_GroupUse(\ConfigTransformer202107104\PhpParser\Node\Stmt\GroupUse $node)
     {
         return 'use ' . $this->pUseType($node->type) . $this->pName($node->prefix) . '\\{' . $this->pCommaSeparated($node->uses) . '};';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\UseUse $node
-     */
-    protected function pStmt_UseUse($node)
+    protected function pStmt_UseUse(\ConfigTransformer202107104\PhpParser\Node\Stmt\UseUse $node)
     {
         return $this->pUseType($node->type) . $this->p($node->name) . (null !== $node->alias ? ' as ' . $node->alias : '');
     }
     protected function pUseType($type)
     {
-        return $type === \ConfigTransformer202107108\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION ? 'function ' : ($type === \ConfigTransformer202107108\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT ? 'const ' : '');
+        return $type === \ConfigTransformer202107104\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION ? 'function ' : ($type === \ConfigTransformer202107104\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT ? 'const ' : '');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Interface_ $node
-     */
-    protected function pStmt_Interface($node)
+    protected function pStmt_Interface(\ConfigTransformer202107104\PhpParser\Node\Stmt\Interface_ $node)
     {
         return $this->pAttrGroups($node->attrGroups) . 'interface ' . $node->name . (!empty($node->extends) ? ' extends ' . $this->pCommaSeparated($node->extends) : '') . $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Enum_ $node
-     */
-    protected function pStmt_Enum($node)
+    protected function pStmt_Enum(\ConfigTransformer202107104\PhpParser\Node\Stmt\Enum_ $node)
     {
         return $this->pAttrGroups($node->attrGroups) . 'enum ' . $node->name . ($node->scalarType ? " : {$node->scalarType}" : '') . (!empty($node->implements) ? ' implements ' . $this->pCommaSeparated($node->implements) : '') . $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Class_ $node
-     */
-    protected function pStmt_Class($node)
+    protected function pStmt_Class(\ConfigTransformer202107104\PhpParser\Node\Stmt\Class_ $node)
     {
         return $this->pClassCommon($node, ' ' . $node->name);
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Trait_ $node
-     */
-    protected function pStmt_Trait($node)
+    protected function pStmt_Trait(\ConfigTransformer202107104\PhpParser\Node\Stmt\Trait_ $node)
     {
         return $this->pAttrGroups($node->attrGroups) . 'trait ' . $node->name . $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\EnumCase $node
-     */
-    protected function pStmt_EnumCase($node)
+    protected function pStmt_EnumCase(\ConfigTransformer202107104\PhpParser\Node\Stmt\EnumCase $node)
     {
         return $this->pAttrGroups($node->attrGroups) . 'case ' . $node->name . ($node->expr ? ' = ' . $this->p($node->expr) : '') . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\TraitUse $node
-     */
-    protected function pStmt_TraitUse($node)
+    protected function pStmt_TraitUse(\ConfigTransformer202107104\PhpParser\Node\Stmt\TraitUse $node)
     {
         return 'use ' . $this->pCommaSeparated($node->traits) . (empty($node->adaptations) ? ';' : ' {' . $this->pStmts($node->adaptations) . $this->nl . '}');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\TraitUseAdaptation\Precedence $node
-     */
-    protected function pStmt_TraitUseAdaptation_Precedence($node)
+    protected function pStmt_TraitUseAdaptation_Precedence(\ConfigTransformer202107104\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence $node)
     {
         return $this->p($node->trait) . '::' . $node->method . ' insteadof ' . $this->pCommaSeparated($node->insteadof) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\TraitUseAdaptation\Alias $node
-     */
-    protected function pStmt_TraitUseAdaptation_Alias($node)
+    protected function pStmt_TraitUseAdaptation_Alias(\ConfigTransformer202107104\PhpParser\Node\Stmt\TraitUseAdaptation\Alias $node)
     {
         return (null !== $node->trait ? $this->p($node->trait) . '::' : '') . $node->method . ' as' . (null !== $node->newModifier ? ' ' . \rtrim($this->pModifiers($node->newModifier), ' ') : '') . (null !== $node->newName ? ' ' . $node->newName : '') . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Property $node
-     */
-    protected function pStmt_Property($node)
+    protected function pStmt_Property(\ConfigTransformer202107104\PhpParser\Node\Stmt\Property $node)
     {
         return $this->pAttrGroups($node->attrGroups) . (0 === $node->flags ? 'var ' : $this->pModifiers($node->flags)) . ($node->type ? $this->p($node->type) . ' ' : '') . $this->pCommaSeparated($node->props) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\PropertyProperty $node
-     */
-    protected function pStmt_PropertyProperty($node)
+    protected function pStmt_PropertyProperty(\ConfigTransformer202107104\PhpParser\Node\Stmt\PropertyProperty $node)
     {
         return '$' . $node->name . (null !== $node->default ? ' = ' . $this->p($node->default) : '');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\ClassMethod $node
-     */
-    protected function pStmt_ClassMethod($node)
+    protected function pStmt_ClassMethod(\ConfigTransformer202107104\PhpParser\Node\Stmt\ClassMethod $node)
     {
         return $this->pAttrGroups($node->attrGroups) . $this->pModifiers($node->flags) . 'function ' . ($node->byRef ? '&' : '') . $node->name . '(' . $this->pMaybeMultiline($node->params) . ')' . (null !== $node->returnType ? ' : ' . $this->p($node->returnType) : '') . (null !== $node->stmts ? $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}' : ';');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\ClassConst $node
-     */
-    protected function pStmt_ClassConst($node)
+    protected function pStmt_ClassConst(\ConfigTransformer202107104\PhpParser\Node\Stmt\ClassConst $node)
     {
         return $this->pAttrGroups($node->attrGroups) . $this->pModifiers($node->flags) . 'const ' . $this->pCommaSeparated($node->consts) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Function_ $node
-     */
-    protected function pStmt_Function($node)
+    protected function pStmt_Function(\ConfigTransformer202107104\PhpParser\Node\Stmt\Function_ $node)
     {
         return $this->pAttrGroups($node->attrGroups) . 'function ' . ($node->byRef ? '&' : '') . $node->name . '(' . $this->pCommaSeparated($node->params) . ')' . (null !== $node->returnType ? ' : ' . $this->p($node->returnType) : '') . $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Const_ $node
-     */
-    protected function pStmt_Const($node)
+    protected function pStmt_Const(\ConfigTransformer202107104\PhpParser\Node\Stmt\Const_ $node)
     {
         return 'const ' . $this->pCommaSeparated($node->consts) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Declare_ $node
-     */
-    protected function pStmt_Declare($node)
+    protected function pStmt_Declare(\ConfigTransformer202107104\PhpParser\Node\Stmt\Declare_ $node)
     {
         return 'declare (' . $this->pCommaSeparated($node->declares) . ')' . (null !== $node->stmts ? ' {' . $this->pStmts($node->stmts) . $this->nl . '}' : ';');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\DeclareDeclare $node
-     */
-    protected function pStmt_DeclareDeclare($node)
+    protected function pStmt_DeclareDeclare(\ConfigTransformer202107104\PhpParser\Node\Stmt\DeclareDeclare $node)
     {
         return $node->key . '=' . $this->p($node->value);
     }
     // Control flow
-    /**
-     * @param \PhpParser\Node\Stmt\If_ $node
-     */
-    protected function pStmt_If($node)
+    protected function pStmt_If(\ConfigTransformer202107104\PhpParser\Node\Stmt\If_ $node)
     {
         return 'if (' . $this->p($node->cond) . ') {' . $this->pStmts($node->stmts) . $this->nl . '}' . ($node->elseifs ? ' ' . $this->pImplode($node->elseifs, ' ') : '') . (null !== $node->else ? ' ' . $this->p($node->else) : '');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\ElseIf_ $node
-     */
-    protected function pStmt_ElseIf($node)
+    protected function pStmt_ElseIf(\ConfigTransformer202107104\PhpParser\Node\Stmt\ElseIf_ $node)
     {
         return 'elseif (' . $this->p($node->cond) . ') {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Else_ $node
-     */
-    protected function pStmt_Else($node)
+    protected function pStmt_Else(\ConfigTransformer202107104\PhpParser\Node\Stmt\Else_ $node)
     {
         return 'else {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\For_ $node
-     */
-    protected function pStmt_For($node)
+    protected function pStmt_For(\ConfigTransformer202107104\PhpParser\Node\Stmt\For_ $node)
     {
         return 'for (' . $this->pCommaSeparated($node->init) . ';' . (!empty($node->cond) ? ' ' : '') . $this->pCommaSeparated($node->cond) . ';' . (!empty($node->loop) ? ' ' : '') . $this->pCommaSeparated($node->loop) . ') {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Foreach_ $node
-     */
-    protected function pStmt_Foreach($node)
+    protected function pStmt_Foreach(\ConfigTransformer202107104\PhpParser\Node\Stmt\Foreach_ $node)
     {
         return 'foreach (' . $this->p($node->expr) . ' as ' . (null !== $node->keyVar ? $this->p($node->keyVar) . ' => ' : '') . ($node->byRef ? '&' : '') . $this->p($node->valueVar) . ') {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\While_ $node
-     */
-    protected function pStmt_While($node)
+    protected function pStmt_While(\ConfigTransformer202107104\PhpParser\Node\Stmt\While_ $node)
     {
         return 'while (' . $this->p($node->cond) . ') {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Do_ $node
-     */
-    protected function pStmt_Do($node)
+    protected function pStmt_Do(\ConfigTransformer202107104\PhpParser\Node\Stmt\Do_ $node)
     {
         return 'do {' . $this->pStmts($node->stmts) . $this->nl . '} while (' . $this->p($node->cond) . ');';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Switch_ $node
-     */
-    protected function pStmt_Switch($node)
+    protected function pStmt_Switch(\ConfigTransformer202107104\PhpParser\Node\Stmt\Switch_ $node)
     {
         return 'switch (' . $this->p($node->cond) . ') {' . $this->pStmts($node->cases) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Case_ $node
-     */
-    protected function pStmt_Case($node)
+    protected function pStmt_Case(\ConfigTransformer202107104\PhpParser\Node\Stmt\Case_ $node)
     {
         return (null !== $node->cond ? 'case ' . $this->p($node->cond) : 'default') . ':' . $this->pStmts($node->stmts);
     }
-    /**
-     * @param \PhpParser\Node\Stmt\TryCatch $node
-     */
-    protected function pStmt_TryCatch($node)
+    protected function pStmt_TryCatch(\ConfigTransformer202107104\PhpParser\Node\Stmt\TryCatch $node)
     {
         return 'try {' . $this->pStmts($node->stmts) . $this->nl . '}' . ($node->catches ? ' ' . $this->pImplode($node->catches, ' ') : '') . ($node->finally !== null ? ' ' . $this->p($node->finally) : '');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Catch_ $node
-     */
-    protected function pStmt_Catch($node)
+    protected function pStmt_Catch(\ConfigTransformer202107104\PhpParser\Node\Stmt\Catch_ $node)
     {
         return 'catch (' . $this->pImplode($node->types, '|') . ($node->var !== null ? ' ' . $this->p($node->var) : '') . ') {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Finally_ $node
-     */
-    protected function pStmt_Finally($node)
+    protected function pStmt_Finally(\ConfigTransformer202107104\PhpParser\Node\Stmt\Finally_ $node)
     {
         return 'finally {' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Break_ $node
-     */
-    protected function pStmt_Break($node)
+    protected function pStmt_Break(\ConfigTransformer202107104\PhpParser\Node\Stmt\Break_ $node)
     {
         return 'break' . ($node->num !== null ? ' ' . $this->p($node->num) : '') . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Continue_ $node
-     */
-    protected function pStmt_Continue($node)
+    protected function pStmt_Continue(\ConfigTransformer202107104\PhpParser\Node\Stmt\Continue_ $node)
     {
         return 'continue' . ($node->num !== null ? ' ' . $this->p($node->num) : '') . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Return_ $node
-     */
-    protected function pStmt_Return($node)
+    protected function pStmt_Return(\ConfigTransformer202107104\PhpParser\Node\Stmt\Return_ $node)
     {
         return 'return' . (null !== $node->expr ? ' ' . $this->p($node->expr) : '') . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Throw_ $node
-     */
-    protected function pStmt_Throw($node)
+    protected function pStmt_Throw(\ConfigTransformer202107104\PhpParser\Node\Stmt\Throw_ $node)
     {
         return 'throw ' . $this->p($node->expr) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Label $node
-     */
-    protected function pStmt_Label($node)
+    protected function pStmt_Label(\ConfigTransformer202107104\PhpParser\Node\Stmt\Label $node)
     {
         return $node->name . ':';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Goto_ $node
-     */
-    protected function pStmt_Goto($node)
+    protected function pStmt_Goto(\ConfigTransformer202107104\PhpParser\Node\Stmt\Goto_ $node)
     {
         return 'goto ' . $node->name . ';';
     }
     // Other
-    /**
-     * @param \PhpParser\Node\Stmt\Expression $node
-     */
-    protected function pStmt_Expression($node)
+    protected function pStmt_Expression(\ConfigTransformer202107104\PhpParser\Node\Stmt\Expression $node)
     {
         return $this->p($node->expr) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Echo_ $node
-     */
-    protected function pStmt_Echo($node)
+    protected function pStmt_Echo(\ConfigTransformer202107104\PhpParser\Node\Stmt\Echo_ $node)
     {
         return 'echo ' . $this->pCommaSeparated($node->exprs) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Static_ $node
-     */
-    protected function pStmt_Static($node)
+    protected function pStmt_Static(\ConfigTransformer202107104\PhpParser\Node\Stmt\Static_ $node)
     {
         return 'static ' . $this->pCommaSeparated($node->vars) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Global_ $node
-     */
-    protected function pStmt_Global($node)
+    protected function pStmt_Global(\ConfigTransformer202107104\PhpParser\Node\Stmt\Global_ $node)
     {
         return 'global ' . $this->pCommaSeparated($node->vars) . ';';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\StaticVar $node
-     */
-    protected function pStmt_StaticVar($node)
+    protected function pStmt_StaticVar(\ConfigTransformer202107104\PhpParser\Node\Stmt\StaticVar $node)
     {
         return $this->p($node->var) . (null !== $node->default ? ' = ' . $this->p($node->default) : '');
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Unset_ $node
-     */
-    protected function pStmt_Unset($node)
+    protected function pStmt_Unset(\ConfigTransformer202107104\PhpParser\Node\Stmt\Unset_ $node)
     {
         return 'unset(' . $this->pCommaSeparated($node->vars) . ');';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\InlineHTML $node
-     */
-    protected function pStmt_InlineHTML($node)
+    protected function pStmt_InlineHTML(\ConfigTransformer202107104\PhpParser\Node\Stmt\InlineHTML $node)
     {
         $newline = $node->getAttribute('hasLeadingNewline', \true) ? "\n" : '';
         return '?>' . $newline . $node->value . '<?php ';
     }
-    /**
-     * @param \PhpParser\Node\Stmt\HaltCompiler $node
-     */
-    protected function pStmt_HaltCompiler($node)
+    protected function pStmt_HaltCompiler(\ConfigTransformer202107104\PhpParser\Node\Stmt\HaltCompiler $node)
     {
         return '__halt_compiler();' . $node->remaining;
     }
-    /**
-     * @param \PhpParser\Node\Stmt\Nop $node
-     */
-    protected function pStmt_Nop($node)
+    protected function pStmt_Nop(\ConfigTransformer202107104\PhpParser\Node\Stmt\Nop $node)
     {
         return '';
     }
     // Helpers
-    /**
-     * @param \PhpParser\Node\Stmt\Class_ $node
-     */
-    protected function pClassCommon($node, $afterClassToken)
+    protected function pClassCommon(\ConfigTransformer202107104\PhpParser\Node\Stmt\Class_ $node, $afterClassToken)
     {
         return $this->pAttrGroups($node->attrGroups, $node->name === null) . $this->pModifiers($node->flags) . 'class' . $afterClassToken . (null !== $node->extends ? ' extends ' . $this->p($node->extends) : '') . (!empty($node->implements) ? ' implements ' . $this->pCommaSeparated($node->implements) : '') . $this->nl . '{' . $this->pStmts($node->stmts) . $this->nl . '}';
     }
     protected function pObjectProperty($node)
     {
-        if ($node instanceof \ConfigTransformer202107108\PhpParser\Node\Expr) {
+        if ($node instanceof \ConfigTransformer202107104\PhpParser\Node\Expr) {
             return '{' . $this->p($node) . '}';
         } else {
             return $node;
         }
     }
-    /**
-     * @param mixed[] $encapsList
-     */
-    protected function pEncapsList($encapsList, $quote)
+    protected function pEncapsList(array $encapsList, $quote)
     {
         $return = '';
         foreach ($encapsList as $element) {
-            if ($element instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart) {
+            if ($element instanceof \ConfigTransformer202107104\PhpParser\Node\Scalar\EncapsedStringPart) {
                 $return .= $this->escapeString($element->value, $quote);
             } else {
                 $return .= '{' . $this->p($element) . '}';
@@ -1333,10 +835,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         }
         return $return;
     }
-    /**
-     * @param string $string
-     */
-    protected function pSingleQuotedString($string)
+    protected function pSingleQuotedString(string $string)
     {
         return '\'' . \addcslashes($string, '\'\\') . '\'';
     }
@@ -1377,24 +876,18 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         $end = $atEnd ? '(?:$|[;\\r\\n])' : '[;\\r\\n]';
         return \false !== \strpos($string, $label) && \preg_match('/' . $start . $label . $end . '/', $string);
     }
-    /**
-     * @param mixed[] $parts
-     */
-    protected function encapsedContainsEndLabel($parts, $label)
+    protected function encapsedContainsEndLabel(array $parts, $label)
     {
         foreach ($parts as $i => $part) {
             $atStart = $i === 0;
             $atEnd = $i === \count($parts) - 1;
-            if ($part instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart && $this->containsEndLabel($part->value, $label, $atStart, $atEnd)) {
+            if ($part instanceof \ConfigTransformer202107104\PhpParser\Node\Scalar\EncapsedStringPart && $this->containsEndLabel($part->value, $label, $atStart, $atEnd)) {
                 return \true;
             }
         }
         return \false;
     }
-    /**
-     * @param \PhpParser\Node $node
-     */
-    protected function pDereferenceLhs($node)
+    protected function pDereferenceLhs(\ConfigTransformer202107104\PhpParser\Node $node)
     {
         if (!$this->dereferenceLhsRequiresParens($node)) {
             return $this->p($node);
@@ -1402,10 +895,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
             return '(' . $this->p($node) . ')';
         }
     }
-    /**
-     * @param \PhpParser\Node $node
-     */
-    protected function pCallLhs($node)
+    protected function pCallLhs(\ConfigTransformer202107104\PhpParser\Node $node)
     {
         if (!$this->callLhsRequiresParens($node)) {
             return $this->p($node);
@@ -1413,10 +903,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
             return '(' . $this->p($node) . ')';
         }
     }
-    /**
-     * @param \PhpParser\Node $node
-     */
-    protected function pNewVariable($node)
+    protected function pNewVariable(\ConfigTransformer202107104\PhpParser\Node $node)
     {
         // TODO: This is not fully accurate.
         return $this->pDereferenceLhs($node);
@@ -1425,7 +912,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
      * @param Node[] $nodes
      * @return bool
      */
-    protected function hasNodeWithComments($nodes)
+    protected function hasNodeWithComments(array $nodes)
     {
         foreach ($nodes as $node) {
             if ($node && $node->getComments()) {
@@ -1434,11 +921,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
         }
         return \false;
     }
-    /**
-     * @param mixed[] $nodes
-     * @param bool $trailingComma
-     */
-    protected function pMaybeMultiline($nodes, $trailingComma = \false)
+    protected function pMaybeMultiline(array $nodes, bool $trailingComma = \false)
     {
         if (!$this->hasNodeWithComments($nodes)) {
             return $this->pCommaSeparated($nodes);
@@ -1446,11 +929,7 @@ class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstra
             return $this->pCommaSeparatedMultiline($nodes, $trailingComma) . $this->nl;
         }
     }
-    /**
-     * @param mixed[] $nodes
-     * @param bool $inline
-     */
-    protected function pAttrGroups($nodes, $inline = \false) : string
+    protected function pAttrGroups(array $nodes, bool $inline = \false) : string
     {
         $result = '';
         $sep = $inline ? ' ' : $this->nl;

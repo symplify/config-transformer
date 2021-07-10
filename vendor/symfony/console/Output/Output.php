@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107108\Symfony\Component\Console\Output;
+namespace ConfigTransformer202107104\Symfony\Component\Console\Output;
 
-use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * Base class for output classes.
  *
@@ -25,7 +25,7 @@ use ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatt
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Output implements \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface
+abstract class Output implements \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface
 {
     private $verbosity;
     private $formatter;
@@ -34,17 +34,16 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
      * @param bool                          $decorated Whether to decorate messages
      * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
      */
-    public function __construct(?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, \ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
+    public function __construct(?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, \ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
     {
         $this->verbosity = null === $verbosity ? self::VERBOSITY_NORMAL : $verbosity;
-        $this->formatter = $formatter ?? new \ConfigTransformer202107108\Symfony\Component\Console\Formatter\OutputFormatter();
+        $this->formatter = $formatter ?? new \ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatter();
         $this->formatter->setDecorated($decorated);
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      */
-    public function setFormatter($formatter)
+    public function setFormatter(\ConfigTransformer202107104\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         $this->formatter = $formatter;
     }
@@ -57,9 +56,8 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         $this->formatter->setDecorated($decorated);
     }
@@ -72,9 +70,8 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     * @param int $level
      */
-    public function setVerbosity($level)
+    public function setVerbosity(int $level)
     {
         $this->verbosity = $level;
     }
@@ -115,18 +112,15 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     * @param int $options
      */
-    public function writeln($messages, $options = self::OUTPUT_NORMAL)
+    public function writeln($messages, int $options = self::OUTPUT_NORMAL)
     {
         $this->write($messages, \true, $options);
     }
     /**
      * {@inheritdoc}
-     * @param bool $newline
-     * @param int $options
      */
-    public function write($messages, $newline = \false, $options = self::OUTPUT_NORMAL)
+    public function write($messages, bool $newline = \false, int $options = self::OUTPUT_NORMAL)
     {
         if (!\is_iterable($messages)) {
             $messages = [$messages];
@@ -140,12 +134,12 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
         }
         foreach ($messages as $message) {
             switch ($type) {
-                case \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL:
+                case \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL:
                     $message = $this->formatter->format($message);
                     break;
-                case \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW:
+                case \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW:
                     break;
-                case \ConfigTransformer202107108\Symfony\Component\Console\Output\OutputInterface::OUTPUT_PLAIN:
+                case \ConfigTransformer202107104\Symfony\Component\Console\Output\OutputInterface::OUTPUT_PLAIN:
                     $message = \strip_tags($this->formatter->format($message));
                     break;
             }
@@ -154,8 +148,6 @@ abstract class Output implements \ConfigTransformer202107108\Symfony\Component\C
     }
     /**
      * Writes a message to the output.
-     * @param string $message
-     * @param bool $newline
      */
-    protected abstract function doWrite($message, $newline);
+    protected abstract function doWrite(string $message, bool $newline);
 }
