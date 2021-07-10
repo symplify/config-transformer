@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107109\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202107100\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202107109\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202107100\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * StorageInterface.
  *
