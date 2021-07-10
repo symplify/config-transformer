@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107104\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202107109\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202107104\PhpParser\Node\Expr;
-use ConfigTransformer202107104\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202107104\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202107104\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202107109\PhpParser\Node\Expr;
+use ConfigTransformer202107109\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202107109\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202107109\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * Handles this part:
  *
  * parameters: <---
  */
-final class ParameterCaseConverter implements \ConfigTransformer202107104\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ParameterCaseConverter implements \ConfigTransformer202107109\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
@@ -33,7 +33,7 @@ final class ParameterCaseConverter implements \ConfigTransformer202107104\Sympli
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer202107104\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202107104\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \ConfigTransformer202107104\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202107109\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202107109\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \ConfigTransformer202107109\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->currentFilePathProvider = $currentFilePathProvider;
@@ -44,9 +44,9 @@ final class ParameterCaseConverter implements \ConfigTransformer202107104\Sympli
      */
     public function match($rootKey, $key, $values) : bool
     {
-        return $rootKey === \ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
+        return $rootKey === \ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202107104\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202107109\PhpParser\Node\Stmt\Expression
     {
         if (\is_string($values)) {
             $values = $this->prefixWithDirConstantIfExistingPath($values);
@@ -60,9 +60,9 @@ final class ParameterCaseConverter implements \ConfigTransformer202107104\Sympli
             }
         }
         $args = $this->argsNodeFactory->createFromValues([$key, $values]);
-        $parametersVariable = new \ConfigTransformer202107104\PhpParser\Node\Expr\Variable(\ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
-        $methodCall = new \ConfigTransformer202107104\PhpParser\Node\Expr\MethodCall($parametersVariable, \ConfigTransformer202107104\Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
-        return new \ConfigTransformer202107104\PhpParser\Node\Stmt\Expression($methodCall);
+        $parametersVariable = new \ConfigTransformer202107109\PhpParser\Node\Expr\Variable(\ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
+        $methodCall = new \ConfigTransformer202107109\PhpParser\Node\Expr\MethodCall($parametersVariable, \ConfigTransformer202107109\Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        return new \ConfigTransformer202107109\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @return string|\PhpParser\Node\Expr
