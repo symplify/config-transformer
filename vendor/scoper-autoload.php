@@ -6,8 +6,8 @@ $loader = require_once __DIR__.'/autoload.php';
 
 // Aliases for the whitelisted classes. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#class-whitelisting
-if (!class_exists('ComposerAutoloaderInitdc18e85c77cc5820336305bd0a52dae5', false) && !interface_exists('ComposerAutoloaderInitdc18e85c77cc5820336305bd0a52dae5', false) && !trait_exists('ComposerAutoloaderInitdc18e85c77cc5820336305bd0a52dae5', false)) {
-    spl_autoload_call('ConfigTransformer202107109\ComposerAutoloaderInitdc18e85c77cc5820336305bd0a52dae5');
+if (!class_exists('ComposerAutoloaderInit3a9b9e26b7bdd05accf0c8a925a23012', false) && !interface_exists('ComposerAutoloaderInit3a9b9e26b7bdd05accf0c8a925a23012', false) && !trait_exists('ComposerAutoloaderInit3a9b9e26b7bdd05accf0c8a925a23012', false)) {
+    spl_autoload_call('ConfigTransformer202107109\ComposerAutoloaderInit3a9b9e26b7bdd05accf0c8a925a23012');
 }
 if (!class_exists('Normalizer', false) && !interface_exists('Normalizer', false) && !trait_exists('Normalizer', false)) {
     spl_autoload_call('ConfigTransformer202107109\Normalizer');
@@ -33,9 +33,9 @@ if (!class_exists('ReturnTypeWillChange', false) && !interface_exists('ReturnTyp
 
 // Functions whitelisting. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#functions-whitelisting
-if (!function_exists('composerRequiredc18e85c77cc5820336305bd0a52dae5')) {
-    function composerRequiredc18e85c77cc5820336305bd0a52dae5() {
-        return \ConfigTransformer202107109\composerRequiredc18e85c77cc5820336305bd0a52dae5(...func_get_args());
+if (!function_exists('composerRequire3a9b9e26b7bdd05accf0c8a925a23012')) {
+    function composerRequire3a9b9e26b7bdd05accf0c8a925a23012() {
+        return \ConfigTransformer202107109\composerRequire3a9b9e26b7bdd05accf0c8a925a23012(...func_get_args());
     }
 }
 if (!function_exists('parseArgs')) {
