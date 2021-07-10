@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerBag extends \ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
+class ContainerBag extends \ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202107100\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\DependencyInjection\Container $container)
     {
         $this->container = $container;
     }
@@ -30,6 +30,9 @@ class ContainerBag extends \ConfigTransformer202107100\Symfony\Component\Depende
     }
     /**
      * {@inheritdoc}
+     *
+     * @return array|bool|string|int|float|null
+     * @param string $name
      */
     public function get($name)
     {
@@ -37,6 +40,9 @@ class ContainerBag extends \ConfigTransformer202107100\Symfony\Component\Depende
     }
     /**
      * {@inheritdoc}
+     *
+     * @return bool
+     * @param string $name
      */
     public function has($name)
     {

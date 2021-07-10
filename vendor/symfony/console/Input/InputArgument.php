@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\Console\Input;
+namespace ConfigTransformer202107108\Symfony\Component\Console\Input;
 
-use ConfigTransformer202107100\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202107100\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202107108\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line argument.
  *
@@ -27,10 +27,10 @@ class InputArgument
     private $default;
     private $description;
     /**
-     * @param string               $name        The argument name
-     * @param int|null             $mode        The argument mode: self::REQUIRED or self::OPTIONAL
-     * @param string               $description A description text
-     * @param string|string[]|null $default     The default value (for self::OPTIONAL mode only)
+     * @param string                           $name        The argument name
+     * @param int|null                         $mode        The argument mode: self::REQUIRED or self::OPTIONAL
+     * @param string                           $description A description text
+     * @param string|bool|int|float|array|null $default     The default value (for self::OPTIONAL mode only)
      *
      * @throws InvalidArgumentException When argument mode is not valid
      */
@@ -39,7 +39,7 @@ class InputArgument
         if (null === $mode) {
             $mode = self::OPTIONAL;
         } elseif ($mode > 7 || $mode < 1) {
-            throw new \ConfigTransformer202107100\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Argument mode "%s" is not valid.', $mode));
+            throw new \ConfigTransformer202107108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Argument mode "%s" is not valid.', $mode));
         }
         $this->name = $name;
         $this->mode = $mode;
@@ -76,20 +76,20 @@ class InputArgument
     /**
      * Sets the default value.
      *
-     * @param string|string[]|null $default The default value
+     * @param string|bool|int|float|array|null $default
      *
      * @throws LogicException When incorrect default value is given
      */
     public function setDefault($default = null)
     {
         if (self::REQUIRED === $this->mode && null !== $default) {
-            throw new \ConfigTransformer202107100\Symfony\Component\Console\Exception\LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
+            throw new \ConfigTransformer202107108\Symfony\Component\Console\Exception\LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
         }
         if ($this->isArray()) {
             if (null === $default) {
                 $default = [];
             } elseif (!\is_array($default)) {
-                throw new \ConfigTransformer202107100\Symfony\Component\Console\Exception\LogicException('A default value for an array argument must be an array.');
+                throw new \ConfigTransformer202107108\Symfony\Component\Console\Exception\LogicException('A default value for an array argument must be an array.');
             }
         }
         $this->default = $default;
@@ -97,7 +97,7 @@ class InputArgument
     /**
      * Returns the default value.
      *
-     * @return string|string[]|null The default value
+     * @return string|bool|int|float|array|null
      */
     public function getDefault()
     {

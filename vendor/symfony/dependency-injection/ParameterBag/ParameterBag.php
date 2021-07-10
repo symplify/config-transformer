@@ -8,38 +8,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+class ParameterBag implements \ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
 {
     protected $parameters = [];
     protected $resolved = \false;
-    /**
-     * @param array $parameters An array of parameters
-     */
     public function __construct(array $parameters = [])
     {
         $this->add($parameters);
     }
     /**
-     * Clears all parameters.
+     * {@inheritdoc}
      */
     public function clear()
     {
         $this->parameters = [];
     }
     /**
-     * Adds parameters to the service container parameters.
-     *
-     * @param array $parameters An array of parameters
+     * {@inheritdoc}
+     * @param mixed[] $parameters
      */
     public function add($parameters)
     {
@@ -62,7 +58,7 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
     {
         if (!\array_key_exists($name, $this->parameters)) {
             if (!$name) {
-                throw new \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
             }
             $alternatives = [];
             foreach ($this->parameters as $key => $parameterValue) {
@@ -85,15 +81,13 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
                     $key = \substr($key, 0, -1 * (1 + \array_pop($namePartsLength)));
                 }
             }
-            throw new \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
+            throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
         }
         return $this->parameters[$name];
     }
     /**
-     * Sets a service container parameter.
-     *
-     * @param string $name  The parameter name
-     * @param mixed  $value The parameter value
+     * {@inheritdoc}
+     * @param string $name
      */
     public function set($name, $value)
     {
@@ -108,9 +102,8 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
         return \array_key_exists((string) $name, $this->parameters);
     }
     /**
-     * Removes a parameter.
-     *
-     * @param string $name The parameter name
+     * {@inheritdoc}
+     * @param string $name
      */
     public function remove($name)
     {
@@ -129,7 +122,7 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
             try {
                 $value = $this->resolveValue($value);
                 $parameters[$key] = $this->unescapeValue($value);
-            } catch (\ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
                 $e->setSourceKey($key);
                 throw $e;
             }
@@ -183,7 +176,7 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
         if (\preg_match('/^%([^%\\s]+)%$/', $value, $match)) {
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolving[$key] = \true;
             return $this->resolved ? $this->get($key) : $this->resolveValue($this->get($key), $resolving);
@@ -195,11 +188,11 @@ class ParameterBag implements \ConfigTransformer202107100\Symfony\Component\Depe
             }
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolved = $this->get($key);
             if (!\is_string($resolved) && !\is_numeric($resolved)) {
-                throw new \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type "%s" inside string value "%s".', $key, \get_debug_type($resolved), $value));
+                throw new \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type "%s" inside string value "%s".', $key, \get_debug_type($resolved), $value));
             }
             $resolved = (string) $resolved;
             $resolving[$key] = \true;

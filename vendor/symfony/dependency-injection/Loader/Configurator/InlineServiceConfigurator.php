@@ -8,15 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class InlineServiceConfigurator extends \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class InlineServiceConfigurator extends \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
-    public const FACTORY = 'service';
     use Traits\ArgumentTrait;
     use Traits\AutowireTrait;
     use Traits\BindTrait;
@@ -28,10 +27,11 @@ class InlineServiceConfigurator extends \ConfigTransformer202107100\Symfony\Comp
     use Traits\ParentTrait;
     use Traits\PropertyTrait;
     use Traits\TagTrait;
+    public const FACTORY = 'service';
     private $id = '[inline]';
     private $allowParent = \true;
     private $path = null;
-    public function __construct(\ConfigTransformer202107100\Symfony\Component\DependencyInjection\Definition $definition)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\DependencyInjection\Definition $definition)
     {
         $this->definition = $definition;
     }

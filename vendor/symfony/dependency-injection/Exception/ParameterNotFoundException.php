@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202107100\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer202107108\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent parameter is used.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterNotFoundException extends \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202107100\Psr\Container\NotFoundExceptionInterface
+class ParameterNotFoundException extends \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202107108\Psr\Container\NotFoundExceptionInterface
 {
     private $key;
     private $sourceId;
@@ -24,12 +24,12 @@ class ParameterNotFoundException extends \ConfigTransformer202107100\Symfony\Com
     private $alternatives;
     private $nonNestedAlternative;
     /**
-     * @param string      $key                  The requested parameter key
-     * @param string      $sourceId             The service id that references the non-existent parameter
-     * @param string      $sourceKey            The parameter key that references the non-existent parameter
-     * @param \Throwable  $previous             The previous exception
-     * @param string[]    $alternatives         Some parameter name alternatives
-     * @param string|null $nonNestedAlternative The alternative parameter name when the user expected dot notation for nested parameters
+     * @param string          $key                  The requested parameter key
+     * @param string|null     $sourceId             The service id that references the non-existent parameter
+     * @param string|null     $sourceKey            The parameter key that references the non-existent parameter
+     * @param \Throwable|null $previous             The previous exception
+     * @param string[]        $alternatives         Some parameter name alternatives
+     * @param string|null     $nonNestedAlternative The alternative parameter name when the user expected dot notation for nested parameters
      */
     public function __construct(string $key, string $sourceId = null, string $sourceKey = null, \Throwable $previous = null, array $alternatives = [], string $nonNestedAlternative = null)
     {
@@ -73,11 +73,17 @@ class ParameterNotFoundException extends \ConfigTransformer202107100\Symfony\Com
     {
         return $this->sourceKey;
     }
+    /**
+     * @param string|null $sourceId
+     */
     public function setSourceId($sourceId)
     {
         $this->sourceId = $sourceId;
         $this->updateRepr();
     }
+    /**
+     * @param string|null $sourceKey
+     */
     public function setSourceKey($sourceKey)
     {
         $this->sourceKey = $sourceKey;

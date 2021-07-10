@@ -8,16 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
-    public const FACTORY = 'services';
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
     use Traits\AutoconfigureTrait;
@@ -37,12 +36,13 @@ class ServiceConfigurator extends \ConfigTransformer202107100\Symfony\Component\
     use Traits\ShareTrait;
     use Traits\SyntheticTrait;
     use Traits\TagTrait;
+    public const FACTORY = 'services';
     private $container;
     private $instanceof;
     private $allowParent;
     private $path;
     private $destructed = \false;
-    public function __construct(\ConfigTransformer202107100\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202107100\Symfony\Component\DependencyInjection\Definition $definition, $id, array $defaultTags, string $path = null)
+    public function __construct(\ConfigTransformer202107108\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202107108\Symfony\Component\DependencyInjection\Definition $definition, ?string $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;

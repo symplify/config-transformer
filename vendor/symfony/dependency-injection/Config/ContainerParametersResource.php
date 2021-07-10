@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202107100\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202107108\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer202107100\Symfony\Component\Config\Resource\ResourceInterfa
  *
  * @final
  */
-class ContainerParametersResource implements \ConfigTransformer202107100\Symfony\Component\Config\Resource\ResourceInterface
+class ContainerParametersResource implements \ConfigTransformer202107108\Symfony\Component\Config\Resource\ResourceInterface
 {
     private $parameters;
     /**
@@ -28,9 +28,6 @@ class ContainerParametersResource implements \ConfigTransformer202107100\Symfony
     {
         $this->parameters = $parameters;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function __toString() : string
     {
         return 'container_parameters_' . \md5(\serialize($this->parameters));

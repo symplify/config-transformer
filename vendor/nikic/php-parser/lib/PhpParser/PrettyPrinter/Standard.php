@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107100\PhpParser\PrettyPrinter;
+namespace ConfigTransformer202107108\PhpParser\PrettyPrinter;
 
-use ConfigTransformer202107100\PhpParser\Node;
-use ConfigTransformer202107100\PhpParser\Node\Expr;
-use ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp;
-use ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp;
-use ConfigTransformer202107100\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202107100\PhpParser\Node\Name;
-use ConfigTransformer202107100\PhpParser\Node\Scalar;
-use ConfigTransformer202107100\PhpParser\Node\Scalar\MagicConst;
-use ConfigTransformer202107100\PhpParser\Node\Stmt;
-use ConfigTransformer202107100\PhpParser\PrettyPrinterAbstract;
-class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstract
+use ConfigTransformer202107108\PhpParser\Node;
+use ConfigTransformer202107108\PhpParser\Node\Expr;
+use ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer202107108\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202107108\PhpParser\Node\Name;
+use ConfigTransformer202107108\PhpParser\Node\Scalar;
+use ConfigTransformer202107108\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer202107108\PhpParser\Node\Stmt;
+use ConfigTransformer202107108\PhpParser\PrettyPrinterAbstract;
+class Standard extends \ConfigTransformer202107108\PhpParser\PrettyPrinterAbstract
 {
     // Special nodes
     /**
@@ -164,9 +164,9 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pScalar_String($node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED);
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED);
         switch ($kind) {
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_NOWDOC:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_NOWDOC:
                 $label = $node->getAttribute('docLabel');
                 if ($label && !$this->containsEndLabel($node->value, $label)) {
                     if ($node->value === '') {
@@ -175,9 +175,9 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
                     return "<<<'{$label}'\n{$node->value}\n{$label}" . $this->docStringEndToken;
                 }
             /* break missing intentionally */
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED:
                 return $this->pSingleQuotedString($node->value);
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_HEREDOC:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_HEREDOC:
                 $label = $node->getAttribute('docLabel');
                 if ($label && !$this->containsEndLabel($node->value, $label)) {
                     if ($node->value === '') {
@@ -187,7 +187,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
                     return "<<<{$label}\n" . $escaped . "\n{$label}" . $this->docStringEndToken;
                 }
             /* break missing intentionally */
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED:
                 return '"' . $this->escapeString($node->value, '"') . '"';
         }
         throw new \Exception('Invalid string kind');
@@ -197,10 +197,10 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pScalar_Encapsed($node)
     {
-        if ($node->getAttribute('kind') === \ConfigTransformer202107100\PhpParser\Node\Scalar\String_::KIND_HEREDOC) {
+        if ($node->getAttribute('kind') === \ConfigTransformer202107108\PhpParser\Node\Scalar\String_::KIND_HEREDOC) {
             $label = $node->getAttribute('docLabel');
             if ($label && !$this->encapsedContainsEndLabel($node->parts, $label)) {
-                if (\count($node->parts) === 1 && $node->parts[0] instanceof \ConfigTransformer202107100\PhpParser\Node\Scalar\EncapsedStringPart && $node->parts[0]->value === '') {
+                if (\count($node->parts) === 1 && $node->parts[0] instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart && $node->parts[0]->value === '') {
                     return "<<<{$label}\n{$label}" . $this->docStringEndToken;
                 }
                 return "<<<{$label}\n" . $this->pEncapsList($node->parts, null) . "\n{$label}" . $this->docStringEndToken;
@@ -218,8 +218,8 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
             // because the sign is not part of the literal
             return '(-' . \PHP_INT_MAX . '-1)';
         }
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107100\PhpParser\Node\Scalar\LNumber::KIND_DEC);
-        if (\ConfigTransformer202107100\PhpParser\Node\Scalar\LNumber::KIND_DEC === $kind) {
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_DEC);
+        if (\ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_DEC === $kind) {
             return (string) $node->value;
         }
         if ($node->value < 0) {
@@ -230,11 +230,11 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
             $str = (string) $node->value;
         }
         switch ($kind) {
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\LNumber::KIND_BIN:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_BIN:
                 return $sign . '0b' . \base_convert($str, 10, 2);
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\LNumber::KIND_OCT:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_OCT:
                 return $sign . '0' . \base_convert($str, 10, 8);
-            case \ConfigTransformer202107100\PhpParser\Node\Scalar\LNumber::KIND_HEX:
+            case \ConfigTransformer202107108\PhpParser\Node\Scalar\LNumber::KIND_HEX:
                 return $sign . '0x' . \base_convert($str, 10, 16);
         }
         throw new \Exception('Invalid number kind');
@@ -278,105 +278,105 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_Assign($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Assign::class, $node->var, ' = ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Assign::class, $node->var, ' = ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignRef $node
      */
     protected function pExpr_AssignRef($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignRef::class, $node->var, ' =& ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignRef::class, $node->var, ' =& ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Plus $node
      */
     protected function pExpr_AssignOp_Plus($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Plus::class, $node->var, ' += ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Plus::class, $node->var, ' += ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Minus $node
      */
     protected function pExpr_AssignOp_Minus($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Minus::class, $node->var, ' -= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Minus::class, $node->var, ' -= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Mul $node
      */
     protected function pExpr_AssignOp_Mul($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Mul::class, $node->var, ' *= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Mul::class, $node->var, ' *= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Div $node
      */
     protected function pExpr_AssignOp_Div($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Div::class, $node->var, ' /= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Div::class, $node->var, ' /= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Concat $node
      */
     protected function pExpr_AssignOp_Concat($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Concat::class, $node->var, ' .= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Concat::class, $node->var, ' .= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Mod $node
      */
     protected function pExpr_AssignOp_Mod($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Mod::class, $node->var, ' %= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Mod::class, $node->var, ' %= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\BitwiseAnd $node
      */
     protected function pExpr_AssignOp_BitwiseAnd($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\BitwiseAnd::class, $node->var, ' &= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseAnd::class, $node->var, ' &= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\BitwiseOr $node
      */
     protected function pExpr_AssignOp_BitwiseOr($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\BitwiseOr::class, $node->var, ' |= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseOr::class, $node->var, ' |= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\BitwiseXor $node
      */
     protected function pExpr_AssignOp_BitwiseXor($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\BitwiseXor::class, $node->var, ' ^= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\BitwiseXor::class, $node->var, ' ^= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\ShiftLeft $node
      */
     protected function pExpr_AssignOp_ShiftLeft($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\ShiftLeft::class, $node->var, ' <<= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\ShiftLeft::class, $node->var, ' <<= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\ShiftRight $node
      */
     protected function pExpr_AssignOp_ShiftRight($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\ShiftRight::class, $node->var, ' >>= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\ShiftRight::class, $node->var, ' >>= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Pow $node
      */
     protected function pExpr_AssignOp_Pow($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Pow::class, $node->var, ' **= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Pow::class, $node->var, ' **= ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\AssignOp\Coalesce $node
      */
     protected function pExpr_AssignOp_Coalesce($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\AssignOp\Coalesce::class, $node->var, ' ??= ', $node->expr);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\AssignOp\Coalesce::class, $node->var, ' ??= ', $node->expr);
     }
     // Binary expressions
     /**
@@ -384,196 +384,196 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_BinaryOp_Plus($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Plus::class, $node->left, ' + ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Plus::class, $node->left, ' + ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Minus $node
      */
     protected function pExpr_BinaryOp_Minus($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Minus::class, $node->left, ' - ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Minus::class, $node->left, ' - ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Mul $node
      */
     protected function pExpr_BinaryOp_Mul($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Mul::class, $node->left, ' * ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Mul::class, $node->left, ' * ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Div $node
      */
     protected function pExpr_BinaryOp_Div($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Div::class, $node->left, ' / ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Div::class, $node->left, ' / ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Concat $node
      */
     protected function pExpr_BinaryOp_Concat($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Concat::class, $node->left, ' . ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Concat::class, $node->left, ' . ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Mod $node
      */
     protected function pExpr_BinaryOp_Mod($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Mod::class, $node->left, ' % ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Mod::class, $node->left, ' % ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\BooleanAnd $node
      */
     protected function pExpr_BinaryOp_BooleanAnd($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\BooleanAnd::class, $node->left, ' && ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BooleanAnd::class, $node->left, ' && ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\BooleanOr $node
      */
     protected function pExpr_BinaryOp_BooleanOr($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\BooleanOr::class, $node->left, ' || ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BooleanOr::class, $node->left, ' || ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\BitwiseAnd $node
      */
     protected function pExpr_BinaryOp_BitwiseAnd($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\BitwiseAnd::class, $node->left, ' & ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseAnd::class, $node->left, ' & ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\BitwiseOr $node
      */
     protected function pExpr_BinaryOp_BitwiseOr($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\BitwiseOr::class, $node->left, ' | ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseOr::class, $node->left, ' | ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\BitwiseXor $node
      */
     protected function pExpr_BinaryOp_BitwiseXor($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\BitwiseXor::class, $node->left, ' ^ ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\BitwiseXor::class, $node->left, ' ^ ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\ShiftLeft $node
      */
     protected function pExpr_BinaryOp_ShiftLeft($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\ShiftLeft::class, $node->left, ' << ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\ShiftLeft::class, $node->left, ' << ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\ShiftRight $node
      */
     protected function pExpr_BinaryOp_ShiftRight($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\ShiftRight::class, $node->left, ' >> ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\ShiftRight::class, $node->left, ' >> ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Pow $node
      */
     protected function pExpr_BinaryOp_Pow($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Pow::class, $node->left, ' ** ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Pow::class, $node->left, ' ** ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\LogicalAnd $node
      */
     protected function pExpr_BinaryOp_LogicalAnd($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\LogicalAnd::class, $node->left, ' and ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalAnd::class, $node->left, ' and ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\LogicalOr $node
      */
     protected function pExpr_BinaryOp_LogicalOr($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\LogicalOr::class, $node->left, ' or ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalOr::class, $node->left, ' or ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\LogicalXor $node
      */
     protected function pExpr_BinaryOp_LogicalXor($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\LogicalXor::class, $node->left, ' xor ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\LogicalXor::class, $node->left, ' xor ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Equal $node
      */
     protected function pExpr_BinaryOp_Equal($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Equal::class, $node->left, ' == ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Equal::class, $node->left, ' == ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\NotEqual $node
      */
     protected function pExpr_BinaryOp_NotEqual($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\NotEqual::class, $node->left, ' != ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\NotEqual::class, $node->left, ' != ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Identical $node
      */
     protected function pExpr_BinaryOp_Identical($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Identical::class, $node->left, ' === ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Identical::class, $node->left, ' === ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\NotIdentical $node
      */
     protected function pExpr_BinaryOp_NotIdentical($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\NotIdentical::class, $node->left, ' !== ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\NotIdentical::class, $node->left, ' !== ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Spaceship $node
      */
     protected function pExpr_BinaryOp_Spaceship($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Spaceship::class, $node->left, ' <=> ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Spaceship::class, $node->left, ' <=> ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Greater $node
      */
     protected function pExpr_BinaryOp_Greater($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Greater::class, $node->left, ' > ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Greater::class, $node->left, ' > ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\GreaterOrEqual $node
      */
     protected function pExpr_BinaryOp_GreaterOrEqual($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\GreaterOrEqual::class, $node->left, ' >= ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\GreaterOrEqual::class, $node->left, ' >= ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Smaller $node
      */
     protected function pExpr_BinaryOp_Smaller($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Smaller::class, $node->left, ' < ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Smaller::class, $node->left, ' < ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\SmallerOrEqual $node
      */
     protected function pExpr_BinaryOp_SmallerOrEqual($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\SmallerOrEqual::class, $node->left, ' <= ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\SmallerOrEqual::class, $node->left, ' <= ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\BinaryOp\Coalesce $node
      */
     protected function pExpr_BinaryOp_Coalesce($node)
     {
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BinaryOp\Coalesce::class, $node->left, ' ?? ', $node->right);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BinaryOp\Coalesce::class, $node->left, ' ?? ', $node->right);
     }
     /**
      * @param \PhpParser\Node\Expr\Instanceof_ $node
      */
     protected function pExpr_Instanceof($node)
     {
-        list($precedence, $associativity) = $this->precedenceMap[\ConfigTransformer202107100\PhpParser\Node\Expr\Instanceof_::class];
+        list($precedence, $associativity) = $this->precedenceMap[\ConfigTransformer202107108\PhpParser\Node\Expr\Instanceof_::class];
         return $this->pPrec($node->expr, $precedence, $associativity, -1) . ' instanceof ' . $this->pNewVariable($node->class);
     }
     // Unary expressions
@@ -582,85 +582,85 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_BooleanNot($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BooleanNot::class, '!', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BooleanNot::class, '!', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\BitwiseNot $node
      */
     protected function pExpr_BitwiseNot($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\BitwiseNot::class, '~', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\BitwiseNot::class, '~', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\UnaryMinus $node
      */
     protected function pExpr_UnaryMinus($node)
     {
-        if ($node->expr instanceof \ConfigTransformer202107100\PhpParser\Node\Expr\UnaryMinus || $node->expr instanceof \ConfigTransformer202107100\PhpParser\Node\Expr\PreDec) {
+        if ($node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\UnaryMinus || $node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\PreDec) {
             // Enforce -(-$expr) instead of --$expr
             return '-(' . $this->p($node->expr) . ')';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\UnaryMinus::class, '-', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\UnaryMinus::class, '-', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\UnaryPlus $node
      */
     protected function pExpr_UnaryPlus($node)
     {
-        if ($node->expr instanceof \ConfigTransformer202107100\PhpParser\Node\Expr\UnaryPlus || $node->expr instanceof \ConfigTransformer202107100\PhpParser\Node\Expr\PreInc) {
+        if ($node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\UnaryPlus || $node->expr instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\PreInc) {
             // Enforce +(+$expr) instead of ++$expr
             return '+(' . $this->p($node->expr) . ')';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\UnaryPlus::class, '+', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\UnaryPlus::class, '+', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\PreInc $node
      */
     protected function pExpr_PreInc($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\PreInc::class, '++', $node->var);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PreInc::class, '++', $node->var);
     }
     /**
      * @param \PhpParser\Node\Expr\PreDec $node
      */
     protected function pExpr_PreDec($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\PreDec::class, '--', $node->var);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PreDec::class, '--', $node->var);
     }
     /**
      * @param \PhpParser\Node\Expr\PostInc $node
      */
     protected function pExpr_PostInc($node)
     {
-        return $this->pPostfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\PostInc::class, $node->var, '++');
+        return $this->pPostfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PostInc::class, $node->var, '++');
     }
     /**
      * @param \PhpParser\Node\Expr\PostDec $node
      */
     protected function pExpr_PostDec($node)
     {
-        return $this->pPostfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\PostDec::class, $node->var, '--');
+        return $this->pPostfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\PostDec::class, $node->var, '--');
     }
     /**
      * @param \PhpParser\Node\Expr\ErrorSuppress $node
      */
     protected function pExpr_ErrorSuppress($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\ErrorSuppress::class, '@', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\ErrorSuppress::class, '@', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\YieldFrom $node
      */
     protected function pExpr_YieldFrom($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\YieldFrom::class, 'yield from ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\YieldFrom::class, 'yield from ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Print_ $node
      */
     protected function pExpr_Print($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Print_::class, 'print ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Print_::class, 'print ', $node->expr);
     }
     // Casts
     /**
@@ -668,57 +668,57 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_Cast_Int($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Int_::class, '(int) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Int_::class, '(int) ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\Double $node
      */
     protected function pExpr_Cast_Double($node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE);
-        if ($kind === \ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE) {
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE);
+        if ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_DOUBLE) {
             $cast = '(double)';
-        } elseif ($kind === \ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Double::KIND_FLOAT) {
+        } elseif ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_FLOAT) {
             $cast = '(float)';
-        } elseif ($kind === \ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Double::KIND_REAL) {
+        } elseif ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::KIND_REAL) {
             $cast = '(real)';
         }
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Double::class, $cast . ' ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Double::class, $cast . ' ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\String_ $node
      */
     protected function pExpr_Cast_String($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\String_::class, '(string) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\String_::class, '(string) ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\Array_ $node
      */
     protected function pExpr_Cast_Array($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Array_::class, '(array) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Array_::class, '(array) ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\Object_ $node
      */
     protected function pExpr_Cast_Object($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Object_::class, '(object) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Object_::class, '(object) ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\Bool_ $node
      */
     protected function pExpr_Cast_Bool($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Bool_::class, '(bool) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Bool_::class, '(bool) ', $node->expr);
     }
     /**
      * @param \PhpParser\Node\Expr\Cast\Unset_ $node
      */
     protected function pExpr_Cast_Unset($node)
     {
-        return $this->pPrefixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Cast\Unset_::class, '(unset) ', $node->expr);
+        return $this->pPrefixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Cast\Unset_::class, '(unset) ', $node->expr);
     }
     // Function calls and similar constructs
     /**
@@ -747,7 +747,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_StaticCall($node)
     {
-        return $this->pDereferenceLhs($node->class) . '::' . ($node->name instanceof \ConfigTransformer202107100\PhpParser\Node\Expr ? $node->name instanceof \ConfigTransformer202107100\PhpParser\Node\Expr\Variable ? $this->p($node->name) : '{' . $this->p($node->name) . '}' : $node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
+        return $this->pDereferenceLhs($node->class) . '::' . ($node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr ? $node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr\Variable ? $this->p($node->name) : '{' . $this->p($node->name) . '}' : $node->name) . '(' . $this->pMaybeMultiline($node->args) . ')';
     }
     /**
      * @param \PhpParser\Node\Expr\Empty_ $node
@@ -775,7 +775,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_Include($node)
     {
-        static $map = [\ConfigTransformer202107100\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'include', \ConfigTransformer202107100\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'include_once', \ConfigTransformer202107100\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'require', \ConfigTransformer202107100\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'require_once'];
+        static $map = [\ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'include', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'include_once', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'require', \ConfigTransformer202107108\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'require_once'];
         return $map[$node->type] . ' ' . $this->p($node->expr);
     }
     /**
@@ -798,7 +798,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_Variable($node)
     {
-        if ($node->name instanceof \ConfigTransformer202107100\PhpParser\Node\Expr) {
+        if ($node->name instanceof \ConfigTransformer202107108\PhpParser\Node\Expr) {
             return '${' . $this->p($node->name) . '}';
         } else {
             return '$' . $node->name;
@@ -809,8 +809,8 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_Array($node)
     {
-        $syntax = $node->getAttribute('kind', $this->options['shortArraySyntax'] ? \ConfigTransformer202107100\PhpParser\Node\Expr\Array_::KIND_SHORT : \ConfigTransformer202107100\PhpParser\Node\Expr\Array_::KIND_LONG);
-        if ($syntax === \ConfigTransformer202107100\PhpParser\Node\Expr\Array_::KIND_SHORT) {
+        $syntax = $node->getAttribute('kind', $this->options['shortArraySyntax'] ? \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_SHORT : \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_LONG);
+        if ($syntax === \ConfigTransformer202107108\PhpParser\Node\Expr\Array_::KIND_SHORT) {
             return '[' . $this->pMaybeMultiline($node->items, \true) . ']';
         } else {
             return 'array(' . $this->pMaybeMultiline($node->items, \true) . ')';
@@ -912,7 +912,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
      */
     protected function pExpr_New($node)
     {
-        if ($node->class instanceof \ConfigTransformer202107100\PhpParser\Node\Stmt\Class_) {
+        if ($node->class instanceof \ConfigTransformer202107108\PhpParser\Node\Stmt\Class_) {
             $args = $node->args ? '(' . $this->pMaybeMultiline($node->args) . ')' : '';
             return 'new ' . $this->pClassCommon($node->class, $args);
         }
@@ -932,15 +932,15 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
     {
         // a bit of cheating: we treat the ternary as a binary op where the ?...: part is the operator.
         // this is okay because the part between ? and : never needs parentheses.
-        return $this->pInfixOp(\ConfigTransformer202107100\PhpParser\Node\Expr\Ternary::class, $node->cond, ' ?' . (null !== $node->if ? ' ' . $this->p($node->if) . ' ' : '') . ': ', $node->else);
+        return $this->pInfixOp(\ConfigTransformer202107108\PhpParser\Node\Expr\Ternary::class, $node->cond, ' ?' . (null !== $node->if ? ' ' . $this->p($node->if) . ' ' : '') . ': ', $node->else);
     }
     /**
      * @param \PhpParser\Node\Expr\Exit_ $node
      */
     protected function pExpr_Exit($node)
     {
-        $kind = $node->getAttribute('kind', \ConfigTransformer202107100\PhpParser\Node\Expr\Exit_::KIND_DIE);
-        return ($kind === \ConfigTransformer202107100\PhpParser\Node\Expr\Exit_::KIND_EXIT ? 'exit' : 'die') . (null !== $node->expr ? '(' . $this->p($node->expr) . ')' : '');
+        $kind = $node->getAttribute('kind', \ConfigTransformer202107108\PhpParser\Node\Expr\Exit_::KIND_DIE);
+        return ($kind === \ConfigTransformer202107108\PhpParser\Node\Expr\Exit_::KIND_EXIT ? 'exit' : 'die') . (null !== $node->expr ? '(' . $this->p($node->expr) . ')' : '');
     }
     /**
      * @param \PhpParser\Node\Expr\Throw_ $node
@@ -996,7 +996,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
     }
     protected function pUseType($type)
     {
-        return $type === \ConfigTransformer202107100\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION ? 'function ' : ($type === \ConfigTransformer202107100\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT ? 'const ' : '');
+        return $type === \ConfigTransformer202107108\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION ? 'function ' : ($type === \ConfigTransformer202107108\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT ? 'const ' : '');
     }
     /**
      * @param \PhpParser\Node\Stmt\Interface_ $node
@@ -1312,7 +1312,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
     }
     protected function pObjectProperty($node)
     {
-        if ($node instanceof \ConfigTransformer202107100\PhpParser\Node\Expr) {
+        if ($node instanceof \ConfigTransformer202107108\PhpParser\Node\Expr) {
             return '{' . $this->p($node) . '}';
         } else {
             return $node;
@@ -1325,7 +1325,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
     {
         $return = '';
         foreach ($encapsList as $element) {
-            if ($element instanceof \ConfigTransformer202107100\PhpParser\Node\Scalar\EncapsedStringPart) {
+            if ($element instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart) {
                 $return .= $this->escapeString($element->value, $quote);
             } else {
                 $return .= '{' . $this->p($element) . '}';
@@ -1385,7 +1385,7 @@ class Standard extends \ConfigTransformer202107100\PhpParser\PrettyPrinterAbstra
         foreach ($parts as $i => $part) {
             $atStart = $i === 0;
             $atEnd = $i === \count($parts) - 1;
-            if ($part instanceof \ConfigTransformer202107100\PhpParser\Node\Scalar\EncapsedStringPart && $this->containsEndLabel($part->value, $label, $atStart, $atEnd)) {
+            if ($part instanceof \ConfigTransformer202107108\PhpParser\Node\Scalar\EncapsedStringPart && $this->containsEndLabel($part->value, $label, $atStart, $atEnd)) {
                 return \true;
             }
         }

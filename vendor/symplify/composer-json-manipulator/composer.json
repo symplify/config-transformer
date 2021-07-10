@@ -7,7 +7,7 @@
         "php": ">=8.0",
         "nette\/utils": "^3.2",
         "symfony\/config": "^5.3",
-        "symfony\/dependency-injection": "^5.3",
+        "symfony\/dependency-injection": "^5.3.x-dev",
         "symfony\/filesystem": "^5.3",
         "symfony\/http-kernel": "^5.3",
         "symplify\/package-builder": "dev-main",
@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202107100\\Symplify\\ComposerJsonManipulator\\": "src"
+            "ConfigTransformer202107108\\Symplify\\ComposerJsonManipulator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202107100\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+            "ConfigTransformer202107108\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
         }
     },
     "extra": {

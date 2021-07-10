@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * ParameterBagInterface is the interface implemented by objects that manage service container parameters.
  *
@@ -28,9 +28,8 @@ interface ParameterBagInterface
     /**
      * Adds parameters to the service container parameters.
      *
-     * @param array $parameters An array of parameters
-     *
      * @throws LogicException if the parameter can not be added
+     * @param mixed[] $parameters
      */
     public function add($parameters);
     /**
@@ -42,7 +41,7 @@ interface ParameterBagInterface
     /**
      * Gets a service container parameter.
      *
-     * @return mixed The parameter value
+     * @return array|bool|string|int|float|null
      *
      * @throws ParameterNotFoundException if the parameter is not defined
      * @param string $name
@@ -56,7 +55,7 @@ interface ParameterBagInterface
     /**
      * Sets a service container parameter.
      *
-     * @param mixed $value The parameter value
+     * @param array|bool|string|int|float|null $value The parameter value
      *
      * @throws LogicException if the parameter can not be set
      * @param string $name

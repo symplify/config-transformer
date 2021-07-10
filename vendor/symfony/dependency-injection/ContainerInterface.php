@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107100\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202107108\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202107100\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202107100\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202107108\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202107108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * ContainerInterface is the interface implemented by service container classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ContainerInterface extends \ConfigTransformer202107100\Psr\Container\ContainerInterface
+interface ContainerInterface extends \ConfigTransformer202107108\Psr\Container\ContainerInterface
 {
     public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
     public const EXCEPTION_ON_INVALID_REFERENCE = 1;
@@ -48,11 +48,8 @@ interface ContainerInterface extends \ConfigTransformer202107100\Psr\Container\C
      */
     public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE);
     /**
-     * Returns true if the given service is defined.
-     *
-     * @param string $id The service identifier
-     *
      * @return bool true if the service is defined, false otherwise
+     * @param string $id
      */
     public function has($id);
     /**
@@ -63,28 +60,22 @@ interface ContainerInterface extends \ConfigTransformer202107100\Psr\Container\C
      */
     public function initialized($id);
     /**
-     * Gets a parameter.
-     *
-     * @param string $name The parameter name
-     *
-     * @return array|bool|float|int|string|null The parameter value
+     * @return array|bool|string|int|float|null
      *
      * @throws InvalidArgumentException if the parameter is not defined
+     * @param string $name
      */
     public function getParameter($name);
     /**
-     * Checks if a parameter exists.
-     *
-     * @param string $name The parameter name
-     *
-     * @return bool The presence of parameter in container
+     * @return bool
+     * @param string $name
      */
     public function hasParameter($name);
     /**
      * Sets a parameter.
      *
-     * @param string $name  The parameter name
-     * @param mixed  $value The parameter value
+     * @param string                           $name  The parameter name
+     * @param array|bool|string|int|float|null $value The parameter value
      */
     public function setParameter($name, $value);
 }
