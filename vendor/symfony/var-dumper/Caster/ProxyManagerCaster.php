@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107104\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer2021071010\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202107104\ProxyManager\Proxy\ProxyInterface;
-use ConfigTransformer202107104\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer2021071010\ProxyManager\Proxy\ProxyInterface;
+use ConfigTransformer2021071010\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -19,7 +19,7 @@ use ConfigTransformer202107104\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class ProxyManagerCaster
 {
-    public static function castProxy(\ConfigTransformer202107104\ProxyManager\Proxy\ProxyInterface $c, array $a, \ConfigTransformer202107104\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    public static function castProxy(\ConfigTransformer2021071010\ProxyManager\Proxy\ProxyInterface $c, array $a, \ConfigTransformer2021071010\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
     {
         if ($parent = \get_parent_class($c)) {
             $stub->class .= ' - ' . $parent;

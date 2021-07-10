@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107104\Symfony\Component\HttpKernel;
+namespace ConfigTransformer2021071010\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202107104\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107104\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer2021071010\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021071010\Symfony\Component\HttpFoundation\Response;
 /**
  * HttpKernelInterface handles a Request to convert it to a Response.
  *

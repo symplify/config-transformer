@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107104\Symplify\Astral\Naming;
+namespace ConfigTransformer2021071010\Symplify\Astral\Naming;
 
-use ConfigTransformer202107104\Nette\Utils\Strings;
-use ConfigTransformer202107104\PhpParser\Node;
-use ConfigTransformer202107104\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202107104\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202107104\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer202107104\PhpParser\Node\Stmt\Property;
-use ConfigTransformer202107104\PHPStan\Analyser\Scope;
-use ConfigTransformer202107104\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer202107104\Symplify\Astral\Contract\NodeNameResolverInterface;
+use ConfigTransformer2021071010\Nette\Utils\Strings;
+use ConfigTransformer2021071010\PhpParser\Node;
+use ConfigTransformer2021071010\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer2021071010\PhpParser\Node\Expr\Variable;
+use ConfigTransformer2021071010\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer2021071010\PhpParser\Node\Stmt\Property;
+use ConfigTransformer2021071010\PHPStan\Analyser\Scope;
+use ConfigTransformer2021071010\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer2021071010\Symplify\Astral\Contract\NodeNameResolverInterface;
 /**
  * @see \Symplify\Astral\Tests\Naming\SimpleNameResolverTest
  */
@@ -47,14 +47,14 @@ final class SimpleNameResolver
             }
             return $nodeNameResolver->resolve($node);
         }
-        if ($node instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\ClassConstFetch && $this->isName($node->name, 'class')) {
+        if ($node instanceof \ConfigTransformer2021071010\PhpParser\Node\Expr\ClassConstFetch && $this->isName($node->name, 'class')) {
             return $this->getName($node->class);
         }
-        if ($node instanceof \ConfigTransformer202107104\PhpParser\Node\Stmt\Property) {
+        if ($node instanceof \ConfigTransformer2021071010\PhpParser\Node\Stmt\Property) {
             $propertyProperty = $node->props[0];
             return $this->getName($propertyProperty->name);
         }
-        if ($node instanceof \ConfigTransformer202107104\PhpParser\Node\Expr\Variable) {
+        if ($node instanceof \ConfigTransformer2021071010\PhpParser\Node\Expr\Variable) {
             return $this->getName($node->name);
         }
         return null;
@@ -62,7 +62,7 @@ final class SimpleNameResolver
     /**
      * @param string[] $desiredNames
      */
-    public function isNames(\ConfigTransformer202107104\PhpParser\Node $node, array $desiredNames) : bool
+    public function isNames(\ConfigTransformer2021071010\PhpParser\Node $node, array $desiredNames) : bool
     {
         foreach ($desiredNames as $desiredName) {
             if ($this->isName($node, $desiredName)) {
@@ -85,7 +85,7 @@ final class SimpleNameResolver
         }
         return $name === $desiredName;
     }
-    public function areNamesEqual(\ConfigTransformer202107104\PhpParser\Node $firstNode, \ConfigTransformer202107104\PhpParser\Node $secondNode) : bool
+    public function areNamesEqual(\ConfigTransformer2021071010\PhpParser\Node $firstNode, \ConfigTransformer2021071010\PhpParser\Node $secondNode) : bool
     {
         $firstName = $this->getName($firstNode);
         if ($firstName === null) {
@@ -93,19 +93,19 @@ final class SimpleNameResolver
         }
         return $this->isName($secondNode, $firstName);
     }
-    public function resolveShortNameFromNode(\ConfigTransformer202107104\PhpParser\Node\Stmt\ClassLike $classLike) : ?string
+    public function resolveShortNameFromNode(\ConfigTransformer2021071010\PhpParser\Node\Stmt\ClassLike $classLike) : ?string
     {
         $className = $this->getName($classLike);
         if ($className === null) {
             return null;
         }
         // anonymous class return null name
-        if (\ConfigTransformer202107104\Nette\Utils\Strings::match($className, self::ANONYMOUS_CLASS_REGEX)) {
+        if (\ConfigTransformer2021071010\Nette\Utils\Strings::match($className, self::ANONYMOUS_CLASS_REGEX)) {
             return null;
         }
         return $this->resolveShortName($className);
     }
-    public function resolveShortNameFromScope(\ConfigTransformer202107104\PHPStan\Analyser\Scope $scope) : ?string
+    public function resolveShortNameFromScope(\ConfigTransformer2021071010\PHPStan\Analyser\Scope $scope) : ?string
     {
         $className = $this->getClassNameFromScope($scope);
         if ($className === null) {
@@ -113,34 +113,34 @@ final class SimpleNameResolver
         }
         return $this->resolveShortName($className);
     }
-    public function getClassNameFromScope(\ConfigTransformer202107104\PHPStan\Analyser\Scope $scope) : ?string
+    public function getClassNameFromScope(\ConfigTransformer2021071010\PHPStan\Analyser\Scope $scope) : ?string
     {
         if ($scope->isInTrait()) {
             $traitReflection = $scope->getTraitReflection();
-            if (!$traitReflection instanceof \ConfigTransformer202107104\PHPStan\Reflection\ClassReflection) {
+            if (!$traitReflection instanceof \ConfigTransformer2021071010\PHPStan\Reflection\ClassReflection) {
                 return null;
             }
             return $traitReflection->getName();
         }
         $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof \ConfigTransformer202107104\PHPStan\Reflection\ClassReflection) {
+        if (!$classReflection instanceof \ConfigTransformer2021071010\PHPStan\Reflection\ClassReflection) {
             return null;
         }
         return $classReflection->getName();
     }
-    public function isNameMatch(\ConfigTransformer202107104\PhpParser\Node $node, string $desiredNameRegex) : bool
+    public function isNameMatch(\ConfigTransformer2021071010\PhpParser\Node $node, string $desiredNameRegex) : bool
     {
         $name = $this->getName($node);
         if ($name === null) {
             return \false;
         }
-        return (bool) \ConfigTransformer202107104\Nette\Utils\Strings::match($name, $desiredNameRegex);
+        return (bool) \ConfigTransformer2021071010\Nette\Utils\Strings::match($name, $desiredNameRegex);
     }
     public function resolveShortName(string $className) : string
     {
         if (\strpos($className, '\\') === \false) {
             return $className;
         }
-        return (string) \ConfigTransformer202107104\Nette\Utils\Strings::after($className, '\\', -1);
+        return (string) \ConfigTransformer2021071010\Nette\Utils\Strings::after($className, '\\', -1);
     }
 }

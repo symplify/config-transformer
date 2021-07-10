@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107104\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2021071010\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202107104\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer2021071010\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This is the entry class for building a config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class TreeBuilder implements \ConfigTransformer202107104\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+class TreeBuilder implements \ConfigTransformer2021071010\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $tree;
     protected $root;
-    public function __construct(string $name, string $type = 'array', \ConfigTransformer202107104\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder = null)
+    public function __construct(string $name, string $type = 'array', \ConfigTransformer2021071010\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder = null)
     {
-        $builder = $builder ?? new \ConfigTransformer202107104\Symfony\Component\Config\Definition\Builder\NodeBuilder();
+        $builder = $builder ?? new \ConfigTransformer2021071010\Symfony\Component\Config\Definition\Builder\NodeBuilder();
         $this->root = $builder->node($name, $type)->setParent($this);
     }
     /**
      * @return NodeDefinition|ArrayNodeDefinition The root node (as an ArrayNodeDefinition when the type is 'array')
      */
-    public function getRootNode() : \ConfigTransformer202107104\Symfony\Component\Config\Definition\Builder\NodeDefinition
+    public function getRootNode() : \ConfigTransformer2021071010\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         return $this->root;
     }
