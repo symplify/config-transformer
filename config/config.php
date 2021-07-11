@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107118;
+namespace ConfigTransformer202107116;
 
-use ConfigTransformer202107118\PhpParser\BuilderFactory;
-use ConfigTransformer202107118\PhpParser\NodeFinder;
-use ConfigTransformer202107118\Symfony\Component\Console\Application;
-use ConfigTransformer202107118\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202107118\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202107118\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202107118\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication;
-use ConfigTransformer202107118\Symplify\ConfigTransformer\Provider\YamlContentProvider;
-use ConfigTransformer202107118\Symplify\PackageBuilder\Console\Command\CommandNaming;
-use ConfigTransformer202107118\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer202107118\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-use ConfigTransformer202107118\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-use ConfigTransformer202107118\Symplify\SmartFileSystem\FileSystemFilter;
-return static function (\ConfigTransformer202107118\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use ConfigTransformer202107116\PhpParser\BuilderFactory;
+use ConfigTransformer202107116\PhpParser\NodeFinder;
+use ConfigTransformer202107116\Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202107116\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202107116\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer202107116\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication;
+use ConfigTransformer202107116\Symplify\ConfigTransformer\Provider\YamlContentProvider;
+use ConfigTransformer202107116\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer202107116\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202107116\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+use ConfigTransformer202107116\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use ConfigTransformer202107116\Symplify\SmartFileSystem\FileSystemFilter;
+return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202107118\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([
+    $services->load('ConfigTransformer202107116\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([
         __DIR__ . '/../src/HttpKernel',
         __DIR__ . '/../src/DependencyInjection/Loader',
         __DIR__ . '/../src/ValueObject',
@@ -27,14 +27,14 @@ return static function (\ConfigTransformer202107118\Symfony\Component\Dependency
         __DIR__ . '/../src/DependencyInjection/Extension/AliasConfigurableExtension.php',
     ]);
     // console
-    $services->set(\ConfigTransformer202107118\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
-    $services->alias(\ConfigTransformer202107118\Symfony\Component\Console\Application::class, \ConfigTransformer202107118\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
-    $services->set(\ConfigTransformer202107118\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
-    $services->set(\ConfigTransformer202107118\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer202107118\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer202107118\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer202107118\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->alias(\ConfigTransformer202107118\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class, \ConfigTransformer202107118\Symplify\ConfigTransformer\Configuration\Configuration::class);
-    $services->alias(\ConfigTransformer202107118\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class, \ConfigTransformer202107118\Symplify\ConfigTransformer\Provider\YamlContentProvider::class);
-    $services->set(\ConfigTransformer202107118\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->set(\ConfigTransformer202107116\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
+    $services->alias(\ConfigTransformer202107116\Symfony\Component\Console\Application::class, \ConfigTransformer202107116\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
+    $services->set(\ConfigTransformer202107116\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
+    $services->set(\ConfigTransformer202107116\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202107116\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202107116\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202107116\Symplify\SmartFileSystem\FileSystemFilter::class);
+    $services->alias(\ConfigTransformer202107116\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class, \ConfigTransformer202107116\Symplify\ConfigTransformer\Configuration\Configuration::class);
+    $services->alias(\ConfigTransformer202107116\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class, \ConfigTransformer202107116\Symplify\ConfigTransformer\Provider\YamlContentProvider::class);
+    $services->set(\ConfigTransformer202107116\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
 };

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107118\Symplify\SmartFileSystem\Exception;
+namespace ConfigTransformer202107116\Symplify\SmartFileSystem\Exception;
 
 use Exception;
 final class FileNotFoundException extends \Exception

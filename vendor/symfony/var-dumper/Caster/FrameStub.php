@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107118\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202107116\Symfony\Component\VarDumper\Caster;
 
 /**
  * Represents a single backtrace frame as returned by debug_backtrace() or Exception->getTrace().
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class FrameStub extends \ConfigTransformer202107118\Symfony\Component\VarDumper\Caster\EnumStub
+class FrameStub extends \ConfigTransformer202107116\Symfony\Component\VarDumper\Caster\EnumStub
 {
     public $keepArgs;
     public $inTraceStub;

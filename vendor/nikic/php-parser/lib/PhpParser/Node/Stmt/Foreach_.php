@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107118\PhpParser\Node\Stmt;
+namespace ConfigTransformer202107116\PhpParser\Node\Stmt;
 
-use ConfigTransformer202107118\PhpParser\Node;
-class Foreach_ extends \ConfigTransformer202107118\PhpParser\Node\Stmt
+use ConfigTransformer202107116\PhpParser\Node;
+class Foreach_ extends \ConfigTransformer202107116\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Expression to iterate */
     public $expr;
@@ -27,7 +27,7 @@ class Foreach_ extends \ConfigTransformer202107118\PhpParser\Node\Stmt
      *                              'stmts'  => array(): Statements
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202107118\PhpParser\Node\Expr $expr, \ConfigTransformer202107118\PhpParser\Node\Expr $valueVar, array $subNodes = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202107116\PhpParser\Node\Expr $expr, \ConfigTransformer202107116\PhpParser\Node\Expr $valueVar, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;
