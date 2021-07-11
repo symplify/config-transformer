@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202107107\Psr\Cache;
+namespace ConfigTransformer202107112\Psr\Cache;
 
 /**
  * Exception interface for all exceptions thrown by an Implementing Library.
