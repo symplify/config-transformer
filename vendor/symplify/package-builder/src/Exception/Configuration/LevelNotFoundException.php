@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107116\Symplify\PackageBuilder\Exception\Configuration;
+namespace ConfigTransformer202107113\Symplify\PackageBuilder\Exception\Configuration;
 
 use Exception;
 final class LevelNotFoundException extends \Exception
