@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202107113\Psr\Log;
+namespace ConfigTransformer202107112\Psr\Log;
 
 /**
  * Describes a logger instance.

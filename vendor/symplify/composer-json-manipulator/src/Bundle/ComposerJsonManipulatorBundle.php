@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107113\Symplify\ComposerJsonManipulator\Bundle;
+namespace ConfigTransformer202107112\Symplify\ComposerJsonManipulator\Bundle;
 
-use ConfigTransformer202107113\Symfony\Component\HttpKernel\Bundle\Bundle;
-use ConfigTransformer202107113\Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension;
-final class ComposerJsonManipulatorBundle extends \ConfigTransformer202107113\Symfony\Component\HttpKernel\Bundle\Bundle
+use ConfigTransformer202107112\Symfony\Component\HttpKernel\Bundle\Bundle;
+use ConfigTransformer202107112\Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension;
+final class ComposerJsonManipulatorBundle extends \ConfigTransformer202107112\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    protected function createContainerExtension() : ?\ConfigTransformer202107113\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\ConfigTransformer202107112\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \ConfigTransformer202107113\Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension();
+        return new \ConfigTransformer202107112\Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension();
     }
 }

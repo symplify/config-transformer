@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107113\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202107112\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202107113\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use ConfigTransformer202107113\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer202107113\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use ConfigTransformer202107112\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use ConfigTransformer202107112\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202107112\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * Common Interface among all nodes.
  *
