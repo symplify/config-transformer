@@ -1,8 +1,8 @@
 <?php
 
-namespace ConfigTransformer202107117\Psr\Log\Test;
+namespace ConfigTransformer202107118\Psr\Log\Test;
 
-use ConfigTransformer202107117\Psr\Log\AbstractLogger;
+use ConfigTransformer202107118\Psr\Log\AbstractLogger;
 /**
  * Used for testing purposes.
  *
@@ -53,7 +53,7 @@ use ConfigTransformer202107117\Psr\Log\AbstractLogger;
  * @method bool hasInfoThatPasses($message)
  * @method bool hasDebugThatPasses($message)
  */
-class TestLogger extends \ConfigTransformer202107117\Psr\Log\AbstractLogger
+class TestLogger extends \ConfigTransformer202107118\Psr\Log\AbstractLogger
 {
     /**
      * @var array

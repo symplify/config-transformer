@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107117\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107118\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107117\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202107117\Symfony\Component\Cache\Traits\RedisTrait;
-class RedisAdapter extends \ConfigTransformer202107117\Symfony\Component\Cache\Adapter\AbstractAdapter
+use ConfigTransformer202107118\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202107118\Symfony\Component\Cache\Traits\RedisTrait;
+class RedisAdapter extends \ConfigTransformer202107118\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use RedisTrait;
     /**
@@ -20,7 +20,7 @@ class RedisAdapter extends \ConfigTransformer202107117\Symfony\Component\Cache\A
      * @param string                                                   $namespace       The default namespace
      * @param int                                                      $defaultLifetime The default lifetime
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107117\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107118\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($redisClient, $namespace, $defaultLifetime, $marshaller);
     }

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107117\Symplify\PackageBuilder\DependencyInjection;
+namespace ConfigTransformer202107118\Symplify\PackageBuilder\DependencyInjection;
 
-use ConfigTransformer202107117\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202107117\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202107117\Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
+use ConfigTransformer202107118\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107118\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202107118\Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 use Throwable;
 /**
  * @see \Symplify\PackageBuilder\Tests\DependencyInjection\DefinitionFinderTest
@@ -15,7 +15,7 @@ final class DefinitionFinder
     /**
      * @return Definition[]
      */
-    public function findAllByType(\ConfigTransformer202107117\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : array
+    public function findAllByType(\ConfigTransformer202107118\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : array
     {
         $definitions = [];
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
@@ -30,15 +30,15 @@ final class DefinitionFinder
         }
         return $definitions;
     }
-    public function getByType(\ConfigTransformer202107117\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : \ConfigTransformer202107117\Symfony\Component\DependencyInjection\Definition
+    public function getByType(\ConfigTransformer202107118\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : \ConfigTransformer202107118\Symfony\Component\DependencyInjection\Definition
     {
         $definition = $this->getByTypeIfExists($containerBuilder, $type);
         if ($definition !== null) {
             return $definition;
         }
-        throw new \ConfigTransformer202107117\Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException(\sprintf('Definition for type "%s" was not found.', $type));
+        throw new \ConfigTransformer202107118\Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException(\sprintf('Definition for type "%s" was not found.', $type));
     }
-    private function getByTypeIfExists(\ConfigTransformer202107117\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : ?\ConfigTransformer202107117\Symfony\Component\DependencyInjection\Definition
+    private function getByTypeIfExists(\ConfigTransformer202107118\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : ?\ConfigTransformer202107118\Symfony\Component\DependencyInjection\Definition
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $name => $definition) {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107117\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202107118\Symfony\Component\HttpKernel\DataCollector;
 
 /**
  * LateDataCollectorInterface.

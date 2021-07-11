@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107117\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace ConfigTransformer202107118\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use ConfigTransformer202107117\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use ConfigTransformer202107117\Symfony\Component\VarDumper\Cloner\VarCloner;
-use ConfigTransformer202107117\Symfony\Component\VarDumper\Dumper\CliDumper;
+use ConfigTransformer202107118\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer202107118\Symfony\Component\VarDumper\Cloner\VarCloner;
+use ConfigTransformer202107118\Symfony\Component\VarDumper\Dumper\CliDumper;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202107117\Symfony\Component\VarDumper\Dumper\CliDumper::class);
+\class_exists(\ConfigTransformer202107118\Symfony\Component\VarDumper\Dumper\CliDumper::class);
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliErrorRenderer implements \ConfigTransformer202107117\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
+class CliErrorRenderer implements \ConfigTransformer202107118\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
 {
     /**
      * {@inheritdoc}
      * @param \Throwable $exception
      */
-    public function render($exception) : \ConfigTransformer202107117\Symfony\Component\ErrorHandler\Exception\FlattenException
+    public function render($exception) : \ConfigTransformer202107118\Symfony\Component\ErrorHandler\Exception\FlattenException
     {
-        $cloner = new \ConfigTransformer202107117\Symfony\Component\VarDumper\Cloner\VarCloner();
-        $dumper = new class extends \ConfigTransformer202107117\Symfony\Component\VarDumper\Dumper\CliDumper
+        $cloner = new \ConfigTransformer202107118\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $dumper = new class extends \ConfigTransformer202107118\Symfony\Component\VarDumper\Dumper\CliDumper
         {
             protected function supportsColors() : bool
             {
@@ -40,6 +40,6 @@ class CliErrorRenderer implements \ConfigTransformer202107117\Symfony\Component\
                 }
             }
         };
-        return \ConfigTransformer202107117\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)->setAsString($dumper->dump($cloner->cloneVar($exception), \true));
+        return \ConfigTransformer202107118\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)->setAsString($dumper->dump($cloner->cloneVar($exception), \true));
     }
 }
