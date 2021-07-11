@@ -1,32 +1,32 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107112\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202107118\Symplify\PhpConfigPrinter\ValueObject;
 
 final class FunctionName
 {
     /**
      * @var string
      */
-    public const INLINE_SERVICE = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
+    public const INLINE_SERVICE = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
     /**
      * @var string
      */
-    public const SERVICE = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
+    public const SERVICE = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
     /**
      * @var string
      */
-    public const REF = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
+    public const REF = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
     /**
      * @var string
      */
-    public const EXPR = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
+    public const EXPR = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
     /**
      * @var string
      */
-    public const TAGGED_ITERATOR = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_iterator';
+    public const TAGGED_ITERATOR = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_iterator';
     /**
      * @var string
      */
-    public const TAGGED_LOCATOR = 'ConfigTransformer202107112\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_locator';
+    public const TAGGED_LOCATOR = 'ConfigTransformer202107118\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_locator';
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107112\PhpParser\Node\Expr;
+namespace ConfigTransformer202107118\PhpParser\Node\Expr;
 
-use ConfigTransformer202107112\PhpParser\Node\Expr;
-class PreInc extends \ConfigTransformer202107112\PhpParser\Node\Expr
+use ConfigTransformer202107118\PhpParser\Node\Expr;
+class PreInc extends \ConfigTransformer202107118\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -14,7 +14,7 @@ class PreInc extends \ConfigTransformer202107112\PhpParser\Node\Expr
      * @param Expr  $var        Variable
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202107112\PhpParser\Node\Expr $var, array $attributes = [])
+    public function __construct(\ConfigTransformer202107118\PhpParser\Node\Expr $var, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

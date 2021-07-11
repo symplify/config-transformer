@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107112\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202107118\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202107112\Symfony\Component\Config\Definition\ScalarNode;
+use ConfigTransformer202107118\Symfony\Component\Config\Definition\ScalarNode;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ScalarNodeDefinition extends \ConfigTransformer202107112\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition
+class ScalarNodeDefinition extends \ConfigTransformer202107118\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition
 {
     /**
      * Instantiate a Node.
@@ -25,6 +25,6 @@ class ScalarNodeDefinition extends \ConfigTransformer202107112\Symfony\Component
      */
     protected function instantiateNode()
     {
-        return new \ConfigTransformer202107112\Symfony\Component\Config\Definition\ScalarNode($this->name, $this->parent, $this->pathSeparator);
+        return new \ConfigTransformer202107118\Symfony\Component\Config\Definition\ScalarNode($this->name, $this->parent, $this->pathSeparator);
     }
 }
