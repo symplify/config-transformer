@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107118\Symfony\Component\HttpFoundation\RateLimiter;
+namespace ConfigTransformer202107129\Symfony\Component\HttpFoundation\RateLimiter;
 
-use ConfigTransformer202107118\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107118\Symfony\Component\RateLimiter\LimiterInterface;
-use ConfigTransformer202107118\Symfony\Component\RateLimiter\Policy\NoLimiter;
-use ConfigTransformer202107118\Symfony\Component\RateLimiter\RateLimit;
+use ConfigTransformer202107129\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107129\Symfony\Component\RateLimiter\LimiterInterface;
+use ConfigTransformer202107129\Symfony\Component\RateLimiter\Policy\NoLimiter;
+use ConfigTransformer202107129\Symfony\Component\RateLimiter\RateLimit;
 /**
  * An implementation of RequestRateLimiterInterface that
  * fits most use-cases.
@@ -22,16 +22,16 @@ use ConfigTransformer202107118\Symfony\Component\RateLimiter\RateLimit;
  *
  * @experimental in 5.3
  */
-abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107118\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
+abstract class AbstractRequestRateLimiter implements \ConfigTransformer202107129\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function consume($request) : \ConfigTransformer202107118\Symfony\Component\RateLimiter\RateLimit
+    public function consume($request) : \ConfigTransformer202107129\Symfony\Component\RateLimiter\RateLimit
     {
         $limiters = $this->getLimiters($request);
         if (0 === \count($limiters)) {
-            $limiters = [new \ConfigTransformer202107118\Symfony\Component\RateLimiter\Policy\NoLimiter()];
+            $limiters = [new \ConfigTransformer202107129\Symfony\Component\RateLimiter\Policy\NoLimiter()];
         }
         $minimalRateLimit = null;
         foreach ($limiters as $limiter) {

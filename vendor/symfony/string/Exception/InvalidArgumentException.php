@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107118\Symfony\Component\String\Exception;
+namespace ConfigTransformer202107129\Symfony\Component\String\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202107118\Symfony\Component\String\Exception\ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202107129\Symfony\Component\String\Exception\ExceptionInterface
 {
 }

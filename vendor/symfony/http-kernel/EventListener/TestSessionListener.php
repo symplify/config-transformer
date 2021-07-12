@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107118\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202107129\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202107118\Psr\Container\ContainerInterface;
-use ConfigTransformer202107118\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer202107129\Psr\Container\ContainerInterface;
+use ConfigTransformer202107129\Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * Sets the session in the request.
  *
@@ -19,15 +19,15 @@ use ConfigTransformer202107118\Symfony\Component\HttpFoundation\Session\SessionI
  *
  * @final
  */
-class TestSessionListener extends \ConfigTransformer202107118\Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener
+class TestSessionListener extends \ConfigTransformer202107129\Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener
 {
     private $container;
-    public function __construct(\ConfigTransformer202107118\Psr\Container\ContainerInterface $container, array $sessionOptions = [])
+    public function __construct(\ConfigTransformer202107129\Psr\Container\ContainerInterface $container, array $sessionOptions = [])
     {
         $this->container = $container;
         parent::__construct($sessionOptions);
     }
-    protected function getSession() : ?\ConfigTransformer202107118\Symfony\Component\HttpFoundation\Session\SessionInterface
+    protected function getSession() : ?\ConfigTransformer202107129\Symfony\Component\HttpFoundation\Session\SessionInterface
     {
         if (!$this->container->has('session')) {
             return null;

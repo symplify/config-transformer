@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107118\Symplify\EasyTesting\PHPUnit;
+namespace ConfigTransformer202107129\Symplify\EasyTesting\PHPUnit;
 
 final class StaticPHPUnitEnvironment
 {
