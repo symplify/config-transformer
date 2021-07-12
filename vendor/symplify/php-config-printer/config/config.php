@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107121;
+namespace ConfigTransformer202107127;
 
-use ConfigTransformer202107121\PhpParser\BuilderFactory;
-use ConfigTransformer202107121\PhpParser\NodeFinder;
-use ConfigTransformer202107121\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer202107121\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202107127\PhpParser\BuilderFactory;
+use ConfigTransformer202107127\PhpParser\NodeFinder;
+use ConfigTransformer202107127\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202107127\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202107121\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202107121\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202107121\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use function ConfigTransformer202107121\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202107127\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202107127\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202107127\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use function ConfigTransformer202107127\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202107121\Symplify\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/Dummy', __DIR__ . '/../src/Bundle', __DIR__ . '/../src/ValueObject/FullyQualifiedImport.php']);
-    $services->set(\ConfigTransformer202107121\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer202107121\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer202107121\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer202107121\PhpParser\NodeVisitor\ParentConnectingVisitor::class);
-    $services->set(\ConfigTransformer202107121\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202107121\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202107121\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
-    $services->set(\ConfigTransformer202107121\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->load('ConfigTransformer202107127\Symplify\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/Dummy', __DIR__ . '/../src/Bundle', __DIR__ . '/../src/ValueObject/FullyQualifiedImport.php']);
+    $services->set(\ConfigTransformer202107127\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202107127\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202107127\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202107127\PhpParser\NodeVisitor\ParentConnectingVisitor::class);
+    $services->set(\ConfigTransformer202107127\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202107127\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202107127\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
+    $services->set(\ConfigTransformer202107127\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
 };

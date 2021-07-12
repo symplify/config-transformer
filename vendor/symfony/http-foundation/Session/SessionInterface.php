@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107121\Symfony\Component\HttpFoundation\Session;
+namespace ConfigTransformer202107127\Symfony\Component\HttpFoundation\Session;
 
-use ConfigTransformer202107121\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
+use ConfigTransformer202107127\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 /**
  * Interface for the session.
  *
