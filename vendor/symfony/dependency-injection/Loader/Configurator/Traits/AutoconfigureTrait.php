@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107129\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202107121\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202107129\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202107121\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait AutoconfigureTrait
 {
     /**
