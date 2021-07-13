@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107127\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107135\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202107127\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107127\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202107135\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107135\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableControllerResolver implements \ConfigTransformer202107127\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class TraceableControllerResolver implements \ConfigTransformer202107135\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $resolver;
     private $stopwatch;
-    public function __construct(\ConfigTransformer202107127\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer202107127\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer202107135\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver, \ConfigTransformer202107135\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->resolver = $resolver;
         $this->stopwatch = $stopwatch;

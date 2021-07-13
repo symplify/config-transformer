@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107127\Symfony\Component\HttpFoundation\Exception;
+namespace ConfigTransformer202107135\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Thrown by Request::toArray() when the content cannot be JSON-decoded.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class JsonException extends \UnexpectedValueException implements \ConfigTransformer202107127\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+final class JsonException extends \UnexpectedValueException implements \ConfigTransformer202107135\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
 }
