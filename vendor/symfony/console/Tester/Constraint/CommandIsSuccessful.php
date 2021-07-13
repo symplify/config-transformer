@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107132\Symfony\Component\Console\Tester\Constraint;
+namespace ConfigTransformer202107139\Symfony\Component\Console\Tester\Constraint;
 
-use ConfigTransformer202107132\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202107132\Symfony\Component\Console\Command\Command;
-final class CommandIsSuccessful extends \ConfigTransformer202107132\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202107139\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202107139\Symfony\Component\Console\Command\Command;
+final class CommandIsSuccessful extends \ConfigTransformer202107139\PHPUnit\Framework\Constraint\Constraint
 {
     /**
      * {@inheritdoc}
@@ -26,7 +26,7 @@ final class CommandIsSuccessful extends \ConfigTransformer202107132\PHPUnit\Fram
      */
     protected function matches($other) : bool
     {
-        return \ConfigTransformer202107132\Symfony\Component\Console\Command\Command::SUCCESS === $other;
+        return \ConfigTransformer202107139\Symfony\Component\Console\Command\Command::SUCCESS === $other;
     }
     /**
      * {@inheritdoc}
