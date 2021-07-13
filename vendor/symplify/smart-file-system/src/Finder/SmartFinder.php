@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107131\Symplify\SmartFileSystem\Finder;
+namespace ConfigTransformer202107139\Symplify\SmartFileSystem\Finder;
 
-use ConfigTransformer202107131\Symfony\Component\Finder\Finder;
-use ConfigTransformer202107131\Symplify\SmartFileSystem\FileSystemFilter;
-use ConfigTransformer202107131\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202107139\Symfony\Component\Finder\Finder;
+use ConfigTransformer202107139\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer202107139\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Finder\SmartFinder\SmartFinderTest
  */
@@ -19,7 +19,7 @@ final class SmartFinder
      * @var \Symplify\SmartFileSystem\FileSystemFilter
      */
     private $fileSystemFilter;
-    public function __construct(\ConfigTransformer202107131\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer, \ConfigTransformer202107131\Symplify\SmartFileSystem\FileSystemFilter $fileSystemFilter)
+    public function __construct(\ConfigTransformer202107139\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer, \ConfigTransformer202107139\Symplify\SmartFileSystem\FileSystemFilter $fileSystemFilter)
     {
         $this->finderSanitizer = $finderSanitizer;
         $this->fileSystemFilter = $fileSystemFilter;
@@ -33,7 +33,7 @@ final class SmartFinder
         $directories = $this->fileSystemFilter->filterDirectories($directoriesOrFiles);
         $fileInfos = [];
         if ($directories !== []) {
-            $finder = new \ConfigTransformer202107131\Symfony\Component\Finder\Finder();
+            $finder = new \ConfigTransformer202107139\Symfony\Component\Finder\Finder();
             $finder->name('*')->in($directories)->path($path)->files()->sortByName();
             $fileInfos = $this->finderSanitizer->sanitize($finder);
         }
@@ -49,7 +49,7 @@ final class SmartFinder
         $directories = $this->fileSystemFilter->filterDirectories($directoriesOrFiles);
         $fileInfos = [];
         if ($directories !== []) {
-            $finder = new \ConfigTransformer202107131\Symfony\Component\Finder\Finder();
+            $finder = new \ConfigTransformer202107139\Symfony\Component\Finder\Finder();
             $finder->name($name)->in($directories)->files()->sortByName();
             if ($excludedDirectories !== []) {
                 $finder->exclude($excludedDirectories);
@@ -58,7 +58,7 @@ final class SmartFinder
         }
         $files = $this->fileSystemFilter->filterFiles($directoriesOrFiles);
         foreach ($files as $file) {
-            $fileInfos[] = new \ConfigTransformer202107131\Symplify\SmartFileSystem\SmartFileInfo($file);
+            $fileInfos[] = new \ConfigTransformer202107139\Symplify\SmartFileSystem\SmartFileInfo($file);
         }
         return $fileInfos;
     }
