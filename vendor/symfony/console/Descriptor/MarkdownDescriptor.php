@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107139\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202107131\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202107139\Symfony\Component\Console\Application;
-use ConfigTransformer202107139\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202107139\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer202107139\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202107139\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202107139\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202107139\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202107131\Symfony\Component\Console\Application;
+use ConfigTransformer202107131\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202107131\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202107131\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202107131\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202107131\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202107131\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Markdown descriptor.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202107139\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-class MarkdownDescriptor extends \ConfigTransformer202107139\Symfony\Component\Console\Descriptor\Descriptor
+class MarkdownDescriptor extends \ConfigTransformer202107131\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
@@ -110,13 +110,13 @@ class MarkdownDescriptor extends \ConfigTransformer202107139\Symfony\Component\C
     protected function describeCommand($command, $options = [])
     {
         if ($options['short'] ?? \false) {
-            $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \ConfigTransformer202107139\Symfony\Component\Console\Helper\Helper::width($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce($command->getAliases(), function ($carry, $usage) {
+            $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \ConfigTransformer202107131\Symfony\Component\Console\Helper\Helper::width($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce($command->getAliases(), function ($carry, $usage) {
                 return $carry . '* `' . $usage . '`' . "\n";
             }));
             return;
         }
         $command->mergeApplicationDefinition(\false);
-        $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \ConfigTransformer202107139\Symfony\Component\Console\Helper\Helper::width($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce(\array_merge([$command->getSynopsis()], $command->getAliases(), $command->getUsages()), function ($carry, $usage) {
+        $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \ConfigTransformer202107131\Symfony\Component\Console\Helper\Helper::width($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce(\array_merge([$command->getSynopsis()], $command->getAliases(), $command->getUsages()), function ($carry, $usage) {
             return $carry . '* `' . $usage . '`' . "\n";
         }));
         if ($help = $command->getProcessedHelp()) {
@@ -137,11 +137,11 @@ class MarkdownDescriptor extends \ConfigTransformer202107139\Symfony\Component\C
     protected function describeApplication($application, $options = [])
     {
         $describedNamespace = $options['namespace'] ?? null;
-        $description = new \ConfigTransformer202107139\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
+        $description = new \ConfigTransformer202107131\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         $title = $this->getApplicationTitle($application);
-        $this->write($title . "\n" . \str_repeat('=', \ConfigTransformer202107139\Symfony\Component\Console\Helper\Helper::width($title)));
+        $this->write($title . "\n" . \str_repeat('=', \ConfigTransformer202107131\Symfony\Component\Console\Helper\Helper::width($title)));
         foreach ($description->getNamespaces() as $namespace) {
-            if (\ConfigTransformer202107139\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
+            if (\ConfigTransformer202107131\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                 $this->write("\n\n");
                 $this->write('**' . $namespace['id'] . ':**');
             }
@@ -157,7 +157,7 @@ class MarkdownDescriptor extends \ConfigTransformer202107139\Symfony\Component\C
             }
         }
     }
-    private function getApplicationTitle(\ConfigTransformer202107139\Symfony\Component\Console\Application $application) : string
+    private function getApplicationTitle(\ConfigTransformer202107131\Symfony\Component\Console\Application $application) : string
     {
         if ('UNKNOWN' !== $application->getName()) {
             if ('UNKNOWN' !== $application->getVersion()) {
