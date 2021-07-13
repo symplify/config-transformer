@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107133\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202107132\Symfony\Component\DependencyInjection;
 
 /**
  * Represents a variable.
