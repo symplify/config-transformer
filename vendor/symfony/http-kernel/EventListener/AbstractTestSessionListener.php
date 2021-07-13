@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107139\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202107133\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202107139\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202107139\Symfony\Component\HttpFoundation\Cookie;
-use ConfigTransformer202107139\Symfony\Component\HttpFoundation\Session\Session;
-use ConfigTransformer202107139\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use ConfigTransformer202107139\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202107139\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202107139\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202107133\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202107133\Symfony\Component\HttpFoundation\Cookie;
+use ConfigTransformer202107133\Symfony\Component\HttpFoundation\Session\Session;
+use ConfigTransformer202107133\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer202107133\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202107133\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202107133\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * TestSessionListener.
  *
@@ -27,7 +27,7 @@ use ConfigTransformer202107139\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @internal
  */
-abstract class AbstractTestSessionListener implements \ConfigTransformer202107139\Symfony\Component\EventDispatcher\EventSubscriberInterface
+abstract class AbstractTestSessionListener implements \ConfigTransformer202107133\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $sessionId;
     private $sessionOptions;
@@ -71,7 +71,7 @@ abstract class AbstractTestSessionListener implements \ConfigTransformer20210713
         if ($wasStarted = $session->isStarted()) {
             $session->save();
         }
-        if ($session instanceof \ConfigTransformer202107139\Symfony\Component\HttpFoundation\Session\Session ? !$session->isEmpty() || null !== $this->sessionId && $session->getId() !== $this->sessionId : $wasStarted) {
+        if ($session instanceof \ConfigTransformer202107133\Symfony\Component\HttpFoundation\Session\Session ? !$session->isEmpty() || null !== $this->sessionId && $session->getId() !== $this->sessionId : $wasStarted) {
             $params = \session_get_cookie_params() + ['samesite' => null];
             foreach ($this->sessionOptions as $k => $v) {
                 if (0 === \strpos($k, 'cookie_')) {
@@ -83,13 +83,13 @@ abstract class AbstractTestSessionListener implements \ConfigTransformer20210713
                     return;
                 }
             }
-            $event->getResponse()->headers->setCookie(new \ConfigTransformer202107139\Symfony\Component\HttpFoundation\Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : \time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly'], \false, $params['samesite'] ?: null));
+            $event->getResponse()->headers->setCookie(new \ConfigTransformer202107133\Symfony\Component\HttpFoundation\Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : \time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly'], \false, $params['samesite'] ?: null));
             $this->sessionId = $session->getId();
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202107139\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 192], \ConfigTransformer202107139\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -128]];
+        return [\ConfigTransformer202107133\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 192], \ConfigTransformer202107133\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -128]];
     }
     /**
      * Gets the session object.
