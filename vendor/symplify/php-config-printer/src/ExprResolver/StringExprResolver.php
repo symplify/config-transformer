@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107130\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer202107149\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202107130\Nette\Utils\Strings;
-use ConfigTransformer202107130\PhpParser\BuilderHelpers;
-use ConfigTransformer202107130\PhpParser\Node\Arg;
-use ConfigTransformer202107130\PhpParser\Node\Expr;
-use ConfigTransformer202107130\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202107130\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202107130\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202107130\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202107130\Symplify\Astral\ValueObject\AttributeKey;
-use ConfigTransformer202107130\Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider;
-use ConfigTransformer202107130\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202107130\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
-use ConfigTransformer202107130\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202107149\Nette\Utils\Strings;
+use ConfigTransformer202107149\PhpParser\BuilderHelpers;
+use ConfigTransformer202107149\PhpParser\Node\Arg;
+use ConfigTransformer202107149\PhpParser\Node\Expr;
+use ConfigTransformer202107149\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202107149\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202107149\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202107149\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202107149\Symplify\Astral\ValueObject\AttributeKey;
+use ConfigTransformer202107149\Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider;
+use ConfigTransformer202107149\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202107149\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
+use ConfigTransformer202107149\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class StringExprResolver
 {
     /**
@@ -35,16 +35,16 @@ final class StringExprResolver
      * @var \Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider
      */
     private $symfonyFunctionNameProvider;
-    public function __construct(\ConfigTransformer202107130\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory $constantNodeFactory, \ConfigTransformer202107130\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202107130\Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider $symfonyFunctionNameProvider)
+    public function __construct(\ConfigTransformer202107149\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory $constantNodeFactory, \ConfigTransformer202107149\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202107149\Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider $symfonyFunctionNameProvider)
     {
         $this->constantNodeFactory = $constantNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
         $this->symfonyFunctionNameProvider = $symfonyFunctionNameProvider;
     }
-    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \ConfigTransformer202107130\PhpParser\Node\Expr
+    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \ConfigTransformer202107149\PhpParser\Node\Expr
     {
         if ($value === '') {
-            return new \ConfigTransformer202107130\PhpParser\Node\Scalar\String_($value);
+            return new \ConfigTransformer202107149\PhpParser\Node\Scalar\String_($value);
         }
         $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
         if ($constFetch !== null) {
@@ -61,25 +61,25 @@ final class StringExprResolver
         if (\strncmp($value, '@=', \strlen('@=')) === 0) {
             $value = \ltrim($value, '@=');
             $expr = $this->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
-            $args = [new \ConfigTransformer202107130\PhpParser\Node\Arg($expr)];
-            return new \ConfigTransformer202107130\PhpParser\Node\Expr\FuncCall(new \ConfigTransformer202107130\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202107130\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
+            $args = [new \ConfigTransformer202107149\PhpParser\Node\Arg($expr)];
+            return new \ConfigTransformer202107149\PhpParser\Node\Expr\FuncCall(new \ConfigTransformer202107149\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202107149\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
         }
         // is service reference
         if (\strncmp($value, '@', \strlen('@')) === 0 && !$this->isFilePath($value)) {
             $refOrServiceFunctionName = $this->symfonyFunctionNameProvider->provideRefOrService();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
-        return \ConfigTransformer202107130\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \ConfigTransformer202107149\PhpParser\BuilderHelpers::normalizeValue($value);
     }
-    private function keepNewline(string $value) : \ConfigTransformer202107130\PhpParser\Node\Scalar\String_
+    private function keepNewline(string $value) : \ConfigTransformer202107149\PhpParser\Node\Scalar\String_
     {
-        $string = new \ConfigTransformer202107130\PhpParser\Node\Scalar\String_($value);
-        $string->setAttribute(\ConfigTransformer202107130\Symplify\Astral\ValueObject\AttributeKey::KIND, \ConfigTransformer202107130\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
+        $string = new \ConfigTransformer202107149\PhpParser\Node\Scalar\String_($value);
+        $string->setAttribute(\ConfigTransformer202107149\Symplify\Astral\ValueObject\AttributeKey::KIND, \ConfigTransformer202107149\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
         return $string;
     }
     private function isFilePath(string $value) : bool
     {
-        return (bool) \ConfigTransformer202107130\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
+        return (bool) \ConfigTransformer202107149\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
     }
     /**
      * @return \PhpParser\Node\Scalar\String_|\PhpParser\Node\Expr\ClassConstFetch
@@ -87,7 +87,7 @@ final class StringExprResolver
     private function resolveClassType(bool $skipClassesToConstantReference, string $value)
     {
         if ($skipClassesToConstantReference) {
-            return new \ConfigTransformer202107130\PhpParser\Node\Scalar\String_($value);
+            return new \ConfigTransformer202107149\PhpParser\Node\Scalar\String_($value);
         }
         return $this->commonNodeFactory->createClassReference($value);
     }
@@ -101,14 +101,14 @@ final class StringExprResolver
         }
         return \interface_exists($value);
     }
-    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \ConfigTransformer202107130\PhpParser\Node\Expr
+    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \ConfigTransformer202107149\PhpParser\Node\Expr
     {
         $value = \ltrim($value, '@');
         $expr = $this->resolve($value, $skipServiceReference, \false);
         if ($skipServiceReference) {
             return $expr;
         }
-        $args = [new \ConfigTransformer202107130\PhpParser\Node\Arg($expr)];
-        return new \ConfigTransformer202107130\PhpParser\Node\Expr\FuncCall(new \ConfigTransformer202107130\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $args = [new \ConfigTransformer202107149\PhpParser\Node\Arg($expr)];
+        return new \ConfigTransformer202107149\PhpParser\Node\Expr\FuncCall(new \ConfigTransformer202107149\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
 }
