@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107149\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace ConfigTransformer202107158\Symfony\Component\HttpKernel\ControllerMetadata;
 
 /**
  * Builds method argument data.

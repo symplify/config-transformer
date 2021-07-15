@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107149\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202107158\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202107149\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202107149\Symfony\Component\HttpFoundation\StreamedResponse;
-use ConfigTransformer202107149\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202107149\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202107158\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202107158\Symfony\Component\HttpFoundation\StreamedResponse;
+use ConfigTransformer202107158\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202107158\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * StreamedResponseListener is responsible for sending the Response
  * to the client.
@@ -22,7 +22,7 @@ use ConfigTransformer202107149\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final
  */
-class StreamedResponseListener implements \ConfigTransformer202107149\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class StreamedResponseListener implements \ConfigTransformer202107158\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     /**
      * Filters the Response.
@@ -34,12 +34,12 @@ class StreamedResponseListener implements \ConfigTransformer202107149\Symfony\Co
             return;
         }
         $response = $event->getResponse();
-        if ($response instanceof \ConfigTransformer202107149\Symfony\Component\HttpFoundation\StreamedResponse) {
+        if ($response instanceof \ConfigTransformer202107158\Symfony\Component\HttpFoundation\StreamedResponse) {
             $response->send();
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202107149\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1024]];
+        return [\ConfigTransformer202107158\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1024]];
     }
 }
