@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107158\Symfony\Component\Finder;
+namespace ConfigTransformer202107154\Symfony\Component\Finder;
 
 /**
  * Extends \SplFileInfo to support relative paths.
