@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107154\Symfony\Component\HttpFoundation\Session;
+namespace ConfigTransformer202107211\Symfony\Component\HttpFoundation\Session;
 
 /**
  * Session utility functions.

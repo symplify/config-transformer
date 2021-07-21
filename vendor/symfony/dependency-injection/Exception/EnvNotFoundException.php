@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107154\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * This exception is thrown when an environment variable is not found.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvNotFoundException extends \ConfigTransformer202107154\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+class EnvNotFoundException extends \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
 {
 }

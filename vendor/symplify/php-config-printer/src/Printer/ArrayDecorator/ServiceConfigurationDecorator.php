@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107154\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
+namespace ConfigTransformer202107211\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use ConfigTransformer202107154\PhpParser\Node\Arg;
-use ConfigTransformer202107154\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202107154\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202107154\PhpParser\Node\Expr\StaticCall;
-use ConfigTransformer202107154\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202107154\Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory;
-use ConfigTransformer202107154\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
-use ConfigTransformer202107154\Symplify\SymfonyPhpConfig\ValueObjectInliner;
+use ConfigTransformer202107211\PhpParser\Node\Arg;
+use ConfigTransformer202107211\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202107211\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202107211\PhpParser\Node\Expr\StaticCall;
+use ConfigTransformer202107211\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202107211\Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory;
+use ConfigTransformer202107211\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use ConfigTransformer202107211\Symplify\SymfonyPhpConfig\ValueObjectInliner;
 final class ServiceConfigurationDecorator
 {
     /**
@@ -21,7 +21,7 @@ final class ServiceConfigurationDecorator
      * @var \Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory
      */
     private $newValueObjectFactory;
-    public function __construct(\ConfigTransformer202107154\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver, \ConfigTransformer202107154\Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory $newValueObjectFactory)
+    public function __construct(\ConfigTransformer202107211\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver, \ConfigTransformer202107211\Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory $newValueObjectFactory)
     {
         $this->constantNameFromValueResolver = $constantNameFromValueResolver;
         $this->newValueObjectFactory = $newValueObjectFactory;
@@ -65,21 +65,21 @@ final class ServiceConfigurationDecorator
     /**
      * @param object $value
      */
-    private function decorateValueObject($value) : \ConfigTransformer202107154\PhpParser\Node\Expr\StaticCall
+    private function decorateValueObject($value) : \ConfigTransformer202107211\PhpParser\Node\Expr\StaticCall
     {
         $new = $this->newValueObjectFactory->create($value);
-        $args = [new \ConfigTransformer202107154\PhpParser\Node\Arg($new)];
+        $args = [new \ConfigTransformer202107211\PhpParser\Node\Arg($new)];
         return $this->createInlineStaticCall($args);
     }
-    private function decorateValueObjects(array $values) : \ConfigTransformer202107154\PhpParser\Node\Expr\StaticCall
+    private function decorateValueObjects(array $values) : \ConfigTransformer202107211\PhpParser\Node\Expr\StaticCall
     {
         $arrayItems = [];
         foreach ($values as $value) {
             $new = $this->newValueObjectFactory->create($value);
-            $arrayItems[] = new \ConfigTransformer202107154\PhpParser\Node\Expr\ArrayItem($new);
+            $arrayItems[] = new \ConfigTransformer202107211\PhpParser\Node\Expr\ArrayItem($new);
         }
-        $array = new \ConfigTransformer202107154\PhpParser\Node\Expr\Array_($arrayItems);
-        $args = [new \ConfigTransformer202107154\PhpParser\Node\Arg($array)];
+        $array = new \ConfigTransformer202107211\PhpParser\Node\Expr\Array_($arrayItems);
+        $args = [new \ConfigTransformer202107211\PhpParser\Node\Arg($array)];
         return $this->createInlineStaticCall($args);
     }
     private function isArrayOfObjects($values) : bool
@@ -102,9 +102,9 @@ final class ServiceConfigurationDecorator
      *
      * @param Arg[] $args
      */
-    private function createInlineStaticCall(array $args) : \ConfigTransformer202107154\PhpParser\Node\Expr\StaticCall
+    private function createInlineStaticCall(array $args) : \ConfigTransformer202107211\PhpParser\Node\Expr\StaticCall
     {
-        $fullyQualified = new \ConfigTransformer202107154\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202107154\Symplify\SymfonyPhpConfig\ValueObjectInliner::class);
-        return new \ConfigTransformer202107154\PhpParser\Node\Expr\StaticCall($fullyQualified, 'inline', $args);
+        $fullyQualified = new \ConfigTransformer202107211\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202107211\Symplify\SymfonyPhpConfig\ValueObjectInliner::class);
+        return new \ConfigTransformer202107211\PhpParser\Node\Expr\StaticCall($fullyQualified, 'inline', $args);
     }
 }

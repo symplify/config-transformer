@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107154\Symfony\Component\Console\Input;
+namespace ConfigTransformer202107211\Symfony\Component\Console\Input;
 
-use ConfigTransformer202107154\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202107211\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * StringInput represents an input provided as a string.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer202107154\Symfony\Component\Console\Exception\InvalidArgume
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StringInput extends \ConfigTransformer202107154\Symfony\Component\Console\Input\ArgvInput
+class StringInput extends \ConfigTransformer202107211\Symfony\Component\Console\Input\ArgvInput
 {
     public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
@@ -45,14 +45,14 @@ class StringInput extends \ConfigTransformer202107154\Symfony\Component\Console\
         while ($cursor < $length) {
             if (\preg_match('/\\s+/A', $input, $match, 0, $cursor)) {
             } elseif (\preg_match('/([^="\'\\s]+?)(=?)(' . self::REGEX_QUOTED_STRING . '+)/A', $input, $match, 0, $cursor)) {
-                $tokens[] = $match[1] . $match[2] . \stripcslashes(\str_replace(['"\'', '\'"', '\'\'', '""'], '', \substr($match[3], 1, \strlen($match[3]) - 2)));
+                $tokens[] = $match[1] . $match[2] . \stripcslashes(\str_replace(['"\'', '\'"', '\'\'', '""'], '', \substr($match[3], 1, -1)));
             } elseif (\preg_match('/' . self::REGEX_QUOTED_STRING . '/A', $input, $match, 0, $cursor)) {
-                $tokens[] = \stripcslashes(\substr($match[0], 1, \strlen($match[0]) - 2));
+                $tokens[] = \stripcslashes(\substr($match[0], 1, -1));
             } elseif (\preg_match('/' . self::REGEX_STRING . '/A', $input, $match, 0, $cursor)) {
                 $tokens[] = \stripcslashes($match[1]);
             } else {
                 // should never happen
-                throw new \ConfigTransformer202107154\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
+                throw new \ConfigTransformer202107211\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
             }
             $cursor += \strlen($match[0]);
         }

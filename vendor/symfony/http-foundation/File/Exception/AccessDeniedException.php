@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107154\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer202107211\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when the access on a file was denied.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class AccessDeniedException extends \ConfigTransformer202107154\Symfony\Component\HttpFoundation\File\Exception\FileException
+class AccessDeniedException extends \ConfigTransformer202107211\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
     public function __construct(string $path)
     {
