@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107211\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202107211\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202107211\Symfony\Component\Config\Definition\Processor;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer2021072110\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer2021072110\Symfony\Component\Config\Definition\Processor;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**
@@ -62,11 +62,11 @@ abstract class Extension implements \ConfigTransformer202107211\Symfony\Componen
     public function getAlias()
     {
         $className = static::class;
-        if ('Extension' != \substr($className, -9)) {
-            throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
+        if (\substr_compare($className, 'Extension', -\strlen('Extension')) !== 0) {
+            throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
         }
         $classBaseName = \substr(\strrchr($className, '\\'), 1, -9);
-        return \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
+        return \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
     }
     /**
      * {@inheritdoc}
@@ -76,7 +76,7 @@ abstract class Extension implements \ConfigTransformer202107211\Symfony\Componen
     public function getConfiguration($config, $container)
     {
         $class = static::class;
-        if (\false !== \strpos($class, "\0")) {
+        if (\strpos($class, "\0") !== \false) {
             return null;
             // ignore anonymous classes
         }
@@ -85,8 +85,8 @@ abstract class Extension implements \ConfigTransformer202107211\Symfony\Componen
         if (!$class) {
             return null;
         }
-        if (!$class->implementsInterface(\ConfigTransformer202107211\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
-            throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \ConfigTransformer202107211\Symfony\Component\Config\Definition\ConfigurationInterface::class));
+        if (!$class->implementsInterface(\ConfigTransformer2021072110\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
+            throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \ConfigTransformer2021072110\Symfony\Component\Config\Definition\ConfigurationInterface::class));
         }
         if (!($constructor = $class->getConstructor()) || !$constructor->getNumberOfRequiredParameters()) {
             return $class->newInstance();
@@ -99,7 +99,7 @@ abstract class Extension implements \ConfigTransformer202107211\Symfony\Componen
      */
     protected final function processConfiguration($configuration, $configs) : array
     {
-        $processor = new \ConfigTransformer202107211\Symfony\Component\Config\Definition\Processor();
+        $processor = new \ConfigTransformer2021072110\Symfony\Component\Config\Definition\Processor();
         return $this->processedConfigs[] = $processor->processConfiguration($configuration, $configs);
     }
     /**
@@ -123,7 +123,7 @@ abstract class Extension implements \ConfigTransformer202107211\Symfony\Componen
     protected function isConfigEnabled($container, $config)
     {
         if (!\array_key_exists('enabled', $config)) {
-            throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
+            throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
         }
         return (bool) $container->getParameterBag()->resolveValue($config['enabled']);
     }

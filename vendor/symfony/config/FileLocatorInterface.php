@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107211\Symfony\Component\Config;
+namespace ConfigTransformer2021072110\Symfony\Component\Config;
 
-use ConfigTransformer202107211\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ConfigTransformer2021072110\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

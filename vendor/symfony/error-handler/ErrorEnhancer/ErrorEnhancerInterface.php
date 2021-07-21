@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107211\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace ConfigTransformer2021072110\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
 interface ErrorEnhancerInterface
 {

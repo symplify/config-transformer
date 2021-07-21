@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107211\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer2021072110\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvPlaceholderParameterBag extends \ConfigTransformer202107211\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+class EnvPlaceholderParameterBag extends \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
 {
     private $envPlaceholderUniquePrefix;
     private $envPlaceholders = [];
@@ -28,7 +28,7 @@ class EnvPlaceholderParameterBag extends \ConfigTransformer202107211\Symfony\Com
      */
     public function get($name)
     {
-        if (0 === \strpos($name, 'env(') && ')' === \substr($name, -1) && 'env()' !== $name) {
+        if (\strncmp($name, 'env(', \strlen('env(')) === 0 && \substr_compare($name, ')', -\strlen(')')) === 0 && 'env()' !== $name) {
             $env = \substr($name, 4, -1);
             if (isset($this->envPlaceholders[$env])) {
                 foreach ($this->envPlaceholders[$env] as $placeholder) {
@@ -43,10 +43,10 @@ class EnvPlaceholderParameterBag extends \ConfigTransformer202107211\Symfony\Com
                 }
             }
             if (!\preg_match('/^(?:[-.\\w]*+:)*+\\w++$/', $env)) {
-                throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid %s name: only "word" characters are allowed.', $name));
+                throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid %s name: only "word" characters are allowed.', $name));
             }
             if ($this->has($name) && null !== ($defaultValue = parent::get($name)) && !\is_string($defaultValue)) {
-                throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The default value of an env() parameter must be a string or null, but "%s" given to "%s".', \get_debug_type($defaultValue), $name));
+                throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The default value of an env() parameter must be a string or null, but "%s" given to "%s".', \get_debug_type($defaultValue), $name));
             }
             $uniqueName = \md5($name . '_' . self::$counter++);
             $placeholder = \sprintf('%s_%s_%s', $this->getEnvPlaceholderUniquePrefix(), \strtr($env, ':-.', '___'), $uniqueName);
@@ -133,7 +133,7 @@ class EnvPlaceholderParameterBag extends \ConfigTransformer202107211\Symfony\Com
         parent::resolve();
         foreach ($this->envPlaceholders as $env => $placeholders) {
             if ($this->has($name = "env({$env})") && null !== ($default = $this->parameters[$name]) && !\is_string($default)) {
-                throw new \ConfigTransformer202107211\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The default value of env parameter "%s" must be a string or null, "%s" given.', $env, \get_debug_type($default)));
+                throw new \ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The default value of env parameter "%s" must be a string or null, "%s" given.', $env, \get_debug_type($default)));
             }
         }
     }
