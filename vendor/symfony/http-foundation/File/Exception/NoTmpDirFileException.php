@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer202107229\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_NO_TMP_DIR error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class NoTmpDirFileException extends \ConfigTransformer2021072110\Symfony\Component\HttpFoundation\File\Exception\FileException
+class NoTmpDirFileException extends \ConfigTransformer202107229\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

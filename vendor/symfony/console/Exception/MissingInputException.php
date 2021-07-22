@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202107229\Symfony\Component\Console\Exception;
 
 /**
  * Represents failure to read input from stdin.
  *
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class MissingInputException extends \ConfigTransformer2021072110\Symfony\Component\Console\Exception\RuntimeException implements \ConfigTransformer2021072110\Symfony\Component\Console\Exception\ExceptionInterface
+class MissingInputException extends \ConfigTransformer202107229\Symfony\Component\Console\Exception\RuntimeException implements \ConfigTransformer202107229\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }

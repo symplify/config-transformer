@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\Finder\Comparator;
+namespace ConfigTransformer202107229\Symfony\Component\Finder\Comparator;
 
 /**
  * DateCompare compiles date comparisons.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DateComparator extends \ConfigTransformer2021072110\Symfony\Component\Finder\Comparator\Comparator
+class DateComparator extends \ConfigTransformer202107229\Symfony\Component\Finder\Comparator\Comparator
 {
     /**
      * @param string $test A comparison string

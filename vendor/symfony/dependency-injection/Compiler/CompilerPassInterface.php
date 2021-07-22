@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202107229\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2021072110\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202107229\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Interface that must be implemented by compilation passes.
  *

@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107229\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer2021072110\Psr\Cache\CacheItemInterface;
-use ConfigTransformer2021072110\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer2021072110\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202107229\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202107229\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202107229\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \ConfigTransformer2021072110\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer2021072110\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements \ConfigTransformer202107229\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202107229\Symfony\Contracts\Cache\CacheInterface
 {
     private static $createCacheItem;
     public function __construct()
     {
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key) {
-            $item = new \ConfigTransformer2021072110\Symfony\Component\Cache\CacheItem();
+            $item = new \ConfigTransformer202107229\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, null, \ConfigTransformer2021072110\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202107229\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}

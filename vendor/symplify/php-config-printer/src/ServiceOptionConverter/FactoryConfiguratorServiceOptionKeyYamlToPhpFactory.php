@@ -1,32 +1,32 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021072110\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202107229\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer2021072110\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2021072110\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer2021072110\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer2021072110\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer2021072110\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202107229\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202107229\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202107229\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202107229\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202107229\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer2021072110\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202107229\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
     /**
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer2021072110\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer202107229\PhpParser\Node\Expr\MethodCall
     {
         $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-        return new \ConfigTransformer2021072110\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
+        return new \ConfigTransformer202107229\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
     }
     public function isMatch($key, $values) : bool
     {
-        return \in_array($key, [\ConfigTransformer2021072110\Symplify\PhpConfigPrinter\ValueObject\YamlKey::FACTORY, \ConfigTransformer2021072110\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CONFIGURATOR], \true);
+        return \in_array($key, [\ConfigTransformer202107229\Symplify\PhpConfigPrinter\ValueObject\YamlKey::FACTORY, \ConfigTransformer202107229\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CONFIGURATOR], \true);
     }
 }

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * MockArraySessionStorage mocks the session for unit tests.
  *
@@ -23,7 +23,7 @@ use ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Session
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Drak <drak@zikula.org>
  */
-class MockArraySessionStorage implements \ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class MockArraySessionStorage implements \ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var string
@@ -53,7 +53,7 @@ class MockArraySessionStorage implements \ConfigTransformer2021072110\Symfony\Co
      * @var array|SessionBagInterface[]
      */
     protected $bags = [];
-    public function __construct(string $name = 'MOCKSESSID', \ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $name = 'MOCKSESSID', \ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         $this->name = $name;
         $this->setMetadataBag($metaBag);
@@ -187,7 +187,7 @@ class MockArraySessionStorage implements \ConfigTransformer2021072110\Symfony\Co
     public function setMetadataBag($bag = null)
     {
         if (null === $bag) {
-            $bag = new \ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $bag = new \ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $bag;
     }

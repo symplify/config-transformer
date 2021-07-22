@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\Attribute;
 
-use ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Attributes store.
  *
  * @author Drak <drak@zikula.org>
  */
-interface AttributeBagInterface extends \ConfigTransformer2021072110\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface AttributeBagInterface extends \ConfigTransformer202107229\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Checks if an attribute is defined.

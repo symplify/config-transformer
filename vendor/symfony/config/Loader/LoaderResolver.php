@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021072110\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202107229\Symfony\Component\Config\Loader;
 
 /**
  * LoaderResolver selects a loader for a given resource.
@@ -18,7 +18,7 @@ namespace ConfigTransformer2021072110\Symfony\Component\Config\Loader;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LoaderResolver implements \ConfigTransformer2021072110\Symfony\Component\Config\Loader\LoaderResolverInterface
+class LoaderResolver implements \ConfigTransformer202107229\Symfony\Component\Config\Loader\LoaderResolverInterface
 {
     /**
      * @var LoaderInterface[] An array of LoaderInterface objects
