@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107233\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202107232\Symfony\Component\HttpKernel\Exception;
 
 /**
  * Interface for HTTP error exceptions.

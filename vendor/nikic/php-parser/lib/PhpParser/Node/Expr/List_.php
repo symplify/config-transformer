@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107233\PhpParser\Node\Expr;
+namespace ConfigTransformer202107232\PhpParser\Node\Expr;
 
-use ConfigTransformer202107233\PhpParser\Node\Expr;
-class List_ extends \ConfigTransformer202107233\PhpParser\Node\Expr
+use ConfigTransformer202107232\PhpParser\Node\Expr;
+class List_ extends \ConfigTransformer202107232\PhpParser\Node\Expr
 {
     /** @var (ArrayItem|null)[] List of items to assign to */
     public $items;
