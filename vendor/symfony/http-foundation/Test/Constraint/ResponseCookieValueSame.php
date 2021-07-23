@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107229\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202107239\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202107229\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202107229\Symfony\Component\HttpFoundation\Cookie;
-use ConfigTransformer202107229\Symfony\Component\HttpFoundation\Response;
-final class ResponseCookieValueSame extends \ConfigTransformer202107229\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202107239\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202107239\Symfony\Component\HttpFoundation\Cookie;
+use ConfigTransformer202107239\Symfony\Component\HttpFoundation\Response;
+final class ResponseCookieValueSame extends \ConfigTransformer202107239\PHPUnit\Framework\Constraint\Constraint
 {
     private $name;
     private $value;
@@ -66,10 +66,10 @@ final class ResponseCookieValueSame extends \ConfigTransformer202107229\PHPUnit\
     /**
      * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    protected function getCookie($response) : ?\ConfigTransformer202107229\Symfony\Component\HttpFoundation\Cookie
+    protected function getCookie($response) : ?\ConfigTransformer202107239\Symfony\Component\HttpFoundation\Cookie
     {
         $cookies = $response->headers->getCookies();
-        $filteredCookies = \array_filter($cookies, function (\ConfigTransformer202107229\Symfony\Component\HttpFoundation\Cookie $cookie) {
+        $filteredCookies = \array_filter($cookies, function (\ConfigTransformer202107239\Symfony\Component\HttpFoundation\Cookie $cookie) {
             return $cookie->getName() === $this->name && $cookie->getPath() === $this->path && $cookie->getDomain() === $this->domain;
         });
         return \reset($filteredCookies) ?: null;
