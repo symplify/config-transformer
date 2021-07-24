@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107232\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202107246\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202107232\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107232\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107246\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107246\Symfony\Component\HttpFoundation\Response;
 /**
  * Terminable extends the Kernel request/response cycle with dispatching a post
  * response event after sending the response and before shutting down the kernel.

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107232\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202107246\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202107232\Symfony\Component\Console\Application;
-use ConfigTransformer202107232\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202107232\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202107232\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202107232\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202107246\Symfony\Component\Console\Application;
+use ConfigTransformer202107246\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202107246\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202107246\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202107246\Symfony\Component\Console\Input\InputOption;
 /**
  * JSON descriptor.
  *
@@ -22,7 +22,7 @@ use ConfigTransformer202107232\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class JsonDescriptor extends \ConfigTransformer202107232\Symfony\Component\Console\Descriptor\Descriptor
+class JsonDescriptor extends \ConfigTransformer202107246\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
@@ -71,7 +71,7 @@ class JsonDescriptor extends \ConfigTransformer202107232\Symfony\Component\Conso
     protected function describeApplication($application, $options = [])
     {
         $describedNamespace = $options['namespace'] ?? null;
-        $description = new \ConfigTransformer202107232\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
+        $description = new \ConfigTransformer202107246\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
         $commands = [];
         foreach ($description->getCommands() as $command) {
             $commands[] = $this->getCommandData($command, $options['short'] ?? \false);
@@ -99,15 +99,15 @@ class JsonDescriptor extends \ConfigTransformer202107232\Symfony\Component\Conso
         $flags = $options['json_encoding'] ?? 0;
         $this->write(\json_encode($data, $flags));
     }
-    private function getInputArgumentData(\ConfigTransformer202107232\Symfony\Component\Console\Input\InputArgument $argument) : array
+    private function getInputArgumentData(\ConfigTransformer202107246\Symfony\Component\Console\Input\InputArgument $argument) : array
     {
         return ['name' => $argument->getName(), 'is_required' => $argument->isRequired(), 'is_array' => $argument->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $argument->getDescription()), 'default' => \INF === $argument->getDefault() ? 'INF' : $argument->getDefault()];
     }
-    private function getInputOptionData(\ConfigTransformer202107232\Symfony\Component\Console\Input\InputOption $option, bool $negated = \false) : array
+    private function getInputOptionData(\ConfigTransformer202107246\Symfony\Component\Console\Input\InputOption $option, bool $negated = \false) : array
     {
         return $negated ? ['name' => '--no-' . $option->getName(), 'shortcut' => '', 'accept_value' => \false, 'is_value_required' => \false, 'is_multiple' => \false, 'description' => 'Negate the "--' . $option->getName() . '" option', 'default' => \false] : ['name' => '--' . $option->getName(), 'shortcut' => $option->getShortcut() ? '-' . \str_replace('|', '|-', $option->getShortcut()) : '', 'accept_value' => $option->acceptValue(), 'is_value_required' => $option->isValueRequired(), 'is_multiple' => $option->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $option->getDescription()), 'default' => \INF === $option->getDefault() ? 'INF' : $option->getDefault()];
     }
-    private function getInputDefinitionData(\ConfigTransformer202107232\Symfony\Component\Console\Input\InputDefinition $definition) : array
+    private function getInputDefinitionData(\ConfigTransformer202107246\Symfony\Component\Console\Input\InputDefinition $definition) : array
     {
         $inputArguments = [];
         foreach ($definition->getArguments() as $name => $argument) {
@@ -122,7 +122,7 @@ class JsonDescriptor extends \ConfigTransformer202107232\Symfony\Component\Conso
         }
         return ['arguments' => $inputArguments, 'options' => $inputOptions];
     }
-    private function getCommandData(\ConfigTransformer202107232\Symfony\Component\Console\Command\Command $command, bool $short = \false) : array
+    private function getCommandData(\ConfigTransformer202107246\Symfony\Component\Console\Command\Command $command, bool $short = \false) : array
     {
         $data = ['name' => $command->getName(), 'description' => $command->getDescription()];
         if ($short) {
