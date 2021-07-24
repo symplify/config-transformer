@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107246\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107242\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202107246\Symfony\Component\Routing\RequestContext;
+use ConfigTransformer202107242\Symfony\Component\Routing\RequestContext;
 /**
  * A helper service for manipulating URLs within and outside the request scope.
  *
@@ -20,7 +20,7 @@ final class UrlHelper
 {
     private $requestStack;
     private $requestContext;
-    public function __construct(\ConfigTransformer202107246\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer202107246\Symfony\Component\Routing\RequestContext $requestContext = null)
+    public function __construct(\ConfigTransformer202107242\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer202107242\Symfony\Component\Routing\RequestContext $requestContext = null)
     {
         $this->requestStack = $requestStack;
         $this->requestContext = $requestContext;
