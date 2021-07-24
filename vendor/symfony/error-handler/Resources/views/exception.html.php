@@ -1,5 +1,5 @@
 <div class="exception-summary <?php 
-namespace ConfigTransformer202107242;
+namespace ConfigTransformer202107246;
 
 echo !$exceptionMessage ? 'exception-without-message' : '';
 ?>">

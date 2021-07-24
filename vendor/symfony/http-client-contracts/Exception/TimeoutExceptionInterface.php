@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107242\Symfony\Contracts\HttpClient\Exception;
+namespace ConfigTransformer202107246\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When an idle timeout occurs.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TimeoutExceptionInterface extends \ConfigTransformer202107242\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+interface TimeoutExceptionInterface extends \ConfigTransformer202107246\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
 {
 }
