@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\SessionUtils;
-use ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
-use ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
-use ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
+use ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
+use ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
+use ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag::class);
-\class_exists(\ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler::class);
-\class_exists(\ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy::class);
+\class_exists(\ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag::class);
+\class_exists(\ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler::class);
+\class_exists(\ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy::class);
 /**
  * This provides a base class for session attribute storage.
  *
  * @author Drak <drak@zikula.org>
  */
-class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class NativeSessionStorage implements \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var SessionBagInterface[]
@@ -95,7 +95,7 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
      *
      * @param AbstractProxy|\SessionHandlerInterface|null $handler
      */
-    public function __construct(array $options = [], $handler = null, \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(array $options = [], $handler = null, \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (!\extension_loaded('session')) {
             throw new \LogicException('PHP extension "session" is required.');
@@ -134,7 +134,7 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
             throw new \RuntimeException('Failed to start the session.');
         }
         if (null !== $this->emulateSameSite) {
-            $originalCookie = \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
+            $originalCookie = \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
             if (null !== $originalCookie) {
                 \header(\sprintf('%s; SameSite=%s', $originalCookie, $this->emulateSameSite), \false);
             }
@@ -196,7 +196,7 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
         }
         $isRegenerated = \session_regenerate_id($destroy);
         if (null !== $this->emulateSameSite) {
-            $originalCookie = \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
+            $originalCookie = \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
             if (null !== $originalCookie) {
                 \header(\sprintf('%s; SameSite=%s', $originalCookie, $this->emulateSameSite), \false);
             }
@@ -221,7 +221,7 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
         // Register error handler to add information about the current save handler
         $previousHandler = \set_error_handler(function ($type, $msg, $file, $line) use(&$previousHandler) {
             if (\E_WARNING === $type && 0 === \strpos($msg, 'session_write_close():')) {
-                $handler = $this->saveHandler instanceof \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy ? $this->saveHandler->getHandler() : $this->saveHandler;
+                $handler = $this->saveHandler instanceof \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy ? $this->saveHandler->getHandler() : $this->saveHandler;
                 $msg = \sprintf('session_write_close(): Failed to write session data with "%s" handler', \get_class($handler));
             }
             return $previousHandler ? $previousHandler($type, $msg, $file, $line) : \false;
@@ -285,7 +285,7 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
     public function setMetadataBag($metaBag = null)
     {
         if (null === $metaBag) {
-            $metaBag = new \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $metaBag = new \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $metaBag;
     }
@@ -358,20 +358,20 @@ class NativeSessionStorage implements \ConfigTransformer202107245\Symfony\Compon
      */
     public function setSaveHandler($saveHandler = null)
     {
-        if (!$saveHandler instanceof \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && !$saveHandler instanceof \SessionHandlerInterface && null !== $saveHandler) {
+        if (!$saveHandler instanceof \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && !$saveHandler instanceof \SessionHandlerInterface && null !== $saveHandler) {
             throw new \InvalidArgumentException('Must be instance of AbstractProxy; implement \\SessionHandlerInterface; or be null.');
         }
         // Wrap $saveHandler in proxy and prevent double wrapping of proxy
-        if (!$saveHandler instanceof \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && $saveHandler instanceof \SessionHandlerInterface) {
-            $saveHandler = new \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy($saveHandler);
-        } elseif (!$saveHandler instanceof \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy) {
-            $saveHandler = new \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy(new \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \SessionHandler()));
+        if (!$saveHandler instanceof \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && $saveHandler instanceof \SessionHandlerInterface) {
+            $saveHandler = new \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy($saveHandler);
+        } elseif (!$saveHandler instanceof \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy) {
+            $saveHandler = new \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy(new \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \SessionHandler()));
         }
         $this->saveHandler = $saveHandler;
         if (\headers_sent() || \PHP_SESSION_ACTIVE === \session_status()) {
             return;
         }
-        if ($this->saveHandler instanceof \ConfigTransformer202107245\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy) {
+        if ($this->saveHandler instanceof \ConfigTransformer202107252\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy) {
             \session_set_save_handler($this->saveHandler, \false);
         }
     }

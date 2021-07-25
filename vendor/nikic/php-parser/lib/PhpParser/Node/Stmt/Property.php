@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107245\PhpParser\Node\Stmt;
+namespace ConfigTransformer202107252\PhpParser\Node\Stmt;
 
-use ConfigTransformer202107245\PhpParser\Node;
-use ConfigTransformer202107245\PhpParser\Node\Identifier;
-use ConfigTransformer202107245\PhpParser\Node\Name;
-use ConfigTransformer202107245\PhpParser\Node\NullableType;
-use ConfigTransformer202107245\PhpParser\Node\UnionType;
-class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
+use ConfigTransformer202107252\PhpParser\Node;
+use ConfigTransformer202107252\PhpParser\Node\Identifier;
+use ConfigTransformer202107252\PhpParser\Node\Name;
+use ConfigTransformer202107252\PhpParser\Node\NullableType;
+use ConfigTransformer202107252\PhpParser\Node\UnionType;
+class Property extends \ConfigTransformer202107252\PhpParser\Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
@@ -32,7 +32,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
         $this->attributes = $attributes;
         $this->flags = $flags;
         $this->props = $props;
-        $this->type = \is_string($type) ? new \ConfigTransformer202107245\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \ConfigTransformer202107252\PhpParser\Node\Identifier($type) : $type;
         $this->attrGroups = $attrGroups;
     }
     public function getSubNodeNames() : array
@@ -46,7 +46,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
      */
     public function isPublic() : bool
     {
-        return ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+        return ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
     /**
      * Whether the property is protected.
@@ -55,7 +55,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
      */
     public function isProtected() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        return (bool) ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
     }
     /**
      * Whether the property is private.
@@ -64,7 +64,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
      */
     public function isPrivate() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        return (bool) ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
     }
     /**
      * Whether the property is static.
@@ -73,7 +73,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
      */
     public function isStatic() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        return (bool) ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
     }
     /**
      * Whether the property is readonly.
@@ -82,7 +82,7 @@ class Property extends \ConfigTransformer202107245\PhpParser\Node\Stmt
      */
     public function isReadonly() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202107245\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY);
+        return (bool) ($this->flags & \ConfigTransformer202107252\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY);
     }
     public function getType() : string
     {

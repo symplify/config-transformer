@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107245\PhpParser\ErrorHandler;
+namespace ConfigTransformer202107252\PhpParser\ErrorHandler;
 
-use ConfigTransformer202107245\PhpParser\Error;
-use ConfigTransformer202107245\PhpParser\ErrorHandler;
+use ConfigTransformer202107252\PhpParser\Error;
+use ConfigTransformer202107252\PhpParser\ErrorHandler;
 /**
  * Error handler that collects all errors into an array.
  *
  * This allows graceful handling of errors.
  */
-class Collecting implements \ConfigTransformer202107245\PhpParser\ErrorHandler
+class Collecting implements \ConfigTransformer202107252\PhpParser\ErrorHandler
 {
     /** @var Error[] Collected errors */
     private $errors = [];
