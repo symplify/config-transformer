@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202107276\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Memcached based session storage handler based on the Memcached class
@@ -18,7 +18,7 @@ namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation\Session\St
  *
  * @author Drak <drak@zikula.org>
  */
-class MemcachedSessionHandler extends \ConfigTransformer202107264\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MemcachedSessionHandler extends \ConfigTransformer202107276\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $memcached;
     /**
@@ -89,12 +89,13 @@ class MemcachedSessionHandler extends \ConfigTransformer202107264\Symfony\Compon
         return $result || \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();
     }
     /**
-     * @return bool
+     * @return int|false
      */
+    #[\ReturnTypeWillChange]
     public function gc($maxlifetime)
     {
         // not required here because memcached will auto expire the records anyhow.
-        return \true;
+        return 0;
     }
     /**
      * Return a Memcached instance.

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107276\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\File;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\File;
 /**
  * BinaryFileResponse represents an HTTP response delivering a file.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\File;
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Sergey Linnik <linniksa@gmail.com>
  */
-class BinaryFileResponse extends \ConfigTransformer202107264\Symfony\Component\HttpFoundation\Response
+class BinaryFileResponse extends \ConfigTransformer202107276\Symfony\Component\HttpFoundation\Response
 {
     protected static $trustXSendfileTypeHeader = \false;
     /**
@@ -80,15 +80,15 @@ class BinaryFileResponse extends \ConfigTransformer202107264\Symfony\Component\H
      */
     public function setFile($file, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
     {
-        if (!$file instanceof \ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\File) {
+        if (!$file instanceof \ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\File) {
             if ($file instanceof \SplFileInfo) {
-                $file = new \ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\File($file->getPathname());
+                $file = new \ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\File($file->getPathname());
             } else {
-                $file = new \ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\File((string) $file);
+                $file = new \ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\File((string) $file);
             }
         }
         if (!$file->isReadable()) {
-            throw new \ConfigTransformer202107264\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
+            throw new \ConfigTransformer202107276\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
         }
         $this->file = $file;
         if ($autoEtag) {
@@ -141,7 +141,7 @@ class BinaryFileResponse extends \ConfigTransformer202107264\Symfony\Component\H
         if ('' === $filename) {
             $filename = $this->file->getFilename();
         }
-        if ('' === $filenameFallback && (!\preg_match('/^[\\x20-\\x7e]*$/', $filename) || \false !== \strpos($filename, '%'))) {
+        if ('' === $filenameFallback && (!\preg_match('/^[\\x20-\\x7e]*$/', $filename) || \strpos($filename, '%') !== \false)) {
             $encoding = \mb_detect_encoding($filename, null, \true) ?: '8bit';
             for ($i = 0, $filenameLength = \mb_strlen($filename, $encoding); $i < $filenameLength; ++$i) {
                 $char = \mb_substr($filename, $i, 1, $encoding);
@@ -190,7 +190,7 @@ class BinaryFileResponse extends \ConfigTransformer202107264\Symfony\Component\H
             if ('x-accel-redirect' === \strtolower($type)) {
                 // Do X-Accel-Mapping substitutions.
                 // @link https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/#x-accel-redirect
-                $parts = \ConfigTransformer202107264\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
+                $parts = \ConfigTransformer202107276\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
                 foreach ($parts as $part) {
                     [$pathPrefix, $location] = $part;
                     if (\substr($path, 0, \strlen($pathPrefix)) === $pathPrefix) {
@@ -210,7 +210,7 @@ class BinaryFileResponse extends \ConfigTransformer202107264\Symfony\Component\H
             // Process the range headers.
             if (!$request->headers->has('If-Range') || $this->hasValidIfRangeHeader($request->headers->get('If-Range'))) {
                 $range = $request->headers->get('Range');
-                if (0 === \strpos($range, 'bytes=')) {
+                if (\strncmp($range, 'bytes=', \strlen('bytes=')) === 0) {
                     [$start, $end] = \explode('-', \substr($range, 6), 2) + [0];
                     $end = '' === $end ? $fileSize - 1 : (int) $end;
                     if ('' === $start) {

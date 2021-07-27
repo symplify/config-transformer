@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107264\Symplify\ConfigTransformer\FileSystem;
+namespace ConfigTransformer202107276\Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202107264\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202107264\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202107264\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202107264\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202107276\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202107276\Symplify\ConfigTransformer\Configuration\Configuration;
+use ConfigTransformer202107276\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202107276\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     /**
@@ -21,13 +21,13 @@ final class ConfigFileDumper
      * @var \Symplify\SmartFileSystem\SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\ConfigTransformer202107264\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202107264\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202107264\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(\ConfigTransformer202107276\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202107276\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202107276\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
     {
         $this->configuration = $configuration;
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
     }
-    public function dumpFile(\ConfigTransformer202107264\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
+    public function dumpFile(\ConfigTransformer202107276\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';

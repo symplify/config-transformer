@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Finder;
+namespace ConfigTransformer202107276\Symfony\Component\Finder;
 
 /**
  * Gitignore matches against text.
@@ -69,6 +69,6 @@ class Gitignore
         $regex = \preg_replace('~(?:(?:\\\\\\*){2,}(/?))+~', '(?:(?:(?!//).(?<!//))+$1)?', $regex);
         $regex = \preg_replace('~\\\\\\*~', '[^/]*', $regex);
         $regex = \preg_replace('~\\\\\\?~', '[^/]', $regex);
-        return ($isAbsolute ? '' : '(?:[^/]+/)*') . $regex . ('/' !== \substr($gitignoreLine, -1) ? '(?:$|/)' : '');
+        return ($isAbsolute ? '' : '(?:[^/]+/)*') . $regex . (\substr_compare($gitignoreLine, '/', -\strlen('/')) !== 0 ? '(?:$|/)' : '');
     }
 }

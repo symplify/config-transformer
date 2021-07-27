@@ -8,20 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107276\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107264\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202107264\Symfony\Component\Cache\Traits\RedisTrait;
-class RedisAdapter extends \ConfigTransformer202107264\Symfony\Component\Cache\Adapter\AbstractAdapter
+use ConfigTransformer202107276\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202107276\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use ConfigTransformer202107276\Symfony\Component\Cache\Traits\RedisProxy;
+use ConfigTransformer202107276\Symfony\Component\Cache\Traits\RedisTrait;
+class RedisAdapter extends \ConfigTransformer202107276\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use RedisTrait;
     /**
-     * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface $redisClient     The redis client
-     * @param string                                                   $namespace       The default namespace
-     * @param int                                                      $defaultLifetime The default lifetime
+     * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis           The redis client
+     * @param string                                                                                $namespace       The default namespace
+     * @param int                                                                                   $defaultLifetime The default lifetime
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107264\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redis, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202107276\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->init($redisClient, $namespace, $defaultLifetime, $marshaller);
+        $this->init($redis, $namespace, $defaultLifetime, $marshaller);
     }
 }

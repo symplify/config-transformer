@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107276\Symfony\Component\HttpFoundation;
 
 /**
  * Response represents an HTTP response in JSON format.
@@ -21,7 +21,7 @@ namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation;
  *
  * @author Igor Wiedler <igor@wiedler.ch>
  */
-class JsonResponse extends \ConfigTransformer202107264\Symfony\Component\HttpFoundation\Response
+class JsonResponse extends \ConfigTransformer202107276\Symfony\Component\HttpFoundation\Response
 {
     protected $data;
     protected $callback;
@@ -138,7 +138,7 @@ class JsonResponse extends \ConfigTransformer202107264\Symfony\Component\HttpFou
         try {
             $data = \json_encode($data, $this->encodingOptions);
         } catch (\Exception $e) {
-            if ('Exception' === \get_class($e) && 0 === \strpos($e->getMessage(), 'Failed calling ')) {
+            if ('Exception' === \get_class($e) && \strncmp($e->getMessage(), 'Failed calling ', \strlen('Failed calling ')) === 0) {
                 throw $e->getPrevious() ?: $e;
             }
             throw $e;

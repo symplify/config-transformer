@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202107276\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202107264\Symfony\Component\Routing\RequestContext;
+use ConfigTransformer202107276\Symfony\Component\Routing\RequestContext;
 /**
  * A helper service for manipulating URLs within and outside the request scope.
  *
@@ -20,14 +20,14 @@ final class UrlHelper
 {
     private $requestStack;
     private $requestContext;
-    public function __construct(\ConfigTransformer202107264\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer202107264\Symfony\Component\Routing\RequestContext $requestContext = null)
+    public function __construct(\ConfigTransformer202107276\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer202107276\Symfony\Component\Routing\RequestContext $requestContext = null)
     {
         $this->requestStack = $requestStack;
         $this->requestContext = $requestContext;
     }
     public function getAbsoluteUrl(string $path) : string
     {
-        if (\false !== \strpos($path, '://') || '//' === \substr($path, 0, 2)) {
+        if (\strpos($path, '://') !== \false || '//' === \substr($path, 0, 2)) {
             return $path;
         }
         if (null === ($request = $this->requestStack->getMainRequest())) {
@@ -50,7 +50,7 @@ final class UrlHelper
     }
     public function getRelativePath(string $path) : string
     {
-        if (\false !== \strpos($path, '://') || '//' === \substr($path, 0, 2)) {
+        if (\strpos($path, '://') !== \false || '//' === \substr($path, 0, 2)) {
             return $path;
         }
         if (null === ($request = $this->requestStack->getMainRequest())) {

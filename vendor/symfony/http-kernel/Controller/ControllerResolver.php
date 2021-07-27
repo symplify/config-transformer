@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202107276\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202107264\Psr\Log\LoggerInterface;
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107276\Psr\Log\LoggerInterface;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\Request;
 /**
  * This implementation uses the '_controller' request attribute to determine
  * the controller to execute.
@@ -19,10 +19,10 @@ use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Request;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class ControllerResolver implements \ConfigTransformer202107264\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class ControllerResolver implements \ConfigTransformer202107276\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $logger;
-    public function __construct(\ConfigTransformer202107264\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\ConfigTransformer202107276\Psr\Log\LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
@@ -90,7 +90,7 @@ class ControllerResolver implements \ConfigTransformer202107264\Symfony\Componen
      */
     protected function createController($controller)
     {
-        if (\false === \strpos($controller, '::')) {
+        if (\strpos($controller, '::') === \false) {
             $controller = $this->instantiateController($controller);
             if (!\is_callable($controller)) {
                 throw new \InvalidArgumentException($this->getControllerError($controller));
@@ -128,7 +128,7 @@ class ControllerResolver implements \ConfigTransformer202107264\Symfony\Componen
     private function getControllerError($callable) : string
     {
         if (\is_string($callable)) {
-            if (\false !== \strpos($callable, '::')) {
+            if (\strpos($callable, '::') !== \false) {
                 $callable = \explode('::', $callable, 2);
             } else {
                 return \sprintf('Function "%s" does not exist.', $callable);
@@ -157,7 +157,7 @@ class ControllerResolver implements \ConfigTransformer202107264\Symfony\Componen
         $alternatives = [];
         foreach ($collection as $item) {
             $lev = \levenshtein($method, $item);
-            if ($lev <= \strlen($method) / 3 || \false !== \strpos($item, $method)) {
+            if ($lev <= \strlen($method) / 3 || \strpos($item, $method) !== \false) {
                 $alternatives[] = $item;
             }
         }

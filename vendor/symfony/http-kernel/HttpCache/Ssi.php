@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202107276\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\Response;
 /**
  * Ssi implements the SSI capabilities to Request and Response instances.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class Ssi extends \ConfigTransformer202107264\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Ssi extends \ConfigTransformer202107276\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class Ssi extends \ConfigTransformer202107264\Symfony\Component\HttpKernel\HttpC
      */
     public function addSurrogateControl($response)
     {
-        if (\false !== \strpos($response->getContent(), '<!--#include')) {
+        if (\strpos($response->getContent(), '<!--#include') !== \false) {
             $response->headers->set('Surrogate-Control', 'content="SSI/1.0"');
         }
     }

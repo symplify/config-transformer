@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202107276\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202107276\Symfony\Component\HttpFoundation\Response;
 /**
  * MemoryDataCollector.
  *
@@ -19,7 +19,7 @@ use ConfigTransformer202107264\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class MemoryDataCollector extends \ConfigTransformer202107264\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202107264\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class MemoryDataCollector extends \ConfigTransformer202107276\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202107276\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     public function __construct()
     {
@@ -91,9 +91,9 @@ class MemoryDataCollector extends \ConfigTransformer202107264\Symfony\Component\
         }
         $memoryLimit = \strtolower($memoryLimit);
         $max = \strtolower(\ltrim($memoryLimit, '+'));
-        if (0 === \strpos($max, '0x')) {
+        if (\strncmp($max, '0x', \strlen('0x')) === 0) {
             $max = \intval($max, 16);
-        } elseif (0 === \strpos($max, '0')) {
+        } elseif (\strncmp($max, '0', \strlen('0')) === 0) {
             $max = \intval($max, 8);
         } else {
             $max = (int) $max;

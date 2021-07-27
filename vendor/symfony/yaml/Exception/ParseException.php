@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202107276\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParseException extends \ConfigTransformer202107264\Symfony\Component\Yaml\Exception\RuntimeException
+class ParseException extends \ConfigTransformer202107276\Symfony\Component\Yaml\Exception\RuntimeException
 {
     private $parsedFile;
     private $parsedLine;
     private $snippet;
     private $rawMessage;
     /**
-     * @param string          $message    The error message
-     * @param int             $parsedLine The line where the error occurred
-     * @param string|null     $snippet    The snippet of code near the problem
-     * @param string|null     $parsedFile The file name where the error occurred
+     * @param string      $message    The error message
+     * @param int         $parsedLine The line where the error occurred
+     * @param string|null $snippet    The snippet of code near the problem
+     * @param string|null $parsedFile The file name where the error occurred
      */
     public function __construct(string $message, int $parsedLine = -1, string $snippet = null, string $parsedFile = null, \Throwable $previous = null)
     {
@@ -96,7 +96,7 @@ class ParseException extends \ConfigTransformer202107264\Symfony\Component\Yaml\
     {
         $this->message = $this->rawMessage;
         $dot = \false;
-        if ('.' === \substr($this->message, -1)) {
+        if (\substr_compare($this->message, '.', -\strlen('.')) === 0) {
             $this->message = \substr($this->message, 0, -1);
             $dot = \true;
         }

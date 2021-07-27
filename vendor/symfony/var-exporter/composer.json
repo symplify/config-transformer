@@ -24,14 +24,14 @@
     ],
     "require": {
         "php": ">=7.2.5",
-        "symfony\/polyfill-php80": "^1.15"
+        "symfony\/polyfill-php80": "^1.16"
     },
     "require-dev": {
         "symfony\/var-dumper": "^4.4.9|^5.0.9"
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202107264\\Symfony\\Component\\VarExporter\\": ""
+            "ConfigTransformer202107276\\Symfony\\Component\\VarExporter\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

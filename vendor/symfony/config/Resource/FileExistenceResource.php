@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202107276\Symfony\Component\Config\Resource;
 
 /**
  * FileExistenceResource represents a resource stored on the filesystem.
@@ -20,7 +20,7 @@ namespace ConfigTransformer202107264\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class FileExistenceResource implements \ConfigTransformer202107264\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class FileExistenceResource implements \ConfigTransformer202107276\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $resource;
     private $exists;
@@ -32,9 +32,6 @@ class FileExistenceResource implements \ConfigTransformer202107264\Symfony\Compo
         $this->resource = $resource;
         $this->exists = \file_exists($resource);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function __toString() : string
     {
         return $this->resource;

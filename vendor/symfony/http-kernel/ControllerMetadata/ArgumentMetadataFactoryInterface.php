@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace ConfigTransformer202107276\Symfony\Component\HttpKernel\ControllerMetadata;
 
 /**
  * Builds method argument data.
@@ -18,7 +18,7 @@ namespace ConfigTransformer202107264\Symfony\Component\HttpKernel\ControllerMeta
 interface ArgumentMetadataFactoryInterface
 {
     /**
-     * @param mixed $controller The controller to resolve the arguments for
+     * @param string|object|array $controller The controller to resolve the arguments for
      *
      * @return ArgumentMetadata[]
      */

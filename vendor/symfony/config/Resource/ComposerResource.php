@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202107276\Symfony\Component\Config\Resource;
 
 /**
  * ComposerResource tracks the PHP version and Composer dependencies.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202107264\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class ComposerResource implements \ConfigTransformer202107264\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ComposerResource implements \ConfigTransformer202107276\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $vendors;
     private static $runtimeVendors;
@@ -30,9 +30,6 @@ class ComposerResource implements \ConfigTransformer202107264\Symfony\Component\
     {
         return \array_keys($this->vendors);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function __toString() : string
     {
         return __CLASS__;
@@ -50,7 +47,7 @@ class ComposerResource implements \ConfigTransformer202107264\Symfony\Component\
     {
         self::$runtimeVendors = [];
         foreach (\get_declared_classes() as $class) {
-            if ('C' === $class[0] && 0 === \strpos($class, 'ComposerAutoloaderInit')) {
+            if ('C' === $class[0] && \strncmp($class, 'ComposerAutoloaderInit', \strlen('ComposerAutoloaderInit')) === 0) {
                 $r = new \ReflectionClass($class);
                 $v = \dirname($r->getFileName(), 2);
                 if (\is_file($v . '/composer/installed.json')) {

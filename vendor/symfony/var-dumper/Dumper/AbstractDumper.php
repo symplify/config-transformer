@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\VarDumper\Dumper;
+namespace ConfigTransformer202107276\Symfony\Component\VarDumper\Dumper;
 
-use ConfigTransformer202107264\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202107264\Symfony\Component\VarDumper\Cloner\DumperInterface;
+use ConfigTransformer202107276\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202107276\Symfony\Component\VarDumper\Cloner\DumperInterface;
 /**
  * Abstract mechanism for dumping a Data object.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractDumper implements \ConfigTransformer202107264\Symfony\Component\VarDumper\Dumper\DataDumperInterface, \ConfigTransformer202107264\Symfony\Component\VarDumper\Cloner\DumperInterface
+abstract class AbstractDumper implements \ConfigTransformer202107276\Symfony\Component\VarDumper\Dumper\DataDumperInterface, \ConfigTransformer202107276\Symfony\Component\VarDumper\Cloner\DumperInterface
 {
     public const DUMP_LIGHT_ARRAY = 1;
     public const DUMP_STRING_LENGTH = 2;
@@ -57,7 +57,7 @@ abstract class AbstractDumper implements \ConfigTransformer202107264\Symfony\Com
      */
     public function setOutput($output)
     {
-        $prev = null !== $this->outputStream ? $this->outputStream : $this->lineDumper;
+        $prev = $this->outputStream ?? $this->lineDumper;
         if (\is_callable($output)) {
             $this->outputStream = null;
             $this->lineDumper = $output;

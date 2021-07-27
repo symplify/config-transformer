@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107264\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202107276\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202107264\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202107264\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202107264\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202107264\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202107264\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202107264\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202107264\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202107264\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202107264\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202107264\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer202107276\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202107276\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202107276\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202107276\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202107276\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202107276\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202107276\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202107276\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202107276\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202107276\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202107264\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer202107264\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202107264\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer202107264\Psr\Log\LoggerAwareInterface
+class TagAwareAdapter implements \ConfigTransformer202107276\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202107276\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer202107276\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202107276\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer202107276\Psr\Log\LoggerAwareInterface
 {
-    public const TAGS_PREFIX = "\0tags\0";
     use ContractsTrait;
     use LoggerAwareTrait;
     use ProxyTrait;
+    public const TAGS_PREFIX = "\0tags\0";
     private $deferred = [];
     private $tags;
     private $knownTagVersions = [];
@@ -37,27 +37,27 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
     private static $setCacheItemTags;
     private static $getTagsByKey;
     private static $invalidateTags;
-    public function __construct(\ConfigTransformer202107264\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer202107264\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
+    public function __construct(\ConfigTransformer202107276\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer202107276\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
         $this->tags = $tagsPool ?: $itemsPool;
         $this->knownTagVersionsTtl = $knownTagVersionsTtl;
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem $protoItem) {
-            $item = new \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem();
+        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem $protoItem) {
+            $item = new \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->expiry = $protoItem->expiry;
             $item->poolHash = $protoItem->poolHash;
             return $item;
-        }, null, \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::class));
-        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer202107264\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
+        }, null, \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::class));
+        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer202107276\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
             $item->isTaggable = \true;
             if (!$item->isHit) {
                 return $item;
             }
             if (isset($itemTags[$key])) {
                 foreach ($itemTags[$key] as $tag => $version) {
-                    $item->metadata[\ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
+                    $item->metadata[\ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
                 }
                 unset($itemTags[$key]);
             } else {
@@ -65,22 +65,22 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
                 $item->isHit = \false;
             }
             return $item;
-        }, null, \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::class));
         self::$getTagsByKey ?? (self::$getTagsByKey = \Closure::bind(static function ($deferred) {
             $tagsByKey = [];
             foreach ($deferred as $key => $item) {
-                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
+                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
                 $item->metadata = $item->newMetadata;
             }
             return $tagsByKey;
-        }, null, \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::class));
-        self::$invalidateTags ?? (self::$invalidateTags = \Closure::bind(static function (\ConfigTransformer202107264\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+        }, null, \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::class));
+        self::$invalidateTags ?? (self::$invalidateTags = \Closure::bind(static function (\ConfigTransformer202107276\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
             foreach ($tags as $v) {
                 $v->expiry = 0;
                 $tagsAdapter->saveDeferred($v);
             }
             return $tagsAdapter->commit();
-        }, null, \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
@@ -92,7 +92,7 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
         $tagsByKey = [];
         $invalidatedTags = [];
         foreach ($tags as $tag) {
-            \assert('' !== \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem::validateKey($tag));
+            \assert('' !== \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem::validateKey($tag));
             $invalidatedTags[$tag] = 0;
         }
         if ($this->deferred) {
@@ -172,7 +172,7 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
         }
         try {
             $items = $this->pool->getItems($tagKeys + $keys);
-        } catch (\ConfigTransformer202107264\Psr\Cache\InvalidArgumentException $e) {
+        } catch (\ConfigTransformer202107276\Psr\Cache\InvalidArgumentException $e) {
             $this->pool->getItems($keys);
             // Should throw an exception
             throw $e;
@@ -189,14 +189,14 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
     {
         if ('' !== $prefix) {
             foreach ($this->deferred as $key => $item) {
-                if (0 === \strpos($key, $prefix)) {
+                if (\strncmp($key, $prefix, \strlen($prefix)) === 0) {
                     unset($this->deferred[$key]);
                 }
             }
         } else {
             $this->deferred = [];
         }
-        if ($this->pool instanceof \ConfigTransformer202107264\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \ConfigTransformer202107276\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix);
         }
         return $this->pool->clear();
@@ -233,7 +233,7 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
      */
     public function save($item)
     {
-        if (!$item instanceof \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -247,7 +247,7 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
      */
     public function saveDeferred($item)
     {
-        if (!$item instanceof \ConfigTransformer202107264\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202107276\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -262,6 +262,9 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
     {
         return $this->invalidateTags([]);
     }
+    /**
+     * @return array
+     */
     public function __sleep()
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
@@ -274,7 +277,7 @@ class TagAwareAdapter implements \ConfigTransformer202107264\Symfony\Component\C
     {
         $this->commit();
     }
-    private function generateItems(iterable $items, array $tagKeys)
+    private function generateItems(iterable $items, array $tagKeys) : \Generator
     {
         $bufferedItems = $itemTags = [];
         $f = self::$setCacheItemTags;
