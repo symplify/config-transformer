@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107276\Symplify\PhpConfigPrinter\Dummy;
+namespace ConfigTransformer202107289\Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer202107276\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-final class DummySymfonyVersionFeatureGuard implements \ConfigTransformer202107276\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
+use ConfigTransformer202107289\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+final class DummySymfonyVersionFeatureGuard implements \ConfigTransformer202107289\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
 {
     /**
      * @param float $symfonyVersion

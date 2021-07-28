@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107276\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202107289\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202107276\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202107276\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202107289\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202107289\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class OutputFormatterStyleStack implements \ConfigTransformer202107276\Symfony\Contracts\Service\ResetInterface
+class OutputFormatterStyleStack implements \ConfigTransformer202107289\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * @var OutputFormatterStyleInterface[]
      */
     private $styles;
     private $emptyStyle;
-    public function __construct(\ConfigTransformer202107276\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
+    public function __construct(\ConfigTransformer202107289\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
     {
-        $this->emptyStyle = $emptyStyle ?? new \ConfigTransformer202107276\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $this->emptyStyle = $emptyStyle ?? new \ConfigTransformer202107289\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         $this->reset();
     }
     /**
@@ -64,7 +64,7 @@ class OutputFormatterStyleStack implements \ConfigTransformer202107276\Symfony\C
                 return $stackedStyle;
             }
         }
-        throw new \ConfigTransformer202107276\Symfony\Component\Console\Exception\InvalidArgumentException('Incorrectly nested style tag found.');
+        throw new \ConfigTransformer202107289\Symfony\Component\Console\Exception\InvalidArgumentException('Incorrectly nested style tag found.');
     }
     /**
      * Computes current style with stacks top codes.

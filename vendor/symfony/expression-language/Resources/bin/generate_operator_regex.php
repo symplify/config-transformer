@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202107276;
+namespace ConfigTransformer202107289;
 
 /*
  * This file is part of the Symfony package.

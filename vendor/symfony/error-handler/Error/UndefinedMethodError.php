@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107276\Symfony\Component\ErrorHandler\Error;
+namespace ConfigTransformer202107289\Symfony\Component\ErrorHandler\Error;
 
 class UndefinedMethodError extends \Error
 {
