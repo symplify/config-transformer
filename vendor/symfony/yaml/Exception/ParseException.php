@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202107289\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202107300\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParseException extends \ConfigTransformer202107289\Symfony\Component\Yaml\Exception\RuntimeException
+class ParseException extends \ConfigTransformer202107300\Symfony\Component\Yaml\Exception\RuntimeException
 {
     private $parsedFile;
     private $parsedLine;
@@ -96,7 +96,7 @@ class ParseException extends \ConfigTransformer202107289\Symfony\Component\Yaml\
     {
         $this->message = $this->rawMessage;
         $dot = \false;
-        if (\substr_compare($this->message, '.', -\strlen('.')) === 0) {
+        if ('.' === \substr($this->message, -1)) {
             $this->message = \substr($this->message, 0, -1);
             $dot = \true;
         }
