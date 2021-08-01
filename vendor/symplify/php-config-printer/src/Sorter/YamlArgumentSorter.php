@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202107300\Symplify\PhpConfigPrinter\Sorter;
+namespace ConfigTransformer202108019\Symplify\PhpConfigPrinter\Sorter;
 
 final class YamlArgumentSorter
 {
