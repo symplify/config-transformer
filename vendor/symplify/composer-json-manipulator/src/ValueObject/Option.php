@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108019\Symplify\ComposerJsonManipulator\ValueObject;
+namespace ConfigTransformer202108029\Symplify\ComposerJsonManipulator\ValueObject;
 
 final class Option
 {
