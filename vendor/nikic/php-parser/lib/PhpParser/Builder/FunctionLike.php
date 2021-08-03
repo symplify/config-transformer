@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108039\PhpParser\Builder;
+namespace ConfigTransformer202108036\PhpParser\Builder;
 
-use ConfigTransformer202108039\PhpParser\BuilderHelpers;
-use ConfigTransformer202108039\PhpParser\Node;
-abstract class FunctionLike extends \ConfigTransformer202108039\PhpParser\Builder\Declaration
+use ConfigTransformer202108036\PhpParser\BuilderHelpers;
+use ConfigTransformer202108036\PhpParser\Node;
+abstract class FunctionLike extends \ConfigTransformer202108036\PhpParser\Builder\Declaration
 {
     protected $returnByRef = \false;
     protected $params = [];
@@ -30,8 +30,8 @@ abstract class FunctionLike extends \ConfigTransformer202108039\PhpParser\Builde
      */
     public function addParam($param)
     {
-        $param = \ConfigTransformer202108039\PhpParser\BuilderHelpers::normalizeNode($param);
-        if (!$param instanceof \ConfigTransformer202108039\PhpParser\Node\Param) {
+        $param = \ConfigTransformer202108036\PhpParser\BuilderHelpers::normalizeNode($param);
+        if (!$param instanceof \ConfigTransformer202108036\PhpParser\Node\Param) {
             throw new \LogicException(\sprintf('Expected parameter node, got "%s"', $param->getType()));
         }
         $this->params[] = $param;
@@ -61,7 +61,7 @@ abstract class FunctionLike extends \ConfigTransformer202108039\PhpParser\Builde
      */
     public function setReturnType($type)
     {
-        $this->returnType = \ConfigTransformer202108039\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->returnType = \ConfigTransformer202108036\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
 }

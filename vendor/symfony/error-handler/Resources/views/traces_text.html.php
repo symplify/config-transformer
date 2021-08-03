@@ -2,7 +2,7 @@
     <thead class="trace-head">
         <tr>
             <th class="sf-toggle" data-toggle-selector="#trace-text-<?php 
-namespace ConfigTransformer202108039;
+namespace ConfigTransformer202108036;
 
 echo $index;
 ?>" data-toggle-initial="<?php 
