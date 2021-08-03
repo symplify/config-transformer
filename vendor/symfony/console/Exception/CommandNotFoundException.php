@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108033\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202108035\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect command name typed in the console.
  *
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class CommandNotFoundException extends \InvalidArgumentException implements \ConfigTransformer202108033\Symfony\Component\Console\Exception\ExceptionInterface
+class CommandNotFoundException extends \InvalidArgumentException implements \ConfigTransformer202108035\Symfony\Component\Console\Exception\ExceptionInterface
 {
     private $alternatives;
     /**
