@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108032\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202108033\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202108032\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108033\Symfony\Component\HttpFoundation\Request;
 /**
  * A ControllerResolverInterface implementation knows how to determine the
  * controller to execute based on a Request object.
