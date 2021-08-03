@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202108035\Nette\Utils;
+namespace ConfigTransformer202108039\Nette\Utils;
 
-use ConfigTransformer202108035\Nette;
+use ConfigTransformer202108039\Nette;
 /**
  * Floating-point numbers comparison.
  */
