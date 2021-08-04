@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108042;
+namespace ConfigTransformer2021080410;
 
-use ConfigTransformer202108042\Symfony\Component\Console\Application;
+use ConfigTransformer2021080410\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202108042\Symplify\EasyTesting\Console\EasyTestingConsoleApplication;
-use ConfigTransformer202108042\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer2021080410\Symplify\EasyTesting\Console\EasyTestingConsoleApplication;
+use ConfigTransformer2021080410\Symplify\PackageBuilder\Console\Command\CommandNaming;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202108042\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer2021080410\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202108042\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->alias(\ConfigTransformer202108042\Symfony\Component\Console\Application::class, \ConfigTransformer202108042\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->set(\ConfigTransformer202108042\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
+    $services->set(\ConfigTransformer2021080410\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
+    $services->alias(\ConfigTransformer2021080410\Symfony\Component\Console\Application::class, \ConfigTransformer2021080410\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
+    $services->set(\ConfigTransformer2021080410\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
 };

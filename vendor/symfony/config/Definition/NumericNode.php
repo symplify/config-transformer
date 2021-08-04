@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108042\Symfony\Component\Config\Definition;
+namespace ConfigTransformer2021080410\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202108042\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer2021080410\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * This node represents a numeric value in the config tree.
  *
  * @author David Jeanmonod <david.jeanmonod@gmail.com>
  */
-class NumericNode extends \ConfigTransformer202108042\Symfony\Component\Config\Definition\ScalarNode
+class NumericNode extends \ConfigTransformer2021080410\Symfony\Component\Config\Definition\ScalarNode
 {
     protected $min;
     protected $max;
@@ -24,7 +24,7 @@ class NumericNode extends \ConfigTransformer202108042\Symfony\Component\Config\D
      * @param int|float|null $min
      * @param int|float|null $max
      */
-    public function __construct(?string $name, \ConfigTransformer202108042\Symfony\Component\Config\Definition\NodeInterface $parent = null, $min = null, $max = null, string $pathSeparator = \ConfigTransformer202108042\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \ConfigTransformer2021080410\Symfony\Component\Config\Definition\NodeInterface $parent = null, $min = null, $max = null, string $pathSeparator = \ConfigTransformer2021080410\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
     {
         parent::__construct($name, $parent, $pathSeparator);
         $this->min = $min;
@@ -44,7 +44,7 @@ class NumericNode extends \ConfigTransformer202108042\Symfony\Component\Config\D
             $errorMsg = \sprintf('The value %s is too big for path "%s". Should be less than or equal to %s', $value, $this->getPath(), $this->max);
         }
         if (isset($errorMsg)) {
-            $ex = new \ConfigTransformer202108042\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException($errorMsg);
+            $ex = new \ConfigTransformer2021080410\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException($errorMsg);
             $ex->setPath($this->getPath());
             throw $ex;
         }
