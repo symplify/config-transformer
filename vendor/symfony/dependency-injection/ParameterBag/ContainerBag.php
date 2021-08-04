@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108043\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202108044\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202108043\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202108044\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerBag extends \ConfigTransformer202108043\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202108043\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
+class ContainerBag extends \ConfigTransformer202108044\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202108044\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202108043\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(\ConfigTransformer202108044\Symfony\Component\DependencyInjection\Container $container)
     {
         $this->container = $container;
     }
