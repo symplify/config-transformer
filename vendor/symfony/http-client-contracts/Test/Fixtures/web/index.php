@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202108049;
+namespace ConfigTransformer2021080410;
 
 if ('cli-server' !== \PHP_SAPI) {
     // safe guard against unwanted execution
