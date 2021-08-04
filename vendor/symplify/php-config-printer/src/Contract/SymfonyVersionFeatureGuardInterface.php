@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108041\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer202108044\Symplify\PhpConfigPrinter\Contract;
 
 interface SymfonyVersionFeatureGuardInterface
 {
