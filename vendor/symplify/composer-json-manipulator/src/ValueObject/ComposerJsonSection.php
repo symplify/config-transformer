@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108039\Symplify\ComposerJsonManipulator\ValueObject;
+namespace ConfigTransformer2021080410\Symplify\ComposerJsonManipulator\ValueObject;
 
 /**
  * @api
@@ -100,7 +100,7 @@ final class ComposerJsonSection
     /**
      * @var string
      */
-    public const SUGGESTS = 'suggests';
+    public const SUGGEST = 'suggest';
     /**
      * @var string
      */

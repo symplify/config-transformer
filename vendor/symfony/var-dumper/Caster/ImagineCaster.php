@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108039\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202108039\Imagine\Image\ImageInterface;
-use ConfigTransformer202108039\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer2021080410\Imagine\Image\ImageInterface;
+use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
 final class ImagineCaster
 {
-    public static function castImage(\ConfigTransformer202108039\Imagine\Image\ImageInterface $c, array $a, \ConfigTransformer202108039\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castImage(\ConfigTransformer2021080410\Imagine\Image\ImageInterface $c, array $a, \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         $imgData = $c->get('png');
         if (\strlen($imgData) > 1 * 1000 * 1000) {
-            $a += [\ConfigTransformer202108039\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \ConfigTransformer202108039\Symfony\Component\VarDumper\Caster\ConstStub($c->getSize())];
+            $a += [\ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\ConstStub($c->getSize())];
         } else {
-            $a += [\ConfigTransformer202108039\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \ConfigTransformer202108039\Symfony\Component\VarDumper\Caster\ImgStub($imgData, 'image/png', $c->getSize())];
+            $a += [\ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\ImgStub($imgData, 'image/png', $c->getSize())];
         }
         return $a;
     }

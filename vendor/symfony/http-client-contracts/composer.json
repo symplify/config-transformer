@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108039\\Symfony\\Contracts\\HttpClient\\": ""
+            "ConfigTransformer2021080410\\Symfony\\Contracts\\HttpClient\\": ""
         }
     },
     "minimum-stability": "dev",
