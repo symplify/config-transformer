@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108047\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202108042\Symfony\Component\Config\Loader;
 
-use ConfigTransformer202108047\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer202108042\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Loader implements \ConfigTransformer202108047\Symfony\Component\Config\Loader\LoaderInterface
+abstract class Loader implements \ConfigTransformer202108042\Symfony\Component\Config\Loader\LoaderInterface
 {
     protected $resolver;
     protected $env;
@@ -68,7 +68,7 @@ abstract class Loader implements \ConfigTransformer202108047\Symfony\Component\C
         }
         $loader = null === $this->resolver ? \false : $this->resolver->resolve($resource, $type);
         if (\false === $loader) {
-            throw new \ConfigTransformer202108047\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
+            throw new \ConfigTransformer202108042\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
         }
         return $loader;
     }
