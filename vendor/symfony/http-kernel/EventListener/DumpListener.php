@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202108049\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer2021080410\Symfony\Component\Console\ConsoleEvents;
-use ConfigTransformer2021080410\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Server\Connection;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\VarDumper;
+use ConfigTransformer202108049\Symfony\Component\Console\ConsoleEvents;
+use ConfigTransformer202108049\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202108049\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use ConfigTransformer202108049\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use ConfigTransformer202108049\Symfony\Component\VarDumper\Server\Connection;
+use ConfigTransformer202108049\Symfony\Component\VarDumper\VarDumper;
 /**
  * Configures dump() handler.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DumpListener implements \ConfigTransformer2021080410\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class DumpListener implements \ConfigTransformer202108049\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $cloner;
     private $dumper;
     private $connection;
-    public function __construct(\ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner, \ConfigTransformer2021080410\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper, \ConfigTransformer2021080410\Symfony\Component\VarDumper\Server\Connection $connection = null)
+    public function __construct(\ConfigTransformer202108049\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner, \ConfigTransformer202108049\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper, \ConfigTransformer202108049\Symfony\Component\VarDumper\Server\Connection $connection = null)
     {
         $this->cloner = $cloner;
         $this->dumper = $dumper;
@@ -37,7 +37,7 @@ class DumpListener implements \ConfigTransformer2021080410\Symfony\Component\Eve
         $cloner = $this->cloner;
         $dumper = $this->dumper;
         $connection = $this->connection;
-        \ConfigTransformer2021080410\Symfony\Component\VarDumper\VarDumper::setHandler(static function ($var) use($cloner, $dumper, $connection) {
+        \ConfigTransformer202108049\Symfony\Component\VarDumper\VarDumper::setHandler(static function ($var) use($cloner, $dumper, $connection) {
             $data = $cloner->cloneVar($var);
             if (!$connection || !$connection->write($data)) {
                 $dumper->dump($data);
@@ -46,10 +46,10 @@ class DumpListener implements \ConfigTransformer2021080410\Symfony\Component\Eve
     }
     public static function getSubscribedEvents()
     {
-        if (!\class_exists(\ConfigTransformer2021080410\Symfony\Component\Console\ConsoleEvents::class)) {
+        if (!\class_exists(\ConfigTransformer202108049\Symfony\Component\Console\ConsoleEvents::class)) {
             return [];
         }
         // Register early to have a working dump() as early as possible
-        return [\ConfigTransformer2021080410\Symfony\Component\Console\ConsoleEvents::COMMAND => ['configure', 1024]];
+        return [\ConfigTransformer202108049\Symfony\Component\Console\ConsoleEvents::COMMAND => ['configure', 1024]];
     }
 }

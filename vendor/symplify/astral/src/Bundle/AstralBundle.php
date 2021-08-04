@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021080410\Symplify\Astral\Bundle;
+namespace ConfigTransformer202108049\Symplify\Astral\Bundle;
 
-use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021080410\Symfony\Component\HttpKernel\Bundle\Bundle;
-use ConfigTransformer2021080410\Symplify\Astral\DependencyInjection\Extension\AstralExtension;
-use ConfigTransformer2021080410\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-final class AstralBundle extends \ConfigTransformer2021080410\Symfony\Component\HttpKernel\Bundle\Bundle
+use ConfigTransformer202108049\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108049\Symfony\Component\HttpKernel\Bundle\Bundle;
+use ConfigTransformer202108049\Symplify\Astral\DependencyInjection\Extension\AstralExtension;
+use ConfigTransformer202108049\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+final class AstralBundle extends \ConfigTransformer202108049\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
     public function build($containerBuilder) : void
     {
-        $containerBuilder->addCompilerPass(new \ConfigTransformer2021080410\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
+        $containerBuilder->addCompilerPass(new \ConfigTransformer202108049\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\ConfigTransformer202108049\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \ConfigTransformer2021080410\Symplify\Astral\DependencyInjection\Extension\AstralExtension();
+        return new \ConfigTransformer202108049\Symplify\Astral\DependencyInjection\Extension\AstralExtension();
     }
 }

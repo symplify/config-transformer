@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202108049\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer2021080410\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2021080410\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202108049\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202108049\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
