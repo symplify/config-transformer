@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108045\Symplify\Astral\HttpKernel;
+namespace ConfigTransformer202108043\Symplify\Astral\HttpKernel;
 
-use ConfigTransformer202108045\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202108045\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class AstralKernel extends \ConfigTransformer202108045\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202108043\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202108043\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class AstralKernel extends \ConfigTransformer202108043\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
      * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
