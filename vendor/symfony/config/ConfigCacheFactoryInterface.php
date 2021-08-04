@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\Config;
+namespace ConfigTransformer202108045\Symfony\Component\Config;
 
 /**
  * Interface for a ConfigCache factory. This factory creates

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202108045\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\CutStub;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub;
-use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\VarCloner;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Caster\CutStub;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * DataCollector.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\VarCloner;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bernhard Schussek <bschussek@symfony.com>
  */
-abstract class DataCollector implements \ConfigTransformer2021080410\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+abstract class DataCollector implements \ConfigTransformer202108045\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
 {
     /**
      * @var array|Data
@@ -46,11 +46,11 @@ abstract class DataCollector implements \ConfigTransformer2021080410\Symfony\Com
      */
     protected function cloneVar($var)
     {
-        if ($var instanceof \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Data) {
+        if ($var instanceof \ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Data) {
             return $var;
         }
         if (null === $this->cloner) {
-            $this->cloner = new \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\VarCloner();
+            $this->cloner = new \ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\VarCloner();
             $this->cloner->setMaxItems(-1);
             $this->cloner->addCasters($this->getCasters());
         }
@@ -61,16 +61,16 @@ abstract class DataCollector implements \ConfigTransformer2021080410\Symfony\Com
      */
     protected function getCasters()
     {
-        $casters = ['*' => function ($v, array $a, \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub $s, $isNested) {
-            if (!$v instanceof \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub) {
+        $casters = ['*' => function ($v, array $a, \ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Stub $s, $isNested) {
+            if (!$v instanceof \ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Stub) {
                 foreach ($a as $k => $v) {
-                    if (\is_object($v) && !$v instanceof \DateTimeInterface && !$v instanceof \ConfigTransformer2021080410\Symfony\Component\VarDumper\Cloner\Stub) {
-                        $a[$k] = new \ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\CutStub($v);
+                    if (\is_object($v) && !$v instanceof \DateTimeInterface && !$v instanceof \ConfigTransformer202108045\Symfony\Component\VarDumper\Cloner\Stub) {
+                        $a[$k] = new \ConfigTransformer202108045\Symfony\Component\VarDumper\Caster\CutStub($v);
                     }
                 }
             }
             return $a;
-        }] + \ConfigTransformer2021080410\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO;
+        }] + \ConfigTransformer202108045\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO;
         return $casters;
     }
     /**

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace ConfigTransformer202108045\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202108045\Symfony\Component\DependencyInjection\Definition;
 /**
  * Null dumper, negates any proxy code generation for any given service definition.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Definition
  *
  * @final
  */
-class NullDumper implements \ConfigTransformer2021080410\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+class NullDumper implements \ConfigTransformer202108045\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
 {
     /**
      * {@inheritdoc}

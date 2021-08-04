@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202108045\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202108045\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202108045\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108045\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CachePoolClearerPass implements \ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolClearerPass implements \ConfigTransformer202108045\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $cachePoolClearerTag;
     public function __construct(string $cachePoolClearerTag = 'cache.pool.clearer')
@@ -38,7 +38,7 @@ class CachePoolClearerPass implements \ConfigTransformer2021080410\Symfony\Compo
             $pools = [];
             foreach ($clearer->getArgument(0) as $name => $ref) {
                 if ($container->hasDefinition($ref)) {
-                    $pools[$name] = new \ConfigTransformer2021080410\Symfony\Component\DependencyInjection\Reference($ref);
+                    $pools[$name] = new \ConfigTransformer202108045\Symfony\Component\DependencyInjection\Reference($ref);
                 }
             }
             $clearer->replaceArgument(0, $pools);

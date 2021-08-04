@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080410\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202108045\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer2021080410\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202108045\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ArrayNode extends \ConfigTransformer2021080410\Symfony\Component\ExpressionLanguage\Node\Node
+class ArrayNode extends \ConfigTransformer202108045\Symfony\Component\ExpressionLanguage\Node\Node
 {
     protected $index;
     public function __construct()
@@ -30,7 +30,7 @@ class ArrayNode extends \ConfigTransformer2021080410\Symfony\Component\Expressio
     public function addElement($value, $key = null)
     {
         if (null === $key) {
-            $key = new \ConfigTransformer2021080410\Symfony\Component\ExpressionLanguage\Node\ConstantNode(++$this->index);
+            $key = new \ConfigTransformer202108045\Symfony\Component\ExpressionLanguage\Node\ConstantNode(++$this->index);
         }
         \array_push($this->nodes, $key, $value);
     }
@@ -66,7 +66,7 @@ class ArrayNode extends \ConfigTransformer2021080410\Symfony\Component\Expressio
         if ($this->isHash($value)) {
             foreach ($value as $k => $v) {
                 $array[] = ', ';
-                $array[] = new \ConfigTransformer2021080410\Symfony\Component\ExpressionLanguage\Node\ConstantNode($k);
+                $array[] = new \ConfigTransformer202108045\Symfony\Component\ExpressionLanguage\Node\ConstantNode($k);
                 $array[] = ': ';
                 $array[] = $v;
             }
