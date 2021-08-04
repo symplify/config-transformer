@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108044\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer202108041\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when a file was not found.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class FileNotFoundException extends \ConfigTransformer202108044\Symfony\Component\HttpFoundation\File\Exception\FileException
+class FileNotFoundException extends \ConfigTransformer202108041\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
     public function __construct(string $path)
     {
