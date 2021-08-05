@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108042\Symfony\Contracts\HttpClient;
+namespace ConfigTransformer202108057\Symfony\Contracts\HttpClient;
 
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use ConfigTransformer202108042\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use ConfigTransformer202108057\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 /**
  * A (lazily retrieved) HTTP response.
  *
