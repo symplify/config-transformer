@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108055\Symfony\Component\HttpKernel;
+namespace ConfigTransformer2021080510\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202108055\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202108055\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202108055\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer2021080510\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer2021080510\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2021080510\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202108055\Symfony\Component\HttpKernel\Bundle\BundleInterfa
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \ConfigTransformer202108055\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \ConfigTransformer2021080510\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.

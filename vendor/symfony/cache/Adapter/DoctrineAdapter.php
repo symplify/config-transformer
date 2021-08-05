@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108055\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021080510\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202108055\Doctrine\Common\Cache\CacheProvider;
+use ConfigTransformer2021080510\Doctrine\Common\Cache\CacheProvider;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineAdapter extends \ConfigTransformer202108055\Symfony\Component\Cache\Adapter\AbstractAdapter
+class DoctrineAdapter extends \ConfigTransformer2021080510\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $provider;
-    public function __construct(\ConfigTransformer202108055\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\ConfigTransformer2021080510\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;

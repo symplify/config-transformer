@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108055\Symfony\Contracts\EventDispatcher;
+namespace ConfigTransformer2021080510\Symfony\Contracts\EventDispatcher;
 
-use ConfigTransformer202108055\Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;
+use ConfigTransformer2021080510\Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;
 /**
  * Allows providing hooks on domain-specific lifecycles by dispatching events.
  */
-interface EventDispatcherInterface extends \ConfigTransformer202108055\Psr\EventDispatcher\EventDispatcherInterface
+interface EventDispatcherInterface extends \ConfigTransformer2021080510\Psr\EventDispatcher\EventDispatcherInterface
 {
     /**
      * Dispatches an event to all registered listeners.
