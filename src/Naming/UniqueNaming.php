@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108098\Symplify\ConfigTransformer\Naming;
+namespace ConfigTransformer202108096\Symplify\ConfigTransformer\Naming;
 
 final class UniqueNaming
 {
