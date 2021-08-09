@@ -5,7 +5,7 @@
     "require": {
         "php": ">=8.0",
         "nette\/utils": "^3.2",
-        "symfony\/dependency-injection": "^5.3.x-dev",
+        "symfony\/dependency-injection": "^5.3",
         "symplify\/autowire-array-parameter": "dev-main",
         "symfony\/http-kernel": "^5.3",
         "nikic\/php-parser": "^4.11",
@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2021080510\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202108098\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer2021080510\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202108098\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {

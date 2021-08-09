@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021080510\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202108098\Symfony\Component\Console\Helper;
 
 /**
  * Marks a row as being a separator.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TableSeparator extends \ConfigTransformer2021080510\Symfony\Component\Console\Helper\TableCell
+class TableSeparator extends \ConfigTransformer202108098\Symfony\Component\Console\Helper\TableCell
 {
     public function __construct(array $options = [])
     {
