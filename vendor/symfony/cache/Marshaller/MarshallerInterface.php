@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108098\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202108103\Symfony\Component\Cache\Marshaller;
 
 /**
  * Serializes/unserializes PHP values.
