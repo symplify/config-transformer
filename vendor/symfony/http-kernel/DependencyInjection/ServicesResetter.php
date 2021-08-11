@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081110\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202108112\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer2021081110\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202108112\Symfony\Contracts\Service\ResetInterface;
 /**
  * Resets provided services.
  *
@@ -19,7 +19,7 @@ use ConfigTransformer2021081110\Symfony\Contracts\Service\ResetInterface;
  *
  * @internal
  */
-class ServicesResetter implements \ConfigTransformer2021081110\Symfony\Contracts\Service\ResetInterface
+class ServicesResetter implements \ConfigTransformer202108112\Symfony\Contracts\Service\ResetInterface
 {
     private $resettableServices;
     private $resetMethods;

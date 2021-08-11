@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081110\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202108112\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108112\Symfony\Component\HttpFoundation\Request;
 /**
  * An ArgumentResolverInterface instance knows how to determine the
  * arguments for a specific action.

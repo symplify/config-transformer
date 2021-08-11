@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081110\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202108112\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Romain Neutron <imprec@gmail.com>
  */
-class RuntimeException extends \RuntimeException implements \ConfigTransformer2021081110\Symfony\Component\Yaml\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \ConfigTransformer202108112\Symfony\Component\Yaml\Exception\ExceptionInterface
 {
 }

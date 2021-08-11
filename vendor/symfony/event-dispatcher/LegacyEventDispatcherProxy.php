@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081110\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202108112\Symfony\Component\EventDispatcher;
 
-use ConfigTransformer2021081110\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \ConfigTransformer2021081110\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
+use ConfigTransformer202108112\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \ConfigTransformer202108112\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
 /**
  * A helper class to provide BC/FC with the legacy signature of EventDispatcherInterface::dispatch().
  *
@@ -21,7 +21,7 @@ trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use th
  */
 final class LegacyEventDispatcherProxy
 {
-    public static function decorate(?\ConfigTransformer2021081110\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher) : ?\ConfigTransformer2021081110\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+    public static function decorate(?\ConfigTransformer202108112\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher) : ?\ConfigTransformer202108112\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
     {
         return $dispatcher;
     }
