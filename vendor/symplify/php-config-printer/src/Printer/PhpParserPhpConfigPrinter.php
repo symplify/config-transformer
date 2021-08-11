@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108112\Symplify\PhpConfigPrinter\Printer;
+namespace ConfigTransformer202108114\Symplify\PhpConfigPrinter\Printer;
 
-use ConfigTransformer202108112\Nette\Utils\Strings;
-use ConfigTransformer202108112\PhpParser\Node;
-use ConfigTransformer202108112\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202108112\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202108112\PhpParser\Node\Scalar\LNumber;
-use ConfigTransformer202108112\PhpParser\Node\Stmt\Declare_;
-use ConfigTransformer202108112\PhpParser\Node\Stmt\DeclareDeclare;
-use ConfigTransformer202108112\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202108112\PhpParser\PrettyPrinter\Standard;
-use ConfigTransformer202108112\Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
-use ConfigTransformer202108112\Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
-final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108112\PhpParser\PrettyPrinter\Standard
+use ConfigTransformer202108114\Nette\Utils\Strings;
+use ConfigTransformer202108114\PhpParser\Node;
+use ConfigTransformer202108114\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202108114\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202108114\PhpParser\Node\Scalar\LNumber;
+use ConfigTransformer202108114\PhpParser\Node\Stmt\Declare_;
+use ConfigTransformer202108114\PhpParser\Node\Stmt\DeclareDeclare;
+use ConfigTransformer202108114\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202108114\PhpParser\PrettyPrinter\Standard;
+use ConfigTransformer202108114\Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
+use ConfigTransformer202108114\Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
+final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108114\PhpParser\PrettyPrinter\Standard
 {
     /**
      * @see https://regex101.com/r/qYtAPy/1
@@ -48,7 +48,7 @@ final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108112\PhpPar
      * @var \Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator
      */
     private $emptyLineNodeDecorator;
-    public function __construct(\ConfigTransformer202108112\Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, \ConfigTransformer202108112\Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator $emptyLineNodeDecorator)
+    public function __construct(\ConfigTransformer202108114\Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, \ConfigTransformer202108114\Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator $emptyLineNodeDecorator)
     {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
         $this->emptyLineNodeDecorator = $emptyLineNodeDecorator;
@@ -62,11 +62,11 @@ final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108112\PhpPar
         $stmts = $this->prependStrictTypesDeclare($stmts);
         $printedContent = parent::prettyPrintFile($stmts);
         // remove trailing spaces
-        $printedContent = \ConfigTransformer202108112\Nette\Utils\Strings::replace($printedContent, self::START_WITH_SPACE_REGEX, "\n");
+        $printedContent = \ConfigTransformer202108114\Nette\Utils\Strings::replace($printedContent, self::START_WITH_SPACE_REGEX, "\n");
         // remove space before " :" in main closure
-        $printedContent = \ConfigTransformer202108112\Nette\Utils\Strings::replace($printedContent, self::VOID_AFTER_FUNC_REGEX, '): void');
+        $printedContent = \ConfigTransformer202108114\Nette\Utils\Strings::replace($printedContent, self::VOID_AFTER_FUNC_REGEX, '): void');
         // remove space between declare strict types
-        $printedContent = \ConfigTransformer202108112\Nette\Utils\Strings::replace($printedContent, self::DECLARE_SPACE_STRICT_REGEX, 'declare(strict');
+        $printedContent = \ConfigTransformer202108114\Nette\Utils\Strings::replace($printedContent, self::DECLARE_SPACE_STRICT_REGEX, 'declare(strict');
         return $printedContent . \PHP_EOL;
     }
     /**
@@ -78,22 +78,22 @@ final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108112\PhpPar
      */
     protected function pSingleQuotedString(string $string) : string
     {
-        return "'" . \ConfigTransformer202108112\Nette\Utils\Strings::replace($string, self::QUOTE_SLASH_REGEX, '\\\\$0') . "'";
+        return "'" . \ConfigTransformer202108114\Nette\Utils\Strings::replace($string, self::QUOTE_SLASH_REGEX, '\\\\$0') . "'";
     }
-    protected function pExpr_Array(\ConfigTransformer202108112\PhpParser\Node\Expr\Array_ $node) : string
+    protected function pExpr_Array(\ConfigTransformer202108114\PhpParser\Node\Expr\Array_ $node) : string
     {
-        $node->setAttribute(self::KIND, \ConfigTransformer202108112\PhpParser\Node\Expr\Array_::KIND_SHORT);
+        $node->setAttribute(self::KIND, \ConfigTransformer202108114\PhpParser\Node\Expr\Array_::KIND_SHORT);
         return parent::pExpr_Array($node);
     }
-    protected function pExpr_MethodCall(\ConfigTransformer202108112\PhpParser\Node\Expr\MethodCall $node) : string
+    protected function pExpr_MethodCall(\ConfigTransformer202108114\PhpParser\Node\Expr\MethodCall $node) : string
     {
         $printedMethodCall = parent::pExpr_MethodCall($node);
         return $this->indentFluentCallToNewline($printedMethodCall);
     }
     private function indentFluentCallToNewline(string $content) : string
     {
-        $nextCallIndentReplacement = ')' . \PHP_EOL . \ConfigTransformer202108112\Nette\Utils\Strings::indent('->', 8, ' ');
-        return \ConfigTransformer202108112\Nette\Utils\Strings::replace($content, '#\\)->#', $nextCallIndentReplacement);
+        $nextCallIndentReplacement = ')' . \PHP_EOL . \ConfigTransformer202108114\Nette\Utils\Strings::indent('->', 8, ' ');
+        return \ConfigTransformer202108114\Nette\Utils\Strings::replace($content, '#\\)->#', $nextCallIndentReplacement);
     }
     /**
      * @param Node[] $stmts
@@ -102,11 +102,11 @@ final class PhpParserPhpConfigPrinter extends \ConfigTransformer202108112\PhpPar
     private function prependStrictTypesDeclare(array $stmts) : array
     {
         $strictTypesDeclare = $this->createStrictTypesDeclare();
-        return \array_merge([$strictTypesDeclare, new \ConfigTransformer202108112\PhpParser\Node\Stmt\Nop()], $stmts);
+        return \array_merge([$strictTypesDeclare, new \ConfigTransformer202108114\PhpParser\Node\Stmt\Nop()], $stmts);
     }
-    private function createStrictTypesDeclare() : \ConfigTransformer202108112\PhpParser\Node\Stmt\Declare_
+    private function createStrictTypesDeclare() : \ConfigTransformer202108114\PhpParser\Node\Stmt\Declare_
     {
-        $declareDeclare = new \ConfigTransformer202108112\PhpParser\Node\Stmt\DeclareDeclare('strict_types', new \ConfigTransformer202108112\PhpParser\Node\Scalar\LNumber(1));
-        return new \ConfigTransformer202108112\PhpParser\Node\Stmt\Declare_([$declareDeclare]);
+        $declareDeclare = new \ConfigTransformer202108114\PhpParser\Node\Stmt\DeclareDeclare('strict_types', new \ConfigTransformer202108114\PhpParser\Node\Scalar\LNumber(1));
+        return new \ConfigTransformer202108114\PhpParser\Node\Stmt\Declare_([$declareDeclare]);
     }
 }
