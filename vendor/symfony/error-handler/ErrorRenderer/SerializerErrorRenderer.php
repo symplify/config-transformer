@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081110\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace ConfigTransformer202108110\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use ConfigTransformer2021081110\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer2021081110\Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use ConfigTransformer2021081110\Symfony\Component\Serializer\SerializerInterface;
+use ConfigTransformer202108110\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer202108110\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108110\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202108110\Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use ConfigTransformer202108110\Symfony\Component\Serializer\SerializerInterface;
 /**
  * Formats an exception using Serializer for rendering.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class SerializerErrorRenderer implements \ConfigTransformer2021081110\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
+class SerializerErrorRenderer implements \ConfigTransformer202108110\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
 {
     private $serializer;
     private $format;
@@ -31,7 +31,7 @@ class SerializerErrorRenderer implements \ConfigTransformer2021081110\Symfony\Co
      *                                                  formats not supported by Request::getMimeTypes() should be given as mime types
      * @param bool|callable                     $debug  The debugging mode as a boolean or a callable that should return it
      */
-    public function __construct(\ConfigTransformer2021081110\Symfony\Component\Serializer\SerializerInterface $serializer, $format, \ConfigTransformer2021081110\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $fallbackErrorRenderer = null, $debug = \false)
+    public function __construct(\ConfigTransformer202108110\Symfony\Component\Serializer\SerializerInterface $serializer, $format, \ConfigTransformer202108110\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $fallbackErrorRenderer = null, $debug = \false)
     {
         if (!\is_string($format) && !\is_callable($format)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be a string or a callable, "%s" given.', __METHOD__, \gettype($format)));
@@ -41,14 +41,14 @@ class SerializerErrorRenderer implements \ConfigTransformer2021081110\Symfony\Co
         }
         $this->serializer = $serializer;
         $this->format = $format;
-        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new \ConfigTransformer2021081110\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
+        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new \ConfigTransformer202108110\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
         $this->debug = $debug;
     }
     /**
      * {@inheritdoc}
      * @param \Throwable $exception
      */
-    public function render($exception) : \ConfigTransformer2021081110\Symfony\Component\ErrorHandler\Exception\FlattenException
+    public function render($exception) : \ConfigTransformer202108110\Symfony\Component\ErrorHandler\Exception\FlattenException
     {
         $headers = [];
         $debug = \is_bool($this->debug) ? $this->debug : ($this->debug)($exception);
@@ -56,12 +56,12 @@ class SerializerErrorRenderer implements \ConfigTransformer2021081110\Symfony\Co
             $headers['X-Debug-Exception'] = \rawurlencode($exception->getMessage());
             $headers['X-Debug-Exception-File'] = \rawurlencode($exception->getFile()) . ':' . $exception->getLine();
         }
-        $flattenException = \ConfigTransformer2021081110\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception, null, $headers);
+        $flattenException = \ConfigTransformer202108110\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception, null, $headers);
         try {
             $format = \is_string($this->format) ? $this->format : ($this->format)($flattenException);
-            $headers = ['Content-Type' => \ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Request::getMimeTypes($format)[0] ?? $format, 'Vary' => 'Accept'];
+            $headers = ['Content-Type' => \ConfigTransformer202108110\Symfony\Component\HttpFoundation\Request::getMimeTypes($format)[0] ?? $format, 'Vary' => 'Accept'];
             return $flattenException->setAsString($this->serializer->serialize($flattenException, $format, ['exception' => $exception, 'debug' => $debug]))->setHeaders($flattenException->getHeaders() + $headers);
-        } catch (\ConfigTransformer2021081110\Symfony\Component\Serializer\Exception\NotEncodableValueException $e) {
+        } catch (\ConfigTransformer202108110\Symfony\Component\Serializer\Exception\NotEncodableValueException $e) {
             return $this->fallbackErrorRenderer->render($exception);
         }
     }
@@ -72,7 +72,7 @@ class SerializerErrorRenderer implements \ConfigTransformer2021081110\Symfony\Co
     {
         return static function () use($requestStack) {
             if (!($request = $requestStack->getCurrentRequest())) {
-                throw new \ConfigTransformer2021081110\Symfony\Component\Serializer\Exception\NotEncodableValueException();
+                throw new \ConfigTransformer202108110\Symfony\Component\Serializer\Exception\NotEncodableValueException();
             }
             return $request->getPreferredFormat();
         };
