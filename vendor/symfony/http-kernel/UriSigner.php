@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108110\Symfony\Component\HttpKernel;
+namespace ConfigTransformer2021081110\Symfony\Component\HttpKernel;
 
-use ConfigTransformer202108110\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Request;
 /**
  * Signs URIs.
  *
