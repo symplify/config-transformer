@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108119\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Base RuntimeException for Dependency Injection component.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class RuntimeException extends \RuntimeException implements \ConfigTransformer202108119\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
 {
 }

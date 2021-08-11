@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108119\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer2021081110\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202108119\Psr\Container\ContainerInterface;
-use ConfigTransformer202108119\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202108119\Symfony\Component\HttpFoundation\Session\Session;
-use ConfigTransformer202108119\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use ConfigTransformer202108119\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use ConfigTransformer202108119\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202108119\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202108119\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
-use ConfigTransformer202108119\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer2021081110\Psr\Container\ContainerInterface;
+use ConfigTransformer2021081110\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Session\Session;
+use ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer2021081110\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ConfigTransformer2021081110\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer2021081110\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer2021081110\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
+use ConfigTransformer2021081110\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Sets the session onto the request on the "kernel.request" event and saves
  * it on the "kernel.response" event.
@@ -34,13 +34,13 @@ use ConfigTransformer202108119\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @internal
  */
-abstract class AbstractSessionListener implements \ConfigTransformer202108119\Symfony\Component\EventDispatcher\EventSubscriberInterface
+abstract class AbstractSessionListener implements \ConfigTransformer2021081110\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public const NO_AUTO_CACHE_CONTROL_HEADER = 'Symfony-Session-NoAutoCacheControl';
     protected $container;
     private $sessionUsageStack = [];
     private $debug;
-    public function __construct(\ConfigTransformer202108119\Psr\Container\ContainerInterface $container = null, bool $debug = \false)
+    public function __construct(\ConfigTransformer2021081110\Psr\Container\ContainerInterface $container = null, bool $debug = \false)
     {
         $this->container = $container;
         $this->debug = $debug;
@@ -61,7 +61,7 @@ abstract class AbstractSessionListener implements \ConfigTransformer202108119\Sy
             });
         }
         $session = $this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null;
-        $this->sessionUsageStack[] = $session instanceof \ConfigTransformer202108119\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
+        $this->sessionUsageStack[] = $session instanceof \ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
     }
     /**
      * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
@@ -106,7 +106,7 @@ abstract class AbstractSessionListener implements \ConfigTransformer202108119\Sy
              */
             $session->save();
         }
-        if ($session instanceof \ConfigTransformer202108119\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() === \end($this->sessionUsageStack) : !$session->isStarted()) {
+        if ($session instanceof \ConfigTransformer2021081110\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() === \end($this->sessionUsageStack) : !$session->isStarted()) {
             return;
         }
         if ($autoCacheControl) {
@@ -116,7 +116,7 @@ abstract class AbstractSessionListener implements \ConfigTransformer202108119\Sy
             return;
         }
         if ($this->debug) {
-            throw new \ConfigTransformer202108119\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
+            throw new \ConfigTransformer2021081110\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
         }
         if ($this->container->has('logger')) {
             $this->container->get('logger')->warning('Session was used while the request was declared stateless.');
@@ -156,15 +156,15 @@ abstract class AbstractSessionListener implements \ConfigTransformer202108119\Sy
         if ($session->isStarted()) {
             $session->save();
         }
-        throw new \ConfigTransformer202108119\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
+        throw new \ConfigTransformer2021081110\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
     }
     public static function getSubscribedEvents() : array
     {
         return [
-            \ConfigTransformer202108119\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
+            \ConfigTransformer2021081110\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
             // low priority to come after regular response listeners, but higher than StreamedResponseListener
-            \ConfigTransformer202108119\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
-            \ConfigTransformer202108119\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
+            \ConfigTransformer2021081110\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
+            \ConfigTransformer2021081110\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
         ];
     }
     /**

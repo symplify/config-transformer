@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108119\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer2021081110\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_NO_FILE error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class NoFileException extends \ConfigTransformer202108119\Symfony\Component\HttpFoundation\File\Exception\FileException
+class NoFileException extends \ConfigTransformer2021081110\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

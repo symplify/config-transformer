@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108119\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202108119\Psr\Container\ContainerInterface;
-use ConfigTransformer202108119\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202108119\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202108119\Symfony\Contracts\Service\ServiceProviderInterface;
+use ConfigTransformer2021081110\Psr\Container\ContainerInterface;
+use ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021081110\Symfony\Contracts\Service\ServiceProviderInterface;
 /**
  * Compiler pass to inject their service locator to service subscribers.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveServiceSubscribersPass extends \ConfigTransformer202108119\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveServiceSubscribersPass extends \ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocator;
     /**
@@ -27,10 +27,10 @@ class ResolveServiceSubscribersPass extends \ConfigTransformer202108119\Symfony\
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202108119\Symfony\Component\DependencyInjection\Reference && $this->serviceLocator && \in_array((string) $value, [\ConfigTransformer202108119\Psr\Container\ContainerInterface::class, \ConfigTransformer202108119\Symfony\Contracts\Service\ServiceProviderInterface::class], \true)) {
-            return new \ConfigTransformer202108119\Symfony\Component\DependencyInjection\Reference($this->serviceLocator);
+        if ($value instanceof \ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Reference && $this->serviceLocator && \in_array((string) $value, [\ConfigTransformer2021081110\Psr\Container\ContainerInterface::class, \ConfigTransformer2021081110\Symfony\Contracts\Service\ServiceProviderInterface::class], \true)) {
+            return new \ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Reference($this->serviceLocator);
         }
-        if (!$value instanceof \ConfigTransformer202108119\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \ConfigTransformer2021081110\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         $serviceLocator = $this->serviceLocator;
