@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108115\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202108112\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202108115\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202108112\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class BinaryNode extends \ConfigTransformer202108115\Symfony\Component\ExpressionLanguage\Node\Node
+class BinaryNode extends \ConfigTransformer202108112\Symfony\Component\ExpressionLanguage\Node\Node
 {
     private const OPERATORS = ['~' => '.', 'and' => '&&', 'or' => '||'];
     private const FUNCTIONS = ['**' => 'pow', '..' => 'range', 'in' => 'in_array', 'not in' => '!in_array'];
-    public function __construct(string $operator, \ConfigTransformer202108115\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202108115\Symfony\Component\ExpressionLanguage\Node\Node $right)
+    public function __construct(string $operator, \ConfigTransformer202108112\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202108112\Symfony\Component\ExpressionLanguage\Node\Node $right)
     {
         parent::__construct(['left' => $left, 'right' => $right], ['operator' => $operator]);
     }
