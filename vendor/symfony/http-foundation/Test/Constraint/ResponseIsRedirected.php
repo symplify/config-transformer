@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108117\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202108119\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202108117\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202108117\Symfony\Component\HttpFoundation\Response;
-final class ResponseIsRedirected extends \ConfigTransformer202108117\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202108119\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202108119\Symfony\Component\HttpFoundation\Response;
+final class ResponseIsRedirected extends \ConfigTransformer202108119\PHPUnit\Framework\Constraint\Constraint
 {
     /**
      * {@inheritdoc}
