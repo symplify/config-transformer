@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108114\PhpParser\Builder;
+namespace ConfigTransformer202108115\PhpParser\Builder;
 
-use ConfigTransformer202108114\PhpParser;
-use ConfigTransformer202108114\PhpParser\BuilderHelpers;
-use ConfigTransformer202108114\PhpParser\Node;
-use ConfigTransformer202108114\PhpParser\Node\Identifier;
-use ConfigTransformer202108114\PhpParser\Node\Name;
-use ConfigTransformer202108114\PhpParser\Node\NullableType;
-use ConfigTransformer202108114\PhpParser\Node\Stmt;
-class Property implements \ConfigTransformer202108114\PhpParser\Builder
+use ConfigTransformer202108115\PhpParser;
+use ConfigTransformer202108115\PhpParser\BuilderHelpers;
+use ConfigTransformer202108115\PhpParser\Node;
+use ConfigTransformer202108115\PhpParser\Node\Identifier;
+use ConfigTransformer202108115\PhpParser\Node\Name;
+use ConfigTransformer202108115\PhpParser\Node\NullableType;
+use ConfigTransformer202108115\PhpParser\Node\Stmt;
+class Property implements \ConfigTransformer202108115\PhpParser\Builder
 {
     protected $name;
     protected $flags = 0;
@@ -36,7 +36,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function makePublic()
     {
-        $this->flags = \ConfigTransformer202108114\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->flags = \ConfigTransformer202108115\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -46,7 +46,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function makeProtected()
     {
-        $this->flags = \ConfigTransformer202108114\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->flags = \ConfigTransformer202108115\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -56,7 +56,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function makePrivate()
     {
-        $this->flags = \ConfigTransformer202108114\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->flags = \ConfigTransformer202108115\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -66,7 +66,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function makeStatic()
     {
-        $this->flags = \ConfigTransformer202108114\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        $this->flags = \ConfigTransformer202108115\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
         return $this;
     }
     /**
@@ -76,7 +76,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function makeReadonly()
     {
-        $this->flags = \ConfigTransformer202108114\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY);
+        $this->flags = \ConfigTransformer202108115\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY);
         return $this;
     }
     /**
@@ -88,7 +88,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function setDefault($value)
     {
-        $this->default = \ConfigTransformer202108114\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->default = \ConfigTransformer202108115\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -100,7 +100,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function setDocComment($docComment)
     {
-        $this->attributes = ['comments' => [\ConfigTransformer202108114\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
+        $this->attributes = ['comments' => [\ConfigTransformer202108115\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
         return $this;
     }
     /**
@@ -112,7 +112,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function setType($type)
     {
-        $this->type = \ConfigTransformer202108114\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->type = \ConfigTransformer202108115\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
     /**
@@ -124,7 +124,7 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202108114\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202108115\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -132,8 +132,8 @@ class Property implements \ConfigTransformer202108114\PhpParser\Builder
      *
      * @return Stmt\Property The built property node
      */
-    public function getNode() : \ConfigTransformer202108114\PhpParser\Node
+    public function getNode() : \ConfigTransformer202108115\PhpParser\Node
     {
-        return new \ConfigTransformer202108114\PhpParser\Node\Stmt\Property($this->flags !== 0 ? $this->flags : \ConfigTransformer202108114\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC, [new \ConfigTransformer202108114\PhpParser\Node\Stmt\PropertyProperty($this->name, $this->default)], $this->attributes, $this->type, $this->attributeGroups);
+        return new \ConfigTransformer202108115\PhpParser\Node\Stmt\Property($this->flags !== 0 ? $this->flags : \ConfigTransformer202108115\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC, [new \ConfigTransformer202108115\PhpParser\Node\Stmt\PropertyProperty($this->name, $this->default)], $this->attributes, $this->type, $this->attributeGroups);
     }
 }
