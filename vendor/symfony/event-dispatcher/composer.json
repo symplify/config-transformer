@@ -44,7 +44,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108114\\Symfony\\Component\\EventDispatcher\\": ""
+            "ConfigTransformer202108119\\Symfony\\Component\\EventDispatcher\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
