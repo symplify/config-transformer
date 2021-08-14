@@ -1,12 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108111\Symplify\PackageBuilder\Php;
+namespace ConfigTransformer202108148\Symplify\PackageBuilder\Php;
 
 final class TypeChecker
 {
     /**
      * @param array<class-string> $types
+     * @param object|string $object
      */
     public function isInstanceOf($object, array $types) : bool
     {

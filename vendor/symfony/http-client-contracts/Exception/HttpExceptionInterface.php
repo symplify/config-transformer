@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108111\Symfony\Contracts\HttpClient\Exception;
+namespace ConfigTransformer202108148\Symfony\Contracts\HttpClient\Exception;
 
-use ConfigTransformer202108111\Symfony\Contracts\HttpClient\ResponseInterface;
+use ConfigTransformer202108148\Symfony\Contracts\HttpClient\ResponseInterface;
 /**
  * Base interface for HTTP-related exceptions.
  *
  * @author Anton Chernikov <anton_ch1989@mail.ru>
  */
-interface HttpExceptionInterface extends \ConfigTransformer202108111\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
+interface HttpExceptionInterface extends \ConfigTransformer202108148\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
 {
-    public function getResponse() : \ConfigTransformer202108111\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function getResponse() : \ConfigTransformer202108148\Symfony\Contracts\HttpClient\ResponseInterface;
 }
