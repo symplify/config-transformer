@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108148\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202108167\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202108148\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202108148\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202108148\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202108167\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202108167\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202108167\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Adds configured formats to each request.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer202108148\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final
  */
-class AddRequestFormatsListener implements \ConfigTransformer202108148\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class AddRequestFormatsListener implements \ConfigTransformer202108167\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     protected $formats;
     public function __construct(array $formats)
@@ -43,6 +43,6 @@ class AddRequestFormatsListener implements \ConfigTransformer202108148\Symfony\C
      */
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202108148\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 100]];
+        return [\ConfigTransformer202108167\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 100]];
     }
 }
