@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108165\Symfony\Component\ErrorHandler;
+namespace ConfigTransformer202108166\Symfony\Component\ErrorHandler;
 
-use ConfigTransformer202108165\Composer\InstalledVersions;
-use ConfigTransformer202108165\Doctrine\Common\Persistence\Proxy as LegacyProxy;
-use ConfigTransformer202108165\Doctrine\Persistence\Proxy;
-use ConfigTransformer202108165\Mockery\MockInterface;
-use ConfigTransformer202108165\Phake\IMock;
-use ConfigTransformer202108165\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-use ConfigTransformer202108165\PHPUnit\Framework\MockObject\MockObject;
-use ConfigTransformer202108165\Prophecy\Prophecy\ProphecySubjectInterface;
-use ConfigTransformer202108165\ProxyManager\Proxy\ProxyInterface;
+use ConfigTransformer202108166\Composer\InstalledVersions;
+use ConfigTransformer202108166\Doctrine\Common\Persistence\Proxy as LegacyProxy;
+use ConfigTransformer202108166\Doctrine\Persistence\Proxy;
+use ConfigTransformer202108166\Mockery\MockInterface;
+use ConfigTransformer202108166\Phake\IMock;
+use ConfigTransformer202108166\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
+use ConfigTransformer202108166\PHPUnit\Framework\MockObject\MockObject;
+use ConfigTransformer202108166\Prophecy\Prophecy\ProphecySubjectInterface;
+use ConfigTransformer202108166\ProxyManager\Proxy\ProxyInterface;
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -113,8 +113,8 @@ class DebugClassLoader
     public static function enable() : void
     {
         // Ensures we don't hit https://bugs.php.net/42098
-        \class_exists(\ConfigTransformer202108165\Symfony\Component\ErrorHandler\ErrorHandler::class);
-        \class_exists(\ConfigTransformer202108165\Psr\Log\LogLevel::class);
+        \class_exists(\ConfigTransformer202108166\Symfony\Component\ErrorHandler\ErrorHandler::class);
+        \class_exists(\ConfigTransformer202108166\Psr\Log\LogLevel::class);
         if (!\is_array($functions = \spl_autoload_functions())) {
             return;
         }
@@ -165,7 +165,7 @@ class DebugClassLoader
         foreach ($offsets as $getSymbols => $i) {
             $symbols = $getSymbols();
             for (; $i < \count($symbols); ++$i) {
-                if (!\is_subclass_of($symbols[$i], \ConfigTransformer202108165\PHPUnit\Framework\MockObject\MockObject::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\Prophecy\Prophecy\ProphecySubjectInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\Doctrine\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\ProxyManager\Proxy\ProxyInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\Doctrine\Common\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\Mockery\MockInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108165\Phake\IMock::class)) {
+                if (!\is_subclass_of($symbols[$i], \ConfigTransformer202108166\PHPUnit\Framework\MockObject\MockObject::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\Prophecy\Prophecy\ProphecySubjectInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\Doctrine\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\ProxyManager\Proxy\ProxyInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\Doctrine\Common\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\Mockery\MockInterface::class) && !\is_subclass_of($symbols[$i], \ConfigTransformer202108166\Phake\IMock::class)) {
                     $loader->checkClass($symbols[$i]);
                 }
             }
@@ -324,7 +324,7 @@ class DebugClassLoader
                         self::$method[$class] = self::$method[$use];
                     }
                 } elseif (!$refl->isInterface()) {
-                    if (!\strncmp($vendor, \str_replace('_', '\\', $use), $vendorLen) && 0 === \strpos($className, 'Symfony\\') && (!\class_exists(\ConfigTransformer202108165\Composer\InstalledVersions::class) || 'symfony/symfony' !== \ConfigTransformer202108165\Composer\InstalledVersions::getRootPackage()['name'])) {
+                    if (!\strncmp($vendor, \str_replace('_', '\\', $use), $vendorLen) && 0 === \strpos($className, 'Symfony\\') && (!\class_exists(\ConfigTransformer202108166\Composer\InstalledVersions::class) || 'symfony/symfony' !== \ConfigTransformer202108166\Composer\InstalledVersions::getRootPackage()['name'])) {
                         // skip "same vendor" @method deprecations for Symfony\* classes unless symfony/symfony is being tested
                         continue;
                     }
@@ -457,7 +457,7 @@ class DebugClassLoader
                     $finalOrInternal = \true;
                 }
             }
-            if ($finalOrInternal || $method->isConstructor() || \false === \strpos($doc, '@param') || \ConfigTransformer202108165\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation::class === $class) {
+            if ($finalOrInternal || $method->isConstructor() || \false === \strpos($doc, '@param') || \ConfigTransformer202108166\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation::class === $class) {
                 continue;
             }
             if (!\preg_match_all('#\\n\\s+\\* @param +((?(?!callable *\\().*?|callable *\\(.*\\).*?))(?<= )\\$([a-zA-Z0-9_\\x7f-\\xff]++)#', $doc, $matches, \PREG_SET_ORDER)) {

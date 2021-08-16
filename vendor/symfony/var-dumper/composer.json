@@ -43,7 +43,7 @@
             "Resources\/functions\/dump.php"
         ],
         "psr-4": {
-            "ConfigTransformer202108165\\Symfony\\Component\\VarDumper\\": ""
+            "ConfigTransformer202108166\\Symfony\\Component\\VarDumper\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
