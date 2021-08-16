@@ -1,8 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108160\PhpParser\Comment;
+namespace ConfigTransformer202108161\PhpParser\Comment;
 
-class Doc extends \ConfigTransformer202108160\PhpParser\Comment
+class Doc extends \ConfigTransformer202108161\PhpParser\Comment
 {
 }

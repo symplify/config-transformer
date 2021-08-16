@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108160\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202108161\Symfony\Component\HttpFoundation;
 
 /**
  * HTTP header utility functions.
