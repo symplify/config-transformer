@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108167\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202108166\Symplify\EasyTesting\ValueObject;
 
 final class InputAndExpected
 {
