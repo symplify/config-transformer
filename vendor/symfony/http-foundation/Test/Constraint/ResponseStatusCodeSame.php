@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108167\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202108165\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202108167\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202108167\Symfony\Component\HttpFoundation\Response;
-final class ResponseStatusCodeSame extends \ConfigTransformer202108167\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202108165\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202108165\Symfony\Component\HttpFoundation\Response;
+final class ResponseStatusCodeSame extends \ConfigTransformer202108165\PHPUnit\Framework\Constraint\Constraint
 {
     private $statusCode;
     public function __construct(int $statusCode)

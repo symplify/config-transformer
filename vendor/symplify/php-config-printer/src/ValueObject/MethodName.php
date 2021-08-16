@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108167\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202108165\Symplify\PhpConfigPrinter\ValueObject;
 
 final class MethodName
 {
@@ -13,14 +13,6 @@ final class MethodName
      * @var string
      */
     public const ALIAS = 'alias';
-    /**
-     * @var string
-     */
-    public const SERVICES = 'services';
-    /**
-     * @var string
-     */
-    public const PARAMETERS = 'parameters';
     /**
      * @var string
      */
