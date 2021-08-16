@@ -1,6 +1,6 @@
 <table class="logs" data-filter-level="Emergency,Alert,Critical,Error,Warning,Notice,Info,Debug" data-filters>
 <?php 
-namespace ConfigTransformer2021081610;
+namespace ConfigTransformer202108160;
 
 $channelIsDefined = isset($logs[0]['channel']);
 ?>
@@ -25,7 +25,7 @@ foreach ($logs as $log) {
         $status = 'warning';
     } else {
         $severity = 0;
-        if (($exception = $log['context']['exception'] ?? null) instanceof \ErrorException || $exception instanceof \ConfigTransformer2021081610\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+        if (($exception = $log['context']['exception'] ?? null) instanceof \ErrorException || $exception instanceof \ConfigTransformer202108160\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
             $severity = $exception->getSeverity();
         }
         $status = \E_DEPRECATED === $severity || \E_USER_DEPRECATED === $severity ? 'warning' : 'normal';

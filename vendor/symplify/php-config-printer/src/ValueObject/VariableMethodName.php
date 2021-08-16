@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021081610\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202108160\Symplify\PhpConfigPrinter\ValueObject;
 
 final class VariableMethodName
 {

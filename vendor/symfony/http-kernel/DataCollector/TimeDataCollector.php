@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021081610\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202108160\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer2021081610\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021081610\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021081610\Symfony\Component\HttpKernel\KernelInterface;
-use ConfigTransformer2021081610\Symfony\Component\Stopwatch\Stopwatch;
-use ConfigTransformer2021081610\Symfony\Component\Stopwatch\StopwatchEvent;
+use ConfigTransformer202108160\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108160\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202108160\Symfony\Component\HttpKernel\KernelInterface;
+use ConfigTransformer202108160\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202108160\Symfony\Component\Stopwatch\StopwatchEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class TimeDataCollector extends \ConfigTransformer2021081610\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer2021081610\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class TimeDataCollector extends \ConfigTransformer202108160\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202108160\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $kernel;
     protected $stopwatch;
-    public function __construct(\ConfigTransformer2021081610\Symfony\Component\HttpKernel\KernelInterface $kernel = null, \ConfigTransformer2021081610\Symfony\Component\Stopwatch\Stopwatch $stopwatch = null)
+    public function __construct(\ConfigTransformer202108160\Symfony\Component\HttpKernel\KernelInterface $kernel = null, \ConfigTransformer202108160\Symfony\Component\Stopwatch\Stopwatch $stopwatch = null)
     {
         $this->kernel = $kernel;
         $this->stopwatch = $stopwatch;
@@ -42,7 +42,7 @@ class TimeDataCollector extends \ConfigTransformer2021081610\Symfony\Component\H
         } else {
             $startTime = $request->server->get('REQUEST_TIME_FLOAT');
         }
-        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'start_time' => $startTime * 1000, 'events' => [], 'stopwatch_installed' => \class_exists(\ConfigTransformer2021081610\Symfony\Component\Stopwatch\Stopwatch::class, \false)];
+        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'start_time' => $startTime * 1000, 'events' => [], 'stopwatch_installed' => \class_exists(\ConfigTransformer202108160\Symfony\Component\Stopwatch\Stopwatch::class, \false)];
     }
     /**
      * {@inheritdoc}
