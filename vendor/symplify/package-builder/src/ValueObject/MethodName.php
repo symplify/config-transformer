@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108166\Symplify\PackageBuilder\ValueObject;
+namespace ConfigTransformer2021081610\Symplify\PackageBuilder\ValueObject;
 
 final class MethodName
 {
