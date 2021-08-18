@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108160\Symfony\Component\Cache;
+namespace ConfigTransformer202108183\Symfony\Component\Cache;
 
-use ConfigTransformer202108160\Doctrine\Common\Cache\CacheProvider;
-use ConfigTransformer202108160\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202108160\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202108183\Doctrine\Common\Cache\CacheProvider;
+use ConfigTransformer202108183\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202108183\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineProvider extends \ConfigTransformer202108160\Doctrine\Common\Cache\CacheProvider implements \ConfigTransformer202108160\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202108160\Symfony\Component\Cache\ResettableInterface
+class DoctrineProvider extends \ConfigTransformer202108183\Doctrine\Common\Cache\CacheProvider implements \ConfigTransformer202108183\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202108183\Symfony\Component\Cache\ResettableInterface
 {
     private $pool;
-    public function __construct(\ConfigTransformer202108160\Psr\Cache\CacheItemPoolInterface $pool)
+    public function __construct(\ConfigTransformer202108183\Psr\Cache\CacheItemPoolInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -28,14 +28,14 @@ class DoctrineProvider extends \ConfigTransformer202108160\Doctrine\Common\Cache
      */
     public function prune()
     {
-        return $this->pool instanceof \ConfigTransformer202108160\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \ConfigTransformer202108183\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}
      */
     public function reset()
     {
-        if ($this->pool instanceof \ConfigTransformer202108160\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \ConfigTransformer202108183\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
         $this->setNamespace($this->getNamespace());
