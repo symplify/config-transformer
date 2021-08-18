@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108180\Symfony\Component\Config;
+namespace ConfigTransformer202108187\Symfony\Component\Config;
 
-use ConfigTransformer202108180\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
+use ConfigTransformer202108187\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
 /**
  * ConfigCache caches arbitrary content in files on disk.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202108180\Symfony\Component\Config\Resource\SelfCheckingRes
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ConfigCache extends \ConfigTransformer202108180\Symfony\Component\Config\ResourceCheckerConfigCache
+class ConfigCache extends \ConfigTransformer202108187\Symfony\Component\Config\ResourceCheckerConfigCache
 {
     private $debug;
     /**
@@ -33,7 +33,7 @@ class ConfigCache extends \ConfigTransformer202108180\Symfony\Component\Config\R
         $this->debug = $debug;
         $checkers = [];
         if (\true === $this->debug) {
-            $checkers = [new \ConfigTransformer202108180\Symfony\Component\Config\Resource\SelfCheckingResourceChecker()];
+            $checkers = [new \ConfigTransformer202108187\Symfony\Component\Config\Resource\SelfCheckingResourceChecker()];
         }
         parent::__construct($file, $checkers);
     }
