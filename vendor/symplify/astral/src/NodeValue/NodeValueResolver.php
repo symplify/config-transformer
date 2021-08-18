@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108187\Symplify\Astral\NodeValue;
+namespace ConfigTransformer202108182\Symplify\Astral\NodeValue;
 
-use ConfigTransformer202108187\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer202108187\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202108187\PhpParser\Node\Expr;
-use ConfigTransformer202108187\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202108187\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202108187\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202108187\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202108187\PhpParser\Node\Expr\Instanceof_;
-use ConfigTransformer202108187\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202108187\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer202108187\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst;
-use ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst\Dir;
-use ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst\File;
-use ConfigTransformer202108187\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer202108182\PhpParser\ConstExprEvaluationException;
+use ConfigTransformer202108182\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202108182\PhpParser\Node\Expr;
+use ConfigTransformer202108182\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202108182\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202108182\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202108182\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202108182\PhpParser\Node\Expr\Instanceof_;
+use ConfigTransformer202108182\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202108182\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer202108182\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst\Dir;
+use ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst\File;
+use ConfigTransformer202108182\PhpParser\Node\Stmt\ClassLike;
 use ReflectionClassConstant;
-use ConfigTransformer202108187\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202108187\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202108187\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202108187\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202108182\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202108182\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202108182\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202108182\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  */
@@ -48,36 +48,36 @@ final class NodeValueResolver
      * @var \Symplify\Astral\NodeFinder\SimpleNodeFinder
      */
     private $simpleNodeFinder;
-    public function __construct(\ConfigTransformer202108187\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202108187\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer202108187\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
+    public function __construct(\ConfigTransformer202108182\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202108182\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer202108182\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->typeChecker = $typeChecker;
         $this->simpleNodeFinder = $simpleNodeFinder;
-        $this->constExprEvaluator = new \ConfigTransformer202108187\PhpParser\ConstExprEvaluator(function (\ConfigTransformer202108187\PhpParser\Node\Expr $expr) {
+        $this->constExprEvaluator = new \ConfigTransformer202108182\PhpParser\ConstExprEvaluator(function (\ConfigTransformer202108182\PhpParser\Node\Expr $expr) {
             return $this->resolveByNode($expr);
         });
     }
     /**
      * @return array|bool|float|int|mixed|string|null
      */
-    public function resolve(\ConfigTransformer202108187\PhpParser\Node\Expr $expr, string $filePath)
+    public function resolve(\ConfigTransformer202108182\PhpParser\Node\Expr $expr, string $filePath)
     {
         $this->currentFilePath = $filePath;
         try {
             return $this->constExprEvaluator->evaluateDirectly($expr);
-        } catch (\ConfigTransformer202108187\PhpParser\ConstExprEvaluationException $exception) {
+        } catch (\ConfigTransformer202108182\PhpParser\ConstExprEvaluationException $exception) {
             return null;
         }
     }
     /**
      * @return mixed|null
      */
-    private function resolveClassConstFetch(\ConfigTransformer202108187\PhpParser\Node\Expr\ClassConstFetch $classConstFetch)
+    private function resolveClassConstFetch(\ConfigTransformer202108182\PhpParser\Node\Expr\ClassConstFetch $classConstFetch)
     {
         $className = $this->simpleNameResolver->getName($classConstFetch->class);
         if ($className === 'self') {
-            $classLike = $this->simpleNodeFinder->findFirstParentByType($classConstFetch, \ConfigTransformer202108187\PhpParser\Node\Stmt\ClassLike::class);
-            if (!$classLike instanceof \ConfigTransformer202108187\PhpParser\Node\Stmt\ClassLike) {
+            $classLike = $this->simpleNodeFinder->findFirstParentByType($classConstFetch, \ConfigTransformer202108182\PhpParser\Node\Stmt\ClassLike::class);
+            if (!$classLike instanceof \ConfigTransformer202108182\PhpParser\Node\Stmt\ClassLike) {
                 return null;
             }
             $className = $this->simpleNameResolver->getName($classLike);
@@ -98,15 +98,15 @@ final class NodeValueResolver
         $reflectionClassConstant = new \ReflectionClassConstant($className, $constantName);
         return $reflectionClassConstant->getValue();
     }
-    private function resolveMagicConst(\ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst $magicConst) : ?string
+    private function resolveMagicConst(\ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst $magicConst) : ?string
     {
         if ($this->currentFilePath === null) {
-            throw new \ConfigTransformer202108187\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202108182\Symplify\Astral\Exception\ShouldNotHappenException();
         }
-        if ($magicConst instanceof \ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst\Dir) {
+        if ($magicConst instanceof \ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst\Dir) {
             return \dirname($this->currentFilePath);
         }
-        if ($magicConst instanceof \ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst\File) {
+        if ($magicConst instanceof \ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst\File) {
             return $this->currentFilePath;
         }
         return null;
@@ -114,7 +114,7 @@ final class NodeValueResolver
     /**
      * @return mixed|null
      */
-    private function resolveConstFetch(\ConfigTransformer202108187\PhpParser\Node\Expr\ConstFetch $constFetch)
+    private function resolveConstFetch(\ConfigTransformer202108182\PhpParser\Node\Expr\ConstFetch $constFetch)
     {
         $constFetchName = $this->simpleNameResolver->getName($constFetch);
         if ($constFetchName === null) {
@@ -125,25 +125,25 @@ final class NodeValueResolver
     /**
      * @return mixed|string|int|bool|null
      */
-    private function resolveByNode(\ConfigTransformer202108187\PhpParser\Node\Expr $expr)
+    private function resolveByNode(\ConfigTransformer202108182\PhpParser\Node\Expr $expr)
     {
         if ($this->currentFilePath === null) {
-            throw new \ConfigTransformer202108187\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202108182\Symplify\Astral\Exception\ShouldNotHappenException();
         }
-        if ($expr instanceof \ConfigTransformer202108187\PhpParser\Node\Scalar\MagicConst) {
+        if ($expr instanceof \ConfigTransformer202108182\PhpParser\Node\Scalar\MagicConst) {
             return $this->resolveMagicConst($expr);
         }
-        if ($expr instanceof \ConfigTransformer202108187\PhpParser\Node\Expr\FuncCall && $this->simpleNameResolver->isName($expr, 'getcwd')) {
+        if ($expr instanceof \ConfigTransformer202108182\PhpParser\Node\Expr\FuncCall && $this->simpleNameResolver->isName($expr, 'getcwd')) {
             return \dirname($this->currentFilePath);
         }
-        if ($expr instanceof \ConfigTransformer202108187\PhpParser\Node\Expr\ConstFetch) {
+        if ($expr instanceof \ConfigTransformer202108182\PhpParser\Node\Expr\ConstFetch) {
             return $this->resolveConstFetch($expr);
         }
-        if ($expr instanceof \ConfigTransformer202108187\PhpParser\Node\Expr\ClassConstFetch) {
+        if ($expr instanceof \ConfigTransformer202108182\PhpParser\Node\Expr\ClassConstFetch) {
             return $this->resolveClassConstFetch($expr);
         }
-        if ($this->typeChecker->isInstanceOf($expr, [\ConfigTransformer202108187\PhpParser\Node\Expr\Variable::class, \ConfigTransformer202108187\PhpParser\Node\Expr\Cast::class, \ConfigTransformer202108187\PhpParser\Node\Expr\MethodCall::class, \ConfigTransformer202108187\PhpParser\Node\Expr\PropertyFetch::class, \ConfigTransformer202108187\PhpParser\Node\Expr\Instanceof_::class])) {
-            throw new \ConfigTransformer202108187\PhpParser\ConstExprEvaluationException();
+        if ($this->typeChecker->isInstanceOf($expr, [\ConfigTransformer202108182\PhpParser\Node\Expr\Variable::class, \ConfigTransformer202108182\PhpParser\Node\Expr\Cast::class, \ConfigTransformer202108182\PhpParser\Node\Expr\MethodCall::class, \ConfigTransformer202108182\PhpParser\Node\Expr\PropertyFetch::class, \ConfigTransformer202108182\PhpParser\Node\Expr\Instanceof_::class])) {
+            throw new \ConfigTransformer202108182\PhpParser\ConstExprEvaluationException();
         }
         return null;
     }
