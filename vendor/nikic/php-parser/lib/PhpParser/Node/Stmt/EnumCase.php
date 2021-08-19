@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108183\PhpParser\Node\Stmt;
+namespace ConfigTransformer202108193\PhpParser\Node\Stmt;
 
-use ConfigTransformer202108183\PhpParser\Node;
-use ConfigTransformer202108183\PhpParser\Node\AttributeGroup;
-class EnumCase extends \ConfigTransformer202108183\PhpParser\Node\Stmt
+use ConfigTransformer202108193\PhpParser\Node;
+use ConfigTransformer202108193\PhpParser\Node\AttributeGroup;
+class EnumCase extends \ConfigTransformer202108193\PhpParser\Node\Stmt
 {
     /** @var Node\Identifier Enum case name */
     public $name;
@@ -19,10 +19,10 @@ class EnumCase extends \ConfigTransformer202108183\PhpParser\Node\Stmt
      * @param AttributeGroup[]          $attrGroups PHP attribute groups
      * @param array                     $attributes Additional attributes
      */
-    public function __construct($name, \ConfigTransformer202108183\PhpParser\Node\Expr $expr = null, array $attrGroups = [], array $attributes = [])
+    public function __construct($name, \ConfigTransformer202108193\PhpParser\Node\Expr $expr = null, array $attrGroups = [], array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->name = \is_string($name) ? new \ConfigTransformer202108183\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202108193\PhpParser\Node\Identifier($name) : $name;
         $this->expr = $expr;
         $this->attrGroups = $attrGroups;
     }
