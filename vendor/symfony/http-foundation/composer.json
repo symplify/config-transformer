@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108193\\Symfony\\Component\\HttpFoundation\\": ""
+            "ConfigTransformer202108209\\Symfony\\Component\\HttpFoundation\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

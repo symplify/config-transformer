@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108193\Symfony\Component\ErrorHandler;
+namespace ConfigTransformer202108209\Symfony\Component\ErrorHandler;
 
-use ConfigTransformer202108193\Psr\Log\AbstractLogger;
+use ConfigTransformer202108209\Psr\Log\AbstractLogger;
 /**
  * A buffering logger that stacks logs for later.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class BufferingLogger extends \ConfigTransformer202108193\Psr\Log\AbstractLogger
+class BufferingLogger extends \ConfigTransformer202108209\Psr\Log\AbstractLogger
 {
     private $logs = [];
     /**
