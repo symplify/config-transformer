@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108202\PhpParser\NodeVisitor;
+namespace ConfigTransformer202108203\PhpParser\NodeVisitor;
 
-use ConfigTransformer202108202\PhpParser\Node;
-use ConfigTransformer202108202\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202108203\PhpParser\Node;
+use ConfigTransformer202108203\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node
  * as well as its sibling nodes.
@@ -14,7 +14,7 @@ use ConfigTransformer202108202\PhpParser\NodeVisitorAbstract;
  * node can be accessed through <code>$node->getAttribute('previous')</code>,
  * and the next node can be accessed through <code>$node->getAttribute('next')</code>.
  */
-final class NodeConnectingVisitor extends \ConfigTransformer202108202\PhpParser\NodeVisitorAbstract
+final class NodeConnectingVisitor extends \ConfigTransformer202108203\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]

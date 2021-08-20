@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108202\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer202108203\Symfony\Component\HttpFoundation\File\Exception;
 
-class UnexpectedTypeException extends \ConfigTransformer202108202\Symfony\Component\HttpFoundation\File\Exception\FileException
+class UnexpectedTypeException extends \ConfigTransformer202108203\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
     public function __construct($value, string $expectedType)
     {
