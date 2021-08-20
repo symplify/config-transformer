@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108207\Symfony\Contracts\HttpClient\Exception;
+namespace ConfigTransformer202108202\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When a 5xx response is returned.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ServerExceptionInterface extends \ConfigTransformer202108207\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+interface ServerExceptionInterface extends \ConfigTransformer202108202\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
 {
 }

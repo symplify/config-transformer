@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108207\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202108202\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202108207\PhpParser\Node;
-use ConfigTransformer202108207\PhpParser\Node\Expr;
-use ConfigTransformer202108207\PhpParser\Node\Param;
-use ConfigTransformer202108207\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class ParamNodeNameResolver implements \ConfigTransformer202108207\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202108202\PhpParser\Node;
+use ConfigTransformer202108202\PhpParser\Node\Expr;
+use ConfigTransformer202108202\PhpParser\Node\Param;
+use ConfigTransformer202108202\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class ParamNodeNameResolver implements \ConfigTransformer202108202\Symplify\Astral\Contract\NodeNameResolverInterface
 {
     /**
      * @param \PhpParser\Node $node
      */
     public function match($node) : bool
     {
-        return $node instanceof \ConfigTransformer202108207\PhpParser\Node\Param;
+        return $node instanceof \ConfigTransformer202108202\PhpParser\Node\Param;
     }
     /**
      * @param \PhpParser\Node $node
@@ -22,7 +22,7 @@ final class ParamNodeNameResolver implements \ConfigTransformer202108207\Symplif
     public function resolve($node) : ?string
     {
         $paramName = $node->var->name;
-        if ($paramName instanceof \ConfigTransformer202108207\PhpParser\Node\Expr) {
+        if ($paramName instanceof \ConfigTransformer202108202\PhpParser\Node\Expr) {
             return null;
         }
         return $paramName;
