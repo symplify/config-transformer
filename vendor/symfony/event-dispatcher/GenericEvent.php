@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108213\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202108214\Symfony\Component\EventDispatcher;
 
-use ConfigTransformer202108213\Symfony\Contracts\EventDispatcher\Event;
+use ConfigTransformer202108214\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Event encapsulation class.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer202108213\Symfony\Contracts\EventDispatcher\Event;
  *
  * @author Drak <drak@zikula.org>
  */
-class GenericEvent extends \ConfigTransformer202108213\Symfony\Contracts\EventDispatcher\Event implements \ArrayAccess, \IteratorAggregate
+class GenericEvent extends \ConfigTransformer202108214\Symfony\Contracts\EventDispatcher\Event implements \ArrayAccess, \IteratorAggregate
 {
     protected $subject;
     protected $arguments;

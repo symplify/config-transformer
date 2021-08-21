@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108213\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass;
+namespace ConfigTransformer202108214\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass;
 
-use ConfigTransformer202108213\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202108213\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202108213\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108213\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer202108214\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202108214\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202108214\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108214\Symplify\PackageBuilder\Console\Command\CommandNaming;
 /**
  * @see \Symplify\ConsolePackageBuilder\Tests\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPassTest
  */
-final class NamelessConsoleCommandCompilerPass implements \ConfigTransformer202108213\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class NamelessConsoleCommandCompilerPass implements \ConfigTransformer202108214\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
@@ -22,10 +22,10 @@ final class NamelessConsoleCommandCompilerPass implements \ConfigTransformer2021
             if ($definitionClass === null) {
                 continue;
             }
-            if (!\is_a($definitionClass, \ConfigTransformer202108213\Symfony\Component\Console\Command\Command::class, \true)) {
+            if (!\is_a($definitionClass, \ConfigTransformer202108214\Symfony\Component\Console\Command\Command::class, \true)) {
                 continue;
             }
-            $commandName = \ConfigTransformer202108213\Symplify\PackageBuilder\Console\Command\CommandNaming::classToName($definitionClass);
+            $commandName = \ConfigTransformer202108214\Symplify\PackageBuilder\Console\Command\CommandNaming::classToName($definitionClass);
             $definition->addMethodCall('setName', [$commandName]);
         }
     }
