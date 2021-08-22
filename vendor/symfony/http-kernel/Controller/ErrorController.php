@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108224\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202108222\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202108224\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
-use ConfigTransformer202108224\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202108224\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202108224\Symfony\Component\HttpKernel\Exception\HttpException;
-use ConfigTransformer202108224\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202108222\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
+use ConfigTransformer202108222\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108222\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202108222\Symfony\Component\HttpKernel\Exception\HttpException;
+use ConfigTransformer202108222\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Renders error or exception pages from a given FlattenException.
  *
@@ -26,29 +26,29 @@ class ErrorController
     private $kernel;
     private $controller;
     private $errorRenderer;
-    public function __construct(\ConfigTransformer202108224\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, $controller, \ConfigTransformer202108224\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $errorRenderer)
+    public function __construct(\ConfigTransformer202108222\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, $controller, \ConfigTransformer202108222\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $errorRenderer)
     {
         $this->kernel = $kernel;
         $this->controller = $controller;
         $this->errorRenderer = $errorRenderer;
     }
-    public function __invoke(\Throwable $exception) : \ConfigTransformer202108224\Symfony\Component\HttpFoundation\Response
+    public function __invoke(\Throwable $exception) : \ConfigTransformer202108222\Symfony\Component\HttpFoundation\Response
     {
         $exception = $this->errorRenderer->render($exception);
-        return new \ConfigTransformer202108224\Symfony\Component\HttpFoundation\Response($exception->getAsString(), $exception->getStatusCode(), $exception->getHeaders());
+        return new \ConfigTransformer202108222\Symfony\Component\HttpFoundation\Response($exception->getAsString(), $exception->getStatusCode(), $exception->getHeaders());
     }
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $code
      */
-    public function preview($request, $code) : \ConfigTransformer202108224\Symfony\Component\HttpFoundation\Response
+    public function preview($request, $code) : \ConfigTransformer202108222\Symfony\Component\HttpFoundation\Response
     {
         /*
          * This Request mimics the parameters set by
          * \Symfony\Component\HttpKernel\EventListener\ErrorListener::duplicateRequest, with
          * the additional "showException" flag.
          */
-        $subRequest = $request->duplicate(null, null, ['_controller' => $this->controller, 'exception' => new \ConfigTransformer202108224\Symfony\Component\HttpKernel\Exception\HttpException($code, 'This is a sample exception.'), 'logger' => null, 'showException' => \false]);
-        return $this->kernel->handle($subRequest, \ConfigTransformer202108224\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
+        $subRequest = $request->duplicate(null, null, ['_controller' => $this->controller, 'exception' => new \ConfigTransformer202108222\Symfony\Component\HttpKernel\Exception\HttpException($code, 'This is a sample exception.'), 'logger' => null, 'showException' => \false]);
+        return $this->kernel->handle($subRequest, \ConfigTransformer202108222\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     }
 }
