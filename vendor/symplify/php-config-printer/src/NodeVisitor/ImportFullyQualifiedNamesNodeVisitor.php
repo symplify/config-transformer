@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108222\Symplify\PhpConfigPrinter\NodeVisitor;
+namespace ConfigTransformer202108224\Symplify\PhpConfigPrinter\NodeVisitor;
 
-use ConfigTransformer202108222\PhpParser\Node;
-use ConfigTransformer202108222\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202108222\PhpParser\Node\Name;
-use ConfigTransformer202108222\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202108222\PhpParser\NodeVisitorAbstract;
-use ConfigTransformer202108222\Symplify\PhpConfigPrinter\Naming\ClassNaming;
-use ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\AttributeKey;
-use ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\ImportType;
-final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer202108222\PhpParser\NodeVisitorAbstract
+use ConfigTransformer202108224\PhpParser\Node;
+use ConfigTransformer202108224\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202108224\PhpParser\Node\Name;
+use ConfigTransformer202108224\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202108224\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202108224\Symplify\PhpConfigPrinter\Naming\ClassNaming;
+use ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\AttributeKey;
+use ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer202108224\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var FullyQualifiedImport[]
@@ -22,7 +22,7 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer20210
      * @var \Symplify\PhpConfigPrinter\Naming\ClassNaming
      */
     private $classNaming;
-    public function __construct(\ConfigTransformer202108222\Symplify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
+    public function __construct(\ConfigTransformer202108224\Symplify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
     {
         $this->classNaming = $classNaming;
     }
@@ -38,27 +38,27 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \ConfigTransformer20210
     /**
      * @param \PhpParser\Node $node
      */
-    public function enterNode($node) : ?\ConfigTransformer202108222\PhpParser\Node
+    public function enterNode($node) : ?\ConfigTransformer202108224\PhpParser\Node
     {
-        if (!$node instanceof \ConfigTransformer202108222\PhpParser\Node\Name\FullyQualified) {
+        if (!$node instanceof \ConfigTransformer202108224\PhpParser\Node\Name\FullyQualified) {
             return null;
         }
-        $parent = $node->getAttribute(\ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\AttributeKey::PARENT);
+        $parent = $node->getAttribute(\ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\AttributeKey::PARENT);
         $fullyQualifiedName = $node->toString();
         if (\strncmp($fullyQualifiedName, '\\', \strlen('\\')) === 0) {
             $fullyQualifiedName = \ltrim($fullyQualifiedName, '\\');
         }
         if (\strpos($fullyQualifiedName, '\\') === \false) {
-            return new \ConfigTransformer202108222\PhpParser\Node\Name($fullyQualifiedName);
+            return new \ConfigTransformer202108224\PhpParser\Node\Name($fullyQualifiedName);
         }
         $shortClassName = $this->classNaming->getShortName($fullyQualifiedName);
-        if ($parent instanceof \ConfigTransformer202108222\PhpParser\Node\Expr\FuncCall) {
-            $import = new \ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport(\ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE, $fullyQualifiedName);
+        if ($parent instanceof \ConfigTransformer202108224\PhpParser\Node\Expr\FuncCall) {
+            $import = new \ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport(\ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE, $fullyQualifiedName);
         } else {
-            $import = new \ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport(\ConfigTransformer202108222\Symplify\PhpConfigPrinter\ValueObject\ImportType::CLASS_TYPE, $fullyQualifiedName);
+            $import = new \ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport(\ConfigTransformer202108224\Symplify\PhpConfigPrinter\ValueObject\ImportType::CLASS_TYPE, $fullyQualifiedName);
         }
         $this->imports[] = $import;
-        return new \ConfigTransformer202108222\PhpParser\Node\Name($shortClassName);
+        return new \ConfigTransformer202108224\PhpParser\Node\Name($shortClassName);
     }
     /**
      * @return FullyQualifiedImport[]
