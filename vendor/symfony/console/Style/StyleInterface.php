@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108211\Symfony\Component\Console\Style;
+namespace ConfigTransformer202108221\Symfony\Component\Console\Style;
 
 /**
  * Output style helpers.
