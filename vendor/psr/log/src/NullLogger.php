@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202108226\Psr\Log;
+namespace ConfigTransformer202108229\Psr\Log;
 
 /**
  * This Logger can be used to avoid conditional log calls.
@@ -10,7 +10,7 @@ namespace ConfigTransformer202108226\Psr\Log;
  * is a good way to avoid littering your code with `if ($this->logger) { }`
  * blocks.
  */
-class NullLogger extends \ConfigTransformer202108226\Psr\Log\AbstractLogger
+class NullLogger extends \ConfigTransformer202108229\Psr\Log\AbstractLogger
 {
     /**
      * Logs with an arbitrary level.

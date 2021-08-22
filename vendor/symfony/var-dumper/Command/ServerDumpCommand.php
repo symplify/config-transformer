@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108226\Symfony\Component\VarDumper\Command;
+namespace ConfigTransformer202108229\Symfony\Component\VarDumper\Command;
 
-use ConfigTransformer202108226\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202108226\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202108226\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202108226\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202108226\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202108226\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Dumper\CliDumper;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use ConfigTransformer202108226\Symfony\Component\VarDumper\Server\DumpServer;
+use ConfigTransformer202108229\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202108229\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202108229\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202108229\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202108229\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202108229\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Dumper\CliDumper;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use ConfigTransformer202108229\Symfony\Component\VarDumper\Server\DumpServer;
 /**
  * Starts a dump server to collect and output dumps on a single place with multiple formats support.
  *
@@ -30,23 +30,23 @@ use ConfigTransformer202108226\Symfony\Component\VarDumper\Server\DumpServer;
  *
  * @final
  */
-class ServerDumpCommand extends \ConfigTransformer202108226\Symfony\Component\Console\Command\Command
+class ServerDumpCommand extends \ConfigTransformer202108229\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'server:dump';
     protected static $defaultDescription = 'Start a dump server that collects and displays dumps in a single place';
     private $server;
     /** @var DumpDescriptorInterface[] */
     private $descriptors;
-    public function __construct(\ConfigTransformer202108226\Symfony\Component\VarDumper\Server\DumpServer $server, array $descriptors = [])
+    public function __construct(\ConfigTransformer202108229\Symfony\Component\VarDumper\Server\DumpServer $server, array $descriptors = [])
     {
         $this->server = $server;
-        $this->descriptors = $descriptors + ['cli' => new \ConfigTransformer202108226\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor(new \ConfigTransformer202108226\Symfony\Component\VarDumper\Dumper\CliDumper()), 'html' => new \ConfigTransformer202108226\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor(new \ConfigTransformer202108226\Symfony\Component\VarDumper\Dumper\HtmlDumper())];
+        $this->descriptors = $descriptors + ['cli' => new \ConfigTransformer202108229\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor(new \ConfigTransformer202108229\Symfony\Component\VarDumper\Dumper\CliDumper()), 'html' => new \ConfigTransformer202108229\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor(new \ConfigTransformer202108229\Symfony\Component\VarDumper\Dumper\HtmlDumper())];
         parent::__construct();
     }
     protected function configure()
     {
         $availableFormats = \implode(', ', \array_keys($this->descriptors));
-        $this->addOption('format', null, \ConfigTransformer202108226\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, \sprintf('The output format (%s)', $availableFormats), 'cli')->setDescription(self::$defaultDescription)->setHelp(<<<'EOF'
+        $this->addOption('format', null, \ConfigTransformer202108229\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, \sprintf('The output format (%s)', $availableFormats), 'cli')->setDescription(self::$defaultDescription)->setHelp(<<<'EOF'
 <info>%command.name%</info> starts a dump server that collects and displays
 dumps in a single place for debugging you application:
 
@@ -66,17 +66,17 @@ EOF
      */
     protected function execute($input, $output) : int
     {
-        $io = new \ConfigTransformer202108226\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+        $io = new \ConfigTransformer202108229\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
         $format = $input->getOption('format');
         if (!($descriptor = $this->descriptors[$format] ?? null)) {
-            throw new \ConfigTransformer202108226\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $format));
+            throw new \ConfigTransformer202108229\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $format));
         }
         $errorIo = $io->getErrorStyle();
         $errorIo->title('Symfony Var Dumper Server');
         $this->server->start();
         $errorIo->success(\sprintf('Server listening on %s', $this->server->getHost()));
         $errorIo->comment('Quit the server with CONTROL-C.');
-        $this->server->listen(function (\ConfigTransformer202108226\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) use($descriptor, $io) {
+        $this->server->listen(function (\ConfigTransformer202108229\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) use($descriptor, $io) {
             $descriptor->describe($io, $data, $context, $clientId);
         });
         return 0;
