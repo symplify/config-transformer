@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108221\Symfony\Component\Console\Output;
+namespace ConfigTransformer202108226\Symfony\Component\Console\Output;
 
 /**
  * ConsoleOutputInterface is the interface implemented by ConsoleOutput class.
@@ -16,7 +16,7 @@ namespace ConfigTransformer202108221\Symfony\Component\Console\Output;
  *
  * @author Dariusz Górecki <darek.krk@gmail.com>
  */
-interface ConsoleOutputInterface extends \ConfigTransformer202108221\Symfony\Component\Console\Output\OutputInterface
+interface ConsoleOutputInterface extends \ConfigTransformer202108226\Symfony\Component\Console\Output\OutputInterface
 {
     /**
      * Gets the OutputInterface for errors.
@@ -24,6 +24,6 @@ interface ConsoleOutputInterface extends \ConfigTransformer202108221\Symfony\Com
      * @return OutputInterface
      */
     public function getErrorOutput();
-    public function setErrorOutput(\ConfigTransformer202108221\Symfony\Component\Console\Output\OutputInterface $error);
-    public function section() : \ConfigTransformer202108221\Symfony\Component\Console\Output\ConsoleSectionOutput;
+    public function setErrorOutput(\ConfigTransformer202108226\Symfony\Component\Console\Output\OutputInterface $error);
+    public function section() : \ConfigTransformer202108226\Symfony\Component\Console\Output\ConsoleSectionOutput;
 }

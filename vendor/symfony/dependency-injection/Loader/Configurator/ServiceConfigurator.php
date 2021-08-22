@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108221\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202108226\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202108221\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108221\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202108226\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108226\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \ConfigTransformer202108221\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \ConfigTransformer202108226\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
@@ -42,7 +42,7 @@ class ServiceConfigurator extends \ConfigTransformer202108221\Symfony\Component\
     private $allowParent;
     private $path;
     private $destructed = \false;
-    public function __construct(\ConfigTransformer202108221\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer202108221\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202108221\Symfony\Component\DependencyInjection\Definition $definition, ?string $id, array $defaultTags, string $path = null)
+    public function __construct(\ConfigTransformer202108226\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer202108226\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202108226\Symfony\Component\DependencyInjection\Definition $definition, ?string $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;
