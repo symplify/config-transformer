@@ -1,26 +1,26 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021082310\Symplify\PhpConfigPrinter\Configuration;
+namespace ConfigTransformer202108239\Symplify\PhpConfigPrinter\Configuration;
 
-use ConfigTransformer2021082310\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-use ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
-use ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject\SymfonyVersionFeature;
+use ConfigTransformer202108239\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+use ConfigTransformer202108239\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202108239\Symplify\PhpConfigPrinter\ValueObject\SymfonyVersionFeature;
 final class SymfonyFunctionNameProvider
 {
     /**
      * @var \Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
      */
     private $symfonyVersionFeatureGuard;
-    public function __construct(\ConfigTransformer2021082310\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface $symfonyVersionFeatureGuard)
+    public function __construct(\ConfigTransformer202108239\Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface $symfonyVersionFeatureGuard)
     {
         $this->symfonyVersionFeatureGuard = $symfonyVersionFeatureGuard;
     }
     public function provideRefOrService() : string
     {
-        if ($this->symfonyVersionFeatureGuard->isAtLeastSymfonyVersion(\ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject\SymfonyVersionFeature::REF_OVER_SERVICE)) {
-            return \ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject\FunctionName::SERVICE;
+        if ($this->symfonyVersionFeatureGuard->isAtLeastSymfonyVersion(\ConfigTransformer202108239\Symplify\PhpConfigPrinter\ValueObject\SymfonyVersionFeature::REF_OVER_SERVICE)) {
+            return \ConfigTransformer202108239\Symplify\PhpConfigPrinter\ValueObject\FunctionName::SERVICE;
         }
-        return \ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject\FunctionName::REF;
+        return \ConfigTransformer202108239\Symplify\PhpConfigPrinter\ValueObject\FunctionName::REF;
     }
 }

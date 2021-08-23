@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082310\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202108239\Symfony\Component\HttpFoundation;
 
 /**
  * Http utility functions.
