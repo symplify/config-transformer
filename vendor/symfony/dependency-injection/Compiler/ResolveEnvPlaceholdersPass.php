@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108230\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202108238\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202108230\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202108238\Symfony\Component\DependencyInjection\Definition;
 /**
  * Replaces env var placeholders by their current values.
  */
-class ResolveEnvPlaceholdersPass extends \ConfigTransformer202108230\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveEnvPlaceholdersPass extends \ConfigTransformer202108238\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * @param bool $isRoot
@@ -24,7 +24,7 @@ class ResolveEnvPlaceholdersPass extends \ConfigTransformer202108230\Symfony\Com
         if (\is_string($value)) {
             return $this->container->resolveEnvPlaceholders($value, \true);
         }
-        if ($value instanceof \ConfigTransformer202108230\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \ConfigTransformer202108238\Symfony\Component\DependencyInjection\Definition) {
             $changes = $value->getChanges();
             if (isset($changes['class'])) {
                 $value->setClass($this->container->resolveEnvPlaceholders($value->getClass(), \true));
