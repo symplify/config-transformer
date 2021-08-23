@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ConditionalNode extends \ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Node\Node
+class ConditionalNode extends \ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Node\Node
 {
-    public function __construct(\ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Node\Node $expr1, \ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Node\Node $expr2, \ConfigTransformer202108224\Symfony\Component\ExpressionLanguage\Node\Node $expr3)
+    public function __construct(\ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Node\Node $expr1, \ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Node\Node $expr2, \ConfigTransformer2021082310\Symfony\Component\ExpressionLanguage\Node\Node $expr3)
     {
         parent::__construct(['expr1' => $expr1, 'expr2' => $expr2, 'expr3' => $expr3]);
     }
