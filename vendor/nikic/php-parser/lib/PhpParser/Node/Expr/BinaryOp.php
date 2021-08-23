@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108237\PhpParser\Node\Expr;
+namespace ConfigTransformer202108231\PhpParser\Node\Expr;
 
-use ConfigTransformer202108237\PhpParser\Node\Expr;
-abstract class BinaryOp extends \ConfigTransformer202108237\PhpParser\Node\Expr
+use ConfigTransformer202108231\PhpParser\Node\Expr;
+abstract class BinaryOp extends \ConfigTransformer202108231\PhpParser\Node\Expr
 {
     /** @var Expr The left hand side expression */
     public $left;
@@ -17,7 +17,7 @@ abstract class BinaryOp extends \ConfigTransformer202108237\PhpParser\Node\Expr
      * @param Expr  $right      The right hand side expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202108237\PhpParser\Node\Expr $left, \ConfigTransformer202108237\PhpParser\Node\Expr $right, array $attributes = [])
+    public function __construct(\ConfigTransformer202108231\PhpParser\Node\Expr $left, \ConfigTransformer202108231\PhpParser\Node\Expr $right, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->left = $left;
