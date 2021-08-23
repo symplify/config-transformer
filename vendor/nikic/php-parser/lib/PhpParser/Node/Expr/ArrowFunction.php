@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108236\PhpParser\Node\Expr;
+namespace ConfigTransformer202108239\PhpParser\Node\Expr;
 
-use ConfigTransformer202108236\PhpParser\Node;
-use ConfigTransformer202108236\PhpParser\Node\Expr;
-use ConfigTransformer202108236\PhpParser\Node\FunctionLike;
-class ArrowFunction extends \ConfigTransformer202108236\PhpParser\Node\Expr implements \ConfigTransformer202108236\PhpParser\Node\FunctionLike
+use ConfigTransformer202108239\PhpParser\Node;
+use ConfigTransformer202108239\PhpParser\Node\Expr;
+use ConfigTransformer202108239\PhpParser\Node\FunctionLike;
+class ArrowFunction extends \ConfigTransformer202108239\PhpParser\Node\Expr implements \ConfigTransformer202108239\PhpParser\Node\FunctionLike
 {
     /** @var bool */
     public $static;
@@ -37,7 +37,7 @@ class ArrowFunction extends \ConfigTransformer202108236\PhpParser\Node\Expr impl
         $this->byRef = $subNodes['byRef'] ?? \false;
         $this->params = $subNodes['params'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \ConfigTransformer202108236\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \ConfigTransformer202108239\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->expr = $subNodes['expr'] ?? null;
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }
@@ -66,7 +66,7 @@ class ArrowFunction extends \ConfigTransformer202108236\PhpParser\Node\Expr impl
      */
     public function getStmts() : ?array
     {
-        return [new \ConfigTransformer202108236\PhpParser\Node\Stmt\Return_($this->expr)];
+        return [new \ConfigTransformer202108239\PhpParser\Node\Stmt\Return_($this->expr)];
     }
     public function getType() : string
     {

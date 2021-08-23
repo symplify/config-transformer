@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108236\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202108239\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202108236\Symfony\Component\Config\Resource\ClassExistenceResource;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\Target;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202108239\Symfony\Component\Config\Resource\ClassExistenceResource;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\Target;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Inspects existing service definitions and wires the autowired ones using the type hints of their classes.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowirePass extends \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $types;
     private $ambiguousServiceTypes;
@@ -73,7 +73,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
     {
         try {
             return $this->doProcessValue($value, $isRoot);
-        } catch (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException $e) {
+        } catch (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException $e) {
             if ($this->throwOnAutowiringException) {
                 throw $e;
             }
@@ -86,19 +86,19 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
      */
     private function doProcessValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference) {
+        if ($value instanceof \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference) {
             if ($ref = $this->getAutowiredReference($value)) {
                 return $ref;
             }
-            if (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE === $value->getInvalidBehavior()) {
+            if (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE === $value->getInvalidBehavior()) {
                 $message = $this->createTypeNotFoundMessageCallback($value, 'it');
                 // since the error message varies by referenced id and $this->currentId, so should the id of the dummy errored definition
                 $this->container->register($id = \sprintf('.errored.%s.%s', $this->currentId, (string) $value), $value->getType())->addError($message);
-                return new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($id, $value->getType(), $value->getInvalidBehavior(), $value->getName());
+                return new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($id, $value->getType(), $value->getInvalidBehavior(), $value->getName());
             }
         }
         $value = parent::processValue($value, $isRoot);
-        if (!$value instanceof \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
+        if (!$value instanceof \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
             return $value;
         }
         if (!($reflectionClass = $this->container->getReflectionClass($value->getClass(), \false))) {
@@ -108,8 +108,8 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
         $this->methodCalls = $value->getMethodCalls();
         try {
             $constructor = $this->getConstructor($value, \false);
-        } catch (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
-            throw new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, $e->getMessage(), 0, $e);
+        } catch (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+            throw new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, $e->getMessage(), 0, $e);
         }
         if ($constructor) {
             \array_unshift($this->methodCalls, [$constructor, $value->getArguments()]);
@@ -141,10 +141,10 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
             if ($method instanceof \ReflectionFunctionAbstract) {
                 $reflectionMethod = $method;
             } else {
-                $definition = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Definition($reflectionClass->name);
+                $definition = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Definition($reflectionClass->name);
                 try {
                     $reflectionMethod = $this->getReflectionMethod($definition, $method);
-                } catch (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+                } catch (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
                     if ($definition->getFactory()) {
                         continue;
                     }
@@ -177,17 +177,17 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
             if (\array_key_exists($index, $arguments) && '' !== $arguments[$index]) {
                 continue;
             }
-            $type = \ConfigTransformer202108236\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter, \true);
+            $type = \ConfigTransformer202108239\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter, \true);
             if ($checkAttributes) {
                 foreach ($parameter->getAttributes() as $attribute) {
-                    if (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\TaggedIterator::class === $attribute->getName()) {
+                    if (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\TaggedIterator::class === $attribute->getName()) {
                         $attribute = $attribute->newInstance();
-                        $arguments[$index] = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($attribute->tag, $attribute->indexAttribute);
+                        $arguments[$index] = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($attribute->tag, $attribute->indexAttribute);
                         break;
                     }
-                    if (\ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\TaggedLocator::class === $attribute->getName()) {
+                    if (\ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\TaggedLocator::class === $attribute->getName()) {
                         $attribute = $attribute->newInstance();
-                        $arguments[$index] = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($attribute->tag, $attribute->indexAttribute, null, \true));
+                        $arguments[$index] = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($attribute->tag, $attribute->indexAttribute, null, \true));
                         break;
                     }
                 }
@@ -207,21 +207,21 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
                     if ($parameter->isOptional()) {
                         continue;
                     }
-                    $type = \ConfigTransformer202108236\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter, \false);
+                    $type = \ConfigTransformer202108239\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter, \false);
                     $type = $type ? \sprintf('is type-hinted "%s"', \ltrim($type, '\\')) : 'has no type-hint';
-                    throw new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, \sprintf('Cannot autowire service "%s": argument "$%s" of method "%s()" %s, you should configure its value explicitly.', $this->currentId, $parameter->name, $class !== $this->currentId ? $class . '::' . $method : $method, $type));
+                    throw new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, \sprintf('Cannot autowire service "%s": argument "$%s" of method "%s()" %s, you should configure its value explicitly.', $this->currentId, $parameter->name, $class !== $this->currentId ? $class . '::' . $method : $method, $type));
                 }
                 // specifically pass the default value
                 $arguments[$index] = $parameter->getDefaultValue();
                 continue;
             }
             $getValue = function () use($type, $parameter, $class, $method) {
-                if (!($value = $this->getAutowiredReference($ref = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($type, $type, \ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Attribute\Target::parseName($parameter))))) {
+                if (!($value = $this->getAutowiredReference($ref = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($type, $type, \ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Attribute\Target::parseName($parameter))))) {
                     $failureMessage = $this->createTypeNotFoundMessageCallback($ref, \sprintf('argument "$%s" of method "%s()"', $parameter->name, $class !== $this->currentId ? $class . '::' . $method : $method));
                     if ($parameter->isDefaultValueAvailable()) {
                         $value = $parameter->getDefaultValue();
                     } elseif (!$parameter->allowsNull()) {
-                        throw new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, $failureMessage);
+                        throw new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException($this->currentId, $failureMessage);
                     }
                 }
                 return $value;
@@ -236,7 +236,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
                     $this->decoratedClass = null;
                     // Prevent further checks
                 } else {
-                    $arguments[$index] = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($this->decoratedId, $this->decoratedClass);
+                    $arguments[$index] = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($this->decoratedId, $this->decoratedClass);
                     $this->getPreviousValue = $getValue;
                     $this->decoratedMethodArgumentIndex = $index;
                     continue;
@@ -261,7 +261,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
     /**
      * Returns a reference to the service matching the given type, if any.
      */
-    private function getAutowiredReference(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference $reference) : ?\ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference
+    private function getAutowiredReference(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference $reference) : ?\ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference
     {
         $this->lastFailure = null;
         $type = $reference->getType();
@@ -270,25 +270,25 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
         }
         if (null !== ($name = $reference->getName())) {
             if ($this->container->has($alias = $type . ' $' . $name) && !$this->container->findDefinition($alias)->isAbstract()) {
-                return new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($alias, $type, $reference->getInvalidBehavior());
+                return new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($alias, $type, $reference->getInvalidBehavior());
             }
             if ($this->container->has($name) && !$this->container->findDefinition($name)->isAbstract()) {
                 foreach ($this->container->getAliases() as $id => $alias) {
                     if ($name === (string) $alias && \strncmp($id, $type . ' $', \strlen($type . ' $')) === 0) {
-                        return new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($name, $type, $reference->getInvalidBehavior());
+                        return new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($name, $type, $reference->getInvalidBehavior());
                     }
                 }
             }
         }
         if ($this->container->has($type) && !$this->container->findDefinition($type)->isAbstract()) {
-            return new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference($type, $type, $reference->getInvalidBehavior());
+            return new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference($type, $type, $reference->getInvalidBehavior());
         }
         return null;
     }
     /**
      * Populates the list of available types.
      */
-    private function populateAvailableTypes(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    private function populateAvailableTypes(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->types = [];
         $this->ambiguousServiceTypes = [];
@@ -303,7 +303,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
     /**
      * Populates the list of available types for a given definition.
      */
-    private function populateAvailableType(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, \ConfigTransformer202108236\Symfony\Component\DependencyInjection\Definition $definition)
+    private function populateAvailableType(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, \ConfigTransformer202108239\Symfony\Component\DependencyInjection\Definition $definition)
     {
         // Never use abstract services
         if ($definition->isAbstract()) {
@@ -342,10 +342,10 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
         }
         $this->ambiguousServiceTypes[$type][] = $id;
     }
-    private function createTypeNotFoundMessageCallback(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference $reference, string $label) : \Closure
+    private function createTypeNotFoundMessageCallback(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference $reference, string $label) : \Closure
     {
         if (null === $this->typesClone->container) {
-            $this->typesClone->container = new \ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder($this->container->getParameterBag());
+            $this->typesClone->container = new \ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder($this->container->getParameterBag());
             $this->typesClone->container->setAliases($this->container->getAliases());
             $this->typesClone->container->setDefinitions($this->container->getDefinitions());
             $this->typesClone->container->setResourceTracking(\false);
@@ -355,12 +355,12 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
             return $this->createTypeNotFoundMessage($reference, $label, $currentId);
         })->bindTo($this->typesClone);
     }
-    private function createTypeNotFoundMessage(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference $reference, string $label, string $currentId) : string
+    private function createTypeNotFoundMessage(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference $reference, string $label, string $currentId) : string
     {
         if (!($r = $this->container->getReflectionClass($type = $reference->getType(), \false))) {
             // either $type does not exist or a parent class does not exist
             try {
-                $resource = new \ConfigTransformer202108236\Symfony\Component\Config\Resource\ClassExistenceResource($type, \false);
+                $resource = new \ConfigTransformer202108239\Symfony\Component\Config\Resource\ClassExistenceResource($type, \false);
                 // isFresh() will explode ONLY if a parent class/trait does not exist
                 $resource->isFresh(0);
                 $parentMsg = \false;
@@ -383,7 +383,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
         }
         return $message;
     }
-    private function createTypeAlternatives(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ConfigTransformer202108236\Symfony\Component\DependencyInjection\TypedReference $reference) : string
+    private function createTypeAlternatives(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ConfigTransformer202108239\Symfony\Component\DependencyInjection\TypedReference $reference) : string
     {
         // try suggesting available aliases first
         if ($message = $this->getAliasesSuggestionForType($container, $type = $reference->getType())) {
@@ -407,7 +407,7 @@ class AutowirePass extends \ConfigTransformer202108236\Symfony\Component\Depende
         }
         return \sprintf(' You should maybe alias this %s to %s.', \class_exists($type, \false) ? 'class' : 'interface', $message);
     }
-    private function getAliasesSuggestionForType(\ConfigTransformer202108236\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $type) : ?string
+    private function getAliasesSuggestionForType(\ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $type) : ?string
     {
         $aliases = [];
         foreach (\class_parents($type) + \class_implements($type) as $parent) {
