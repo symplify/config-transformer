@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021082310\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202108238\Symplify\PhpConfigPrinter\ValueObject;
 
 final class AttributeKey
 {

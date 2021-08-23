@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021082310\PhpParser\Node\Stmt;
+namespace ConfigTransformer202108238\PhpParser\Node\Stmt;
 
-use ConfigTransformer2021082310\PhpParser\Node;
-use ConfigTransformer2021082310\PhpParser\Node\Identifier;
-class UseUse extends \ConfigTransformer2021082310\PhpParser\Node\Stmt
+use ConfigTransformer202108238\PhpParser\Node;
+use ConfigTransformer202108238\PhpParser\Node\Identifier;
+class UseUse extends \ConfigTransformer202108238\PhpParser\Node\Stmt
 {
     /** @var int One of the Stmt\Use_::TYPE_* constants. Will only differ from TYPE_UNKNOWN for mixed group uses */
     public $type;
@@ -21,12 +21,12 @@ class UseUse extends \ConfigTransformer2021082310\PhpParser\Node\Stmt
      * @param int                    $type       Type of the use element (for mixed group use only)
      * @param array                  $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021082310\PhpParser\Node\Name $name, $alias = null, int $type = \ConfigTransformer2021082310\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN, array $attributes = [])
+    public function __construct(\ConfigTransformer202108238\PhpParser\Node\Name $name, $alias = null, int $type = \ConfigTransformer202108238\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->type = $type;
         $this->name = $name;
-        $this->alias = \is_string($alias) ? new \ConfigTransformer2021082310\PhpParser\Node\Identifier($alias) : $alias;
+        $this->alias = \is_string($alias) ? new \ConfigTransformer202108238\PhpParser\Node\Identifier($alias) : $alias;
     }
     public function getSubNodeNames() : array
     {
@@ -37,12 +37,12 @@ class UseUse extends \ConfigTransformer2021082310\PhpParser\Node\Stmt
      *
      * @return Identifier
      */
-    public function getAlias() : \ConfigTransformer2021082310\PhpParser\Node\Identifier
+    public function getAlias() : \ConfigTransformer202108238\PhpParser\Node\Identifier
     {
         if (null !== $this->alias) {
             return $this->alias;
         }
-        return new \ConfigTransformer2021082310\PhpParser\Node\Identifier($this->name->getLast());
+        return new \ConfigTransformer202108238\PhpParser\Node\Identifier($this->name->getLast());
     }
     public function getType() : string
     {
