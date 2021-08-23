@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202108231\Psr\Container;
+namespace ConfigTransformer202108237\Psr\Container;
 
 /**
  * Base interface representing a generic exception in a container.
