@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108239\Symfony\Component\HttpKernel\Bundle;
+namespace ConfigTransformer202108234\Symfony\Component\HttpKernel\Bundle;
 
-use ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108239\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202108234\Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use ConfigTransformer202108234\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108234\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * BundleInterface.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface BundleInterface extends \ConfigTransformer202108239\Symfony\Component\DependencyInjection\ContainerAwareInterface
+interface BundleInterface extends \ConfigTransformer202108234\Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
     /**
      * Boots the Bundle.
