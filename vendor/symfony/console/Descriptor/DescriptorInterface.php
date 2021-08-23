@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108234\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202108236\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202108234\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202108236\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Descriptor interface.
  *
