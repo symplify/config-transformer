@@ -5,9 +5,9 @@
     "require": {
         "php": ">=8.0",
         "nette\/utils": "^3.2",
-        "symfony\/dependency-injection": "^5.3",
+        "symfony\/dependency-injection": "^5.3|^6.0",
         "symplify\/autowire-array-parameter": "dev-main",
-        "symfony\/http-kernel": "^5.3",
+        "symfony\/http-kernel": "^5.3|^6.0",
         "nikic\/php-parser": "^4.11",
         "symplify\/package-builder": "dev-main"
     },
@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108231\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202108232\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202108231\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202108232\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {

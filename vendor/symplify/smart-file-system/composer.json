@@ -5,8 +5,8 @@
     "require": {
         "php": ">=8.0",
         "nette\/utils": "^3.2",
-        "symfony\/finder": "^5.3",
-        "symfony\/filesystem": "^5.3"
+        "symfony\/finder": "^5.3|^6.0",
+        "symfony\/filesystem": "^5.3|^6.0"
     },
     "require-dev": {
         "nette\/finder": "^2.5",
@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108231\\Symplify\\SmartFileSystem\\": "src"
+            "ConfigTransformer202108232\\Symplify\\SmartFileSystem\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202108231\\Symplify\\SmartFileSystem\\Tests\\": "tests"
+            "ConfigTransformer202108232\\Symplify\\SmartFileSystem\\Tests\\": "tests"
         }
     },
     "extra": {
