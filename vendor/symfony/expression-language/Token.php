@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108239\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202108232\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a Token.
