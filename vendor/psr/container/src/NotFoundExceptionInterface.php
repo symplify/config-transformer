@@ -1,10 +1,10 @@
 <?php
 
-namespace ConfigTransformer202108248\Psr\Container;
+namespace ConfigTransformer202108240\Psr\Container;
 
 /**
  * No entry was found in the container.
  */
-interface NotFoundExceptionInterface extends \ConfigTransformer202108248\Psr\Container\ContainerExceptionInterface
+interface NotFoundExceptionInterface extends \ConfigTransformer202108240\Psr\Container\ContainerExceptionInterface
 {
 }
