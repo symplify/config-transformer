@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021082410\Symplify\ConsolePackageBuilder\Bundle;
+namespace ConfigTransformer202108248\Symplify\ConsolePackageBuilder\Bundle;
 
-use ConfigTransformer2021082410\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021082410\Symfony\Component\HttpKernel\Bundle\Bundle;
-use ConfigTransformer2021082410\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass;
-final class NamelessConsoleCommandBundle extends \ConfigTransformer2021082410\Symfony\Component\HttpKernel\Bundle\Bundle
+use ConfigTransformer202108248\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108248\Symfony\Component\HttpKernel\Bundle\Bundle;
+use ConfigTransformer202108248\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass;
+final class NamelessConsoleCommandBundle extends \ConfigTransformer202108248\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
     public function build($containerBuilder) : void
     {
-        $containerBuilder->addCompilerPass(new \ConfigTransformer2021082410\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass());
+        $containerBuilder->addCompilerPass(new \ConfigTransformer202108248\Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass());
     }
 }

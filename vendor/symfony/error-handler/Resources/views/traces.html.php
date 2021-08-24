@@ -1,5 +1,5 @@
 <div class="trace trace-as-html" id="trace-box-<?php 
-namespace ConfigTransformer2021082410;
+namespace ConfigTransformer202108248;
 
 echo $index;
 ?>">

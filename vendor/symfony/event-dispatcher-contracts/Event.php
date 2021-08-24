@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082410\Symfony\Contracts\EventDispatcher;
+namespace ConfigTransformer202108248\Symfony\Contracts\EventDispatcher;
 
-use ConfigTransformer2021082410\Psr\EventDispatcher\StoppableEventInterface;
+use ConfigTransformer202108248\Psr\EventDispatcher\StoppableEventInterface;
 /**
  * Event is the base class for classes containing event data.
  *
@@ -26,7 +26,7 @@ use ConfigTransformer2021082410\Psr\EventDispatcher\StoppableEventInterface;
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Event implements \ConfigTransformer2021082410\Psr\EventDispatcher\StoppableEventInterface
+class Event implements \ConfigTransformer202108248\Psr\EventDispatcher\StoppableEventInterface
 {
     private $propagationStopped = \false;
     /**
