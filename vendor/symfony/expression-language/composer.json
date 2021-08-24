@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108240\\Symfony\\Component\\ExpressionLanguage\\": ""
+            "ConfigTransformer202108242\\Symfony\\Component\\ExpressionLanguage\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

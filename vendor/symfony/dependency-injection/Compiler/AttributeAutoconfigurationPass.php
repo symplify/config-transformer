@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108240\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202108242\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202108240\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202108240\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108240\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202108242\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202108242\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108242\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Alexander M. Turek <me@derrabus.de>
  */
-final class AttributeAutoconfigurationPass extends \ConfigTransformer202108240\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class AttributeAutoconfigurationPass extends \ConfigTransformer202108242\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
@@ -33,18 +33,18 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202108240\S
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer202108240\Symfony\Component\DependencyInjection\Definition || !$value->isAutoconfigured() || $value->isAbstract() || $value->hasTag('container.ignore_attributes') || !($reflector = $this->container->getReflectionClass($value->getClass(), \false))) {
+        if (!$value instanceof \ConfigTransformer202108242\Symfony\Component\DependencyInjection\Definition || !$value->isAutoconfigured() || $value->isAbstract() || $value->hasTag('container.ignore_attributes') || !($reflector = $this->container->getReflectionClass($value->getClass(), \false))) {
             return parent::processValue($value, $isRoot);
         }
         $autoconfiguredAttributes = $this->container->getAutoconfiguredAttributes();
         $instanceof = $value->getInstanceofConditionals();
-        $conditionals = $instanceof[$reflector->getName()] ?? new \ConfigTransformer202108240\Symfony\Component\DependencyInjection\ChildDefinition('');
+        $conditionals = $instanceof[$reflector->getName()] ?? new \ConfigTransformer202108242\Symfony\Component\DependencyInjection\ChildDefinition('');
         foreach ($reflector->getAttributes() as $attribute) {
             if ($configurator = $autoconfiguredAttributes[$attribute->getName()] ?? null) {
                 $configurator($conditionals, $attribute->newInstance(), $reflector);
             }
         }
-        if (!isset($instanceof[$reflector->getName()]) && new \ConfigTransformer202108240\Symfony\Component\DependencyInjection\ChildDefinition('') != $conditionals) {
+        if (!isset($instanceof[$reflector->getName()]) && new \ConfigTransformer202108242\Symfony\Component\DependencyInjection\ChildDefinition('') != $conditionals) {
             $instanceof[$reflector->getName()] = $conditionals;
             $value->setInstanceofConditionals($instanceof);
         }
