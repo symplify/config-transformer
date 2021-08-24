@@ -12,9 +12,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108242\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202108241\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202108242\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202108241\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategyInterface implementations know how to compute the
  * Response cache HTTP header based on the different response cache headers.
