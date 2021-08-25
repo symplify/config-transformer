@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class GetAttrNode extends \ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Node\Node
+class GetAttrNode extends \ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Node\Node
 {
     public const PROPERTY_CALL = 1;
     public const METHOD_CALL = 2;
     public const ARRAY_CALL = 3;
-    public function __construct(\ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Node\Node $node, \ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Node\Node $attribute, \ConfigTransformer202108250\Symfony\Component\ExpressionLanguage\Node\ArrayNode $arguments, int $type)
+    public function __construct(\ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Node\Node $node, \ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Node\Node $attribute, \ConfigTransformer2021082510\Symfony\Component\ExpressionLanguage\Node\ArrayNode $arguments, int $type)
     {
         parent::__construct(['node' => $node, 'attribute' => $attribute, 'arguments' => $arguments], ['type' => $type]);
     }
