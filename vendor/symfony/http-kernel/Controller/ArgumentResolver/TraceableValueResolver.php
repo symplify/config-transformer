@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108257\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202108258\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202108257\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202108257\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202108257\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use ConfigTransformer202108257\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202108258\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108258\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202108258\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202108258\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Provides timing information via the stopwatch.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class TraceableValueResolver implements \ConfigTransformer202108257\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class TraceableValueResolver implements \ConfigTransformer202108258\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $inner;
     private $stopwatch;
-    public function __construct(\ConfigTransformer202108257\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \ConfigTransformer202108257\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\ConfigTransformer202108258\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \ConfigTransformer202108258\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->inner = $inner;
         $this->stopwatch = $stopwatch;
