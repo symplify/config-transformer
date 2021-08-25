@@ -6,7 +6,7 @@
     <title>Welcome to Symfony!</title>
     <style>
         <?php 
-namespace ConfigTransformer202108251;
+namespace ConfigTransformer202108257;
 
 $hue = \random_int(0, 360);
 ?>

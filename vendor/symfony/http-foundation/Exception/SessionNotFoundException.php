@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108251\Symfony\Component\HttpFoundation\Exception;
+namespace ConfigTransformer202108257\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Raised when a session does not exists. This happens in the following cases:
@@ -17,7 +17,7 @@ namespace ConfigTransformer202108251\Symfony\Component\HttpFoundation\Exception;
  *
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
-class SessionNotFoundException extends \LogicException implements \ConfigTransformer202108251\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+class SessionNotFoundException extends \LogicException implements \ConfigTransformer202108257\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
     public function __construct(string $message = 'There is currently no session available.', int $code = 0, \Throwable $previous = null)
     {
