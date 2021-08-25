@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082510\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202108251\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer2021082510\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer2021082510\Symfony\Component\Cache\Traits\RedisClusterProxy;
-use ConfigTransformer2021082510\Symfony\Component\Cache\Traits\RedisProxy;
-use ConfigTransformer2021082510\Symfony\Component\Cache\Traits\RedisTrait;
-class RedisAdapter extends \ConfigTransformer2021082510\Symfony\Component\Cache\Adapter\AbstractAdapter
+use ConfigTransformer202108251\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202108251\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use ConfigTransformer202108251\Symfony\Component\Cache\Traits\RedisProxy;
+use ConfigTransformer202108251\Symfony\Component\Cache\Traits\RedisTrait;
+class RedisAdapter extends \ConfigTransformer202108251\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use RedisTrait;
     /**
@@ -22,7 +22,7 @@ class RedisAdapter extends \ConfigTransformer2021082510\Symfony\Component\Cache\
      * @param string                                                                                $namespace       The default namespace
      * @param int                                                                                   $defaultLifetime The default lifetime
      */
-    public function __construct($redis, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer2021082510\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redis, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202108251\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($redis, $namespace, $defaultLifetime, $marshaller);
     }
