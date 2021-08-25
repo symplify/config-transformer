@@ -1,18 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108241\Symplify\ConfigTransformer\FileSystem;
+namespace ConfigTransformer202108250\Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202108241\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202108241\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202108250\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202108250\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
-    /**
-     * @var \Symplify\ConfigTransformer\Configuration\Configuration
-     */
-    private $configuration;
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
      */
@@ -21,18 +17,17 @@ final class ConfigFileDumper
      * @var \Symplify\SmartFileSystem\SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\ConfigTransformer202108241\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202108241\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202108241\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(\ConfigTransformer202108250\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202108250\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
     {
-        $this->configuration = $configuration;
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
     }
-    public function dumpFile(\ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent) : void
+    public function dumpFile(\ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent, \ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
         $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFileRealPath);
-        if ($this->configuration->isDryRun()) {
+        if ($configuration->isDryRun()) {
             $message = \sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
             $this->symfonyStyle->note($message);
             return;

@@ -1,23 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108241\Symplify\ConfigTransformer\Command;
+namespace ConfigTransformer202108250\Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer202108241\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202108241\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202108241\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202108241\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\Configuration\Configuration;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
-use ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202108241\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-final class SwitchFormatCommand extends \ConfigTransformer202108241\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+use ConfigTransformer202108250\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202108250\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202108250\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202108250\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202108250\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer202108250\Symplify\SmartFileSystem\SmartFileInfo;
+final class SwitchFormatCommand extends \ConfigTransformer202108250\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     /**
-     * @var \Symplify\ConfigTransformer\Configuration\Configuration
+     * @var \Symplify\ConfigTransformer\Configuration\ConfigurationFactory
      */
-    private $configuration;
+    private $configurationFactory;
     /**
      * @var \Symplify\ConfigTransformer\FileSystem\ConfigFileDumper
      */
@@ -26,9 +28,9 @@ final class SwitchFormatCommand extends \ConfigTransformer202108241\Symplify\Pac
      * @var \Symplify\ConfigTransformer\Converter\ConvertedContentFactory
      */
     private $convertedContentFactory;
-    public function __construct(\ConfigTransformer202108241\Symplify\ConfigTransformer\Configuration\Configuration $configuration, \ConfigTransformer202108241\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202108241\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
+    public function __construct(\ConfigTransformer202108250\Symplify\ConfigTransformer\Configuration\ConfigurationFactory $configurationFactory, \ConfigTransformer202108250\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202108250\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
     {
-        $this->configuration = $configuration;
+        $this->configurationFactory = $configurationFactory;
         $this->configFileDumper = $configFileDumper;
         $this->convertedContentFactory = $convertedContentFactory;
         parent::__construct();
@@ -36,9 +38,9 @@ final class SwitchFormatCommand extends \ConfigTransformer202108241\Symplify\Pac
     protected function configure() : void
     {
         $this->setDescription('Converts XML/YAML configs to PHP format');
-        $this->addArgument(\ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202108241\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202108241\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
-        $this->addOption(\ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION, 's', \ConfigTransformer202108241\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Symfony version to migrate config to', '3.2');
-        $this->addOption(\ConfigTransformer202108241\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202108241\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addArgument(\ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202108250\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202108250\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
+        $this->addOption(\ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION, 's', \ConfigTransformer202108250\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Symfony version to migrate config to', '3.2');
+        $this->addOption(\ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202108250\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
@@ -46,19 +48,35 @@ final class SwitchFormatCommand extends \ConfigTransformer202108241\Symplify\Pac
      */
     protected function execute($input, $output) : int
     {
-        $this->configuration->populateFromInput($input);
-        $suffixes = $this->configuration->getInputSuffixes();
+        $configuration = $this->configurationFactory->createFromInput($input);
+        $suffixes = $configuration->getInputSuffixes();
         $suffixesRegex = '#\\.' . \implode('|', $suffixes) . '$#';
-        $fileInfos = $this->smartFinder->find($this->configuration->getSource(), $suffixesRegex);
-        $convertedContents = $this->convertedContentFactory->createFromFileInfos($fileInfos);
+        $fileInfos = $this->smartFinder->find($configuration->getSources(), $suffixesRegex);
+        $convertedContents = $this->convertedContentFactory->createFromFileInfos($fileInfos, $configuration);
         foreach ($convertedContents as $convertedContent) {
-            $this->configFileDumper->dumpFile($convertedContent);
+            $this->configFileDumper->dumpFile($convertedContent, $configuration);
         }
-        if (!$this->configuration->isDryRun()) {
-            $this->smartFileSystem->remove($fileInfos);
-        }
+        $this->removeFileInfos($configuration, $fileInfos);
         $successMessage = \sprintf('Processed %d file(s) to "PHP" format', \count($fileInfos));
         $this->symfonyStyle->success($successMessage);
         return self::SUCCESS;
+    }
+    /**
+     * @param SmartFileInfo[] $fileInfos
+     */
+    private function removeFileInfos(\ConfigTransformer202108250\Symplify\ConfigTransformer\ValueObject\Configuration $configuration, array $fileInfos) : void
+    {
+        if (!$configuration->isDryRun()) {
+            $this->smartFileSystem->remove($fileInfos);
+            foreach ($fileInfos as $fileInfo) {
+                $message = \sprintf('File "%s" was be removed', $fileInfo->getRelativeFilePath());
+                $this->symfonyStyle->note($message);
+            }
+        } else {
+            foreach ($fileInfos as $fileInfo) {
+                $message = \sprintf('[dry-run] File "%s" would be removed', $fileInfo->getRelativeFilePath());
+                $this->symfonyStyle->note($message);
+            }
+        }
     }
 }
