@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108258\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202108260\Symplify\EasyTesting\ValueObject;
 
-use ConfigTransformer202108258\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202108260\Symplify\SmartFileSystem\SmartFileInfo;
 final class InputFileInfoAndExpected
 {
     /**
@@ -14,7 +14,7 @@ final class InputFileInfoAndExpected
     /**
      * @param mixed $expected
      */
-    public function __construct(\ConfigTransformer202108258\Symplify\SmartFileSystem\SmartFileInfo $inputFileInfo, $expected)
+    public function __construct(\ConfigTransformer202108260\Symplify\SmartFileSystem\SmartFileInfo $inputFileInfo, $expected)
     {
         $this->inputFileInfo = $inputFileInfo;
         $this->expected = $expected;
@@ -23,7 +23,7 @@ final class InputFileInfoAndExpected
     {
         return $this->inputFileInfo->getContents();
     }
-    public function getInputFileInfo() : \ConfigTransformer202108258\Symplify\SmartFileSystem\SmartFileInfo
+    public function getInputFileInfo() : \ConfigTransformer202108260\Symplify\SmartFileSystem\SmartFileInfo
     {
         return $this->inputFileInfo;
     }
