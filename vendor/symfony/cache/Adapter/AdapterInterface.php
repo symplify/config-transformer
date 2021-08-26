@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108260\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202108269\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202108260\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202108260\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202108269\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202108269\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202108260\Symfony\Component\Cache\CacheItem::class);
+\class_exists(\ConfigTransformer202108269\Symfony\Component\Cache\CacheItem::class);
 /**
  * Interface for adapters managing instances of Symfony's CacheItem.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-interface AdapterInterface extends \ConfigTransformer202108260\Psr\Cache\CacheItemPoolInterface
+interface AdapterInterface extends \ConfigTransformer202108269\Psr\Cache\CacheItemPoolInterface
 {
     /**
      * {@inheritdoc}

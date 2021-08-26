@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108260\Symplify\ConfigTransformer\Converter;
+namespace ConfigTransformer202108269\Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202108260\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202108260\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202108260\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202108260\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202108269\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202108269\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202108269\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202108269\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContentFactory
 {
     /**
@@ -17,7 +17,7 @@ final class ConvertedContentFactory
      * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
     private $configFormatConverter;
-    public function __construct(\ConfigTransformer202108260\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202108260\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
+    public function __construct(\ConfigTransformer202108269\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202108269\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;
@@ -26,14 +26,14 @@ final class ConvertedContentFactory
      * @param SmartFileInfo[] $fileInfos
      * @return ConvertedContent[]
      */
-    public function createFromFileInfos(array $fileInfos, \ConfigTransformer202108260\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : array
+    public function createFromFileInfos(array $fileInfos, \ConfigTransformer202108269\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : array
     {
         $convertedContentFromFileInfo = [];
         foreach ($fileInfos as $fileInfo) {
             $message = \sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
             $this->symfonyStyle->note($message);
             $convertedContent = $this->configFormatConverter->convert($fileInfo, $configuration);
-            $convertedContentFromFileInfo[] = new \ConfigTransformer202108260\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
+            $convertedContentFromFileInfo[] = new \ConfigTransformer202108269\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
         }
         return $convertedContentFromFileInfo;
     }
