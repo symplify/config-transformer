@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108269\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202108279\PhpParser\Lexer\TokenEmulator;
 
-abstract class KeywordEmulator extends \ConfigTransformer202108269\PhpParser\Lexer\TokenEmulator\TokenEmulator
+abstract class KeywordEmulator extends \ConfigTransformer202108279\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     abstract function getKeywordString() : string;
     abstract function getKeywordToken() : int;

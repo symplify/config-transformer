@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108269\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer202108279\Symplify\PhpConfigPrinter\Contract;
 
 interface YamlFileContentProviderInterface
 {
