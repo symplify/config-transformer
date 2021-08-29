@@ -1,29 +1,29 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108279\Symplify\ComposerJsonManipulator\Printer;
+namespace ConfigTransformer202108294\Symplify\ComposerJsonManipulator\Printer;
 
-use ConfigTransformer202108279\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
-use ConfigTransformer202108279\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
-use ConfigTransformer202108279\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202108294\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
+use ConfigTransformer202108294\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
+use ConfigTransformer202108294\Symplify\SmartFileSystem\SmartFileInfo;
 final class ComposerJsonPrinter
 {
     /**
      * @var \Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager
      */
     private $jsonFileManager;
-    public function __construct(\ConfigTransformer202108279\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager $jsonFileManager)
+    public function __construct(\ConfigTransformer202108294\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager $jsonFileManager)
     {
         $this->jsonFileManager = $jsonFileManager;
     }
-    public function printToString(\ConfigTransformer202108279\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson) : string
+    public function printToString(\ConfigTransformer202108294\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson) : string
     {
         return $this->jsonFileManager->encodeJsonToFileContent($composerJson->getJsonArray());
     }
     /**
      * @param string|\Symplify\SmartFileSystem\SmartFileInfo $targetFile
      */
-    public function print(\ConfigTransformer202108279\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson, $targetFile) : string
+    public function print(\ConfigTransformer202108294\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson, $targetFile) : string
     {
         if (\is_string($targetFile)) {
             return $this->jsonFileManager->printComposerJsonToFilePath($composerJson, $targetFile);

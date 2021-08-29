@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108279\\Symplify\\PackageBuilder\\": "src"
+            "ConfigTransformer202108294\\Symplify\\PackageBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202108279\\Symplify\\PackageBuilder\\Tests\\": "tests"
+            "ConfigTransformer202108294\\Symplify\\PackageBuilder\\Tests\\": "tests"
         }
     },
     "extra": {

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108279\Symplify\Astral\ValueObject;
+namespace ConfigTransformer202108294\Symplify\Astral\ValueObject;
 
 final class AttributeKey
 {
