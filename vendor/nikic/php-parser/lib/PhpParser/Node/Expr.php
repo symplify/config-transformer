@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108297\PhpParser\Node;
+namespace ConfigTransformer202108296\PhpParser\Node;
 
-use ConfigTransformer202108297\PhpParser\NodeAbstract;
-abstract class Expr extends \ConfigTransformer202108297\PhpParser\NodeAbstract
+use ConfigTransformer202108296\PhpParser\NodeAbstract;
+abstract class Expr extends \ConfigTransformer202108296\PhpParser\NodeAbstract
 {
 }

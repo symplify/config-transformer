@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108297\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202108296\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202108297\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202108297\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202108297\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
-use ConfigTransformer202108297\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class ResourceCaseConverter implements \ConfigTransformer202108297\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202108296\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202108296\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202108296\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
+use ConfigTransformer202108296\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class ResourceCaseConverter implements \ConfigTransformer202108296\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory
      */
     private $servicesPhpNodeFactory;
-    public function __construct(\ConfigTransformer202108297\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory $servicesPhpNodeFactory)
+    public function __construct(\ConfigTransformer202108296\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory $servicesPhpNodeFactory)
     {
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202108297\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202108296\PhpParser\Node\Stmt\Expression
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($values['namespace'])) {
@@ -31,6 +31,6 @@ final class ResourceCaseConverter implements \ConfigTransformer202108297\Symplif
      */
     public function match($rootKey, $key, $values) : bool
     {
-        return isset($values[\ConfigTransformer202108297\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE]);
+        return isset($values[\ConfigTransformer202108296\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE]);
     }
 }
