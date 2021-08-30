@@ -18,12 +18,11 @@
     "require": {
         "php": ">=7.2.5",
         "symfony\/cache": "^4.4|^5.0",
-        "symfony\/polyfill-php80": "^1.16",
         "symfony\/service-contracts": "^1.1|^2"
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2021082910\\Symfony\\Component\\ExpressionLanguage\\": ""
+            "ConfigTransformer202108309\\Symfony\\Component\\ExpressionLanguage\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

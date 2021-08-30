@@ -29,6 +29,7 @@
         "psr\/log": "^1.1|^2|^3",
         "symfony\/cache-contracts": "^1.1.7|^2",
         "symfony\/deprecation-contracts": "^2.1",
+        "symfony\/polyfill-php73": "^1.9",
         "symfony\/polyfill-php80": "^1.16",
         "symfony\/service-contracts": "^1.1|^2",
         "symfony\/var-exporter": "^4.4|^5.0"
@@ -54,7 +55,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2021082910\\Symfony\\Component\\Cache\\": ""
+            "ConfigTransformer202108309\\Symfony\\Component\\Cache\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

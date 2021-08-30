@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021082910\PhpParser\Node\Stmt;
+namespace ConfigTransformer202108309\PhpParser\Node\Stmt;
 
-use ConfigTransformer2021082910\PhpParser\Node;
-class Break_ extends \ConfigTransformer2021082910\PhpParser\Node\Stmt
+use ConfigTransformer202108309\PhpParser\Node;
+class Break_ extends \ConfigTransformer202108309\PhpParser\Node\Stmt
 {
     /** @var null|Node\Expr Number of loops to break */
     public $num;
@@ -14,7 +14,7 @@ class Break_ extends \ConfigTransformer2021082910\PhpParser\Node\Stmt
      * @param null|Node\Expr $num        Number of loops to break
      * @param array          $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021082910\PhpParser\Node\Expr $num = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202108309\PhpParser\Node\Expr $num = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->num = $num;

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082910\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202108309\Symfony\Component\HttpFoundation;
 
 /**
  * HeaderBag is a container for HTTP headers.
@@ -233,6 +233,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      *
      * @return \ArrayIterator An \ArrayIterator instance
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->headers);
@@ -242,6 +243,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      *
      * @return int The number of headers
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return \count($this->headers);
@@ -249,7 +251,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
     protected function getCacheControlHeader()
     {
         \ksort($this->cacheControl);
-        return \ConfigTransformer2021082910\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
+        return \ConfigTransformer202108309\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
     }
     /**
      * Parses a Cache-Control HTTP header.
@@ -259,7 +261,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     protected function parseCacheControl($header)
     {
-        $parts = \ConfigTransformer2021082910\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
-        return \ConfigTransformer2021082910\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
+        $parts = \ConfigTransformer202108309\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
+        return \ConfigTransformer202108309\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
     }
 }

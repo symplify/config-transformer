@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082910\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202108309\Symfony\Component\Console\Helper;
 
-use ConfigTransformer2021082910\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer2021082910\Symfony\Component\String\UnicodeString;
+use ConfigTransformer202108309\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202108309\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \ConfigTransformer202108309\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
@@ -38,7 +38,7 @@ abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\
     /**
      * Returns the length of a string, using mb_strwidth if it is available.
      *
-     * @deprecated since 5.3
+     * @deprecated since Symfony 5.3
      *
      * @return int The length of the string
      * @param string|null $string
@@ -57,7 +57,7 @@ abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\
     {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
-            return (new \ConfigTransformer2021082910\Symfony\Component\String\UnicodeString($string))->width(\false);
+            return (new \ConfigTransformer202108309\Symfony\Component\String\UnicodeString($string))->width(\false);
         }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
@@ -73,7 +73,7 @@ abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\
     {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
-            return (new \ConfigTransformer2021082910\Symfony\Component\String\UnicodeString($string))->length();
+            return (new \ConfigTransformer202108309\Symfony\Component\String\UnicodeString($string))->length();
         }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
@@ -127,7 +127,7 @@ abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\
         return \sprintf('%d B', $memory);
     }
     /**
-     * @deprecated since 5.3
+     * @deprecated since Symfony 5.3
      * @param \Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      * @param string|null $string
      */
@@ -147,7 +147,7 @@ abstract class Helper implements \ConfigTransformer2021082910\Symfony\Component\
         // remove <...> formatting
         $string = $formatter->format($string ?? '');
         // remove already formatted characters
-        $string = \preg_replace("/\33\\[[^m]*m/", '', $string);
+        $string = \preg_replace("/\33\\[[^m]*m/", '', $string ?? '');
         $formatter->setDecorated($isDecorated);
         return $string;
     }

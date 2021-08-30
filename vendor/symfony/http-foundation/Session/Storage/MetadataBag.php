@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021082910\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202108309\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer2021082910\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202108309\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Metadata container.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer2021082910\Symfony\Component\HttpFoundation\Session\Session
  *
  * @author Drak <drak@zikula.org>
  */
-class MetadataBag implements \ConfigTransformer2021082910\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+class MetadataBag implements \ConfigTransformer202108309\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     public const CREATED = 'c';
     public const UPDATED = 'u';
@@ -143,6 +143,6 @@ class MetadataBag implements \ConfigTransformer2021082910\Symfony\Component\Http
     {
         $timeStamp = \time();
         $this->meta[self::CREATED] = $this->meta[self::UPDATED] = $this->lastUsed = $timeStamp;
-        $this->meta[self::LIFETIME] = $lifetime ?? \ini_get('session.cookie_lifetime');
+        $this->meta[self::LIFETIME] = $lifetime ?? (int) \ini_get('session.cookie_lifetime');
     }
 }
