@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021083010\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202108305\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer2021083010\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
-use ConfigTransformer2021083010\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021083010\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer2021083010\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021083010\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ConfigTransformer2021083010\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202108305\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use ConfigTransformer202108305\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108305\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202108305\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202108305\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use ConfigTransformer202108305\Symfony\Contracts\Service\ResetInterface;
 /**
  * EventDataCollector.
  *
@@ -23,12 +23,12 @@ use ConfigTransformer2021083010\Symfony\Contracts\Service\ResetInterface;
  *
  * @final
  */
-class EventDataCollector extends \ConfigTransformer2021083010\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer2021083010\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class EventDataCollector extends \ConfigTransformer202108305\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202108305\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $dispatcher;
     private $requestStack;
     private $currentRequest;
-    public function __construct(\ConfigTransformer2021083010\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher = null, \ConfigTransformer2021083010\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(\ConfigTransformer202108305\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher = null, \ConfigTransformer202108305\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->requestStack = $requestStack;
@@ -47,13 +47,13 @@ class EventDataCollector extends \ConfigTransformer2021083010\Symfony\Component\
     public function reset()
     {
         $this->data = [];
-        if ($this->dispatcher instanceof \ConfigTransformer2021083010\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->dispatcher instanceof \ConfigTransformer202108305\Symfony\Contracts\Service\ResetInterface) {
             $this->dispatcher->reset();
         }
     }
     public function lateCollect()
     {
-        if ($this->dispatcher instanceof \ConfigTransformer2021083010\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher) {
+        if ($this->dispatcher instanceof \ConfigTransformer202108305\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher) {
             $this->setCalledListeners($this->dispatcher->getCalledListeners($this->currentRequest));
             $this->setNotCalledListeners($this->dispatcher->getNotCalledListeners($this->currentRequest));
             $this->setOrphanedEvents($this->dispatcher->getOrphanedEvents($this->currentRequest));

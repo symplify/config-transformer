@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021083010\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202108305\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer2021083010\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021083010\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer2021083010\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202108305\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202108305\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202108305\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a variadic argument's values from the request attributes.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class VariadicValueResolver implements \ConfigTransformer2021083010\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class VariadicValueResolver implements \ConfigTransformer202108305\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}

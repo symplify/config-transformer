@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021083010\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202108305\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer2021083010\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use ConfigTransformer202108305\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 /**
  * ExpressionRequestMatcher uses an expression to match a Request.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ExpressionRequestMatcher extends \ConfigTransformer2021083010\Symfony\Component\HttpFoundation\RequestMatcher
+class ExpressionRequestMatcher extends \ConfigTransformer202108305\Symfony\Component\HttpFoundation\RequestMatcher
 {
     private $language;
     private $expression;
