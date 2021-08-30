@@ -8,50 +8,50 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108303\Symfony\Component\HttpKernel\Log;
+namespace ConfigTransformer2021083010\Symfony\Component\HttpKernel\Log;
 
-use ConfigTransformer202108303\Psr\Log\AbstractLogger;
-use ConfigTransformer202108303\Psr\Log\InvalidArgumentException;
-use ConfigTransformer202108303\Psr\Log\LogLevel;
+use ConfigTransformer2021083010\Psr\Log\AbstractLogger;
+use ConfigTransformer2021083010\Psr\Log\InvalidArgumentException;
+use ConfigTransformer2021083010\Psr\Log\LogLevel;
 /**
  * Minimalist PSR-3 logger designed to write in stderr or any other stream.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class Logger extends \ConfigTransformer202108303\Psr\Log\AbstractLogger
+class Logger extends \ConfigTransformer2021083010\Psr\Log\AbstractLogger
 {
-    private const LEVELS = [\ConfigTransformer202108303\Psr\Log\LogLevel::DEBUG => 0, \ConfigTransformer202108303\Psr\Log\LogLevel::INFO => 1, \ConfigTransformer202108303\Psr\Log\LogLevel::NOTICE => 2, \ConfigTransformer202108303\Psr\Log\LogLevel::WARNING => 3, \ConfigTransformer202108303\Psr\Log\LogLevel::ERROR => 4, \ConfigTransformer202108303\Psr\Log\LogLevel::CRITICAL => 5, \ConfigTransformer202108303\Psr\Log\LogLevel::ALERT => 6, \ConfigTransformer202108303\Psr\Log\LogLevel::EMERGENCY => 7];
+    private const LEVELS = [\ConfigTransformer2021083010\Psr\Log\LogLevel::DEBUG => 0, \ConfigTransformer2021083010\Psr\Log\LogLevel::INFO => 1, \ConfigTransformer2021083010\Psr\Log\LogLevel::NOTICE => 2, \ConfigTransformer2021083010\Psr\Log\LogLevel::WARNING => 3, \ConfigTransformer2021083010\Psr\Log\LogLevel::ERROR => 4, \ConfigTransformer2021083010\Psr\Log\LogLevel::CRITICAL => 5, \ConfigTransformer2021083010\Psr\Log\LogLevel::ALERT => 6, \ConfigTransformer2021083010\Psr\Log\LogLevel::EMERGENCY => 7];
     private $minLevelIndex;
     private $formatter;
     private $handle;
     public function __construct(string $minLevel = null, $output = null, callable $formatter = null)
     {
         if (null === $minLevel) {
-            $minLevel = null === $output || 'php://stdout' === $output || 'php://stderr' === $output ? \ConfigTransformer202108303\Psr\Log\LogLevel::ERROR : \ConfigTransformer202108303\Psr\Log\LogLevel::WARNING;
+            $minLevel = null === $output || 'php://stdout' === $output || 'php://stderr' === $output ? \ConfigTransformer2021083010\Psr\Log\LogLevel::ERROR : \ConfigTransformer2021083010\Psr\Log\LogLevel::WARNING;
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
                 switch ((int) ($_ENV['SHELL_VERBOSITY'] ?? $_SERVER['SHELL_VERBOSITY'])) {
                     case -1:
-                        $minLevel = \ConfigTransformer202108303\Psr\Log\LogLevel::ERROR;
+                        $minLevel = \ConfigTransformer2021083010\Psr\Log\LogLevel::ERROR;
                         break;
                     case 1:
-                        $minLevel = \ConfigTransformer202108303\Psr\Log\LogLevel::NOTICE;
+                        $minLevel = \ConfigTransformer2021083010\Psr\Log\LogLevel::NOTICE;
                         break;
                     case 2:
-                        $minLevel = \ConfigTransformer202108303\Psr\Log\LogLevel::INFO;
+                        $minLevel = \ConfigTransformer2021083010\Psr\Log\LogLevel::INFO;
                         break;
                     case 3:
-                        $minLevel = \ConfigTransformer202108303\Psr\Log\LogLevel::DEBUG;
+                        $minLevel = \ConfigTransformer2021083010\Psr\Log\LogLevel::DEBUG;
                         break;
                 }
             }
         }
         if (!isset(self::LEVELS[$minLevel])) {
-            throw new \ConfigTransformer202108303\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $minLevel));
+            throw new \ConfigTransformer2021083010\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $minLevel));
         }
         $this->minLevelIndex = self::LEVELS[$minLevel];
         $this->formatter = $formatter ?: [$this, 'format'];
         if ($output && \false === ($this->handle = \is_resource($output) ? $output : @\fopen($output, 'a'))) {
-            throw new \ConfigTransformer202108303\Psr\Log\InvalidArgumentException(\sprintf('Unable to open "%s".', $output));
+            throw new \ConfigTransformer2021083010\Psr\Log\InvalidArgumentException(\sprintf('Unable to open "%s".', $output));
         }
     }
     /**
@@ -63,7 +63,7 @@ class Logger extends \ConfigTransformer202108303\Psr\Log\AbstractLogger
     public function log($level, $message, $context = [])
     {
         if (!isset(self::LEVELS[$level])) {
-            throw new \ConfigTransformer202108303\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
+            throw new \ConfigTransformer2021083010\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
         }
         if (self::LEVELS[$level] < $this->minLevelIndex) {
             return;
