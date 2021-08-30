@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108306\Symfony\Component\HttpFoundation\Session\Flash;
+namespace ConfigTransformer202108305\Symfony\Component\HttpFoundation\Session\Flash;
 
-use ConfigTransformer202108306\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202108305\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * FlashBagInterface.
  *
  * @author Drak <drak@zikula.org>
  */
-interface FlashBagInterface extends \ConfigTransformer202108306\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface FlashBagInterface extends \ConfigTransformer202108305\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Adds a flash message for the given type.
