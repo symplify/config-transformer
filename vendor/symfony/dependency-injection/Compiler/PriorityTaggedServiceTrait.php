@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108301\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202108303\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202108301\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202108303\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Trait that allows a generic method to find and sort service by priority option in the tag.
  *
@@ -37,10 +37,10 @@ trait PriorityTaggedServiceTrait
      *
      * @return Reference[]
      */
-    private function findAndSortTaggedServices($tagName, \ConfigTransformer202108301\Symfony\Component\DependencyInjection\ContainerBuilder $container) : array
+    private function findAndSortTaggedServices($tagName, \ConfigTransformer202108303\Symfony\Component\DependencyInjection\ContainerBuilder $container) : array
     {
         $indexAttribute = $defaultIndexMethod = $needsIndexes = $defaultPriorityMethod = null;
-        if ($tagName instanceof \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+        if ($tagName instanceof \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
             $indexAttribute = $tagName->getIndexAttribute();
             $defaultIndexMethod = $tagName->getDefaultIndexMethod();
             $needsIndexes = $tagName->needsIndexes();
@@ -61,7 +61,7 @@ trait PriorityTaggedServiceTrait
                 if (isset($attribute['priority'])) {
                     $priority = $attribute['priority'];
                 } elseif (null === $defaultPriority && $defaultPriorityMethod && $class) {
-                    $defaultPriority = \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefault($container, $serviceId, $class, $defaultPriorityMethod, $tagName, 'priority', $checkTaggedItem);
+                    $defaultPriority = \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefault($container, $serviceId, $class, $defaultPriorityMethod, $tagName, 'priority', $checkTaggedItem);
                 }
                 $priority = $priority ?? $defaultPriority ?? ($defaultPriority = 0);
                 if (null === $indexAttribute && !$defaultIndexMethod && !$needsIndexes) {
@@ -71,7 +71,7 @@ trait PriorityTaggedServiceTrait
                 if (null !== $indexAttribute && isset($attribute[$indexAttribute])) {
                     $index = $attribute[$indexAttribute];
                 } elseif (null === $defaultIndex && $defaultPriorityMethod && $class) {
-                    $defaultIndex = \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefault($container, $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute, $checkTaggedItem);
+                    $defaultIndex = \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefault($container, $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute, $checkTaggedItem);
                 }
                 $index = $index ?? $defaultIndex ?? ($defaultIndex = $serviceId);
                 $services[] = [$priority, ++$i, $index, $serviceId, $class];
@@ -83,11 +83,11 @@ trait PriorityTaggedServiceTrait
         $refs = [];
         foreach ($services as [, , $index, $serviceId, $class]) {
             if (!$class) {
-                $reference = new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Reference($serviceId);
+                $reference = new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Reference($serviceId);
             } elseif ($index === $serviceId) {
-                $reference = new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class);
+                $reference = new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class);
             } else {
-                $reference = new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \ConfigTransformer202108301\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $index);
+                $reference = new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \ConfigTransformer202108303\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $index);
             }
             if (null === $index) {
                 $refs[] = $reference;
@@ -119,7 +119,7 @@ class PriorityTaggedServiceUtil
             return null;
         }
         if ($checkTaggedItem && !$r->hasMethod($defaultMethod)) {
-            foreach ($r->getAttributes(\ConfigTransformer202108301\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem::class) as $attribute) {
+            foreach ($r->getAttributes(\ConfigTransformer202108303\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem::class) as $attribute) {
                 return 'priority' === $indexAttribute ? $attribute->newInstance()->priority : $attribute->newInstance()->index;
             }
             return null;
@@ -131,15 +131,15 @@ class PriorityTaggedServiceUtil
             $message = [\sprintf('Method "%s::%s()" should ', $class, $defaultMethod), '.'];
         }
         if (!($rm = $r->getMethod($defaultMethod))->isStatic()) {
-            throw new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode('be static', $message));
+            throw new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode('be static', $message));
         }
         if (!$rm->isPublic()) {
-            throw new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode('be public', $message));
+            throw new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode('be public', $message));
         }
         $default = $rm->invoke(null);
         if ('priority' === $indexAttribute) {
             if (!\is_int($default)) {
-                throw new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode(\sprintf('return int (got "%s")', \get_debug_type($default)), $message));
+                throw new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode(\sprintf('return int (got "%s")', \get_debug_type($default)), $message));
             }
             return $default;
         }
@@ -147,7 +147,7 @@ class PriorityTaggedServiceUtil
             $default = (string) $default;
         }
         if (!\is_string($default)) {
-            throw new \ConfigTransformer202108301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode(\sprintf('return string|int (got "%s")', \get_debug_type($default)), $message));
+            throw new \ConfigTransformer202108303\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\implode(\sprintf('return string|int (got "%s")', \get_debug_type($default)), $message));
         }
         return $default;
     }

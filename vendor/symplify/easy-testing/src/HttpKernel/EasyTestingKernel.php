@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108301\Symplify\EasyTesting\HttpKernel;
+namespace ConfigTransformer202108303\Symplify\EasyTesting\HttpKernel;
 
-use ConfigTransformer202108301\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202108301\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class EasyTestingKernel extends \ConfigTransformer202108301\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202108303\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202108303\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class EasyTestingKernel extends \ConfigTransformer202108303\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
      * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
