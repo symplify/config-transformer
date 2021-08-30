@@ -1,26 +1,26 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108304;
+namespace ConfigTransformer202108301;
 
-use ConfigTransformer202108304\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202108304\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202108301\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202108301\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202108304\Symplify\ComposerJsonManipulator\ValueObject\Option;
-use ConfigTransformer202108304\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer202108304\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202108304\Symplify\PackageBuilder\Reflection\PrivatesCaller;
-use ConfigTransformer202108304\Symplify\SmartFileSystem\SmartFileSystem;
-use function ConfigTransformer202108304\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202108301\Symplify\ComposerJsonManipulator\ValueObject\Option;
+use ConfigTransformer202108301\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer202108301\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202108301\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202108301\Symplify\SmartFileSystem\SmartFileSystem;
+use function ConfigTransformer202108301\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(\ConfigTransformer202108304\Symplify\ComposerJsonManipulator\ValueObject\Option::INLINE_SECTIONS, ['keywords']);
+    $parameters->set(\ConfigTransformer202108301\Symplify\ComposerJsonManipulator\ValueObject\Option::INLINE_SECTIONS, ['keywords']);
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202108304\Symplify\ComposerJsonManipulator\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Bundle']);
-    $services->set(\ConfigTransformer202108304\Symplify\SmartFileSystem\SmartFileSystem::class);
-    $services->set(\ConfigTransformer202108304\Symplify\PackageBuilder\Reflection\PrivatesCaller::class);
-    $services->set(\ConfigTransformer202108304\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202108304\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202108304\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
-    $services->set(\ConfigTransformer202108304\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\ConfigTransformer202108304\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\ConfigTransformer202108304\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202108304\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
+    $services->load('ConfigTransformer202108301\Symplify\ComposerJsonManipulator\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Bundle']);
+    $services->set(\ConfigTransformer202108301\Symplify\SmartFileSystem\SmartFileSystem::class);
+    $services->set(\ConfigTransformer202108301\Symplify\PackageBuilder\Reflection\PrivatesCaller::class);
+    $services->set(\ConfigTransformer202108301\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202108301\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202108301\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
+    $services->set(\ConfigTransformer202108301\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
+    $services->set(\ConfigTransformer202108301\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\ConfigTransformer202108301\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202108301\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
 };
