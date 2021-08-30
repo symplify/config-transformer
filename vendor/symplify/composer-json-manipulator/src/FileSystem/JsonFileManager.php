@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108306\Symplify\ComposerJsonManipulator\FileSystem;
+namespace ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\FileSystem;
 
-use ConfigTransformer202108306\Nette\Utils\Json;
-use ConfigTransformer202108306\Symplify\ComposerJsonManipulator\Json\JsonCleaner;
-use ConfigTransformer202108306\Symplify\ComposerJsonManipulator\Json\JsonInliner;
-use ConfigTransformer202108306\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
-use ConfigTransformer202108306\Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
-use ConfigTransformer202108306\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202108306\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer2021083010\Nette\Utils\Json;
+use ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\Json\JsonCleaner;
+use ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\Json\JsonInliner;
+use ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
+use ConfigTransformer2021083010\Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
+use ConfigTransformer2021083010\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2021083010\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @see \Symplify\MonorepoBuilder\Tests\FileSystem\JsonFileManager\JsonFileManagerTest
  */
@@ -31,7 +31,7 @@ final class JsonFileManager
      * @var \Symplify\ComposerJsonManipulator\Json\JsonInliner
      */
     private $jsonInliner;
-    public function __construct(\ConfigTransformer202108306\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer202108306\Symplify\ComposerJsonManipulator\Json\JsonCleaner $jsonCleaner, \ConfigTransformer202108306\Symplify\ComposerJsonManipulator\Json\JsonInliner $jsonInliner)
+    public function __construct(\ConfigTransformer2021083010\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\Json\JsonCleaner $jsonCleaner, \ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\Json\JsonInliner $jsonInliner)
     {
         $this->smartFileSystem = $smartFileSystem;
         $this->jsonCleaner = $jsonCleaner;
@@ -40,11 +40,11 @@ final class JsonFileManager
     /**
      * @return mixed[]
      */
-    public function loadFromFileInfo(\ConfigTransformer202108306\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : array
+    public function loadFromFileInfo(\ConfigTransformer2021083010\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : array
     {
         $realPath = $smartFileInfo->getRealPath();
         if (!isset($this->cachedJSONFiles[$realPath])) {
-            $this->cachedJSONFiles[$realPath] = \ConfigTransformer202108306\Nette\Utils\Json::decode($smartFileInfo->getContents(), \ConfigTransformer202108306\Nette\Utils\Json::FORCE_ARRAY);
+            $this->cachedJSONFiles[$realPath] = \ConfigTransformer2021083010\Nette\Utils\Json::decode($smartFileInfo->getContents(), \ConfigTransformer2021083010\Nette\Utils\Json::FORCE_ARRAY);
         }
         return $this->cachedJSONFiles[$realPath];
     }
@@ -54,12 +54,12 @@ final class JsonFileManager
     public function loadFromFilePath(string $filePath) : array
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \ConfigTransformer202108306\Nette\Utils\Json::decode($fileContent, \ConfigTransformer202108306\Nette\Utils\Json::FORCE_ARRAY);
+        return \ConfigTransformer2021083010\Nette\Utils\Json::decode($fileContent, \ConfigTransformer2021083010\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @param mixed[] $json
      */
-    public function printJsonToFileInfo(array $json, \ConfigTransformer202108306\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : string
+    public function printJsonToFileInfo(array $json, \ConfigTransformer2021083010\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : string
     {
         $jsonString = $this->encodeJsonToFileContent($json);
         $this->smartFileSystem->dumpFile($smartFileInfo->getPathname(), $jsonString);
@@ -67,7 +67,7 @@ final class JsonFileManager
         unset($this->cachedJSONFiles[$realPath]);
         return $jsonString;
     }
-    public function printComposerJsonToFilePath(\ConfigTransformer202108306\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson, string $filePath) : string
+    public function printComposerJsonToFilePath(\ConfigTransformer2021083010\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson, string $filePath) : string
     {
         $jsonString = $this->encodeJsonToFileContent($composerJson->getJsonArray());
         $this->smartFileSystem->dumpFile($filePath, $jsonString);
@@ -80,7 +80,7 @@ final class JsonFileManager
     {
         // Empty arrays may lead to bad encoding since we can't be sure whether they need to be arrays or objects.
         $json = $this->jsonCleaner->removeEmptyKeysFromJsonArray($json);
-        $jsonContent = \ConfigTransformer202108306\Nette\Utils\Json::encode($json, \ConfigTransformer202108306\Nette\Utils\Json::PRETTY) . \ConfigTransformer202108306\Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
+        $jsonContent = \ConfigTransformer2021083010\Nette\Utils\Json::encode($json, \ConfigTransformer2021083010\Nette\Utils\Json::PRETTY) . \ConfigTransformer2021083010\Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
         return $this->jsonInliner->inlineSections($jsonContent);
     }
 }
