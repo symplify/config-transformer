@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108302\Symfony\Component\HttpKernel\CacheClearer;
+namespace ConfigTransformer202108306\Symfony\Component\HttpKernel\CacheClearer;
 
 /**
  * CacheClearerInterface.
