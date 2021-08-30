@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108305\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202108307\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202108305\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
+use ConfigTransformer202108307\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 /**
  * Acts as a marker and a data holder for a Controller.
  *
