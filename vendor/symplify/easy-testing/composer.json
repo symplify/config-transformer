@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202108312\\Symplify\\EasyTesting\\": "src"
+            "ConfigTransformer202108315\\Symplify\\EasyTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202108312\\Symplify\\EasyTesting\\Tests\\": "tests"
+            "ConfigTransformer202108315\\Symplify\\EasyTesting\\Tests\\": "tests"
         }
     },
     "extra": {
