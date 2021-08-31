@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108311\Symplify\SymplifyKernel\Bundle;
+namespace ConfigTransformer202108316\Symplify\SymplifyKernel\Bundle;
 
-use ConfigTransformer202108311\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202108311\Symfony\Component\HttpKernel\Bundle\Bundle;
-use ConfigTransformer202108311\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use ConfigTransformer202108311\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
-final class SymplifyKernelBundle extends \ConfigTransformer202108311\Symfony\Component\HttpKernel\Bundle\Bundle
+use ConfigTransformer202108316\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108316\Symfony\Component\HttpKernel\Bundle\Bundle;
+use ConfigTransformer202108316\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+use ConfigTransformer202108316\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
+final class SymplifyKernelBundle extends \ConfigTransformer202108316\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
     public function build($containerBuilder) : void
     {
-        $containerBuilder->addCompilerPass(new \ConfigTransformer202108311\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
+        $containerBuilder->addCompilerPass(new \ConfigTransformer202108316\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\ConfigTransformer202108311\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\ConfigTransformer202108316\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \ConfigTransformer202108311\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension();
+        return new \ConfigTransformer202108316\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension();
     }
 }
