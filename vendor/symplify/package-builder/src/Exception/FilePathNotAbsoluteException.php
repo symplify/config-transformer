@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021083010\Symplify\PackageBuilder\Exception;
+namespace ConfigTransformer202108312\Symplify\PackageBuilder\Exception;
 
 use Exception;
 final class FilePathNotAbsoluteException extends \Exception

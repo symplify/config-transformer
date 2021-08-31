@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021083010\PhpParser\Builder;
+namespace ConfigTransformer202108312\PhpParser\Builder;
 
-use ConfigTransformer2021083010\PhpParser;
-use ConfigTransformer2021083010\PhpParser\BuilderHelpers;
-use ConfigTransformer2021083010\PhpParser\Node;
-use ConfigTransformer2021083010\PhpParser\Node\Name;
-use ConfigTransformer2021083010\PhpParser\Node\Stmt;
-class Interface_ extends \ConfigTransformer2021083010\PhpParser\Builder\Declaration
+use ConfigTransformer202108312\PhpParser;
+use ConfigTransformer202108312\PhpParser\BuilderHelpers;
+use ConfigTransformer202108312\PhpParser\Node;
+use ConfigTransformer202108312\PhpParser\Node\Name;
+use ConfigTransformer202108312\PhpParser\Node\Stmt;
+class Interface_ extends \ConfigTransformer202108312\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $extends = [];
@@ -35,7 +35,7 @@ class Interface_ extends \ConfigTransformer2021083010\PhpParser\Builder\Declarat
     public function extend(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->extends[] = \ConfigTransformer2021083010\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->extends[] = \ConfigTransformer202108312\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -48,10 +48,10 @@ class Interface_ extends \ConfigTransformer2021083010\PhpParser\Builder\Declarat
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer2021083010\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \ConfigTransformer2021083010\PhpParser\Node\Stmt\ClassConst) {
+        $stmt = \ConfigTransformer202108312\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \ConfigTransformer202108312\PhpParser\Node\Stmt\ClassConst) {
             $this->constants[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer2021083010\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \ConfigTransformer202108312\PhpParser\Node\Stmt\ClassMethod) {
             // we erase all statements in the body of an interface method
             $stmt->stmts = null;
             $this->methods[] = $stmt;
@@ -69,7 +69,7 @@ class Interface_ extends \ConfigTransformer2021083010\PhpParser\Builder\Declarat
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer2021083010\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202108312\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -77,8 +77,8 @@ class Interface_ extends \ConfigTransformer2021083010\PhpParser\Builder\Declarat
      *
      * @return Stmt\Interface_ The built interface node
      */
-    public function getNode() : \ConfigTransformer2021083010\PhpParser\Node
+    public function getNode() : \ConfigTransformer202108312\PhpParser\Node
     {
-        return new \ConfigTransformer2021083010\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer202108312\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

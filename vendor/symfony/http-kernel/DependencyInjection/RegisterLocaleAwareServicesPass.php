@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021083010\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202108312\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2021083010\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202108312\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202108312\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202108312\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202108312\Symfony\Component\DependencyInjection\Reference;
 /**
  * Register all services that have the "kernel.locale_aware" tag into the listener.
  *
  * @author Pierre Bobiet <pierrebobiet@gmail.com>
  */
-class RegisterLocaleAwareServicesPass implements \ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterLocaleAwareServicesPass implements \ConfigTransformer202108312\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $listenerServiceId;
     private $localeAwareTag;
@@ -41,12 +41,12 @@ class RegisterLocaleAwareServicesPass implements \ConfigTransformer2021083010\Sy
         }
         $services = [];
         foreach ($container->findTaggedServiceIds($this->localeAwareTag) as $id => $tags) {
-            $services[] = new \ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Reference($id);
+            $services[] = new \ConfigTransformer202108312\Symfony\Component\DependencyInjection\Reference($id);
         }
         if (!$services) {
             $container->removeDefinition($this->listenerServiceId);
             return;
         }
-        $container->getDefinition($this->listenerServiceId)->setArgument(0, new \ConfigTransformer2021083010\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
+        $container->getDefinition($this->listenerServiceId)->setArgument(0, new \ConfigTransformer202108312\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
     }
 }

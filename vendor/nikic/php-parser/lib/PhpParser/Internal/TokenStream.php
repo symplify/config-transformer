@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021083010\PhpParser\Internal;
+namespace ConfigTransformer202108312\PhpParser\Internal;
 
 /**
  * Provides operations on token streams, for use by pretty printer.

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021083010\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202108312\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use ConfigTransformer2021083010\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202108312\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
@@ -18,7 +18,7 @@ class MarshallingSessionHandler implements \SessionHandlerInterface, \SessionUpd
 {
     private $handler;
     private $marshaller;
-    public function __construct(\ConfigTransformer2021083010\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler $handler, \ConfigTransformer2021083010\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    public function __construct(\ConfigTransformer202108312\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler $handler, \ConfigTransformer202108312\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         $this->handler = $handler;
         $this->marshaller = $marshaller;
