@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202108315\Symplify\Astral\ValueObject\NodeBuilder;
+namespace ConfigTransformer202108316\Symplify\Astral\ValueObject\NodeBuilder;
 
-use ConfigTransformer202108315\PhpParser\Builder\Namespace_;
+use ConfigTransformer202108316\PhpParser\Builder\Namespace_;
 /**
  * Fixed duplicated naming in php-parser and prevents confusion
  */
-final class NamespaceBuilder extends \ConfigTransformer202108315\PhpParser\Builder\Namespace_
+final class NamespaceBuilder extends \ConfigTransformer202108316\PhpParser\Builder\Namespace_
 {
 }

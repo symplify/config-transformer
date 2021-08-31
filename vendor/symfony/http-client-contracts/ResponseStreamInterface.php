@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202108315\Symfony\Contracts\HttpClient;
+namespace ConfigTransformer202108316\Symfony\Contracts\HttpClient;
 
 /**
  * Yields response chunks, returned by HttpClientInterface::stream().
@@ -17,6 +17,6 @@ namespace ConfigTransformer202108315\Symfony\Contracts\HttpClient;
  */
 interface ResponseStreamInterface extends \Iterator
 {
-    public function key() : \ConfigTransformer202108315\Symfony\Contracts\HttpClient\ResponseInterface;
-    public function current() : \ConfigTransformer202108315\Symfony\Contracts\HttpClient\ChunkInterface;
+    public function key() : \ConfigTransformer202108316\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function current() : \ConfigTransformer202108316\Symfony\Contracts\HttpClient\ChunkInterface;
 }
