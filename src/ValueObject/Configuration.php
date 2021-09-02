@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109023\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer2021090210\Symplify\ConfigTransformer\ValueObject;
 
 final class Configuration
 {
@@ -46,6 +46,6 @@ final class Configuration
      */
     public function getInputSuffixes() : array
     {
-        return [\ConfigTransformer202109023\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202109023\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202109023\Symplify\ConfigTransformer\ValueObject\Format::XML];
+        return [\ConfigTransformer2021090210\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer2021090210\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer2021090210\Symplify\ConfigTransformer\ValueObject\Format::XML];
     }
 }

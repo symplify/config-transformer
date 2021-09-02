@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109023\Symplify\PackageBuilder\Contract\HttpKernel;
+namespace ConfigTransformer2021090210\Symplify\PackageBuilder\Contract\HttpKernel;
 
-use ConfigTransformer202109023\Symfony\Component\HttpKernel\KernelInterface;
-use ConfigTransformer202109023\Symplify\SmartFileSystem\SmartFileInfo;
-interface ExtraConfigAwareKernelInterface extends \ConfigTransformer202109023\Symfony\Component\HttpKernel\KernelInterface
+use ConfigTransformer2021090210\Symfony\Component\HttpKernel\KernelInterface;
+use ConfigTransformer2021090210\Symplify\SmartFileSystem\SmartFileInfo;
+interface ExtraConfigAwareKernelInterface extends \ConfigTransformer2021090210\Symfony\Component\HttpKernel\KernelInterface
 {
     /**
      * @param string[]|SmartFileInfo[] $configs

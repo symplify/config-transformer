@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109023\Symfony\Contracts\HttpClient\Exception;
+namespace ConfigTransformer2021090210\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * The base interface for all exceptions in the contract.

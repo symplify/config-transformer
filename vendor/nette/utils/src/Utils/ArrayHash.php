@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202109023\Nette\Utils;
+namespace ConfigTransformer2021090210\Nette\Utils;
 
-use ConfigTransformer202109023\Nette;
+use ConfigTransformer2021090210\Nette;
 /**
  * Provides objects to work as array.
  */
@@ -50,7 +50,7 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
     {
         if (!\is_scalar($key)) {
             // prevents null
-            throw new \ConfigTransformer202109023\Nette\InvalidArgumentException(\sprintf('Key must be either a string or an integer, %s given.', \gettype($key)));
+            throw new \ConfigTransformer2021090210\Nette\InvalidArgumentException(\sprintf('Key must be either a string or an integer, %s given.', \gettype($key)));
         }
         $this->{$key} = $value;
     }

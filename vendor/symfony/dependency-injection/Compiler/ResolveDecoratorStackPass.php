@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109023\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202109023\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveDecoratorStackPass implements \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveDecoratorStackPass implements \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $tag;
     public function __construct(string $tag = 'container.stack')
@@ -38,11 +38,11 @@ class ResolveDecoratorStackPass implements \ConfigTransformer202109023\Symfony\C
         $stacks = [];
         foreach ($container->findTaggedServiceIds($this->tag) as $id => $tags) {
             $definition = $container->getDefinition($id);
-            if (!$definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition) {
-                throw new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": only definitions with a "parent" can have the "%s" tag.', $id, $this->tag));
+            if (!$definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition) {
+                throw new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": only definitions with a "parent" can have the "%s" tag.', $id, $this->tag));
             }
             if (!($stack = $definition->getArguments())) {
-                throw new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": the stack of decorators is empty.', $id));
+                throw new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": the stack of decorators is empty.', $id));
             }
             $stacks[$id] = $stack;
         }
@@ -74,27 +74,27 @@ class ResolveDecoratorStackPass implements \ConfigTransformer202109023\Symfony\C
         $id = \end($path);
         $prefix = '.' . $id . '.';
         if (!isset($stacks[$id])) {
-            return [$id => new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition($id)];
+            return [$id => new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition($id)];
         }
         if (\key($path) !== ($searchKey = \array_search($id, $path))) {
-            throw new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_slice($path, $searchKey));
+            throw new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_slice($path, $searchKey));
         }
         foreach ($stacks[$id] as $k => $definition) {
-            if ($definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition && isset($stacks[$definition->getParent()])) {
+            if ($definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition && isset($stacks[$definition->getParent()])) {
                 $path[] = $definition->getParent();
                 $definition = \unserialize(\serialize($definition));
                 // deep clone
-            } elseif ($definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Definition) {
+            } elseif ($definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Definition) {
                 $definitions[$decoratedId = $prefix . $k] = $definition;
                 continue;
-            } elseif ($definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Reference || $definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Alias) {
+            } elseif ($definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Reference || $definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Alias) {
                 $path[] = (string) $definition;
             } else {
-                throw new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": unexpected value of type "%s" found in the stack of decorators.', $id, \get_debug_type($definition)));
+                throw new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": unexpected value of type "%s" found in the stack of decorators.', $id, \get_debug_type($definition)));
             }
             $p = $prefix . $k;
             foreach ($this->resolveStack($stacks, $path) as $k => $v) {
-                $definitions[$decoratedId = $p . $k] = $definition instanceof \ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition ? $definition->setParent($k) : new \ConfigTransformer202109023\Symfony\Component\DependencyInjection\ChildDefinition($k);
+                $definitions[$decoratedId = $p . $k] = $definition instanceof \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition ? $definition->setParent($k) : new \ConfigTransformer2021090210\Symfony\Component\DependencyInjection\ChildDefinition($k);
                 $definition = null;
             }
             \array_pop($path);

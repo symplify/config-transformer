@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109023\Symfony\Component\ErrorHandler\Error;
+namespace ConfigTransformer2021090210\Symfony\Component\ErrorHandler\Error;
 
-class OutOfMemoryError extends \ConfigTransformer202109023\Symfony\Component\ErrorHandler\Error\FatalError
+class OutOfMemoryError extends \ConfigTransformer2021090210\Symfony\Component\ErrorHandler\Error\FatalError
 {
 }
