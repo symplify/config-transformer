@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109039\Symfony\Contracts\HttpClient;
+namespace ConfigTransformer2021090310\Symfony\Contracts\HttpClient;
 
-use ConfigTransformer202109039\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use ConfigTransformer202109039\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
+use ConfigTransformer2021090310\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use ConfigTransformer2021090310\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
 /**
  * Provides flexible methods for requesting HTTP resources synchronously or asynchronously.
  *
@@ -102,12 +102,12 @@ interface HttpClientInterface
      * @param string $url
      * @param mixed[] $options
      */
-    public function request($method, $url, $options = []) : \ConfigTransformer202109039\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function request($method, $url, $options = []) : \ConfigTransformer2021090310\Symfony\Contracts\HttpClient\ResponseInterface;
     /**
      * Yields responses chunk by chunk as they complete.
      *
      * @param ResponseInterface|ResponseInterface[]|iterable $responses One or more responses created by the current HTTP client
      * @param float|null                                     $timeout   The idle timeout before yielding timeout chunks
      */
-    public function stream($responses, $timeout = null) : \ConfigTransformer202109039\Symfony\Contracts\HttpClient\ResponseStreamInterface;
+    public function stream($responses, $timeout = null) : \ConfigTransformer2021090310\Symfony\Contracts\HttpClient\ResponseStreamInterface;
 }
