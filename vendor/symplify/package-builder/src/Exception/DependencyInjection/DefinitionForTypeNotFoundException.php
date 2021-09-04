@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109048\Symplify\PackageBuilder\Exception\DependencyInjection;
+namespace ConfigTransformer202109049\Symplify\PackageBuilder\Exception\DependencyInjection;
 
 use Exception;
 final class DefinitionForTypeNotFoundException extends \Exception

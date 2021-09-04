@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109048\PhpParser\Builder;
+namespace ConfigTransformer202109049\PhpParser\Builder;
 
-use ConfigTransformer202109048\PhpParser\Builder;
-use ConfigTransformer202109048\PhpParser\BuilderHelpers;
-use ConfigTransformer202109048\PhpParser\Node;
-use ConfigTransformer202109048\PhpParser\Node\Stmt;
-class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builder
+use ConfigTransformer202109049\PhpParser\Builder;
+use ConfigTransformer202109049\PhpParser\BuilderHelpers;
+use ConfigTransformer202109049\PhpParser\Node;
+use ConfigTransformer202109049\PhpParser\Node\Stmt;
+class TraitUseAdaptation implements \ConfigTransformer202109049\PhpParser\Builder
 {
     const TYPE_UNDEFINED = 0;
     const TYPE_ALIAS = 1;
@@ -28,8 +28,8 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
     public function __construct($trait, $method)
     {
         $this->type = self::TYPE_UNDEFINED;
-        $this->trait = \is_null($trait) ? null : \ConfigTransformer202109048\PhpParser\BuilderHelpers::normalizeName($trait);
-        $this->method = \ConfigTransformer202109048\PhpParser\BuilderHelpers::normalizeIdentifier($method);
+        $this->trait = \is_null($trait) ? null : \ConfigTransformer202109049\PhpParser\BuilderHelpers::normalizeName($trait);
+        $this->method = \ConfigTransformer202109049\PhpParser\BuilderHelpers::normalizeIdentifier($method);
     }
     /**
      * Sets alias of method.
@@ -56,7 +56,7 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
      */
     public function makePublic()
     {
-        $this->setModifier(\ConfigTransformer202109048\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->setModifier(\ConfigTransformer202109049\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -66,7 +66,7 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
      */
     public function makeProtected()
     {
-        $this->setModifier(\ConfigTransformer202109048\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->setModifier(\ConfigTransformer202109049\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -76,7 +76,7 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
      */
     public function makePrivate()
     {
-        $this->setModifier(\ConfigTransformer202109048\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->setModifier(\ConfigTransformer202109049\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -98,7 +98,7 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
             throw new \LogicException('Cannot add overwritten traits for not precedence adaptation buider');
         }
         foreach ($traits as $trait) {
-            $this->insteadof[] = \ConfigTransformer202109048\PhpParser\BuilderHelpers::normalizeName($trait);
+            $this->insteadof[] = \ConfigTransformer202109049\PhpParser\BuilderHelpers::normalizeName($trait);
         }
         return $this;
     }
@@ -124,13 +124,13 @@ class TraitUseAdaptation implements \ConfigTransformer202109048\PhpParser\Builde
      *
      * @return Node The built node
      */
-    public function getNode() : \ConfigTransformer202109048\PhpParser\Node
+    public function getNode() : \ConfigTransformer202109049\PhpParser\Node
     {
         switch ($this->type) {
             case self::TYPE_ALIAS:
-                return new \ConfigTransformer202109048\PhpParser\Node\Stmt\TraitUseAdaptation\Alias($this->trait, $this->method, $this->modifier, $this->alias);
+                return new \ConfigTransformer202109049\PhpParser\Node\Stmt\TraitUseAdaptation\Alias($this->trait, $this->method, $this->modifier, $this->alias);
             case self::TYPE_PRECEDENCE:
-                return new \ConfigTransformer202109048\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence($this->trait, $this->method, $this->insteadof);
+                return new \ConfigTransformer202109049\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence($this->trait, $this->method, $this->insteadof);
             default:
                 throw new \LogicException('Type of adaptation is not defined');
         }
