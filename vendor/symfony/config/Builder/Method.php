@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109046\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202109040\Symfony\Component\Config\Builder;
 
 /**
  * Represents a method when building classes.
