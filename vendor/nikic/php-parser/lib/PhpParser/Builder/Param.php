@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109044\PhpParser\Builder;
+namespace ConfigTransformer202109042\PhpParser\Builder;
 
-use ConfigTransformer202109044\PhpParser;
-use ConfigTransformer202109044\PhpParser\BuilderHelpers;
-use ConfigTransformer202109044\PhpParser\Node;
-class Param implements \ConfigTransformer202109044\PhpParser\Builder
+use ConfigTransformer202109042\PhpParser;
+use ConfigTransformer202109042\PhpParser\BuilderHelpers;
+use ConfigTransformer202109042\PhpParser\Node;
+class Param implements \ConfigTransformer202109042\PhpParser\Builder
 {
     protected $name;
     protected $default = null;
@@ -34,7 +34,7 @@ class Param implements \ConfigTransformer202109044\PhpParser\Builder
      */
     public function setDefault($value)
     {
-        $this->default = \ConfigTransformer202109044\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->default = \ConfigTransformer202109042\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -46,7 +46,7 @@ class Param implements \ConfigTransformer202109044\PhpParser\Builder
      */
     public function setType($type)
     {
-        $this->type = \ConfigTransformer202109044\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->type = \ConfigTransformer202109042\PhpParser\BuilderHelpers::normalizeType($type);
         if ($this->type == 'void') {
             throw new \LogicException('Parameter type cannot be void');
         }
@@ -94,7 +94,7 @@ class Param implements \ConfigTransformer202109044\PhpParser\Builder
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202109044\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202109042\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -102,8 +102,8 @@ class Param implements \ConfigTransformer202109044\PhpParser\Builder
      *
      * @return Node\Param The built parameter node
      */
-    public function getNode() : \ConfigTransformer202109044\PhpParser\Node
+    public function getNode() : \ConfigTransformer202109042\PhpParser\Node
     {
-        return new \ConfigTransformer202109044\PhpParser\Node\Param(new \ConfigTransformer202109044\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic, [], 0, $this->attributeGroups);
+        return new \ConfigTransformer202109042\PhpParser\Node\Param(new \ConfigTransformer202109042\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic, [], 0, $this->attributeGroups);
     }
 }

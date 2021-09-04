@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109044\Symplify\PhpConfigPrinter\DependencyInjection\Extension;
+namespace ConfigTransformer202109042\Symplify\PhpConfigPrinter\DependencyInjection\Extension;
 
-use ConfigTransformer202109044\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202109044\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109044\Symfony\Component\DependencyInjection\Extension\Extension;
-use ConfigTransformer202109044\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class PhpConfigPrinterExtension extends \ConfigTransformer202109044\Symfony\Component\DependencyInjection\Extension\Extension
+use ConfigTransformer202109042\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202109042\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109042\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer202109042\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class PhpConfigPrinterExtension extends \ConfigTransformer202109042\Symfony\Component\DependencyInjection\Extension\Extension
 {
     /**
      * @param string[] $configs
@@ -16,7 +16,7 @@ final class PhpConfigPrinterExtension extends \ConfigTransformer202109044\Symfon
     public function load($configs, $containerBuilder) : void
     {
         // needed for parameter shifting of sniff/fixer params
-        $phpFileLoader = new \ConfigTransformer202109044\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202109044\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \ConfigTransformer202109042\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202109042\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }
