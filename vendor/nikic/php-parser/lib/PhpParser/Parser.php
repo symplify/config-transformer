@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109042\PhpParser;
+namespace ConfigTransformer202109048\PhpParser;
 
 interface Parser
 {
@@ -15,5 +15,5 @@ interface Parser
      * @return Node\Stmt[]|null Array of statements (or null non-throwing error handler is used and
      *                          the parser was unable to recover from an error).
      */
-    public function parse(string $code, \ConfigTransformer202109042\PhpParser\ErrorHandler $errorHandler = null);
+    public function parse(string $code, \ConfigTransformer202109048\PhpParser\ErrorHandler $errorHandler = null);
 }
