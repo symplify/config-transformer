@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109049\Symplify\SymplifyKernel\ValueObject;
+namespace ConfigTransformer202109048\Symplify\SymplifyKernel\ValueObject;
 
-use ConfigTransformer202109049\Symfony\Component\Console\Application;
-use ConfigTransformer202109049\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202109049\Symfony\Component\HttpKernel\KernelInterface;
-use ConfigTransformer202109049\Symplify\PackageBuilder\Console\Input\StaticInputDetector;
-use ConfigTransformer202109049\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer202109049\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-use ConfigTransformer202109049\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202109049\Symplify\SymplifyKernel\Exception\BootException;
+use ConfigTransformer202109048\Symfony\Component\Console\Application;
+use ConfigTransformer202109048\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202109048\Symfony\Component\HttpKernel\KernelInterface;
+use ConfigTransformer202109048\Symplify\PackageBuilder\Console\Input\StaticInputDetector;
+use ConfigTransformer202109048\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer202109048\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
+use ConfigTransformer202109048\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202109048\Symplify\SymplifyKernel\Exception\BootException;
 use Throwable;
 final class KernelBootAndApplicationRun
 {
@@ -36,44 +36,44 @@ final class KernelBootAndApplicationRun
         try {
             $this->booKernelAndRunApplication();
         } catch (\Throwable $throwable) {
-            $symfonyStyleFactory = new \ConfigTransformer202109049\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory();
+            $symfonyStyleFactory = new \ConfigTransformer202109048\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory();
             $symfonyStyle = $symfonyStyleFactory->create();
             $symfonyStyle->error($throwable->getMessage());
-            exit(\ConfigTransformer202109049\Symfony\Component\Console\Command\Command::FAILURE);
+            exit(\ConfigTransformer202109048\Symfony\Component\Console\Command\Command::FAILURE);
         }
     }
-    private function createKernel() : \ConfigTransformer202109049\Symfony\Component\HttpKernel\KernelInterface
+    private function createKernel() : \ConfigTransformer202109048\Symfony\Component\HttpKernel\KernelInterface
     {
         // random has is needed, so cache is invalidated and changes from config are loaded
         $environment = 'prod' . \random_int(1, 100000);
         $kernelClass = $this->kernelClass;
-        $kernel = new $kernelClass($environment, \ConfigTransformer202109049\Symplify\PackageBuilder\Console\Input\StaticInputDetector::isDebug());
+        $kernel = new $kernelClass($environment, \ConfigTransformer202109048\Symplify\PackageBuilder\Console\Input\StaticInputDetector::isDebug());
         $this->setExtraConfigs($kernel, $kernelClass);
         return $kernel;
     }
     private function booKernelAndRunApplication() : void
     {
         $kernel = $this->createKernel();
-        if ($kernel instanceof \ConfigTransformer202109049\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface && $this->extraConfigs !== []) {
+        if ($kernel instanceof \ConfigTransformer202109048\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface && $this->extraConfigs !== []) {
             $kernel->setConfigs($this->extraConfigs);
         }
         $kernel->boot();
         $container = $kernel->getContainer();
         /** @var Application $application */
-        $application = $container->get(\ConfigTransformer202109049\Symfony\Component\Console\Application::class);
+        $application = $container->get(\ConfigTransformer202109048\Symfony\Component\Console\Application::class);
         exit($application->run());
     }
-    private function setExtraConfigs(\ConfigTransformer202109049\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
+    private function setExtraConfigs(\ConfigTransformer202109048\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
     {
         if ($this->extraConfigs === []) {
             return;
         }
-        if (\is_a($kernel, \ConfigTransformer202109049\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class, \true)) {
+        if (\is_a($kernel, \ConfigTransformer202109048\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class, \true)) {
             /** @var ExtraConfigAwareKernelInterface $kernel */
             $kernel->setConfigs($this->extraConfigs);
         } else {
-            $message = \sprintf('Extra configs are set, but the "%s" kernel class is missing "%s" interface', $kernelClass, \ConfigTransformer202109049\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class);
-            throw new \ConfigTransformer202109049\Symplify\SymplifyKernel\Exception\BootException($message);
+            $message = \sprintf('Extra configs are set, but the "%s" kernel class is missing "%s" interface', $kernelClass, \ConfigTransformer202109048\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class);
+            throw new \ConfigTransformer202109048\Symplify\SymplifyKernel\Exception\BootException($message);
         }
     }
     /**
@@ -81,9 +81,9 @@ final class KernelBootAndApplicationRun
      */
     private function setKernelClass(string $kernelClass) : void
     {
-        if (!\is_a($kernelClass, \ConfigTransformer202109049\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
-            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \ConfigTransformer202109049\Symfony\Component\HttpKernel\KernelInterface::class);
-            throw new \ConfigTransformer202109049\Symplify\SymplifyKernel\Exception\BootException($message);
+        if (!\is_a($kernelClass, \ConfigTransformer202109048\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
+            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \ConfigTransformer202109048\Symfony\Component\HttpKernel\KernelInterface::class);
+            throw new \ConfigTransformer202109048\Symplify\SymplifyKernel\Exception\BootException($message);
         }
         $this->kernelClass = $kernelClass;
     }
