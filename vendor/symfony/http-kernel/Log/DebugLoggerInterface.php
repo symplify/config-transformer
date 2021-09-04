@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109036\Symfony\Component\HttpKernel\Log;
+namespace ConfigTransformer202109046\Symfony\Component\HttpKernel\Log;
 
-use ConfigTransformer202109036\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109046\Symfony\Component\HttpFoundation\Request;
 /**
  * DebugLoggerInterface.
  *
