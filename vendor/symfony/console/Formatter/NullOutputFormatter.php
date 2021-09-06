@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109067\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202109064\Symfony\Component\Console\Formatter;
 
 /**
  * @author Tien Xuan Vo <tien.xuan.vo@gmail.com>
  */
-final class NullOutputFormatter implements \ConfigTransformer202109067\Symfony\Component\Console\Formatter\OutputFormatterInterface
+final class NullOutputFormatter implements \ConfigTransformer202109064\Symfony\Component\Console\Formatter\OutputFormatterInterface
 {
     private $style;
     /**
@@ -28,13 +28,13 @@ final class NullOutputFormatter implements \ConfigTransformer202109067\Symfony\C
      * {@inheritdoc}
      * @param string $name
      */
-    public function getStyle($name) : \ConfigTransformer202109067\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    public function getStyle($name) : \ConfigTransformer202109064\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if ($this->style) {
             return $this->style;
         }
         // to comply with the interface we must return a OutputFormatterStyleInterface
-        return $this->style = new \ConfigTransformer202109067\Symfony\Component\Console\Formatter\NullOutputFormatterStyle();
+        return $this->style = new \ConfigTransformer202109064\Symfony\Component\Console\Formatter\NullOutputFormatterStyle();
     }
     /**
      * {@inheritdoc}
