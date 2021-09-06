@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202109067\\Symplify\\ConsolePackageBuilder\\": "src"
+            "ConfigTransformer202109066\\Symplify\\ConsolePackageBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202109067\\Symplify\\ConsolePackageBuilder\\Tests\\": "tests"
+            "ConfigTransformer202109066\\Symplify\\ConsolePackageBuilder\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -49,7 +49,6 @@
         "symplify\/vendor-patches": "<9.4.53",
         "symplify\/skipper": "<9.4.53",
         "symplify\/smart-file-system": "<9.4.53",
-        "symplify\/phpunit-upgrader": "<9.4.53",
         "symplify\/easy-hydrator": "<9.4.53",
         "symplify\/symfony-static-dumper": "<9.4.53",
         "symplify\/git-wrapper": "<9.4.53",
