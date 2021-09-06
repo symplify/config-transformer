@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109060\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202109064\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202109060\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109060\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109064\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109064\Symfony\Component\HttpFoundation\Response;
 interface SurrogateInterface
 {
     /**
