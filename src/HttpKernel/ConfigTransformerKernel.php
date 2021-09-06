@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109042\Symplify\ConfigTransformer\HttpKernel;
+namespace ConfigTransformer202109065\Symplify\ConfigTransformer\HttpKernel;
 
-use ConfigTransformer202109042\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202109042\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer202109042\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use ConfigTransformer202109042\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
-use ConfigTransformer202109042\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class ConfigTransformerKernel extends \ConfigTransformer202109042\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202109065\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202109065\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202109065\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use ConfigTransformer202109065\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
+use ConfigTransformer202109065\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class ConfigTransformerKernel extends \ConfigTransformer202109065\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
      * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
@@ -22,6 +22,6 @@ final class ConfigTransformerKernel extends \ConfigTransformer202109042\Symplify
      */
     public function registerBundles() : iterable
     {
-        return [new \ConfigTransformer202109042\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer202109042\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new \ConfigTransformer202109065\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer202109065\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
     }
 }
