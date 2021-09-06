@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109064\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer2021090610\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202109064\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021090610\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This extension sub-class provides first-class integration with the
  * Config/Definition Component.
@@ -23,7 +23,7 @@ use ConfigTransformer202109064\Symfony\Component\DependencyInjection\ContainerBu
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class ConfigurableExtension extends \ConfigTransformer202109064\Symfony\Component\HttpKernel\DependencyInjection\Extension
+abstract class ConfigurableExtension extends \ConfigTransformer2021090610\Symfony\Component\HttpKernel\DependencyInjection\Extension
 {
     /**
      * {@inheritdoc}

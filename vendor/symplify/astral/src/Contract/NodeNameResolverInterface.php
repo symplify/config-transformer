@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109064\Symplify\Astral\Contract;
+namespace ConfigTransformer2021090610\Symplify\Astral\Contract;
 
-use ConfigTransformer202109064\PhpParser\Node;
+use ConfigTransformer2021090610\PhpParser\Node;
 interface NodeNameResolverInterface
 {
     /**

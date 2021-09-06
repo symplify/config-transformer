@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109064\Symfony\Component\HttpKernel\CacheWarmer;
+namespace ConfigTransformer2021090610\Symfony\Component\HttpKernel\CacheWarmer;
 
 /**
  * Abstract cache warmer that knows how to write a file to the cache.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class CacheWarmer implements \ConfigTransformer202109064\Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+abstract class CacheWarmer implements \ConfigTransformer2021090610\Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
 {
     /**
      * @param string $file

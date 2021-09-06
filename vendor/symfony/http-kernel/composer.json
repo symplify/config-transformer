@@ -71,7 +71,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202109064\\Symfony\\Component\\HttpKernel\\": ""
+            "ConfigTransformer2021090610\\Symfony\\Component\\HttpKernel\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
