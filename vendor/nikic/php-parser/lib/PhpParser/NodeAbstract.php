@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109068\PhpParser;
+namespace ConfigTransformer202109060\PhpParser;
 
-abstract class NodeAbstract implements \ConfigTransformer202109068\PhpParser\Node, \JsonSerializable
+abstract class NodeAbstract implements \ConfigTransformer202109060\PhpParser\Node, \JsonSerializable
 {
     protected $attributes;
     /**
@@ -115,7 +115,7 @@ abstract class NodeAbstract implements \ConfigTransformer202109068\PhpParser\Nod
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
             $comment = $comments[$i];
-            if ($comment instanceof \ConfigTransformer202109068\PhpParser\Comment\Doc) {
+            if ($comment instanceof \ConfigTransformer202109060\PhpParser\Comment\Doc) {
                 return $comment;
             }
         }
@@ -132,7 +132,7 @@ abstract class NodeAbstract implements \ConfigTransformer202109068\PhpParser\Nod
     {
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
-            if ($comments[$i] instanceof \ConfigTransformer202109068\PhpParser\Comment\Doc) {
+            if ($comments[$i] instanceof \ConfigTransformer202109060\PhpParser\Comment\Doc) {
                 // Replace existing doc comment.
                 $comments[$i] = $docComment;
                 $this->setAttribute('comments', $comments);
