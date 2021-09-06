@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021090610\Symplify\Astral\NodeTraverser;
+namespace ConfigTransformer202109066\Symplify\Astral\NodeTraverser;
 
-use ConfigTransformer2021090610\PhpParser\Node;
-use ConfigTransformer2021090610\PhpParser\Node\Expr;
-use ConfigTransformer2021090610\PhpParser\Node\Stmt;
-use ConfigTransformer2021090610\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2021090610\PhpParser\NodeTraverser;
-use ConfigTransformer2021090610\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202109066\PhpParser\Node;
+use ConfigTransformer202109066\PhpParser\Node\Expr;
+use ConfigTransformer202109066\PhpParser\Node\Stmt;
+use ConfigTransformer202109066\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202109066\PhpParser\NodeTraverser;
+use ConfigTransformer202109066\PhpParser\NodeVisitorAbstract;
 final class SimpleCallableNodeTraverser
 {
     /**
@@ -25,14 +25,14 @@ final class SimpleCallableNodeTraverser
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $nodeTraverser = new \ConfigTransformer2021090610\PhpParser\NodeTraverser();
+        $nodeTraverser = new \ConfigTransformer202109066\PhpParser\NodeTraverser();
         $callableNodeVisitor = $this->createNodeVisitor($callable);
         $nodeTraverser->addVisitor($callableNodeVisitor);
         $nodeTraverser->traverse($nodes);
     }
-    private function createNodeVisitor(callable $callable) : \ConfigTransformer2021090610\PhpParser\NodeVisitorAbstract
+    private function createNodeVisitor(callable $callable) : \ConfigTransformer202109066\PhpParser\NodeVisitorAbstract
     {
-        return new class($callable) extends \ConfigTransformer2021090610\PhpParser\NodeVisitorAbstract
+        return new class($callable) extends \ConfigTransformer202109066\PhpParser\NodeVisitorAbstract
         {
             /**
              * @var callable
@@ -45,14 +45,14 @@ final class SimpleCallableNodeTraverser
             /**
              * @return int|Node|null
              */
-            public function enterNode(\ConfigTransformer2021090610\PhpParser\Node $node)
+            public function enterNode(\ConfigTransformer202109066\PhpParser\Node $node)
             {
                 $originalNode = $node;
                 $callable = $this->callable;
                 /** @var int|Node|null $newNode */
                 $newNode = $callable($node);
-                if ($originalNode instanceof \ConfigTransformer2021090610\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer2021090610\PhpParser\Node\Expr) {
-                    return new \ConfigTransformer2021090610\PhpParser\Node\Stmt\Expression($newNode);
+                if ($originalNode instanceof \ConfigTransformer202109066\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer202109066\PhpParser\Node\Expr) {
+                    return new \ConfigTransformer202109066\PhpParser\Node\Stmt\Expression($newNode);
                 }
                 return $newNode;
             }

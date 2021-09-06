@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021090610\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202109066\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer2021090610\Symfony\Component\HttpFoundation\RedirectResponse;
-use ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021090610\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use ConfigTransformer202109066\Symfony\Component\HttpFoundation\RedirectResponse;
+use ConfigTransformer202109066\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109066\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109066\Symfony\Component\HttpKernel\Event\ControllerEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RouterDataCollector extends \ConfigTransformer2021090610\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class RouterDataCollector extends \ConfigTransformer202109066\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * @var \SplObjectStorage
@@ -37,7 +37,7 @@ class RouterDataCollector extends \ConfigTransformer2021090610\Symfony\Component
      */
     public function collect($request, $response, $exception = null)
     {
-        if ($response instanceof \ConfigTransformer2021090610\Symfony\Component\HttpFoundation\RedirectResponse) {
+        if ($response instanceof \ConfigTransformer202109066\Symfony\Component\HttpFoundation\RedirectResponse) {
             $this->data['redirect'] = \true;
             $this->data['url'] = $response->getTargetUrl();
             if ($this->controllers->contains($request)) {
