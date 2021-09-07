@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109070\Symplify\EasyTesting;
+namespace ConfigTransformer202109071\Symplify\EasyTesting;
 
-use ConfigTransformer202109070\Nette\Utils\Strings;
-use ConfigTransformer202109070\Symplify\EasyTesting\ValueObject\Prefix;
-use ConfigTransformer202109070\Symplify\EasyTesting\ValueObject\SplitLine;
-use ConfigTransformer202109070\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202109071\Nette\Utils\Strings;
+use ConfigTransformer202109071\Symplify\EasyTesting\ValueObject\Prefix;
+use ConfigTransformer202109071\Symplify\EasyTesting\ValueObject\SplitLine;
+use ConfigTransformer202109071\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyTesting\Tests\MissingSkipPrefixResolver\MissingSkipPrefixResolverTest
  */
@@ -22,7 +22,7 @@ final class MissplacedSkipPrefixResolver
         foreach ($fixtureFileInfos as $fixtureFileInfo) {
             $hasNameSkipStart = $this->hasNameSkipStart($fixtureFileInfo);
             $fileContents = $fixtureFileInfo->getContents();
-            $hasSplitLine = (bool) \ConfigTransformer202109070\Nette\Utils\Strings::match($fileContents, \ConfigTransformer202109070\Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
+            $hasSplitLine = (bool) \ConfigTransformer202109071\Nette\Utils\Strings::match($fileContents, \ConfigTransformer202109071\Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
             if ($hasNameSkipStart && $hasSplitLine) {
                 $invalidFileInfos['incorrect_skips'][] = $fixtureFileInfo;
                 continue;
@@ -34,8 +34,8 @@ final class MissplacedSkipPrefixResolver
         }
         return $invalidFileInfos;
     }
-    private function hasNameSkipStart(\ConfigTransformer202109070\Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo) : bool
+    private function hasNameSkipStart(\ConfigTransformer202109071\Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo) : bool
     {
-        return (bool) \ConfigTransformer202109070\Nette\Utils\Strings::match($fixtureFileInfo->getBasenameWithoutSuffix(), \ConfigTransformer202109070\Symplify\EasyTesting\ValueObject\Prefix::SKIP_PREFIX_REGEX);
+        return (bool) \ConfigTransformer202109071\Nette\Utils\Strings::match($fixtureFileInfo->getBasenameWithoutSuffix(), \ConfigTransformer202109071\Symplify\EasyTesting\ValueObject\Prefix::SKIP_PREFIX_REGEX);
     }
 }
