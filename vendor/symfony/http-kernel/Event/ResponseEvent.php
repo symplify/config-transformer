@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021090610\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202109072\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021090610\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202109072\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109072\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109072\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to filter a Response object.
  *
@@ -22,15 +22,15 @@ use ConfigTransformer2021090610\Symfony\Component\HttpKernel\HttpKernelInterface
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ResponseEvent extends \ConfigTransformer2021090610\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ResponseEvent extends \ConfigTransformer202109072\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(\ConfigTransformer2021090610\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Request $request, int $requestType, \ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Response $response)
+    public function __construct(\ConfigTransformer202109072\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202109072\Symfony\Component\HttpFoundation\Request $request, int $requestType, \ConfigTransformer202109072\Symfony\Component\HttpFoundation\Response $response)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setResponse($response);
     }
-    public function getResponse() : \ConfigTransformer2021090610\Symfony\Component\HttpFoundation\Response
+    public function getResponse() : \ConfigTransformer202109072\Symfony\Component\HttpFoundation\Response
     {
         return $this->response;
     }
