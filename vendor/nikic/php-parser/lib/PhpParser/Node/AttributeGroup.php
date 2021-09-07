@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109072\PhpParser\Node;
+namespace ConfigTransformer202109079\PhpParser\Node;
 
-use ConfigTransformer202109072\PhpParser\Node;
-use ConfigTransformer202109072\PhpParser\NodeAbstract;
-class AttributeGroup extends \ConfigTransformer202109072\PhpParser\NodeAbstract
+use ConfigTransformer202109079\PhpParser\Node;
+use ConfigTransformer202109079\PhpParser\NodeAbstract;
+class AttributeGroup extends \ConfigTransformer202109079\PhpParser\NodeAbstract
 {
     /** @var Attribute[] Attributes */
     public $attrs;
