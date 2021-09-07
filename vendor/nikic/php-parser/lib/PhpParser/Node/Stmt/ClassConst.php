@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109079\PhpParser\Node\Stmt;
+namespace ConfigTransformer202109073\PhpParser\Node\Stmt;
 
-use ConfigTransformer202109079\PhpParser\Node;
-class ClassConst extends \ConfigTransformer202109079\PhpParser\Node\Stmt
+use ConfigTransformer202109073\PhpParser\Node;
+class ClassConst extends \ConfigTransformer202109073\PhpParser\Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
@@ -38,7 +38,7 @@ class ClassConst extends \ConfigTransformer202109079\PhpParser\Node\Stmt
      */
     public function isPublic() : bool
     {
-        return ($this->flags & \ConfigTransformer202109079\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \ConfigTransformer202109079\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+        return ($this->flags & \ConfigTransformer202109073\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \ConfigTransformer202109073\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
     /**
      * Whether constant is protected.
@@ -47,7 +47,7 @@ class ClassConst extends \ConfigTransformer202109079\PhpParser\Node\Stmt
      */
     public function isProtected() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202109079\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        return (bool) ($this->flags & \ConfigTransformer202109073\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
     }
     /**
      * Whether constant is private.
@@ -56,7 +56,7 @@ class ClassConst extends \ConfigTransformer202109079\PhpParser\Node\Stmt
      */
     public function isPrivate() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202109079\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        return (bool) ($this->flags & \ConfigTransformer202109073\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
     }
     /**
      * Whether constant is final.
@@ -65,7 +65,7 @@ class ClassConst extends \ConfigTransformer202109079\PhpParser\Node\Stmt
      */
     public function isFinal() : bool
     {
-        return (bool) ($this->flags & \ConfigTransformer202109079\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
+        return (bool) ($this->flags & \ConfigTransformer202109073\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
     }
     public function getType() : string
     {
