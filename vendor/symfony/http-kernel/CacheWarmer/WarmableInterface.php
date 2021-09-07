@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109072\Symfony\Component\HttpKernel\CacheWarmer;
+namespace ConfigTransformer202109075\Symfony\Component\HttpKernel\CacheWarmer;
 
 /**
  * Interface for classes that support warming their cache.
