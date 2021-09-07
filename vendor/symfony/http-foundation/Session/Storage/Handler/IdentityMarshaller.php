@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109073\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202109072\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use ConfigTransformer202109073\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202109072\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
-class IdentityMarshaller implements \ConfigTransformer202109073\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class IdentityMarshaller implements \ConfigTransformer202109072\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     /**
      * {@inheritdoc}
