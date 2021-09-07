@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021090710\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202109074\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer2021090710\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021090710\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109074\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109074\Symfony\Component\HttpFoundation\Response;
 /**
  * AjaxDataCollector.
  *
@@ -19,7 +19,7 @@ use ConfigTransformer2021090710\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class AjaxDataCollector extends \ConfigTransformer2021090710\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class AjaxDataCollector extends \ConfigTransformer202109074\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021090710\Psr\Container;
+namespace ConfigTransformer202109074\Psr\Container;
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.

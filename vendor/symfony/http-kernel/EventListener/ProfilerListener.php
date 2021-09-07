@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021090710\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202109074\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer2021090710\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer2021090710\Symfony\Component\HttpFoundation\RequestMatcherInterface;
-use ConfigTransformer2021090710\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer2021090710\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use ConfigTransformer2021090710\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer2021090710\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use ConfigTransformer2021090710\Symfony\Component\HttpKernel\KernelEvents;
-use ConfigTransformer2021090710\Symfony\Component\HttpKernel\Profiler\Profiler;
+use ConfigTransformer202109074\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202109074\Symfony\Component\HttpFoundation\RequestMatcherInterface;
+use ConfigTransformer202109074\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202109074\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ConfigTransformer202109074\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202109074\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use ConfigTransformer202109074\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202109074\Symfony\Component\HttpKernel\Profiler\Profiler;
 /**
  * ProfilerListener collects data for the current request by listening to the kernel events.
  *
@@ -25,7 +25,7 @@ use ConfigTransformer2021090710\Symfony\Component\HttpKernel\Profiler\Profiler;
  *
  * @final
  */
-class ProfilerListener implements \ConfigTransformer2021090710\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ProfilerListener implements \ConfigTransformer202109074\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     protected $profiler;
     protected $matcher;
@@ -39,7 +39,7 @@ class ProfilerListener implements \ConfigTransformer2021090710\Symfony\Component
      * @param bool $onlyException    True if the profiler only collects data when an exception occurs, false otherwise
      * @param bool $onlyMainRequests True if the profiler only collects data when the request is the main request, false otherwise
      */
-    public function __construct(\ConfigTransformer2021090710\Symfony\Component\HttpKernel\Profiler\Profiler $profiler, \ConfigTransformer2021090710\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer2021090710\Symfony\Component\HttpFoundation\RequestMatcherInterface $matcher = null, bool $onlyException = \false, bool $onlyMainRequests = \false)
+    public function __construct(\ConfigTransformer202109074\Symfony\Component\HttpKernel\Profiler\Profiler $profiler, \ConfigTransformer202109074\Symfony\Component\HttpFoundation\RequestStack $requestStack, \ConfigTransformer202109074\Symfony\Component\HttpFoundation\RequestMatcherInterface $matcher = null, bool $onlyException = \false, bool $onlyMainRequests = \false)
     {
         $this->profiler = $profiler;
         $this->matcher = $matcher;
@@ -106,6 +106,6 @@ class ProfilerListener implements \ConfigTransformer2021090710\Symfony\Component
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer2021090710\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -100], \ConfigTransformer2021090710\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => ['onKernelException', 0], \ConfigTransformer2021090710\Symfony\Component\HttpKernel\KernelEvents::TERMINATE => ['onKernelTerminate', -1024]];
+        return [\ConfigTransformer202109074\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -100], \ConfigTransformer202109074\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => ['onKernelException', 0], \ConfigTransformer202109074\Symfony\Component\HttpKernel\KernelEvents::TERMINATE => ['onKernelTerminate', -1024]];
     }
 }
