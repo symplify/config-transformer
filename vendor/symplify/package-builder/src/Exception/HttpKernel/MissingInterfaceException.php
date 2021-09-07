@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109077\Symplify\PackageBuilder\Exception\HttpKernel;
+namespace ConfigTransformer202109070\Symplify\PackageBuilder\Exception\HttpKernel;
 
 use Exception;
 final class MissingInterfaceException extends \Exception
