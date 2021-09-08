@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109074\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202109086\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202109074\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109074\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202109074\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202109074\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202109086\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109086\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202109086\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202109086\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer202109074\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer202109086\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $replacements;
     /**
@@ -52,9 +52,9 @@ class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer202109074\Sym
             $seenAliasTargets[$targetId] = \true;
             try {
                 $definition = $container->getDefinition($targetId);
-            } catch (\ConfigTransformer202109074\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
+            } catch (\ConfigTransformer202109086\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
                 if ('' !== $e->getId() && '@' === $e->getId()[0]) {
-                    throw new \ConfigTransformer202109074\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
+                    throw new \ConfigTransformer202109086\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
                 }
                 throw $e;
             }
@@ -77,10 +77,10 @@ class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer202109074\Sym
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202109074\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
+        if ($value instanceof \ConfigTransformer202109086\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
             // Perform the replacement
             $newId = $this->replacements[$referenceId];
-            $value = new \ConfigTransformer202109074\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
+            $value = new \ConfigTransformer202109086\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
             $this->container->log($this, \sprintf('Changed reference of service "%s" previously pointing to "%s" to "%s".', $this->currentId, $referenceId, $newId));
         }
         return parent::processValue($value, $isRoot);
