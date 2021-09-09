@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202109086;
+namespace ConfigTransformer202109095;
 
 /*
  * This file is part of the Symfony package.
@@ -10,16 +10,16 @@ namespace ConfigTransformer202109086;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer202109086\Symfony\Component\VarDumper\VarDumper;
-if (!\function_exists('ConfigTransformer202109086\\dump')) {
+use ConfigTransformer202109095\Symfony\Component\VarDumper\VarDumper;
+if (!\function_exists('ConfigTransformer202109095\\dump')) {
     /**
      * @author Nicolas Grekas <p@tchwork.com>
      */
     function dump($var, ...$moreVars)
     {
-        \ConfigTransformer202109086\Symfony\Component\VarDumper\VarDumper::dump($var);
+        \ConfigTransformer202109095\Symfony\Component\VarDumper\VarDumper::dump($var);
         foreach ($moreVars as $v) {
-            \ConfigTransformer202109086\Symfony\Component\VarDumper\VarDumper::dump($v);
+            \ConfigTransformer202109095\Symfony\Component\VarDumper\VarDumper::dump($v);
         }
         if (1 < \func_num_args()) {
             return \func_get_args();
@@ -27,11 +27,11 @@ if (!\function_exists('ConfigTransformer202109086\\dump')) {
         return $var;
     }
 }
-if (!\function_exists('ConfigTransformer202109086\\dd')) {
+if (!\function_exists('ConfigTransformer202109095\\dd')) {
     function dd(...$vars)
     {
         foreach ($vars as $v) {
-            \ConfigTransformer202109086\Symfony\Component\VarDumper\VarDumper::dump($v);
+            \ConfigTransformer202109095\Symfony\Component\VarDumper\VarDumper::dump($v);
         }
         exit(1);
     }

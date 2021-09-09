@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109086\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202109095\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202109086\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202109086\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202109095\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202109095\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * Encrypt/decrypt values using Libsodium.
  *
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
-class SodiumMarshaller implements \ConfigTransformer202109086\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class SodiumMarshaller implements \ConfigTransformer202109095\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
     private $decryptionKeys;
@@ -26,15 +26,15 @@ class SodiumMarshaller implements \ConfigTransformer202109086\Symfony\Component\
      *                                 more rotating keys can be provided to decrypt values;
      *                                 each key must be generated using sodium_crypto_box_keypair()
      */
-    public function __construct(array $decryptionKeys, \ConfigTransformer202109086\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(array $decryptionKeys, \ConfigTransformer202109095\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!self::isSupported()) {
-            throw new \ConfigTransformer202109086\Symfony\Component\Cache\Exception\CacheException('The "sodium" PHP extension is not loaded.');
+            throw new \ConfigTransformer202109095\Symfony\Component\Cache\Exception\CacheException('The "sodium" PHP extension is not loaded.');
         }
         if (!isset($decryptionKeys[0])) {
-            throw new \ConfigTransformer202109086\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one decryption key must be provided at index "0".');
+            throw new \ConfigTransformer202109095\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one decryption key must be provided at index "0".');
         }
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202109086\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202109095\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         $this->decryptionKeys = $decryptionKeys;
     }
     public static function isSupported() : bool

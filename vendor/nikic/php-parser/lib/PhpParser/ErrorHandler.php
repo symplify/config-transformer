@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109086\PhpParser;
+namespace ConfigTransformer202109095\PhpParser;
 
 interface ErrorHandler
 {

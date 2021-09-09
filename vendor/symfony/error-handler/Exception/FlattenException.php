@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109086\Symfony\Component\ErrorHandler\Exception;
+namespace ConfigTransformer202109095\Symfony\Component\ErrorHandler\Exception;
 
-use ConfigTransformer202109086\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use ConfigTransformer202109086\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202109086\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use ConfigTransformer202109095\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use ConfigTransformer202109095\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109095\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *
@@ -67,17 +67,17 @@ class FlattenException
         $e = new static();
         $e->setMessage($exception->getMessage());
         $e->setCode($exception->getCode());
-        if ($exception instanceof \ConfigTransformer202109086\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+        if ($exception instanceof \ConfigTransformer202109095\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
             $headers = \array_merge($headers, $exception->getHeaders());
-        } elseif ($exception instanceof \ConfigTransformer202109086\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+        } elseif ($exception instanceof \ConfigTransformer202109095\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
             $statusCode = 400;
         }
         if (null === $statusCode) {
             $statusCode = 500;
         }
-        if (\class_exists(\ConfigTransformer202109086\Symfony\Component\HttpFoundation\Response::class) && isset(\ConfigTransformer202109086\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
-            $statusText = \ConfigTransformer202109086\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
+        if (\class_exists(\ConfigTransformer202109095\Symfony\Component\HttpFoundation\Response::class) && isset(\ConfigTransformer202109095\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
+            $statusText = \ConfigTransformer202109095\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
         } else {
             $statusText = 'Whoops, looks like something went wrong.';
         }
