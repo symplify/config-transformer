@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202109095\\Symplify\\ComposerJsonManipulator\\": "src"
+            "ConfigTransformer202109093\\Symplify\\ComposerJsonManipulator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202109095\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+            "ConfigTransformer202109093\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
         }
     },
     "extra": {

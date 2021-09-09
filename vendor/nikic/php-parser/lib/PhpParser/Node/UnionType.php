@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109095\PhpParser\Node;
+namespace ConfigTransformer202109093\PhpParser\Node;
 
-use ConfigTransformer202109095\PhpParser\NodeAbstract;
-class UnionType extends \ConfigTransformer202109095\PhpParser\NodeAbstract
+use ConfigTransformer202109093\PhpParser\NodeAbstract;
+class UnionType extends \ConfigTransformer202109093\PhpParser\NodeAbstract
 {
     /** @var (Identifier|Name)[] Types */
     public $types;
