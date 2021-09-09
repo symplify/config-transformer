@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109091\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202109098\Symplify\EasyTesting\ValueObject;
 
 final class Prefix
 {
