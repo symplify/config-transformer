@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109098\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202109102\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202109098\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202109102\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * The Formatter class provides helpers to format messages.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FormatterHelper extends \ConfigTransformer202109098\Symfony\Component\Console\Helper\Helper
+class FormatterHelper extends \ConfigTransformer202109102\Symfony\Component\Console\Helper\Helper
 {
     /**
      * Formats a message within a section.
@@ -47,7 +47,7 @@ class FormatterHelper extends \ConfigTransformer202109098\Symfony\Component\Cons
         $len = 0;
         $lines = [];
         foreach ($messages as $message) {
-            $message = \ConfigTransformer202109098\Symfony\Component\Console\Formatter\OutputFormatter::escape($message);
+            $message = \ConfigTransformer202109102\Symfony\Component\Console\Formatter\OutputFormatter::escape($message);
             $lines[] = \sprintf($large ? '  %s  ' : ' %s ', $message);
             $len = \max(self::width($message) + ($large ? 4 : 2), $len);
         }

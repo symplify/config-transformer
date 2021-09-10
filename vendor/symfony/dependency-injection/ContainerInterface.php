@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109098\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202109102\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202109098\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer202109098\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202109098\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202109098\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202109102\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202109102\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202109102\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202109102\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * ContainerInterface is the interface implemented by service container classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ContainerInterface extends \ConfigTransformer202109098\Psr\Container\ContainerInterface
+interface ContainerInterface extends \ConfigTransformer202109102\Psr\Container\ContainerInterface
 {
     public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
     public const EXCEPTION_ON_INVALID_REFERENCE = 1;

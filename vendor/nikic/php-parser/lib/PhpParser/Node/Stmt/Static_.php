@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109098\PhpParser\Node\Stmt;
+namespace ConfigTransformer202109102\PhpParser\Node\Stmt;
 
-use ConfigTransformer202109098\PhpParser\Node\Stmt;
-class Static_ extends \ConfigTransformer202109098\PhpParser\Node\Stmt
+use ConfigTransformer202109102\PhpParser\Node\Stmt;
+class Static_ extends \ConfigTransformer202109102\PhpParser\Node\Stmt
 {
     /** @var StaticVar[] Variable definitions */
     public $vars;
