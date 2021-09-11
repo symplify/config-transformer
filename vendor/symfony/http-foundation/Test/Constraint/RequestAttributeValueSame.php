@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109102\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202109117\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202109102\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202109102\Symfony\Component\HttpFoundation\Request;
-final class RequestAttributeValueSame extends \ConfigTransformer202109102\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202109117\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202109117\Symfony\Component\HttpFoundation\Request;
+final class RequestAttributeValueSame extends \ConfigTransformer202109117\PHPUnit\Framework\Constraint\Constraint
 {
     private $name;
     private $value;
