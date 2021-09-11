@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109117\PhpParser\Node\Stmt;
+namespace ConfigTransformer202109116\PhpParser\Node\Stmt;
 
-use ConfigTransformer202109117\PhpParser\Node;
-class Const_ extends \ConfigTransformer202109117\PhpParser\Node\Stmt
+use ConfigTransformer202109116\PhpParser\Node;
+class Const_ extends \ConfigTransformer202109116\PhpParser\Node\Stmt
 {
     /** @var Node\Const_[] Constant declarations */
     public $consts;

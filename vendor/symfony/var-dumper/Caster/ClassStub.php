@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109117\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202109116\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202109117\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202109116\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents a PHP class identifier.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ClassStub extends \ConfigTransformer202109117\Symfony\Component\VarDumper\Caster\ConstStub
+class ClassStub extends \ConfigTransformer202109116\Symfony\Component\VarDumper\Caster\ConstStub
 {
     /**
      * @param string   $identifier A PHP identifier, e.g. a class, method, interface, etc. name
@@ -56,8 +56,8 @@ class ClassStub extends \ConfigTransformer202109117\Symfony\Component\VarDumper\
                 }, $identifier);
             }
             if (null !== $callable && $r instanceof \ReflectionFunctionAbstract) {
-                $s = \ConfigTransformer202109117\Symfony\Component\VarDumper\Caster\ReflectionCaster::castFunctionAbstract($r, [], new \ConfigTransformer202109117\Symfony\Component\VarDumper\Cloner\Stub(), \true, \ConfigTransformer202109117\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
-                $s = \ConfigTransformer202109117\Symfony\Component\VarDumper\Caster\ReflectionCaster::getSignature($s);
+                $s = \ConfigTransformer202109116\Symfony\Component\VarDumper\Caster\ReflectionCaster::castFunctionAbstract($r, [], new \ConfigTransformer202109116\Symfony\Component\VarDumper\Cloner\Stub(), \true, \ConfigTransformer202109116\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
+                $s = \ConfigTransformer202109116\Symfony\Component\VarDumper\Caster\ReflectionCaster::getSignature($s);
                 if (\substr_compare($identifier, '()', -\strlen('()')) === 0) {
                     $this->value = \substr_replace($identifier, $s, -2);
                 } else {

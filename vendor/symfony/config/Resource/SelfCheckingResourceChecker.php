@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109117\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202109116\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202109117\Symfony\Component\Config\ResourceCheckerInterface;
+use ConfigTransformer202109116\Symfony\Component\Config\ResourceCheckerInterface;
 /**
  * Resource checker for instances of SelfCheckingResourceInterface.
  *
@@ -19,14 +19,14 @@ use ConfigTransformer202109117\Symfony\Component\Config\ResourceCheckerInterface
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class SelfCheckingResourceChecker implements \ConfigTransformer202109117\Symfony\Component\Config\ResourceCheckerInterface
+class SelfCheckingResourceChecker implements \ConfigTransformer202109116\Symfony\Component\Config\ResourceCheckerInterface
 {
     /**
      * @param \Symfony\Component\Config\Resource\ResourceInterface $metadata
      */
     public function supports($metadata)
     {
-        return $metadata instanceof \ConfigTransformer202109117\Symfony\Component\Config\Resource\SelfCheckingResourceInterface;
+        return $metadata instanceof \ConfigTransformer202109116\Symfony\Component\Config\Resource\SelfCheckingResourceInterface;
     }
     /**
      * @param \Symfony\Component\Config\Resource\ResourceInterface $resource
