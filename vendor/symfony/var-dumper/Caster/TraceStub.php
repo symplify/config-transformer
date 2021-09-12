@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109116\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202109129\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202109116\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202109129\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents a backtrace as returned by debug_backtrace() or Exception->getTrace().
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TraceStub extends \ConfigTransformer202109116\Symfony\Component\VarDumper\Cloner\Stub
+class TraceStub extends \ConfigTransformer202109129\Symfony\Component\VarDumper\Cloner\Stub
 {
     public $keepArgs;
     public $sliceOffset;

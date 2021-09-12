@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109116\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202109129\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202109116\Psr\Log\LoggerInterface;
-use ConfigTransformer202109116\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109129\Psr\Log\LoggerInterface;
+use ConfigTransformer202109129\Symfony\Component\HttpFoundation\Request;
 /**
  * This implementation uses the '_controller' request attribute to determine
  * the controller to execute.
@@ -19,10 +19,10 @@ use ConfigTransformer202109116\Symfony\Component\HttpFoundation\Request;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class ControllerResolver implements \ConfigTransformer202109116\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class ControllerResolver implements \ConfigTransformer202109129\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $logger;
-    public function __construct(\ConfigTransformer202109116\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\ConfigTransformer202109129\Psr\Log\LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
