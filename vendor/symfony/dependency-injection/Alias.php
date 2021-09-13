@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109136\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202109131\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202109136\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202109131\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 class Alias
 {
     private const DEFAULT_DEPRECATION_TEMPLATE = 'The "%alias_id%" service alias is deprecated. You should stop using it, as it will be removed in the future.';
@@ -95,10 +95,10 @@ class Alias
         }
         if ('' !== $message) {
             if (\preg_match('#[\\r\\n]|\\*/#', $message)) {
-                throw new \ConfigTransformer202109136\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Invalid characters found in deprecation template.');
+                throw new \ConfigTransformer202109131\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Invalid characters found in deprecation template.');
             }
             if (\strpos($message, '%alias_id%') === \false) {
-                throw new \ConfigTransformer202109136\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The deprecation template must contain the "%alias_id%" placeholder.');
+                throw new \ConfigTransformer202109131\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The deprecation template must contain the "%alias_id%" placeholder.');
             }
         }
         $this->deprecation = $status ? ['package' => $package, 'version' => $version, 'message' => $message ?: self::DEFAULT_DEPRECATION_TEMPLATE] : [];

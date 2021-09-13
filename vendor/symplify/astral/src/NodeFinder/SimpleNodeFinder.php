@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109136\Symplify\Astral\NodeFinder;
+namespace ConfigTransformer202109131\Symplify\Astral\NodeFinder;
 
-use ConfigTransformer202109136\PhpParser\Node;
-use ConfigTransformer202109136\PhpParser\NodeFinder;
-use ConfigTransformer202109136\Symplify\Astral\ValueObject\AttributeKey;
-use ConfigTransformer202109136\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202109131\PhpParser\Node;
+use ConfigTransformer202109131\PhpParser\NodeFinder;
+use ConfigTransformer202109131\Symplify\Astral\ValueObject\AttributeKey;
+use ConfigTransformer202109131\Symplify\PackageBuilder\Php\TypeChecker;
 final class SimpleNodeFinder
 {
     /**
@@ -17,7 +17,7 @@ final class SimpleNodeFinder
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\ConfigTransformer202109136\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer202109136\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\ConfigTransformer202109131\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer202109131\PhpParser\NodeFinder $nodeFinder)
     {
         $this->typeChecker = $typeChecker;
         $this->nodeFinder = $nodeFinder;
@@ -27,7 +27,7 @@ final class SimpleNodeFinder
      * @param class-string<T> $nodeClass
      * @return T[]
      */
-    public function findByType(\ConfigTransformer202109136\PhpParser\Node $node, string $nodeClass) : array
+    public function findByType(\ConfigTransformer202109131\PhpParser\Node $node, string $nodeClass) : array
     {
         return $this->nodeFinder->findInstanceOf($node, $nodeClass);
     }
@@ -35,7 +35,7 @@ final class SimpleNodeFinder
      * @template T of Node
      * @param array<class-string<T>> $nodeClasses
      */
-    public function hasByTypes(\ConfigTransformer202109136\PhpParser\Node $node, array $nodeClasses) : bool
+    public function hasByTypes(\ConfigTransformer202109131\PhpParser\Node $node, array $nodeClasses) : bool
     {
         foreach ($nodeClasses as $nodeClass) {
             $foundNodes = $this->findByType($node, $nodeClass);
@@ -52,14 +52,14 @@ final class SimpleNodeFinder
      * @param class-string<T> $nodeClass
      * @return T|null
      */
-    public function findFirstParentByType(\ConfigTransformer202109136\PhpParser\Node $node, string $nodeClass) : ?\ConfigTransformer202109136\PhpParser\Node
+    public function findFirstParentByType(\ConfigTransformer202109131\PhpParser\Node $node, string $nodeClass) : ?\ConfigTransformer202109131\PhpParser\Node
     {
-        $node = $node->getAttribute(\ConfigTransformer202109136\Symplify\Astral\ValueObject\AttributeKey::PARENT);
+        $node = $node->getAttribute(\ConfigTransformer202109131\Symplify\Astral\ValueObject\AttributeKey::PARENT);
         while ($node) {
             if (\is_a($node, $nodeClass, \true)) {
                 return $node;
             }
-            $node = $node->getAttribute(\ConfigTransformer202109136\Symplify\Astral\ValueObject\AttributeKey::PARENT);
+            $node = $node->getAttribute(\ConfigTransformer202109131\Symplify\Astral\ValueObject\AttributeKey::PARENT);
         }
         return null;
     }
@@ -68,14 +68,14 @@ final class SimpleNodeFinder
      * @param array<class-string<T>&class-string<Node>> $nodeTypes
      * @return T|null
      */
-    public function findFirstParentByTypes(\ConfigTransformer202109136\PhpParser\Node $node, array $nodeTypes) : ?\ConfigTransformer202109136\PhpParser\Node
+    public function findFirstParentByTypes(\ConfigTransformer202109131\PhpParser\Node $node, array $nodeTypes) : ?\ConfigTransformer202109131\PhpParser\Node
     {
-        $node = $node->getAttribute(\ConfigTransformer202109136\Symplify\Astral\ValueObject\AttributeKey::PARENT);
+        $node = $node->getAttribute(\ConfigTransformer202109131\Symplify\Astral\ValueObject\AttributeKey::PARENT);
         while ($node) {
             if ($this->typeChecker->isInstanceOf($node, $nodeTypes)) {
                 return $node;
             }
-            $node = $node->getAttribute(\ConfigTransformer202109136\Symplify\Astral\ValueObject\AttributeKey::PARENT);
+            $node = $node->getAttribute(\ConfigTransformer202109131\Symplify\Astral\ValueObject\AttributeKey::PARENT);
         }
         return null;
     }
