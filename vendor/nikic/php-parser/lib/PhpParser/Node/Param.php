@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109136\PhpParser\Node;
+namespace ConfigTransformer202109139\PhpParser\Node;
 
-use ConfigTransformer202109136\PhpParser\NodeAbstract;
-class Param extends \ConfigTransformer202109136\PhpParser\NodeAbstract
+use ConfigTransformer202109139\PhpParser\NodeAbstract;
+class Param extends \ConfigTransformer202109139\PhpParser\NodeAbstract
 {
     /** @var null|Identifier|Name|NullableType|UnionType Type declaration */
     public $type;
@@ -32,10 +32,10 @@ class Param extends \ConfigTransformer202109136\PhpParser\NodeAbstract
      * @param int                                                $flags      Optional visibility flags
      * @param AttributeGroup[]                                   $attrGroups PHP attribute groups
      */
-    public function __construct($var, \ConfigTransformer202109136\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0, array $attrGroups = [])
+    public function __construct($var, \ConfigTransformer202109139\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0, array $attrGroups = [])
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \ConfigTransformer202109136\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \ConfigTransformer202109139\PhpParser\Node\Identifier($type) : $type;
         $this->byRef = $byRef;
         $this->variadic = $variadic;
         $this->var = $var;
