@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021091310\Symplify\PackageBuilder\Configuration;
+namespace ConfigTransformer202109136\Symplify\PackageBuilder\Configuration;
 
 final class StaticEolConfiguration
 {

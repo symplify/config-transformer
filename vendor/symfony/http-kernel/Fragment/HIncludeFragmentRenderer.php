@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021091310\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202109136\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer2021091310\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021091310\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer2021091310\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use ConfigTransformer2021091310\Symfony\Component\HttpKernel\UriSigner;
-use ConfigTransformer2021091310\Twig\Environment;
+use ConfigTransformer202109136\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109136\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109136\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202109136\Symfony\Component\HttpKernel\UriSigner;
+use ConfigTransformer202109136\Twig\Environment;
 /**
  * Implements the Hinclude rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HIncludeFragmentRenderer extends \ConfigTransformer2021091310\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+class HIncludeFragmentRenderer extends \ConfigTransformer202109136\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $globalDefaultTemplate;
     private $signer;
@@ -29,7 +29,7 @@ class HIncludeFragmentRenderer extends \ConfigTransformer2021091310\Symfony\Comp
     /**
      * @param string $globalDefaultTemplate The global default content (it can be a template name or the content)
      */
-    public function __construct(\ConfigTransformer2021091310\Twig\Environment $twig = null, \ConfigTransformer2021091310\Symfony\Component\HttpKernel\UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
+    public function __construct(\ConfigTransformer202109136\Twig\Environment $twig = null, \ConfigTransformer202109136\Symfony\Component\HttpKernel\UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
     {
         $this->twig = $twig;
         $this->globalDefaultTemplate = $globalDefaultTemplate;
@@ -58,8 +58,8 @@ class HIncludeFragmentRenderer extends \ConfigTransformer2021091310\Symfony\Comp
      */
     public function render($uri, $request, $options = [])
     {
-        if ($uri instanceof \ConfigTransformer2021091310\Symfony\Component\HttpKernel\Controller\ControllerReference) {
-            $uri = (new \ConfigTransformer2021091310\Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator($this->fragmentPath, $this->signer))->generate($uri, $request);
+        if ($uri instanceof \ConfigTransformer202109136\Symfony\Component\HttpKernel\Controller\ControllerReference) {
+            $uri = (new \ConfigTransformer202109136\Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator($this->fragmentPath, $this->signer))->generate($uri, $request);
         }
         // We need to replace ampersands in the URI with the encoded form in order to return valid html/xml content.
         $uri = \str_replace('&', '&amp;', $uri);
@@ -80,7 +80,7 @@ class HIncludeFragmentRenderer extends \ConfigTransformer2021091310\Symfony\Comp
                 $renderedAttributes .= \sprintf(' %s="%s"', \htmlspecialchars($attribute, $flags, $this->charset, \false), \htmlspecialchars($value, $flags, $this->charset, \false));
             }
         }
-        return new \ConfigTransformer2021091310\Symfony\Component\HttpFoundation\Response(\sprintf('<hx:include src="%s"%s>%s</hx:include>', $uri, $renderedAttributes, $content));
+        return new \ConfigTransformer202109136\Symfony\Component\HttpFoundation\Response(\sprintf('<hx:include src="%s"%s>%s</hx:include>', $uri, $renderedAttributes, $content));
     }
     /**
      * {@inheritdoc}

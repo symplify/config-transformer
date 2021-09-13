@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021091310\Symplify\PhpConfigPrinter\Exception;
+namespace ConfigTransformer202109136\Symplify\PhpConfigPrinter\Exception;
 
 use Exception;
 final class ShouldNotHappenException extends \Exception

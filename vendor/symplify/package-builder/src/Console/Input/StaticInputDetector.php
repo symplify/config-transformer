@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021091310\Symplify\PackageBuilder\Console\Input;
+namespace ConfigTransformer202109136\Symplify\PackageBuilder\Console\Input;
 
-use ConfigTransformer2021091310\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202109136\Symfony\Component\Console\Input\ArgvInput;
 final class StaticInputDetector
 {
     public static function isDebug() : bool
     {
-        $argvInput = new \ConfigTransformer2021091310\Symfony\Component\Console\Input\ArgvInput();
+        $argvInput = new \ConfigTransformer202109136\Symfony\Component\Console\Input\ArgvInput();
         return $argvInput->hasParameterOption(['--debug', '-v', '-vv', '-vvv']);
     }
 }
