@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109139\Symplify\ComposerJsonManipulator\ValueObject;
+namespace ConfigTransformer202109135\Symplify\ComposerJsonManipulator\ValueObject;
 
 /**
  * @api

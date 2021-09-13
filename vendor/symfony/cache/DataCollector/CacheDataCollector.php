@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109139\Symfony\Component\Cache\DataCollector;
+namespace ConfigTransformer202109135\Symfony\Component\Cache\DataCollector;
 
-use ConfigTransformer202109139\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use ConfigTransformer202109139\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
-use ConfigTransformer202109139\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109139\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202109139\Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use ConfigTransformer202109139\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use ConfigTransformer202109135\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ConfigTransformer202109135\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+use ConfigTransformer202109135\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109135\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109135\Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use ConfigTransformer202109135\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  *
  * @final
  */
-class CacheDataCollector extends \ConfigTransformer202109139\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202109139\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class CacheDataCollector extends \ConfigTransformer202109135\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202109135\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     /**
      * @var TraceableAdapter[]

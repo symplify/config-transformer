@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109139\Symfony\Component\ErrorHandler\Error;
+namespace ConfigTransformer202109135\Symfony\Component\ErrorHandler\Error;
 
 class FatalError extends \Error
 {
