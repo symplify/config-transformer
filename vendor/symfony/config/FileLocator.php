@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109178\Symfony\Component\Config;
+namespace ConfigTransformer202109173\Symfony\Component\Config;
 
-use ConfigTransformer202109178\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ConfigTransformer202109173\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * FileLocator uses an array of pre-defined paths to find files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FileLocator implements \ConfigTransformer202109178\Symfony\Component\Config\FileLocatorInterface
+class FileLocator implements \ConfigTransformer202109173\Symfony\Component\Config\FileLocatorInterface
 {
     protected $paths;
     /**
@@ -39,7 +39,7 @@ class FileLocator implements \ConfigTransformer202109178\Symfony\Component\Confi
         }
         if ($this->isAbsolutePath($name)) {
             if (!\file_exists($name)) {
-                throw new \ConfigTransformer202109178\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist.', $name), 0, null, [$name]);
+                throw new \ConfigTransformer202109173\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist.', $name), 0, null, [$name]);
             }
             return $name;
         }
@@ -60,7 +60,7 @@ class FileLocator implements \ConfigTransformer202109178\Symfony\Component\Confi
             }
         }
         if (!$filepaths) {
-            throw new \ConfigTransformer202109178\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist (in: "%s").', $name, \implode('", "', $paths)), 0, null, $notfound);
+            throw new \ConfigTransformer202109173\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist (in: "%s").', $name, \implode('", "', $paths)), 0, null, $notfound);
         }
         return $filepaths;
     }
