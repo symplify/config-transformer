@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109151\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021091710\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202109151\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021091710\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class NameNode extends \ConfigTransformer202109151\Symfony\Component\ExpressionLanguage\Node\Node
+class NameNode extends \ConfigTransformer2021091710\Symfony\Component\ExpressionLanguage\Node\Node
 {
     public function __construct(string $name)
     {
