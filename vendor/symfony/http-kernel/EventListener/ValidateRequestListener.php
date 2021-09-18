@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109184\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer2021091810\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202109184\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202109184\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202109184\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer2021091810\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer2021091810\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer2021091810\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Validates Requests.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer202109184\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final
  */
-class ValidateRequestListener implements \ConfigTransformer202109184\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ValidateRequestListener implements \ConfigTransformer2021091810\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     /**
      * Performs the validation.
@@ -42,6 +42,6 @@ class ValidateRequestListener implements \ConfigTransformer202109184\Symfony\Com
      */
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202109184\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 256]]];
+        return [\ConfigTransformer2021091810\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 256]]];
     }
 }

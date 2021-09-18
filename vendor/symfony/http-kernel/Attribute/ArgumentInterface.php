@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109184\Symfony\Component\HttpKernel\Attribute;
+namespace ConfigTransformer2021091810\Symfony\Component\HttpKernel\Attribute;
 
-trigger_deprecation('symfony/http-kernel', '5.3', 'The "%s" interface is deprecated.', \ConfigTransformer202109184\Symfony\Component\HttpKernel\Attribute\ArgumentInterface::class);
+trigger_deprecation('symfony/http-kernel', '5.3', 'The "%s" interface is deprecated.', \ConfigTransformer2021091810\Symfony\Component\HttpKernel\Attribute\ArgumentInterface::class);
 /**
  * Marker interface for controller argument attributes.
  *
