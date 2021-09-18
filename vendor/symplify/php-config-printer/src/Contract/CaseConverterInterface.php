@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109182\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer2021091810\Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer202109182\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2021091810\PhpParser\Node\Stmt\Expression;
 interface CaseConverterInterface
 {
     /**
      * @param string $rootKey
      */
     public function match($rootKey, $key, $values) : bool;
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202109182\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall($key, $values) : \ConfigTransformer2021091810\PhpParser\Node\Stmt\Expression;
 }

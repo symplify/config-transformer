@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109182\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer2021091810\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202109182\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use ConfigTransformer202109182\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109182\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer2021091810\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ConfigTransformer2021091810\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021091810\Symfony\Component\HttpFoundation\Response;
 /**
  * ExceptionDataCollector.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer202109182\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class ExceptionDataCollector extends \ConfigTransformer202109182\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class ExceptionDataCollector extends \ConfigTransformer2021091810\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class ExceptionDataCollector extends \ConfigTransformer202109182\Symfony\Compone
     public function collect($request, $response, $exception = null)
     {
         if (null !== $exception) {
-            $this->data = ['exception' => \ConfigTransformer202109182\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
+            $this->data = ['exception' => \ConfigTransformer2021091810\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
         }
     }
     /**

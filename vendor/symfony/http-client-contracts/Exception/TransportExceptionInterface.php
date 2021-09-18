@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109182\Symfony\Contracts\HttpClient\Exception;
+namespace ConfigTransformer2021091810\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When any error happens at the transport level.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TransportExceptionInterface extends \ConfigTransformer202109182\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
+interface TransportExceptionInterface extends \ConfigTransformer2021091810\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
 {
 }
