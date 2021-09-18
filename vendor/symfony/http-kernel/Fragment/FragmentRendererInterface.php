@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109186\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202109185\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202109186\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109186\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202109186\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202109185\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109185\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109185\Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * Interface implemented by all rendering strategies.
  *
