@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109173\Symplify\ConfigTransformer\DependencyInjection;
+namespace ConfigTransformer2021091810\Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer202109173\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109173\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202109173\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
-use ConfigTransformer202109173\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2021091810\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021091810\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer2021091810\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
+use ConfigTransformer2021091810\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * This fakes basic extensions, so loading of config is possible without loading real extensions and booting your whole
  * project
@@ -17,13 +17,13 @@ final class ExtensionFaker
      * @var \Symplify\PhpConfigPrinter\ValueObject\YamlKey
      */
     private $yamlKey;
-    public function __construct(\ConfigTransformer202109173\Symplify\PhpConfigPrinter\ValueObject\YamlKey $yamlKey)
+    public function __construct(\ConfigTransformer2021091810\Symplify\PhpConfigPrinter\ValueObject\YamlKey $yamlKey)
     {
         $this->yamlKey = $yamlKey;
     }
-    public function fakeInContainerBuilder(\ConfigTransformer202109173\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $yamlContent) : void
+    public function fakeInContainerBuilder(\ConfigTransformer2021091810\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $yamlContent) : void
     {
-        $yaml = \ConfigTransformer202109173\Symfony\Component\Yaml\Yaml::parse($yamlContent, \ConfigTransformer202109173\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
+        $yaml = \ConfigTransformer2021091810\Symfony\Component\Yaml\Yaml::parse($yamlContent, \ConfigTransformer2021091810\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
         // empty file
         if ($yaml === null) {
             return;
@@ -35,7 +35,7 @@ final class ExtensionFaker
             return;
         }
         foreach ($extensionKeys as $extensionKey) {
-            $aliasConfigurableExtension = new \ConfigTransformer202109173\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension($extensionKey);
+            $aliasConfigurableExtension = new \ConfigTransformer2021091810\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension($extensionKey);
             $containerBuilder->registerExtension($aliasConfigurableExtension);
         }
     }

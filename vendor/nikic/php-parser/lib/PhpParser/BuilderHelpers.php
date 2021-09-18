@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109173\PhpParser;
+namespace ConfigTransformer2021091810\PhpParser;
 
-use ConfigTransformer202109173\PhpParser\Node\Expr;
-use ConfigTransformer202109173\PhpParser\Node\Identifier;
-use ConfigTransformer202109173\PhpParser\Node\Name;
-use ConfigTransformer202109173\PhpParser\Node\NullableType;
-use ConfigTransformer202109173\PhpParser\Node\Scalar;
-use ConfigTransformer202109173\PhpParser\Node\Stmt;
-use ConfigTransformer202109173\PhpParser\Node\UnionType;
+use ConfigTransformer2021091810\PhpParser\Node\Expr;
+use ConfigTransformer2021091810\PhpParser\Node\Identifier;
+use ConfigTransformer2021091810\PhpParser\Node\Name;
+use ConfigTransformer2021091810\PhpParser\Node\NullableType;
+use ConfigTransformer2021091810\PhpParser\Node\Scalar;
+use ConfigTransformer2021091810\PhpParser\Node\Stmt;
+use ConfigTransformer2021091810\PhpParser\Node\UnionType;
 /**
  * This class defines helpers used in the implementation of builders. Don't use it directly.
  *
@@ -24,12 +24,12 @@ final class BuilderHelpers
      *
      * @return Node The normalized node
      */
-    public static function normalizeNode($node) : \ConfigTransformer202109173\PhpParser\Node
+    public static function normalizeNode($node) : \ConfigTransformer2021091810\PhpParser\Node
     {
-        if ($node instanceof \ConfigTransformer202109173\PhpParser\Builder) {
+        if ($node instanceof \ConfigTransformer2021091810\PhpParser\Builder) {
             return $node->getNode();
         }
-        if ($node instanceof \ConfigTransformer202109173\PhpParser\Node) {
+        if ($node instanceof \ConfigTransformer2021091810\PhpParser\Node) {
             return $node;
         }
         throw new \LogicException('Expected node or builder object');
@@ -43,14 +43,14 @@ final class BuilderHelpers
      *
      * @return Stmt The normalized statement node
      */
-    public static function normalizeStmt($node) : \ConfigTransformer202109173\PhpParser\Node\Stmt
+    public static function normalizeStmt($node) : \ConfigTransformer2021091810\PhpParser\Node\Stmt
     {
         $node = self::normalizeNode($node);
-        if ($node instanceof \ConfigTransformer202109173\PhpParser\Node\Stmt) {
+        if ($node instanceof \ConfigTransformer2021091810\PhpParser\Node\Stmt) {
             return $node;
         }
-        if ($node instanceof \ConfigTransformer202109173\PhpParser\Node\Expr) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Stmt\Expression($node);
+        if ($node instanceof \ConfigTransformer2021091810\PhpParser\Node\Expr) {
+            return new \ConfigTransformer2021091810\PhpParser\Node\Stmt\Expression($node);
         }
         throw new \LogicException('Expected statement or expression node');
     }
@@ -61,15 +61,15 @@ final class BuilderHelpers
      *
      * @return Identifier The normalized identifier
      */
-    public static function normalizeIdentifier($name) : \ConfigTransformer202109173\PhpParser\Node\Identifier
+    public static function normalizeIdentifier($name) : \ConfigTransformer2021091810\PhpParser\Node\Identifier
     {
-        if ($name instanceof \ConfigTransformer202109173\PhpParser\Node\Identifier) {
+        if ($name instanceof \ConfigTransformer2021091810\PhpParser\Node\Identifier) {
             return $name;
         }
         if (\is_string($name)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Identifier($name);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Identifier($name);
         }
-        throw new \LogicException('ConfigTransformer202109173\\Expected string or instance of Node\\Identifier');
+        throw new \LogicException('ConfigTransformer2021091810\\Expected string or instance of Node\\Identifier');
     }
     /**
      * Normalizes strings to Identifier, also allowing expressions.
@@ -80,13 +80,13 @@ final class BuilderHelpers
      */
     public static function normalizeIdentifierOrExpr($name)
     {
-        if ($name instanceof \ConfigTransformer202109173\PhpParser\Node\Identifier || $name instanceof \ConfigTransformer202109173\PhpParser\Node\Expr) {
+        if ($name instanceof \ConfigTransformer2021091810\PhpParser\Node\Identifier || $name instanceof \ConfigTransformer2021091810\PhpParser\Node\Expr) {
             return $name;
         }
         if (\is_string($name)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Identifier($name);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Identifier($name);
         }
-        throw new \LogicException('ConfigTransformer202109173\\Expected string or instance of Node\\Identifier or Node\\Expr');
+        throw new \LogicException('ConfigTransformer2021091810\\Expected string or instance of Node\\Identifier or Node\\Expr');
     }
     /**
      * Normalizes a name: Converts string names to Name nodes.
@@ -95,7 +95,7 @@ final class BuilderHelpers
      *
      * @return Name The normalized name
      */
-    public static function normalizeName($name) : \ConfigTransformer202109173\PhpParser\Node\Name
+    public static function normalizeName($name) : \ConfigTransformer2021091810\PhpParser\Node\Name
     {
         return self::normalizeNameCommon($name, \false);
     }
@@ -120,7 +120,7 @@ final class BuilderHelpers
      */
     private static function normalizeNameCommon($name, bool $allowExpr)
     {
-        if ($name instanceof \ConfigTransformer202109173\PhpParser\Node\Name) {
+        if ($name instanceof \ConfigTransformer2021091810\PhpParser\Node\Name) {
             return $name;
         }
         if (\is_string($name)) {
@@ -128,20 +128,20 @@ final class BuilderHelpers
                 throw new \LogicException('Name cannot be empty');
             }
             if ($name[0] === '\\') {
-                return new \ConfigTransformer202109173\PhpParser\Node\Name\FullyQualified(\substr($name, 1));
+                return new \ConfigTransformer2021091810\PhpParser\Node\Name\FullyQualified(\substr($name, 1));
             }
             if (0 === \strpos($name, 'namespace\\')) {
-                return new \ConfigTransformer202109173\PhpParser\Node\Name\Relative(\substr($name, \strlen('namespace\\')));
+                return new \ConfigTransformer2021091810\PhpParser\Node\Name\Relative(\substr($name, \strlen('namespace\\')));
             }
-            return new \ConfigTransformer202109173\PhpParser\Node\Name($name);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Name($name);
         }
         if ($allowExpr) {
-            if ($name instanceof \ConfigTransformer202109173\PhpParser\Node\Expr) {
+            if ($name instanceof \ConfigTransformer2021091810\PhpParser\Node\Expr) {
                 return $name;
             }
-            throw new \LogicException('ConfigTransformer202109173\\Name must be a string or an instance of Node\\Name or Node\\Expr');
+            throw new \LogicException('ConfigTransformer2021091810\\Name must be a string or an instance of Node\\Name or Node\\Expr');
         }
-        throw new \LogicException('ConfigTransformer202109173\\Name must be a string or an instance of Node\\Name');
+        throw new \LogicException('ConfigTransformer2021091810\\Name must be a string or an instance of Node\\Name');
     }
     /**
      * Normalizes a type: Converts plain-text type names into proper AST representation.
@@ -156,7 +156,7 @@ final class BuilderHelpers
     public static function normalizeType($type)
     {
         if (!\is_string($type)) {
-            if (!$type instanceof \ConfigTransformer202109173\PhpParser\Node\Name && !$type instanceof \ConfigTransformer202109173\PhpParser\Node\Identifier && !$type instanceof \ConfigTransformer202109173\PhpParser\Node\NullableType && !$type instanceof \ConfigTransformer202109173\PhpParser\Node\UnionType) {
+            if (!$type instanceof \ConfigTransformer2021091810\PhpParser\Node\Name && !$type instanceof \ConfigTransformer2021091810\PhpParser\Node\Identifier && !$type instanceof \ConfigTransformer2021091810\PhpParser\Node\NullableType && !$type instanceof \ConfigTransformer2021091810\PhpParser\Node\UnionType) {
                 throw new \LogicException('Type must be a string, or an instance of Name, Identifier, NullableType or UnionType');
             }
             return $type;
@@ -169,7 +169,7 @@ final class BuilderHelpers
         $builtinTypes = ['array', 'callable', 'string', 'int', 'float', 'bool', 'iterable', 'void', 'object', 'mixed', 'never'];
         $lowerType = \strtolower($type);
         if (\in_array($lowerType, $builtinTypes)) {
-            $type = new \ConfigTransformer202109173\PhpParser\Node\Identifier($lowerType);
+            $type = new \ConfigTransformer2021091810\PhpParser\Node\Identifier($lowerType);
         } else {
             $type = self::normalizeName($type);
         }
@@ -177,7 +177,7 @@ final class BuilderHelpers
         if ($nullable && \in_array((string) $type, $notNullableTypes)) {
             throw new \LogicException(\sprintf('%s type cannot be nullable', $type));
         }
-        return $nullable ? new \ConfigTransformer202109173\PhpParser\Node\NullableType($type) : $type;
+        return $nullable ? new \ConfigTransformer2021091810\PhpParser\Node\NullableType($type) : $type;
     }
     /**
      * Normalizes a value: Converts nulls, booleans, integers,
@@ -187,25 +187,25 @@ final class BuilderHelpers
      *
      * @return Expr The normalized value
      */
-    public static function normalizeValue($value) : \ConfigTransformer202109173\PhpParser\Node\Expr
+    public static function normalizeValue($value) : \ConfigTransformer2021091810\PhpParser\Node\Expr
     {
-        if ($value instanceof \ConfigTransformer202109173\PhpParser\Node\Expr) {
+        if ($value instanceof \ConfigTransformer2021091810\PhpParser\Node\Expr) {
             return $value;
         }
         if (\is_null($value)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202109173\PhpParser\Node\Name('null'));
+            return new \ConfigTransformer2021091810\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer2021091810\PhpParser\Node\Name('null'));
         }
         if (\is_bool($value)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202109173\PhpParser\Node\Name($value ? 'true' : 'false'));
+            return new \ConfigTransformer2021091810\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer2021091810\PhpParser\Node\Name($value ? 'true' : 'false'));
         }
         if (\is_int($value)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Scalar\LNumber($value);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Scalar\LNumber($value);
         }
         if (\is_float($value)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Scalar\DNumber($value);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Scalar\DNumber($value);
         }
         if (\is_string($value)) {
-            return new \ConfigTransformer202109173\PhpParser\Node\Scalar\String_($value);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Scalar\String_($value);
         }
         if (\is_array($value)) {
             $items = [];
@@ -213,13 +213,13 @@ final class BuilderHelpers
             foreach ($value as $itemKey => $itemValue) {
                 // for consecutive, numeric keys don't generate keys
                 if (null !== $lastKey && ++$lastKey === $itemKey) {
-                    $items[] = new \ConfigTransformer202109173\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue));
+                    $items[] = new \ConfigTransformer2021091810\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue));
                 } else {
                     $lastKey = null;
-                    $items[] = new \ConfigTransformer202109173\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue), self::normalizeValue($itemKey));
+                    $items[] = new \ConfigTransformer2021091810\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue), self::normalizeValue($itemKey));
                 }
             }
-            return new \ConfigTransformer202109173\PhpParser\Node\Expr\Array_($items);
+            return new \ConfigTransformer2021091810\PhpParser\Node\Expr\Array_($items);
         }
         throw new \LogicException('Invalid value');
     }
@@ -230,15 +230,15 @@ final class BuilderHelpers
      *
      * @return Comment\Doc The normalized doc comment
      */
-    public static function normalizeDocComment($docComment) : \ConfigTransformer202109173\PhpParser\Comment\Doc
+    public static function normalizeDocComment($docComment) : \ConfigTransformer2021091810\PhpParser\Comment\Doc
     {
-        if ($docComment instanceof \ConfigTransformer202109173\PhpParser\Comment\Doc) {
+        if ($docComment instanceof \ConfigTransformer2021091810\PhpParser\Comment\Doc) {
             return $docComment;
         }
         if (\is_string($docComment)) {
-            return new \ConfigTransformer202109173\PhpParser\Comment\Doc($docComment);
+            return new \ConfigTransformer2021091810\PhpParser\Comment\Doc($docComment);
         }
-        throw new \LogicException('ConfigTransformer202109173\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
+        throw new \LogicException('ConfigTransformer2021091810\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
     }
     /**
      * Normalizes a attribute: Converts attribute to the Attribute Group if needed.
@@ -247,15 +247,15 @@ final class BuilderHelpers
      *
      * @return Node\AttributeGroup The Attribute Group
      */
-    public static function normalizeAttribute($attribute) : \ConfigTransformer202109173\PhpParser\Node\AttributeGroup
+    public static function normalizeAttribute($attribute) : \ConfigTransformer2021091810\PhpParser\Node\AttributeGroup
     {
-        if ($attribute instanceof \ConfigTransformer202109173\PhpParser\Node\AttributeGroup) {
+        if ($attribute instanceof \ConfigTransformer2021091810\PhpParser\Node\AttributeGroup) {
             return $attribute;
         }
-        if (!$attribute instanceof \ConfigTransformer202109173\PhpParser\Node\Attribute) {
-            throw new \LogicException('ConfigTransformer202109173\\Attribute must be an instance of PhpParser\\Node\\Attribute or PhpParser\\Node\\AttributeGroup');
+        if (!$attribute instanceof \ConfigTransformer2021091810\PhpParser\Node\Attribute) {
+            throw new \LogicException('ConfigTransformer2021091810\\Attribute must be an instance of PhpParser\\Node\\Attribute or PhpParser\\Node\\AttributeGroup');
         }
-        return new \ConfigTransformer202109173\PhpParser\Node\AttributeGroup([$attribute]);
+        return new \ConfigTransformer2021091810\PhpParser\Node\AttributeGroup([$attribute]);
     }
     /**
      * Adds a modifier and returns new modifier bitmask.
@@ -267,7 +267,7 @@ final class BuilderHelpers
      */
     public static function addModifier(int $modifiers, int $modifier) : int
     {
-        \ConfigTransformer202109173\PhpParser\Node\Stmt\Class_::verifyModifier($modifiers, $modifier);
+        \ConfigTransformer2021091810\PhpParser\Node\Stmt\Class_::verifyModifier($modifiers, $modifier);
         return $modifiers | $modifier;
     }
 }

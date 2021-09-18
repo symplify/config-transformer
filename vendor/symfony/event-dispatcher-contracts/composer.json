@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202109173\\Symfony\\Contracts\\EventDispatcher\\": ""
+            "ConfigTransformer2021091810\\Symfony\\Contracts\\EventDispatcher\\": ""
         }
     },
     "minimum-stability": "dev",

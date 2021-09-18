@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109173\Symfony\Component\Config\Definition\Exception;
+namespace ConfigTransformer2021091810\Symfony\Component\Config\Definition\Exception;
 
 /**
  * Base exception for all configuration exceptions.
