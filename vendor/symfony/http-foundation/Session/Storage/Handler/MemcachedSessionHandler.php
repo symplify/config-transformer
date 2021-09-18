@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021091810\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202109181\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Memcached based session storage handler based on the Memcached class
@@ -18,7 +18,7 @@ namespace ConfigTransformer2021091810\Symfony\Component\HttpFoundation\Session\S
  *
  * @author Drak <drak@zikula.org>
  */
-class MemcachedSessionHandler extends \ConfigTransformer2021091810\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MemcachedSessionHandler extends \ConfigTransformer202109181\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $memcached;
     /**

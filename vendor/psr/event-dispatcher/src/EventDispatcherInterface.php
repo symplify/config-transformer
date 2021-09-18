@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021091810\Psr\EventDispatcher;
+namespace ConfigTransformer202109181\Psr\EventDispatcher;
 
 /**
  * Defines a dispatcher for events.

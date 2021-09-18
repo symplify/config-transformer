@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021091810\Symplify\PackageBuilder\Console;
+namespace ConfigTransformer202109181\Symplify\PackageBuilder\Console;
 
-use ConfigTransformer2021091810\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202109181\Symfony\Component\Console\Command\Command;
 /**
  * @deprecated Use symfony constants in directly
  * @see Command::FAILURE

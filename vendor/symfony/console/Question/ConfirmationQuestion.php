@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021091810\Symfony\Component\Console\Question;
+namespace ConfigTransformer202109181\Symfony\Component\Console\Question;
 
 /**
  * Represents a yes/no question.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ConfirmationQuestion extends \ConfigTransformer2021091810\Symfony\Component\Console\Question\Question
+class ConfirmationQuestion extends \ConfigTransformer202109181\Symfony\Component\Console\Question\Question
 {
     private $trueAnswerRegex;
     /**

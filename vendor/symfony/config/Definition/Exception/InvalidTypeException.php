@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021091810\Symfony\Component\Config\Definition\Exception;
+namespace ConfigTransformer202109181\Symfony\Component\Config\Definition\Exception;
 
 /**
  * This exception is thrown if an invalid type is encountered.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InvalidTypeException extends \ConfigTransformer2021091810\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+class InvalidTypeException extends \ConfigTransformer202109181\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 {
 }
