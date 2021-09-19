@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109187\Symfony\Component\HttpKernel\Controller;
+namespace ConfigTransformer202109197\Symfony\Component\HttpKernel\Controller;
 
-use ConfigTransformer202109187\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109187\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202109197\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109197\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Responsible for resolving the value of an argument based on its metadata.
  *
