@@ -1,32 +1,34 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109197\PhpParser\Node\Expr;
+namespace ConfigTransformer202109204\PhpParser\Node\Expr;
 
-use ConfigTransformer202109197\PhpParser\Node;
-use ConfigTransformer202109197\PhpParser\Node\Expr;
-use ConfigTransformer202109197\PhpParser\Node\Identifier;
-class StaticCall extends \ConfigTransformer202109197\PhpParser\Node\Expr
+use ConfigTransformer202109204\PhpParser\Node;
+use ConfigTransformer202109204\PhpParser\Node\Arg;
+use ConfigTransformer202109204\PhpParser\Node\Expr;
+use ConfigTransformer202109204\PhpParser\Node\Identifier;
+use ConfigTransformer202109204\PhpParser\Node\VariadicPlaceholder;
+class StaticCall extends \ConfigTransformer202109204\PhpParser\Node\Expr\CallLike
 {
     /** @var Node\Name|Expr Class name */
     public $class;
     /** @var Identifier|Expr Method name */
     public $name;
-    /** @var Node\Arg[] Arguments */
+    /** @var array<Arg|VariadicPlaceholder> Arguments */
     public $args;
     /**
      * Constructs a static method call node.
      *
-     * @param Node\Name|Expr         $class      Class name
-     * @param string|Identifier|Expr $name       Method name
-     * @param Node\Arg[]             $args       Arguments
-     * @param array                  $attributes Additional attributes
+     * @param Node\Name|Expr                 $class      Class name
+     * @param string|Identifier|Expr         $name       Method name
+     * @param array<Arg|VariadicPlaceholder> $args       Arguments
+     * @param array                          $attributes Additional attributes
      */
     public function __construct($class, $name, array $args = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \ConfigTransformer202109197\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202109204\PhpParser\Node\Identifier($name) : $name;
         $this->args = $args;
     }
     public function getSubNodeNames() : array
@@ -36,5 +38,9 @@ class StaticCall extends \ConfigTransformer202109197\PhpParser\Node\Expr
     public function getType() : string
     {
         return 'Expr_StaticCall';
+    }
+    public function getRawArgs() : array
+    {
+        return $this->args;
     }
 }

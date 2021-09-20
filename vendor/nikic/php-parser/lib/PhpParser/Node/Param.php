@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109197\PhpParser\Node;
+namespace ConfigTransformer202109204\PhpParser\Node;
 
-use ConfigTransformer202109197\PhpParser\NodeAbstract;
-class Param extends \ConfigTransformer202109197\PhpParser\NodeAbstract
+use ConfigTransformer202109204\PhpParser\NodeAbstract;
+class Param extends \ConfigTransformer202109204\PhpParser\NodeAbstract
 {
-    /** @var null|Identifier|Name|NullableType|UnionType Type declaration */
+    /** @var null|Identifier|Name|ComplexType Type declaration */
     public $type;
     /** @var bool Whether parameter is passed by reference */
     public $byRef;
@@ -23,19 +23,19 @@ class Param extends \ConfigTransformer202109197\PhpParser\NodeAbstract
     /**
      * Constructs a parameter node.
      *
-     * @param Expr\Variable|Expr\Error                           $var        Parameter variable
-     * @param null|Expr                                          $default    Default value
-     * @param null|string|Identifier|Name|NullableType|UnionType $type       Type declaration
-     * @param bool                                               $byRef      Whether is passed by reference
-     * @param bool                                               $variadic   Whether this is a variadic argument
-     * @param array                                              $attributes Additional attributes
-     * @param int                                                $flags      Optional visibility flags
-     * @param AttributeGroup[]                                   $attrGroups PHP attribute groups
+     * @param Expr\Variable|Expr\Error                $var        Parameter variable
+     * @param null|Expr                               $default    Default value
+     * @param null|string|Identifier|Name|ComplexType $type       Type declaration
+     * @param bool                                    $byRef      Whether is passed by reference
+     * @param bool                                    $variadic   Whether this is a variadic argument
+     * @param array                                   $attributes Additional attributes
+     * @param int                                     $flags      Optional visibility flags
+     * @param AttributeGroup[]                        $attrGroups PHP attribute groups
      */
-    public function __construct($var, \ConfigTransformer202109197\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0, array $attrGroups = [])
+    public function __construct($var, \ConfigTransformer202109204\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0, array $attrGroups = [])
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \ConfigTransformer202109197\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \ConfigTransformer202109204\PhpParser\Node\Identifier($type) : $type;
         $this->byRef = $byRef;
         $this->variadic = $variadic;
         $this->var = $var;

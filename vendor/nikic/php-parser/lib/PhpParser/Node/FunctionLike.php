@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109197\PhpParser\Node;
+namespace ConfigTransformer202109204\PhpParser\Node;
 
-use ConfigTransformer202109197\PhpParser\Node;
-interface FunctionLike extends \ConfigTransformer202109197\PhpParser\Node
+use ConfigTransformer202109204\PhpParser\Node;
+interface FunctionLike extends \ConfigTransformer202109204\PhpParser\Node
 {
     /**
      * Whether to return by reference
@@ -21,7 +21,7 @@ interface FunctionLike extends \ConfigTransformer202109197\PhpParser\Node
     /**
      * Get the declared return type or null
      *
-     * @return null|Identifier|Name|NullableType|UnionType
+     * @return null|Identifier|Name|ComplexType
      */
     public function getReturnType();
     /**

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109197\PhpParser\Builder;
+namespace ConfigTransformer202109204\PhpParser\Builder;
 
-use ConfigTransformer202109197\PhpParser\BuilderHelpers;
-use ConfigTransformer202109197\PhpParser\Node;
-abstract class FunctionLike extends \ConfigTransformer202109197\PhpParser\Builder\Declaration
+use ConfigTransformer202109204\PhpParser\BuilderHelpers;
+use ConfigTransformer202109204\PhpParser\Node;
+abstract class FunctionLike extends \ConfigTransformer202109204\PhpParser\Builder\Declaration
 {
     protected $returnByRef = \false;
     protected $params = [];
@@ -30,8 +30,8 @@ abstract class FunctionLike extends \ConfigTransformer202109197\PhpParser\Builde
      */
     public function addParam($param)
     {
-        $param = \ConfigTransformer202109197\PhpParser\BuilderHelpers::normalizeNode($param);
-        if (!$param instanceof \ConfigTransformer202109197\PhpParser\Node\Param) {
+        $param = \ConfigTransformer202109204\PhpParser\BuilderHelpers::normalizeNode($param);
+        if (!$param instanceof \ConfigTransformer202109204\PhpParser\Node\Param) {
             throw new \LogicException(\sprintf('Expected parameter node, got "%s"', $param->getType()));
         }
         $this->params[] = $param;
@@ -54,14 +54,13 @@ abstract class FunctionLike extends \ConfigTransformer202109197\PhpParser\Builde
     /**
      * Sets the return type for PHP 7.
      *
-     * @param string|Node\Name|Node\NullableType $type One of array, callable, string, int, float,
-     *                                                 bool, iterable, or a class/interface name.
+     * @param string|Node\Name|Node\Identifier|Node\ComplexType $type
      *
      * @return $this The builder instance (for fluid interface)
      */
     public function setReturnType($type)
     {
-        $this->returnType = \ConfigTransformer202109197\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->returnType = \ConfigTransformer202109204\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
 }
