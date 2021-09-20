@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109204\PhpParser\Node\Expr\Cast;
+namespace ConfigTransformer202109209\PhpParser\Node\Expr\Cast;
 
-use ConfigTransformer202109204\PhpParser\Node\Expr\Cast;
-class Int_ extends \ConfigTransformer202109204\PhpParser\Node\Expr\Cast
+use ConfigTransformer202109209\PhpParser\Node\Expr\Cast;
+class Int_ extends \ConfigTransformer202109209\PhpParser\Node\Expr\Cast
 {
     public function getType() : string
     {
