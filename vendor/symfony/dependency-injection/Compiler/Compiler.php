@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109209\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202109208\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202109209\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109209\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use ConfigTransformer202109208\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109208\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
 /**
  * This class is used to remove circular dependencies between individual passes.
  *
@@ -24,8 +24,8 @@ class Compiler
     private $serviceReferenceGraph;
     public function __construct()
     {
-        $this->passConfig = new \ConfigTransformer202109209\Symfony\Component\DependencyInjection\Compiler\PassConfig();
-        $this->serviceReferenceGraph = new \ConfigTransformer202109209\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
+        $this->passConfig = new \ConfigTransformer202109208\Symfony\Component\DependencyInjection\Compiler\PassConfig();
+        $this->serviceReferenceGraph = new \ConfigTransformer202109208\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
     }
     /**
      * Returns the PassConfig.
@@ -51,7 +51,7 @@ class Compiler
      * @param string $type
      * @param int $priority
      */
-    public function addPass($pass, $type = \ConfigTransformer202109209\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
+    public function addPass($pass, $type = \ConfigTransformer202109208\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
     {
         $this->passConfig->addPass($pass, $type, $priority);
     }
@@ -98,7 +98,7 @@ class Compiler
                 }
             } while ($prev = $prev->getPrevious());
             if ($usedEnvs) {
-                $e = new \ConfigTransformer202109209\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
+                $e = new \ConfigTransformer202109208\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
             }
             throw $e;
         } finally {
