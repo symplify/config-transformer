@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109208\Symfony\Contracts\Service;
+namespace ConfigTransformer202109204\Symfony\Contracts\Service;
 
-use ConfigTransformer202109208\Psr\Container\ContainerInterface;
+use ConfigTransformer202109204\Psr\Container\ContainerInterface;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
  * private method return types. Service ids are available as "ClassName::methodName".
@@ -44,7 +44,7 @@ trait ServiceSubscriberTrait
     /**
      * @required
      */
-    public function setContainer(\ConfigTransformer202109208\Psr\Container\ContainerInterface $container)
+    public function setContainer(\ConfigTransformer202109204\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
         if (\is_callable(['parent', __FUNCTION__])) {

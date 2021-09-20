@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109208\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202109204\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202109208\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202109208\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202109208\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202109204\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202109204\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202109204\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Ensures that the application is not indexed by search engines.
  *
  * @author Gary PEGEOT <garypegeot@gmail.com>
  */
-class DisallowRobotsIndexingListener implements \ConfigTransformer202109208\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class DisallowRobotsIndexingListener implements \ConfigTransformer202109204\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private const HEADER_NAME = 'X-Robots-Tag';
     /**
@@ -35,6 +35,6 @@ class DisallowRobotsIndexingListener implements \ConfigTransformer202109208\Symf
      */
     public static function getSubscribedEvents()
     {
-        return [\ConfigTransformer202109208\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onResponse', -255]];
+        return [\ConfigTransformer202109204\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onResponse', -255]];
     }
 }
