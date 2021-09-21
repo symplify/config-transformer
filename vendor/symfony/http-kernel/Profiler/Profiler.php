@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109208\Symfony\Component\HttpKernel\Profiler;
+namespace ConfigTransformer202109217\Symfony\Component\HttpKernel\Profiler;
 
-use ConfigTransformer202109208\Psr\Log\LoggerInterface;
-use ConfigTransformer202109208\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
-use ConfigTransformer202109208\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109208\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202109208\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
-use ConfigTransformer202109208\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
-use ConfigTransformer202109208\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202109217\Psr\Log\LoggerInterface;
+use ConfigTransformer202109217\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use ConfigTransformer202109217\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109217\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109217\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use ConfigTransformer202109217\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use ConfigTransformer202109217\Symfony\Contracts\Service\ResetInterface;
 /**
  * Profiler.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Profiler implements \ConfigTransformer202109208\Symfony\Contracts\Service\ResetInterface
+class Profiler implements \ConfigTransformer202109217\Symfony\Contracts\Service\ResetInterface
 {
     private $storage;
     /**
@@ -32,7 +32,7 @@ class Profiler implements \ConfigTransformer202109208\Symfony\Contracts\Service\
     private $logger;
     private $initiallyEnabled = \true;
     private $enabled = \true;
-    public function __construct(\ConfigTransformer202109208\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, \ConfigTransformer202109208\Psr\Log\LoggerInterface $logger = null, bool $enable = \true)
+    public function __construct(\ConfigTransformer202109217\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, \ConfigTransformer202109217\Psr\Log\LoggerInterface $logger = null, bool $enable = \true)
     {
         $this->storage = $storage;
         $this->logger = $logger;
@@ -85,7 +85,7 @@ class Profiler implements \ConfigTransformer202109208\Symfony\Contracts\Service\
     {
         // late collect
         foreach ($profile->getCollectors() as $collector) {
-            if ($collector instanceof \ConfigTransformer202109208\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface) {
+            if ($collector instanceof \ConfigTransformer202109217\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface) {
                 $collector->lateCollect();
             }
         }
@@ -133,14 +133,14 @@ class Profiler implements \ConfigTransformer202109208\Symfony\Contracts\Service\
         if (\false === $this->enabled) {
             return null;
         }
-        $profile = new \ConfigTransformer202109208\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
+        $profile = new \ConfigTransformer202109217\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
         $profile->setTime(\time());
         $profile->setUrl($request->getUri());
         $profile->setMethod($request->getMethod());
         $profile->setStatusCode($response->getStatusCode());
         try {
             $profile->setIp($request->getClientIp());
-        } catch (\ConfigTransformer202109208\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException $e) {
+        } catch (\ConfigTransformer202109217\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException $e) {
             $profile->setIp('Unknown');
         }
         if ($prevToken = $response->headers->get('X-Debug-Token')) {
