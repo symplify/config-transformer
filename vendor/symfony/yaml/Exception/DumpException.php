@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109217\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202109212\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during dumping.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DumpException extends \ConfigTransformer202109217\Symfony\Component\Yaml\Exception\RuntimeException
+class DumpException extends \ConfigTransformer202109212\Symfony\Component\Yaml\Exception\RuntimeException
 {
 }
