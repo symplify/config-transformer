@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109212\Symfony\Component\HttpFoundation\File\Exception;
+namespace ConfigTransformer202109216\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an error occurred during file upload.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class UploadException extends \ConfigTransformer202109212\Symfony\Component\HttpFoundation\File\Exception\FileException
+class UploadException extends \ConfigTransformer202109216\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

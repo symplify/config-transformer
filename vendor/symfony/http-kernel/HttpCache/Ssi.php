@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109212\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202109216\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202109212\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109212\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109216\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109216\Symfony\Component\HttpFoundation\Response;
 /**
  * Ssi implements the SSI capabilities to Request and Response instances.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class Ssi extends \ConfigTransformer202109212\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Ssi extends \ConfigTransformer202109216\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     /**
      * {@inheritdoc}

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109212\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer202109216\Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer202109212\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202109216\PhpParser\Node\Stmt\Expression;
 interface RoutingCaseConverterInterface
 {
     /**
@@ -13,5 +13,5 @@ interface RoutingCaseConverterInterface
     /**
      * @param string $key
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202109212\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202109216\PhpParser\Node\Stmt\Expression;
 }

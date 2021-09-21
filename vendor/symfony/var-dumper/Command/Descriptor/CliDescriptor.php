@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109212\Symfony\Component\VarDumper\Command\Descriptor;
+namespace ConfigTransformer202109216\Symfony\Component\VarDumper\Command\Descriptor;
 
-use ConfigTransformer202109212\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use ConfigTransformer202109212\Symfony\Component\Console\Input\ArrayInput;
-use ConfigTransformer202109212\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202109212\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202109212\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202109212\Symfony\Component\VarDumper\Dumper\CliDumper;
+use ConfigTransformer202109216\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use ConfigTransformer202109216\Symfony\Component\Console\Input\ArrayInput;
+use ConfigTransformer202109216\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202109216\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202109216\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202109216\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * Describe collected data clones for cli output.
  *
@@ -23,15 +23,15 @@ use ConfigTransformer202109212\Symfony\Component\VarDumper\Dumper\CliDumper;
  *
  * @final
  */
-class CliDescriptor implements \ConfigTransformer202109212\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class CliDescriptor implements \ConfigTransformer202109216\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $lastIdentifier;
     private $supportsHref;
-    public function __construct(\ConfigTransformer202109212\Symfony\Component\VarDumper\Dumper\CliDumper $dumper)
+    public function __construct(\ConfigTransformer202109216\Symfony\Component\VarDumper\Dumper\CliDumper $dumper)
     {
         $this->dumper = $dumper;
-        $this->supportsHref = \method_exists(\ConfigTransformer202109212\Symfony\Component\Console\Formatter\OutputFormatterStyle::class, 'setHref');
+        $this->supportsHref = \method_exists(\ConfigTransformer202109216\Symfony\Component\Console\Formatter\OutputFormatterStyle::class, 'setHref');
     }
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
@@ -41,7 +41,7 @@ class CliDescriptor implements \ConfigTransformer202109212\Symfony\Component\Var
      */
     public function describe($output, $data, $context, $clientId) : void
     {
-        $io = $output instanceof \ConfigTransformer202109212\Symfony\Component\Console\Style\SymfonyStyle ? $output : new \ConfigTransformer202109212\Symfony\Component\Console\Style\SymfonyStyle(new \ConfigTransformer202109212\Symfony\Component\Console\Input\ArrayInput([]), $output);
+        $io = $output instanceof \ConfigTransformer202109216\Symfony\Component\Console\Style\SymfonyStyle ? $output : new \ConfigTransformer202109216\Symfony\Component\Console\Style\SymfonyStyle(new \ConfigTransformer202109216\Symfony\Component\Console\Input\ArrayInput([]), $output);
         $this->dumper->setColors($output->isDecorated());
         $rows = [['date', \date('r', (int) $context['timestamp'])]];
         $lastIdentifier = $this->lastIdentifier;
