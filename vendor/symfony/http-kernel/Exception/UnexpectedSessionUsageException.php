@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109220\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer2021092210\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>

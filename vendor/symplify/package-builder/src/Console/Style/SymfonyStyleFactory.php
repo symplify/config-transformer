@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109220\Symplify\PackageBuilder\Console\Style;
+namespace ConfigTransformer2021092210\Symplify\PackageBuilder\Console\Style;
 
-use ConfigTransformer202109220\Symfony\Component\Console\Application;
-use ConfigTransformer202109220\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202109220\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202109220\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202109220\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202109220\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
-use ConfigTransformer202109220\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer2021092210\Symfony\Component\Console\Application;
+use ConfigTransformer2021092210\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer2021092210\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer2021092210\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2021092210\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer2021092210\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use ConfigTransformer2021092210\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 final class SymfonyStyleFactory
 {
     /**
@@ -18,26 +18,26 @@ final class SymfonyStyleFactory
     private $privatesCaller;
     public function __construct()
     {
-        $this->privatesCaller = new \ConfigTransformer202109220\Symplify\PackageBuilder\Reflection\PrivatesCaller();
+        $this->privatesCaller = new \ConfigTransformer2021092210\Symplify\PackageBuilder\Reflection\PrivatesCaller();
     }
-    public function create() : \ConfigTransformer202109220\Symfony\Component\Console\Style\SymfonyStyle
+    public function create() : \ConfigTransformer2021092210\Symfony\Component\Console\Style\SymfonyStyle
     {
         // to prevent missing argv indexes
         if (!isset($_SERVER['argv'])) {
             $_SERVER['argv'] = [];
         }
-        $argvInput = new \ConfigTransformer202109220\Symfony\Component\Console\Input\ArgvInput();
-        $consoleOutput = new \ConfigTransformer202109220\Symfony\Component\Console\Output\ConsoleOutput();
+        $argvInput = new \ConfigTransformer2021092210\Symfony\Component\Console\Input\ArgvInput();
+        $consoleOutput = new \ConfigTransformer2021092210\Symfony\Component\Console\Output\ConsoleOutput();
         // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
-        $this->privatesCaller->callPrivateMethod(new \ConfigTransformer202109220\Symfony\Component\Console\Application(), 'configureIO', [$argvInput, $consoleOutput]);
+        $this->privatesCaller->callPrivateMethod(new \ConfigTransformer2021092210\Symfony\Component\Console\Application(), 'configureIO', [$argvInput, $consoleOutput]);
         // --debug is called
         if ($argvInput->hasParameterOption('--debug')) {
-            $consoleOutput->setVerbosity(\ConfigTransformer202109220\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
+            $consoleOutput->setVerbosity(\ConfigTransformer2021092210\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
         }
         // disable output for tests
-        if (\ConfigTransformer202109220\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
-            $consoleOutput->setVerbosity(\ConfigTransformer202109220\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        if (\ConfigTransformer2021092210\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
+            $consoleOutput->setVerbosity(\ConfigTransformer2021092210\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         }
-        return new \ConfigTransformer202109220\Symfony\Component\Console\Style\SymfonyStyle($argvInput, $consoleOutput);
+        return new \ConfigTransformer2021092210\Symfony\Component\Console\Style\SymfonyStyle($argvInput, $consoleOutput);
     }
 }
