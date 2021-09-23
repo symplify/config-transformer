@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109230\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202109235\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait ConfiguratorTrait
 {
