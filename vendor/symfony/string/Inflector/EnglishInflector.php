@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109236\Symfony\Component\String\Inflector;
+namespace ConfigTransformer202109234\Symfony\Component\String\Inflector;
 
-final class EnglishInflector implements \ConfigTransformer202109236\Symfony\Component\String\Inflector\InflectorInterface
+final class EnglishInflector implements \ConfigTransformer202109234\Symfony\Component\String\Inflector\InflectorInterface
 {
     /**
      * Map English plural to singular suffixes.
