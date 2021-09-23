@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202109235\Nette\Utils;
+namespace ConfigTransformer202109231\Nette\Utils;
 
 class Helpers
 {
@@ -32,7 +32,7 @@ class Helpers
     public static function getLastError() : string
     {
         $message = \error_get_last()['message'] ?? '';
-        $message = \ini_get('html_errors') ? \ConfigTransformer202109235\Nette\Utils\Html::htmlToText($message) : $message;
+        $message = \ini_get('html_errors') ? \ConfigTransformer202109231\Nette\Utils\Html::htmlToText($message) : $message;
         $message = \preg_replace('#^\\w+\\(.*?\\): #', '', $message);
         return $message;
     }

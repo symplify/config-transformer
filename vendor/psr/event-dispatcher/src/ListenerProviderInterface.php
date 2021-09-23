@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109235\Psr\EventDispatcher;
+namespace ConfigTransformer202109231\Psr\EventDispatcher;
 
 /**
  * Mapper from an event to the listeners that are applicable to that event.
