@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109230\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202109231\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Kris Wallsmith <kris@symfony.com>
  */
-class MethodNotAllowedHttpException extends \ConfigTransformer202109230\Symfony\Component\HttpKernel\Exception\HttpException
+class MethodNotAllowedHttpException extends \ConfigTransformer202109231\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string[]        $allow    An array of allowed methods
