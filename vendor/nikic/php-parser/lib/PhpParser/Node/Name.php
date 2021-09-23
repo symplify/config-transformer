@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109235\PhpParser\Node;
+namespace ConfigTransformer202109236\PhpParser\Node;
 
-use ConfigTransformer202109235\PhpParser\NodeAbstract;
-class Name extends \ConfigTransformer202109235\PhpParser\NodeAbstract
+use ConfigTransformer202109236\PhpParser\NodeAbstract;
+class Name extends \ConfigTransformer202109236\PhpParser\NodeAbstract
 {
     /** @var string[] Parts of the name */
     public $parts;
