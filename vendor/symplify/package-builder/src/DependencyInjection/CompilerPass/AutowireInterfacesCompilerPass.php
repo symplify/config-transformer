@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109231\Symplify\PackageBuilder\DependencyInjection\CompilerPass;
+namespace ConfigTransformer202109230\Symplify\PackageBuilder\DependencyInjection\CompilerPass;
 
-use ConfigTransformer202109231\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202109231\Symfony\Component\DependencyInjection\ContainerBuilder;
-final class AutowireInterfacesCompilerPass implements \ConfigTransformer202109231\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use ConfigTransformer202109230\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202109230\Symfony\Component\DependencyInjection\ContainerBuilder;
+final class AutowireInterfacesCompilerPass implements \ConfigTransformer202109230\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @var mixed[]
