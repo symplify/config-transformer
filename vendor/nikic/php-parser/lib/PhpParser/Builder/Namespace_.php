@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109231\PhpParser\Builder;
+namespace ConfigTransformer202109238\PhpParser\Builder;
 
-use ConfigTransformer202109231\PhpParser;
-use ConfigTransformer202109231\PhpParser\BuilderHelpers;
-use ConfigTransformer202109231\PhpParser\Node;
-use ConfigTransformer202109231\PhpParser\Node\Stmt;
-class Namespace_ extends \ConfigTransformer202109231\PhpParser\Builder\Declaration
+use ConfigTransformer202109238\PhpParser;
+use ConfigTransformer202109238\PhpParser\BuilderHelpers;
+use ConfigTransformer202109238\PhpParser\Node;
+use ConfigTransformer202109238\PhpParser\Node\Stmt;
+class Namespace_ extends \ConfigTransformer202109238\PhpParser\Builder\Declaration
 {
     private $name;
     private $stmts = [];
@@ -18,7 +18,7 @@ class Namespace_ extends \ConfigTransformer202109231\PhpParser\Builder\Declarati
      */
     public function __construct($name)
     {
-        $this->name = null !== $name ? \ConfigTransformer202109231\PhpParser\BuilderHelpers::normalizeName($name) : null;
+        $this->name = null !== $name ? \ConfigTransformer202109238\PhpParser\BuilderHelpers::normalizeName($name) : null;
     }
     /**
      * Adds a statement.
@@ -29,7 +29,7 @@ class Namespace_ extends \ConfigTransformer202109231\PhpParser\Builder\Declarati
      */
     public function addStmt($stmt)
     {
-        $this->stmts[] = \ConfigTransformer202109231\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \ConfigTransformer202109238\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -37,8 +37,8 @@ class Namespace_ extends \ConfigTransformer202109231\PhpParser\Builder\Declarati
      *
      * @return Stmt\Namespace_ The built node
      */
-    public function getNode() : \ConfigTransformer202109231\PhpParser\Node
+    public function getNode() : \ConfigTransformer202109238\PhpParser\Node
     {
-        return new \ConfigTransformer202109231\PhpParser\Node\Stmt\Namespace_($this->name, $this->stmts, $this->attributes);
+        return new \ConfigTransformer202109238\PhpParser\Node\Stmt\Namespace_($this->name, $this->stmts, $this->attributes);
     }
 }
