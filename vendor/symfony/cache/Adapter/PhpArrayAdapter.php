@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202109278\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202109231\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202109231\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202109231\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202109231\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202109231\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202109231\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202109231\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202109231\Symfony\Component\VarExporter\VarExporter;
-use ConfigTransformer202109231\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202109278\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202109278\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202109278\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202109278\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202109278\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202109278\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202109278\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202109278\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer202109278\Symfony\Contracts\Cache\CacheInterface;
 /**
  * Caches items at warm up time using a PHP array that is stored in shared memory by OPCache since PHP 7.0.
  * Warmed up items are read-only and run-time discovered items are cached using a fallback adapter.
@@ -27,7 +27,7 @@ use ConfigTransformer202109231\Symfony\Contracts\Cache\CacheInterface;
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202109231\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202109231\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202109231\Symfony\Component\Cache\ResettableInterface
+class PhpArrayAdapter implements \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202109278\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202109278\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202109278\Symfony\Component\Cache\ResettableInterface
 {
     use ContractsTrait;
     use ProxyTrait;
@@ -40,17 +40,17 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      * @param string           $file         The PHP file were values are cached
      * @param AdapterInterface $fallbackPool A pool to fallback on when an item is not hit
      */
-    public function __construct(string $file, \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
+    public function __construct(string $file, \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
-            $item = new \ConfigTransformer202109231\Symfony\Component\Cache\CacheItem();
+            $item = new \ConfigTransformer202109278\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->isHit = $isHit;
             return $item;
-        }, null, \ConfigTransformer202109231\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202109278\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * This adapter takes advantage of how PHP stores arrays in its latest versions.
@@ -60,28 +60,24 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      *
      * @return CacheItemPoolInterface
      */
-    public static function create($file, $fallbackPool)
+    public static function create(string $file, \ConfigTransformer202109278\Psr\Cache\CacheItemPoolInterface $fallbackPool)
     {
-        if (!$fallbackPool instanceof \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AdapterInterface) {
-            $fallbackPool = new \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
+        if (!$fallbackPool instanceof \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            $fallbackPool = new \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
         }
         return new static($file, $fallbackPool);
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param callable $callback
-     * @param float|null $beta
-     * @param mixed[]|null $metadata
      */
-    public function get($key, $callback, $beta = null, &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         if (null === $this->values) {
             $this->initialize();
         }
         if (!isset($this->keys[$key])) {
             get_from_pool:
-            if ($this->pool instanceof \ConfigTransformer202109231\Symfony\Contracts\Cache\CacheInterface) {
+            if ($this->pool instanceof \ConfigTransformer202109278\Symfony\Contracts\Cache\CacheInterface) {
                 return $this->pool->get($key, $callback, $beta, $metadata);
             }
             return $this->doGet($this->pool, $key, $callback, $beta, $metadata);
@@ -106,7 +102,7 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
     public function getItem($key)
     {
         if (!\is_string($key)) {
-            throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+            throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -130,13 +126,12 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $keys
      */
-    public function getItems($keys = [])
+    public function getItems(array $keys = [])
     {
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
             }
         }
         if (null === $this->values) {
@@ -152,7 +147,7 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
     public function hasItem($key)
     {
         if (!\is_string($key)) {
-            throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+            throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -167,7 +162,7 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
     public function deleteItem($key)
     {
         if (!\is_string($key)) {
-            throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+            throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -178,15 +173,14 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      * {@inheritdoc}
      *
      * @return bool
-     * @param mixed[] $keys
      */
-    public function deleteItems($keys)
+    public function deleteItems(array $keys)
     {
         $deleted = \true;
         $fallbackKeys = [];
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
             }
             if (isset($this->keys[$key])) {
                 $deleted = \false;
@@ -206,9 +200,8 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      * {@inheritdoc}
      *
      * @return bool
-     * @param \Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(\ConfigTransformer202109278\Psr\Cache\CacheItemInterface $item)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -219,9 +212,8 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      * {@inheritdoc}
      *
      * @return bool
-     * @param \Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(\ConfigTransformer202109278\Psr\Cache\CacheItemInterface $item)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -241,14 +233,13 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         $this->keys = $this->values = [];
         $cleared = @\unlink($this->file) || !\file_exists($this->file);
         unset(self::$valuesCache[$this->file]);
-        if ($this->pool instanceof \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix) && $cleared;
         }
         return $this->pool->clear() && $cleared;
@@ -260,22 +251,22 @@ class PhpArrayAdapter implements \ConfigTransformer202109231\Symfony\Component\C
      *
      * @return string[] A list of classes to preload on PHP 7.4+
      */
-    public function warmUp($values)
+    public function warmUp(array $values)
     {
         if (\file_exists($this->file)) {
             if (!\is_file($this->file)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache path exists and is not a file: "%s".', $this->file));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache path exists and is not a file: "%s".', $this->file));
             }
             if (!\is_writable($this->file)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache file is not writable: "%s".', $this->file));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache file is not writable: "%s".', $this->file));
             }
         } else {
             $directory = \dirname($this->file);
             if (!\is_dir($directory) && !@\mkdir($directory, 0777, \true)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory does not exist and cannot be created: "%s".', $directory));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory does not exist and cannot be created: "%s".', $directory));
             }
             if (!\is_writable($directory)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory is not writable: "%s".', $directory));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory is not writable: "%s".', $directory));
             }
         }
         $preload = [];
@@ -291,15 +282,15 @@ return [[
 
 EOF;
         foreach ($values as $key => $value) {
-            \ConfigTransformer202109231\Symfony\Component\Cache\CacheItem::validateKey(\is_int($key) ? (string) $key : $key);
+            \ConfigTransformer202109278\Symfony\Component\Cache\CacheItem::validateKey(\is_int($key) ? (string) $key : $key);
             $isStaticValue = \true;
             if (null === $value) {
                 $value = "'N;'";
             } elseif (\is_object($value) || \is_array($value)) {
                 try {
-                    $value = \ConfigTransformer202109231\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue, $preload);
+                    $value = \ConfigTransformer202109278\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue, $preload);
                 } catch (\Exception $e) {
-                    throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
+                    throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
                 }
             } elseif (\is_string($value)) {
                 // Wrap "N;" in a closure to not confuse it with an encoded `null`
@@ -308,7 +299,7 @@ EOF;
                 }
                 $value = \var_export($value, \true);
             } elseif (!\is_scalar($value)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
             } else {
                 $value = \var_export($value, \true);
             }

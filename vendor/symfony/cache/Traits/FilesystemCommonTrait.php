@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202109278\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -29,7 +29,7 @@ trait FilesystemCommonTrait
         }
         if (isset($namespace[0])) {
             if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-                throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+                throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
             }
             $directory .= \DIRECTORY_SEPARATOR . $namespace;
         } else {
@@ -41,19 +41,18 @@ trait FilesystemCommonTrait
         $directory .= \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
         if ('\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            throw new \ConfigTransformer202109231\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
+            throw new \ConfigTransformer202109278\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
         }
         $this->directory = $directory;
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = \true;
         foreach ($this->scanHashDir($this->directory) as $file) {
-            if ('' !== $namespace && \strncmp($this->getFileKey($file), $namespace, \strlen($namespace)) !== 0) {
+            if ('' !== $namespace && !\str_starts_with($this->getFileKey($file), $namespace)) {
                 continue;
             }
             $ok = ($this->doUnlink($file) || !\file_exists($file)) && $ok;
@@ -62,9 +61,8 @@ trait FilesystemCommonTrait
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $ids
      */
-    protected function doDelete($ids)
+    protected function doDelete(array $ids)
     {
         $ok = \true;
         foreach ($ids as $id) {
@@ -73,10 +71,7 @@ trait FilesystemCommonTrait
         }
         return $ok;
     }
-    /**
-     * @param string $file
-     */
-    protected function doUnlink($file)
+    protected function doUnlink(string $file)
     {
         return @\unlink($file);
     }
@@ -90,7 +85,7 @@ trait FilesystemCommonTrait
             try {
                 $h = \fopen($this->tmp, 'x');
             } catch (\ErrorException $e) {
-                if (\strpos($e->getMessage(), 'File exists') === \false) {
+                if (!\str_contains($e->getMessage(), 'File exists')) {
                     throw $e;
                 }
                 $this->tmp = $this->directory . \bin2hex(\random_bytes(6));
@@ -144,12 +139,8 @@ trait FilesystemCommonTrait
     }
     /**
      * @internal
-     * @param int $type
-     * @param string $message
-     * @param string $file
-     * @param int $line
      */
-    public static function throwError($type, $message, $file, $line)
+    public static function throwError(int $type, string $message, string $file, int $line)
     {
         throw new \ErrorException($message, 0, $type, $file, $line);
     }

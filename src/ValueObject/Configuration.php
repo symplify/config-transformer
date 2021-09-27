@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109231\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject;
 
 final class Configuration
 {
     /**
-     * @var mixed[]
+     * @var string[]
      */
     private $sources;
     /**
@@ -46,6 +46,6 @@ final class Configuration
      */
     public function getInputSuffixes() : array
     {
-        return [\ConfigTransformer202109231\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202109231\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202109231\Symplify\ConfigTransformer\ValueObject\Format::XML];
+        return [\ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format::XML];
     }
 }

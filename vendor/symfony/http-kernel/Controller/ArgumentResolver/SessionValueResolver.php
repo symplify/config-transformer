@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202109278\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202109231\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109231\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use ConfigTransformer202109231\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202109231\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202109278\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109278\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer202109278\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202109278\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the Session.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class SessionValueResolver implements \ConfigTransformer202109231\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class SessionValueResolver implements \ConfigTransformer202109278\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ final class SessionValueResolver implements \ConfigTransformer202109231\Symfony\
             return \false;
         }
         $type = $argument->getType();
-        if (\ConfigTransformer202109231\Symfony\Component\HttpFoundation\Session\SessionInterface::class !== $type && !\is_subclass_of($type, \ConfigTransformer202109231\Symfony\Component\HttpFoundation\Session\SessionInterface::class)) {
+        if (\ConfigTransformer202109278\Symfony\Component\HttpFoundation\Session\SessionInterface::class !== $type && !\is_subclass_of($type, \ConfigTransformer202109278\Symfony\Component\HttpFoundation\Session\SessionInterface::class)) {
             return \false;
         }
         return $request->getSession() instanceof $type;

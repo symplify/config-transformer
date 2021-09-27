@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202109278\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202109231\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202109231\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer202109231\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202109231\Symfony\Component\Cache\Traits\FilesystemTrait;
+use ConfigTransformer202109278\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202109278\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer202109278\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202109278\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer202109231\Symfony\Component\Cache\PruneableInterface
+class FilesystemTagAwareAdapter extends \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer202109278\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -30,17 +30,16 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Comp
      * Folder used for tag symlinks.
      */
     private const TAG_FOLDER = 'tags';
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer202109231\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer202109278\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = new \ConfigTransformer202109231\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
+        $this->marshaller = new \ConfigTransformer202109278\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = $this->doClearCache($namespace);
         if ('' !== $namespace) {
@@ -83,12 +82,8 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Comp
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $values
-     * @param int $lifetime
-     * @param mixed[] $addTagData
-     * @param mixed[] $removeTagData
      */
-    protected function doSave($values, $lifetime, $addTagData = [], $removeTagData = []) : array
+    protected function doSave(array $values, int $lifetime, array $addTagData = [], array $removeTagData = []) : array
     {
         $failed = $this->doSaveCache($values, $lifetime);
         // Add Tags as symlinks
@@ -119,9 +114,8 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Comp
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $ids
      */
-    protected function doDeleteYieldTags($ids) : iterable
+    protected function doDeleteYieldTags(array $ids) : iterable
     {
         foreach ($ids as $id) {
             $file = $this->getFile($id);
@@ -155,9 +149,8 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Comp
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $tagData
      */
-    protected function doDeleteTagRelations($tagData) : bool
+    protected function doDeleteTagRelations(array $tagData) : bool
     {
         foreach ($tagData as $tagId => $idList) {
             $tagFolder = $this->getTagFolder($tagId);
@@ -169,9 +162,8 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202109231\Symfony\Comp
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $tagIds
      */
-    protected function doInvalidate($tagIds) : bool
+    protected function doInvalidate(array $tagIds) : bool
     {
         foreach ($tagIds as $tagId) {
             if (!\is_dir($tagFolder = $this->getTagFolder($tagId))) {

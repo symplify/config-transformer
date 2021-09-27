@@ -8,34 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\Console;
+namespace ConfigTransformer202109278\Symfony\Component\Console;
 
-use ConfigTransformer202109231\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202109231\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202109231\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202109278\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202109278\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202109278\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class SingleCommandApplication extends \ConfigTransformer202109231\Symfony\Component\Console\Command\Command
+class SingleCommandApplication extends \ConfigTransformer202109278\Symfony\Component\Console\Command\Command
 {
     private $version = 'UNKNOWN';
     private $autoExit = \true;
     private $running = \false;
     /**
-     * @return $this
      * @param string $version
      */
-    public function setVersion($version)
+    public function setVersion($version) : self
     {
         $this->version = $version;
         return $this;
     }
     /**
      * @final
-     * @return $this
      * @param bool $autoExit
      */
-    public function setAutoExit($autoExit)
+    public function setAutoExit($autoExit) : self
     {
         $this->autoExit = $autoExit;
         return $this;
@@ -50,7 +48,7 @@ class SingleCommandApplication extends \ConfigTransformer202109231\Symfony\Compo
             return parent::run($input, $output);
         }
         // We use the command name as the application name
-        $application = new \ConfigTransformer202109231\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
+        $application = new \ConfigTransformer202109278\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
         $application->setAutoExit($this->autoExit);
         // Fix the usage of the command displayed with "--help"
         $this->setName($_SERVER['argv'][0]);

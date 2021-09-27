@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202109278\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202109231\Doctrine\Common\Cache\CacheProvider;
+use ConfigTransformer202109278\Doctrine\Common\Cache\CacheProvider;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineAdapter extends \ConfigTransformer202109231\Symfony\Component\Cache\Adapter\AbstractAdapter
+class DoctrineAdapter extends \ConfigTransformer202109278\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $provider;
-    public function __construct(\ConfigTransformer202109231\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\ConfigTransformer202109278\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;
@@ -33,9 +33,8 @@ class DoctrineAdapter extends \ConfigTransformer202109231\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $ids
      */
-    protected function doFetch($ids)
+    protected function doFetch(array $ids)
     {
         $unserializeCallbackHandler = \ini_set('unserialize_callback_func', parent::class . '::handleUnserializeCallback');
         try {
@@ -57,26 +56,23 @@ class DoctrineAdapter extends \ConfigTransformer202109231\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         return $this->provider->contains($id);
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $namespace = $this->provider->getNamespace();
         return isset($namespace[0]) ? $this->provider->deleteAll() : $this->provider->flushAll();
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $ids
      */
-    protected function doDelete($ids)
+    protected function doDelete(array $ids)
     {
         $ok = \true;
         foreach ($ids as $id) {
@@ -86,10 +82,8 @@ class DoctrineAdapter extends \ConfigTransformer202109231\Symfony\Component\Cach
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $values
-     * @param int $lifetime
      */
-    protected function doSave($values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         return $this->provider->saveMultiple($values, $lifetime);
     }

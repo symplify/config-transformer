@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109231\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202109278\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait PropertyTrait
 {
@@ -18,7 +18,7 @@ trait PropertyTrait
      * @return $this
      * @param string $name
      */
-    public final function property($name, $value)
+    public final function property($name, $value) : self
     {
         $this->definition->setProperty($name, static::processValue($value, \true));
         return $this;
