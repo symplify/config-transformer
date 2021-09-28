@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109287\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer202109282\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer202109287\PhpParser\NodeFinder;
-use ConfigTransformer202109287\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202109287\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202109287\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202109282\PhpParser\NodeFinder;
+use ConfigTransformer202109282\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202109282\Symplify\PackageBuilder\Php\TypeChecker;
 final class NodeValueResolverStaticFactory
 {
-    public static function create() : \ConfigTransformer202109287\Symplify\Astral\NodeValue\NodeValueResolver
+    public static function create() : \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver
     {
-        $simpleNameResolver = \ConfigTransformer202109287\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
-        $simpleNodeFinder = new \ConfigTransformer202109287\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202109287\Symplify\PackageBuilder\Php\TypeChecker(), new \ConfigTransformer202109287\PhpParser\NodeFinder());
-        return new \ConfigTransformer202109287\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202109287\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
+        $simpleNameResolver = \ConfigTransformer202109282\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
+        $simpleNodeFinder = new \ConfigTransformer202109282\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202109282\Symplify\PackageBuilder\Php\TypeChecker(), new \ConfigTransformer202109282\PhpParser\NodeFinder());
+        return new \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202109282\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
     }
 }

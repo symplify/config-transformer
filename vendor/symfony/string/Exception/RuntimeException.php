@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109287\Symfony\Component\String\Exception;
+namespace ConfigTransformer202109282\Symfony\Component\String\Exception;
 
-class RuntimeException extends \RuntimeException implements \ConfigTransformer202109287\Symfony\Component\String\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \ConfigTransformer202109282\Symfony\Component\String\Exception\ExceptionInterface
 {
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202109287\Psr\Log;
+namespace ConfigTransformer202109282\Psr\Log;
 
 /**
  * Basic Implementation of LoggerAwareInterface.
