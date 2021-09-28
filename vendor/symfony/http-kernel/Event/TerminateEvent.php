@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109283\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202109281\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer202109283\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109283\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202109283\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202109281\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109281\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202109281\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to execute logic after a response was sent.
  *
@@ -21,15 +21,15 @@ use ConfigTransformer202109283\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-final class TerminateEvent extends \ConfigTransformer202109283\Symfony\Component\HttpKernel\Event\KernelEvent
+final class TerminateEvent extends \ConfigTransformer202109281\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(\ConfigTransformer202109283\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202109283\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202109283\Symfony\Component\HttpFoundation\Response $response)
+    public function __construct(\ConfigTransformer202109281\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202109281\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202109281\Symfony\Component\HttpFoundation\Response $response)
     {
-        parent::__construct($kernel, $request, \ConfigTransformer202109283\Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST);
+        parent::__construct($kernel, $request, \ConfigTransformer202109281\Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST);
         $this->response = $response;
     }
-    public function getResponse() : \ConfigTransformer202109283\Symfony\Component\HttpFoundation\Response
+    public function getResponse() : \ConfigTransformer202109281\Symfony\Component\HttpFoundation\Response
     {
         return $this->response;
     }
