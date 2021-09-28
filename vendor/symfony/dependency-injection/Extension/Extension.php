@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109281\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202109284\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202109281\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202109281\Symfony\Component\Config\Definition\Processor;
-use ConfigTransformer202109281\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer202109281\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202109284\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202109284\Symfony\Component\Config\Definition\Processor;
+use ConfigTransformer202109284\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202109284\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**
@@ -63,10 +63,10 @@ abstract class Extension implements \ConfigTransformer202109281\Symfony\Componen
     {
         $className = static::class;
         if (\substr_compare($className, 'Extension', -\strlen('Extension')) !== 0) {
-            throw new \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
+            throw new \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
         }
         $classBaseName = \substr(\strrchr($className, '\\'), 1, -9);
-        return \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
+        return \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
     }
     /**
      * {@inheritdoc}
@@ -85,8 +85,8 @@ abstract class Extension implements \ConfigTransformer202109281\Symfony\Componen
         if (!$class) {
             return null;
         }
-        if (!$class->implementsInterface(\ConfigTransformer202109281\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
-            throw new \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \ConfigTransformer202109281\Symfony\Component\Config\Definition\ConfigurationInterface::class));
+        if (!$class->implementsInterface(\ConfigTransformer202109284\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
+            throw new \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \ConfigTransformer202109284\Symfony\Component\Config\Definition\ConfigurationInterface::class));
         }
         if (!($constructor = $class->getConstructor()) || !$constructor->getNumberOfRequiredParameters()) {
             return $class->newInstance();
@@ -99,7 +99,7 @@ abstract class Extension implements \ConfigTransformer202109281\Symfony\Componen
      */
     protected final function processConfiguration($configuration, $configs) : array
     {
-        $processor = new \ConfigTransformer202109281\Symfony\Component\Config\Definition\Processor();
+        $processor = new \ConfigTransformer202109284\Symfony\Component\Config\Definition\Processor();
         return $this->processedConfigs[] = $processor->processConfiguration($configuration, $configs);
     }
     /**
@@ -123,7 +123,7 @@ abstract class Extension implements \ConfigTransformer202109281\Symfony\Componen
     protected function isConfigEnabled($container, $config)
     {
         if (!\array_key_exists('enabled', $config)) {
-            throw new \ConfigTransformer202109281\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
+            throw new \ConfigTransformer202109284\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
         }
         return (bool) $container->getParameterBag()->resolveValue($config['enabled']);
     }
