@@ -1,22 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer202109283\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202109282\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer202109282\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202109282\PhpParser\Node\Expr;
-use ConfigTransformer202109282\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202109282\PhpParser\Node\Name;
-use ConfigTransformer202109282\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202109282\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202109282\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202109283\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202109283\PhpParser\Node\Expr;
+use ConfigTransformer202109283\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202109283\PhpParser\Node\Name;
+use ConfigTransformer202109283\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202109283\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202109283\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<FuncCall>
  */
-final class FuncCallValueResolver implements \ConfigTransformer202109282\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class FuncCallValueResolver implements \ConfigTransformer202109283\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
@@ -26,25 +25,23 @@ final class FuncCallValueResolver implements \ConfigTransformer202109282\Symplif
      * @var \PhpParser\ConstExprEvaluator
      */
     private $constExprEvaluator;
-    public function __construct(\ConfigTransformer202109282\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202109282\PhpParser\ConstExprEvaluator $constExprEvaluator)
+    public function __construct(\ConfigTransformer202109283\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202109283\PhpParser\ConstExprEvaluator $constExprEvaluator)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->constExprEvaluator = $constExprEvaluator;
     }
     public function getType() : string
     {
-        return \ConfigTransformer202109282\PhpParser\Node\Expr\FuncCall::class;
+        return \ConfigTransformer202109283\PhpParser\Node\Expr\FuncCall::class;
     }
     /**
      * @param \PhpParser\Node\Expr $expr
-     * @throws ConstExprEvaluationException
-     * @throws ShouldNotHappenException
      * @return mixed
      * @param string $currentFilePath
      */
     public function resolve($expr, $currentFilePath)
     {
-        if ($expr instanceof \ConfigTransformer202109282\PhpParser\Node\Expr\FuncCall && $this->simpleNameResolver->isName($expr, 'getcwd')) {
+        if ($this->simpleNameResolver->isName($expr, 'getcwd')) {
             return \dirname($currentFilePath);
         }
         $args = $expr->args;
@@ -52,12 +49,12 @@ final class FuncCallValueResolver implements \ConfigTransformer202109282\Symplif
         foreach ($args as $arg) {
             $arguments[] = $this->constExprEvaluator->evaluateDirectly($arg->value);
         }
-        if ($expr->name instanceof \ConfigTransformer202109282\PhpParser\Node\Name) {
+        if ($expr->name instanceof \ConfigTransformer202109283\PhpParser\Node\Name) {
             $functionName = (string) $expr->name;
             if (\function_exists($functionName) && \is_callable($functionName)) {
                 return \call_user_func_array($functionName, $arguments);
             }
-            throw new \ConfigTransformer202109282\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202109283\Symplify\Astral\Exception\ShouldNotHappenException();
         }
         return null;
     }
