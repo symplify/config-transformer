@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109278\Symfony\Component\HttpKernel\Profiler;
+namespace ConfigTransformer202109283\Symfony\Component\HttpKernel\Profiler;
 
-use ConfigTransformer202109278\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use ConfigTransformer202109283\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 /**
  * Profile.
  *

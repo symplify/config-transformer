@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109278\Symplify\ConfigTransformer\Converter;
+namespace ConfigTransformer202109283\Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202109278\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109278\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
-use ConfigTransformer202109278\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202109278\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202109278\Symplify\ConfigTransformer\ConfigLoader;
-use ConfigTransformer202109278\Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
-use ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format;
-use ConfigTransformer202109278\Symplify\PackageBuilder\Exception\NotImplementedYetException;
-use ConfigTransformer202109278\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use ConfigTransformer202109278\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer202109278\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use ConfigTransformer202109278\Symplify\PhpConfigPrinter\YamlToPhpConverter;
-use ConfigTransformer202109278\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202109278\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202109283\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109283\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
+use ConfigTransformer202109283\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202109283\Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use ConfigTransformer202109283\Symplify\ConfigTransformer\ConfigLoader;
+use ConfigTransformer202109283\Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
+use ConfigTransformer202109283\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202109283\Symplify\ConfigTransformer\ValueObject\Format;
+use ConfigTransformer202109283\Symplify\PackageBuilder\Exception\NotImplementedYetException;
+use ConfigTransformer202109283\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202109283\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202109283\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use ConfigTransformer202109283\Symplify\PhpConfigPrinter\YamlToPhpConverter;
+use ConfigTransformer202109283\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202109283\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ConfigFormatConverter
 {
     /**
@@ -48,7 +48,7 @@ final class ConfigFormatConverter
      * @var \Symplify\PackageBuilder\Yaml\ParametersMerger
      */
     private $parametersMerger;
-    public function __construct(\ConfigTransformer202109278\Symplify\ConfigTransformer\ConfigLoader $configLoader, \ConfigTransformer202109278\Symplify\PhpConfigPrinter\YamlToPhpConverter $yamlToPhpConverter, \ConfigTransformer202109278\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \ConfigTransformer202109278\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector, \ConfigTransformer202109278\Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner $containerBuilderCleaner, \ConfigTransformer202109278\Symplify\PackageBuilder\Reflection\PrivatesAccessor $privatesAccessor, \ConfigTransformer202109278\Symplify\PackageBuilder\Yaml\ParametersMerger $parametersMerger)
+    public function __construct(\ConfigTransformer202109283\Symplify\ConfigTransformer\ConfigLoader $configLoader, \ConfigTransformer202109283\Symplify\PhpConfigPrinter\YamlToPhpConverter $yamlToPhpConverter, \ConfigTransformer202109283\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \ConfigTransformer202109283\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector, \ConfigTransformer202109283\Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner $containerBuilderCleaner, \ConfigTransformer202109283\Symplify\PackageBuilder\Reflection\PrivatesAccessor $privatesAccessor, \ConfigTransformer202109283\Symplify\PackageBuilder\Yaml\ParametersMerger $parametersMerger)
     {
         $this->configLoader = $configLoader;
         $this->yamlToPhpConverter = $yamlToPhpConverter;
@@ -58,32 +58,32 @@ final class ConfigFormatConverter
         $this->privatesAccessor = $privatesAccessor;
         $this->parametersMerger = $parametersMerger;
     }
-    public function convert(\ConfigTransformer202109278\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, \ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : string
+    public function convert(\ConfigTransformer202109283\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, \ConfigTransformer202109283\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : string
     {
         $this->currentFilePathProvider->setFilePath($smartFileInfo->getRealPath());
         $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($smartFileInfo, $configuration);
         $containerBuilder = $containerBuilderAndFileContent->getContainerBuilder();
-        if ($smartFileInfo->getSuffix() === \ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format::YAML) {
+        if ($smartFileInfo->getSuffix() === \ConfigTransformer202109283\Symplify\ConfigTransformer\ValueObject\Format::YAML) {
             $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
             $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
             return $this->yamlToPhpConverter->convert($dumpedYaml);
         }
-        if ($smartFileInfo->getSuffix() === \ConfigTransformer202109278\Symplify\ConfigTransformer\ValueObject\Format::XML) {
+        if ($smartFileInfo->getSuffix() === \ConfigTransformer202109283\Symplify\ConfigTransformer\ValueObject\Format::XML) {
             $dumpedYaml = $this->dumpContainerBuilderToYaml($containerBuilder);
             $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
             return $this->yamlToPhpConverter->convert($dumpedYaml);
         }
         $message = \sprintf('Suffix "%s" is not support yet', $smartFileInfo->getSuffix());
-        throw new \ConfigTransformer202109278\Symplify\PackageBuilder\Exception\NotImplementedYetException($message);
+        throw new \ConfigTransformer202109283\Symplify\PackageBuilder\Exception\NotImplementedYetException($message);
     }
-    private function dumpContainerBuilderToYaml(\ConfigTransformer202109278\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : string
+    private function dumpContainerBuilderToYaml(\ConfigTransformer202109283\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : string
     {
-        $yamlDumper = new \ConfigTransformer202109278\Symfony\Component\DependencyInjection\Dumper\YamlDumper($containerBuilder);
+        $yamlDumper = new \ConfigTransformer202109283\Symfony\Component\DependencyInjection\Dumper\YamlDumper($containerBuilder);
         $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
         // 1. services and parameters
         $content = $yamlDumper->dump();
         if (!\is_string($content)) {
-            throw new \ConfigTransformer202109278\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202109283\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         // 2. append extension yaml too
         $extensionsConfigs = $this->privatesAccessor->getPrivateProperty($containerBuilder, 'extensionConfigs');
@@ -103,7 +103,7 @@ final class ConfigFormatConverter
         if ($collectedXmlImports === []) {
             return $dumpedYaml;
         }
-        $yamlArray = \ConfigTransformer202109278\Symfony\Component\Yaml\Yaml::parse($dumpedYaml, \ConfigTransformer202109278\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
+        $yamlArray = \ConfigTransformer202109283\Symfony\Component\Yaml\Yaml::parse($dumpedYaml, \ConfigTransformer202109283\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
         $yamlArray['imports'] = \array_merge($yamlArray['imports'] ?? [], $collectedXmlImports);
         return $this->dumpYaml($yamlArray);
     }
@@ -115,6 +115,6 @@ final class ConfigFormatConverter
         if ($yamlArray === []) {
             return '';
         }
-        return \ConfigTransformer202109278\Symfony\Component\Yaml\Yaml::dump($yamlArray, 10, 4, \ConfigTransformer202109278\Symfony\Component\Yaml\Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
+        return \ConfigTransformer202109283\Symfony\Component\Yaml\Yaml::dump($yamlArray, 10, 4, \ConfigTransformer202109283\Symfony\Component\Yaml\Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
     }
 }
