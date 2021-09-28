@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109284\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202109281\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202109284\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202109284\Symfony\Component\HttpFoundation\Response;
-final class ResponseHasHeader extends \ConfigTransformer202109284\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202109281\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202109281\Symfony\Component\HttpFoundation\Response;
+final class ResponseHasHeader extends \ConfigTransformer202109281\PHPUnit\Framework\Constraint\Constraint
 {
     private $headerName;
     public function __construct(string $headerName)
