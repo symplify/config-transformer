@@ -1190,6 +1190,7 @@ return array(
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\NodeValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/NodeValueResolver.php',
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\ClassConstFetchValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/NodeValueResolver/ClassConstFetchValueResolver.php',
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\ConstFetchValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/NodeValueResolver/ConstFetchValueResolver.php',
+    'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\FuncCallValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/NodeValueResolver/FuncCallValueResolver.php',
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\MagicConstValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/NodeValueResolver/MagicConstValueResolver.php',
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeValue\\UnionTypeValueResolver' => $vendorDir . '/symplify/astral/src/NodeValue/UnionTypeValueResolver.php',
     'ConfigTransformer202109282\\Symplify\\Astral\\NodeVisitor\\CallableNodeVisitor' => $vendorDir . '/symplify/astral/src/NodeVisitor/CallableNodeVisitor.php',

@@ -7,7 +7,6 @@ use ConfigTransformer202109282\PhpParser\ConstExprEvaluationException;
 use ConfigTransformer202109282\PhpParser\ConstExprEvaluator;
 use ConfigTransformer202109282\PhpParser\Node\Expr;
 use ConfigTransformer202109282\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202109282\PhpParser\Node\Expr\FuncCall;
 use ConfigTransformer202109282\PhpParser\Node\Expr\Instanceof_;
 use ConfigTransformer202109282\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202109282\PhpParser\Node\Expr\PropertyFetch;
@@ -21,6 +20,7 @@ use ConfigTransformer202109282\Symplify\Astral\Naming\SimpleNameResolver;
 use ConfigTransformer202109282\Symplify\Astral\NodeFinder\SimpleNodeFinder;
 use ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
 use ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
+use ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
 use ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
 use ConfigTransformer202109282\Symplify\PackageBuilder\Php\TypeChecker;
 /**
@@ -63,6 +63,7 @@ final class NodeValueResolver
         $this->nodeValueResolvers[] = new \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver($this->simpleNameResolver, $simpleNodeFinder);
         $this->nodeValueResolvers[] = new \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver($this->simpleNameResolver);
         $this->nodeValueResolvers[] = new \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver();
+        $this->nodeValueResolvers[] = new \ConfigTransformer202109282\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver($this->simpleNameResolver, $this->constExprEvaluator);
     }
     /**
      * @return array|bool|float|int|mixed|string|null
@@ -102,9 +103,6 @@ final class NodeValueResolver
     {
         if ($this->currentFilePath === null) {
             throw new \ConfigTransformer202109282\Symplify\Astral\Exception\ShouldNotHappenException();
-        }
-        if ($expr instanceof \ConfigTransformer202109282\PhpParser\Node\Expr\FuncCall && $this->simpleNameResolver->isName($expr, 'getcwd')) {
-            return \dirname($this->currentFilePath);
         }
         foreach ($this->nodeValueResolvers as $nodeValueResolver) {
             if (\is_a($expr, $nodeValueResolver->getType(), \true)) {
