@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202109284\\Psr\\EventDispatcher\\": "src\/"
+            "ConfigTransformer202109287\\Psr\\EventDispatcher\\": "src\/"
         }
     },
     "extra": {

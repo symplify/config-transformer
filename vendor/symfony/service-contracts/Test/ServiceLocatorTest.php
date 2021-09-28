@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109284\Symfony\Contracts\Service\Test;
+namespace ConfigTransformer202109287\Symfony\Contracts\Service\Test;
 
-use ConfigTransformer202109284\PHPUnit\Framework\TestCase;
-use ConfigTransformer202109284\Psr\Container\ContainerInterface;
-use ConfigTransformer202109284\Symfony\Contracts\Service\ServiceLocatorTrait;
-abstract class ServiceLocatorTest extends \ConfigTransformer202109284\PHPUnit\Framework\TestCase
+use ConfigTransformer202109287\PHPUnit\Framework\TestCase;
+use ConfigTransformer202109287\Psr\Container\ContainerInterface;
+use ConfigTransformer202109287\Symfony\Contracts\Service\ServiceLocatorTrait;
+abstract class ServiceLocatorTest extends \ConfigTransformer202109287\PHPUnit\Framework\TestCase
 {
     /**
      * @param mixed[] $factories
      */
     protected function getServiceLocator($factories)
     {
-        return new class($factories) implements \ConfigTransformer202109284\Psr\Container\ContainerInterface
+        return new class($factories) implements \ConfigTransformer202109287\Psr\Container\ContainerInterface
         {
             use ServiceLocatorTrait;
         };
@@ -62,7 +62,7 @@ abstract class ServiceLocatorTest extends \ConfigTransformer202109284\PHPUnit\Fr
     public function testThrowsOnUndefinedInternalService()
     {
         if (!$this->getExpectedException()) {
-            $this->expectException(\ConfigTransformer202109284\Psr\Container\NotFoundExceptionInterface::class);
+            $this->expectException(\ConfigTransformer202109287\Psr\Container\NotFoundExceptionInterface::class);
             $this->expectExceptionMessage('The service "foo" has a dependency on a non-existent service "bar". This locator only knows about the "foo" service.');
         }
         $locator = $this->getServiceLocator(['foo' => function () use(&$locator) {
@@ -72,7 +72,7 @@ abstract class ServiceLocatorTest extends \ConfigTransformer202109284\PHPUnit\Fr
     }
     public function testThrowsOnCircularReference()
     {
-        $this->expectException(\ConfigTransformer202109284\Psr\Container\ContainerExceptionInterface::class);
+        $this->expectException(\ConfigTransformer202109287\Psr\Container\ContainerExceptionInterface::class);
         $this->expectExceptionMessage('Circular reference detected for service "bar", path: "bar -> baz -> bar".');
         $locator = $this->getServiceLocator(['foo' => function () use(&$locator) {
             return $locator->get('bar');

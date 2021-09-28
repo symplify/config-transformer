@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109284\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202109287\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class NotAcceptableHttpException extends \ConfigTransformer202109284\Symfony\Component\HttpKernel\Exception\HttpException
+class NotAcceptableHttpException extends \ConfigTransformer202109287\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message
