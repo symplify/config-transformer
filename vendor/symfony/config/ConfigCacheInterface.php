@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109285\Symfony\Component\Config;
+namespace ConfigTransformer202109293\Symfony\Component\Config;
 
-use ConfigTransformer202109285\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202109293\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ConfigCache.
  *
