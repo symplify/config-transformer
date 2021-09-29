@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109297\Symfony\Component\HttpKernel\Event;
+namespace ConfigTransformer202109298\Symfony\Component\HttpKernel\Event;
 
-use ConfigTransformer202109297\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109297\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ConfigTransformer202109298\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109298\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to create a response for the return value of a controller.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202109297\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ViewEvent extends \ConfigTransformer202109297\Symfony\Component\HttpKernel\Event\RequestEvent
+final class ViewEvent extends \ConfigTransformer202109298\Symfony\Component\HttpKernel\Event\RequestEvent
 {
     /**
      * The return value of the controller.
@@ -29,7 +29,7 @@ final class ViewEvent extends \ConfigTransformer202109297\Symfony\Component\Http
      * @var mixed
      */
     private $controllerResult;
-    public function __construct(\ConfigTransformer202109297\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202109297\Symfony\Component\HttpFoundation\Request $request, int $requestType, $controllerResult)
+    public function __construct(\ConfigTransformer202109298\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \ConfigTransformer202109298\Symfony\Component\HttpFoundation\Request $request, int $requestType, $controllerResult)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->controllerResult = $controllerResult;
