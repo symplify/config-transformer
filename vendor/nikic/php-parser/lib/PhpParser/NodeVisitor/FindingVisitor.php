@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109293\PhpParser\NodeVisitor;
+namespace ConfigTransformer202109299\PhpParser\NodeVisitor;
 
-use ConfigTransformer202109293\PhpParser\Node;
-use ConfigTransformer202109293\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202109299\PhpParser\Node;
+use ConfigTransformer202109299\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find and collect all nodes satisfying some criterion determined by
  * a filter callback.
  */
-class FindingVisitor extends \ConfigTransformer202109293\PhpParser\NodeVisitorAbstract
+class FindingVisitor extends \ConfigTransformer202109299\PhpParser\NodeVisitorAbstract
 {
     /** @var callable Filter callback */
     protected $filterCallback;
