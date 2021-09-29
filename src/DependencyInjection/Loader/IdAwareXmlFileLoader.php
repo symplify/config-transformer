@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109297\Symplify\ConfigTransformer\DependencyInjection\Loader;
+namespace ConfigTransformer202109294\Symplify\ConfigTransformer\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
@@ -9,21 +9,21 @@ use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use InvalidArgumentException;
-use ConfigTransformer202109297\Nette\Utils\Strings;
-use ConfigTransformer202109297\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202109297\Symfony\Component\Config\Util\Exception\XmlParsingException;
-use ConfigTransformer202109297\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer202109297\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202109297\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202109297\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use ConfigTransformer202109297\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202109297\Symplify\ConfigTransformer\Naming\UniqueNaming;
-use ConfigTransformer202109297\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
-use ConfigTransformer202109297\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202109294\Nette\Utils\Strings;
+use ConfigTransformer202109294\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202109294\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use ConfigTransformer202109294\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer202109294\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202109294\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202109294\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ConfigTransformer202109294\Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use ConfigTransformer202109294\Symplify\ConfigTransformer\Naming\UniqueNaming;
+use ConfigTransformer202109294\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
+use ConfigTransformer202109294\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * Mimics https://github.com/symfony/symfony/commit/b8c68da0107a4f433dd414a355ea5589da0da0e8 for Symfony 3.3-
  */
-final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+final class IdAwareXmlFileLoader extends \ConfigTransformer202109294\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
 {
     /**
      * @var string
@@ -45,12 +45,12 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
      * @var \Symplify\ConfigTransformer\Collector\XmlImportCollector
      */
     private $xmlImportCollector;
-    public function __construct(\ConfigTransformer202109297\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202109297\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202109297\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202109297\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
+    public function __construct(\ConfigTransformer202109294\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202109294\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202109294\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202109294\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
     {
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;
         parent::__construct($containerBuilder, $fileLocator);
-        $this->privatesCaller = new \ConfigTransformer202109297\Symplify\PackageBuilder\Reflection\PrivatesCaller();
+        $this->privatesCaller = new \ConfigTransformer202109294\Symplify\PackageBuilder\Reflection\PrivatesCaller();
     }
     public function import($resource, $type = null, $ignoreErrors = \false, $sourceResource = null, $exclude = null) : void
     {
@@ -63,7 +63,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
     {
         $path = $this->locator->locate($resource);
         if (!\is_string($path)) {
-            throw new \ConfigTransformer202109297\Symfony\Component\Config\Util\Exception\XmlParsingException();
+            throw new \ConfigTransformer202109294\Symfony\Component\Config\Util\Exception\XmlParsingException();
         }
         // mostly mimics parseFileToDOM(), just without validation, that often breaks due to missing extension
         $domDocument = $this->parseFileToDOMWithoutValidation($path);
@@ -75,7 +75,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
         // parameters
         $this->privatesCaller->callPrivateMethod($this, 'parseParameters', [$domDocument, $path]);
         // faking extensions
-        $aliasAndNamespaceConfigurableExtension = new \ConfigTransformer202109297\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension('doctrine', 'http://symfony.com/schema/dic/doctrine');
+        $aliasAndNamespaceConfigurableExtension = new \ConfigTransformer202109294\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension('doctrine', 'http://symfony.com/schema/dic/doctrine');
         $this->container->registerExtension($aliasAndNamespaceConfigurableExtension);
         $this->privatesCaller->callPrivateMethod($this, 'loadFromExtensions', [$domDocument]);
         // services
@@ -90,7 +90,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
     {
         $this->count = 0;
         $definitions = [];
-        $suffix = '~' . \ConfigTransformer202109297\Symfony\Component\DependencyInjection\ContainerBuilder::hash($file);
+        $suffix = '~' . \ConfigTransformer202109294\Symfony\Component\DependencyInjection\ContainerBuilder::hash($file);
         $domxPath = new \DOMXPath($xml);
         $domxPath->registerNamespace('container', self::NS);
         $definitions = $this->processAnonymousServicesInArguments($domxPath, $suffix, $file, $definitions);
@@ -111,7 +111,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
         \uksort($definitions, 'strnatcmp');
         $inversedDefinitions = \array_reverse($definitions);
         foreach ($inversedDefinitions as $id => [$domElement, $file]) {
-            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202109297\Symfony\Component\DependencyInjection\Definition()]);
+            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202109294\Symfony\Component\DependencyInjection\Definition()]);
             if ($definition !== null) {
                 $this->setDefinition($id, $definition);
             }
@@ -154,7 +154,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
     }
     private function createServiceNameFromClass(string $class) : string
     {
-        $serviceName = \ConfigTransformer202109297\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
+        $serviceName = \ConfigTransformer202109294\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
         $serviceName = \strtolower($serviceName);
         return $this->uniqueNaming->uniquateName($serviceName);
     }
@@ -170,10 +170,10 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202109297\Symfony\Com
     private function parseFileToDOMWithoutValidation(string $path) : \DOMDocument
     {
         try {
-            return \ConfigTransformer202109297\Symfony\Component\Config\Util\XmlUtils::loadFile($path);
+            return \ConfigTransformer202109294\Symfony\Component\Config\Util\XmlUtils::loadFile($path);
         } catch (\InvalidArgumentException $invalidArgumentException) {
             $errorMessage = \sprintf('Unable to parse file "%s": %s', $path, $invalidArgumentException->getMessage());
-            throw new \ConfigTransformer202109297\Symfony\Component\Config\Util\Exception\XmlParsingException($errorMessage, $invalidArgumentException->getCode(), $invalidArgumentException);
+            throw new \ConfigTransformer202109294\Symfony\Component\Config\Util\Exception\XmlParsingException($errorMessage, $invalidArgumentException->getCode(), $invalidArgumentException);
         }
     }
 }
