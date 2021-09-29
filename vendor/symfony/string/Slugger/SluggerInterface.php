@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109295\Symfony\Component\String\Slugger;
+namespace ConfigTransformer202109297\Symfony\Component\String\Slugger;
 
-use ConfigTransformer202109295\Symfony\Component\String\AbstractUnicodeString;
+use ConfigTransformer202109297\Symfony\Component\String\AbstractUnicodeString;
 /**
  * Creates a URL-friendly slug from a given string.
  *
@@ -24,5 +24,5 @@ interface SluggerInterface
      * @param string $separator
      * @param string|null $locale
      */
-    public function slug($string, $separator = '-', $locale = null) : \ConfigTransformer202109295\Symfony\Component\String\AbstractUnicodeString;
+    public function slug($string, $separator = '-', $locale = null) : \ConfigTransformer202109297\Symfony\Component\String\AbstractUnicodeString;
 }
