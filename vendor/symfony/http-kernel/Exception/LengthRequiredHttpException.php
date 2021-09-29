@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109294\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202109297\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class LengthRequiredHttpException extends \ConfigTransformer202109294\Symfony\Component\HttpKernel\Exception\HttpException
+class LengthRequiredHttpException extends \ConfigTransformer202109297\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message
