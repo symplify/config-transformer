@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109298\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202109297\Symplify\ConfigTransformer\ValueObject;
 
 final class Format
 {
