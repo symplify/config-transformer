@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202109305\Psr\Cache;
+namespace ConfigTransformer202109303\Psr\Cache;
 
 /**
  * CacheItemInterface defines an interface for interacting with objects inside a cache.
