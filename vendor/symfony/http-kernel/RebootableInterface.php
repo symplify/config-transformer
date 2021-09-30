@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109305\Symfony\Component\HttpKernel;
+namespace ConfigTransformer202109307\Symfony\Component\HttpKernel;
 
 /**
  * Allows the Kernel to be rebooted using a temporary cache directory.
