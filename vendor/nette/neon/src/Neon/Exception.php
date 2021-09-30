@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202109297\Nette\Neon;
+namespace ConfigTransformer202109305\Nette\Neon;
 
 /**
  * The exception that indicates error of NEON processing.

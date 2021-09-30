@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109297\Symfony\Component\Console\Event;
+namespace ConfigTransformer202109305\Symfony\Component\Console\Event;
 
-use ConfigTransformer202109297\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202109297\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202109297\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202109297\Symfony\Contracts\EventDispatcher\Event;
+use ConfigTransformer202109305\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202109305\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202109305\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202109305\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Allows to inspect input and output of a command.
  *
  * @author Francesco Levorato <git@flevour.net>
  */
-class ConsoleEvent extends \ConfigTransformer202109297\Symfony\Contracts\EventDispatcher\Event
+class ConsoleEvent extends \ConfigTransformer202109305\Symfony\Contracts\EventDispatcher\Event
 {
     protected $command;
     private $input;
     private $output;
-    public function __construct(?\ConfigTransformer202109297\Symfony\Component\Console\Command\Command $command, \ConfigTransformer202109297\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202109297\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(?\ConfigTransformer202109305\Symfony\Component\Console\Command\Command $command, \ConfigTransformer202109305\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202109305\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->command = $command;
         $this->input = $input;

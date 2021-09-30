@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109297\PhpParser\Node\Stmt;
+namespace ConfigTransformer202109305\PhpParser\Node\Stmt;
 
-use ConfigTransformer202109297\PhpParser\Node\Identifier;
-use ConfigTransformer202109297\PhpParser\Node\Stmt;
-class Goto_ extends \ConfigTransformer202109297\PhpParser\Node\Stmt
+use ConfigTransformer202109305\PhpParser\Node\Identifier;
+use ConfigTransformer202109305\PhpParser\Node\Stmt;
+class Goto_ extends \ConfigTransformer202109305\PhpParser\Node\Stmt
 {
     /** @var Identifier Name of label to jump to */
     public $name;
@@ -18,7 +18,7 @@ class Goto_ extends \ConfigTransformer202109297\PhpParser\Node\Stmt
     public function __construct($name, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer202109297\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202109305\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109297\Symfony\Contracts\Service;
+namespace ConfigTransformer202109305\Symfony\Contracts\Service;
 
 /**
  * Provides a way to reset an object to its initial state.
