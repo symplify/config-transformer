@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109303\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202109309\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202109303\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202109303\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202109303\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer202109303\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use ConfigTransformer202109303\Symfony\Component\HttpKernel\KernelEvents;
-use ConfigTransformer202109303\Symfony\Component\HttpKernel\UriSigner;
+use ConfigTransformer202109309\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202109309\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202109309\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202109309\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use ConfigTransformer202109309\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202109309\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Handles content fragments represented by special URIs.
  *
@@ -29,14 +29,14 @@ use ConfigTransformer202109303\Symfony\Component\HttpKernel\UriSigner;
  *
  * @final
  */
-class FragmentListener implements \ConfigTransformer202109303\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class FragmentListener implements \ConfigTransformer202109309\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $signer;
     private $fragmentPath;
     /**
      * @param string $fragmentPath The path that triggers this listener
      */
-    public function __construct(\ConfigTransformer202109303\Symfony\Component\HttpKernel\UriSigner $signer, string $fragmentPath = '/_fragment')
+    public function __construct(\ConfigTransformer202109309\Symfony\Component\HttpKernel\UriSigner $signer, string $fragmentPath = '/_fragment')
     {
         $this->signer = $signer;
         $this->fragmentPath = $fragmentPath;
@@ -73,16 +73,16 @@ class FragmentListener implements \ConfigTransformer202109303\Symfony\Component\
     {
         // is the Request safe?
         if (!$request->isMethodSafe()) {
-            throw new \ConfigTransformer202109303\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            throw new \ConfigTransformer202109309\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
         }
         // is the Request signed?
         if ($this->signer->checkRequest($request)) {
             return;
         }
-        throw new \ConfigTransformer202109303\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+        throw new \ConfigTransformer202109309\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202109303\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 48]]];
+        return [\ConfigTransformer202109309\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 48]]];
     }
 }
