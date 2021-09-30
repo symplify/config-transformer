@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202109309\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202109301\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents an already parsed expression.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class SerializedParsedExpression extends \ConfigTransformer202109309\Symfony\Component\ExpressionLanguage\ParsedExpression
+class SerializedParsedExpression extends \ConfigTransformer202109301\Symfony\Component\ExpressionLanguage\ParsedExpression
 {
     private $nodes;
     /**
