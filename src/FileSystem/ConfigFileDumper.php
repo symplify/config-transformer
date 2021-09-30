@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109301\Symplify\ConfigTransformer\FileSystem;
+namespace ConfigTransformer202109308\Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202109301\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202109301\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202109301\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202109301\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202109308\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202109308\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202109308\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202109308\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     /**
@@ -17,12 +17,12 @@ final class ConfigFileDumper
      * @var \Symplify\SmartFileSystem\SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\ConfigTransformer202109301\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202109301\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(\ConfigTransformer202109308\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202109308\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
     }
-    public function dumpFile(\ConfigTransformer202109301\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent, \ConfigTransformer202109301\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : void
+    public function dumpFile(\ConfigTransformer202109308\Symplify\ConfigTransformer\ValueObject\ConvertedContent $convertedContent, \ConfigTransformer202109308\Symplify\ConfigTransformer\ValueObject\Configuration $configuration) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';

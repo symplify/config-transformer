@@ -5,24 +5,24 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202109301\Nette\Utils;
+namespace ConfigTransformer202109308\Nette\Utils;
 
-use ConfigTransformer202109301\Nette;
+use ConfigTransformer202109308\Nette;
 if (\false) {
     /** @deprecated use Nette\HtmlStringable */
-    interface IHtmlString extends \ConfigTransformer202109301\Nette\HtmlStringable
+    interface IHtmlString extends \ConfigTransformer202109308\Nette\HtmlStringable
     {
     }
-} elseif (!\interface_exists(\ConfigTransformer202109301\Nette\Utils\IHtmlString::class)) {
-    \class_alias(\ConfigTransformer202109301\Nette\HtmlStringable::class, \ConfigTransformer202109301\Nette\Utils\IHtmlString::class);
+} elseif (!\interface_exists(\ConfigTransformer202109308\Nette\Utils\IHtmlString::class)) {
+    \class_alias(\ConfigTransformer202109308\Nette\HtmlStringable::class, \ConfigTransformer202109308\Nette\Utils\IHtmlString::class);
 }
-namespace ConfigTransformer202109301\Nette\Localization;
+namespace ConfigTransformer202109308\Nette\Localization;
 
 if (\false) {
     /** @deprecated use Nette\Localization\Translator */
-    interface ITranslator extends \ConfigTransformer202109301\Nette\Localization\Translator
+    interface ITranslator extends \ConfigTransformer202109308\Nette\Localization\Translator
     {
     }
-} elseif (!\interface_exists(\ConfigTransformer202109301\Nette\Localization\ITranslator::class)) {
-    \class_alias(\ConfigTransformer202109301\Nette\Localization\Translator::class, \ConfigTransformer202109301\Nette\Localization\ITranslator::class);
+} elseif (!\interface_exists(\ConfigTransformer202109308\Nette\Localization\ITranslator::class)) {
+    \class_alias(\ConfigTransformer202109308\Nette\Localization\Translator::class, \ConfigTransformer202109308\Nette\Localization\ITranslator::class);
 }
