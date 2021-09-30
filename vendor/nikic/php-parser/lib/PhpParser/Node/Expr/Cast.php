@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109308\PhpParser\Node\Expr;
+namespace ConfigTransformer202109302\PhpParser\Node\Expr;
 
-use ConfigTransformer202109308\PhpParser\Node\Expr;
-abstract class Cast extends \ConfigTransformer202109308\PhpParser\Node\Expr
+use ConfigTransformer202109302\PhpParser\Node\Expr;
+abstract class Cast extends \ConfigTransformer202109302\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ abstract class Cast extends \ConfigTransformer202109308\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202109308\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\ConfigTransformer202109302\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

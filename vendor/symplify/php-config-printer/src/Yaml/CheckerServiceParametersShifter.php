@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109308\Symplify\PhpConfigPrinter\Yaml;
+namespace ConfigTransformer202109302\Symplify\PhpConfigPrinter\Yaml;
 
-use ConfigTransformer202109308\Nette\Utils\Strings;
-use ConfigTransformer202109308\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer202109302\Nette\Utils\Strings;
+use ConfigTransformer202109302\Symplify\PackageBuilder\Strings\StringFormatConverter;
 /**
  * @copy of https://github.com/symplify/symplify/blob/d4beda1b1af847599aa035ead755e03db81c7247/packages/easy-coding-standard/src/Yaml/CheckerServiceParametersShifter.php
  *
@@ -47,7 +47,7 @@ final class CheckerServiceParametersShifter
     private $stringFormatConverter;
     public function __construct()
     {
-        $this->stringFormatConverter = new \ConfigTransformer202109308\Symplify\PackageBuilder\Strings\StringFormatConverter();
+        $this->stringFormatConverter = new \ConfigTransformer202109302\Symplify\PackageBuilder\Strings\StringFormatConverter();
     }
     /**
      * @param mixed[] $configuration
@@ -170,6 +170,6 @@ final class CheckerServiceParametersShifter
             }
             return $value;
         }
-        return \ConfigTransformer202109308\Nette\Utils\Strings::replace($value, '#^@#', '@@');
+        return \ConfigTransformer202109302\Nette\Utils\Strings::replace($value, '#^@#', '@@');
     }
 }
