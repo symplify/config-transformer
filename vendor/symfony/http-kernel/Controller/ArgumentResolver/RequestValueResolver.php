@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110018\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202110019\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202110018\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110018\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202110018\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202110019\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110019\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202110019\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the same instance as the request object passed along.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class RequestValueResolver implements \ConfigTransformer202110018\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class RequestValueResolver implements \ConfigTransformer202110019\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
@@ -27,7 +27,7 @@ final class RequestValueResolver implements \ConfigTransformer202110018\Symfony\
      */
     public function supports($request, $argument) : bool
     {
-        return \ConfigTransformer202110018\Symfony\Component\HttpFoundation\Request::class === $argument->getType() || \is_subclass_of($argument->getType(), \ConfigTransformer202110018\Symfony\Component\HttpFoundation\Request::class);
+        return \ConfigTransformer202110019\Symfony\Component\HttpFoundation\Request::class === $argument->getType() || \is_subclass_of($argument->getType(), \ConfigTransformer202110019\Symfony\Component\HttpFoundation\Request::class);
     }
     /**
      * {@inheritdoc}

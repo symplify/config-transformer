@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110018\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202110019\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202110018\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110018\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202110019\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110019\Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * Interface implemented by rendering strategies able to generate an URL for a fragment.
  *

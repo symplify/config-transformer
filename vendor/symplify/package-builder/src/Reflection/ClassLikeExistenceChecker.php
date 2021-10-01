@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110018\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202110019\Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
 final class ClassLikeExistenceChecker
