@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110013\Symplify\SymplifyKernel\DependencyInjection\Extension;
+namespace ConfigTransformer2021100110\Symplify\SymplifyKernel\DependencyInjection\Extension;
 
-use ConfigTransformer202110013\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202110013\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Extension\Extension;
-use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class SymplifyKernelExtension extends \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Extension\Extension
+use ConfigTransformer2021100110\Symfony\Component\Config\FileLocator;
+use ConfigTransformer2021100110\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021100110\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer2021100110\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class SymplifyKernelExtension extends \ConfigTransformer2021100110\Symfony\Component\DependencyInjection\Extension\Extension
 {
     /**
      * @param string[] $configs
@@ -15,7 +15,7 @@ final class SymplifyKernelExtension extends \ConfigTransformer202110013\Symfony\
      */
     public function load($configs, $containerBuilder) : void
     {
-        $phpFileLoader = new \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202110013\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \ConfigTransformer2021100110\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer2021100110\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('common-config.php');
     }
 }
