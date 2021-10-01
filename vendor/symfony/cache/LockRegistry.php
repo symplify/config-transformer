@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110015\Symfony\Component\Cache;
+namespace ConfigTransformer202110012\Symfony\Component\Cache;
 
-use ConfigTransformer202110015\Psr\Log\LoggerInterface;
-use ConfigTransformer202110015\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202110015\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202110012\Psr\Log\LoggerInterface;
+use ConfigTransformer202110012\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202110012\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *
@@ -48,7 +48,7 @@ final class LockRegistry
         self::$openedFiles = self::$lockedFiles = [];
         return $previousFiles;
     }
-    public static function compute(callable $callback, \ConfigTransformer202110015\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202110015\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \ConfigTransformer202110015\Psr\Log\LoggerInterface $logger = null)
+    public static function compute(callable $callback, \ConfigTransformer202110012\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202110012\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \ConfigTransformer202110012\Psr\Log\LoggerInterface $logger = null)
     {
         if ('\\' === \DIRECTORY_SEPARATOR && null === self::$lockedFiles) {
             // disable locking on Windows by default
