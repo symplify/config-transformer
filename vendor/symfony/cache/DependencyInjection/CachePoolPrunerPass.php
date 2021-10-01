@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110012\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202110013\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202110012\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202110012\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202110012\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202110012\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202110012\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202110012\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202110013\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202110013\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202110013\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  */
-class CachePoolPrunerPass implements \ConfigTransformer202110012\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolPrunerPass implements \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $cacheCommandServiceId;
     private $cachePoolTag;
@@ -34,7 +34,7 @@ class CachePoolPrunerPass implements \ConfigTransformer202110012\Symfony\Compone
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202110012\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202110013\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->cacheCommandServiceId)) {
             return;
@@ -43,12 +43,12 @@ class CachePoolPrunerPass implements \ConfigTransformer202110012\Symfony\Compone
         foreach ($container->findTaggedServiceIds($this->cachePoolTag) as $id => $tags) {
             $class = $container->getParameterBag()->resolveValue($container->getDefinition($id)->getClass());
             if (!($reflection = $container->getReflectionClass($class))) {
-                throw new \ConfigTransformer202110012\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
-            if ($reflection->implementsInterface(\ConfigTransformer202110012\Symfony\Component\Cache\PruneableInterface::class)) {
-                $services[$id] = new \ConfigTransformer202110012\Symfony\Component\DependencyInjection\Reference($id);
+            if ($reflection->implementsInterface(\ConfigTransformer202110013\Symfony\Component\Cache\PruneableInterface::class)) {
+                $services[$id] = new \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Reference($id);
             }
         }
-        $container->getDefinition($this->cacheCommandServiceId)->replaceArgument(0, new \ConfigTransformer202110012\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
+        $container->getDefinition($this->cacheCommandServiceId)->replaceArgument(0, new \ConfigTransformer202110013\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
     }
 }
