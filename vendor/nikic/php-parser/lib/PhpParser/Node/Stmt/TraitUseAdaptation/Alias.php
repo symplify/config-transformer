@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021100110\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace ConfigTransformer202110017\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use ConfigTransformer2021100110\PhpParser\Node;
-class Alias extends \ConfigTransformer2021100110\PhpParser\Node\Stmt\TraitUseAdaptation
+use ConfigTransformer202110017\PhpParser\Node;
+class Alias extends \ConfigTransformer202110017\PhpParser\Node\Stmt\TraitUseAdaptation
 {
     /** @var null|int New modifier */
     public $newModifier;
@@ -23,9 +23,9 @@ class Alias extends \ConfigTransformer2021100110\PhpParser\Node\Stmt\TraitUseAda
     {
         $this->attributes = $attributes;
         $this->trait = $trait;
-        $this->method = \is_string($method) ? new \ConfigTransformer2021100110\PhpParser\Node\Identifier($method) : $method;
+        $this->method = \is_string($method) ? new \ConfigTransformer202110017\PhpParser\Node\Identifier($method) : $method;
         $this->newModifier = $newModifier;
-        $this->newName = \is_string($newName) ? new \ConfigTransformer2021100110\PhpParser\Node\Identifier($newName) : $newName;
+        $this->newName = \is_string($newName) ? new \ConfigTransformer202110017\PhpParser\Node\Identifier($newName) : $newName;
     }
     public function getSubNodeNames() : array
     {

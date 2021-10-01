@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021100110\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
+namespace ConfigTransformer202110017\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
 
-use ConfigTransformer2021100110\Symfony\Component\Config\FileLocator;
-use ConfigTransformer2021100110\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021100110\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer2021100110\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
-use ConfigTransformer2021100110\Symplify\ConfigTransformer\Naming\UniqueNaming;
+use ConfigTransformer202110017\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202110017\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202110017\Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use ConfigTransformer202110017\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
+use ConfigTransformer202110017\Symplify\ConfigTransformer\Naming\UniqueNaming;
 final class IdAwareXmlFileLoaderFactory
 {
     /**
@@ -18,13 +18,13 @@ final class IdAwareXmlFileLoaderFactory
      * @var \Symplify\ConfigTransformer\Collector\XmlImportCollector
      */
     private $xmlImportCollector;
-    public function __construct(\ConfigTransformer2021100110\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer2021100110\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
+    public function __construct(\ConfigTransformer202110017\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202110017\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
     {
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;
     }
-    public function createFromContainerBuilder(\ConfigTransformer2021100110\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \ConfigTransformer2021100110\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader
+    public function createFromContainerBuilder(\ConfigTransformer202110017\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \ConfigTransformer202110017\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader
     {
-        return new \ConfigTransformer2021100110\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader($containerBuilder, new \ConfigTransformer2021100110\Symfony\Component\Config\FileLocator(), $this->uniqueNaming, $this->xmlImportCollector);
+        return new \ConfigTransformer202110017\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader($containerBuilder, new \ConfigTransformer202110017\Symfony\Component\Config\FileLocator(), $this->uniqueNaming, $this->xmlImportCollector);
     }
 }

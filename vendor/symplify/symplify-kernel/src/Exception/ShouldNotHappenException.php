@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021100110\Symplify\SymplifyKernel\Exception;
+namespace ConfigTransformer202110017\Symplify\SymplifyKernel\Exception;
 
 use Exception;
 final class ShouldNotHappenException extends \Exception

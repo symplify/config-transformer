@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021100110\Symfony\Component\VarExporter;
+namespace ConfigTransformer202110017\Symfony\Component\VarExporter;
 
-use ConfigTransformer2021100110\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use ConfigTransformer2021100110\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
-use ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer202110017\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer202110017\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry;
 /**
  * A utility class to create objects without calling their constructor.
  *
@@ -57,13 +57,13 @@ final class Instantiator
      */
     public static function instantiate(string $class, array $properties = [], array $privateProperties = [])
     {
-        $reflector = \ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
-        if (\ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
-            $wrappedInstance = [clone \ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]];
-        } elseif (\ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
+        $reflector = \ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+        if (\ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+            $wrappedInstance = [clone \ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]];
+        } elseif (\ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
             $wrappedInstance = [$reflector->newInstanceWithoutConstructor()];
-        } elseif (null === \ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]) {
-            throw new \ConfigTransformer2021100110\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+        } elseif (null === \ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]) {
+            throw new \ConfigTransformer202110017\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
         } elseif ($reflector->implementsInterface('Serializable') && (\PHP_VERSION_ID < 70400 || !\method_exists($class, '__unserialize'))) {
             $wrappedInstance = [\unserialize('C:' . \strlen($class) . ':"' . $class . '":0:{}')];
         } else {
@@ -81,7 +81,7 @@ final class Instantiator
                 // deal with array of instances, so we need to wrap values
                 $properties[$name] = [$value];
             }
-            (\ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Hydrator::$hydrators[$class] ?? \ConfigTransformer2021100110\Symfony\Component\VarExporter\Internal\Hydrator::getHydrator($class))($properties, $wrappedInstance);
+            (\ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Hydrator::$hydrators[$class] ?? \ConfigTransformer202110017\Symfony\Component\VarExporter\Internal\Hydrator::getHydrator($class))($properties, $wrappedInstance);
         }
         return $wrappedInstance[0];
     }
