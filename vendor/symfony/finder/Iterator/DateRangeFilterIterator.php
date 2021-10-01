@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110010\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202110016\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202110010\Symfony\Component\Finder\Comparator\DateComparator;
+use ConfigTransformer202110016\Symfony\Component\Finder\Comparator\DateComparator;
 /**
  * DateRangeFilterIterator filters out files that are not in the given date range (last modified dates).
  *

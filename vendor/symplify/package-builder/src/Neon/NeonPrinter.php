@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110010\Symplify\PackageBuilder\Neon;
+namespace ConfigTransformer202110016\Symplify\PackageBuilder\Neon;
 
-use ConfigTransformer202110010\Nette\Neon\Encoder;
-use ConfigTransformer202110010\Nette\Neon\Neon;
-use ConfigTransformer202110010\Nette\Utils\Strings;
+use ConfigTransformer202110016\Nette\Neon\Encoder;
+use ConfigTransformer202110016\Nette\Neon\Neon;
+use ConfigTransformer202110016\Nette\Utils\Strings;
 final class NeonPrinter
 {
     /**
@@ -23,7 +23,7 @@ final class NeonPrinter
      */
     public function printNeon(array $phpStanNeon) : string
     {
-        $neonContent = \ConfigTransformer202110010\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer202110010\Nette\Neon\Encoder::BLOCK);
+        $neonContent = \ConfigTransformer202110016\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer202110016\Nette\Neon\Encoder::BLOCK);
         // tabs to spaces for consistency
         $neonContent = $this->replaceTabsWithSpaces($neonContent);
         // inline single tags, dummy
@@ -33,14 +33,14 @@ final class NeonPrinter
     }
     private function replaceTabsWithSpaces(string $neonContent) : string
     {
-        return \ConfigTransformer202110010\Nette\Utils\Strings::replace($neonContent, '#\\t#', '    ');
+        return \ConfigTransformer202110016\Nette\Utils\Strings::replace($neonContent, '#\\t#', '    ');
     }
     private function inlineSingleTags(string $neonContent) : string
     {
-        return \ConfigTransformer202110010\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
+        return \ConfigTransformer202110016\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
     }
     private function fixDoubleSpaceInArguments(string $neonContent) : string
     {
-        return \ConfigTransformer202110010\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
+        return \ConfigTransformer202110016\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
     }
 }
