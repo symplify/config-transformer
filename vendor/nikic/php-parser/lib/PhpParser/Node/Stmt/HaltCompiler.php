@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110012\PhpParser\Node\Stmt;
+namespace ConfigTransformer202110016\PhpParser\Node\Stmt;
 
-use ConfigTransformer202110012\PhpParser\Node\Stmt;
-class HaltCompiler extends \ConfigTransformer202110012\PhpParser\Node\Stmt
+use ConfigTransformer202110016\PhpParser\Node\Stmt;
+class HaltCompiler extends \ConfigTransformer202110016\PhpParser\Node\Stmt
 {
     /** @var string Remaining text after halt compiler statement. */
     public $remaining;
