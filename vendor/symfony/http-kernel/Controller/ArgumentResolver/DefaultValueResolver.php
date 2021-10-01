@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110016\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202110012\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202110016\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110016\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202110016\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202110012\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110012\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202110012\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the default value defined in the action signature when no value has been given.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class DefaultValueResolver implements \ConfigTransformer202110016\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class DefaultValueResolver implements \ConfigTransformer202110012\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}

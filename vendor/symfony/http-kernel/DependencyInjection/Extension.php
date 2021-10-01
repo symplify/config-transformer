@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110016\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202110012\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202110016\Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
+use ConfigTransformer202110012\Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
 /**
  * Allow adding classes to the class cache.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension extends \ConfigTransformer202110016\Symfony\Component\DependencyInjection\Extension\Extension
+abstract class Extension extends \ConfigTransformer202110012\Symfony\Component\DependencyInjection\Extension\Extension
 {
     private $annotatedClasses = [];
     /**
