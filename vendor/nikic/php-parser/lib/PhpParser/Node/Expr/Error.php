@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110015\PhpParser\Node\Expr;
+namespace ConfigTransformer202110018\PhpParser\Node\Expr;
 
-use ConfigTransformer202110015\PhpParser\Node\Expr;
+use ConfigTransformer202110018\PhpParser\Node\Expr;
 /**
  * Error node used during parsing with error recovery.
  *
  * An error node may be placed at a position where an expression is required, but an error occurred.
  * Error nodes will not be present if the parser is run in throwOnError mode (the default).
  */
-class Error extends \ConfigTransformer202110015\PhpParser\Node\Expr
+class Error extends \ConfigTransformer202110018\PhpParser\Node\Expr
 {
     /**
      * Constructs an error node.
