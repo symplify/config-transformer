@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202109307\Symplify\PhpConfigPrinter\RoutingCaseConverter;
+namespace ConfigTransformer202110015\Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use ConfigTransformer202109307\PhpParser\Node\Arg;
-use ConfigTransformer202109307\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202109307\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202109307\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202109307\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use ConfigTransformer202109307\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202109307\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-final class PathRoutingCaseConverter implements \ConfigTransformer202109307\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
+use ConfigTransformer202110015\PhpParser\Node\Arg;
+use ConfigTransformer202110015\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202110015\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202110015\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202110015\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use ConfigTransformer202110015\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202110015\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+final class PathRoutingCaseConverter implements \ConfigTransformer202110015\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
 {
     /**
      * @var string[]
@@ -28,7 +28,7 @@ final class PathRoutingCaseConverter implements \ConfigTransformer202109307\Symp
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202109307\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202110015\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
@@ -42,12 +42,12 @@ final class PathRoutingCaseConverter implements \ConfigTransformer202109307\Symp
     /**
      * @param string $key
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202109307\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202110015\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \ConfigTransformer202109307\PhpParser\Node\Expr\Variable(\ConfigTransformer202109307\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \ConfigTransformer202110015\PhpParser\Node\Expr\Variable(\ConfigTransformer202110015\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         // @todo args
         $args = $this->createAddArgs($key, $values);
-        $methodCall = new \ConfigTransformer202109307\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
+        $methodCall = new \ConfigTransformer202110015\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
                 continue;
@@ -58,9 +58,9 @@ final class PathRoutingCaseConverter implements \ConfigTransformer202109307\Symp
                 $nestedValues = \explode('|', $nestedValues);
             }
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
-            $methodCall = new \ConfigTransformer202109307\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
+            $methodCall = new \ConfigTransformer202110015\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
         }
-        return new \ConfigTransformer202109307\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \ConfigTransformer202110015\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed $values
