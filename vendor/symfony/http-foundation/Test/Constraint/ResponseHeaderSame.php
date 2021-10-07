@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110071\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ConfigTransformer202110072\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use ConfigTransformer202110071\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202110071\Symfony\Component\HttpFoundation\Response;
-final class ResponseHeaderSame extends \ConfigTransformer202110071\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202110072\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202110072\Symfony\Component\HttpFoundation\Response;
+final class ResponseHeaderSame extends \ConfigTransformer202110072\PHPUnit\Framework\Constraint\Constraint
 {
     private $headerName;
     private $expectedValue;

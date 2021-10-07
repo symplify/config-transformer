@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110071\Symplify\EasyTesting\Console;
+namespace ConfigTransformer202110072\Symplify\EasyTesting\Console;
 
-use ConfigTransformer202110071\Symfony\Component\Console\Application;
-use ConfigTransformer202110071\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202110071\Symplify\PackageBuilder\Console\Command\CommandNaming;
-final class EasyTestingConsoleApplication extends \ConfigTransformer202110071\Symfony\Component\Console\Application
+use ConfigTransformer202110072\Symfony\Component\Console\Application;
+use ConfigTransformer202110072\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202110072\Symplify\PackageBuilder\Console\Command\CommandNaming;
+final class EasyTestingConsoleApplication extends \ConfigTransformer202110072\Symfony\Component\Console\Application
 {
     /**
      * @param Command[] $commands
      */
-    public function __construct(\ConfigTransformer202110071\Symplify\PackageBuilder\Console\Command\CommandNaming $commandNaming, array $commands)
+    public function __construct(\ConfigTransformer202110072\Symplify\PackageBuilder\Console\Command\CommandNaming $commandNaming, array $commands)
     {
         foreach ($commands as $command) {
             $commandName = $commandNaming->resolveFromCommand($command);
