@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110029\\Symplify\\SmartFileSystem\\": "src"
+            "ConfigTransformer202110071\\Symplify\\SmartFileSystem\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110029\\Symplify\\SmartFileSystem\\Tests\\": "tests"
+            "ConfigTransformer202110071\\Symplify\\SmartFileSystem\\Tests\\": "tests"
         }
     },
     "extra": {

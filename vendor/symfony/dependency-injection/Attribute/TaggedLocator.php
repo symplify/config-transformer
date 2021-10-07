@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110029\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202110071\Symfony\Component\DependencyInjection\Attribute;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER)]
 class TaggedLocator
