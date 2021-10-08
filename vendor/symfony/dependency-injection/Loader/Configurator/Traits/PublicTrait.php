@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110072\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202110089\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait PublicTrait
 {

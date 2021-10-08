@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110072\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202110089\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Christophe Coevoet <stof@notk.org>
  */
-class AccessDeniedHttpException extends \ConfigTransformer202110072\Symfony\Component\HttpKernel\Exception\HttpException
+class AccessDeniedHttpException extends \ConfigTransformer202110089\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message
