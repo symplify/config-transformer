@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110089\Symplify\PackageBuilder\Composer;
+namespace ConfigTransformer202110093\Symplify\PackageBuilder\Composer;
 
-use ConfigTransformer202110089\Composer\Autoload\ClassLoader;
+use ConfigTransformer202110093\Composer\Autoload\ClassLoader;
 use ReflectionClass;
 /**
  * @see \Symplify\PackageBuilder\Tests\Composer\VendorDirProviderTest
@@ -24,7 +24,7 @@ final class VendorDirProvider
     }
     private function reflectionFallback() : string
     {
-        $reflectionClass = new \ReflectionClass(\ConfigTransformer202110089\Composer\Autoload\ClassLoader::class);
+        $reflectionClass = new \ReflectionClass(\ConfigTransformer202110093\Composer\Autoload\ClassLoader::class);
         return \dirname($reflectionClass->getFileName(), 2);
     }
 }

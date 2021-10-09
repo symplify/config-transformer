@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110089\Symfony\Component\Console\Output;
+namespace ConfigTransformer202110093\Symfony\Component\Console\Output;
 
-use ConfigTransformer202110089\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer202110089\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer202110089\Symfony\Component\Console\Terminal;
+use ConfigTransformer202110093\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202110093\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202110093\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class ConsoleSectionOutput extends \ConfigTransformer202110089\Symfony\Component\Console\Output\StreamOutput
+class ConsoleSectionOutput extends \ConfigTransformer202110093\Symfony\Component\Console\Output\StreamOutput
 {
     private $content = [];
     private $lines = 0;
@@ -27,12 +27,12 @@ class ConsoleSectionOutput extends \ConfigTransformer202110089\Symfony\Component
      * @param resource               $stream
      * @param ConsoleSectionOutput[] $sections
      */
-    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, \ConfigTransformer202110089\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, \ConfigTransformer202110093\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         parent::__construct($stream, $verbosity, $decorated, $formatter);
         \array_unshift($sections, $this);
         $this->sections =& $sections;
-        $this->terminal = new \ConfigTransformer202110089\Symfony\Component\Console\Terminal();
+        $this->terminal = new \ConfigTransformer202110093\Symfony\Component\Console\Terminal();
     }
     /**
      * Clears previous output for this section.
@@ -118,6 +118,6 @@ class ConsoleSectionOutput extends \ConfigTransformer202110089\Symfony\Component
     }
     private function getDisplayLength(string $text) : int
     {
-        return \ConfigTransformer202110089\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202110089\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), \str_replace("\t", '        ', $text)));
+        return \ConfigTransformer202110093\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202110093\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), \str_replace("\t", '        ', $text)));
     }
 }
