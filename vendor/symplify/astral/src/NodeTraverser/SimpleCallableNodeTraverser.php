@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110105\Symplify\Astral\NodeTraverser;
+namespace ConfigTransformer202110101\Symplify\Astral\NodeTraverser;
 
-use ConfigTransformer202110105\PhpParser\Node;
-use ConfigTransformer202110105\PhpParser\NodeTraverser;
-use ConfigTransformer202110105\Symplify\Astral\NodeVisitor\CallableNodeVisitor;
+use ConfigTransformer202110101\PhpParser\Node;
+use ConfigTransformer202110101\PhpParser\NodeTraverser;
+use ConfigTransformer202110101\Symplify\Astral\NodeVisitor\CallableNodeVisitor;
 final class SimpleCallableNodeTraverser
 {
     /**
@@ -22,8 +22,8 @@ final class SimpleCallableNodeTraverser
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $nodeTraverser = new \ConfigTransformer202110105\PhpParser\NodeTraverser();
-        $callableNodeVisitor = new \ConfigTransformer202110105\Symplify\Astral\NodeVisitor\CallableNodeVisitor($callable);
+        $nodeTraverser = new \ConfigTransformer202110101\PhpParser\NodeTraverser();
+        $callableNodeVisitor = new \ConfigTransformer202110101\Symplify\Astral\NodeVisitor\CallableNodeVisitor($callable);
         $nodeTraverser->addVisitor($callableNodeVisitor);
         $nodeTraverser->traverse($nodes);
     }
