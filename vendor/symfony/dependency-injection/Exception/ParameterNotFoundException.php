@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110093\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202110105\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202110093\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer202110105\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent parameter is used.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterNotFoundException extends \ConfigTransformer202110093\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202110093\Psr\Container\NotFoundExceptionInterface
+class ParameterNotFoundException extends \ConfigTransformer202110105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202110105\Psr\Container\NotFoundExceptionInterface
 {
     private $key;
     private $sourceId;
