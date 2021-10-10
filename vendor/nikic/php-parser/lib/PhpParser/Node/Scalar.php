@@ -1,8 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110101\PhpParser\Node;
+namespace ConfigTransformer202110106\PhpParser\Node;
 
-abstract class Scalar extends \ConfigTransformer202110101\PhpParser\Node\Expr
+abstract class Scalar extends \ConfigTransformer202110106\PhpParser\Node\Expr
 {
 }

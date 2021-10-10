@@ -1,5 +1,5 @@
 <div class="trace-line-header break-long-words <?php 
-namespace ConfigTransformer202110101;
+namespace ConfigTransformer202110106;
 
 echo $trace['file'] ? 'sf-toggle' : '';
 ?>" data-toggle-selector="#trace-html-<?php 
