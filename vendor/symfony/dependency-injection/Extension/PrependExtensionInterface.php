@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110119\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202110112\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202110119\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202110112\Symfony\Component\DependencyInjection\ContainerBuilder;
 interface PrependExtensionInterface
 {
     /**

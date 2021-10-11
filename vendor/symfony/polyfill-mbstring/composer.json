@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symfony\\Polyfill\\Mbstring\\": ""
+            "ConfigTransformer202110112\\Symfony\\Polyfill\\Mbstring\\": ""
         },
         "files": [
             "bootstrap.php"

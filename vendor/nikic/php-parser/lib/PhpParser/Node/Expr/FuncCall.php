@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110119\PhpParser\Node\Expr;
+namespace ConfigTransformer202110112\PhpParser\Node\Expr;
 
-use ConfigTransformer202110119\PhpParser\Node;
-use ConfigTransformer202110119\PhpParser\Node\Expr;
-class FuncCall extends \ConfigTransformer202110119\PhpParser\Node\Expr\CallLike
+use ConfigTransformer202110112\PhpParser\Node;
+use ConfigTransformer202110112\PhpParser\Node\Expr;
+class FuncCall extends \ConfigTransformer202110112\PhpParser\Node\Expr\CallLike
 {
     /** @var Node\Name|Expr Function name */
     public $name;
