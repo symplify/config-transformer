@@ -1,8 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\EasyTesting\PHPUnit;
+namespace ConfigTransformer202110119\Symplify\EasyTesting\PHPUnit;
 
+/**
+ * @api
+ */
 final class StaticPHPUnitEnvironment
 {
     /**

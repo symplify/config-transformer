@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\ConfigTransformer\Configuration;
+namespace ConfigTransformer202110119\Symplify\ConfigTransformer\Configuration;
 
-use ConfigTransformer2021101110\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202110119\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Option;
 final class ConfigurationFactory
 {
-    public function createFromInput(\ConfigTransformer2021101110\Symfony\Component\Console\Input\InputInterface $input) : \ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Configuration
+    public function createFromInput(\ConfigTransformer202110119\Symfony\Component\Console\Input\InputInterface $input) : \ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Configuration
     {
-        $source = (array) $input->getArgument(\ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
-        $targetSymfonyVersion = \floatval($input->getOption(\ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION));
-        $isDryRun = \boolval($input->getOption(\ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
-        return new \ConfigTransformer2021101110\Symplify\ConfigTransformer\ValueObject\Configuration($source, $targetSymfonyVersion, $isDryRun);
+        $source = (array) $input->getArgument(\ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
+        $targetSymfonyVersion = \floatval($input->getOption(\ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Option::TARGET_SYMFONY_VERSION));
+        $isDryRun = \boolval($input->getOption(\ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
+        return new \ConfigTransformer202110119\Symplify\ConfigTransformer\ValueObject\Configuration($source, $targetSymfonyVersion, $isDryRun);
     }
 }

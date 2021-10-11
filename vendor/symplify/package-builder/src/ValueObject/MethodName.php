@@ -1,8 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PackageBuilder\ValueObject;
+namespace ConfigTransformer202110119\Symplify\PackageBuilder\ValueObject;
 
+/**
+ * @api
+ */
 final class MethodName
 {
     /**

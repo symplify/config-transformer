@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\PhpParser;
+namespace ConfigTransformer202110119\PhpParser;
 
-use ConfigTransformer2021101110\PhpParser\NodeVisitor\FindingVisitor;
-use ConfigTransformer2021101110\PhpParser\NodeVisitor\FirstFindingVisitor;
+use ConfigTransformer202110119\PhpParser\NodeVisitor\FindingVisitor;
+use ConfigTransformer202110119\PhpParser\NodeVisitor\FirstFindingVisitor;
 class NodeFinder
 {
     /**
@@ -20,8 +20,8 @@ class NodeFinder
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \ConfigTransformer2021101110\PhpParser\NodeVisitor\FindingVisitor($filter);
-        $traverser = new \ConfigTransformer2021101110\PhpParser\NodeTraverser();
+        $visitor = new \ConfigTransformer202110119\PhpParser\NodeVisitor\FindingVisitor($filter);
+        $traverser = new \ConfigTransformer202110119\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNodes();
@@ -53,8 +53,8 @@ class NodeFinder
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \ConfigTransformer2021101110\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
-        $traverser = new \ConfigTransformer2021101110\PhpParser\NodeTraverser();
+        $visitor = new \ConfigTransformer202110119\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
+        $traverser = new \ConfigTransformer202110119\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNode();

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\Finder\Exception;
+namespace ConfigTransformer202110119\Symfony\Component\Finder\Exception;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>

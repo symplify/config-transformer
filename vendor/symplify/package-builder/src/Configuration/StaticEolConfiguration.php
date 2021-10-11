@@ -1,8 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PackageBuilder\Configuration;
+namespace ConfigTransformer202110119\Symplify\PackageBuilder\Configuration;
 
+/**
+ * @api
+ */
 final class StaticEolConfiguration
 {
     public static function getEolChar() : string

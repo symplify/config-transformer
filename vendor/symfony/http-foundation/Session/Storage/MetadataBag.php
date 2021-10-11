@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202110119\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202110119\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Metadata container.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Session\Session
  *
  * @author Drak <drak@zikula.org>
  */
-class MetadataBag implements \ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+class MetadataBag implements \ConfigTransformer202110119\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     public const CREATED = 'c';
     public const UPDATED = 'u';

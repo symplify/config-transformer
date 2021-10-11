@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\Console\Event;
+namespace ConfigTransformer202110119\Symfony\Component\Console\Event;
 
-use ConfigTransformer2021101110\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2021101110\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2021101110\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202110119\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202110119\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202110119\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to manipulate the exit code of a command after its execution.
  *
  * @author Francesco Levorato <git@flevour.net>
  */
-final class ConsoleTerminateEvent extends \ConfigTransformer2021101110\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleTerminateEvent extends \ConfigTransformer202110119\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $exitCode;
-    public function __construct(\ConfigTransformer2021101110\Symfony\Component\Console\Command\Command $command, \ConfigTransformer2021101110\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2021101110\Symfony\Component\Console\Output\OutputInterface $output, int $exitCode)
+    public function __construct(\ConfigTransformer202110119\Symfony\Component\Console\Command\Command $command, \ConfigTransformer202110119\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202110119\Symfony\Component\Console\Output\OutputInterface $output, int $exitCode)
     {
         parent::__construct($command, $input, $output);
         $this->setExitCode($exitCode);

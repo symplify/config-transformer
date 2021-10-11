@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PackageBuilder\Exception;
+namespace ConfigTransformer202110119\Symplify\ConfigTransformer\Exception;
 
 use Exception;
 final class NotImplementedYetException extends \Exception

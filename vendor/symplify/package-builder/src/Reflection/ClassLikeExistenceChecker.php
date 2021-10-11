@@ -1,9 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202110119\Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
+/**
+ * @api
+ */
 final class ClassLikeExistenceChecker
 {
     /**

@@ -1,12 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PhpConfigPrinter\Printer;
+namespace ConfigTransformer202110119\Symplify\PhpConfigPrinter\Printer;
 
-use ConfigTransformer2021101110\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use ConfigTransformer2021101110\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
-use ConfigTransformer2021101110\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202110119\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use ConfigTransformer202110119\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
+use ConfigTransformer202110119\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
+ * @api
  * @see \Symplify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\SmartPhpConfigPrinterTest
  */
 final class SmartPhpConfigPrinter
@@ -23,7 +24,7 @@ final class SmartPhpConfigPrinter
      * @var \Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator
      */
     private $serviceConfigurationDecorator;
-    public function __construct(\ConfigTransformer2021101110\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, \ConfigTransformer2021101110\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \ConfigTransformer2021101110\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator $serviceConfigurationDecorator)
+    public function __construct(\ConfigTransformer202110119\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, \ConfigTransformer202110119\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \ConfigTransformer202110119\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator $serviceConfigurationDecorator)
     {
         $this->configuratorReturnClosureFactory = $configuratorReturnClosureFactory;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
@@ -42,7 +43,7 @@ final class SmartPhpConfigPrinter
                 $servicesWithConfigureCalls[$service] = $this->createServiceConfiguration($configuration, $service);
             }
         }
-        $return = $this->configuratorReturnClosureFactory->createFromYamlArray([\ConfigTransformer2021101110\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES => $servicesWithConfigureCalls]);
+        $return = $this->configuratorReturnClosureFactory->createFromYamlArray([\ConfigTransformer202110119\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES => $servicesWithConfigureCalls]);
         return $this->phpParserPhpConfigPrinter->prettyPrintFile([$return]);
     }
     /**

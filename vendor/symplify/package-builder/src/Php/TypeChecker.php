@@ -1,8 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101110\Symplify\PackageBuilder\Php;
+namespace ConfigTransformer202110119\Symplify\PackageBuilder\Php;
 
+/**
+ * @api
+ */
 final class TypeChecker
 {
     /**
