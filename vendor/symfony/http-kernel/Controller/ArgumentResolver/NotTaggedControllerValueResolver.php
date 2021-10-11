@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110111\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace ConfigTransformer202110116\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use ConfigTransformer202110111\Psr\Container\ContainerInterface;
-use ConfigTransformer202110111\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202110111\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110111\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use ConfigTransformer202110111\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use ConfigTransformer202110116\Psr\Container\ContainerInterface;
+use ConfigTransformer202110116\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202110116\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110116\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use ConfigTransformer202110116\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Provides an intuitive error message when controller fails because it is not registered as a service.
  *
  * @author Simeon Kolev <simeon.kolev9@gmail.com>
  */
-final class NotTaggedControllerValueResolver implements \ConfigTransformer202110111\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class NotTaggedControllerValueResolver implements \ConfigTransformer202110116\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202110111\Psr\Container\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202110116\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
@@ -67,6 +67,6 @@ final class NotTaggedControllerValueResolver implements \ConfigTransformer202110
         }
         $what = \sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
         $message = \sprintf('Could not resolve %s, maybe you forgot to register the controller as a service or missed tagging it with the "controller.service_arguments"?', $what);
-        throw new \ConfigTransformer202110111\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
+        throw new \ConfigTransformer202110116\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
     }
 }
