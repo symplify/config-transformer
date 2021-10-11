@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202110111\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class UnauthorizedHttpException extends \ConfigTransformer2021101110\Symfony\Component\HttpKernel\Exception\HttpException
+class UnauthorizedHttpException extends \ConfigTransformer202110111\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string          $challenge WWW-Authenticate challenge string

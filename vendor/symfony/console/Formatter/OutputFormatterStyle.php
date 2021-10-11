@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202110111\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer2021101110\Symfony\Component\Console\Color;
+use ConfigTransformer202110111\Symfony\Component\Console\Color;
 /**
  * Formatter style class for defining styles.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+class OutputFormatterStyle implements \ConfigTransformer202110111\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     private $color;
     private $foreground;
@@ -32,7 +32,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
      */
     public function __construct(string $foreground = null, string $background = null, array $options = [])
     {
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground = $foreground ?: '', $this->background = $background ?: '', $this->options = $options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground = $foreground ?: '', $this->background = $background ?: '', $this->options = $options);
     }
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
      */
     public function setForeground($color = null)
     {
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground = $color ?: '', $this->background, $this->options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground = $color ?: '', $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
@@ -48,7 +48,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
      */
     public function setBackground($color = null)
     {
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground, $this->background = $color ?: '', $this->options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground, $this->background = $color ?: '', $this->options);
     }
     /**
      * @param string $url
@@ -64,7 +64,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
     public function setOption($option)
     {
         $this->options[] = $option;
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
@@ -76,7 +76,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
         if (\false !== $pos) {
             unset($this->options[$pos]);
         }
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
@@ -84,7 +84,7 @@ class OutputFormatterStyle implements \ConfigTransformer2021101110\Symfony\Compo
      */
     public function setOptions($options)
     {
-        $this->color = new \ConfigTransformer2021101110\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options = $options);
+        $this->color = new \ConfigTransformer202110111\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options = $options);
     }
     /**
      * {@inheritdoc}

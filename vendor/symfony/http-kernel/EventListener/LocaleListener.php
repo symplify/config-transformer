@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202110111\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer2021101110\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer2021101110\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use ConfigTransformer2021101110\Symfony\Component\HttpKernel\Event\KernelEvent;
-use ConfigTransformer2021101110\Symfony\Component\HttpKernel\Event\RequestEvent;
-use ConfigTransformer2021101110\Symfony\Component\HttpKernel\KernelEvents;
-use ConfigTransformer2021101110\Symfony\Component\Routing\RequestContextAwareInterface;
+use ConfigTransformer202110111\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202110111\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110111\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202110111\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ConfigTransformer202110111\Symfony\Component\HttpKernel\Event\KernelEvent;
+use ConfigTransformer202110111\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ConfigTransformer202110111\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202110111\Symfony\Component\Routing\RequestContextAwareInterface;
 /**
  * Initializes the locale based on the current request.
  *
@@ -25,12 +25,12 @@ use ConfigTransformer2021101110\Symfony\Component\Routing\RequestContextAwareInt
  *
  * @final
  */
-class LocaleListener implements \ConfigTransformer2021101110\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class LocaleListener implements \ConfigTransformer202110111\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $router;
     private $defaultLocale;
     private $requestStack;
-    public function __construct(\ConfigTransformer2021101110\Symfony\Component\HttpFoundation\RequestStack $requestStack, string $defaultLocale = 'en', \ConfigTransformer2021101110\Symfony\Component\Routing\RequestContextAwareInterface $router = null)
+    public function __construct(\ConfigTransformer202110111\Symfony\Component\HttpFoundation\RequestStack $requestStack, string $defaultLocale = 'en', \ConfigTransformer202110111\Symfony\Component\Routing\RequestContextAwareInterface $router = null)
     {
         $this->defaultLocale = $defaultLocale;
         $this->requestStack = $requestStack;
@@ -61,13 +61,13 @@ class LocaleListener implements \ConfigTransformer2021101110\Symfony\Component\E
             $this->setRouterContext($parentRequest);
         }
     }
-    private function setLocale(\ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Request $request)
+    private function setLocale(\ConfigTransformer202110111\Symfony\Component\HttpFoundation\Request $request)
     {
         if ($locale = $request->attributes->get('_locale')) {
             $request->setLocale($locale);
         }
     }
-    private function setRouterContext(\ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Request $request)
+    private function setRouterContext(\ConfigTransformer202110111\Symfony\Component\HttpFoundation\Request $request)
     {
         if (null !== $this->router) {
             $this->router->getContext()->setParameter('_locale', $request->getLocale());
@@ -75,10 +75,10 @@ class LocaleListener implements \ConfigTransformer2021101110\Symfony\Component\E
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer2021101110\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [
+        return [\ConfigTransformer202110111\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [
             ['setDefaultLocale', 100],
             // must be registered after the Router to have access to the _locale
             ['onKernelRequest', 16],
-        ], \ConfigTransformer2021101110\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]]];
+        ], \ConfigTransformer202110111\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]]];
     }
 }

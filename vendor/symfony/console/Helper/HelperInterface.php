@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202110111\Symfony\Component\Console\Helper;
 
 /**
  * HelperInterface is the interface all helpers must implement.

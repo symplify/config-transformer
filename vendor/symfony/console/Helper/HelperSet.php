@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101110\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202110111\Symfony\Component\Console\Helper;
 
-use ConfigTransformer2021101110\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2021101110\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202110111\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202110111\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * HelperSet represents a set of helpers to be used with a command.
  *
@@ -66,7 +66,7 @@ class HelperSet implements \IteratorAggregate
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new \ConfigTransformer2021101110\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The helper "%s" is not defined.', $name));
+            throw new \ConfigTransformer202110111\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The helper "%s" is not defined.', $name));
         }
         return $this->helpers[$name];
     }
