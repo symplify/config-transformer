@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110106\PhpParser\Builder;
+namespace ConfigTransformer2021101110\PhpParser\Builder;
 
-use ConfigTransformer202110106\PhpParser;
-use ConfigTransformer202110106\PhpParser\BuilderHelpers;
-use ConfigTransformer202110106\PhpParser\Node;
-use ConfigTransformer202110106\PhpParser\Node\Stmt;
-class Function_ extends \ConfigTransformer202110106\PhpParser\Builder\FunctionLike
+use ConfigTransformer2021101110\PhpParser;
+use ConfigTransformer2021101110\PhpParser\BuilderHelpers;
+use ConfigTransformer2021101110\PhpParser\Node;
+use ConfigTransformer2021101110\PhpParser\Node\Stmt;
+class Function_ extends \ConfigTransformer2021101110\PhpParser\Builder\FunctionLike
 {
     protected $name;
     protected $stmts = [];
@@ -31,7 +31,7 @@ class Function_ extends \ConfigTransformer202110106\PhpParser\Builder\FunctionLi
      */
     public function addStmt($stmt)
     {
-        $this->stmts[] = \ConfigTransformer202110106\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \ConfigTransformer2021101110\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -43,7 +43,7 @@ class Function_ extends \ConfigTransformer202110106\PhpParser\Builder\FunctionLi
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202110106\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer2021101110\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -51,8 +51,8 @@ class Function_ extends \ConfigTransformer202110106\PhpParser\Builder\FunctionLi
      *
      * @return Stmt\Function_ The built function node
      */
-    public function getNode() : \ConfigTransformer202110106\PhpParser\Node
+    public function getNode() : \ConfigTransformer2021101110\PhpParser\Node
     {
-        return new \ConfigTransformer202110106\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts, 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer2021101110\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts, 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

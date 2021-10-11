@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110106\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202110106\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202110106\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202110106\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021101110\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate the "container.no_preload" tag.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveNoPreloadPass extends \ConfigTransformer202110106\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveNoPreloadPass extends \ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const DO_PRELOAD_TAG = '.container.do_preload';
     private $tagName;
@@ -68,7 +68,7 @@ class ResolveNoPreloadPass extends \ConfigTransformer202110106\Symfony\Component
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202110106\Symfony\Component\DependencyInjection\Reference && \ConfigTransformer202110106\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
+        if ($value instanceof \ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Reference && \ConfigTransformer2021101110\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
             $definition = $this->container->getDefinition($id);
             if (!isset($this->resolvedIds[$id]) && (!$definition->isPublic() || $definition->isPrivate())) {
                 $this->resolvedIds[$id] = \true;
@@ -76,7 +76,7 @@ class ResolveNoPreloadPass extends \ConfigTransformer202110106\Symfony\Component
             }
             return $value;
         }
-        if (!$value instanceof \ConfigTransformer202110106\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         if ($value->hasTag($this->tagName) || $value->isDeprecated() || $value->hasErrors()) {

@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110106\Symplify\Astral\TypeAnalyzer;
+namespace ConfigTransformer2021101110\Symplify\Astral\TypeAnalyzer;
 
-use ConfigTransformer202110106\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202110106\PHPStan\Analyser\Scope;
-use ConfigTransformer202110106\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer202110106\PHPStan\Type\Type;
-use ConfigTransformer202110106\Symplify\PHPStanRules\Exception\ShouldNotHappenException;
+use ConfigTransformer2021101110\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer2021101110\PHPStan\Analyser\Scope;
+use ConfigTransformer2021101110\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer2021101110\PHPStan\Type\Type;
+use ConfigTransformer2021101110\Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 final class ClassMethodTypeAnalyzer
 {
-    public function resolveReturnType(\ConfigTransformer202110106\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer202110106\PHPStan\Analyser\Scope $scope) : \ConfigTransformer202110106\PHPStan\Type\Type
+    public function resolveReturnType(\ConfigTransformer2021101110\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer2021101110\PHPStan\Analyser\Scope $scope) : \ConfigTransformer2021101110\PHPStan\Type\Type
     {
         $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof \ConfigTransformer202110106\PHPStan\Reflection\ClassReflection) {
-            throw new \ConfigTransformer202110106\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+        if (!$classReflection instanceof \ConfigTransformer2021101110\PHPStan\Reflection\ClassReflection) {
+            throw new \ConfigTransformer2021101110\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
         }
         $methodName = (string) $classMethod->name;
         $methodReflection = $classReflection->getNativeMethod($methodName);
@@ -24,7 +24,7 @@ final class ClassMethodTypeAnalyzer
     /**
      * @param string[] $methodNames
      */
-    public function isClassMethodOfNamesAndType(\ConfigTransformer202110106\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer202110106\PHPStan\Analyser\Scope $scope, array $methodNames, string $classType) : bool
+    public function isClassMethodOfNamesAndType(\ConfigTransformer2021101110\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer2021101110\PHPStan\Analyser\Scope $scope, array $methodNames, string $classType) : bool
     {
         $classMethodName = (string) $classMethod->name;
         if (!\in_array($classMethodName, $methodNames, \true)) {
@@ -32,10 +32,10 @@ final class ClassMethodTypeAnalyzer
         }
         return $this->isClassType($scope, $classType);
     }
-    private function isClassType(\ConfigTransformer202110106\PHPStan\Analyser\Scope $scope, string $classType) : bool
+    private function isClassType(\ConfigTransformer2021101110\PHPStan\Analyser\Scope $scope, string $classType) : bool
     {
         $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof \ConfigTransformer202110106\PHPStan\Reflection\ClassReflection) {
+        if (!$classReflection instanceof \ConfigTransformer2021101110\PHPStan\Reflection\ClassReflection) {
             return \false;
         }
         if ($classReflection->isSubclassOf($classType)) {
