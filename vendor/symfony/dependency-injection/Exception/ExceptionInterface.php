@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110119\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021101110\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202110119\Psr\Container\ContainerExceptionInterface;
+use ConfigTransformer2021101110\Psr\Container\ContainerExceptionInterface;
 /**
  * Base ExceptionInterface for Dependency Injection component.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bulat Shakirzyanov <bulat@theopenskyproject.com>
  */
-interface ExceptionInterface extends \ConfigTransformer202110119\Psr\Container\ContainerExceptionInterface, \Throwable
+interface ExceptionInterface extends \ConfigTransformer2021101110\Psr\Container\ContainerExceptionInterface, \Throwable
 {
 }

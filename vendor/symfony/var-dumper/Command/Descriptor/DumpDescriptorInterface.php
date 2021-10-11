@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110119\Symfony\Component\VarDumper\Command\Descriptor;
+namespace ConfigTransformer2021101110\Symfony\Component\VarDumper\Command\Descriptor;
 
-use ConfigTransformer202110119\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202110119\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer2021101110\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2021101110\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */

@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\EasyTesting\\": "src"
+            "ConfigTransformer2021101110\\Symplify\\EasyTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\EasyTesting\\Tests\\": "tests"
+            "ConfigTransformer2021101110\\Symplify\\EasyTesting\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -54,7 +54,6 @@
         "symplify\/rule-doc-generator": "<9.4.70",
         "symplify\/vendor-patches": "<9.4.70",
         "symplify\/skipper": "<9.4.70",
-        "symplify\/easy-hydrator": "<9.4.70",
         "symplify\/symfony-static-dumper": "<9.4.70",
         "symplify\/git-wrapper": "<9.4.70",
         "symplify\/monorepo-builder": "<9.4.70",

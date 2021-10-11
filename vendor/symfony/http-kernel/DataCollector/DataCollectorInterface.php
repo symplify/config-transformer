@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110119\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer2021101110\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202110119\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110119\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202110119\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2021101110\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer2021101110\Symfony\Contracts\Service\ResetInterface;
 /**
  * DataCollectorInterface.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface DataCollectorInterface extends \ConfigTransformer202110119\Symfony\Contracts\Service\ResetInterface
+interface DataCollectorInterface extends \ConfigTransformer2021101110\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * Collects data for the given Request and Response.

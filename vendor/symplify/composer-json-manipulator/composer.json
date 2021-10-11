@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\ComposerJsonManipulator\\": "src"
+            "ConfigTransformer2021101110\\Symplify\\ComposerJsonManipulator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+            "ConfigTransformer2021101110\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -50,7 +50,6 @@
         "symplify\/console-package-builder": "<9.4.70",
         "symplify\/vendor-patches": "<9.4.70",
         "symplify\/skipper": "<9.4.70",
-        "symplify\/easy-hydrator": "<9.4.70",
         "symplify\/symfony-static-dumper": "<9.4.70",
         "symplify\/git-wrapper": "<9.4.70",
         "symplify\/symplify-kernel": "<9.4.70",

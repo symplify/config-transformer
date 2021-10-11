@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\PhpConfigPrinter\\": "src"
+            "ConfigTransformer2021101110\\Symplify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110119\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+            "ConfigTransformer2021101110\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
         },
         "files": [
             "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",
@@ -54,7 +54,6 @@
         "symplify\/vendor-patches": "<9.4.70",
         "symplify\/skipper": "<9.4.70",
         "symplify\/smart-file-system": "<9.4.70",
-        "symplify\/easy-hydrator": "<9.4.70",
         "symplify\/symfony-static-dumper": "<9.4.70",
         "symplify\/git-wrapper": "<9.4.70",
         "symplify\/monorepo-builder": "<9.4.70",
