@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110112\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202110110\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202110112\Symfony\Component\Finder\Comparator\NumberComparator;
+use ConfigTransformer202110110\Symfony\Component\Finder\Comparator\NumberComparator;
 /**
  * SizeRangeFilterIterator filters out files that are not in the given size range.
  *

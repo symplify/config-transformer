@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110112\PhpParser\Node\Stmt;
+namespace ConfigTransformer202110110\PhpParser\Node\Stmt;
 
-use ConfigTransformer202110112\PhpParser\Node\Stmt;
-class Use_ extends \ConfigTransformer202110112\PhpParser\Node\Stmt
+use ConfigTransformer202110110\PhpParser\Node\Stmt;
+class Use_ extends \ConfigTransformer202110110\PhpParser\Node\Stmt
 {
     /**
      * Unknown type. Both Stmt\Use_ / Stmt\GroupUse and Stmt\UseUse have a $type property, one of them will always be
