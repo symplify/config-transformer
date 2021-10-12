@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2021101210\Nette\Utils;
+namespace ConfigTransformer202110125\Nette\Utils;
 
-use ConfigTransformer2021101210\Nette;
+use ConfigTransformer202110125\Nette;
 /**
  * Nette\Object behaviour mixin.
  * @deprecated
@@ -21,7 +21,7 @@ final class ObjectMixin
     public static function getSuggestion($possibilities, $value) : ?string
     {
         \trigger_error(__METHOD__ . '() has been renamed to Nette\\Utils\\ObjectHelpers::getSuggestion()', \E_USER_DEPRECATED);
-        return \ConfigTransformer2021101210\Nette\Utils\ObjectHelpers::getSuggestion($possibilities, $value);
+        return \ConfigTransformer202110125\Nette\Utils\ObjectHelpers::getSuggestion($possibilities, $value);
     }
     public static function setExtensionMethod() : void
     {

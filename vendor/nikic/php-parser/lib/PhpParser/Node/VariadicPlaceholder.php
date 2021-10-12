@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101210\PhpParser\Node;
+namespace ConfigTransformer202110125\PhpParser\Node;
 
-use ConfigTransformer2021101210\PhpParser\NodeAbstract;
+use ConfigTransformer202110125\PhpParser\NodeAbstract;
 /**
  * Represents the "..." in "foo(...)" of the first-class callable syntax.
  */
-class VariadicPlaceholder extends \ConfigTransformer2021101210\PhpParser\NodeAbstract
+class VariadicPlaceholder extends \ConfigTransformer202110125\PhpParser\NodeAbstract
 {
     /**
      * Create a variadic argument placeholder (first-class callable syntax).

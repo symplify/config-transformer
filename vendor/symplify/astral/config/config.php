@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021101210;
+namespace ConfigTransformer202110125;
 
-use ConfigTransformer2021101210\PhpParser\ConstExprEvaluator;
-use ConfigTransformer2021101210\PhpParser\NodeFinder;
+use ConfigTransformer202110125\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202110125\PhpParser\NodeFinder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer2021101210\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202110125\Symplify\PackageBuilder\Php\TypeChecker;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
-    $services->load('ConfigTransformer2021101210\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor']);
-    $services->set(\ConfigTransformer2021101210\PhpParser\ConstExprEvaluator::class);
-    $services->set(\ConfigTransformer2021101210\Symplify\PackageBuilder\Php\TypeChecker::class);
-    $services->set(\ConfigTransformer2021101210\PhpParser\NodeFinder::class);
+    $services->load('ConfigTransformer202110125\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor']);
+    $services->set(\ConfigTransformer202110125\PhpParser\ConstExprEvaluator::class);
+    $services->set(\ConfigTransformer202110125\Symplify\PackageBuilder\Php\TypeChecker::class);
+    $services->set(\ConfigTransformer202110125\PhpParser\NodeFinder::class);
 };

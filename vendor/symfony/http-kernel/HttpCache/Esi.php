@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021101210\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202110125\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer2021101210\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer2021101210\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202110125\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110125\Symfony\Component\HttpFoundation\Response;
 /**
  * Esi implements the ESI capabilities to Request and Response instances.
  *
@@ -23,7 +23,7 @@ use ConfigTransformer2021101210\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Esi extends \ConfigTransformer2021101210\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Esi extends \ConfigTransformer202110125\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     public function getName()
     {
