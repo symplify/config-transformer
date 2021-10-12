@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110110\Symfony\Component\HttpKernel\Exception;
+namespace ConfigTransformer202110129\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Steve Hutchins <hutchinsteve@gmail.com>
  */
-class UnprocessableEntityHttpException extends \ConfigTransformer202110110\Symfony\Component\HttpKernel\Exception\HttpException
+class UnprocessableEntityHttpException extends \ConfigTransformer202110129\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message
