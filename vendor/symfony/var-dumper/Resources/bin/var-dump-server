@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace ConfigTransformer202110129;
+namespace ConfigTransformer2021101210;
 
 /*
  * This file is part of the Symfony package.
@@ -15,31 +15,31 @@ namespace ConfigTransformer202110129;
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-use ConfigTransformer202110129\Psr\Log\LoggerInterface;
-use ConfigTransformer202110129\Symfony\Component\Console\Application;
-use ConfigTransformer202110129\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202110129\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202110129\Symfony\Component\Console\Logger\ConsoleLogger;
-use ConfigTransformer202110129\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202110129\Symfony\Component\VarDumper\Command\ServerDumpCommand;
-use ConfigTransformer202110129\Symfony\Component\VarDumper\Server\DumpServer;
+use ConfigTransformer2021101210\Psr\Log\LoggerInterface;
+use ConfigTransformer2021101210\Symfony\Component\Console\Application;
+use ConfigTransformer2021101210\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer2021101210\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer2021101210\Symfony\Component\Console\Logger\ConsoleLogger;
+use ConfigTransformer2021101210\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer2021101210\Symfony\Component\VarDumper\Command\ServerDumpCommand;
+use ConfigTransformer2021101210\Symfony\Component\VarDumper\Server\DumpServer;
 function includeIfExists(string $file) : bool
 {
     return \file_exists($file) && (include $file);
 }
-if (!\ConfigTransformer202110129\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\ConfigTransformer202110129\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\ConfigTransformer202110129\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
+if (!\ConfigTransformer2021101210\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\ConfigTransformer2021101210\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\ConfigTransformer2021101210\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
     \fwrite(\STDERR, 'Install dependencies using Composer.' . \PHP_EOL);
     exit(1);
 }
-if (!\class_exists(\ConfigTransformer202110129\Symfony\Component\Console\Application::class)) {
+if (!\class_exists(\ConfigTransformer2021101210\Symfony\Component\Console\Application::class)) {
     \fwrite(\STDERR, 'You need the "symfony/console" component in order to run the VarDumper server.' . \PHP_EOL);
     exit(1);
 }
-$input = new \ConfigTransformer202110129\Symfony\Component\Console\Input\ArgvInput();
-$output = new \ConfigTransformer202110129\Symfony\Component\Console\Output\ConsoleOutput();
+$input = new \ConfigTransformer2021101210\Symfony\Component\Console\Input\ArgvInput();
+$output = new \ConfigTransformer2021101210\Symfony\Component\Console\Output\ConsoleOutput();
 $defaultHost = '127.0.0.1:9912';
 $host = $input->getParameterOption(['--host'], $_SERVER['VAR_DUMPER_SERVER'] ?? $defaultHost, \true);
-$logger = \interface_exists(\ConfigTransformer202110129\Psr\Log\LoggerInterface::class) ? new \ConfigTransformer202110129\Symfony\Component\Console\Logger\ConsoleLogger($output->getErrorOutput()) : null;
-$app = new \ConfigTransformer202110129\Symfony\Component\Console\Application();
-$app->getDefinition()->addOption(new \ConfigTransformer202110129\Symfony\Component\Console\Input\InputOption('--host', null, \ConfigTransformer202110129\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The address the server should listen to', $defaultHost));
-$app->add($command = new \ConfigTransformer202110129\Symfony\Component\VarDumper\Command\ServerDumpCommand(new \ConfigTransformer202110129\Symfony\Component\VarDumper\Server\DumpServer($host, $logger)))->getApplication()->setDefaultCommand($command->getName(), \true)->run($input, $output);
+$logger = \interface_exists(\ConfigTransformer2021101210\Psr\Log\LoggerInterface::class) ? new \ConfigTransformer2021101210\Symfony\Component\Console\Logger\ConsoleLogger($output->getErrorOutput()) : null;
+$app = new \ConfigTransformer2021101210\Symfony\Component\Console\Application();
+$app->getDefinition()->addOption(new \ConfigTransformer2021101210\Symfony\Component\Console\Input\InputOption('--host', null, \ConfigTransformer2021101210\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The address the server should listen to', $defaultHost));
+$app->add($command = new \ConfigTransformer2021101210\Symfony\Component\VarDumper\Command\ServerDumpCommand(new \ConfigTransformer2021101210\Symfony\Component\VarDumper\Server\DumpServer($host, $logger)))->getApplication()->setDefaultCommand($command->getName(), \true)->run($input, $output);

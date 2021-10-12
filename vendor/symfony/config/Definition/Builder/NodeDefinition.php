@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202110129\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202110129\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use ConfigTransformer202110129\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer2021101210\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer2021101210\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer2021101210\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+abstract class NodeDefinition implements \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $name;
     protected $normalization;
@@ -32,10 +32,10 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
     protected $nullEquivalent;
     protected $trueEquivalent = \true;
     protected $falseEquivalent = \false;
-    protected $pathSeparator = \ConfigTransformer202110129\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
+    protected $pathSeparator = \ConfigTransformer2021101210\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
     protected $parent;
     protected $attributes = [];
-    public function __construct(?string $name, \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         $this->parent = $parent;
         $this->name = $name;
@@ -106,13 +106,13 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
             $this->parent = null;
         }
         if (null !== $this->normalization) {
-            $this->normalization->before = \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
+            $this->normalization->before = \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
         }
         if (null !== $this->validation) {
-            $this->validation->rules = \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
+            $this->validation->rules = \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
         }
         $node = $this->createNode();
-        if ($node instanceof \ConfigTransformer202110129\Symfony\Component\Config\Definition\BaseNode) {
+        if ($node instanceof \ConfigTransformer2021101210\Symfony\Component\Config\Definition\BaseNode) {
             $node->setAttributes($this->attributes);
         }
         return $node;
@@ -281,7 +281,7 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
     protected function validation()
     {
         if (null === $this->validation) {
-            $this->validation = new \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
+            $this->validation = new \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
         }
         return $this->validation;
     }
@@ -293,7 +293,7 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
     protected function merge()
     {
         if (null === $this->merge) {
-            $this->merge = new \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
+            $this->merge = new \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
         }
         return $this->merge;
     }
@@ -305,7 +305,7 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
     protected function normalization()
     {
         if (null === $this->normalization) {
-            $this->normalization = new \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
+            $this->normalization = new \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
         }
         return $this->normalization;
     }
@@ -325,7 +325,7 @@ abstract class NodeDefinition implements \ConfigTransformer202110129\Symfony\Com
      */
     public function setPathSeparator($separator)
     {
-        if ($this instanceof \ConfigTransformer202110129\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
+        if ($this instanceof \ConfigTransformer2021101210\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
             foreach ($this->getChildNodeDefinitions() as $child) {
                 $child->setPathSeparator($separator);
             }

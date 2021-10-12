@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110129\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer2021101210\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202110129\Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use ConfigTransformer2021101210\Symfony\Component\HttpFoundation\Exception\BadRequestException;
 /**
  * InputBag is a container for user input values such as $_GET, $_POST, $_REQUEST, and $_COOKIE.
  *
  * @author Saif Eddin Gmati <azjezz@protonmail.com>
  */
-final class InputBag extends \ConfigTransformer202110129\Symfony\Component\HttpFoundation\ParameterBag
+final class InputBag extends \ConfigTransformer2021101210\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Returns a scalar input value by name.
@@ -33,7 +33,7 @@ final class InputBag extends \ConfigTransformer202110129\Symfony\Component\HttpF
         }
         $value = parent::get($key, $this);
         if (null !== $value && $this !== $value && !\is_scalar($value) && !(\is_object($value) && \method_exists($value, '__toString'))) {
-            trigger_deprecation('symfony/http-foundation', '5.1', 'Retrieving a non-string value from "%s()" is deprecated, and will throw a "%s" exception in Symfony 6.0, use "%s::all($key)" instead.', __METHOD__, \ConfigTransformer202110129\Symfony\Component\HttpFoundation\Exception\BadRequestException::class, __CLASS__);
+            trigger_deprecation('symfony/http-foundation', '5.1', 'Retrieving a non-string value from "%s()" is deprecated, and will throw a "%s" exception in Symfony 6.0, use "%s::all($key)" instead.', __METHOD__, \ConfigTransformer2021101210\Symfony\Component\HttpFoundation\Exception\BadRequestException::class, __CLASS__);
         }
         return $this === $value ? $default : $value;
     }
