@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace ConfigTransformer202110146;
+namespace ConfigTransformer202110143;
 
 foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php'] as $file) {
     if (\file_exists($file)) {
@@ -13,20 +13,20 @@ foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php
 \ini_set('xdebug.var_display_max_children', -1);
 \ini_set('xdebug.var_display_max_data', -1);
 \ini_set('xdebug.var_display_max_depth', -1);
-list($operations, $files, $attributes) = \ConfigTransformer202110146\parseArgs($argv);
+list($operations, $files, $attributes) = \ConfigTransformer202110143\parseArgs($argv);
 /* Dump nodes by default */
 if (empty($operations)) {
     $operations[] = 'dump';
 }
 if (empty($files)) {
-    \ConfigTransformer202110146\showHelp("Must specify at least one file.");
+    \ConfigTransformer202110143\showHelp("Must specify at least one file.");
 }
-$lexer = new \ConfigTransformer202110146\PhpParser\Lexer\Emulative(['usedAttributes' => ['startLine', 'endLine', 'startFilePos', 'endFilePos', 'comments']]);
-$parser = (new \ConfigTransformer202110146\PhpParser\ParserFactory())->create(\ConfigTransformer202110146\PhpParser\ParserFactory::PREFER_PHP7, $lexer);
-$dumper = new \ConfigTransformer202110146\PhpParser\NodeDumper(['dumpComments' => \true, 'dumpPositions' => $attributes['with-positions']]);
-$prettyPrinter = new \ConfigTransformer202110146\PhpParser\PrettyPrinter\Standard();
-$traverser = new \ConfigTransformer202110146\PhpParser\NodeTraverser();
-$traverser->addVisitor(new \ConfigTransformer202110146\PhpParser\NodeVisitor\NameResolver());
+$lexer = new \ConfigTransformer202110143\PhpParser\Lexer\Emulative(['usedAttributes' => ['startLine', 'endLine', 'startFilePos', 'endFilePos', 'comments']]);
+$parser = (new \ConfigTransformer202110143\PhpParser\ParserFactory())->create(\ConfigTransformer202110143\PhpParser\ParserFactory::PREFER_PHP7, $lexer);
+$dumper = new \ConfigTransformer202110143\PhpParser\NodeDumper(['dumpComments' => \true, 'dumpPositions' => $attributes['with-positions']]);
+$prettyPrinter = new \ConfigTransformer202110143\PhpParser\PrettyPrinter\Standard();
+$traverser = new \ConfigTransformer202110143\PhpParser\NodeTraverser();
+$traverser->addVisitor(new \ConfigTransformer202110143\PhpParser\NodeVisitor\NameResolver());
 foreach ($files as $file) {
     if (\strpos($file, '<?php') === 0) {
         $code = $file;
@@ -40,10 +40,10 @@ foreach ($files as $file) {
         \fwrite(\STDERR, "====> File {$file}:\n");
     }
     if ($attributes['with-recovery']) {
-        $errorHandler = new \ConfigTransformer202110146\PhpParser\ErrorHandler\Collecting();
+        $errorHandler = new \ConfigTransformer202110143\PhpParser\ErrorHandler\Collecting();
         $stmts = $parser->parse($code, $errorHandler);
         foreach ($errorHandler->getErrors() as $error) {
-            $message = \ConfigTransformer202110146\formatErrorMessage($error, $code, $attributes['with-column-info']);
+            $message = \ConfigTransformer202110143\formatErrorMessage($error, $code, $attributes['with-column-info']);
             \fwrite(\STDERR, $message . "\n");
         }
         if (null === $stmts) {
@@ -52,8 +52,8 @@ foreach ($files as $file) {
     } else {
         try {
             $stmts = $parser->parse($code);
-        } catch (\ConfigTransformer202110146\PhpParser\Error $error) {
-            $message = \ConfigTransformer202110146\formatErrorMessage($error, $code, $attributes['with-column-info']);
+        } catch (\ConfigTransformer202110143\PhpParser\Error $error) {
+            $message = \ConfigTransformer202110143\formatErrorMessage($error, $code, $attributes['with-column-info']);
             \fwrite(\STDERR, $message . "\n");
             exit(1);
         }
@@ -77,7 +77,7 @@ foreach ($files as $file) {
         }
     }
 }
-function formatErrorMessage(\ConfigTransformer202110146\PhpParser\Error $e, $code, $withColumnInfo)
+function formatErrorMessage(\ConfigTransformer202110143\PhpParser\Error $e, $code, $withColumnInfo)
 {
     if ($withColumnInfo && $e->hasColumnInfo()) {
         return $e->getMessageWithColumnInfo($code);
@@ -163,14 +163,14 @@ function parseArgs($args)
                 break;
             case '--help':
             case '-h':
-                \ConfigTransformer202110146\showHelp();
+                \ConfigTransformer202110143\showHelp();
                 break;
             case '--':
                 $parseOptions = \false;
                 break;
             default:
                 if ($arg[0] === '-') {
-                    \ConfigTransformer202110146\showHelp("Invalid operation {$arg}.");
+                    \ConfigTransformer202110143\showHelp("Invalid operation {$arg}.");
                 } else {
                     $files[] = $arg;
                 }
