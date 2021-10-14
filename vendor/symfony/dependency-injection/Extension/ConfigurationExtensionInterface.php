@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110149\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202110145\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202110149\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202110149\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202110145\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202110145\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ConfigurationExtensionInterface is the interface implemented by container extension classes.
  *
