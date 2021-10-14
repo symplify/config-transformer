@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110143\Symfony\Component\ErrorHandler;
+namespace ConfigTransformer202110149\Symfony\Component\ErrorHandler;
 
-use ConfigTransformer202110143\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use ConfigTransformer202110149\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
 /**
  * @internal
  */
@@ -21,7 +21,7 @@ class ThrowableUtils
      */
     public static function getSeverity($throwable) : int
     {
-        if ($throwable instanceof \ErrorException || $throwable instanceof \ConfigTransformer202110143\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+        if ($throwable instanceof \ErrorException || $throwable instanceof \ConfigTransformer202110149\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
             return $throwable->getSeverity();
         }
         if ($throwable instanceof \ParseError) {
