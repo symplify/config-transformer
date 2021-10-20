@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110145\Symplify\EasyTesting\DataProvider;
+namespace ConfigTransformer202110205\Symplify\EasyTesting\DataProvider;
 
 use Iterator;
-use ConfigTransformer202110145\Nette\Utils\Strings;
-use ConfigTransformer202110145\Symfony\Component\Finder\Finder;
-use ConfigTransformer202110145\Symfony\Component\Finder\SplFileInfo;
-use ConfigTransformer202110145\Symplify\SmartFileSystem\Exception\FileNotFoundException;
-use ConfigTransformer202110145\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202110145\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202110205\Nette\Utils\Strings;
+use ConfigTransformer202110205\Symfony\Component\Finder\Finder;
+use ConfigTransformer202110205\Symfony\Component\Finder\SplFileInfo;
+use ConfigTransformer202110205\Symplify\SmartFileSystem\Exception\FileNotFoundException;
+use ConfigTransformer202110205\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202110205\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * @api
  * @see \Symplify\EasyTesting\Tests\DataProvider\StaticFixtureFinder\StaticFixtureFinderTest
@@ -56,9 +56,9 @@ final class StaticFixtureFinder
     {
         foreach ($fileInfos as $fileInfo) {
             try {
-                $smartFileInfo = new \ConfigTransformer202110145\Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
+                $smartFileInfo = new \ConfigTransformer202110205\Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
                 (yield [$smartFileInfo]);
-            } catch (\ConfigTransformer202110145\Symplify\SmartFileSystem\Exception\FileNotFoundException $exception) {
+            } catch (\ConfigTransformer202110205\Symplify\SmartFileSystem\Exception\FileNotFoundException $exception) {
             }
         }
     }
@@ -70,9 +70,9 @@ final class StaticFixtureFinder
     {
         foreach ($fileInfos as $fileInfo) {
             try {
-                $smartFileInfo = new \ConfigTransformer202110145\Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
+                $smartFileInfo = new \ConfigTransformer202110205\Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
                 (yield $fileInfo->getRelativePathname() => [$smartFileInfo]);
-            } catch (\ConfigTransformer202110145\Symplify\SmartFileSystem\Exception\FileNotFoundException $exception) {
+            } catch (\ConfigTransformer202110205\Symplify\SmartFileSystem\Exception\FileNotFoundException $exception) {
             }
         }
     }
@@ -81,7 +81,7 @@ final class StaticFixtureFinder
      */
     private static function findFilesInDirectory(string $directory, string $suffix) : array
     {
-        $finder = \ConfigTransformer202110145\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \ConfigTransformer202110205\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder);
         return \array_values($fileInfos);
     }
@@ -91,20 +91,20 @@ final class StaticFixtureFinder
     private static function findFilesInDirectoryExclusively(string $directory, string $suffix) : array
     {
         self::ensureNoOtherFileName($directory, $suffix);
-        $finder = \ConfigTransformer202110145\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \ConfigTransformer202110205\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder->getIterator());
         return \array_values($fileInfos);
     }
     private static function ensureNoOtherFileName(string $directory, string $suffix) : void
     {
-        $iterator = \ConfigTransformer202110145\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
+        $iterator = \ConfigTransformer202110205\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
         $relativeFilePaths = [];
         foreach ($iterator as $fileInfo) {
-            $relativeFilePaths[] = \ConfigTransformer202110145\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
+            $relativeFilePaths[] = \ConfigTransformer202110205\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
         }
         if ($relativeFilePaths === []) {
             return;
         }
-        throw new \ConfigTransformer202110145\Symplify\SymplifyKernel\Exception\ShouldNotHappenException(\sprintf('Files "%s" have invalid suffix, use "%s" suffix instead', \implode('", ', $relativeFilePaths), $suffix));
+        throw new \ConfigTransformer202110205\Symplify\SymplifyKernel\Exception\ShouldNotHappenException(\sprintf('Files "%s" have invalid suffix, use "%s" suffix instead', \implode('", ', $relativeFilePaths), $suffix));
     }
 }

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110145\Symfony\Component\HttpKernel\EventListener;
+namespace ConfigTransformer202110205\Symfony\Component\HttpKernel\EventListener;
 
-use ConfigTransformer202110145\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202110145\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202110145\Symfony\Component\HttpKernel\HttpCache\HttpCache;
-use ConfigTransformer202110145\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
-use ConfigTransformer202110145\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202110205\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202110205\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202110205\Symfony\Component\HttpKernel\HttpCache\HttpCache;
+use ConfigTransformer202110205\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
+use ConfigTransformer202110205\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * SurrogateListener adds a Surrogate-Control HTTP header when the Response needs to be parsed for Surrogates.
  *
@@ -22,10 +22,10 @@ use ConfigTransformer202110145\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final
  */
-class SurrogateListener implements \ConfigTransformer202110145\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class SurrogateListener implements \ConfigTransformer202110205\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $surrogate;
-    public function __construct(\ConfigTransformer202110145\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null)
+    public function __construct(\ConfigTransformer202110205\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null)
     {
         $this->surrogate = $surrogate;
     }
@@ -40,7 +40,7 @@ class SurrogateListener implements \ConfigTransformer202110145\Symfony\Component
         }
         $kernel = $event->getKernel();
         $surrogate = $this->surrogate;
-        if ($kernel instanceof \ConfigTransformer202110145\Symfony\Component\HttpKernel\HttpCache\HttpCache) {
+        if ($kernel instanceof \ConfigTransformer202110205\Symfony\Component\HttpKernel\HttpCache\HttpCache) {
             $surrogate = $kernel->getSurrogate();
             if (null !== $this->surrogate && $this->surrogate->getName() !== $surrogate->getName()) {
                 $surrogate = $this->surrogate;
@@ -53,6 +53,6 @@ class SurrogateListener implements \ConfigTransformer202110145\Symfony\Component
     }
     public static function getSubscribedEvents() : array
     {
-        return [\ConfigTransformer202110145\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
+        return [\ConfigTransformer202110205\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
     }
 }
