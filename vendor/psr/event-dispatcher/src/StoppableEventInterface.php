@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110205\Psr\EventDispatcher;
+namespace ConfigTransformer202110202\Psr\EventDispatcher;
 
 /**
  * An Event whose processing may be interrupted when the event has been handled.
