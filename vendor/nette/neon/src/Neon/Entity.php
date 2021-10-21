@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202110202\Nette\Neon;
+namespace ConfigTransformer202110212\Nette\Neon;
 
 /**
  * Representation of NEON entity 'foo(bar=1)'
