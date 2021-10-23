@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110235\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202110237\Symplify\PhpConfigPrinter\ValueObject;
 
 final class YamlServiceKey
 {
