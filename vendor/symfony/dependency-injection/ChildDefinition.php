@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110237\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202110242\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202110237\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202110237\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use ConfigTransformer202110242\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202110242\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * This definition extends another definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ChildDefinition extends \ConfigTransformer202110237\Symfony\Component\DependencyInjection\Definition
+class ChildDefinition extends \ConfigTransformer202110242\Symfony\Component\DependencyInjection\Definition
 {
     private $parent;
     /**
@@ -88,7 +88,7 @@ class ChildDefinition extends \ConfigTransformer202110237\Symfony\Component\Depe
         } elseif (\strncmp($index, '$', \strlen('$')) === 0) {
             $this->arguments[$index] = $value;
         } else {
-            throw new \ConfigTransformer202110237\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The argument must be an existing index or the name of a constructor\'s parameter.');
+            throw new \ConfigTransformer202110242\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The argument must be an existing index or the name of a constructor\'s parameter.');
         }
         return $this;
     }

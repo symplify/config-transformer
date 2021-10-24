@@ -5,11 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202110237\Nette\Neon\Node;
+namespace ConfigTransformer202110242\Nette\Neon\Node;
 
-use ConfigTransformer202110237\Nette\Neon\Node;
+use ConfigTransformer202110242\Nette\Neon\Node;
 /** @internal */
-final class LiteralNode extends \ConfigTransformer202110237\Nette\Neon\Node
+final class LiteralNode extends \ConfigTransformer202110242\Nette\Neon\Node
 {
     /** @var mixed */
     public $value;

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110237\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202110242\Symfony\Component\EventDispatcher;
 
-use ConfigTransformer202110237\Psr\EventDispatcher\StoppableEventInterface;
-use ConfigTransformer202110237\Symfony\Component\EventDispatcher\Debug\WrappedListener;
+use ConfigTransformer202110242\Psr\EventDispatcher\StoppableEventInterface;
+use ConfigTransformer202110242\Symfony\Component\EventDispatcher\Debug\WrappedListener;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  *
@@ -27,7 +27,7 @@ use ConfigTransformer202110237\Symfony\Component\EventDispatcher\Debug\WrappedLi
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EventDispatcher implements \ConfigTransformer202110237\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class EventDispatcher implements \ConfigTransformer202110242\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $listeners = [];
     private $sorted = [];
@@ -205,7 +205,7 @@ class EventDispatcher implements \ConfigTransformer202110237\Symfony\Component\E
      */
     protected function callListeners($listeners, $eventName, $event)
     {
-        $stoppable = $event instanceof \ConfigTransformer202110237\Psr\EventDispatcher\StoppableEventInterface;
+        $stoppable = $event instanceof \ConfigTransformer202110242\Psr\EventDispatcher\StoppableEventInterface;
         foreach ($listeners as $listener) {
             if ($stoppable && $event->isPropagationStopped()) {
                 break;
@@ -249,7 +249,7 @@ class EventDispatcher implements \ConfigTransformer202110237\Symfony\Component\E
                         ($closure = \Closure::fromCallable($listener))(...$args);
                     };
                 } else {
-                    $closure = $listener instanceof \Closure || $listener instanceof \ConfigTransformer202110237\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
+                    $closure = $listener instanceof \Closure || $listener instanceof \ConfigTransformer202110242\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
                 }
             }
         }
