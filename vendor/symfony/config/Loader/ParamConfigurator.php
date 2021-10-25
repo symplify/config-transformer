@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110259\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202110251\Symfony\Component\Config\Loader;
 
 /**
  * Placeholder for a parameter.

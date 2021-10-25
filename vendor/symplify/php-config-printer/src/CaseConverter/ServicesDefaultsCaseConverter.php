@@ -1,44 +1,44 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110259\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202110251\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202110259\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202110259\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202110259\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202110259\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202110259\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
-use ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class ServicesDefaultsCaseConverter implements \ConfigTransformer202110259\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202110251\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202110251\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202110251\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202110251\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202110251\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
+use ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class ServicesDefaultsCaseConverter implements \ConfigTransformer202110251\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory
      */
     private $autoBindNodeFactory;
-    public function __construct(\ConfigTransformer202110259\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
+    public function __construct(\ConfigTransformer202110251\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
     {
         $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202110259\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202110251\PhpParser\Node\Stmt\Expression
     {
-        $methodCall = new \ConfigTransformer202110259\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
-        $decoratedMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall, \ConfigTransformer202110259\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_DEFAULTS);
-        return new \ConfigTransformer202110259\PhpParser\Node\Stmt\Expression($decoratedMethodCall);
+        $methodCall = new \ConfigTransformer202110251\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
+        $decoratedMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall, \ConfigTransformer202110251\Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_DEFAULTS);
+        return new \ConfigTransformer202110251\PhpParser\Node\Stmt\Expression($decoratedMethodCall);
     }
     /**
      * @param string $rootKey
      */
     public function match($rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
-        return $key === \ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS;
+        return $key === \ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS;
     }
-    private function createServicesVariable() : \ConfigTransformer202110259\PhpParser\Node\Expr\Variable
+    private function createServicesVariable() : \ConfigTransformer202110251\PhpParser\Node\Expr\Variable
     {
-        return new \ConfigTransformer202110259\PhpParser\Node\Expr\Variable(\ConfigTransformer202110259\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        return new \ConfigTransformer202110251\PhpParser\Node\Expr\Variable(\ConfigTransformer202110251\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
     }
 }
