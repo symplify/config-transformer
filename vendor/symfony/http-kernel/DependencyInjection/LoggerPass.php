@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110274\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202110276\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202110274\Psr\Log\LoggerInterface;
-use ConfigTransformer202110274\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202110274\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202110274\Symfony\Component\HttpKernel\Log\Logger;
+use ConfigTransformer202110276\Psr\Log\LoggerInterface;
+use ConfigTransformer202110276\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202110276\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202110276\Symfony\Component\HttpKernel\Log\Logger;
 /**
  * Registers the default logger if necessary.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class LoggerPass implements \ConfigTransformer202110274\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class LoggerPass implements \ConfigTransformer202110276\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -27,10 +27,10 @@ class LoggerPass implements \ConfigTransformer202110274\Symfony\Component\Depend
      */
     public function process($container)
     {
-        $container->setAlias(\ConfigTransformer202110274\Psr\Log\LoggerInterface::class, 'logger')->setPublic(\false);
+        $container->setAlias(\ConfigTransformer202110276\Psr\Log\LoggerInterface::class, 'logger')->setPublic(\false);
         if ($container->has('logger')) {
             return;
         }
-        $container->register('logger', \ConfigTransformer202110274\Symfony\Component\HttpKernel\Log\Logger::class)->setPublic(\false);
+        $container->register('logger', \ConfigTransformer202110276\Symfony\Component\HttpKernel\Log\Logger::class)->setPublic(\false);
     }
 }

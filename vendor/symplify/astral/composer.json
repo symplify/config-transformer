@@ -8,7 +8,7 @@
         "nette\/utils": "^3.2",
         "symfony\/dependency-injection": "^5.3|^6.0",
         "symplify\/smart-file-system": "dev-main",
-        "phpstan\/phpstan": "^0.12.99",
+        "phpstan\/phpstan": "1.0.x-dev as 0.12.99",
         "symfony\/http-kernel": "^5.3|^6.0",
         "nikic\/php-parser": "^4.13",
         "symplify\/package-builder": "dev-main"
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110274\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202110276\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110274\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202110276\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {

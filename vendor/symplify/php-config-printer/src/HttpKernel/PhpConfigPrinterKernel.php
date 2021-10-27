@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110274\Symplify\PhpConfigPrinter\HttpKernel;
+namespace ConfigTransformer202110276\Symplify\PhpConfigPrinter\HttpKernel;
 
-use ConfigTransformer202110274\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202110274\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer202110274\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-use ConfigTransformer202110274\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use ConfigTransformer202110274\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class PhpConfigPrinterKernel extends \ConfigTransformer202110274\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel implements \ConfigTransformer202110274\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
+use ConfigTransformer202110276\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202110276\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ConfigTransformer202110276\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
+use ConfigTransformer202110276\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use ConfigTransformer202110276\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class PhpConfigPrinterKernel extends \ConfigTransformer202110276\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel implements \ConfigTransformer202110276\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
 {
     /**
      * @var string[]
@@ -29,7 +29,7 @@ final class PhpConfigPrinterKernel extends \ConfigTransformer202110274\Symplify\
      */
     public function registerBundles() : iterable
     {
-        return [new \ConfigTransformer202110274\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new \ConfigTransformer202110276\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
     }
     /**
      * @param string[] $configs

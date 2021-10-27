@@ -1,22 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110274\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202110276\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202110274\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202110274\Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter;
+use ConfigTransformer202110276\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202110276\Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter;
 final class ContainerNestedNodesFactory
 {
     /**
      * @var \Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter
      */
     private $instanceOfNestedCaseConverter;
-    public function __construct(\ConfigTransformer202110274\Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter $instanceOfNestedCaseConverter)
+    public function __construct(\ConfigTransformer202110276\Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter $instanceOfNestedCaseConverter)
     {
         $this->instanceOfNestedCaseConverter = $instanceOfNestedCaseConverter;
     }
     /**
      * @return Expression[]
+     * @param int|string $nestedKey
      */
     public function createFromValues(array $nestedValues, string $key, $nestedKey) : array
     {

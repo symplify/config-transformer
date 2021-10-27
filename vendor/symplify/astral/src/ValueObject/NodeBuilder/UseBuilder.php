@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110274\Symplify\Astral\ValueObject\NodeBuilder;
+namespace ConfigTransformer202110276\Symplify\Astral\ValueObject\NodeBuilder;
 
-use ConfigTransformer202110274\PhpParser\Builder\Use_;
-use ConfigTransformer202110274\PhpParser\Node\Stmt\Use_ as UseStmt;
+use ConfigTransformer202110276\PhpParser\Builder\Use_;
+use ConfigTransformer202110276\PhpParser\Node\Stmt\Use_ as UseStmt;
 /**
  * @api
  * Fixed duplicated naming in php-parser and prevents confusion
  */
-final class UseBuilder extends \ConfigTransformer202110274\PhpParser\Builder\Use_
+final class UseBuilder extends \ConfigTransformer202110276\PhpParser\Builder\Use_
 {
-    public function __construct($name, int $type = \ConfigTransformer202110274\PhpParser\Node\Stmt\Use_::TYPE_NORMAL)
+    public function __construct($name, int $type = \ConfigTransformer202110276\PhpParser\Node\Stmt\Use_::TYPE_NORMAL)
     {
         parent::__construct($name, $type);
     }

@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110274\\Symfony\\Component\\VarExporter\\": ""
+            "ConfigTransformer202110276\\Symfony\\Component\\VarExporter\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
