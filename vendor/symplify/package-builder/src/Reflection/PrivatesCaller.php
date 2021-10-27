@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110251\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202110274\Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
 use ReflectionMethod;
-use ConfigTransformer202110251\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202110274\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * @see \Symplify\PackageBuilder\Tests\Reflection\PrivatesCallerTest
  */
@@ -59,6 +59,6 @@ final class PrivatesCaller
             return;
         }
         $errorMessage = \sprintf('Value passed to "%s()" method cannot be null', $location);
-        throw new \ConfigTransformer202110251\Symplify\SymplifyKernel\Exception\ShouldNotHappenException($errorMessage);
+        throw new \ConfigTransformer202110274\Symplify\SymplifyKernel\Exception\ShouldNotHappenException($errorMessage);
     }
 }

@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110251\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202110274\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202110251\Psr\Container\ContainerInterface;
-use ConfigTransformer202110251\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202110274\Psr\Container\ContainerInterface;
+use ConfigTransformer202110274\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * Loads commands from a PSR-11 container.
  *
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class ContainerCommandLoader implements \ConfigTransformer202110251\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class ContainerCommandLoader implements \ConfigTransformer202110274\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $container;
     private $commandMap;
     /**
      * @param array $commandMap An array with command names as keys and service ids as values
      */
-    public function __construct(\ConfigTransformer202110251\Psr\Container\ContainerInterface $container, array $commandMap)
+    public function __construct(\ConfigTransformer202110274\Psr\Container\ContainerInterface $container, array $commandMap)
     {
         $this->container = $container;
         $this->commandMap = $commandMap;
@@ -36,7 +36,7 @@ class ContainerCommandLoader implements \ConfigTransformer202110251\Symfony\Comp
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new \ConfigTransformer202110251\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202110274\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         return $this->container->get($this->commandMap[$name]);
     }

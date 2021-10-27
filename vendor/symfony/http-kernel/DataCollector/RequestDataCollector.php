@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110251\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202110274\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202110251\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\Cookie;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use ConfigTransformer202110251\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use ConfigTransformer202110251\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use ConfigTransformer202110251\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use ConfigTransformer202110251\Symfony\Component\HttpKernel\KernelEvents;
+use ConfigTransformer202110274\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\Cookie;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202110274\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer202110274\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use ConfigTransformer202110274\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ConfigTransformer202110274\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202110251\Symfony\Component\EventDispatcher\EventSubscriberInterface, \ConfigTransformer202110251\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class RequestDataCollector extends \ConfigTransformer202110274\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202110274\Symfony\Component\EventDispatcher\EventSubscriberInterface, \ConfigTransformer202110274\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $controllers;
     private $sessionUsages = [];
     private $requestStack;
-    public function __construct(\ConfigTransformer202110251\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(\ConfigTransformer202110274\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->controllers = new \SplObjectStorage();
         $this->requestStack = $requestStack;
@@ -80,7 +80,7 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
                 $dotenvVars[$name] = $_ENV[$name];
             }
         }
-        $this->data = ['method' => $request->getMethod(), 'format' => $request->getRequestFormat(), 'content_type' => $response->headers->get('Content-Type', 'text/html'), 'status_text' => \ConfigTransformer202110251\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode] ?? '', 'status_code' => $statusCode, 'request_query' => $request->query->all(), 'request_request' => $request->request->all(), 'request_files' => $request->files->all(), 'request_headers' => $request->headers->all(), 'request_server' => $request->server->all(), 'request_cookies' => $request->cookies->all(), 'request_attributes' => $attributes, 'route' => $route, 'response_headers' => $response->headers->all(), 'response_cookies' => $responseCookies, 'session_metadata' => $sessionMetadata, 'session_attributes' => $sessionAttributes, 'session_usages' => \array_values($this->sessionUsages), 'stateless_check' => $this->requestStack && $this->requestStack->getMainRequest()->attributes->get('_stateless', \false), 'flashes' => $flashes, 'path_info' => $request->getPathInfo(), 'controller' => 'n/a', 'locale' => $request->getLocale(), 'dotenv_vars' => $dotenvVars];
+        $this->data = ['method' => $request->getMethod(), 'format' => $request->getRequestFormat(), 'content_type' => $response->headers->get('Content-Type', 'text/html'), 'status_text' => \ConfigTransformer202110274\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode] ?? '', 'status_code' => $statusCode, 'request_query' => $request->query->all(), 'request_request' => $request->request->all(), 'request_files' => $request->files->all(), 'request_headers' => $request->headers->all(), 'request_server' => $request->server->all(), 'request_cookies' => $request->cookies->all(), 'request_attributes' => $attributes, 'route' => $route, 'response_headers' => $response->headers->all(), 'response_cookies' => $responseCookies, 'session_metadata' => $sessionMetadata, 'session_attributes' => $sessionAttributes, 'session_usages' => \array_values($this->sessionUsages), 'stateless_check' => $this->requestStack && $this->requestStack->getMainRequest()->attributes->get('_stateless', \false), 'flashes' => $flashes, 'path_info' => $request->getPathInfo(), 'controller' => 'n/a', 'locale' => $request->getLocale(), 'dotenv_vars' => $dotenvVars];
         if (isset($this->data['request_headers']['php-auth-pw'])) {
             $this->data['request_headers']['php-auth-pw'] = '******';
         }
@@ -112,7 +112,7 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
             $response->headers->clearCookie('sf_redirect');
         }
         if ($response->isRedirect()) {
-            $response->headers->setCookie(new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\Cookie('sf_redirect', \json_encode(['token' => $response->headers->get('x-debug-token'), 'route' => $request->attributes->get('_route', 'n/a'), 'method' => $request->getMethod(), 'controller' => $this->parseController($request->attributes->get('_controller')), 'status_code' => $statusCode, 'status_text' => \ConfigTransformer202110251\Symfony\Component\HttpFoundation\Response::$statusTexts[(int) $statusCode]]), 0, '/', null, $request->isSecure(), \true, \false, 'lax'));
+            $response->headers->setCookie(new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\Cookie('sf_redirect', \json_encode(['token' => $response->headers->get('x-debug-token'), 'route' => $request->attributes->get('_route', 'n/a'), 'method' => $request->getMethod(), 'controller' => $this->parseController($request->attributes->get('_controller')), 'status_code' => $statusCode, 'status_text' => \ConfigTransformer202110274\Symfony\Component\HttpFoundation\Response::$statusTexts[(int) $statusCode]]), 0, '/', null, $request->isSecure(), \true, \false, 'lax'));
         }
         $this->data['identifier'] = $this->data['route'] ?: (\is_array($this->data['controller']) ? $this->data['controller']['class'] . '::' . $this->data['controller']['method'] . '()' : $this->data['controller']);
         if ($response->headers->has('x-previous-debug-token')) {
@@ -139,45 +139,45 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
     }
     public function getRequestRequest()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_request']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_request']->getValue());
     }
     public function getRequestQuery()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_query']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_query']->getValue());
     }
     public function getRequestFiles()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_files']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_files']->getValue());
     }
     public function getRequestHeaders()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_headers']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_headers']->getValue());
     }
     /**
      * @param bool $raw
      */
     public function getRequestServer($raw = \false)
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_server']->getValue($raw));
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_server']->getValue($raw));
     }
     /**
      * @param bool $raw
      */
     public function getRequestCookies($raw = \false)
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_cookies']->getValue($raw));
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_cookies']->getValue($raw));
     }
     public function getRequestAttributes()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_attributes']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['request_attributes']->getValue());
     }
     public function getResponseHeaders()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['response_headers']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['response_headers']->getValue());
     }
     public function getResponseCookies()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['response_cookies']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['response_cookies']->getValue());
     }
     public function getSessionMetadata()
     {
@@ -234,7 +234,7 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
     }
     public function getDotenvVars()
     {
-        return new \ConfigTransformer202110251\Symfony\Component\HttpFoundation\ParameterBag($this->data['dotenv_vars']->getValue());
+        return new \ConfigTransformer202110274\Symfony\Component\HttpFoundation\ParameterBag($this->data['dotenv_vars']->getValue());
     }
     /**
      * Gets the route name.
@@ -307,7 +307,7 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
     }
     public static function getSubscribedEvents()
     {
-        return [\ConfigTransformer202110251\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER => 'onKernelController', \ConfigTransformer202110251\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
+        return [\ConfigTransformer202110274\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER => 'onKernelController', \ConfigTransformer202110274\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
     }
     /**
      * {@inheritdoc}
@@ -321,7 +321,7 @@ class RequestDataCollector extends \ConfigTransformer202110251\Symfony\Component
         $trace = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
         $traceEndIndex = \count($trace) - 1;
         for ($i = $traceEndIndex; $i > 0; --$i) {
-            if (null !== ($class = $trace[$i]['class'] ?? null) && (\is_subclass_of($class, \ConfigTransformer202110251\Symfony\Component\HttpFoundation\Session\SessionInterface::class) || \is_subclass_of($class, \ConfigTransformer202110251\Symfony\Component\HttpFoundation\Session\SessionBagInterface::class))) {
+            if (null !== ($class = $trace[$i]['class'] ?? null) && (\is_subclass_of($class, \ConfigTransformer202110274\Symfony\Component\HttpFoundation\Session\SessionInterface::class) || \is_subclass_of($class, \ConfigTransformer202110274\Symfony\Component\HttpFoundation\Session\SessionBagInterface::class))) {
                 $traceEndIndex = $i;
                 break;
             }
