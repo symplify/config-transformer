@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110318\Symplify\ConfigTransformer\Provider;
+namespace ConfigTransformer202110312\Symplify\ConfigTransformer\Provider;
 
-use ConfigTransformer202110318\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-use ConfigTransformer202110318\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-final class YamlContentProvider implements \ConfigTransformer202110318\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
+use ConfigTransformer202110312\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use ConfigTransformer202110312\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+final class YamlContentProvider implements \ConfigTransformer202110312\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
 {
     /**
      * @var string|null
@@ -21,7 +21,7 @@ final class YamlContentProvider implements \ConfigTransformer202110318\Symplify\
     public function getYamlContent() : string
     {
         if ($this->yamlContent === null) {
-            throw new \ConfigTransformer202110318\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202110312\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $this->yamlContent;
     }
