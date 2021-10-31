@@ -5,12 +5,12 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202110311\Nette\Neon\Node;
+namespace ConfigTransformer202110315\Nette\Neon\Node;
 
-use ConfigTransformer202110311\Nette;
-use ConfigTransformer202110311\Nette\Neon\Node;
+use ConfigTransformer202110315\Nette;
+use ConfigTransformer202110315\Nette\Neon\Node;
 /** @internal */
-final class StringNode extends \ConfigTransformer202110311\Nette\Neon\Node
+final class StringNode extends \ConfigTransformer202110315\Nette\Neon\Node
 {
     /** @var string */
     public $value;
@@ -27,7 +27,7 @@ final class StringNode extends \ConfigTransformer202110311\Nette\Neon\Node
     {
         $res = \json_encode($this->value, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
         if ($res === \false) {
-            throw new \ConfigTransformer202110311\Nette\Neon\Exception('Invalid UTF-8 sequence: ' . $this->value);
+            throw new \ConfigTransformer202110315\Nette\Neon\Exception('Invalid UTF-8 sequence: ' . $this->value);
         }
         if (\strpos($this->value, "\n") !== \false) {
             $res = \preg_replace_callback('#[^\\\\]|\\\\(.)#s', function ($m) {

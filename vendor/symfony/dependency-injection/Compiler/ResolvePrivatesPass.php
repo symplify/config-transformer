@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110311\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202110315\Symfony\Component\DependencyInjection\Compiler;
 
-trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \ConfigTransformer202110311\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
-use ConfigTransformer202110311\Symfony\Component\DependencyInjection\ContainerBuilder;
+trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \ConfigTransformer202110315\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
+use ConfigTransformer202110315\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @deprecated since Symfony 5.2
  */
-class ResolvePrivatesPass implements \ConfigTransformer202110311\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolvePrivatesPass implements \ConfigTransformer202110315\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}

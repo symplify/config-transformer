@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110311\Symplify\PackageBuilder\Testing;
+namespace ConfigTransformer202110315\Symplify\PackageBuilder\Testing;
 
-use ConfigTransformer202110311\PHPUnit\Framework\TestCase;
+use ConfigTransformer202110315\PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use ConfigTransformer202110311\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202110311\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202110311\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface;
-use ConfigTransformer202110311\Symfony\Contracts\Service\ResetInterface;
-use ConfigTransformer202110311\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-use ConfigTransformer202110311\Symplify\PackageBuilder\Exception\HttpKernel\MissingInterfaceException;
-use ConfigTransformer202110311\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202110311\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202110315\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202110315\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202110315\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface;
+use ConfigTransformer202110315\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202110315\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
+use ConfigTransformer202110315\Symplify\PackageBuilder\Exception\HttpKernel\MissingInterfaceException;
+use ConfigTransformer202110315\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202110315\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * Inspiration
  *
  * @see https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Test/KernelTestCase.php
  */
-abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUnit\Framework\TestCase
+abstract class AbstractKernelTestCase extends \ConfigTransformer202110315\PHPUnit\Framework\TestCase
 {
     /**
      * @var \Symfony\Component\HttpKernel\KernelInterface|null
@@ -30,14 +30,10 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
      */
     protected static $container;
     /**
-     * @var array<string, KernelInterface>
-     */
-    private static $kernelsByHash = [];
-    /**
      * @param class-string<KernelInterface> $kernelClass
      * @param string[]|SmartFileInfo[] $configs
      */
-    protected function bootKernelWithConfigs($kernelClass, $configs) : \ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface
+    protected function bootKernelWithConfigs($kernelClass, $configs) : \ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface
     {
         // unwrap file infos to real paths
         $configFilePaths = $this->resolveConfigFilePaths($configs);
@@ -46,25 +42,6 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
         $bootedKernel = $this->createBootedKernelFromConfigs($kernelClass, $configsHash, $configFilePaths);
         static::$kernel = $bootedKernel;
         return $bootedKernel;
-    }
-    /**
-     * @param class-string<KernelInterface> $kernelClass
-     * @param string[]|SmartFileInfo[] $configs
-     */
-    protected function bootKernelWithConfigsAndStaticCache($kernelClass, $configs) : \ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface
-    {
-        // unwrap file infos to real paths
-        $configFilePaths = $this->resolveConfigFilePaths($configs);
-        $configsHash = $this->resolveConfigsHash($configFilePaths);
-        if (isset(self::$kernelsByHash[$configsHash])) {
-            static::$kernel = self::$kernelsByHash[$configsHash];
-            self::$container = static::$kernel->getContainer();
-        } else {
-            $bootedKernel = $this->createBootedKernelFromConfigs($kernelClass, $configsHash, $configFilePaths);
-            static::$kernel = $bootedKernel;
-            self::$kernelsByHash[$configsHash] = $bootedKernel;
-        }
-        return static::$kernel;
     }
     /**
      * Syntax sugger to remove static from the test cases vission
@@ -76,12 +53,12 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
     protected function getService($type)
     {
         if (self::$container === null) {
-            throw new \ConfigTransformer202110311\Symplify\SymplifyKernel\Exception\ShouldNotHappenException('First, crewate container with booKernel(KernelClass::class)');
+            throw new \ConfigTransformer202110315\Symplify\SymplifyKernel\Exception\ShouldNotHappenException('First, create container with booKernel(KernelClass::class)');
         }
         $service = self::$container->get($type);
         if ($service === null) {
             $errorMessage = \sprintf('Services "%s" was not found', $type);
-            throw new \ConfigTransformer202110311\Symplify\Astral\Exception\ShouldNotHappenException($errorMessage);
+            throw new \ConfigTransformer202110315\Symplify\Astral\Exception\ShouldNotHappenException($errorMessage);
         }
         return $service;
     }
@@ -92,8 +69,8 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
     {
         $this->ensureKernelShutdown();
         $kernel = new $kernelClass('test', \true);
-        if (!$kernel instanceof \ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface) {
-            throw new \ConfigTransformer202110311\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        if (!$kernel instanceof \ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface) {
+            throw new \ConfigTransformer202110315\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         static::$kernel = $this->bootAndReturnKernel($kernel);
     }
@@ -112,7 +89,7 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
             if ($kernel !== null) {
                 $container = static::$kernel->getContainer();
                 static::$kernel->shutdown();
-                if ($container instanceof \ConfigTransformer202110311\Symfony\Contracts\Service\ResetInterface) {
+                if ($container instanceof \ConfigTransformer202110315\Symfony\Contracts\Service\ResetInterface) {
                     $container->reset();
                 }
             }
@@ -138,18 +115,18 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
     {
         $configFilePaths = [];
         foreach ($configs as $config) {
-            $configFilePaths[] = $config instanceof \ConfigTransformer202110311\Symplify\SmartFileSystem\SmartFileInfo ? $config->getRealPath() : $config;
+            $configFilePaths[] = $config instanceof \ConfigTransformer202110315\Symplify\SmartFileSystem\SmartFileInfo ? $config->getRealPath() : $config;
         }
         return $configFilePaths;
     }
-    private function ensureIsConfigAwareKernel(\ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface $kernel) : void
+    private function ensureIsConfigAwareKernel(\ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface $kernel) : void
     {
-        if ($kernel instanceof \ConfigTransformer202110311\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface) {
+        if ($kernel instanceof \ConfigTransformer202110315\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface) {
             return;
         }
-        throw new \ConfigTransformer202110311\Symplify\PackageBuilder\Exception\HttpKernel\MissingInterfaceException(\sprintf('"%s" is missing an "%s" interface', \get_class($kernel), \ConfigTransformer202110311\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class));
+        throw new \ConfigTransformer202110315\Symplify\PackageBuilder\Exception\HttpKernel\MissingInterfaceException(\sprintf('"%s" is missing an "%s" interface', \get_class($kernel), \ConfigTransformer202110315\Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class));
     }
-    private function bootAndReturnKernel(\ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface $kernel) : \ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface
+    private function bootAndReturnKernel(\ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface $kernel) : \ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface
     {
         $kernel->boot();
         $container = $kernel->getContainer();
@@ -157,13 +134,13 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
         if ($container->has('test.service_container')) {
             $container = $container->get('test.service_container');
         }
-        if (!$container instanceof \ConfigTransformer202110311\Symfony\Component\DependencyInjection\ContainerInterface) {
-            throw new \ConfigTransformer202110311\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        if (!$container instanceof \ConfigTransformer202110315\Symfony\Component\DependencyInjection\ContainerInterface) {
+            throw new \ConfigTransformer202110315\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         // has output? keep it silent out of tests
-        if ($container->has(\ConfigTransformer202110311\Symfony\Component\Console\Style\SymfonyStyle::class)) {
-            $symfonyStyle = $container->get(\ConfigTransformer202110311\Symfony\Component\Console\Style\SymfonyStyle::class);
-            $symfonyStyle->setVerbosity(\ConfigTransformer202110311\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        if ($container->has(\ConfigTransformer202110315\Symfony\Component\Console\Style\SymfonyStyle::class)) {
+            $symfonyStyle = $container->get(\ConfigTransformer202110315\Symfony\Component\Console\Style\SymfonyStyle::class);
+            $symfonyStyle->setVerbosity(\ConfigTransformer202110315\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         }
         static::$container = $container;
         return $kernel;
@@ -171,7 +148,7 @@ abstract class AbstractKernelTestCase extends \ConfigTransformer202110311\PHPUni
     /**
      * @param string[] $configFilePaths
      */
-    private function createBootedKernelFromConfigs(string $kernelClass, string $configsHash, array $configFilePaths) : \ConfigTransformer202110311\Symfony\Component\HttpKernel\KernelInterface
+    private function createBootedKernelFromConfigs(string $kernelClass, string $configsHash, array $configFilePaths) : \ConfigTransformer202110315\Symfony\Component\HttpKernel\KernelInterface
     {
         $kernel = new $kernelClass('test_' . $configsHash, \true);
         $this->ensureIsConfigAwareKernel($kernel);

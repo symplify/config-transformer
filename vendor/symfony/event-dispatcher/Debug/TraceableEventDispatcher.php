@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug;
+namespace ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug;
 
-use ConfigTransformer202110311\Psr\EventDispatcher\StoppableEventInterface;
-use ConfigTransformer202110311\Psr\Log\LoggerInterface;
-use ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110311\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202110311\Symfony\Component\Stopwatch\Stopwatch;
-use ConfigTransformer202110311\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202110315\Psr\EventDispatcher\StoppableEventInterface;
+use ConfigTransformer202110315\Psr\Log\LoggerInterface;
+use ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110315\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202110315\Symfony\Component\Stopwatch\Stopwatch;
+use ConfigTransformer202110315\Symfony\Contracts\Service\ResetInterface;
 /**
  * Collects some data about event listeners.
  *
@@ -25,7 +25,7 @@ use ConfigTransformer202110311\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventDispatcherInterface, \ConfigTransformer202110311\Symfony\Contracts\Service\ResetInterface
+class TraceableEventDispatcher implements \ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventDispatcherInterface, \ConfigTransformer202110315\Symfony\Contracts\Service\ResetInterface
 {
     protected $logger;
     protected $stopwatch;
@@ -35,7 +35,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
     private $orphanedEvents;
     private $requestStack;
     private $currentRequestHash = '';
-    public function __construct(\ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, \ConfigTransformer202110311\Symfony\Component\Stopwatch\Stopwatch $stopwatch, \ConfigTransformer202110311\Psr\Log\LoggerInterface $logger = null, \ConfigTransformer202110311\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(\ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, \ConfigTransformer202110315\Symfony\Component\Stopwatch\Stopwatch $stopwatch, \ConfigTransformer202110315\Psr\Log\LoggerInterface $logger = null, \ConfigTransformer202110315\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->stopwatch = $stopwatch;
@@ -54,7 +54,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(\ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber(\ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         $this->dispatcher->addSubscriber($subscriber);
     }
@@ -77,7 +77,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(\ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber(\ConfigTransformer202110315\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         return $this->dispatcher->removeSubscriber($subscriber);
     }
@@ -121,7 +121,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
             $this->callStack = new \SplObjectStorage();
         }
         $currentRequestHash = $this->currentRequestHash = $this->requestStack && ($request = $this->requestStack->getCurrentRequest()) ? \spl_object_hash($request) : '';
-        if (null !== $this->logger && $event instanceof \ConfigTransformer202110311\Psr\EventDispatcher\StoppableEventInterface && $event->isPropagationStopped()) {
+        if (null !== $this->logger && $event instanceof \ConfigTransformer202110315\Psr\EventDispatcher\StoppableEventInterface && $event->isPropagationStopped()) {
             $this->logger->debug(\sprintf('The "%s" event is already stopped. No listeners have been called.', $eventName));
         }
         $this->preProcess($eventName);
@@ -148,7 +148,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
     /**
      * @return array
      */
-    public function getCalledListeners(\ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request $request = null)
+    public function getCalledListeners(\ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request $request = null)
     {
         if (null === $this->callStack) {
             return [];
@@ -166,7 +166,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
     /**
      * @return array
      */
-    public function getNotCalledListeners(\ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request $request = null)
+    public function getNotCalledListeners(\ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request $request = null)
     {
         try {
             $allListeners = $this->getListeners();
@@ -191,8 +191,8 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
         foreach ($allListeners as $eventName => $listeners) {
             foreach ($listeners as $listener) {
                 if (!\in_array($listener, $calledListeners, \true)) {
-                    if (!$listener instanceof \ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
-                        $listener = new \ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
+                    if (!$listener instanceof \ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+                        $listener = new \ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
                     }
                     $notCalled[] = $listener->getInfo($eventName);
                 }
@@ -201,7 +201,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
         \uasort($notCalled, [$this, 'sortNotCalledListeners']);
         return $notCalled;
     }
-    public function getOrphanedEvents(\ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request $request = null) : array
+    public function getOrphanedEvents(\ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request $request = null) : array
     {
         if ($request) {
             return $this->orphanedEvents[\spl_object_hash($request)] ?? [];
@@ -249,7 +249,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
         }
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
             $priority = $this->getListenerPriority($eventName, $listener);
-            $wrappedListener = new \ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
+            $wrappedListener = new \ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
             $this->wrappedListeners[$eventName][] = $wrappedListener;
             $this->dispatcher->removeListener($eventName, $listener);
             $this->dispatcher->addListener($eventName, $wrappedListener, $priority);
@@ -261,7 +261,7 @@ class TraceableEventDispatcher implements \ConfigTransformer202110311\Symfony\Co
         unset($this->wrappedListeners[$eventName]);
         $skipped = \false;
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
-            if (!$listener instanceof \ConfigTransformer202110311\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+            if (!$listener instanceof \ConfigTransformer202110315\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
                 // #12845: a new listener was added during dispatch.
                 continue;
             }

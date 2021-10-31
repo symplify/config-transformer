@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110311\Symfony\Component\HttpKernel\Fragment;
+namespace ConfigTransformer202110315\Symfony\Component\HttpKernel\Fragment;
 
-use ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110311\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202110311\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use ConfigTransformer202110311\Symfony\Component\HttpKernel\UriSigner;
+use ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110315\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202110315\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use ConfigTransformer202110315\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Generates a fragment URI.
  *
  * @author Kévin Dunglas <kevin@dunglas.fr>
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class FragmentUriGenerator implements \ConfigTransformer202110311\Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+final class FragmentUriGenerator implements \ConfigTransformer202110315\Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
 {
     private $fragmentPath;
     private $signer;
     private $requestStack;
-    public function __construct(string $fragmentPath, \ConfigTransformer202110311\Symfony\Component\HttpKernel\UriSigner $signer = null, \ConfigTransformer202110311\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(string $fragmentPath, \ConfigTransformer202110315\Symfony\Component\HttpKernel\UriSigner $signer = null, \ConfigTransformer202110315\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->fragmentPath = $fragmentPath;
         $this->signer = $signer;
