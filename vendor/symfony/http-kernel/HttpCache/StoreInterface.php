@@ -11,10 +11,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110315\Symfony\Component\HttpKernel\HttpCache;
+namespace ConfigTransformer202110314\Symfony\Component\HttpKernel\HttpCache;
 
-use ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110315\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202110314\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110314\Symfony\Component\HttpFoundation\Response;
 /**
  * Interface implemented by HTTP cache stores.
  *

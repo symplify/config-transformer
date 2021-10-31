@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110315\Symfony\Component\HttpFoundation\RateLimiter;
+namespace ConfigTransformer202110314\Symfony\Component\HttpFoundation\RateLimiter;
 
-use ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110315\Symfony\Component\RateLimiter\RateLimit;
+use ConfigTransformer202110314\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110314\Symfony\Component\RateLimiter\RateLimit;
 /**
  * A special type of limiter that deals with requests.
  *
@@ -24,6 +24,6 @@ use ConfigTransformer202110315\Symfony\Component\RateLimiter\RateLimit;
  */
 interface RequestRateLimiterInterface
 {
-    public function consume(\ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202110315\Symfony\Component\RateLimiter\RateLimit;
-    public function reset(\ConfigTransformer202110315\Symfony\Component\HttpFoundation\Request $request) : void;
+    public function consume(\ConfigTransformer202110314\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202110314\Symfony\Component\RateLimiter\RateLimit;
+    public function reset(\ConfigTransformer202110314\Symfony\Component\HttpFoundation\Request $request) : void;
 }

@@ -1,27 +1,41 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110315\Symplify\ConfigTransformer\HttpKernel;
+namespace ConfigTransformer202110314\Symplify\ConfigTransformer\HttpKernel;
 
-use ConfigTransformer202110315\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202110315\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use ConfigTransformer202110315\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use ConfigTransformer202110315\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
-use ConfigTransformer202110315\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class ConfigTransformerKernel extends \ConfigTransformer202110315\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202110314\Psr\Container\ContainerInterface;
+use ConfigTransformer202110314\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202110314\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+use ConfigTransformer202110314\Symplify\ConfigTransformer\Exception\ShouldNotHappenException;
+use ConfigTransformer202110314\Symplify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension;
+use ConfigTransformer202110314\Symplify\SymfonyContainerBuilder\ContainerBuilderFactory;
+use ConfigTransformer202110314\Symplify\SymplifyKernel\Contract\LightKernelInterface;
+use ConfigTransformer202110314\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
+final class ConfigTransformerKernel implements \ConfigTransformer202110314\Symplify\SymplifyKernel\Contract\LightKernelInterface
 {
     /**
-     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
+     * @var \Symfony\Component\DependencyInjection\Container|null
      */
-    public function registerContainerConfiguration($loader) : void
-    {
-        $loader->load(__DIR__ . '/../../config/config.php');
-    }
+    private $container = null;
     /**
-     * @return BundleInterface[]
+     * @param string[] $configFiles
      */
-    public function registerBundles() : iterable
+    public function createFromConfigs($configFiles) : \ConfigTransformer202110314\Psr\Container\ContainerInterface
     {
-        return [new \ConfigTransformer202110315\Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \ConfigTransformer202110315\Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        $containerBuilderFactory = new \ConfigTransformer202110314\Symplify\SymfonyContainerBuilder\ContainerBuilderFactory();
+        $extensions = [new \ConfigTransformer202110314\Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension(), new \ConfigTransformer202110314\Symplify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension()];
+        $compilerPasses = [new \ConfigTransformer202110314\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass()];
+        $configFiles[] = __DIR__ . '/../../config/config.php';
+        $containerBuilder = $containerBuilderFactory->create($extensions, $compilerPasses, $configFiles);
+        $containerBuilder->compile();
+        $this->container = $containerBuilder;
+        return $containerBuilder;
+    }
+    public function getContainer() : \ConfigTransformer202110314\Psr\Container\ContainerInterface
+    {
+        if (!$this->container instanceof \ConfigTransformer202110314\Symfony\Component\DependencyInjection\Container) {
+            throw new \ConfigTransformer202110314\Symplify\ConfigTransformer\Exception\ShouldNotHappenException();
+        }
+        return $this->container;
     }
 }
