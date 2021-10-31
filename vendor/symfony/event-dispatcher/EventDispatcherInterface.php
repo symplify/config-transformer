@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110318\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202110311\Symfony\Component\EventDispatcher;
 
-use ConfigTransformer202110318\Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
+use ConfigTransformer202110311\Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  * Listeners are registered on the manager and events are dispatched through the
@@ -18,7 +18,7 @@ use ConfigTransformer202110318\Symfony\Contracts\EventDispatcher\EventDispatcher
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-interface EventDispatcherInterface extends \ConfigTransformer202110318\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interface EventDispatcherInterface extends \ConfigTransformer202110311\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
 {
     /**
      * Adds an event listener that listens on the specified events.
@@ -33,12 +33,12 @@ interface EventDispatcherInterface extends \ConfigTransformer202110318\Symfony\C
      * The subscriber is asked for all the events it is
      * interested in and added as a listener for these events.
      */
-    public function addSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
+    public function addSubscriber(\ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
     /**
      * Removes an event listener from the specified events.
      */
     public function removeListener(string $eventName, callable $listener);
-    public function removeSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
+    public function removeSubscriber(\ConfigTransformer202110311\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
     /**
      * Gets the listeners of a specific event or all listeners sorted by descending priority.
      *

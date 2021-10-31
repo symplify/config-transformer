@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110318\Symfony\Component\HttpKernel\DataCollector;
+namespace ConfigTransformer202110311\Symfony\Component\HttpKernel\DataCollector;
 
-use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110311\Symfony\Component\HttpFoundation\Response;
 /**
  * MemoryDataCollector.
  *
@@ -19,7 +19,7 @@ use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class MemoryDataCollector extends \ConfigTransformer202110318\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202110318\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class MemoryDataCollector extends \ConfigTransformer202110311\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202110311\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     public function __construct()
     {

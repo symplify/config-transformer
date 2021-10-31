@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage::class);
+\class_exists(\ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage::class);
 /**
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
-class MockFileSessionStorageFactory implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageFactoryInterface
+class MockFileSessionStorageFactory implements \ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageFactoryInterface
 {
     private $savePath;
     private $name;
@@ -24,14 +24,14 @@ class MockFileSessionStorageFactory implements \ConfigTransformer202110318\Symfo
     /**
      * @see MockFileSessionStorage constructor.
      */
-    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         $this->savePath = $savePath;
         $this->name = $name;
         $this->metaBag = $metaBag;
     }
-    public function createStorage(?\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+    public function createStorage(?\ConfigTransformer202110311\Symfony\Component\HttpFoundation\Request $request) : \ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
     {
-        return new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage($this->savePath, $this->name, $this->metaBag);
+        return new \ConfigTransformer202110311\Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage($this->savePath, $this->name, $this->metaBag);
     }
 }
