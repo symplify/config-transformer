@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110314\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202110318\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202110314\Symfony\Component\Finder\Finder;
-use ConfigTransformer202110314\Symfony\Component\Finder\Glob;
+use ConfigTransformer202110318\Symfony\Component\Finder\Finder;
+use ConfigTransformer202110318\Symfony\Component\Finder\Glob;
 /**
  * GlobResource represents a set of resources stored on the filesystem.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202110314\Symfony\Component\Finder\Glob;
  *
  * @final
  */
-class GlobResource implements \IteratorAggregate, \ConfigTransformer202110314\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class GlobResource implements \IteratorAggregate, \ConfigTransformer202110318\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $prefix;
     private $pattern;
@@ -140,11 +140,11 @@ class GlobResource implements \IteratorAggregate, \ConfigTransformer202110314\Sy
             }
             return;
         }
-        if (!\class_exists(\ConfigTransformer202110314\Symfony\Component\Finder\Finder::class)) {
+        if (!\class_exists(\ConfigTransformer202110318\Symfony\Component\Finder\Finder::class)) {
             throw new \LogicException(\sprintf('Extended glob pattern "%s" cannot be used as the Finder component is not installed.', $this->pattern));
         }
-        $finder = new \ConfigTransformer202110314\Symfony\Component\Finder\Finder();
-        $regex = \ConfigTransformer202110314\Symfony\Component\Finder\Glob::toRegex($this->pattern);
+        $finder = new \ConfigTransformer202110318\Symfony\Component\Finder\Finder();
+        $regex = \ConfigTransformer202110318\Symfony\Component\Finder\Glob::toRegex($this->pattern);
         if ($this->recursive) {
             $regex = \substr_replace($regex, '(/|$)', -2, 1);
         }

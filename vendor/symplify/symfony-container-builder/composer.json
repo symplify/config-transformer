@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110314\\Symplify\\SymfonyContainerBuilder\\": "src"
+            "ConfigTransformer202110318\\Symplify\\SymfonyContainerBuilder\\": "src"
         }
     },
     "extra": {
