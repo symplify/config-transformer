@@ -24,7 +24,10 @@ class Compiler implements \ConfigTransformer202110315\Symfony\Contracts\Service\
     {
         $this->functions = $functions;
     }
-    public function getFunction(string $name)
+    /**
+     * @param string $name
+     */
+    public function getFunction($name)
     {
         return $this->functions[$name];
     }
@@ -46,13 +49,17 @@ class Compiler implements \ConfigTransformer202110315\Symfony\Contracts\Service\
      * Compiles a node.
      *
      * @return $this
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $node
      */
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function compile($node)
     {
         $node->compile($this);
         return $this;
     }
-    public function subcompile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $node
+     */
+    public function subcompile($node)
     {
         $current = $this->source;
         $this->source = '';
@@ -65,8 +72,9 @@ class Compiler implements \ConfigTransformer202110315\Symfony\Contracts\Service\
      * Adds a raw string to the compiled code.
      *
      * @return $this
+     * @param string $string
      */
-    public function raw(string $string)
+    public function raw($string)
     {
         $this->source .= $string;
         return $this;
@@ -75,8 +83,9 @@ class Compiler implements \ConfigTransformer202110315\Symfony\Contracts\Service\
      * Adds a quoted string to the compiled code.
      *
      * @return $this
+     * @param string $value
      */
-    public function string(string $value)
+    public function string($value)
     {
         $this->source .= \sprintf('"%s"', \addcslashes($value, "\0\t\"\$\\"));
         return $this;

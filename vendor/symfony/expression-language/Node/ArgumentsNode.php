@@ -18,7 +18,10 @@ use ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler;
  */
 class ArgumentsNode extends \ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Node\ArrayNode
 {
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $this->compileArguments($compiler, \false);
     }

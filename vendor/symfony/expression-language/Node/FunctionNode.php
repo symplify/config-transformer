@@ -22,7 +22,10 @@ class FunctionNode extends \ConfigTransformer202110315\Symfony\Component\Express
     {
         parent::__construct(['arguments' => $arguments], ['name' => $name]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $arguments = [];
         foreach ($this->nodes['arguments']->nodes as $node) {
@@ -31,7 +34,11 @@ class FunctionNode extends \ConfigTransformer202110315\Symfony\Component\Express
         $function = $compiler->getFunction($this->attributes['name']);
         $compiler->raw($function['compiler'](...$arguments));
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $arguments = [$values];
         foreach ($this->nodes['arguments']->nodes as $node) {

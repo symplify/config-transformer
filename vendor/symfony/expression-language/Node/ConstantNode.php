@@ -24,11 +24,18 @@ class ConstantNode extends \ConfigTransformer202110315\Symfony\Component\Express
         $this->isIdentifier = $isIdentifier;
         parent::__construct([], ['value' => $value]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $compiler->repr($this->attributes['value']);
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         return $this->attributes['value'];
     }

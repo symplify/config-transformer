@@ -51,13 +51,20 @@ class Node
         }
         return \implode("\n", $repr);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         foreach ($this->nodes as $node) {
             $node->compile($compiler);
         }
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $results = [];
         foreach ($this->nodes as $node) {
@@ -77,11 +84,17 @@ class Node
         }
         return $dump;
     }
-    protected function dumpString(string $value)
+    /**
+     * @param string $value
+     */
+    protected function dumpString($value)
     {
         return \sprintf('"%s"', \addcslashes($value, "\0\t\"\\"));
     }
-    protected function isHash(array $value)
+    /**
+     * @param mixed[] $value
+     */
+    protected function isHash($value)
     {
         $expectedKey = 0;
         foreach ($value as $key => $val) {

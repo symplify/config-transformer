@@ -22,11 +22,18 @@ class ConditionalNode extends \ConfigTransformer202110315\Symfony\Component\Expr
     {
         parent::__construct(['expr1' => $expr1, 'expr2' => $expr2, 'expr3' => $expr3]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $compiler->raw('((')->compile($this->nodes['expr1'])->raw(') ? (')->compile($this->nodes['expr2'])->raw(') : (')->compile($this->nodes['expr3'])->raw('))');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         if ($this->nodes['expr1']->evaluate($functions, $values)) {
             return $this->nodes['expr2']->evaluate($functions, $values);

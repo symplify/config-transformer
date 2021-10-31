@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851
+class ComposerStaticInit1ba454eada6cd4d38528408b6b4a6d5b
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -1581,6 +1581,7 @@ class ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851
         'ConfigTransformer202110315\\Symplify\\SmartFileSystem\\SmartFileInfo' => __DIR__ . '/..' . '/symplify/smart-file-system/src/SmartFileInfo.php',
         'ConfigTransformer202110315\\Symplify\\SmartFileSystem\\SmartFileSystem' => __DIR__ . '/..' . '/symplify/smart-file-system/src/SmartFileSystem.php',
         'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Bundle\\SymplifyKernelBundle' => __DIR__ . '/..' . '/symplify/symplify-kernel/src/Bundle/SymplifyKernelBundle.php',
+        'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Contract\\LightKernelInterface' => __DIR__ . '/..' . '/symplify/symplify-kernel/src/Contract/LightKernelInterface.php',
         'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\DependencyInjection\\Extension\\SymplifyKernelExtension' => __DIR__ . '/..' . '/symplify/symplify-kernel/src/DependencyInjection/Extension/SymplifyKernelExtension.php',
         'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Exception\\BootException' => __DIR__ . '/..' . '/symplify/symplify-kernel/src/Exception/BootException.php',
         'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Exception\\HttpKernel\\TooGenericKernelClassException' => __DIR__ . '/..' . '/symplify/symplify-kernel/src/Exception/HttpKernel/TooGenericKernelClassException.php',
@@ -1595,9 +1596,9 @@ class ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0d0d45a5b18316d25ee4e0fc9ecb6851::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1ba454eada6cd4d38528408b6b4a6d5b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1ba454eada6cd4d38528408b6b4a6d5b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1ba454eada6cd4d38528408b6b4a6d5b::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -23,11 +23,18 @@ class UnaryNode extends \ConfigTransformer202110315\Symfony\Component\Expression
     {
         parent::__construct(['node' => $node], ['operator' => $operator]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $compiler->raw('(')->raw(self::OPERATORS[$this->attributes['operator']])->compile($this->nodes['node'])->raw(')');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $value = $this->nodes['node']->evaluate($functions, $values);
         switch ($this->attributes['operator']) {

@@ -25,7 +25,10 @@ class GetAttrNode extends \ConfigTransformer202110315\Symfony\Component\Expressi
     {
         parent::__construct(['node' => $node, 'attribute' => $attribute, 'arguments' => $arguments], ['type' => $type]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         switch ($this->attributes['type']) {
             case self::PROPERTY_CALL:
@@ -39,7 +42,11 @@ class GetAttrNode extends \ConfigTransformer202110315\Symfony\Component\Expressi
                 break;
         }
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         switch ($this->attributes['type']) {
             case self::PROPERTY_CALL:

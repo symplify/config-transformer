@@ -23,8 +23,9 @@ class Lexer
      * @return TokenStream A token stream instance
      *
      * @throws SyntaxError
+     * @param string $expression
      */
-    public function tokenize(string $expression)
+    public function tokenize($expression)
     {
         $expression = \str_replace(["\r", "\n", "\t", "\v", "\f"], ' ', $expression);
         $cursor = 0;

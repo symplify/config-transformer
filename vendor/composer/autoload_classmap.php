@@ -1381,6 +1381,7 @@ return array(
     'ConfigTransformer202110315\\Symplify\\SmartFileSystem\\SmartFileInfo' => $vendorDir . '/symplify/smart-file-system/src/SmartFileInfo.php',
     'ConfigTransformer202110315\\Symplify\\SmartFileSystem\\SmartFileSystem' => $vendorDir . '/symplify/smart-file-system/src/SmartFileSystem.php',
     'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Bundle\\SymplifyKernelBundle' => $vendorDir . '/symplify/symplify-kernel/src/Bundle/SymplifyKernelBundle.php',
+    'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Contract\\LightKernelInterface' => $vendorDir . '/symplify/symplify-kernel/src/Contract/LightKernelInterface.php',
     'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\DependencyInjection\\Extension\\SymplifyKernelExtension' => $vendorDir . '/symplify/symplify-kernel/src/DependencyInjection/Extension/SymplifyKernelExtension.php',
     'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Exception\\BootException' => $vendorDir . '/symplify/symplify-kernel/src/Exception/BootException.php',
     'ConfigTransformer202110315\\Symplify\\SymplifyKernel\\Exception\\HttpKernel\\TooGenericKernelClassException' => $vendorDir . '/symplify/symplify-kernel/src/Exception/HttpKernel/TooGenericKernelClassException.php',

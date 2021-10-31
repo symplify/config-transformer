@@ -24,7 +24,10 @@ class BinaryNode extends \ConfigTransformer202110315\Symfony\Component\Expressio
     {
         parent::__construct(['left' => $left, 'right' => $right], ['operator' => $operator]);
     }
-    public function compile(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
+     */
+    public function compile($compiler)
     {
         $operator = $this->attributes['operator'];
         if ('matches' == $operator) {
@@ -40,7 +43,11 @@ class BinaryNode extends \ConfigTransformer202110315\Symfony\Component\Expressio
         }
         $compiler->raw('(')->compile($this->nodes['left'])->raw(' ')->raw($operator)->raw(' ')->compile($this->nodes['right'])->raw(')');
     }
-    public function evaluate(array $functions, array $values)
+    /**
+     * @param mixed[] $functions
+     * @param mixed[] $values
+     */
+    public function evaluate($functions, $values)
     {
         $operator = $this->attributes['operator'];
         $left = $this->nodes['left']->evaluate($functions, $values);

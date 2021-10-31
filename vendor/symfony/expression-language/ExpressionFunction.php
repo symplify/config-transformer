@@ -65,8 +65,9 @@ class ExpressionFunction
      * @throws \InvalidArgumentException if given PHP function name does not exist
      * @throws \InvalidArgumentException if given PHP function name is in namespace
      *                                   and expression function name is not defined
+     * @param string $phpFunctionName
      */
-    public static function fromPhp(string $phpFunctionName, string $expressionFunctionName = null)
+    public static function fromPhp($phpFunctionName, $expressionFunctionName = null)
     {
         $phpFunctionName = \ltrim($phpFunctionName, '\\');
         if (!\function_exists($phpFunctionName)) {

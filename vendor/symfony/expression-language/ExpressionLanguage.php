@@ -43,8 +43,9 @@ class ExpressionLanguage
      * @param Expression|string $expression The expression to compile
      *
      * @return string The compiled PHP source code
+     * @param mixed[] $names
      */
-    public function compile($expression, array $names = [])
+    public function compile($expression, $names = [])
     {
         return $this->getCompiler()->compile($this->parse($expression, $names)->getNodes())->getSource();
     }
@@ -54,8 +55,9 @@ class ExpressionLanguage
      * @param Expression|string $expression The expression to compile
      *
      * @return mixed The result of the evaluation of the expression
+     * @param mixed[] $values
      */
-    public function evaluate($expression, array $values = [])
+    public function evaluate($expression, $values = [])
     {
         return $this->parse($expression, \array_keys($values))->getNodes()->evaluate($this->functions, $values);
     }
@@ -65,8 +67,9 @@ class ExpressionLanguage
      * @param Expression|string $expression The expression to parse
      *
      * @return ParsedExpression A ParsedExpression instance
+     * @param mixed[] $names
      */
-    public function parse($expression, array $names)
+    public function parse($expression, $names)
     {
         if ($expression instanceof \ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\ParsedExpression) {
             return $expression;
@@ -93,7 +96,7 @@ class ExpressionLanguage
      *
      * @throws SyntaxError When the passed expression is invalid
      */
-    public function lint($expression, ?array $names) : void
+    public function lint($expression, $names) : void
     {
         if ($expression instanceof \ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\ParsedExpression) {
             return;
@@ -109,19 +112,26 @@ class ExpressionLanguage
      * @throws \LogicException when registering a function after calling evaluate(), compile() or parse()
      *
      * @see ExpressionFunction
+     * @param string $name
      */
-    public function register(string $name, callable $compiler, callable $evaluator)
+    public function register($name, $compiler, $evaluator)
     {
         if (null !== $this->parser) {
             throw new \LogicException('Registering functions after calling evaluate(), compile() or parse() is not supported.');
         }
         $this->functions[$name] = ['compiler' => $compiler, 'evaluator' => $evaluator];
     }
-    public function addFunction(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\ExpressionFunction $function)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\ExpressionFunction $function
+     */
+    public function addFunction($function)
     {
         $this->register($function->getName(), $function->getCompiler(), $function->getEvaluator());
     }
-    public function registerProvider(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface $provider)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface $provider
+     */
+    public function registerProvider($provider)
     {
         foreach ($provider->getFunctions() as $function) {
             $this->addFunction($function);

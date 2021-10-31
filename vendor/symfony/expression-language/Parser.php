@@ -52,8 +52,10 @@ class Parser
      * @return Node\Node A node tree
      *
      * @throws SyntaxError
+     * @param \Symfony\Component\ExpressionLanguage\TokenStream $stream
+     * @param mixed[] $names
      */
-    public function parse(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\TokenStream $stream, array $names = [])
+    public function parse($stream, $names = [])
     {
         $this->lint = \false;
         return $this->doParse($stream, $names);
@@ -65,8 +67,10 @@ class Parser
      * If you want to skip checking dynamic variable names, pass `null` instead of the array.
      *
      * @throws SyntaxError When the passed expression is invalid
+     * @param \Symfony\Component\ExpressionLanguage\TokenStream $stream
+     * @param mixed[]|null $names
      */
-    public function lint(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\TokenStream $stream, ?array $names = []) : void
+    public function lint($stream, $names = []) : void
     {
         $this->lint = \true;
         $this->doParse($stream, $names);
@@ -86,7 +90,10 @@ class Parser
         $this->names = null;
         return $node;
     }
-    public function parseExpression(int $precedence = 0)
+    /**
+     * @param int $precedence
+     */
+    public function parseExpression($precedence = 0)
     {
         $expr = $this->getPrimary();
         $token = $this->stream->current;
@@ -119,7 +126,10 @@ class Parser
         }
         return $this->parsePrimaryExpression();
     }
-    protected function parseConditionalExpression(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Node\Node $expr)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $expr
+     */
+    protected function parseConditionalExpression($expr)
     {
         while ($this->stream->current->test(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, '?')) {
             $this->stream->next();
@@ -249,7 +259,10 @@ class Parser
         $this->stream->expect(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE, '}', 'An opened hash is not properly closed');
         return $node;
     }
-    public function parsePostfixExpression(\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    /**
+     * @param \Symfony\Component\ExpressionLanguage\Node\Node $node
+     */
+    public function parsePostfixExpression($node)
     {
         $token = $this->stream->current;
         while (\ConfigTransformer202110315\Symfony\Component\ExpressionLanguage\Token::PUNCTUATION_TYPE == $token->type) {
