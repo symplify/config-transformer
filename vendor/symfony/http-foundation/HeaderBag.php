@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
 /**
  * HeaderBag is a container for HTTP headers.
@@ -55,7 +55,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      *
      * @return array An array of headers
      */
-    public function all($key = null)
+    public function all(string $key = null)
     {
         if (null !== $key) {
             return $this->headers[\strtr($key, self::UPPER, self::LOWER)] ?? [];
@@ -73,18 +73,16 @@ class HeaderBag implements \IteratorAggregate, \Countable
     }
     /**
      * Replaces the current HTTP headers by a new set.
-     * @param mixed[] $headers
      */
-    public function replace($headers = [])
+    public function replace(array $headers = [])
     {
         $this->headers = [];
         $this->add($headers);
     }
     /**
      * Adds new headers the current HTTP headers set.
-     * @param mixed[] $headers
      */
-    public function add($headers)
+    public function add(array $headers)
     {
         foreach ($headers as $key => $values) {
             $this->set($key, $values);
@@ -94,10 +92,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Returns a header value by name.
      *
      * @return string|null The first header value or default value
-     * @param string $key
-     * @param string|null $default
      */
-    public function get($key, $default = null)
+    public function get(string $key, string $default = null)
     {
         $headers = $this->all($key);
         if (!$headers) {
@@ -113,9 +109,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      *
      * @param string|string[]|null $values  The value or an array of values
      * @param bool                 $replace Whether to replace the actual value or not (true by default)
-     * @param string $key
      */
-    public function set($key, $values, $replace = \true)
+    public function set(string $key, $values, bool $replace = \true)
     {
         $key = \strtr($key, self::UPPER, self::LOWER);
         if (\is_array($values)) {
@@ -140,9 +135,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Returns true if the HTTP header is defined.
      *
      * @return bool true if the parameter exists, false otherwise
-     * @param string $key
      */
-    public function has($key)
+    public function has(string $key)
     {
         return \array_key_exists(\strtr($key, self::UPPER, self::LOWER), $this->all());
     }
@@ -150,18 +144,15 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Returns true if the given HTTP header contains the given value.
      *
      * @return bool true if the value is contained in the header, false otherwise
-     * @param string $key
-     * @param string $value
      */
-    public function contains($key, $value)
+    public function contains(string $key, string $value)
     {
         return \in_array($value, $this->all($key));
     }
     /**
      * Removes a header.
-     * @param string $key
      */
-    public function remove($key)
+    public function remove(string $key)
     {
         $key = \strtr($key, self::UPPER, self::LOWER);
         unset($this->headers[$key]);
@@ -175,10 +166,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * @return \DateTimeInterface|null The parsed DateTime or the default value if the header does not exist
      *
      * @throws \RuntimeException When the HTTP header is not parseable
-     * @param string $key
-     * @param \DateTime|null $default
      */
-    public function getDate($key, $default = null)
+    public function getDate(string $key, \DateTime $default = null)
     {
         if (null === ($value = $this->get($key))) {
             return $default;
@@ -192,9 +181,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Adds a custom Cache-Control directive.
      *
      * @param bool|string $value The Cache-Control directive value
-     * @param string $key
      */
-    public function addCacheControlDirective($key, $value = \true)
+    public function addCacheControlDirective(string $key, $value = \true)
     {
         $this->cacheControl[$key] = $value;
         $this->set('Cache-Control', $this->getCacheControlHeader());
@@ -203,9 +191,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Returns true if the Cache-Control directive is defined.
      *
      * @return bool true if the directive exists, false otherwise
-     * @param string $key
      */
-    public function hasCacheControlDirective($key)
+    public function hasCacheControlDirective(string $key)
     {
         return \array_key_exists($key, $this->cacheControl);
     }
@@ -213,17 +200,15 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * Returns a Cache-Control directive value by name.
      *
      * @return bool|string|null The directive value if defined, null otherwise
-     * @param string $key
      */
-    public function getCacheControlDirective($key)
+    public function getCacheControlDirective(string $key)
     {
         return $this->cacheControl[$key] ?? null;
     }
     /**
      * Removes a Cache-Control directive.
-     * @param string $key
      */
-    public function removeCacheControlDirective($key)
+    public function removeCacheControlDirective(string $key)
     {
         unset($this->cacheControl[$key]);
         $this->set('Cache-Control', $this->getCacheControlHeader());
@@ -251,17 +236,16 @@ class HeaderBag implements \IteratorAggregate, \Countable
     protected function getCacheControlHeader()
     {
         \ksort($this->cacheControl);
-        return \ConfigTransformer202110276\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
+        return \ConfigTransformer202110318\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
     }
     /**
      * Parses a Cache-Control HTTP header.
      *
      * @return array An array representing the attribute values
-     * @param string $header
      */
-    protected function parseCacheControl($header)
+    protected function parseCacheControl(string $header)
     {
-        $parts = \ConfigTransformer202110276\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
-        return \ConfigTransformer202110276\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
+        $parts = \ConfigTransformer202110318\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
+        return \ConfigTransformer202110318\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
     }
 }

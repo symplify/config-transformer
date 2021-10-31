@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * MockArraySessionStorage mocks the session for unit tests.
  *
@@ -23,7 +23,7 @@ use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionB
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Drak <drak@zikula.org>
  */
-class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class MockArraySessionStorage implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var string
@@ -53,15 +53,12 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
      * @var array|SessionBagInterface[]
      */
     protected $bags = [];
-    public function __construct(string $name = 'MOCKSESSID', \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $name = 'MOCKSESSID', \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         $this->name = $name;
         $this->setMetadataBag($metaBag);
     }
-    /**
-     * @param mixed[] $array
-     */
-    public function setSessionData($array)
+    public function setSessionData(array $array)
     {
         $this->data = $array;
     }
@@ -81,10 +78,8 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
     }
     /**
      * {@inheritdoc}
-     * @param bool $destroy
-     * @param int|null $lifetime
      */
-    public function regenerate($destroy = \false, $lifetime = null)
+    public function regenerate(bool $destroy = \false, int $lifetime = null)
     {
         if (!$this->started) {
             $this->start();
@@ -102,9 +97,8 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         if ($this->started) {
             throw new \LogicException('Cannot set session ID after the session has started.');
@@ -120,9 +114,8 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -154,17 +147,15 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag
      */
-    public function registerBag($bag)
+    public function registerBag(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
     {
         $this->bags[$bag->getName()] = $bag;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function getBag($name)
+    public function getBag(string $name)
     {
         if (!isset($this->bags[$name])) {
             throw new \InvalidArgumentException(\sprintf('The SessionBagInterface "%s" is not registered.', $name));
@@ -181,13 +172,10 @@ class MockArraySessionStorage implements \ConfigTransformer202110276\Symfony\Com
     {
         return $this->started;
     }
-    /**
-     * @param \Symfony\Component\HttpFoundation\Session\Storage\MetadataBag|null $bag
-     */
-    public function setMetadataBag($bag = null)
+    public function setMetadataBag(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $bag = null)
     {
         if (null === $bag) {
-            $bag = new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $bag = new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $bag;
     }

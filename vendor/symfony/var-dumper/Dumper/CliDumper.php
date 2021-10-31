@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper;
 
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor;
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * CliDumper dumps variables for command line output.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\AbstractDumper
+class CliDumper extends \ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\AbstractDumper
 {
     public static $defaultColors;
     public static $defaultOutput = 'php://stdout';
@@ -58,17 +58,15 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * Enables/disables colored output.
-     * @param bool $colors
      */
-    public function setColors($colors)
+    public function setColors(bool $colors)
     {
         $this->colors = $colors;
     }
     /**
      * Sets the maximum number of characters per line for dumped strings.
-     * @param int $maxStringWidth
      */
-    public function setMaxStringWidth($maxStringWidth)
+    public function setMaxStringWidth(int $maxStringWidth)
     {
         $this->maxStringWidth = $maxStringWidth;
     }
@@ -77,7 +75,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
      *
      * @param array $styles A map of style names to style definitions
      */
-    public function setStyles($styles)
+    public function setStyles(array $styles)
     {
         $this->styles = $styles + $this->styles;
     }
@@ -86,16 +84,14 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
      *
      * @param array $displayOptions A map of display options to customize the behavior
      */
-    public function setDisplayOptions($displayOptions)
+    public function setDisplayOptions(array $displayOptions)
     {
         $this->displayOptions = $displayOptions + $this->displayOptions;
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param string $type
      */
-    public function dumpScalar($cursor, $type, $value)
+    public function dumpScalar(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, string $type, $value)
     {
         $this->dumpKey($cursor);
         $style = 'const';
@@ -121,7 +117,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
                         break;
                     default:
                         $value = (string) $value;
-                        if (\strpos($value, $this->decimalPoint) === \false) {
+                        if (!\str_contains($value, $this->decimalPoint)) {
                             $value .= $this->decimalPoint . '0';
                         }
                         break;
@@ -143,12 +139,8 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param string $str
-     * @param bool $bin
-     * @param int $cut
      */
-    public function dumpString($cursor, $str, $bin, $cut)
+    public function dumpString(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, string $str, bool $bin, int $cut)
     {
         $this->dumpKey($cursor);
         $attr = $cursor->attr;
@@ -226,11 +218,8 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
      */
-    public function enterHash($cursor, $type, $class, $hasChild)
+    public function enterHash(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, int $type, $class, bool $hasChild)
     {
         if (null === $this->colors) {
             $this->colors = $this->supportsColors();
@@ -242,18 +231,18 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
             $this->collapseNextHash = $hasChild = \false;
         }
         $class = $this->utf8Encode($class);
-        if (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
+        if (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
             $prefix = $class && 'stdClass' !== $class ? $this->style('note', $class, $attr) . (empty($attr['cut_hash']) ? ' {' : '') : '{';
-        } elseif (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
+        } elseif (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
             $prefix = $this->style('note', $class . ' resource', $attr) . ($hasChild ? ' {' : ' ');
         } else {
             $prefix = $class && !(self::DUMP_LIGHT_ARRAY & $this->flags) ? $this->style('note', 'array:' . $class) . ' [' : '[';
         }
         if (($cursor->softRefCount || 0 < $cursor->softRefHandle) && empty($attr['cut_hash'])) {
-            $prefix .= $this->style('ref', (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type ? '@' : '#') . (0 < $cursor->softRefHandle ? $cursor->softRefHandle : $cursor->softRefTo), ['count' => $cursor->softRefCount]);
+            $prefix .= $this->style('ref', (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type ? '@' : '#') . (0 < $cursor->softRefHandle ? $cursor->softRefHandle : $cursor->softRefTo), ['count' => $cursor->softRefCount]);
         } elseif ($cursor->hardRefTo && !$cursor->refIndex && $class) {
             $prefix .= $this->style('ref', '&' . $cursor->hardRefTo, ['count' => $cursor->hardRefCount]);
-        } elseif (!$hasChild && \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
+        } elseif (!$hasChild && \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
             $prefix = \substr($prefix, 0, -1);
         }
         $this->line .= $prefix;
@@ -263,16 +252,12 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
-     * @param int $cut
      */
-    public function leaveHash($cursor, $type, $class, $hasChild, $cut)
+    public function leaveHash(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, int $type, $class, bool $hasChild, int $cut)
     {
         if (empty($cursor->attr['cut_hash'])) {
             $this->dumpEllipsis($cursor, $hasChild, $cut);
-            $this->line .= \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type ? '}' : (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type ? ']' : ($hasChild ? '}' : ''));
+            $this->line .= \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type ? '}' : (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type ? ']' : ($hasChild ? '}' : ''));
         }
         $this->endValue($cursor);
     }
@@ -281,9 +266,8 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
      *
      * @param bool $hasChild When the dump of the hash has child item
      * @param int  $cut      The number of items the hash has been cut by
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
      */
-    protected function dumpEllipsis($cursor, $hasChild, $cut)
+    protected function dumpEllipsis(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, bool $hasChild, int $cut)
     {
         if ($cut) {
             $this->line .= ' …';
@@ -297,9 +281,8 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * Dumps a key in a hash structure.
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
      */
-    protected function dumpKey($cursor)
+    protected function dumpKey(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
     {
         if (null !== ($key = $cursor->hashKey)) {
             if ($cursor->hashKeyIsBinary) {
@@ -310,23 +293,23 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
             $style = 'key';
             switch ($cursor->hashType) {
                 default:
-                case \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_INDEXED:
+                case \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_INDEXED:
                     if (self::DUMP_LIGHT_ARRAY & $this->flags) {
                         break;
                     }
                     $style = 'index';
                 // no break
-                case \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_ASSOC:
+                case \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_ASSOC:
                     if (\is_int($key)) {
                         $this->line .= $this->style($style, $key) . ' => ';
                     } else {
                         $this->line .= $bin . '"' . $this->style($style, $key) . '" => ';
                     }
                     break;
-                case \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE:
+                case \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE:
                     $key = "\0~\0" . $key;
                 // no break
-                case \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT:
+                case \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT:
                     if (!isset($key[0]) || "\0" !== $key[0]) {
                         $this->line .= '+' . $bin . $this->style('public', $key) . ': ';
                     } elseif (0 < \strpos($key, "\0", 1)) {
@@ -382,7 +365,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
      *
      * @return string The value with style decoration
      */
-    protected function style($style, $value, $attr = [])
+    protected function style(string $style, string $value, array $attr = [])
     {
         if (null === $this->colors) {
             $this->colors = $this->supportsColors();
@@ -392,7 +375,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
         }
         if (isset($attr['ellipsis'], $attr['ellipsis-type'])) {
             $prefix = \substr($value, 0, -$attr['ellipsis']);
-            if ('cli' === \PHP_SAPI && 'path' === $attr['ellipsis-type'] && isset($_SERVER[$pwd = '\\' === \DIRECTORY_SEPARATOR ? 'CD' : 'PWD']) && \strncmp($prefix, $_SERVER[$pwd], \strlen($_SERVER[$pwd])) === 0) {
+            if ('cli' === \PHP_SAPI && 'path' === $attr['ellipsis-type'] && isset($_SERVER[$pwd = '\\' === \DIRECTORY_SEPARATOR ? 'CD' : 'PWD']) && \str_starts_with($prefix, $_SERVER[$pwd])) {
                 $prefix = '.' . \substr($prefix, \strlen($_SERVER[$pwd]));
             }
             if (!empty($attr['ellipsis-tail'])) {
@@ -421,7 +404,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
             } else {
                 $value = "\33[{$this->styles[$style]}m" . $value;
             }
-            if ($cchrCount && \substr_compare($value, $endCchr, -\strlen($endCchr)) === 0) {
+            if ($cchrCount && \str_ends_with($value, $endCchr)) {
                 $value = \substr($value, 0, -\strlen($endCchr));
             } else {
                 $value .= "\33[{$this->styles['default']}m";
@@ -484,25 +467,20 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
     }
     /**
      * {@inheritdoc}
-     * @param int $depth
-     * @param bool $endOfValue
      */
-    protected function dumpLine($depth, $endOfValue = \false)
+    protected function dumpLine(int $depth, bool $endOfValue = \false)
     {
         if ($this->colors) {
             $this->line = \sprintf("\33[%sm%s\33[m", $this->styles['default'], $this->line);
         }
         parent::dumpLine($depth);
     }
-    /**
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     */
-    protected function endValue($cursor)
+    protected function endValue(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
     {
         if (-1 === $cursor->hashType) {
             return;
         }
-        if (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED === $cursor->hashType || \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC === $cursor->hashType) {
+        if (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED === $cursor->hashType || \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC === $cursor->hashType) {
             if (self::DUMP_TRAILING_COMMA & $this->flags && 0 < $cursor->depth) {
                 $this->line .= ',';
             } elseif (self::DUMP_COMMA_SEPARATOR & $this->flags && 1 < $cursor->hashLength - $cursor->hashIndex) {
@@ -534,22 +512,7 @@ class CliDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\
         if (\DIRECTORY_SEPARATOR === '\\') {
             return \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support($stream) || \false !== \getenv('ANSICON') || 'ON' === \getenv('ConEmuANSI') || 'xterm' === \getenv('TERM');
         }
-        $streamIsatty = function ($stream) {
-            if (\function_exists('stream_isatty')) {
-                return \stream_isatty($stream);
-            }
-            if (!\is_resource($stream)) {
-                \trigger_error('stream_isatty() expects parameter 1 to be resource, ' . \gettype($stream) . ' given', \E_USER_WARNING);
-                return \false;
-            }
-            if ('\\' === \DIRECTORY_SEPARATOR) {
-                $stat = @\fstat($stream);
-                // Check if formatted mode is S_IFCHR
-                return $stat ? 020000 === ($stat['mode'] & 0170000) : \false;
-            }
-            return \function_exists('posix_isatty') && @\posix_isatty($stream);
-        };
-        return $streamIsatty($stream);
+        return \stream_isatty($stream);
     }
     /**
      * Returns true if the Windows terminal supports true color.

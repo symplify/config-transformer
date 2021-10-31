@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper;
 
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor;
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * HtmlDumper dumps variables as HTML.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class HtmlDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\CliDumper
+class HtmlDumper extends \ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\CliDumper
 {
     public static $defaultOutput = 'php://output';
     protected static $themes = ['dark' => ['default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:99999; word-break: break-all', 'num' => 'font-weight:bold; color:#1299DA', 'const' => 'font-weight:bold', 'str' => 'font-weight:bold; color:#56DB3A', 'note' => 'color:#1299DA', 'ref' => 'color:#A0A0A0', 'public' => 'color:#FFFFFF', 'protected' => 'color:#FFFFFF', 'private' => 'color:#FFFFFF', 'meta' => 'color:#B729D9', 'key' => 'color:#56DB3A', 'index' => 'color:#1299DA', 'ellipsis' => 'color:#FF8400', 'ns' => 'user-select:none;'], 'light' => ['default' => 'background:none; color:#CC7832; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:99999; word-break: break-all', 'num' => 'font-weight:bold; color:#1299DA', 'const' => 'font-weight:bold', 'str' => 'font-weight:bold; color:#629755;', 'note' => 'color:#6897BB', 'ref' => 'color:#6E6E6E', 'public' => 'color:#262626', 'protected' => 'color:#262626', 'private' => 'color:#262626', 'meta' => 'color:#B729D9', 'key' => 'color:#789339', 'index' => 'color:#1299DA', 'ellipsis' => 'color:#CC7832', 'ns' => 'user-select:none;']];
@@ -36,24 +36,20 @@ class HtmlDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper
      */
     public function __construct($output = null, string $charset = null, int $flags = 0)
     {
-        \ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\AbstractDumper::__construct($output, $charset, $flags);
+        \ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\AbstractDumper::__construct($output, $charset, $flags);
         $this->dumpId = 'sf-dump-' . \mt_rand();
         $this->displayOptions['fileLinkFormat'] = \ini_get('xdebug.file_link_format') ?: \get_cfg_var('xdebug.file_link_format');
         $this->styles = static::$themes['dark'] ?? self::$themes['dark'];
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $styles
      */
-    public function setStyles($styles)
+    public function setStyles(array $styles)
     {
         $this->headerIsDumped = \false;
         $this->styles = $styles + $this->styles;
     }
-    /**
-     * @param string $themeName
-     */
-    public function setTheme($themeName)
+    public function setTheme(string $themeName)
     {
         if (!isset(static::$themes[$themeName])) {
             throw new \InvalidArgumentException(\sprintf('Theme "%s" does not exist in class "%s".', $themeName, static::class));
@@ -65,35 +61,30 @@ class HtmlDumper extends \ConfigTransformer202110276\Symfony\Component\VarDumper
      *
      * @param array $displayOptions A map of display options to customize the behavior
      */
-    public function setDisplayOptions($displayOptions)
+    public function setDisplayOptions(array $displayOptions)
     {
         $this->headerIsDumped = \false;
         $this->displayOptions = $displayOptions + $this->displayOptions;
     }
     /**
      * Sets an HTML header that will be dumped once in the output stream.
-     * @param string|null $header
      */
-    public function setDumpHeader($header)
+    public function setDumpHeader(?string $header)
     {
         $this->dumpHeader = $header;
     }
     /**
      * Sets an HTML prefix and suffix that will encapse every single dump.
-     * @param string $prefix
-     * @param string $suffix
      */
-    public function setDumpBoundaries($prefix, $suffix)
+    public function setDumpBoundaries(string $prefix, string $suffix)
     {
         $this->dumpPrefix = $prefix;
         $this->dumpSuffix = $suffix;
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Data $data
-     * @param mixed[] $extraDisplayOptions
      */
-    public function dump($data, $output = null, $extraDisplayOptions = [])
+    public function dump(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data $data, $output = null, array $extraDisplayOptions = [])
     {
         $this->extraDisplayOptions = $extraDisplayOptions;
         $result = parent::dump($data, $output);
@@ -736,12 +727,8 @@ EOHTML
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param string $str
-     * @param bool $bin
-     * @param int $cut
      */
-    public function dumpString($cursor, $str, $bin, $cut)
+    public function dumpString(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, string $str, bool $bin, int $cut)
     {
         if ('' === $str && isset($cursor->attr['img-data'], $cursor->attr['content-type'])) {
             $this->dumpKey($cursor);
@@ -757,13 +744,10 @@ EOHTML
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
      */
-    public function enterHash($cursor, $type, $class, $hasChild)
+    public function enterHash(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, int $type, $class, bool $hasChild)
     {
-        if (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
+        if (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
             $cursor->attr['depth'] = $cursor->depth;
         }
         parent::enterHash($cursor, $type, $class, \false);
@@ -777,7 +761,7 @@ EOHTML
         if ($hasChild) {
             $this->line .= '<samp data-depth=' . ($cursor->depth + 1);
             if ($cursor->refIndex) {
-                $r = \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT !== $type ? 1 - (\ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type) : 2;
+                $r = \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT !== $type ? 1 - (\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type) : 2;
                 $r .= $r && 0 < $cursor->softRefHandle ? $cursor->softRefHandle : $cursor->refIndex;
                 $this->line .= \sprintf(' id=%s-ref%s', $this->dumpId, $r);
             }
@@ -787,12 +771,8 @@ EOHTML
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
-     * @param int $cut
      */
-    public function leaveHash($cursor, $type, $class, $hasChild, $cut)
+    public function leaveHash(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Cursor $cursor, int $type, $class, bool $hasChild, int $cut)
     {
         $this->dumpEllipsis($cursor, $hasChild, $cut);
         if ($hasChild) {
@@ -802,11 +782,8 @@ EOHTML
     }
     /**
      * {@inheritdoc}
-     * @param string $style
-     * @param string $value
-     * @param mixed[] $attr
      */
-    protected function style($style, $value, $attr = [])
+    protected function style(string $style, string $value, array $attr = [])
     {
         if ('' === $value) {
             return '';
@@ -884,10 +861,8 @@ EOHTML
     }
     /**
      * {@inheritdoc}
-     * @param int $depth
-     * @param bool $endOfValue
      */
-    protected function dumpLine($depth, $endOfValue = \false)
+    protected function dumpLine(int $depth, bool $endOfValue = \false)
     {
         if (-1 === $this->lastDepth) {
             $this->line = \sprintf($this->dumpPrefix, $this->dumpId, $this->indentPad) . $this->line;
@@ -906,9 +881,9 @@ EOHTML
         $this->lastDepth = $depth;
         $this->line = \mb_convert_encoding($this->line, 'HTML-ENTITIES', 'UTF-8');
         if (-1 === $depth) {
-            \ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\AbstractDumper::dumpLine(0);
+            \ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\AbstractDumper::dumpLine(0);
         }
-        \ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\AbstractDumper::dumpLine($depth);
+        \ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\AbstractDumper::dumpLine($depth);
     }
     private function getSourceLink(string $file, int $line)
     {

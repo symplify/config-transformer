@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Adds basic `SessionUpdateTimestampHandlerInterface` behaviors to another `SessionHandlerInterface`.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class StrictSessionHandler extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class StrictSessionHandler extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $handler;
     private $doDestroy;
@@ -37,9 +37,8 @@ class StrictSessionHandler extends \ConfigTransformer202110276\Symfony\Component
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         return $this->handler->read($sessionId);
     }
@@ -53,10 +52,8 @@ class StrictSessionHandler extends \ConfigTransformer202110276\Symfony\Component
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @param string $data
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         return $this->handler->write($sessionId, $data);
     }
@@ -72,9 +69,8 @@ class StrictSessionHandler extends \ConfigTransformer202110276\Symfony\Component
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         $this->doDestroy = \false;
         return $this->handler->destroy($sessionId);

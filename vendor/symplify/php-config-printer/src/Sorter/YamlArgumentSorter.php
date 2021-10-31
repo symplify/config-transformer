@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110276\Symplify\PhpConfigPrinter\Sorter;
+namespace ConfigTransformer202110318\Symplify\PhpConfigPrinter\Sorter;
 
 final class YamlArgumentSorter
 {
@@ -19,9 +19,9 @@ final class YamlArgumentSorter
             }
             return $argumentsInOrder;
         }
-        foreach ($inOrderKeys as $key) {
-            if (isset($arrayToSort[$key])) {
-                $argumentsInOrder[] = $arrayToSort[$key];
+        foreach ($inOrderKeys as $inOrderKey) {
+            if (isset($arrayToSort[$inOrderKey])) {
+                $argumentsInOrder[] = $arrayToSort[$inOrderKey];
             }
         }
         return $argumentsInOrder;

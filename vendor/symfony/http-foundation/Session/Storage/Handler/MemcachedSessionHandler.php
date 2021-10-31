@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Memcached based session storage handler based on the Memcached class
@@ -18,7 +18,7 @@ namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\St
  *
  * @author Drak <drak@zikula.org>
  */
-class MemcachedSessionHandler extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MemcachedSessionHandler extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $memcached;
     /**
@@ -57,9 +57,8 @@ class MemcachedSessionHandler extends \ConfigTransformer202110276\Symfony\Compon
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         return $this->memcached->get($this->prefix . $sessionId) ?: '';
     }
@@ -74,18 +73,15 @@ class MemcachedSessionHandler extends \ConfigTransformer202110276\Symfony\Compon
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @param string $data
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         return $this->memcached->set($this->prefix . $sessionId, $data, \time() + $this->ttl);
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         $result = $this->memcached->delete($this->prefix . $sessionId);
         return $result || \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();

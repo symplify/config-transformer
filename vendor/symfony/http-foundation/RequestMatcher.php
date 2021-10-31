@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
 /**
  * RequestMatcher compares a pre-defined set of checks against a Request instance.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\HttpFoundation\RequestMatcherInterface
+class RequestMatcher implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\RequestMatcherInterface
 {
     /**
      * @var string|null
@@ -73,9 +73,8 @@ class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\Ht
     }
     /**
      * Adds a check for the URL host name.
-     * @param string|null $regexp
      */
-    public function matchHost($regexp)
+    public function matchHost(?string $regexp)
     {
         $this->host = $regexp;
     }
@@ -84,15 +83,14 @@ class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\Ht
      *
      * @param int|null $port The port number to connect to
      */
-    public function matchPort($port)
+    public function matchPort(?int $port)
     {
         $this->port = $port;
     }
     /**
      * Adds a check for the URL path info.
-     * @param string|null $regexp
      */
-    public function matchPath($regexp)
+    public function matchPath(?string $regexp)
     {
         $this->path = $regexp;
     }
@@ -101,7 +99,7 @@ class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\Ht
      *
      * @param string $ip A specific IP address or a range specified using IP/netmask like 192.168.1.0/24
      */
-    public function matchIp($ip)
+    public function matchIp(string $ip)
     {
         $this->matchIps($ip);
     }
@@ -128,18 +126,15 @@ class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\Ht
     }
     /**
      * Adds a check for request attribute.
-     * @param string $key
-     * @param string $regexp
      */
-    public function matchAttribute($key, $regexp)
+    public function matchAttribute(string $key, string $regexp)
     {
         $this->attributes[$key] = $regexp;
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function matches($request)
+    public function matches(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request)
     {
         if ($this->schemes && !\in_array($request->getScheme(), $this->schemes, \true)) {
             return \false;
@@ -165,7 +160,7 @@ class RequestMatcher implements \ConfigTransformer202110276\Symfony\Component\Ht
         if (null !== $this->port && 0 < $this->port && $request->getPort() !== $this->port) {
             return \false;
         }
-        if (\ConfigTransformer202110276\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(), $this->ips)) {
+        if (\ConfigTransformer202110318\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(), $this->ips)) {
             return \true;
         }
         // Note to future implementors: add additional checks above the

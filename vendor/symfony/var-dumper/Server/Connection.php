@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Server;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Server;
 
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
 /**
  * Forwards serialized Data clones to a server.
  *
@@ -28,7 +28,7 @@ class Connection
      */
     public function __construct(string $host, array $contextProviders = [])
     {
-        if (\strpos($host, '://') === \false) {
+        if (!\str_contains($host, '://')) {
             $host = 'tcp://' . $host;
         }
         $this->host = $host;
@@ -38,10 +38,7 @@ class Connection
     {
         return $this->contextProviders;
     }
-    /**
-     * @param \Symfony\Component\VarDumper\Cloner\Data $data
-     */
-    public function write($data) : bool
+    public function write(\ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data $data) : bool
     {
         $socketIsFresh = !$this->socket;
         if (!($this->socket = $this->socket ?: $this->createSocket())) {

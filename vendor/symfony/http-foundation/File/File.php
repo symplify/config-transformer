@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\File;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\File;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use ConfigTransformer202110276\Symfony\Component\Mime\MimeTypes;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use ConfigTransformer202110318\Symfony\Component\Mime\MimeTypes;
 /**
  * A file in the file system.
  *
@@ -31,7 +31,7 @@ class File extends \SplFileInfo
     public function __construct(string $path, bool $checkPath = \true)
     {
         if ($checkPath && !\is_file($path)) {
-            throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         parent::__construct($path);
     }
@@ -50,10 +50,10 @@ class File extends \SplFileInfo
      */
     public function guessExtension()
     {
-        if (!\class_exists(\ConfigTransformer202110276\Symfony\Component\Mime\MimeTypes::class)) {
+        if (!\class_exists(\ConfigTransformer202110318\Symfony\Component\Mime\MimeTypes::class)) {
             throw new \LogicException('You cannot guess the extension as the Mime component is not installed. Try running "composer require symfony/mime".');
         }
-        return \ConfigTransformer202110276\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
+        return \ConfigTransformer202110318\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
     }
     /**
      * Returns the mime type of the file.
@@ -68,10 +68,10 @@ class File extends \SplFileInfo
      */
     public function getMimeType()
     {
-        if (!\class_exists(\ConfigTransformer202110276\Symfony\Component\Mime\MimeTypes::class)) {
+        if (!\class_exists(\ConfigTransformer202110318\Symfony\Component\Mime\MimeTypes::class)) {
             throw new \LogicException('You cannot guess the mime type as the Mime component is not installed. Try running "composer require symfony/mime".');
         }
-        return \ConfigTransformer202110276\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
+        return \ConfigTransformer202110318\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
     }
     /**
      * Moves the file to a new location.
@@ -79,10 +79,8 @@ class File extends \SplFileInfo
      * @return self A File object representing the new file
      *
      * @throws FileException if the target file could not be created
-     * @param string $directory
-     * @param string|null $name
      */
-    public function move($directory, $name = null)
+    public function move(string $directory, string $name = null)
     {
         $target = $this->getTargetFile($directory, $name);
         \set_error_handler(function ($type, $msg) use(&$error) {
@@ -91,7 +89,7 @@ class File extends \SplFileInfo
         $renamed = \rename($this->getPathname(), $target);
         \restore_error_handler();
         if (!$renamed) {
-            throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s).', $this->getPathname(), $target, \strip_tags($error)));
+            throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s).', $this->getPathname(), $target, \strip_tags($error)));
         }
         @\chmod($target, 0666 & ~\umask());
         return $target;
@@ -100,23 +98,21 @@ class File extends \SplFileInfo
     {
         $content = \file_get_contents($this->getPathname());
         if (\false === $content) {
-            throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not get the content of the file "%s".', $this->getPathname()));
+            throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not get the content of the file "%s".', $this->getPathname()));
         }
         return $content;
     }
     /**
      * @return self
-     * @param string $directory
-     * @param string|null $name
      */
-    protected function getTargetFile($directory, $name = null)
+    protected function getTargetFile(string $directory, string $name = null)
     {
         if (!\is_dir($directory)) {
             if (\false === @\mkdir($directory, 0777, \true) && !\is_dir($directory)) {
-                throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory.', $directory));
+                throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory.', $directory));
             }
         } elseif (!\is_writable($directory)) {
-            throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory.', $directory));
+            throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory.', $directory));
         }
         $target = \rtrim($directory, '/\\') . \DIRECTORY_SEPARATOR . (null === $name ? $this->getBasename() : $this->getName($name));
         return new self($target, \false);
@@ -125,9 +121,8 @@ class File extends \SplFileInfo
      * Returns locale independent base name of the given path.
      *
      * @return string
-     * @param string $name
      */
-    protected function getName($name)
+    protected function getName(string $name)
     {
         $originalName = \str_replace('\\', '/', $name);
         $pos = \strrpos($originalName, '/');

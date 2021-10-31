@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionUtils;
 /**
  * This abstract session handler provides a generic implementation
  * of the PHP 7.0 SessionUpdateTimestampHandlerInterface,
@@ -39,20 +39,16 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     }
     /**
      * @return string
-     * @param string $sessionId
      */
-    protected abstract function doRead($sessionId);
+    protected abstract function doRead(string $sessionId);
     /**
      * @return bool
-     * @param string $sessionId
-     * @param string $data
      */
-    protected abstract function doWrite($sessionId, $data);
+    protected abstract function doWrite(string $sessionId, string $data);
     /**
      * @return bool
-     * @param string $sessionId
      */
-    protected abstract function doDestroy($sessionId);
+    protected abstract function doDestroy(string $sessionId);
     /**
      * @return bool
      */
@@ -116,7 +112,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
             if (!$this->sessionName) {
                 throw new \LogicException(\sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', static::class));
             }
-            $cookie = \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
+            $cookie = \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
             /*
              * We send an invalidation Set-Cookie header (zero lifetime)
              * when either the session was started or a cookie with

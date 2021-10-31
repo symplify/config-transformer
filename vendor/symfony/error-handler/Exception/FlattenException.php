@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\ErrorHandler\Exception;
+namespace ConfigTransformer202110318\Symfony\Component\ErrorHandler\Exception;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202110276\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202110318\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *
@@ -48,36 +48,30 @@ class FlattenException
     private $asString;
     /**
      * @return static
-     * @param \Exception $exception
-     * @param int|null $statusCode
-     * @param mixed[] $headers
      */
-    public static function create($exception, $statusCode = null, $headers = []) : self
+    public static function create(\Exception $exception, int $statusCode = null, array $headers = []) : self
     {
         return static::createFromThrowable($exception, $statusCode, $headers);
     }
     /**
      * @return static
-     * @param \Throwable $exception
-     * @param int|null $statusCode
-     * @param mixed[] $headers
      */
-    public static function createFromThrowable($exception, $statusCode = null, $headers = []) : self
+    public static function createFromThrowable(\Throwable $exception, int $statusCode = null, array $headers = []) : self
     {
         $e = new static();
         $e->setMessage($exception->getMessage());
         $e->setCode($exception->getCode());
-        if ($exception instanceof \ConfigTransformer202110276\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+        if ($exception instanceof \ConfigTransformer202110318\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
             $headers = \array_merge($headers, $exception->getHeaders());
-        } elseif ($exception instanceof \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+        } elseif ($exception instanceof \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
             $statusCode = 400;
         }
         if (null === $statusCode) {
             $statusCode = 500;
         }
-        if (\class_exists(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response::class) && isset(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
-            $statusText = \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
+        if (\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response::class) && isset(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
+            $statusText = \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
         } else {
             $statusText = 'Whoops, looks like something went wrong.';
         }
@@ -108,9 +102,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param int $code
      */
-    public function setStatusCode($code) : self
+    public function setStatusCode(int $code) : self
     {
         $this->statusCode = $code;
         return $this;
@@ -121,9 +114,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param mixed[] $headers
      */
-    public function setHeaders($headers) : self
+    public function setHeaders(array $headers) : self
     {
         $this->headers = $headers;
         return $this;
@@ -134,9 +126,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param string $class
      */
-    public function setClass($class) : self
+    public function setClass(string $class) : self
     {
         $this->class = \false !== \strpos($class, "@anonymous\0") ? ((\get_parent_class($class) ?: \key(\class_implements($class))) ?: 'class') . '@anonymous' : $class;
         return $this;
@@ -147,9 +138,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param string $file
      */
-    public function setFile($file) : self
+    public function setFile(string $file) : self
     {
         $this->file = $file;
         return $this;
@@ -160,9 +150,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param int $line
      */
-    public function setLine($line) : self
+    public function setLine(int $line) : self
     {
         $this->line = $line;
         return $this;
@@ -171,10 +160,7 @@ class FlattenException
     {
         return $this->statusText;
     }
-    /**
-     * @param string $statusText
-     */
-    public function setStatusText($statusText) : self
+    public function setStatusText(string $statusText) : self
     {
         $this->statusText = $statusText;
         return $this;
@@ -185,9 +171,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param string $message
      */
-    public function setMessage($message) : self
+    public function setMessage(string $message) : self
     {
         if (\false !== \strpos($message, "@anonymous\0")) {
             $message = \preg_replace_callback('/[a-zA-Z_\\x7f-\\xff][\\\\a-zA-Z0-9_\\x7f-\\xff]*+@anonymous\\x00.*?\\.php(?:0x?|:[0-9]++\\$)[0-9a-fA-F]++/', function ($m) {
@@ -220,9 +205,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param $this $previous
      */
-    public function setPrevious($previous) : self
+    public function setPrevious(self $previous) : self
     {
         $this->previous = $previous;
         return $this;
@@ -245,9 +229,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param \Throwable $throwable
      */
-    public function setTraceFromThrowable($throwable) : self
+    public function setTraceFromThrowable(\Throwable $throwable) : self
     {
         $this->traceAsString = $throwable->getTraceAsString();
         return $this->setTrace($throwable->getTrace(), $throwable->getFile(), $throwable->getLine());
@@ -255,11 +238,8 @@ class FlattenException
     /**
      *
      * @return $this
-     * @param mixed[] $trace
-     * @param string|null $file
-     * @param int|null $line
      */
-    public function setTrace($trace, $file, $line) : self
+    public function setTrace(array $trace, ?string $file, ?int $line) : self
     {
         $this->trace = [];
         $this->trace[] = ['namespace' => '', 'short_class' => '', 'class' => '', 'type' => '', 'function' => '', 'file' => $file, 'line' => $line, 'args' => []];
@@ -319,9 +299,8 @@ class FlattenException
     }
     /**
      * @return $this
-     * @param string|null $asString
      */
-    public function setAsString($asString) : self
+    public function setAsString(?string $asString) : self
     {
         $this->asString = $asString;
         return $this;

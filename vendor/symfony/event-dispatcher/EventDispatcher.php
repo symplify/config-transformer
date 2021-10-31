@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202110318\Symfony\Component\EventDispatcher;
 
-use ConfigTransformer202110276\Psr\EventDispatcher\StoppableEventInterface;
-use ConfigTransformer202110276\Symfony\Component\EventDispatcher\Debug\WrappedListener;
+use ConfigTransformer202110318\Psr\EventDispatcher\StoppableEventInterface;
+use ConfigTransformer202110318\Symfony\Component\EventDispatcher\Debug\WrappedListener;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  *
@@ -27,7 +27,7 @@ use ConfigTransformer202110276\Symfony\Component\EventDispatcher\Debug\WrappedLi
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class EventDispatcher implements \ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $listeners = [];
     private $sorted = [];
@@ -40,11 +40,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param object $event
-     * @return object
-     * @param string|null $eventName
      */
-    public function dispatch($event, $eventName = null)
+    public function dispatch(object $event, string $eventName = null) : object
     {
         $eventName = $eventName ?? \get_class($event);
         if (null !== $this->optimized) {
@@ -59,9 +56,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param string|null $eventName
      */
-    public function getListeners($eventName = null)
+    public function getListeners(string $eventName = null)
     {
         if (null !== $eventName) {
             if (empty($this->listeners[$eventName])) {
@@ -81,9 +77,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function getListenerPriority($eventName, $listener)
+    public function getListenerPriority(string $eventName, $listener)
     {
         if (empty($this->listeners[$eventName])) {
             return null;
@@ -107,9 +102,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param string|null $eventName
      */
-    public function hasListeners($eventName = null)
+    public function hasListeners(string $eventName = null)
     {
         if (null !== $eventName) {
             return !empty($this->listeners[$eventName]);
@@ -123,19 +117,16 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
-     * @param int $priority
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener(string $eventName, $listener, int $priority = 0)
     {
         $this->listeners[$eventName][$priority][] = $listener;
         unset($this->sorted[$eventName], $this->optimized[$eventName]);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function removeListener($eventName, $listener)
+    public function removeListener(string $eventName, $listener)
     {
         if (empty($this->listeners[$eventName])) {
             return;
@@ -161,9 +152,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function addSubscriber($subscriber)
+    public function addSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_string($params)) {
@@ -179,9 +169,8 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function removeSubscriber($subscriber)
+    public function removeSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_array($params) && \is_array($params[0])) {
@@ -203,9 +192,9 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
      * @param string     $eventName The name of the event to dispatch
      * @param object     $event     The event object to pass to the event handlers/listeners
      */
-    protected function callListeners($listeners, $eventName, $event)
+    protected function callListeners(iterable $listeners, string $eventName, object $event)
     {
-        $stoppable = $event instanceof \ConfigTransformer202110276\Psr\EventDispatcher\StoppableEventInterface;
+        $stoppable = $event instanceof \ConfigTransformer202110318\Psr\EventDispatcher\StoppableEventInterface;
         foreach ($listeners as $listener) {
             if ($stoppable && $event->isPropagationStopped()) {
                 break;
@@ -249,7 +238,7 @@ class EventDispatcher implements \ConfigTransformer202110276\Symfony\Component\E
                         ($closure = \Closure::fromCallable($listener))(...$args);
                     };
                 } else {
-                    $closure = $listener instanceof \Closure || $listener instanceof \ConfigTransformer202110276\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
+                    $closure = $listener instanceof \Closure || $listener instanceof \ConfigTransformer202110318\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
                 }
             }
         }

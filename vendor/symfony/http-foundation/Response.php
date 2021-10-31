@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\ResponseHeaderBag::class);
+\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\ResponseHeaderBag::class);
 /**
  * Response represents an HTTP response.
  *
@@ -136,7 +136,7 @@ class Response
      *
      * The list of codes is complete according to the
      * {@link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml Hypertext Transfer Protocol (HTTP) Status Code Registry}
-     * (last updated 2016-03-01).
+     * (last updated 2018-09-21).
      *
      * Unless otherwise noted, the status code is defined in RFC2616.
      *
@@ -231,7 +231,7 @@ class Response
      */
     public function __construct(?string $content = '', int $status = 200, array $headers = [])
     {
-        $this->headers = new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\ResponseHeaderBag($headers);
+        $this->headers = new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\ResponseHeaderBag($headers);
         $this->setContent($content);
         $this->setStatusCode($status);
         $this->setProtocolVersion('1.0');
@@ -247,11 +247,8 @@ class Response
      * @return static
      *
      * @deprecated since Symfony 5.1, use __construct() instead.
-     * @param string|null $content
-     * @param int $status
-     * @param mixed[] $headers
      */
-    public static function create($content = '', $status = 200, $headers = [])
+    public static function create(?string $content = '', int $status = 200, array $headers = [])
     {
         trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($content, $status, $headers);
@@ -286,9 +283,8 @@ class Response
      * the Request that is "associated" with this Response.
      *
      * @return $this
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function prepare($request)
+    public function prepare(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request)
     {
         $headers = $this->headers;
         if ($this->isInformational() || $this->isEmpty()) {
@@ -331,7 +327,7 @@ class Response
             $this->setProtocolVersion('1.1');
         }
         // Check if we need to send extra expire info headers
-        if ('1.0' == $this->getProtocolVersion() && \strpos($headers->get('Cache-Control', ''), 'no-cache') !== \false) {
+        if ('1.0' == $this->getProtocolVersion() && \str_contains($headers->get('Cache-Control', ''), 'no-cache')) {
             $headers->set('pragma', 'no-cache');
             $headers->set('expires', -1);
         }
@@ -401,9 +397,8 @@ class Response
      * @return $this
      *
      * @throws \UnexpectedValueException
-     * @param string|null $content
      */
-    public function setContent($content)
+    public function setContent(?string $content)
     {
         $this->content = $content ?? '';
         return $this;
@@ -420,12 +415,11 @@ class Response
     /**
      * Sets the HTTP protocol version (1.0 or 1.1).
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param string $version
      */
-    public function setProtocolVersion($version)
+    public function setProtocolVersion(string $version) : object
     {
         $this->version = $version;
         return $this;
@@ -445,15 +439,13 @@ class Response
      * If the status text is null it will be automatically populated for the known
      * status codes and left empty otherwise.
      *
-     * @return object
+     * @return $this
      *
      * @throws \InvalidArgumentException When the HTTP status code is not valid
      *
      * @final
-     * @param int $code
-     * @param string|null $text
      */
-    public function setStatusCode($code, $text = null)
+    public function setStatusCode(int $code, string $text = null) : object
     {
         $this->statusCode = $code;
         if ($this->isInvalid()) {
@@ -482,12 +474,11 @@ class Response
     /**
      * Sets the response charset.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param string $charset
      */
-    public function setCharset($charset)
+    public function setCharset(string $charset) : object
     {
         $this->charset = $charset;
         return $this;
@@ -556,11 +547,11 @@ class Response
      *
      * It makes the response ineligible for serving other clients.
      *
-     * @return object
+     * @return $this
      *
      * @final
      */
-    public function setPrivate()
+    public function setPrivate() : object
     {
         $this->headers->removeCacheControlDirective('public');
         $this->headers->addCacheControlDirective('private');
@@ -571,11 +562,11 @@ class Response
      *
      * It makes the response eligible for serving other clients.
      *
-     * @return object
+     * @return $this
      *
      * @final
      */
-    public function setPublic()
+    public function setPublic() : object
     {
         $this->headers->addCacheControlDirective('public');
         $this->headers->removeCacheControlDirective('private');
@@ -584,12 +575,11 @@ class Response
     /**
      * Marks the response as "immutable".
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param bool $immutable
      */
-    public function setImmutable($immutable = \true)
+    public function setImmutable(bool $immutable = \true) : object
     {
         if ($immutable) {
             $this->headers->addCacheControlDirective('immutable');
@@ -635,12 +625,11 @@ class Response
     /**
      * Sets the Date header.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param \DateTimeInterface $date
      */
-    public function setDate($date)
+    public function setDate(\DateTimeInterface $date) : object
     {
         if ($date instanceof \DateTime) {
             $date = \DateTimeImmutable::createFromMutable($date);
@@ -693,12 +682,11 @@ class Response
      *
      * Passing null as value will remove the header.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param \DateTimeInterface|null $date
      */
-    public function setExpires($date = null)
+    public function setExpires(\DateTimeInterface $date = null) : object
     {
         if (null === $date) {
             $this->headers->remove('Expires');
@@ -738,12 +726,11 @@ class Response
      *
      * This methods sets the Cache-Control max-age directive.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param int $value
      */
-    public function setMaxAge($value)
+    public function setMaxAge(int $value) : object
     {
         $this->headers->addCacheControlDirective('max-age', $value);
         return $this;
@@ -753,12 +740,11 @@ class Response
      *
      * This methods sets the Cache-Control s-maxage directive.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param int $value
      */
-    public function setSharedMaxAge($value)
+    public function setSharedMaxAge(int $value) : object
     {
         $this->setPublic();
         $this->headers->addCacheControlDirective('s-maxage', $value);
@@ -784,12 +770,11 @@ class Response
      *
      * This method adjusts the Cache-Control/s-maxage directive.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param int $seconds
      */
-    public function setTtl($seconds)
+    public function setTtl(int $seconds) : object
     {
         $this->setSharedMaxAge($this->getAge() + $seconds);
         return $this;
@@ -799,12 +784,11 @@ class Response
      *
      * This method adjusts the Cache-Control/max-age directive.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param int $seconds
      */
-    public function setClientTtl($seconds)
+    public function setClientTtl(int $seconds) : object
     {
         $this->setMaxAge($this->getAge() + $seconds);
         return $this;
@@ -825,12 +809,11 @@ class Response
      *
      * Passing null as value will remove the header.
      *
-     * @return object
+     * @return $this
      *
      * @final
-     * @param \DateTimeInterface|null $date
      */
-    public function setLastModified($date = null)
+    public function setLastModified(\DateTimeInterface $date = null) : object
     {
         if (null === $date) {
             $this->headers->remove('Last-Modified');
@@ -858,16 +841,16 @@ class Response
      * @param string|null $etag The ETag unique identifier or null to remove the header
      * @param bool        $weak Whether you want a weak ETag or not
      *
-     * @return object
+     * @return $this
      *
      * @final
      */
-    public function setEtag($etag = null, $weak = \false)
+    public function setEtag(string $etag = null, bool $weak = \false) : object
     {
         if (null === $etag) {
             $this->headers->remove('Etag');
         } else {
-            if (\strncmp($etag, '"', \strlen('"')) !== 0) {
+            if (!\str_starts_with($etag, '"')) {
                 $etag = '"' . $etag . '"';
             }
             $this->headers->set('ETag', (\true === $weak ? 'W/' : '') . $etag);
@@ -879,14 +862,13 @@ class Response
      *
      * Available options are: must_revalidate, no_cache, no_store, no_transform, public, private, proxy_revalidate, max_age, s_maxage, immutable, last_modified and etag.
      *
-     * @return object
+     * @return $this
      *
      * @throws \InvalidArgumentException
      *
      * @final
-     * @param mixed[] $options
      */
-    public function setCache($options)
+    public function setCache(array $options) : object
     {
         if ($diff = \array_diff(\array_keys($options), \array_keys(self::HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES))) {
             throw new \InvalidArgumentException(\sprintf('Response does not support the following options: "%s".', \implode('", "', $diff)));
@@ -934,13 +916,13 @@ class Response
      * This sets the status, removes the body, and discards any headers
      * that MUST NOT be included in 304 responses.
      *
-     * @return object
+     * @return $this
      *
      * @see https://tools.ietf.org/html/rfc2616#section-10.3.5
      *
      * @final
      */
-    public function setNotModified()
+    public function setNotModified() : object
     {
         $this->setStatusCode(304);
         $this->setContent(null);
@@ -981,11 +963,11 @@ class Response
      * @param string|array $headers
      * @param bool         $replace Whether to replace the actual value or not (true by default)
      *
-     * @return object
+     * @return $this
      *
      * @final
      */
-    public function setVary($headers, $replace = \true)
+    public function setVary($headers, bool $replace = \true) : object
     {
         $this->headers->set('Vary', $headers, $replace);
         return $this;
@@ -1000,9 +982,8 @@ class Response
      * @return bool true if the Response validators match the Request, false otherwise
      *
      * @final
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function isNotModified($request) : bool
+    public function isNotModified(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request) : bool
     {
         if (!$request->isMethodCacheable()) {
             return \false;
@@ -1120,9 +1101,8 @@ class Response
      * Is the response a redirect of some form?
      *
      * @final
-     * @param string|null $location
      */
-    public function isRedirect($location = null) : bool
+    public function isRedirect(string $location = null) : bool
     {
         return \in_array($this->statusCode, [201, 301, 302, 303, 307, 308]) && (null === $location ?: $location == $this->headers->get('Location'));
     }
@@ -1141,10 +1121,8 @@ class Response
      * Resulting level can be greater than target level if a non-removable buffer has been encountered.
      *
      * @final
-     * @param int $targetLevel
-     * @param bool $flush
      */
-    public static function closeOutputBuffers($targetLevel, $flush) : void
+    public static function closeOutputBuffers(int $targetLevel, bool $flush) : void
     {
         $status = \ob_get_status(\true);
         $level = \count($status);
@@ -1161,9 +1139,8 @@ class Response
      * Marks a response as safe according to RFC8674.
      *
      * @see https://tools.ietf.org/html/rfc8674
-     * @param bool $safe
      */
-    public function setContentSafe($safe = \true) : void
+    public function setContentSafe(bool $safe = \true) : void
     {
         if ($safe) {
             $this->headers->set('Preference-Applied', 'safe');
@@ -1178,9 +1155,8 @@ class Response
      * @see http://support.microsoft.com/kb/323308
      *
      * @final
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    protected function ensureIEOverSSLCompatibility($request) : void
+    protected function ensureIEOverSSLCompatibility(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request) : void
     {
         if (\false !== \stripos($this->headers->get('Content-Disposition') ?? '', 'attachment') && 1 == \preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT') ?? '', $match) && \true === $request->isSecure()) {
             if ((int) \preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {

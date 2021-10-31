@@ -1,8 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110276\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202110318\Symplify\ConfigTransformer\ValueObject;
 
+use ConfigTransformer202110318\Symplify\ConfigTransformer\Enum\Format;
 final class Configuration
 {
     /**
@@ -10,20 +11,15 @@ final class Configuration
      */
     private $sources;
     /**
-     * @var float
-     */
-    private $targetSymfonyVersion;
-    /**
      * @var bool
      */
     private $isDryRun;
     /**
      * @param string[] $sources
      */
-    public function __construct(array $sources, float $targetSymfonyVersion, bool $isDryRun)
+    public function __construct(array $sources, bool $isDryRun)
     {
         $this->sources = $sources;
-        $this->targetSymfonyVersion = $targetSymfonyVersion;
         $this->isDryRun = $isDryRun;
     }
     /**
@@ -32,10 +28,6 @@ final class Configuration
     public function getSources() : array
     {
         return $this->sources;
-    }
-    public function isAtLeastSymfonyVersion(float $symfonyVersion) : bool
-    {
-        return $this->targetSymfonyVersion >= $symfonyVersion;
     }
     public function isDryRun() : bool
     {
@@ -46,6 +38,6 @@ final class Configuration
      */
     public function getInputSuffixes() : array
     {
-        return [\ConfigTransformer202110276\Symplify\ConfigTransformer\ValueObject\Format::YAML, \ConfigTransformer202110276\Symplify\ConfigTransformer\ValueObject\Format::YML, \ConfigTransformer202110276\Symplify\ConfigTransformer\ValueObject\Format::XML];
+        return [\ConfigTransformer202110318\Symplify\ConfigTransformer\Enum\Format::YAML, \ConfigTransformer202110318\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer202110318\Symplify\ConfigTransformer\Enum\Format::XML];
     }
 }

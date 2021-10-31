@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using a PDO connection to read and write data.
@@ -37,7 +37,7 @@ namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\St
  * @author Michael Williams <michael.williams@funsational.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class PdoSessionHandler extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     /**
      * No locking is done. This means sessions are prone to loss of data due to
@@ -157,7 +157,7 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
             }
             $this->pdo = $pdoOrDsn;
             $this->driver = $this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
-        } elseif (\is_string($pdoOrDsn) && \strpos($pdoOrDsn, '://') !== \false) {
+        } elseif (\is_string($pdoOrDsn) && \str_contains($pdoOrDsn, '://')) {
             $this->dsn = $this->buildDsnFromUrl($pdoOrDsn);
         } else {
             $this->dsn = $pdoOrDsn;
@@ -268,9 +268,8 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         // delete the record associated with this id
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} = :id";
@@ -286,10 +285,8 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @param string $data
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         $maxlifetime = (int) \ini_get('session.gc_maxlifetime');
         try {
@@ -312,7 +309,7 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
                     $insertStmt->execute();
                 } catch (\PDOException $e) {
                     // Handle integrity violation SQLSTATE 23000 (or a subclass like 23505 in Postgres) for duplicate keys
-                    if (\strncmp($e->getCode(), '23', \strlen('23')) === 0) {
+                    if (\str_starts_with($e->getCode(), '23')) {
                         $updateStmt->execute();
                     } else {
                         throw $e;
@@ -423,7 +420,7 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
         ];
         $driver = $driverAliasMap[$params['scheme']] ?? $params['scheme'];
         // Doctrine DBAL supports passing its internal pdo_* driver names directly too (allowing both dashes and underscores). This allows supporting the same here.
-        if (\strncmp($driver, 'pdo_', \strlen('pdo_')) === 0 || \strncmp($driver, 'pdo-', \strlen('pdo-')) === 0) {
+        if (\str_starts_with($driver, 'pdo_') || \str_starts_with($driver, 'pdo-')) {
             $driver = \substr($driver, 4);
         }
         $dsn = null;
@@ -553,9 +550,8 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
      * to the session.gc_maxlifetime setting because gc() is called after read() and only sometimes.
      *
      * @return string
-     * @param string $sessionId
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         if (self::LOCK_ADVISORY === $this->lockMode) {
             $this->unlockStatements[] = $this->doAdvisoryLock($sessionId);
@@ -593,7 +589,7 @@ class PdoSessionHandler extends \ConfigTransformer202110276\Symfony\Component\Ht
                 } catch (\PDOException $e) {
                     // Catch duplicate key error because other connection created the session already.
                     // It would only not be the case when the other connection destroyed the session.
-                    if (\strncmp($e->getCode(), '23', \strlen('23')) === 0) {
+                    if (\str_starts_with($e->getCode(), '23')) {
                         // Retrieve finished session data written by concurrent connection by restarting the loop.
                         // We have to start a new transaction as a failed query will mark the current transaction as
                         // aborted in PostgreSQL and disallow further queries within it.

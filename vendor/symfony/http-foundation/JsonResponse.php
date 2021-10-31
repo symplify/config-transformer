@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
 /**
  * Response represents an HTTP response in JSON format.
@@ -21,7 +21,7 @@ namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
  *
  * @author Igor Wiedler <igor@wiedler.ch>
  */
-class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response
+class JsonResponse extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response
 {
     protected $data;
     protected $callback;
@@ -62,7 +62,7 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
      *
      * @deprecated since Symfony 5.1, use __construct() instead.
      */
-    public static function create($data = null, $status = 200, $headers = [])
+    public static function create($data = null, int $status = 200, array $headers = [])
     {
         trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($data, $status, $headers);
@@ -81,7 +81,7 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
      *
      * @return static
      */
-    public static function fromJsonString($data, $status = 200, $headers = [])
+    public static function fromJsonString(string $data, int $status = 200, array $headers = [])
     {
         return new static($data, $status, $headers, \true);
     }
@@ -94,7 +94,7 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
      *
      * @throws \InvalidArgumentException When the callback name is not valid
      */
-    public function setCallback($callback = null)
+    public function setCallback(string $callback = null)
     {
         if (null !== $callback) {
             // partially taken from https://geekality.net/2011/08/03/valid-javascript-identifier/
@@ -117,9 +117,8 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
      * Sets a raw string containing a JSON document to be sent.
      *
      * @return $this
-     * @param string $json
      */
-    public function setJson($json)
+    public function setJson(string $json)
     {
         $this->data = $json;
         return $this->update();
@@ -138,7 +137,7 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
         try {
             $data = \json_encode($data, $this->encodingOptions);
         } catch (\Exception $e) {
-            if ('Exception' === \get_class($e) && \strncmp($e->getMessage(), 'Failed calling ', \strlen('Failed calling ')) === 0) {
+            if ('Exception' === \get_class($e) && \str_starts_with($e->getMessage(), 'Failed calling ')) {
                 throw $e->getPrevious() ?: $e;
             }
             throw $e;
@@ -164,9 +163,8 @@ class JsonResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFou
      * Sets options used while encoding data to JSON.
      *
      * @return $this
-     * @param int $encodingOptions
      */
-    public function setEncodingOptions($encodingOptions)
+    public function setEncodingOptions(int $encodingOptions)
     {
         $this->encodingOptions = $encodingOptions;
         return $this->setData(\json_decode($this->data));

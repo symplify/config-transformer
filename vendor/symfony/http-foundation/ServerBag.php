@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
 /**
  * ServerBag is a container for HTTP headers from the $_SERVER variable.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Robert Kiss <kepten@gmail.com>
  */
-class ServerBag extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\ParameterBag
+class ServerBag extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Gets the HTTP headers.
@@ -28,7 +28,7 @@ class ServerBag extends \ConfigTransformer202110276\Symfony\Component\HttpFounda
     {
         $headers = [];
         foreach ($this->parameters as $key => $value) {
-            if (\strncmp($key, 'HTTP_', \strlen('HTTP_')) === 0) {
+            if (\str_starts_with($key, 'HTTP_')) {
                 $headers[\substr($key, 5)] = $value;
             } elseif (\in_array($key, ['CONTENT_TYPE', 'CONTENT_LENGTH', 'CONTENT_MD5'], \true)) {
                 $headers[$key] = $value;

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Caster;
 
 /**
  * Represents a file or a URL.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class LinkStub extends \ConfigTransformer202110276\Symfony\Component\VarDumper\Caster\ConstStub
+class LinkStub extends \ConfigTransformer202110318\Symfony\Component\VarDumper\Caster\ConstStub
 {
     public $inVendor = \false;
     private static $vendorRoots;
@@ -29,12 +29,12 @@ class LinkStub extends \ConfigTransformer202110276\Symfony\Component\VarDumper\C
         if (!\is_string($href)) {
             return;
         }
-        if (\strncmp($href, 'file://', \strlen('file://')) === 0) {
+        if (\str_starts_with($href, 'file://')) {
             if ($href === $label) {
                 $label = \substr($label, 7);
             }
             $href = \substr($href, 7);
-        } elseif (\strpos($href, '://') !== \false) {
+        } elseif (\str_contains($href, '://')) {
             $this->attr['href'] = $href;
             return;
         }
@@ -62,7 +62,7 @@ class LinkStub extends \ConfigTransformer202110276\Symfony\Component\VarDumper\C
         if (null === self::$vendorRoots) {
             self::$vendorRoots = [];
             foreach (\get_declared_classes() as $class) {
-                if ('C' === $class[0] && \strncmp($class, 'ComposerAutoloaderInit', \strlen('ComposerAutoloaderInit')) === 0) {
+                if ('C' === $class[0] && \str_starts_with($class, 'ComposerAutoloaderInit')) {
                     $r = new \ReflectionClass($class);
                     $v = \dirname($r->getFileName(), 2);
                     if (\is_file($v . '/composer/installed.json')) {
@@ -76,7 +76,7 @@ class LinkStub extends \ConfigTransformer202110276\Symfony\Component\VarDumper\C
             return self::$composerRoots[$dir];
         }
         foreach (self::$vendorRoots as $root) {
-            if ($inVendor = \strncmp($file, $root, \strlen($root)) === 0) {
+            if ($inVendor = \str_starts_with($file, $root)) {
                 return $root;
             }
         }

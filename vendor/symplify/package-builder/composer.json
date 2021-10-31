@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110276\\Symplify\\PackageBuilder\\": "src"
+            "ConfigTransformer202110318\\Symplify\\PackageBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110276\\Symplify\\PackageBuilder\\Tests\\": "tests"
+            "ConfigTransformer202110318\\Symplify\\PackageBuilder\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -48,7 +48,6 @@
         "symplify\/amnesia": "<9.4.70",
         "symplify\/phpstan-extensions": "<9.4.70",
         "symplify\/rule-doc-generator": "<9.4.70",
-        "symplify\/console-package-builder": "<9.4.70",
         "symplify\/vendor-patches": "<9.4.70",
         "symplify\/skipper": "<9.4.70",
         "symplify\/smart-file-system": "<9.4.70",

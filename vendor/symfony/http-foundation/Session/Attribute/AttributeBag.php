@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute;
 
 /**
  * This class relates to session attribute storage.
  */
-class AttributeBag implements \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface, \IteratorAggregate, \Countable
+class AttributeBag implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface, \IteratorAggregate, \Countable
 {
     private $name = 'attributes';
     private $storageKey;
@@ -32,18 +32,14 @@ class AttributeBag implements \ConfigTransformer202110276\Symfony\Component\Http
     {
         return $this->name;
     }
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $attributes
      */
-    public function initialize(&$attributes)
+    public function initialize(array &$attributes)
     {
         $this->attributes =& $attributes;
     }
@@ -56,25 +52,22 @@ class AttributeBag implements \ConfigTransformer202110276\Symfony\Component\Http
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name)
+    public function has(string $name)
     {
         return \array_key_exists($name, $this->attributes);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         return \array_key_exists($name, $this->attributes) ? $this->attributes[$name] : $default;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         $this->attributes[$name] = $value;
     }
@@ -87,9 +80,8 @@ class AttributeBag implements \ConfigTransformer202110276\Symfony\Component\Http
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $attributes
      */
-    public function replace($attributes)
+    public function replace(array $attributes)
     {
         $this->attributes = [];
         foreach ($attributes as $key => $value) {
@@ -98,9 +90,8 @@ class AttributeBag implements \ConfigTransformer202110276\Symfony\Component\Http
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         $retval = null;
         if (\array_key_exists($name, $this->attributes)) {

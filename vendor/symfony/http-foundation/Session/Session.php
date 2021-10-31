@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag::class);
-\class_exists(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBag::class);
-\class_exists(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionBagProxy::class);
+\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag::class);
+\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBag::class);
+\class_exists(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagProxy::class);
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Drak <drak@zikula.org>
  */
-class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionInterface, \IteratorAggregate, \Countable
+class Session implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionInterface, \IteratorAggregate, \Countable
 {
     protected $storage;
     private $flashName;
@@ -32,14 +32,14 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     private $data = [];
     private $usageIndex = 0;
     private $usageReporter;
-    public function __construct(\ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface $storage = null, \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface $attributes = null, \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashes = null, callable $usageReporter = null)
+    public function __construct(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface $storage = null, \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface $attributes = null, \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashes = null, callable $usageReporter = null)
     {
-        $this->storage = $storage ?? new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage();
+        $this->storage = $storage ?? new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage();
         $this->usageReporter = $usageReporter;
-        $attributes = $attributes ?? new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag();
+        $attributes = $attributes ?? new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag();
         $this->attributeName = $attributes->getName();
         $this->registerBag($attributes);
-        $flashes = $flashes ?? new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBag();
+        $flashes = $flashes ?? new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBag();
         $this->flashName = $flashes->getName();
         $this->registerBag($flashes);
     }
@@ -52,25 +52,22 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name)
+    public function has(string $name)
     {
         return $this->getAttributeBag()->has($name);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         return $this->getAttributeBag()->get($name, $default);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         $this->getAttributeBag()->set($name, $value);
     }
@@ -83,17 +80,15 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $attributes
      */
-    public function replace($attributes)
+    public function replace(array $attributes)
     {
         $this->getAttributeBag()->replace($attributes);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         return $this->getAttributeBag()->remove($name);
     }
@@ -155,19 +150,16 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param int|null $lifetime
      */
-    public function invalidate($lifetime = null)
+    public function invalidate(int $lifetime = null)
     {
         $this->storage->clear();
         return $this->migrate(\true, $lifetime);
     }
     /**
      * {@inheritdoc}
-     * @param bool $destroy
-     * @param int|null $lifetime
      */
-    public function migrate($destroy = \false, $lifetime = null)
+    public function migrate(bool $destroy = \false, int $lifetime = null)
     {
         return $this->storage->regenerate($destroy, $lifetime);
     }
@@ -187,9 +179,8 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         if ($this->storage->getId() !== $id) {
             $this->storage->setId($id);
@@ -204,9 +195,8 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->storage->setName($name);
     }
@@ -223,17 +213,15 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag
      */
-    public function registerBag($bag)
+    public function registerBag(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
     {
-        $this->storage->registerBag(new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionBagProxy($bag, $this->data, $this->usageIndex, $this->usageReporter));
+        $this->storage->registerBag(new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagProxy($bag, $this->data, $this->usageIndex, $this->usageReporter));
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function getBag($name)
+    public function getBag(string $name)
     {
         $bag = $this->storage->getBag($name);
         return \method_exists($bag, 'getBag') ? $bag->getBag() : $bag;
@@ -252,7 +240,7 @@ class Session implements \ConfigTransformer202110276\Symfony\Component\HttpFound
      *
      * Note that this method was added to help with IDE autocompletion.
      */
-    private function getAttributeBag() : \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface
+    private function getAttributeBag() : \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface
     {
         return $this->getBag($this->attributeName);
     }

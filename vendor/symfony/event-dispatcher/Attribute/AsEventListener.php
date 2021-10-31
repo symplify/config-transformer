@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\EventDispatcher\Attribute;
+namespace ConfigTransformer202110318\Symfony\Component\EventDispatcher\Attribute;
 
 /**
  * Service tag to autoconfigure event listeners.
@@ -18,27 +18,7 @@ namespace ConfigTransformer202110276\Symfony\Component\EventDispatcher\Attribute
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
 class AsEventListener
 {
-    /**
-     * @var string|null
-     */
-    public $event;
-    /**
-     * @var string|null
-     */
-    public $method;
-    /**
-     * @var int
-     */
-    public $priority = 0;
-    /**
-     * @var string|null
-     */
-    public $dispatcher;
-    public function __construct(?string $event = null, ?string $method = null, int $priority = 0, ?string $dispatcher = null)
+    public function __construct(public ?string $event = null, public ?string $method = null, public int $priority = 0, public ?string $dispatcher = null)
     {
-        $this->event = $event;
-        $this->method = $method;
-        $this->priority = $priority;
-        $this->dispatcher = $dispatcher;
     }
 }

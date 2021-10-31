@@ -8,84 +8,73 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\EventDispatcher;
+namespace ConfigTransformer202110318\Symfony\Component\EventDispatcher;
 
 /**
  * A read-only proxy for an event dispatcher.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class ImmutableEventDispatcher implements \ConfigTransformer202110276\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class ImmutableEventDispatcher implements \ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $dispatcher;
-    public function __construct(\ConfigTransformer202110276\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher)
+    public function __construct(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
     /**
      * {@inheritdoc}
-     * @param object $event
-     * @return object
-     * @param string|null $eventName
      */
-    public function dispatch($event, $eventName = null)
+    public function dispatch(object $event, string $eventName = null) : object
     {
         return $this->dispatcher->dispatch($event, $eventName);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
-     * @param int $priority
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener(string $eventName, $listener, int $priority = 0)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function addSubscriber($subscriber)
+    public function addSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function removeListener($eventName, $listener)
+    public function removeListener(string $eventName, $listener)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function removeSubscriber($subscriber)
+    public function removeSubscriber(\ConfigTransformer202110318\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }
     /**
      * {@inheritdoc}
-     * @param string|null $eventName
      */
-    public function getListeners($eventName = null)
+    public function getListeners(string $eventName = null)
     {
         return $this->dispatcher->getListeners($eventName);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function getListenerPriority($eventName, $listener)
+    public function getListenerPriority(string $eventName, $listener)
     {
         return $this->dispatcher->getListenerPriority($eventName, $listener);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $eventName
      */
-    public function hasListeners($eventName = null)
+    public function hasListeners(string $eventName = null)
     {
         return $this->dispatcher->hasListeners($eventName);
     }

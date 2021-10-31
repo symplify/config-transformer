@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\File;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\File;
 /**
  * BinaryFileResponse represents an HTTP response delivering a file.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\File;
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Sergey Linnik <linniksa@gmail.com>
  */
-class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Response
+class BinaryFileResponse extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Response
 {
     protected static $trustXSendfileTypeHeader = \false;
     /**
@@ -61,7 +61,7 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
      *
      * @deprecated since Symfony 5.2, use __construct() instead.
      */
-    public static function create($file = null, $status = 200, $headers = [], $public = \true, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
+    public static function create($file = null, int $status = 200, array $headers = [], bool $public = \true, string $contentDisposition = null, bool $autoEtag = \false, bool $autoLastModified = \true)
     {
         trigger_deprecation('symfony/http-foundation', '5.2', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($file, $status, $headers, $public, $contentDisposition, $autoEtag, $autoLastModified);
@@ -74,21 +74,18 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
      * @return $this
      *
      * @throws FileException
-     * @param string|null $contentDisposition
-     * @param bool $autoEtag
-     * @param bool $autoLastModified
      */
-    public function setFile($file, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
+    public function setFile($file, string $contentDisposition = null, bool $autoEtag = \false, bool $autoLastModified = \true)
     {
-        if (!$file instanceof \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\File) {
+        if (!$file instanceof \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\File) {
             if ($file instanceof \SplFileInfo) {
-                $file = new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\File($file->getPathname());
+                $file = new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\File($file->getPathname());
             } else {
-                $file = new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\File((string) $file);
+                $file = new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\File((string) $file);
             }
         }
         if (!$file->isReadable()) {
-            throw new \ConfigTransformer202110276\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
+            throw new \ConfigTransformer202110318\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
         }
         $this->file = $file;
         if ($autoEtag) {
@@ -136,12 +133,12 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
      *
      * @return $this
      */
-    public function setContentDisposition($disposition, $filename = '', $filenameFallback = '')
+    public function setContentDisposition(string $disposition, string $filename = '', string $filenameFallback = '')
     {
         if ('' === $filename) {
             $filename = $this->file->getFilename();
         }
-        if ('' === $filenameFallback && (!\preg_match('/^[\\x20-\\x7e]*$/', $filename) || \strpos($filename, '%') !== \false)) {
+        if ('' === $filenameFallback && (!\preg_match('/^[\\x20-\\x7e]*$/', $filename) || \str_contains($filename, '%'))) {
             $encoding = \mb_detect_encoding($filename, null, \true) ?: '8bit';
             for ($i = 0, $filenameLength = \mb_strlen($filename, $encoding); $i < $filenameLength; ++$i) {
                 $char = \mb_substr($filename, $i, 1, $encoding);
@@ -158,9 +155,8 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function prepare($request)
+    public function prepare(\ConfigTransformer202110318\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->headers->has('Content-Type')) {
             $this->headers->set('Content-Type', $this->file->getMimeType() ?: 'application/octet-stream');
@@ -190,7 +186,7 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
             if ('x-accel-redirect' === \strtolower($type)) {
                 // Do X-Accel-Mapping substitutions.
                 // @link https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/#x-accel-redirect
-                $parts = \ConfigTransformer202110276\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
+                $parts = \ConfigTransformer202110318\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
                 foreach ($parts as $part) {
                     [$pathPrefix, $location] = $part;
                     if (\substr($path, 0, \strlen($pathPrefix)) === $pathPrefix) {
@@ -210,7 +206,7 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
             // Process the range headers.
             if (!$request->headers->has('If-Range') || $this->hasValidIfRangeHeader($request->headers->get('If-Range'))) {
                 $range = $request->headers->get('Range');
-                if (\strncmp($range, 'bytes=', \strlen('bytes=')) === 0) {
+                if (\str_starts_with($range, 'bytes=')) {
                     [$start, $end] = \explode('-', \substr($range, 6), 2) + [0];
                     $end = '' === $end ? $fileSize - 1 : (int) $end;
                     if ('' === $start) {
@@ -274,9 +270,8 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
      * {@inheritdoc}
      *
      * @throws \LogicException when the content is not null
-     * @param string|null $content
      */
-    public function setContent($content)
+    public function setContent(?string $content)
     {
         if (null !== $content) {
             throw new \LogicException('The content cannot be set on a BinaryFileResponse instance.');
@@ -302,9 +297,8 @@ class BinaryFileResponse extends \ConfigTransformer202110276\Symfony\Component\H
      * Note: If the X-Sendfile header is used, the deleteFileAfterSend setting will not be used.
      *
      * @return $this
-     * @param bool $shouldDelete
      */
-    public function deleteFileAfterSend($shouldDelete = \true)
+    public function deleteFileAfterSend(bool $shouldDelete = \true)
     {
         $this->deleteFileAfterSend = $shouldDelete;
         return $this;

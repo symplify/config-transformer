@@ -8,30 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash;
 
-use ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * FlashBagInterface.
  *
  * @author Drak <drak@zikula.org>
  */
-interface FlashBagInterface extends \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface FlashBagInterface extends \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Adds a flash message for the given type.
      *
      * @param mixed $message
-     * @param string $type
      */
-    public function add($type, $message);
+    public function add(string $type, $message);
     /**
      * Registers one or more messages for a given type.
      *
      * @param string|array $messages
-     * @param string $type
      */
-    public function set($type, $messages);
+    public function set(string $type, $messages);
     /**
      * Gets flash messages for a given type.
      *
@@ -40,7 +38,7 @@ interface FlashBagInterface extends \ConfigTransformer202110276\Symfony\Componen
      *
      * @return array
      */
-    public function peek($type, $default = []);
+    public function peek(string $type, array $default = []);
     /**
      * Gets all flash messages.
      *
@@ -53,9 +51,8 @@ interface FlashBagInterface extends \ConfigTransformer202110276\Symfony\Componen
      * @param array $default Default value if $type does not exist
      *
      * @return array
-     * @param string $type
      */
-    public function get($type, $default = []);
+    public function get(string $type, array $default = []);
     /**
      * Gets and clears flashes from the stack.
      *
@@ -64,16 +61,14 @@ interface FlashBagInterface extends \ConfigTransformer202110276\Symfony\Componen
     public function all();
     /**
      * Sets all flash messages.
-     * @param mixed[] $messages
      */
-    public function setAll($messages);
+    public function setAll(array $messages);
     /**
      * Has flash messages for a given type?
      *
      * @return bool
-     * @param string $type
      */
-    public function has($type);
+    public function has(string $type);
     /**
      * Returns a list of all defined types.
      *

@@ -14,7 +14,6 @@
         "symfony\/console": "^5.3|^6.0",
         "symfony\/dependency-injection": "^5.3|^6.0",
         "symplify\/package-builder": "dev-main",
-        "symplify\/console-package-builder": "dev-main",
         "symplify\/smart-file-system": "dev-main",
         "symplify\/symplify-kernel": "dev-main"
     },
@@ -23,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202110276\\Symplify\\EasyTesting\\": "src"
+            "ConfigTransformer202110318\\Symplify\\EasyTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202110276\\Symplify\\EasyTesting\\Tests\\": "tests"
+            "ConfigTransformer202110318\\Symplify\\EasyTesting\\Tests\\": "tests"
         }
     },
     "extra": {

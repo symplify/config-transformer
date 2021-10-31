@@ -9,10 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Composer;
+namespace ConfigTransformer202110318\Composer;
 
-use ConfigTransformer202110276\Composer\Autoload\ClassLoader;
-use ConfigTransformer202110276\Composer\Semver\VersionParser;
+use ConfigTransformer202110318\Composer\Autoload\ClassLoader;
+use ConfigTransformer202110318\Composer\Semver\VersionParser;
 /**
  * This class is copied in every Composer installed project and available to all
  *
@@ -22,8 +22,19 @@ use ConfigTransformer202110276\Composer\Semver\VersionParser;
  */
 class InstalledVersions
 {
+    /**
+     * @var mixed[]|null
+     * @psalm-var array{root: array{name: string, version: string, reference: string, pretty_version: string, aliases: string[], dev: bool, install_path: string, type: string}, versions: array<string, array{dev_requirement: bool, pretty_version?: string, version?: string, aliases?: string[], reference?: string, replaced?: string[], provided?: string[], install_path?: string, type?: string}>}|array{}|null
+     */
     private static $installed;
+    /**
+     * @var bool|null
+     */
     private static $canGetVendors;
+    /**
+     * @var array[]
+     * @psalm-var array<string, array{root: array{name: string, version: string, reference: string, pretty_version: string, aliases: string[], dev: bool, install_path: string, type: string}, versions: array<string, array{dev_requirement: bool, pretty_version?: string, version?: string, aliases?: string[], reference?: string, replaced?: string[], provided?: string[], install_path?: string, type?: string}>}>
+     */
     private static $installedByVendor = array();
     /**
      * Returns a list of all package names which are present, either by being installed, replaced or provided
@@ -264,11 +275,11 @@ class InstalledVersions
     private static function getInstalled()
     {
         if (null === self::$canGetVendors) {
-            self::$canGetVendors = \method_exists('ConfigTransformer202110276\\Composer\\Autoload\\ClassLoader', 'getRegisteredLoaders');
+            self::$canGetVendors = \method_exists('ConfigTransformer202110318\\Composer\\Autoload\\ClassLoader', 'getRegisteredLoaders');
         }
         $installed = array();
         if (self::$canGetVendors) {
-            foreach (\ConfigTransformer202110276\Composer\Autoload\ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
+            foreach (\ConfigTransformer202110318\Composer\Autoload\ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
                 if (isset(self::$installedByVendor[$vendorDir])) {
                     $installed[] = self::$installedByVendor[$vendorDir];
                 } elseif (\is_file($vendorDir . '/composer/installed.php')) {

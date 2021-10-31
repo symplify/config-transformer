@@ -1,9 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110276\Symplify\PackageBuilder\Yaml;
+namespace ConfigTransformer202110318\Symplify\PackageBuilder\Yaml;
 
-use Closure;
 final class ParametersMerger
 {
     /**
@@ -54,7 +53,7 @@ final class ParametersMerger
     /**
      * @return mixed[]
      */
-    private function mergeLeftToRightWithCallable(array $left, array $right, \Closure $mergeCallback) : array
+    private function mergeLeftToRightWithCallable(array $left, array $right, callable $mergeCallback) : array
     {
         foreach ($left as $key => $val) {
             if (\is_int($key)) {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session;
 
 /**
  * Session Bag store.
@@ -25,9 +25,8 @@ interface SessionBagInterface
     public function getName();
     /**
      * Initializes the Bag.
-     * @param mixed[] $array
      */
-    public function initialize(&$array);
+    public function initialize(array &$array);
     /**
      * Gets the storage key for this bag.
      *

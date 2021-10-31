@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *
@@ -39,9 +39,8 @@ class Caster
      * @param bool $hasDebugInfo Whether the __debugInfo method exists on $obj or not
      *
      * @return array The array-cast of the object, with prefixed dynamic properties
-     * @param object $obj
      */
-    public static function castObject($obj, string $class, bool $hasDebugInfo = \false, string $debugClass = null) : array
+    public static function castObject(object $obj, string $class, bool $hasDebugInfo = \false, string $debugClass = null) : array
     {
         if ($hasDebugInfo) {
             try {
@@ -145,7 +144,7 @@ class Caster
         }
         return $a;
     }
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
             $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';

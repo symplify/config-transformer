@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\VarDumper\Command\Descriptor;
+namespace ConfigTransformer202110318\Symfony\Component\VarDumper\Command\Descriptor;
 
-use ConfigTransformer202110276\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Cloner\Data;
-use ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use ConfigTransformer202110318\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data;
+use ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\HtmlDumper;
 /**
  * Describe collected data clones for html output.
  *
@@ -20,21 +20,15 @@ use ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\HtmlDumper;
  *
  * @final
  */
-class HtmlDescriptor implements \ConfigTransformer202110276\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class HtmlDescriptor implements \ConfigTransformer202110318\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $initialized = \false;
-    public function __construct(\ConfigTransformer202110276\Symfony\Component\VarDumper\Dumper\HtmlDumper $dumper)
+    public function __construct(\ConfigTransformer202110318\Symfony\Component\VarDumper\Dumper\HtmlDumper $dumper)
     {
         $this->dumper = $dumper;
     }
-    /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Symfony\Component\VarDumper\Cloner\Data $data
-     * @param mixed[] $context
-     * @param int $clientId
-     */
-    public function describe($output, $data, $context, $clientId) : void
+    public function describe(\ConfigTransformer202110318\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202110318\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void
     {
         if (!$this->initialized) {
             $styles = \file_get_contents(__DIR__ . '/../../Resources/css/htmlDescriptor.css');

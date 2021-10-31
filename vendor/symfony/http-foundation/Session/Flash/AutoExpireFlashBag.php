@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash;
+namespace ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash;
 
 /**
  * AutoExpireFlashBag flash message container.
  *
  * @author Drak <drak@zikula.org>
  */
-class AutoExpireFlashBag implements \ConfigTransformer202110276\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+class AutoExpireFlashBag implements \ConfigTransformer202110318\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
 {
     private $name = 'flashes';
     private $flashes = ['display' => [], 'new' => []];
@@ -34,18 +34,14 @@ class AutoExpireFlashBag implements \ConfigTransformer202110276\Symfony\Componen
     {
         return $this->name;
     }
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $flashes
      */
-    public function initialize(&$flashes)
+    public function initialize(array &$flashes)
     {
         $this->flashes =& $flashes;
         // The logic: messages from the last request will be stored in new, so we move them to previous
@@ -56,18 +52,15 @@ class AutoExpireFlashBag implements \ConfigTransformer202110276\Symfony\Componen
     }
     /**
      * {@inheritdoc}
-     * @param string $type
      */
-    public function add($type, $message)
+    public function add(string $type, $message)
     {
         $this->flashes['new'][$type][] = $message;
     }
     /**
      * {@inheritdoc}
-     * @param string $type
-     * @param mixed[] $default
      */
-    public function peek($type, $default = [])
+    public function peek(string $type, array $default = [])
     {
         return $this->has($type) ? $this->flashes['display'][$type] : $default;
     }
@@ -80,10 +73,8 @@ class AutoExpireFlashBag implements \ConfigTransformer202110276\Symfony\Componen
     }
     /**
      * {@inheritdoc}
-     * @param string $type
-     * @param mixed[] $default
      */
-    public function get($type, $default = [])
+    public function get(string $type, array $default = [])
     {
         $return = $default;
         if (!$this->has($type)) {
@@ -106,25 +97,22 @@ class AutoExpireFlashBag implements \ConfigTransformer202110276\Symfony\Componen
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $messages
      */
-    public function setAll($messages)
+    public function setAll(array $messages)
     {
         $this->flashes['new'] = $messages;
     }
     /**
      * {@inheritdoc}
-     * @param string $type
      */
-    public function set($type, $messages)
+    public function set(string $type, $messages)
     {
         $this->flashes['new'][$type] = (array) $messages;
     }
     /**
      * {@inheritdoc}
-     * @param string $type
      */
-    public function has($type)
+    public function has(string $type)
     {
         return \array_key_exists($type, $this->flashes['display']) && $this->flashes['display'][$type];
     }

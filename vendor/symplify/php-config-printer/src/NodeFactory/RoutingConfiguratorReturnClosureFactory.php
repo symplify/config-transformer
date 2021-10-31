@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110276\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202110318\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202110276\PhpParser\Node;
-use ConfigTransformer202110276\PhpParser\Node\Stmt\Return_;
-use ConfigTransformer202110276\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use ConfigTransformer202110276\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use ConfigTransformer202110318\PhpParser\Node;
+use ConfigTransformer202110318\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202110318\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use ConfigTransformer202110318\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 /**
  * @api
  */
@@ -23,16 +23,16 @@ final class RoutingConfiguratorReturnClosureFactory
     /**
      * @param RoutingCaseConverterInterface[] $routingCaseConverters
      */
-    public function __construct(\ConfigTransformer202110276\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
+    public function __construct(\ConfigTransformer202110318\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
     {
         $this->containerConfiguratorClosureNodeFactory = $containerConfiguratorClosureNodeFactory;
         $this->routingCaseConverters = $routingCaseConverters;
     }
-    public function createFromArrayData(array $arrayData) : \ConfigTransformer202110276\PhpParser\Node\Stmt\Return_
+    public function createFromArrayData(array $arrayData) : \ConfigTransformer202110318\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->containerConfiguratorClosureNodeFactory->createRoutingClosureFromStmts($stmts);
-        return new \ConfigTransformer202110276\PhpParser\Node\Stmt\Return_($closure);
+        return new \ConfigTransformer202110318\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return mixed[]
@@ -58,11 +58,11 @@ final class RoutingConfiguratorReturnClosureFactory
         $nodes = [];
         foreach ($arrayData as $key => $values) {
             $expression = null;
-            foreach ($this->routingCaseConverters as $caseConverter) {
-                if (!$caseConverter->match($key, $values)) {
+            foreach ($this->routingCaseConverters as $routingCaseConverter) {
+                if (!$routingCaseConverter->match($key, $values)) {
                     continue;
                 }
-                $expression = $caseConverter->convertToMethodCall($key, $values);
+                $expression = $routingCaseConverter->convertToMethodCall($key, $values);
                 break;
             }
             if ($expression === null) {
