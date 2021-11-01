@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111019\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ConfigTransformer202111016\Symfony\Component\HttpKernel\DependencyInjection;
 
-use ConfigTransformer202111019\Psr\Container\ContainerInterface;
-use ConfigTransformer202111019\Symfony\Component\HttpFoundation\RequestStack;
-use ConfigTransformer202111019\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
+use ConfigTransformer202111016\Psr\Container\ContainerInterface;
+use ConfigTransformer202111016\Symfony\Component\HttpFoundation\RequestStack;
+use ConfigTransformer202111016\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 /**
  * Lazily loads fragment renderers from the dependency injection container.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LazyLoadingFragmentHandler extends \ConfigTransformer202111019\Symfony\Component\HttpKernel\Fragment\FragmentHandler
+class LazyLoadingFragmentHandler extends \ConfigTransformer202111016\Symfony\Component\HttpKernel\Fragment\FragmentHandler
 {
     private $container;
     private $initialized = [];
-    public function __construct(\ConfigTransformer202111019\Psr\Container\ContainerInterface $container, \ConfigTransformer202111019\Symfony\Component\HttpFoundation\RequestStack $requestStack, bool $debug = \false)
+    public function __construct(\ConfigTransformer202111016\Psr\Container\ContainerInterface $container, \ConfigTransformer202111016\Symfony\Component\HttpFoundation\RequestStack $requestStack, bool $debug = \false)
     {
         $this->container = $container;
         parent::__construct($requestStack, [], $debug);

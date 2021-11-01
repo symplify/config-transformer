@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111019\Symfony\Component\VarDumper\Caster;
+namespace ConfigTransformer202111016\Symfony\Component\VarDumper\Caster;
 
-use ConfigTransformer202111019\Symfony\Component\VarDumper\Cloner\Stub;
+use ConfigTransformer202111016\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DsPairStub extends \ConfigTransformer202111019\Symfony\Component\VarDumper\Cloner\Stub
+class DsPairStub extends \ConfigTransformer202111016\Symfony\Component\VarDumper\Cloner\Stub
 {
     public function __construct($key, $value)
     {
-        $this->value = [\ConfigTransformer202111019\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'key' => $key, \ConfigTransformer202111019\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value' => $value];
+        $this->value = [\ConfigTransformer202111016\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'key' => $key, \ConfigTransformer202111016\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value' => $value];
     }
 }

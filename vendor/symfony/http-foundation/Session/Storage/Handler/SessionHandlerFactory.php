@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use ConfigTransformer202111019\Doctrine\DBAL\DriverManager;
-use ConfigTransformer202111019\Symfony\Component\Cache\Adapter\AbstractAdapter;
-use ConfigTransformer202111019\Symfony\Component\Cache\Traits\RedisClusterProxy;
-use ConfigTransformer202111019\Symfony\Component\Cache\Traits\RedisProxy;
+use ConfigTransformer202111016\Doctrine\DBAL\DriverManager;
+use ConfigTransformer202111016\Symfony\Component\Cache\Adapter\AbstractAdapter;
+use ConfigTransformer202111016\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use ConfigTransformer202111016\Symfony\Component\Cache\Traits\RedisProxy;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -22,7 +22,7 @@ class SessionHandlerFactory
     /**
      * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy|RedisClusterProxy|\Memcached|\PDO|string $connection Connection or DSN
      */
-    public static function createHandler($connection) : \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+    public static function createHandler($connection) : \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
     {
         if (!\is_string($connection) && !\is_object($connection)) {
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a string or a connection object, "%s" given.', __METHOD__, \get_debug_type($connection)));
@@ -31,33 +31,33 @@ class SessionHandlerFactory
             case $connection instanceof \Redis:
             case $connection instanceof \RedisArray:
             case $connection instanceof \RedisCluster:
-            case $connection instanceof \ConfigTransformer202111019\Predis\ClientInterface:
-            case $connection instanceof \ConfigTransformer202111019\Symfony\Component\Cache\Traits\RedisProxy:
-            case $connection instanceof \ConfigTransformer202111019\Symfony\Component\Cache\Traits\RedisClusterProxy:
-                return new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler($connection);
+            case $connection instanceof \ConfigTransformer202111016\Predis\ClientInterface:
+            case $connection instanceof \ConfigTransformer202111016\Symfony\Component\Cache\Traits\RedisProxy:
+            case $connection instanceof \ConfigTransformer202111016\Symfony\Component\Cache\Traits\RedisClusterProxy:
+                return new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler($connection);
             case $connection instanceof \Memcached:
-                return new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler($connection);
+                return new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler($connection);
             case $connection instanceof \PDO:
-                return new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler($connection);
+                return new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler($connection);
             case !\is_string($connection):
                 throw new \InvalidArgumentException(\sprintf('Unsupported Connection: "%s".', \get_debug_type($connection)));
             case \str_starts_with($connection, 'file://'):
                 $savePath = \substr($connection, 7);
-                return new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('' === $savePath ? null : $savePath));
+                return new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('' === $savePath ? null : $savePath));
             case \str_starts_with($connection, 'redis:'):
             case \str_starts_with($connection, 'rediss:'):
             case \str_starts_with($connection, 'memcached:'):
-                if (!\class_exists(\ConfigTransformer202111019\Symfony\Component\Cache\Adapter\AbstractAdapter::class)) {
+                if (!\class_exists(\ConfigTransformer202111016\Symfony\Component\Cache\Adapter\AbstractAdapter::class)) {
                     throw new \InvalidArgumentException(\sprintf('Unsupported DSN "%s". Try running "composer require symfony/cache".', $connection));
                 }
-                $handlerClass = \str_starts_with($connection, 'memcached:') ? \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler::class : \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler::class;
-                $connection = \ConfigTransformer202111019\Symfony\Component\Cache\Adapter\AbstractAdapter::createConnection($connection, ['lazy' => \true]);
+                $handlerClass = \str_starts_with($connection, 'memcached:') ? \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler::class : \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler::class;
+                $connection = \ConfigTransformer202111016\Symfony\Component\Cache\Adapter\AbstractAdapter::createConnection($connection, ['lazy' => \true]);
                 return new $handlerClass($connection);
             case \str_starts_with($connection, 'pdo_oci://'):
-                if (!\class_exists(\ConfigTransformer202111019\Doctrine\DBAL\DriverManager::class)) {
+                if (!\class_exists(\ConfigTransformer202111016\Doctrine\DBAL\DriverManager::class)) {
                     throw new \InvalidArgumentException(\sprintf('Unsupported DSN "%s". Try running "composer require doctrine/dbal".', $connection));
                 }
-                $connection = \ConfigTransformer202111019\Doctrine\DBAL\DriverManager::getConnection(['url' => $connection])->getWrappedConnection();
+                $connection = \ConfigTransformer202111016\Doctrine\DBAL\DriverManager::getConnection(['url' => $connection])->getWrappedConnection();
             // no break;
             case \str_starts_with($connection, 'mssql://'):
             case \str_starts_with($connection, 'mysql://'):
@@ -68,7 +68,7 @@ class SessionHandlerFactory
             case \str_starts_with($connection, 'sqlsrv://'):
             case \str_starts_with($connection, 'sqlite://'):
             case \str_starts_with($connection, 'sqlite3://'):
-                return new \ConfigTransformer202111019\Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler($connection);
+                return new \ConfigTransformer202111016\Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler($connection);
         }
         throw new \InvalidArgumentException(\sprintf('Unsupported Connection: "%s".', $connection));
     }
