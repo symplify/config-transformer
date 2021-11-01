@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111018\Symplify\SymplifyKernel\Contract;
+namespace ConfigTransformer2021110110\Symplify\SymplifyKernel\Contract;
 
-use ConfigTransformer202111018\Psr\Container\ContainerInterface;
+use ConfigTransformer2021110110\Psr\Container\ContainerInterface;
 /**
  * @api
  */
@@ -12,6 +12,6 @@ interface LightKernelInterface
     /**
      * @param string[] $configFiles
      */
-    public function createFromConfigs($configFiles) : \ConfigTransformer202111018\Psr\Container\ContainerInterface;
-    public function getContainer() : \ConfigTransformer202111018\Psr\Container\ContainerInterface;
+    public function createFromConfigs($configFiles) : \ConfigTransformer2021110110\Psr\Container\ContainerInterface;
+    public function getContainer() : \ConfigTransformer2021110110\Psr\Container\ContainerInterface;
 }

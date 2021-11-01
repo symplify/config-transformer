@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111018\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
+namespace ConfigTransformer2021110110\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 
-use ConfigTransformer202111018\PhpParser\BuilderHelpers;
-use ConfigTransformer202111018\PhpParser\Node\Arg;
-use ConfigTransformer202111018\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111018\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202111018\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202111018\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202111018\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-final class TagsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202111018\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer2021110110\PhpParser\BuilderHelpers;
+use ConfigTransformer2021110110\PhpParser\Node\Arg;
+use ConfigTransformer2021110110\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2021110110\PhpParser\Node\Scalar\String_;
+use ConfigTransformer2021110110\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer2021110110\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer2021110110\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+final class TagsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer2021110110\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var string
@@ -20,31 +20,31 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer20
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202111018\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer2021110110\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
     /**
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    public function decorateServiceMethodCall($key, $yamlLines, $values, $methodCall) : \ConfigTransformer202111018\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yamlLines, $values, $methodCall) : \ConfigTransformer2021110110\PhpParser\Node\Expr\MethodCall
     {
         /** @var mixed[] $yamlLines */
         if (\count($yamlLines) === 1 && \is_string($yamlLines[0])) {
-            $string = new \ConfigTransformer202111018\PhpParser\Node\Scalar\String_($yamlLines[0]);
-            return new \ConfigTransformer202111018\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \ConfigTransformer202111018\PhpParser\Node\Arg($string)]);
+            $string = new \ConfigTransformer2021110110\PhpParser\Node\Scalar\String_($yamlLines[0]);
+            return new \ConfigTransformer2021110110\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \ConfigTransformer2021110110\PhpParser\Node\Arg($string)]);
         }
         foreach ($yamlLines as $yamlLine) {
             $args = [];
             foreach ($yamlLine as $singleNestedKey => $singleNestedValue) {
                 if ($singleNestedKey === 'name') {
-                    $args[] = new \ConfigTransformer202111018\PhpParser\Node\Arg(\ConfigTransformer202111018\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
+                    $args[] = new \ConfigTransformer2021110110\PhpParser\Node\Arg(\ConfigTransformer2021110110\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
                     unset($yamlLine[$singleNestedKey]);
                 }
             }
             $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($yamlLine);
             $args = \array_merge($args, $restArgs);
-            $methodCall = new \ConfigTransformer202111018\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
+            $methodCall = new \ConfigTransformer2021110110\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
         }
         return $methodCall;
     }
@@ -54,6 +54,6 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer20
      */
     public function isMatch($key, $values) : bool
     {
-        return $key === \ConfigTransformer202111018\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::TAGS;
+        return $key === \ConfigTransformer2021110110\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::TAGS;
     }
 }

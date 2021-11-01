@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111018\Symfony\Component\Console\Output;
+namespace ConfigTransformer2021110110\Symfony\Component\Console\Output;
 
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class BufferedOutput extends \ConfigTransformer202111018\Symfony\Component\Console\Output\Output
+class BufferedOutput extends \ConfigTransformer2021110110\Symfony\Component\Console\Output\Output
 {
     private $buffer = '';
     /**
