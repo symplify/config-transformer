@@ -1,47 +1,47 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111016\Symplify\SymfonyContainerBuilder;
+namespace ConfigTransformer202111013\Symplify\SymfonyContainerBuilder;
 
-use ConfigTransformer202111016\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111016\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202111016\Symplify\SymfonyContainerBuilder\Config\Loader\ParameterMergingLoaderFactory;
-use ConfigTransformer202111016\Symplify\SymfonyContainerBuilder\DependencyInjection\LoadExtensionConfigsCompilerPass;
-use ConfigTransformer202111016\Webmozart\Assert\Assert;
+use ConfigTransformer202111013\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202111013\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202111013\Symplify\SymfonyContainerBuilder\Contract\Config\LoaderFactoryInterface;
+use ConfigTransformer202111013\Symplify\SymfonyContainerBuilder\DependencyInjection\LoadExtensionConfigsCompilerPass;
+use ConfigTransformer202111013\Webmozart\Assert\Assert;
 final class ContainerBuilderFactory
 {
     /**
-     * @var \Symplify\SymfonyContainerBuilder\Config\Loader\ParameterMergingLoaderFactory
+     * @var \Symplify\SymfonyContainerBuilder\Contract\Config\LoaderFactoryInterface
      */
-    private $parameterMergingLoaderFactory;
-    public function __construct()
+    private $loaderFactory;
+    public function __construct(\ConfigTransformer202111013\Symplify\SymfonyContainerBuilder\Contract\Config\LoaderFactoryInterface $loaderFactory)
     {
-        $this->parameterMergingLoaderFactory = new \ConfigTransformer202111016\Symplify\SymfonyContainerBuilder\Config\Loader\ParameterMergingLoaderFactory();
+        $this->loaderFactory = $loaderFactory;
     }
     /**
      * @param ExtensionInterface[] $extensions
      * @param CompilerPassInterface[] $compilerPasses
      * @param string[] $configFiles
      */
-    public function create(array $extensions, array $compilerPasses, array $configFiles) : \ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder
+    public function create(array $extensions, array $compilerPasses, array $configFiles) : \ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder
     {
-        \ConfigTransformer202111016\Webmozart\Assert\Assert::allString($configFiles);
-        \ConfigTransformer202111016\Webmozart\Assert\Assert::allFile($configFiles);
-        $containerBuilder = new \ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder();
+        \ConfigTransformer202111013\Webmozart\Assert\Assert::allString($configFiles);
+        \ConfigTransformer202111013\Webmozart\Assert\Assert::allFile($configFiles);
+        $containerBuilder = new \ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder();
         $this->registerExtensions($containerBuilder, $extensions);
         $this->registerConfigFiles($containerBuilder, $configFiles);
         $this->registerCompilerPasses($containerBuilder, $compilerPasses);
         // this calls load() method in every extensions
         // ensure these extensions are implicitly loaded
         $compilerPassConfig = $containerBuilder->getCompilerPassConfig();
-        $compilerPassConfig->setMergePass(new \ConfigTransformer202111016\Symplify\SymfonyContainerBuilder\DependencyInjection\LoadExtensionConfigsCompilerPass());
+        $compilerPassConfig->setMergePass(new \ConfigTransformer202111013\Symplify\SymfonyContainerBuilder\DependencyInjection\LoadExtensionConfigsCompilerPass());
         return $containerBuilder;
     }
     /**
      * @param ExtensionInterface[] $extensions
      */
-    private function registerExtensions(\ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $extensions) : void
+    private function registerExtensions(\ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $extensions) : void
     {
         foreach ($extensions as $extension) {
             $containerBuilder->registerExtension($extension);
@@ -50,7 +50,7 @@ final class ContainerBuilderFactory
     /**
      * @param CompilerPassInterface[] $compilerPasses
      */
-    private function registerCompilerPasses(\ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $compilerPasses) : void
+    private function registerCompilerPasses(\ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $compilerPasses) : void
     {
         foreach ($compilerPasses as $compilerPass) {
             $containerBuilder->addCompilerPass($compilerPass);
@@ -59,9 +59,9 @@ final class ContainerBuilderFactory
     /**
      * @param string[] $configFiles
      */
-    private function registerConfigFiles(\ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $configFiles) : void
+    private function registerConfigFiles(\ConfigTransformer202111013\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, array $configFiles) : void
     {
-        $delegatingLoader = $this->parameterMergingLoaderFactory->create($containerBuilder, \getcwd());
+        $delegatingLoader = $this->loaderFactory->create($containerBuilder, \getcwd());
         foreach ($configFiles as $configFile) {
             $delegatingLoader->load($configFile);
         }
