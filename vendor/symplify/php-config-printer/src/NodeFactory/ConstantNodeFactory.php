@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111016\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202111011\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202111016\Nette\Utils\Strings;
-use ConfigTransformer202111016\PhpParser\Node\Expr;
-use ConfigTransformer202111016\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202111016\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202111016\PhpParser\Node\Name;
-use ConfigTransformer202111016\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202111016\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use ConfigTransformer202111011\Nette\Utils\Strings;
+use ConfigTransformer202111011\PhpParser\Node\Expr;
+use ConfigTransformer202111011\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202111011\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202111011\PhpParser\Node\Name;
+use ConfigTransformer202111011\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202111011\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 /**
  * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:
  * https://github.com/symfony/symfony/blob/ba4d57bb5fc0e9a1b4f63ced66156296dea3687e/src/Symfony/Component/Yaml/Inline.php#L617
@@ -21,17 +21,17 @@ use ConfigTransformer202111016\Symplify\PhpConfigPrinter\Contract\YamlFileConten
 final class ConstantNodeFactory
 {
     /**
-     * @var \Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
+     * @var \Symplify\PhpConfigPrinter\Dummy\YamlContentProvider
      */
-    private $yamlFileContentProvider;
-    public function __construct(\ConfigTransformer202111016\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface $yamlFileContentProvider)
+    private $yamlContentProvider;
+    public function __construct(\ConfigTransformer202111011\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider $yamlContentProvider)
     {
-        $this->yamlFileContentProvider = $yamlFileContentProvider;
+        $this->yamlContentProvider = $yamlContentProvider;
     }
     /**
      * @return ConstFetch|ClassConstFetch|null
      */
-    public function createConstantIfValue(string $value) : ?\ConfigTransformer202111016\PhpParser\Node\Expr
+    public function createConstantIfValue(string $value) : ?\ConfigTransformer202111011\PhpParser\Node\Expr
     {
         if (\strpos($value, '::') !== \false) {
             [$class, $constant] = \explode('::', $value);
@@ -39,7 +39,7 @@ final class ConstantNodeFactory
             if (\strtoupper($constant) !== $constant) {
                 return null;
             }
-            return new \ConfigTransformer202111016\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202111016\PhpParser\Node\Name\FullyQualified($class), $constant);
+            return new \ConfigTransformer202111011\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202111011\PhpParser\Node\Name\FullyQualified($class), $constant);
         }
         $definedConstants = \get_defined_constants();
         foreach (\array_keys($definedConstants) as $constantName) {
@@ -47,12 +47,12 @@ final class ConstantNodeFactory
             if ($value !== $constantValue) {
                 continue;
             }
-            $yamlContent = $this->yamlFileContentProvider->getYamlContent();
+            $yamlContent = $this->yamlContentProvider->getYamlContent();
             $constantDefinitionPattern = '#' . \preg_quote('!php/const', '#') . '(\\s)+' . $constantName . '#';
-            if (!\ConfigTransformer202111016\Nette\Utils\Strings::match($yamlContent, $constantDefinitionPattern)) {
+            if (!\ConfigTransformer202111011\Nette\Utils\Strings::match($yamlContent, $constantDefinitionPattern)) {
                 continue;
             }
-            return new \ConfigTransformer202111016\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202111016\PhpParser\Node\Name($constantName));
+            return new \ConfigTransformer202111011\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202111011\PhpParser\Node\Name($constantName));
         }
         return null;
     }

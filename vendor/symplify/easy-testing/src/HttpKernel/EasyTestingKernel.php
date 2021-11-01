@@ -1,17 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111016\Symplify\EasyTesting\HttpKernel;
+namespace ConfigTransformer202111011\Symplify\EasyTesting\HttpKernel;
 
-use ConfigTransformer202111016\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer202111016\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class EasyTestingKernel extends \ConfigTransformer202111016\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202111011\Psr\Container\ContainerInterface;
+use ConfigTransformer202111011\Symplify\EasyTesting\ValueObject\EasyTestingConfig;
+use ConfigTransformer202111011\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class EasyTestingKernel extends \ConfigTransformer202111011\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
-     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
+     * @param string[] $configFiles
      */
-    public function registerContainerConfiguration($loader) : void
+    public function createFromConfigs($configFiles) : \ConfigTransformer202111011\Psr\Container\ContainerInterface
     {
-        $loader->load(__DIR__ . '/../../config/config.php');
+        $configFiles[] = \ConfigTransformer202111011\Symplify\EasyTesting\ValueObject\EasyTestingConfig::FILE_PATH;
+        return $this->create([], [], $configFiles);
     }
 }

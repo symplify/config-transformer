@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111016\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202111011\Symplify\PhpConfigPrinter\ValueObject;
 
 final class YamlKey
 {
@@ -80,7 +80,7 @@ final class YamlKey
     /**
      * @return string[]
      */
-    public function provideRootKeys() : array
+    public static function provideRootKeys() : array
     {
         return [self::PARAMETERS, self::IMPORTS, self::SERVICES];
     }

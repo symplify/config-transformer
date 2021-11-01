@@ -9,9 +9,9 @@
         "symfony\/dependency-injection": "^5.3|^6.0",
         "symplify\/smart-file-system": "dev-main",
         "phpstan\/phpstan": "^1.0",
-        "symfony\/http-kernel": "^5.3|^6.0",
         "nikic\/php-parser": "^4.13",
-        "symplify\/package-builder": "dev-main"
+        "symplify\/package-builder": "dev-main",
+        "symplify\/symplify-kernel": "dev-main"
     },
     "require-dev": {
         "symplify\/easy-testing": "dev-main",
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111016\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202111011\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202111016\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202111011\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {
