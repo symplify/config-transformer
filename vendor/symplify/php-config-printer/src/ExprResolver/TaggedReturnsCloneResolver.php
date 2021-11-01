@@ -1,26 +1,26 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202110312\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer202111019\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202110312\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202110312\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202110312\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202110312\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202111019\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202111019\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202111019\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedReturnsCloneResolver
 {
     /**
      * @var \Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver
      */
     private $serviceReferenceExprResolver;
-    public function __construct(\ConfigTransformer202110312\Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver $serviceReferenceExprResolver)
+    public function __construct(\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver $serviceReferenceExprResolver)
     {
         $this->serviceReferenceExprResolver = $serviceReferenceExprResolver;
     }
-    public function resolve(\ConfigTransformer202110312\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer202110312\PhpParser\Node\Expr\Array_
+    public function resolve(\ConfigTransformer202111019\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer202111019\PhpParser\Node\Expr\Array_
     {
         $serviceName = $taggedValue->getValue()[0];
-        $funcCall = $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, \ConfigTransformer202110312\Symplify\PhpConfigPrinter\ValueObject\FunctionName::SERVICE);
-        return new \ConfigTransformer202110312\PhpParser\Node\Expr\Array_([new \ConfigTransformer202110312\PhpParser\Node\Expr\ArrayItem($funcCall)]);
+        $funcCall = $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\FunctionName::SERVICE);
+        return new \ConfigTransformer202111019\PhpParser\Node\Expr\Array_([new \ConfigTransformer202111019\PhpParser\Node\Expr\ArrayItem($funcCall)]);
     }
 }
