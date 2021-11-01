@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021110110\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
+namespace ConfigTransformer202111016\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
 
-use ConfigTransformer2021110110\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer2021110110\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202111016\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202111016\Symfony\Component\DependencyInjection\Definition;
 /**
  * {@inheritdoc}
  *
@@ -19,7 +19,7 @@ use ConfigTransformer2021110110\Symfony\Component\DependencyInjection\Definition
  *
  * @author Marco Pivetta <ocramius@gmail.com>
  */
-class RealServiceInstantiator implements \ConfigTransformer2021110110\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface
+class RealServiceInstantiator implements \ConfigTransformer202111016\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface
 {
     /**
      * {@inheritdoc}

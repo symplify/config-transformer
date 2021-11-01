@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021110110\Symfony\Component\Console\Input;
+namespace ConfigTransformer202111016\Symfony\Component\Console\Input;
 
 /**
  * InputAwareInterface should be implemented by classes that depends on the
