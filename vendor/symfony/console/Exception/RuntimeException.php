@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111017\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202111018\Symfony\Component\Console\Exception;
 
 /**
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class RuntimeException extends \RuntimeException implements \ConfigTransformer202111017\Symfony\Component\Console\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \ConfigTransformer202111018\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }

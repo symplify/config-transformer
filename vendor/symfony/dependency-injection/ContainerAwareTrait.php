@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111017\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202111018\Symfony\Component\DependencyInjection;
 
 /**
  * ContainerAware trait.
