@@ -10,7 +10,6 @@
         "symfony\/dependency-injection": "^5.3|^6.0",
         "symfony\/finder": "^5.3|^6.0",
         "symplify\/symplify-kernel": "dev-main",
-        "symplify\/symfony-container-builder": "dev-main",
         "symplify\/easy-testing": "dev-main",
         "nette\/neon": "^3.2"
     },
@@ -19,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111013\\Symplify\\PackageBuilder\\": "src"
+            "ConfigTransformer202111019\\Symplify\\PackageBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202111013\\Symplify\\PackageBuilder\\Tests\\": "tests"
+            "ConfigTransformer202111019\\Symplify\\PackageBuilder\\Tests\\": "tests"
         }
     },
     "extra": {

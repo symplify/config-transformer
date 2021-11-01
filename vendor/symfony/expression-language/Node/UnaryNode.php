@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111013\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202111019\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202111013\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202111019\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class UnaryNode extends \ConfigTransformer202111013\Symfony\Component\ExpressionLanguage\Node\Node
+class UnaryNode extends \ConfigTransformer202111019\Symfony\Component\ExpressionLanguage\Node\Node
 {
     private const OPERATORS = ['!' => '!', 'not' => '!', '+' => '+', '-' => '-'];
-    public function __construct(string $operator, \ConfigTransformer202111013\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function __construct(string $operator, \ConfigTransformer202111019\Symfony\Component\ExpressionLanguage\Node\Node $node)
     {
         parent::__construct(['node' => $node], ['operator' => $operator]);
     }

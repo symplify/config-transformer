@@ -10,7 +10,7 @@
         "symfony\/dependency-injection": "^5.3|^6.0",
         "symfony\/filesystem": "^5.3|^6.0",
         "symplify\/package-builder": "dev-main",
-        "symplify\/symfony-container-builder": "dev-main",
+        "symplify\/symplify-kernel": "dev-main",
         "symplify\/smart-file-system": "dev-main"
     },
     "require-dev": {
@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111013\\Symplify\\ComposerJsonManipulator\\": "src"
+            "ConfigTransformer202111019\\Symplify\\ComposerJsonManipulator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202111013\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+            "ConfigTransformer202111019\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
         }
     },
     "extra": {
