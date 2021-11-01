@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111015\Symfony\Component\Console\SignalRegistry;
+namespace ConfigTransformer202111016\Symfony\Component\Console\SignalRegistry;
 
 final class SignalRegistry
 {
