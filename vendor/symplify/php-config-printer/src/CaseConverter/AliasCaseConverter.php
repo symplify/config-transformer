@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111019\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202111010\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202111019\Nette\Utils\Strings;
-use ConfigTransformer202111019\PhpParser\Node\Arg;
-use ConfigTransformer202111019\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111019\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202111019\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202111019\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202111019\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-use ConfigTransformer202111019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202111010\Nette\Utils\Strings;
+use ConfigTransformer202111010\PhpParser\Node\Arg;
+use ConfigTransformer202111010\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202111010\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202111010\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202111010\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202111010\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202111010\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+final class AliasCaseConverter implements \ConfigTransformer202111010\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @see https://regex101.com/r/BwXkfO/2/
@@ -47,7 +47,7 @@ final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\P
      * @var \Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker
      */
     private $classLikeExistenceChecker;
-    public function __construct(\ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory, \ConfigTransformer202111019\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker $classLikeExistenceChecker)
+    public function __construct(\ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202111010\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory, \ConfigTransformer202111010\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker $classLikeExistenceChecker)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
@@ -58,30 +58,30 @@ final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\P
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression
     {
         if (!\is_string($key)) {
-            throw new \ConfigTransformer202111019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202111010\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
-        $servicesVariable = new \ConfigTransformer202111019\PhpParser\Node\Expr\Variable(\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \ConfigTransformer202111010\PhpParser\Node\Expr\Variable(\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         if ($this->classLikeExistenceChecker->doesClassLikeExist($key)) {
             return $this->createFromClassLike($key, $values, $servicesVariable);
         }
         // handles: "SomeClass $someVariable: ..."
-        $fullClassName = \ConfigTransformer202111019\Nette\Utils\Strings::before($key, ' $');
+        $fullClassName = \ConfigTransformer202111010\Nette\Utils\Strings::before($key, ' $');
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
-            return new \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression($methodCall);
+            return new \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression($methodCall);
         }
         if (\is_string($values) && $values[0] === '@') {
             $args = $this->argsNodeFactory->createFromValues([$key, $values], \true);
-            $methodCall = new \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-            return new \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression($methodCall);
+            $methodCall = new \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            return new \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression($methodCall);
         }
         if (\is_array($values)) {
             return $this->createFromArrayValues($values, $key, $servicesVariable);
         }
-        throw new \ConfigTransformer202111019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        throw new \ConfigTransformer202111010\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
     }
     /**
      * @param mixed $key
@@ -90,13 +90,13 @@ final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\P
      */
     public function match($rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
-        if (isset($values[\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
+        if (isset($values[\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
-        if (\ConfigTransformer202111019\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
+        if (\ConfigTransformer202111010\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
             return \true;
         }
         if (!\is_string($values)) {
@@ -107,32 +107,32 @@ final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\P
     /**
      * @param mixed $serviceValues
      */
-    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall
+    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall
     {
         $args = [];
         $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
-        \ConfigTransformer202111019\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
-        $argumentName = '$' . \ConfigTransformer202111019\Nette\Utils\Strings::after($key, '$');
-        $concat = new \ConfigTransformer202111019\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \ConfigTransformer202111019\PhpParser\Node\Scalar\String_(' ' . $argumentName));
-        $args[] = new \ConfigTransformer202111019\PhpParser\Node\Arg($concat);
+        \ConfigTransformer202111010\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
+        $argumentName = '$' . \ConfigTransformer202111010\Nette\Utils\Strings::after($key, '$');
+        $concat = new \ConfigTransformer202111010\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \ConfigTransformer202111010\PhpParser\Node\Scalar\String_(' ' . $argumentName));
+        $args[] = new \ConfigTransformer202111010\PhpParser\Node\Arg($concat);
         $serviceName = \ltrim($serviceValues, '@');
-        $args[] = new \ConfigTransformer202111019\PhpParser\Node\Arg(new \ConfigTransformer202111019\PhpParser\Node\Scalar\String_($serviceName));
-        return new \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202111019\PhpParser\Node\Expr\Variable(\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        $args[] = new \ConfigTransformer202111010\PhpParser\Node\Arg(new \ConfigTransformer202111010\PhpParser\Node\Scalar\String_($serviceName));
+        return new \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202111010\PhpParser\Node\Expr\Variable(\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
     /**
      * @param mixed $values
      */
-    private function createFromClassLike(string $key, $values, \ConfigTransformer202111019\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression
+    private function createFromClassLike(string $key, $values, \ConfigTransformer202111010\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression
     {
         $classReference = $this->commonNodeFactory->createClassReference($key);
         $argValues = [];
         $argValues[] = $classReference;
-        $argValues[] = $values[\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
+        $argValues[] = $values[\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
         $args = $this->argsNodeFactory->createFromValues($argValues, \true);
-        $methodCall = new \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-        return new \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        return new \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression($methodCall);
     }
-    private function createFromAlias(string $serviceName, string $key, \ConfigTransformer202111019\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall
+    private function createFromAlias(string $serviceName, string $key, \ConfigTransformer202111010\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall
     {
         if ($this->classLikeExistenceChecker->doesClassLikeExist($serviceName)) {
             $classReference = $this->commonNodeFactory->createClassReference($serviceName);
@@ -140,21 +140,21 @@ final class AliasCaseConverter implements \ConfigTransformer202111019\Symplify\P
         } else {
             $args = $this->argsNodeFactory->createFromValues([$key, $serviceName]);
         }
-        return new \ConfigTransformer202111019\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        return new \ConfigTransformer202111010\PhpParser\Node\Expr\MethodCall($servicesVariable, \ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
     /**
      * @param mixed[] $values
      */
-    private function createFromArrayValues(array $values, string $key, \ConfigTransformer202111019\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression
+    private function createFromArrayValues(array $values, string $key, \ConfigTransformer202111010\PhpParser\Node\Expr\Variable $servicesVariable) : \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression
     {
-        if (isset($values[\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
-            $methodCall = $this->createFromAlias($values[\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS], $key, $servicesVariable);
-            unset($values[\ConfigTransformer202111019\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS]);
+        if (isset($values[\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
+            $methodCall = $this->createFromAlias($values[\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS], $key, $servicesVariable);
+            unset($values[\ConfigTransformer202111010\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS]);
         } else {
-            throw new \ConfigTransformer202111019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202111010\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         /** @var MethodCall $methodCall */
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
-        return new \ConfigTransformer202111019\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \ConfigTransformer202111010\PhpParser\Node\Stmt\Expression($methodCall);
     }
 }

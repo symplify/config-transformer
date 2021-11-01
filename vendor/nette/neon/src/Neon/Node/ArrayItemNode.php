@@ -5,11 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111019\Nette\Neon\Node;
+namespace ConfigTransformer202111010\Nette\Neon\Node;
 
-use ConfigTransformer202111019\Nette\Neon\Node;
+use ConfigTransformer202111010\Nette\Neon\Node;
 /** @internal */
-final class ArrayItemNode extends \ConfigTransformer202111019\Nette\Neon\Node
+final class ArrayItemNode extends \ConfigTransformer202111010\Nette\Neon\Node
 {
     /** @var ?Node */
     public $key;
