@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111026\PhpParser;
+namespace ConfigTransformer202111029\PhpParser;
 
-use ConfigTransformer202111026\PhpParser\Node\Arg;
-use ConfigTransformer202111026\PhpParser\Node\Expr;
-use ConfigTransformer202111026\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer202111026\PhpParser\Node\Identifier;
-use ConfigTransformer202111026\PhpParser\Node\Name;
-use ConfigTransformer202111026\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202111026\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202111029\PhpParser\Node\Arg;
+use ConfigTransformer202111029\PhpParser\Node\Expr;
+use ConfigTransformer202111029\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202111029\PhpParser\Node\Identifier;
+use ConfigTransformer202111029\PhpParser\Node\Name;
+use ConfigTransformer202111029\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202111029\PhpParser\Node\Stmt\Use_;
 class BuilderFactory
 {
     /**
@@ -20,9 +20,9 @@ class BuilderFactory
      *
      * @return Node\Attribute
      */
-    public function attribute($name, $args = []) : \ConfigTransformer202111026\PhpParser\Node\Attribute
+    public function attribute($name, $args = []) : \ConfigTransformer202111029\PhpParser\Node\Attribute
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Attribute(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeName($name), $this->args($args));
+        return new \ConfigTransformer202111029\PhpParser\Node\Attribute(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeName($name), $this->args($args));
     }
     /**
      * Creates a namespace builder.
@@ -31,9 +31,9 @@ class BuilderFactory
      *
      * @return Builder\Namespace_ The created namespace builder
      */
-    public function namespace($name) : \ConfigTransformer202111026\PhpParser\Builder\Namespace_
+    public function namespace($name) : \ConfigTransformer202111029\PhpParser\Builder\Namespace_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Namespace_($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Namespace_($name);
     }
     /**
      * Creates a class builder.
@@ -42,9 +42,9 @@ class BuilderFactory
      *
      * @return Builder\Class_ The created class builder
      */
-    public function class($name) : \ConfigTransformer202111026\PhpParser\Builder\Class_
+    public function class($name) : \ConfigTransformer202111029\PhpParser\Builder\Class_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Class_($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Class_($name);
     }
     /**
      * Creates an interface builder.
@@ -53,9 +53,9 @@ class BuilderFactory
      *
      * @return Builder\Interface_ The created interface builder
      */
-    public function interface($name) : \ConfigTransformer202111026\PhpParser\Builder\Interface_
+    public function interface($name) : \ConfigTransformer202111029\PhpParser\Builder\Interface_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Interface_($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Interface_($name);
     }
     /**
      * Creates a trait builder.
@@ -64,9 +64,9 @@ class BuilderFactory
      *
      * @return Builder\Trait_ The created trait builder
      */
-    public function trait($name) : \ConfigTransformer202111026\PhpParser\Builder\Trait_
+    public function trait($name) : \ConfigTransformer202111029\PhpParser\Builder\Trait_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Trait_($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Trait_($name);
     }
     /**
      * Creates a trait use builder.
@@ -75,9 +75,9 @@ class BuilderFactory
      *
      * @return Builder\TraitUse The create trait use builder
      */
-    public function useTrait(...$traits) : \ConfigTransformer202111026\PhpParser\Builder\TraitUse
+    public function useTrait(...$traits) : \ConfigTransformer202111029\PhpParser\Builder\TraitUse
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\TraitUse(...$traits);
+        return new \ConfigTransformer202111029\PhpParser\Builder\TraitUse(...$traits);
     }
     /**
      * Creates a trait use adaptation builder.
@@ -87,13 +87,13 @@ class BuilderFactory
      *
      * @return Builder\TraitUseAdaptation The create trait use adaptation builder
      */
-    public function traitUseAdaptation($trait, $method = null) : \ConfigTransformer202111026\PhpParser\Builder\TraitUseAdaptation
+    public function traitUseAdaptation($trait, $method = null) : \ConfigTransformer202111029\PhpParser\Builder\TraitUseAdaptation
     {
         if ($method === null) {
             $method = $trait;
             $trait = null;
         }
-        return new \ConfigTransformer202111026\PhpParser\Builder\TraitUseAdaptation($trait, $method);
+        return new \ConfigTransformer202111029\PhpParser\Builder\TraitUseAdaptation($trait, $method);
     }
     /**
      * Creates a method builder.
@@ -102,9 +102,9 @@ class BuilderFactory
      *
      * @return Builder\Method The created method builder
      */
-    public function method($name) : \ConfigTransformer202111026\PhpParser\Builder\Method
+    public function method($name) : \ConfigTransformer202111029\PhpParser\Builder\Method
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Method($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Method($name);
     }
     /**
      * Creates a parameter builder.
@@ -113,9 +113,9 @@ class BuilderFactory
      *
      * @return Builder\Param The created parameter builder
      */
-    public function param($name) : \ConfigTransformer202111026\PhpParser\Builder\Param
+    public function param($name) : \ConfigTransformer202111029\PhpParser\Builder\Param
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Param($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Param($name);
     }
     /**
      * Creates a property builder.
@@ -124,9 +124,9 @@ class BuilderFactory
      *
      * @return Builder\Property The created property builder
      */
-    public function property($name) : \ConfigTransformer202111026\PhpParser\Builder\Property
+    public function property($name) : \ConfigTransformer202111029\PhpParser\Builder\Property
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Property($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Property($name);
     }
     /**
      * Creates a function builder.
@@ -135,9 +135,9 @@ class BuilderFactory
      *
      * @return Builder\Function_ The created function builder
      */
-    public function function($name) : \ConfigTransformer202111026\PhpParser\Builder\Function_
+    public function function($name) : \ConfigTransformer202111029\PhpParser\Builder\Function_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Function_($name);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Function_($name);
     }
     /**
      * Creates a namespace/class use builder.
@@ -146,9 +146,9 @@ class BuilderFactory
      *
      * @return Builder\Use_ The created use builder
      */
-    public function use($name) : \ConfigTransformer202111026\PhpParser\Builder\Use_
+    public function use($name) : \ConfigTransformer202111029\PhpParser\Builder\Use_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Use_($name, \ConfigTransformer202111026\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Use_($name, \ConfigTransformer202111029\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
     }
     /**
      * Creates a function use builder.
@@ -157,9 +157,9 @@ class BuilderFactory
      *
      * @return Builder\Use_ The created use function builder
      */
-    public function useFunction($name) : \ConfigTransformer202111026\PhpParser\Builder\Use_
+    public function useFunction($name) : \ConfigTransformer202111029\PhpParser\Builder\Use_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Use_($name, \ConfigTransformer202111026\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Use_($name, \ConfigTransformer202111029\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
     }
     /**
      * Creates a constant use builder.
@@ -168,9 +168,9 @@ class BuilderFactory
      *
      * @return Builder\Use_ The created use const builder
      */
-    public function useConst($name) : \ConfigTransformer202111026\PhpParser\Builder\Use_
+    public function useConst($name) : \ConfigTransformer202111029\PhpParser\Builder\Use_
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\Use_($name, \ConfigTransformer202111026\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
+        return new \ConfigTransformer202111029\PhpParser\Builder\Use_($name, \ConfigTransformer202111029\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
     }
     /**
      * Creates a class constant builder.
@@ -180,9 +180,9 @@ class BuilderFactory
      *
      * @return Builder\ClassConst The created use const builder
      */
-    public function classConst($name, $value) : \ConfigTransformer202111026\PhpParser\Builder\ClassConst
+    public function classConst($name, $value) : \ConfigTransformer202111029\PhpParser\Builder\ClassConst
     {
-        return new \ConfigTransformer202111026\PhpParser\Builder\ClassConst($name, $value);
+        return new \ConfigTransformer202111029\PhpParser\Builder\ClassConst($name, $value);
     }
     /**
      * Creates node a for a literal value.
@@ -191,9 +191,9 @@ class BuilderFactory
      *
      * @return Expr
      */
-    public function val($value) : \ConfigTransformer202111026\PhpParser\Node\Expr
+    public function val($value) : \ConfigTransformer202111029\PhpParser\Node\Expr
     {
-        return \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeValue($value);
     }
     /**
      * Creates variable node.
@@ -202,12 +202,12 @@ class BuilderFactory
      *
      * @return Expr\Variable
      */
-    public function var($name) : \ConfigTransformer202111026\PhpParser\Node\Expr\Variable
+    public function var($name) : \ConfigTransformer202111029\PhpParser\Node\Expr\Variable
     {
-        if (!\is_string($name) && !$name instanceof \ConfigTransformer202111026\PhpParser\Node\Expr) {
+        if (!\is_string($name) && !$name instanceof \ConfigTransformer202111029\PhpParser\Node\Expr) {
             throw new \LogicException('Variable name must be string or Expr');
         }
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\Variable($name);
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\Variable($name);
     }
     /**
      * Normalizes an argument list.
@@ -222,11 +222,11 @@ class BuilderFactory
     {
         $normalizedArgs = [];
         foreach ($args as $key => $arg) {
-            if (!$arg instanceof \ConfigTransformer202111026\PhpParser\Node\Arg) {
-                $arg = new \ConfigTransformer202111026\PhpParser\Node\Arg(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeValue($arg));
+            if (!$arg instanceof \ConfigTransformer202111029\PhpParser\Node\Arg) {
+                $arg = new \ConfigTransformer202111029\PhpParser\Node\Arg(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeValue($arg));
             }
             if (\is_string($key)) {
-                $arg->name = \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeIdentifier($key);
+                $arg->name = \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeIdentifier($key);
             }
             $normalizedArgs[] = $arg;
         }
@@ -240,9 +240,9 @@ class BuilderFactory
      *
      * @return Expr\FuncCall
      */
-    public function funcCall($name, $args = []) : \ConfigTransformer202111026\PhpParser\Node\Expr\FuncCall
+    public function funcCall($name, $args = []) : \ConfigTransformer202111029\PhpParser\Node\Expr\FuncCall
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\FuncCall(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeNameOrExpr($name), $this->args($args));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\FuncCall(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeNameOrExpr($name), $this->args($args));
     }
     /**
      * Creates a method call node.
@@ -253,9 +253,9 @@ class BuilderFactory
      *
      * @return Expr\MethodCall
      */
-    public function methodCall($var, $name, $args = []) : \ConfigTransformer202111026\PhpParser\Node\Expr\MethodCall
+    public function methodCall($var, $name, $args = []) : \ConfigTransformer202111029\PhpParser\Node\Expr\MethodCall
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\MethodCall($var, \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name), $this->args($args));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\MethodCall($var, \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name), $this->args($args));
     }
     /**
      * Creates a static method call node.
@@ -266,9 +266,9 @@ class BuilderFactory
      *
      * @return Expr\StaticCall
      */
-    public function staticCall($class, $name, $args = []) : \ConfigTransformer202111026\PhpParser\Node\Expr\StaticCall
+    public function staticCall($class, $name, $args = []) : \ConfigTransformer202111029\PhpParser\Node\Expr\StaticCall
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\StaticCall(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name), $this->args($args));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\StaticCall(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name), $this->args($args));
     }
     /**
      * Creates an object creation node.
@@ -278,9 +278,9 @@ class BuilderFactory
      *
      * @return Expr\New_
      */
-    public function new($class, $args = []) : \ConfigTransformer202111026\PhpParser\Node\Expr\New_
+    public function new($class, $args = []) : \ConfigTransformer202111029\PhpParser\Node\Expr\New_
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\New_(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), $this->args($args));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\New_(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), $this->args($args));
     }
     /**
      * Creates a constant fetch node.
@@ -289,9 +289,9 @@ class BuilderFactory
      *
      * @return Expr\ConstFetch
      */
-    public function constFetch($name) : \ConfigTransformer202111026\PhpParser\Node\Expr\ConstFetch
+    public function constFetch($name) : \ConfigTransformer202111029\PhpParser\Node\Expr\ConstFetch
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\ConstFetch(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeName($name));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\ConstFetch(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeName($name));
     }
     /**
      * Creates a property fetch node.
@@ -301,9 +301,9 @@ class BuilderFactory
      *
      * @return Expr\PropertyFetch
      */
-    public function propertyFetch($var, $name) : \ConfigTransformer202111026\PhpParser\Node\Expr\PropertyFetch
+    public function propertyFetch($var, $name) : \ConfigTransformer202111029\PhpParser\Node\Expr\PropertyFetch
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\PropertyFetch($var, \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\PropertyFetch($var, \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeIdentifierOrExpr($name));
     }
     /**
      * Creates a class constant fetch node.
@@ -313,9 +313,9 @@ class BuilderFactory
      *
      * @return Expr\ClassConstFetch
      */
-    public function classConstFetch($class, $name) : \ConfigTransformer202111026\PhpParser\Node\Expr\ClassConstFetch
+    public function classConstFetch($class, $name) : \ConfigTransformer202111029\PhpParser\Node\Expr\ClassConstFetch
     {
-        return new \ConfigTransformer202111026\PhpParser\Node\Expr\ClassConstFetch(\ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), \ConfigTransformer202111026\PhpParser\BuilderHelpers::normalizeIdentifier($name));
+        return new \ConfigTransformer202111029\PhpParser\Node\Expr\ClassConstFetch(\ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeNameOrExpr($class), \ConfigTransformer202111029\PhpParser\BuilderHelpers::normalizeIdentifier($name));
     }
     /**
      * Creates nested Concat nodes from a list of expressions.
@@ -324,7 +324,7 @@ class BuilderFactory
      *
      * @return Concat
      */
-    public function concat(...$exprs) : \ConfigTransformer202111026\PhpParser\Node\Expr\BinaryOp\Concat
+    public function concat(...$exprs) : \ConfigTransformer202111029\PhpParser\Node\Expr\BinaryOp\Concat
     {
         $numExprs = \count($exprs);
         if ($numExprs < 2) {
@@ -332,7 +332,7 @@ class BuilderFactory
         }
         $lastConcat = $this->normalizeStringExpr($exprs[0]);
         for ($i = 1; $i < $numExprs; $i++) {
-            $lastConcat = new \ConfigTransformer202111026\PhpParser\Node\Expr\BinaryOp\Concat($lastConcat, $this->normalizeStringExpr($exprs[$i]));
+            $lastConcat = new \ConfigTransformer202111029\PhpParser\Node\Expr\BinaryOp\Concat($lastConcat, $this->normalizeStringExpr($exprs[$i]));
         }
         return $lastConcat;
     }
@@ -340,13 +340,13 @@ class BuilderFactory
      * @param string|Expr $expr
      * @return Expr
      */
-    private function normalizeStringExpr($expr) : \ConfigTransformer202111026\PhpParser\Node\Expr
+    private function normalizeStringExpr($expr) : \ConfigTransformer202111029\PhpParser\Node\Expr
     {
-        if ($expr instanceof \ConfigTransformer202111026\PhpParser\Node\Expr) {
+        if ($expr instanceof \ConfigTransformer202111029\PhpParser\Node\Expr) {
             return $expr;
         }
         if (\is_string($expr)) {
-            return new \ConfigTransformer202111026\PhpParser\Node\Scalar\String_($expr);
+            return new \ConfigTransformer202111029\PhpParser\Node\Scalar\String_($expr);
         }
         throw new \LogicException('Expected string or Expr');
     }
