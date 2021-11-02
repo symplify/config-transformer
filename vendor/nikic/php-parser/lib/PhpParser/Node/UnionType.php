@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111021\PhpParser\Node;
+namespace ConfigTransformer202111023\PhpParser\Node;
 
-class UnionType extends \ConfigTransformer202111021\PhpParser\Node\ComplexType
+class UnionType extends \ConfigTransformer202111023\PhpParser\Node\ComplexType
 {
     /** @var (Identifier|Name)[] Types */
     public $types;

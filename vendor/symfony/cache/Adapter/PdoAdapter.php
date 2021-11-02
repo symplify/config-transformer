@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111021\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202111023\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111021\Doctrine\DBAL\Connection;
-use ConfigTransformer202111021\Doctrine\DBAL\DBALException;
-use ConfigTransformer202111021\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use ConfigTransformer202111021\Doctrine\DBAL\DriverManager;
-use ConfigTransformer202111021\Doctrine\DBAL\Exception;
-use ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException;
-use ConfigTransformer202111021\Doctrine\DBAL\ParameterType;
-use ConfigTransformer202111021\Doctrine\DBAL\Schema\Schema;
-use ConfigTransformer202111021\Doctrine\DBAL\Statement;
-use ConfigTransformer202111021\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202111021\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202111021\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202111021\Symfony\Component\Cache\PruneableInterface;
-class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202111021\Symfony\Component\Cache\PruneableInterface
+use ConfigTransformer202111023\Doctrine\DBAL\Connection;
+use ConfigTransformer202111023\Doctrine\DBAL\DBALException;
+use ConfigTransformer202111023\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use ConfigTransformer202111023\Doctrine\DBAL\DriverManager;
+use ConfigTransformer202111023\Doctrine\DBAL\Exception;
+use ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException;
+use ConfigTransformer202111023\Doctrine\DBAL\ParameterType;
+use ConfigTransformer202111023\Doctrine\DBAL\Schema\Schema;
+use ConfigTransformer202111023\Doctrine\DBAL\Statement;
+use ConfigTransformer202111023\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202111023\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202111023\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202111023\Symfony\Component\Cache\PruneableInterface;
+class PdoAdapter extends \ConfigTransformer202111023\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202111023\Symfony\Component\Cache\PruneableInterface
 {
     protected $maxIdLength = 255;
     private $marshaller;
@@ -64,22 +64,22 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
      * @throws InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      * @throws InvalidArgumentException When namespace contains invalid characters
      */
-    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \ConfigTransformer202111021\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \ConfigTransformer202111023\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (isset($namespace[0]) && \preg_match('#[^-+.A-Za-z0-9]#', $namespace, $match)) {
-            throw new \ConfigTransformer202111021\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
+            throw new \ConfigTransformer202111023\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
         }
         if ($connOrDsn instanceof \PDO) {
             if (\PDO::ERRMODE_EXCEPTION !== $connOrDsn->getAttribute(\PDO::ATTR_ERRMODE)) {
-                throw new \ConfigTransformer202111021\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
+                throw new \ConfigTransformer202111023\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
             }
             $this->conn = $connOrDsn;
-        } elseif ($connOrDsn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection) {
+        } elseif ($connOrDsn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection) {
             $this->conn = $connOrDsn;
         } elseif (\is_string($connOrDsn)) {
             $this->dsn = $connOrDsn;
         } else {
-            throw new \ConfigTransformer202111021\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO or Doctrine\\DBAL\\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, \get_debug_type($connOrDsn)));
+            throw new \ConfigTransformer202111023\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO or Doctrine\\DBAL\\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, \get_debug_type($connOrDsn)));
         }
         $this->table = $options['db_table'] ?? $this->table;
         $this->idCol = $options['db_id_col'] ?? $this->idCol;
@@ -90,7 +90,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
         $this->password = $options['db_password'] ?? $this->password;
         $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
         $this->namespace = $namespace;
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202111021\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202111023\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct($namespace, $defaultLifetime);
     }
     /**
@@ -108,11 +108,11 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
     {
         // connect if we are not yet
         $conn = $this->getConnection();
-        if ($conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection) {
-            $schema = new \ConfigTransformer202111021\Doctrine\DBAL\Schema\Schema();
+        if ($conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection) {
+            $schema = new \ConfigTransformer202111023\Doctrine\DBAL\Schema\Schema();
             $this->addTableToSchema($schema);
             foreach ($schema->toSql($conn->getDatabasePlatform()) as $sql) {
-                if ($conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
+                if ($conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
                     $conn->executeStatement($sql);
                 } else {
                     $conn->exec($sql);
@@ -144,7 +144,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             default:
                 throw new \DomainException(\sprintf('Creating the cache table is currently not implemented for PDO driver "%s".', $this->driver));
         }
-        if ($conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
+        if ($conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
             $conn->executeStatement($sql);
         } else {
             $conn->exec($sql);
@@ -153,7 +153,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
     /**
      * Adds the Table to the Schema if the adapter uses this Connection.
      */
-    public function configureSchema(\ConfigTransformer202111021\Doctrine\DBAL\Schema\Schema $schema, \ConfigTransformer202111021\Doctrine\DBAL\Connection $forConnection) : void
+    public function configureSchema(\ConfigTransformer202111023\Doctrine\DBAL\Schema\Schema $schema, \ConfigTransformer202111023\Doctrine\DBAL\Connection $forConnection) : void
     {
         // only update the schema for this connection
         if ($forConnection !== $this->getConnection()) {
@@ -174,26 +174,26 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             $deleteSql .= " AND {$this->idCol} LIKE :namespace";
         }
         $connection = $this->getConnection();
-        $useDbalConstants = $connection instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection;
+        $useDbalConstants = $connection instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection;
         try {
             $delete = $connection->prepare($deleteSql);
-        } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             return \true;
         } catch (\PDOException $e) {
             return \true;
         }
-        $delete->bindValue(':time', \time(), $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+        $delete->bindValue(':time', \time(), $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         if ('' !== $this->namespace) {
-            $delete->bindValue(':namespace', \sprintf('%s%%', $this->namespace), $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::STRING : \PDO::PARAM_STR);
+            $delete->bindValue(':namespace', \sprintf('%s%%', $this->namespace), $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::STRING : \PDO::PARAM_STR);
         }
         try {
             // Doctrine DBAL ^2.13 || >= 3.1
-            if ($delete instanceof \ConfigTransformer202111021\Doctrine\DBAL\Statement && \method_exists($delete, 'executeStatement')) {
+            if ($delete instanceof \ConfigTransformer202111023\Doctrine\DBAL\Statement && \method_exists($delete, 'executeStatement')) {
                 $delete->executeStatement();
                 return \true;
             }
             return $delete->execute();
-        } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             return \true;
         } catch (\PDOException $e) {
             return \true;
@@ -205,13 +205,13 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
     protected function doFetch(array $ids)
     {
         $connection = $this->getConnection();
-        $useDbalConstants = $connection instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection;
+        $useDbalConstants = $connection instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection;
         $now = \time();
         $expired = [];
         $sql = \str_pad('', (\count($ids) << 1) - 1, '?,');
         $sql = "SELECT {$this->idCol}, CASE WHEN {$this->lifetimeCol} IS NULL OR {$this->lifetimeCol} + {$this->timeCol} > ? THEN {$this->dataCol} ELSE NULL END FROM {$this->table} WHERE {$this->idCol} IN ({$sql})";
         $stmt = $connection->prepare($sql);
-        $stmt->bindValue($i = 1, $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+        $stmt->bindValue($i = 1, $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         foreach ($ids as $id) {
             $stmt->bindValue(++$i, $id);
         }
@@ -233,7 +233,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             $sql = \str_pad('', (\count($expired) << 1) - 1, '?,');
             $sql = "DELETE FROM {$this->table} WHERE {$this->lifetimeCol} + {$this->timeCol} <= ? AND {$this->idCol} IN ({$sql})";
             $stmt = $connection->prepare($sql);
-            $stmt->bindValue($i = 1, $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindValue($i = 1, $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
             foreach ($expired as $id) {
                 $stmt->bindValue(++$i, $id);
             }
@@ -246,11 +246,11 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
     protected function doHave(string $id)
     {
         $connection = $this->getConnection();
-        $useDbalConstants = $connection instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection;
+        $useDbalConstants = $connection instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection;
         $sql = "SELECT 1 FROM {$this->table} WHERE {$this->idCol} = :id AND ({$this->lifetimeCol} IS NULL OR {$this->lifetimeCol} + {$this->timeCol} > :time)";
         $stmt = $connection->prepare($sql);
         $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':time', \time(), $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+        $stmt->bindValue(':time', \time(), $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         $result = $stmt->execute();
         return (bool) (\is_object($result) ? $result->fetchOne() : $stmt->fetchColumn());
     }
@@ -270,12 +270,12 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} LIKE '{$namespace}%'";
         }
         try {
-            if ($conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
+            if ($conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection && \method_exists($conn, 'executeStatement')) {
                 $conn->executeStatement($sql);
             } else {
                 $conn->exec($sql);
             }
-        } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
         } catch (\PDOException $e) {
         }
         return \true;
@@ -290,7 +290,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
         try {
             $stmt = $this->getConnection()->prepare($sql);
             $stmt->execute(\array_values($ids));
-        } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
         } catch (\PDOException $e) {
         }
         return \true;
@@ -304,7 +304,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             return $failed;
         }
         $conn = $this->getConnection();
-        $useDbalConstants = $conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Connection;
+        $useDbalConstants = $conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Connection;
         $driver = $this->driver;
         $insertSql = "INSERT INTO {$this->table} ({$this->idCol}, {$this->dataCol}, {$this->lifetimeCol}, {$this->timeCol}) VALUES (:id, :data, :lifetime, :time)";
         switch (\true) {
@@ -335,7 +335,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
         $lifetime = $lifetime ?: null;
         try {
             $stmt = $conn->prepare($sql);
-        } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             if (!$conn->isTransactionActive() || \in_array($this->driver, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                 $this->createTable();
             }
@@ -349,29 +349,29 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
         if ('sqlsrv' === $driver || 'oci' === $driver) {
             $stmt->bindParam(1, $id);
             $stmt->bindParam(2, $id);
-            $stmt->bindParam(3, $data, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
-            $stmt->bindValue(4, $lifetime, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
-            $stmt->bindValue(5, $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
-            $stmt->bindParam(6, $data, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
-            $stmt->bindValue(7, $lifetime, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
-            $stmt->bindValue(8, $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindParam(3, $data, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
+            $stmt->bindValue(4, $lifetime, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindValue(5, $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindParam(6, $data, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
+            $stmt->bindValue(7, $lifetime, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindValue(8, $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         } else {
             $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':data', $data, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
-            $stmt->bindValue(':lifetime', $lifetime, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
-            $stmt->bindValue(':time', $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindParam(':data', $data, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
+            $stmt->bindValue(':lifetime', $lifetime, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $stmt->bindValue(':time', $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         }
         if (null === $driver) {
             $insertStmt = $conn->prepare($insertSql);
             $insertStmt->bindParam(':id', $id);
-            $insertStmt->bindParam(':data', $data, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
-            $insertStmt->bindValue(':lifetime', $lifetime, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
-            $insertStmt->bindValue(':time', $now, $useDbalConstants ? \ConfigTransformer202111021\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $insertStmt->bindParam(':data', $data, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::LARGE_OBJECT : \PDO::PARAM_LOB);
+            $insertStmt->bindValue(':lifetime', $lifetime, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
+            $insertStmt->bindValue(':time', $now, $useDbalConstants ? \ConfigTransformer202111023\Doctrine\DBAL\ParameterType::INTEGER : \PDO::PARAM_INT);
         }
         foreach ($values as $id => $data) {
             try {
                 $result = $stmt->execute();
-            } catch (\ConfigTransformer202111021\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+            } catch (\ConfigTransformer202111023\Doctrine\DBAL\Exception\TableNotFoundException $e) {
                 if (!$conn->isTransactionActive() || \in_array($this->driver, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                     $this->createTable();
                 }
@@ -385,7 +385,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             if (null === $driver && !(\is_object($result) ? $result->rowCount() : $stmt->rowCount())) {
                 try {
                     $insertStmt->execute();
-                } catch (\ConfigTransformer202111021\Doctrine\DBAL\DBALException|\ConfigTransformer202111021\Doctrine\DBAL\Exception $e) {
+                } catch (\ConfigTransformer202111023\Doctrine\DBAL\DBALException|\ConfigTransformer202111023\Doctrine\DBAL\Exception $e) {
                 } catch (\PDOException $e) {
                     // A concurrent write won, let it be
                 }
@@ -400,10 +400,10 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
     {
         if (null === $this->conn) {
             if (\strpos($this->dsn, '://')) {
-                if (!\class_exists(\ConfigTransformer202111021\Doctrine\DBAL\DriverManager::class)) {
-                    throw new \ConfigTransformer202111021\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to parse the DSN "%s". Try running "composer require doctrine/dbal".', $this->dsn));
+                if (!\class_exists(\ConfigTransformer202111023\Doctrine\DBAL\DriverManager::class)) {
+                    throw new \ConfigTransformer202111023\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to parse the DSN "%s". Try running "composer require doctrine/dbal".', $this->dsn));
                 }
-                $this->conn = \ConfigTransformer202111021\Doctrine\DBAL\DriverManager::getConnection(['url' => $this->dsn]);
+                $this->conn = \ConfigTransformer202111023\Doctrine\DBAL\DriverManager::getConnection(['url' => $this->dsn]);
             } else {
                 $this->conn = new \PDO($this->dsn, $this->username, $this->password, $this->connectionOptions);
                 $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -415,30 +415,30 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             } else {
                 $driver = $this->conn->getDriver();
                 switch (\true) {
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\Mysqli\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\Mysqli\Driver:
                         throw new \LogicException(\sprintf('The adapter "%s" does not support the mysqli driver, use pdo_mysql instead.', static::class));
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\AbstractMySQLDriver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\AbstractMySQLDriver:
                         $this->driver = 'mysql';
                         break;
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDOSqlite\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDO\SQLite\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDOSqlite\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDO\SQLite\Driver:
                         $this->driver = 'sqlite';
                         break;
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDOPgSql\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDO\PgSQL\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDOPgSql\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDO\PgSQL\Driver:
                         $this->driver = 'pgsql';
                         break;
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\OCI8\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDOOracle\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDO\OCI\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\OCI8\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDOOracle\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDO\OCI\Driver:
                         $this->driver = 'oci';
                         break;
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\SQLSrv\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDOSqlsrv\Driver:
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\PDO\SQLSrv\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\SQLSrv\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDOSqlsrv\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\PDO\SQLSrv\Driver:
                         $this->driver = 'sqlsrv';
                         break;
-                    case $driver instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver:
+                    case $driver instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver:
                         $this->driver = ['mssql' => 'sqlsrv', 'oracle' => 'oci', 'postgresql' => 'pgsql', 'sqlite' => 'sqlite', 'mysql' => 'mysql'][$driver->getDatabasePlatform()->getName()] ?? \get_class($driver);
                         break;
                     default:
@@ -455,7 +455,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
             $conn = $this->conn instanceof \PDO ? $this->conn : $this->conn->getWrappedConnection();
             if ($conn instanceof \PDO) {
                 $this->serverVersion = $conn->getAttribute(\PDO::ATTR_SERVER_VERSION);
-            } elseif ($conn instanceof \ConfigTransformer202111021\Doctrine\DBAL\Driver\ServerInfoAwareConnection) {
+            } elseif ($conn instanceof \ConfigTransformer202111023\Doctrine\DBAL\Driver\ServerInfoAwareConnection) {
                 $this->serverVersion = $conn->getServerVersion();
             } else {
                 $this->serverVersion = '0';
@@ -463,7 +463,7 @@ class PdoAdapter extends \ConfigTransformer202111021\Symfony\Component\Cache\Ada
         }
         return $this->serverVersion;
     }
-    private function addTableToSchema(\ConfigTransformer202111021\Doctrine\DBAL\Schema\Schema $schema) : void
+    private function addTableToSchema(\ConfigTransformer202111023\Doctrine\DBAL\Schema\Schema $schema) : void
     {
         $types = ['mysql' => 'binary', 'sqlite' => 'text', 'pgsql' => 'string', 'oci' => 'string', 'sqlsrv' => 'string'];
         if (!isset($types[$this->driver])) {

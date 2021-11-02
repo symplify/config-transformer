@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111021\PhpParser\Internal;
+namespace ConfigTransformer202111023\PhpParser\Internal;
 
-use ConfigTransformer202111021\PhpParser\Node;
-use ConfigTransformer202111021\PhpParser\Node\Expr;
+use ConfigTransformer202111023\PhpParser\Node;
+use ConfigTransformer202111023\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *
@@ -15,7 +15,7 @@ use ConfigTransformer202111021\PhpParser\Node\Expr;
  *
  * @internal
  */
-class PrintableNewAnonClassNode extends \ConfigTransformer202111021\PhpParser\Node\Expr
+class PrintableNewAnonClassNode extends \ConfigTransformer202111023\PhpParser\Node\Expr
 {
     /** @var Node\AttributeGroup[] PHP attribute groups */
     public $attrGroups;
@@ -27,7 +27,7 @@ class PrintableNewAnonClassNode extends \ConfigTransformer202111021\PhpParser\No
     public $implements;
     /** @var Node\Stmt[] Statements */
     public $stmts;
-    public function __construct(array $attrGroups, array $args, \ConfigTransformer202111021\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
+    public function __construct(array $attrGroups, array $args, \ConfigTransformer202111023\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
     {
         parent::__construct($attributes);
         $this->attrGroups = $attrGroups;
@@ -42,7 +42,7 @@ class PrintableNewAnonClassNode extends \ConfigTransformer202111021\PhpParser\No
     public static function fromNewNode($newNode)
     {
         $class = $newNode->class;
-        \assert($class instanceof \ConfigTransformer202111021\PhpParser\Node\Stmt\Class_);
+        \assert($class instanceof \ConfigTransformer202111023\PhpParser\Node\Stmt\Class_);
         // We don't assert that $class->name is null here, to allow consumers to assign unique names
         // to anonymous classes for their own purposes. We simplify ignore the name here.
         return new self($class->attrGroups, $newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());
