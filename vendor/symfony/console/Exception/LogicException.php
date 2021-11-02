@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111020\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202111021\Symfony\Component\Console\Exception;
 
 /**
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class LogicException extends \LogicException implements \ConfigTransformer202111020\Symfony\Component\Console\Exception\ExceptionInterface
+class LogicException extends \LogicException implements \ConfigTransformer202111021\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }
