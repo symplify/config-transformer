@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021110310\PhpParser\Node\Expr;
+namespace ConfigTransformer202111035\PhpParser\Node\Expr;
 
-use ConfigTransformer2021110310\PhpParser\Node\Expr;
-class PostDec extends \ConfigTransformer2021110310\PhpParser\Node\Expr
+use ConfigTransformer202111035\PhpParser\Node\Expr;
+class PostDec extends \ConfigTransformer202111035\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -14,7 +14,7 @@ class PostDec extends \ConfigTransformer2021110310\PhpParser\Node\Expr
      * @param Expr  $var        Variable
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021110310\PhpParser\Node\Expr $var, array $attributes = [])
+    public function __construct(\ConfigTransformer202111035\PhpParser\Node\Expr $var, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

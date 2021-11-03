@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021110310\Symfony\Component\DependencyInjection\LazyProxy;
+namespace ConfigTransformer202111035\Symfony\Component\DependencyInjection\LazyProxy;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
@@ -37,7 +37,7 @@ class ProxyHelper
         $glue = '|';
         if ($type instanceof \ReflectionUnionType) {
             $reflectionTypes = $type->getTypes();
-        } elseif ($type instanceof \ConfigTransformer2021110310\ReflectionIntersectionType) {
+        } elseif ($type instanceof \ConfigTransformer202111035\ReflectionIntersectionType) {
             $reflectionTypes = $type->getTypes();
             $glue = '&';
         } elseif ($type instanceof \ReflectionNamedType) {
