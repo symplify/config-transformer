@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111029\Symfony\Component\Console\Attribute;
+namespace ConfigTransformer2021110310\Symfony\Component\Console\Attribute;
 
 /**
  * Service tag to autoconfigure commands.

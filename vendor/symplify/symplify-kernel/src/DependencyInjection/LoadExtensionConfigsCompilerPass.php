@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111029\Symplify\SymplifyKernel\DependencyInjection;
+namespace ConfigTransformer2021110310\Symplify\SymplifyKernel\DependencyInjection;
 
-use ConfigTransformer202111029\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
-use ConfigTransformer202111029\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021110310\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
+use ConfigTransformer2021110310\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Mimics @see \Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass without dependency on
  * symfony/http-kernel
  */
-final class LoadExtensionConfigsCompilerPass extends \ConfigTransformer202111029\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+final class LoadExtensionConfigsCompilerPass extends \ConfigTransformer2021110310\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
 {
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
