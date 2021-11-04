@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111034\Symplify\Astral\ValueObject;
+namespace ConfigTransformer2021110410\Symplify\Astral\ValueObject;
 
 /**
  * @api
