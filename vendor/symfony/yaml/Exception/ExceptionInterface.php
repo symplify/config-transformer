@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111047\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202111064\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception interface for all exceptions thrown by the component.

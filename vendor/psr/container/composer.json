@@ -18,11 +18,11 @@
         }
     ],
     "require": {
-        "php": ">=7.2.0"
+        "php": ">=7.4.0"
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111047\\Psr\\Container\\": "src\/"
+            "ConfigTransformer202111064\\Psr\\Container\\": "src\/"
         }
     }
 }
