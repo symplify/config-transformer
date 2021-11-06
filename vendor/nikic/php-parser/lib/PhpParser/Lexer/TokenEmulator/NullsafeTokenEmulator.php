@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111064\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202111061\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202111064\PhpParser\Lexer\Emulative;
-final class NullsafeTokenEmulator extends \ConfigTransformer202111064\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer202111061\PhpParser\Lexer\Emulative;
+final class NullsafeTokenEmulator extends \ConfigTransformer202111061\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202111064\PhpParser\Lexer\Emulative::PHP_8_0;
+        return \ConfigTransformer202111061\PhpParser\Lexer\Emulative::PHP_8_0;
     }
     /**
      * @param string $code

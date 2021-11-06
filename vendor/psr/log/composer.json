@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111064\\Psr\\Log\\": "src"
+            "ConfigTransformer202111061\\Psr\\Log\\": "src"
         }
     },
     "extra": {

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111064\PhpParser\Node\Stmt;
+namespace ConfigTransformer202111061\PhpParser\Node\Stmt;
 
-use ConfigTransformer202111064\PhpParser\Node\Stmt;
-class InlineHTML extends \ConfigTransformer202111064\PhpParser\Node\Stmt
+use ConfigTransformer202111061\PhpParser\Node\Stmt;
+class InlineHTML extends \ConfigTransformer202111061\PhpParser\Node\Stmt
 {
     /** @var string String */
     public $value;
