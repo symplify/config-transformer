@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111061\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer202111067\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202111061\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202111061\Symfony\Component\Config\ResourceCheckerInterface;
-use ConfigTransformer202111061\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202111067\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202111067\Symfony\Component\Config\ResourceCheckerInterface;
+use ConfigTransformer202111067\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ContainerParametersResourceChecker implements \ConfigTransformer202111061\Symfony\Component\Config\ResourceCheckerInterface
+class ContainerParametersResourceChecker implements \ConfigTransformer202111067\Symfony\Component\Config\ResourceCheckerInterface
 {
     /** @var ContainerInterface */
     private $container;
-    public function __construct(\ConfigTransformer202111061\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202111067\Symfony\Component\DependencyInjection\ContainerInterface $container)
     {
         $this->container = $container;
     }
@@ -30,7 +30,7 @@ class ContainerParametersResourceChecker implements \ConfigTransformer202111061\
      */
     public function supports($metadata)
     {
-        return $metadata instanceof \ConfigTransformer202111061\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
+        return $metadata instanceof \ConfigTransformer202111067\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
     }
     /**
      * {@inheritdoc}

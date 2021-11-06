@@ -47,7 +47,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111061\\Symfony\\Component\\DependencyInjection\\": ""
+            "ConfigTransformer202111067\\Symfony\\Component\\DependencyInjection\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

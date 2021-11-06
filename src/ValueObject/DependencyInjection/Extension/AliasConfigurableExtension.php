@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111061\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension;
+namespace ConfigTransformer202111067\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension;
 
-use ConfigTransformer202111061\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111061\Symfony\Component\DependencyInjection\Extension\Extension;
-final class AliasConfigurableExtension extends \ConfigTransformer202111061\Symfony\Component\DependencyInjection\Extension\Extension
+use ConfigTransformer202111067\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202111067\Symfony\Component\DependencyInjection\Extension\Extension;
+final class AliasConfigurableExtension extends \ConfigTransformer202111067\Symfony\Component\DependencyInjection\Extension\Extension
 {
     /**
      * @var string

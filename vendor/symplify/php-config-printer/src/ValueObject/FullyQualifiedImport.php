@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111061\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202111067\Symplify\PhpConfigPrinter\ValueObject;
 
 use Stringable;
 final class FullyQualifiedImport

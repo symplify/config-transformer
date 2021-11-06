@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111061\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202111067\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202111061\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202111067\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Remove private aliases from the container. They were only used to establish
  * dependencies between services, and these dependencies have been resolved in
@@ -18,7 +18,7 @@ use ConfigTransformer202111061\Symfony\Component\DependencyInjection\ContainerBu
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class RemovePrivateAliasesPass implements \ConfigTransformer202111061\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RemovePrivateAliasesPass implements \ConfigTransformer202111067\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * Removes private aliases from the ContainerBuilder.
