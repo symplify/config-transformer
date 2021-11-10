@@ -5,34 +5,38 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111073\Nette\Neon\Node;
+namespace ConfigTransformer202111101\Nette\Neon\Node;
 
-use ConfigTransformer202111073\Nette\Neon\Entity;
-use ConfigTransformer202111073\Nette\Neon\Node;
+use ConfigTransformer202111101\Nette\Neon\Entity;
+use ConfigTransformer202111101\Nette\Neon\Node;
 /** @internal */
-final class EntityNode extends \ConfigTransformer202111073\Nette\Neon\Node
+final class EntityNode extends \ConfigTransformer202111101\Nette\Neon\Node
 {
     /** @var Node */
     public $value;
     /** @var ArrayItemNode[] */
     public $attributes = [];
-    public function __construct(\ConfigTransformer202111073\Nette\Neon\Node $value, array $attributes, int $startPos = null, int $endPos = null)
+    public function __construct(\ConfigTransformer202111101\Nette\Neon\Node $value, array $attributes, int $startPos = null, int $endPos = null)
     {
         $this->value = $value;
         $this->attributes = $attributes;
         $this->startPos = $startPos;
         $this->endPos = $endPos ?? $startPos;
     }
-    public function toValue() : \ConfigTransformer202111073\Nette\Neon\Entity
+    public function toValue() : \ConfigTransformer202111101\Nette\Neon\Entity
     {
-        return new \ConfigTransformer202111073\Nette\Neon\Entity($this->value->toValue(), \ConfigTransformer202111073\Nette\Neon\Node\ArrayItemNode::itemsToArray($this->attributes));
+        return new \ConfigTransformer202111101\Nette\Neon\Entity($this->value->toValue(), \ConfigTransformer202111101\Nette\Neon\Node\ArrayItemNode::itemsToArray($this->attributes));
     }
     public function toString() : string
     {
-        return $this->value->toString() . '(' . ($this->attributes ? \ConfigTransformer202111073\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->attributes) : '') . ')';
+        return $this->value->toString() . '(' . ($this->attributes ? \ConfigTransformer202111101\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->attributes) : '') . ')';
     }
     public function getSubNodes() : array
     {
-        return \array_merge([$this->value], $this->attributes);
+        $res = [&$this->value];
+        foreach ($this->attributes as &$item) {
+            $res[] =& $item;
+        }
+        return $res;
     }
 }
