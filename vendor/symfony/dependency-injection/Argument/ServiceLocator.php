@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111107\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer2021111010\Symfony\Component\DependencyInjection\Argument;
 
-use ConfigTransformer202111107\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use ConfigTransformer2021111010\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @internal
  */
-class ServiceLocator extends \ConfigTransformer202111107\Symfony\Component\DependencyInjection\ServiceLocator
+class ServiceLocator extends \ConfigTransformer2021111010\Symfony\Component\DependencyInjection\ServiceLocator
 {
     private $factory;
     private $serviceMap;
