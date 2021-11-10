@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111108\Symfony\Component\Console;
+namespace ConfigTransformer202111107\Symfony\Component\Console;
 
-use ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 /**
  * Contains all events dispatched by an Application.
  *
@@ -57,5 +57,5 @@ final class ConsoleEvents
      *
      * These aliases can be consumed by RegisterListenersPass.
      */
-    public const ALIASES = [\ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleCommandEvent::class => self::COMMAND, \ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleErrorEvent::class => self::ERROR, \ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleSignalEvent::class => self::SIGNAL, \ConfigTransformer202111108\Symfony\Component\Console\Event\ConsoleTerminateEvent::class => self::TERMINATE];
+    public const ALIASES = [\ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleCommandEvent::class => self::COMMAND, \ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleErrorEvent::class => self::ERROR, \ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleSignalEvent::class => self::SIGNAL, \ConfigTransformer202111107\Symfony\Component\Console\Event\ConsoleTerminateEvent::class => self::TERMINATE];
 }
