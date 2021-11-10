@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2021111010\Nette\Neon;
+namespace ConfigTransformer202111108\Nette\Neon;
 
 /** @internal */
 final class Token

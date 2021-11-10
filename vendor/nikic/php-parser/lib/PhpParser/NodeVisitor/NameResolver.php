@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021111010\PhpParser\NodeVisitor;
+namespace ConfigTransformer202111108\PhpParser\NodeVisitor;
 
-use ConfigTransformer2021111010\PhpParser\ErrorHandler;
-use ConfigTransformer2021111010\PhpParser\NameContext;
-use ConfigTransformer2021111010\PhpParser\Node;
-use ConfigTransformer2021111010\PhpParser\Node\Expr;
-use ConfigTransformer2021111010\PhpParser\Node\Name;
-use ConfigTransformer2021111010\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2021111010\PhpParser\Node\Stmt;
-use ConfigTransformer2021111010\PhpParser\NodeVisitorAbstract;
-class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbstract
+use ConfigTransformer202111108\PhpParser\ErrorHandler;
+use ConfigTransformer202111108\PhpParser\NameContext;
+use ConfigTransformer202111108\PhpParser\Node;
+use ConfigTransformer202111108\PhpParser\Node\Expr;
+use ConfigTransformer202111108\PhpParser\Node\Name;
+use ConfigTransformer202111108\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202111108\PhpParser\Node\Stmt;
+use ConfigTransformer202111108\PhpParser\NodeVisitorAbstract;
+class NameResolver extends \ConfigTransformer202111108\PhpParser\NodeVisitorAbstract
 {
     /** @var NameContext Naming context */
     protected $nameContext;
@@ -32,9 +32,9 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
      * @param ErrorHandler|null $errorHandler Error handler
      * @param array $options Options
      */
-    public function __construct(\ConfigTransformer2021111010\PhpParser\ErrorHandler $errorHandler = null, array $options = [])
+    public function __construct(\ConfigTransformer202111108\PhpParser\ErrorHandler $errorHandler = null, array $options = [])
     {
-        $this->nameContext = new \ConfigTransformer2021111010\PhpParser\NameContext($errorHandler ?? new \ConfigTransformer2021111010\PhpParser\ErrorHandler\Throwing());
+        $this->nameContext = new \ConfigTransformer202111108\PhpParser\NameContext($errorHandler ?? new \ConfigTransformer202111108\PhpParser\ErrorHandler\Throwing());
         $this->preserveOriginalNames = $options['preserveOriginalNames'] ?? \false;
         $this->replaceNodes = $options['replaceNodes'] ?? \true;
     }
@@ -43,7 +43,7 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
      *
      * @return NameContext
      */
-    public function getNameContext() : \ConfigTransformer2021111010\PhpParser\NameContext
+    public function getNameContext() : \ConfigTransformer202111108\PhpParser\NameContext
     {
         return $this->nameContext;
     }
@@ -60,17 +60,17 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
      */
     public function enterNode($node)
     {
-        if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Namespace_) {
+        if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Namespace_) {
             $this->nameContext->startNamespace($node->name);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Use_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Use_) {
             foreach ($node->uses as $use) {
                 $this->addAlias($use, $node->type, null);
             }
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\GroupUse) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\GroupUse) {
             foreach ($node->uses as $use) {
                 $this->addAlias($use, $node->type, $node->prefix);
             }
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Class_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Class_) {
             if (null !== $node->extends) {
                 $node->extends = $this->resolveClassName($node->extends);
             }
@@ -81,13 +81,13 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
             if (null !== $node->name) {
                 $this->addNamespacedName($node);
             }
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Interface_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Interface_) {
             foreach ($node->extends as &$interface) {
                 $interface = $this->resolveClassName($interface);
             }
             $this->resolveAttrGroups($node);
             $this->addNamespacedName($node);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Enum_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Enum_) {
             foreach ($node->implements as &$interface) {
                 $interface = $this->resolveClassName($interface);
             }
@@ -95,46 +95,46 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
             if (null !== $node->name) {
                 $this->addNamespacedName($node);
             }
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Trait_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Trait_) {
             $this->resolveAttrGroups($node);
             $this->addNamespacedName($node);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Function_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Function_) {
             $this->resolveSignature($node);
             $this->resolveAttrGroups($node);
             $this->addNamespacedName($node);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\ClassMethod || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\Closure || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\ArrowFunction) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\ClassMethod || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\Closure || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\ArrowFunction) {
             $this->resolveSignature($node);
             $this->resolveAttrGroups($node);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Property) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Property) {
             if (null !== $node->type) {
                 $node->type = $this->resolveType($node->type);
             }
             $this->resolveAttrGroups($node);
-        } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Const_) {
+        } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Const_) {
             foreach ($node->consts as $const) {
                 $this->addNamespacedName($const);
             }
         } else {
-            if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\ClassConst) {
+            if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\ClassConst) {
                 $this->resolveAttrGroups($node);
             } else {
-                if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\EnumCase) {
+                if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\EnumCase) {
                     $this->resolveAttrGroups($node);
-                } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\StaticCall || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\StaticPropertyFetch || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\ClassConstFetch || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\New_ || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\Instanceof_) {
-                    if ($node->class instanceof \ConfigTransformer2021111010\PhpParser\Node\Name) {
+                } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\StaticCall || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\StaticPropertyFetch || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\ClassConstFetch || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\New_ || $node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\Instanceof_) {
+                    if ($node->class instanceof \ConfigTransformer202111108\PhpParser\Node\Name) {
                         $node->class = $this->resolveClassName($node->class);
                     }
-                } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\Catch_) {
+                } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\Catch_) {
                     foreach ($node->types as &$type) {
                         $type = $this->resolveClassName($type);
                     }
-                } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\FuncCall) {
-                    if ($node->name instanceof \ConfigTransformer2021111010\PhpParser\Node\Name) {
-                        $node->name = $this->resolveName($node->name, \ConfigTransformer2021111010\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
+                } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\FuncCall) {
+                    if ($node->name instanceof \ConfigTransformer202111108\PhpParser\Node\Name) {
+                        $node->name = $this->resolveName($node->name, \ConfigTransformer202111108\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
                     }
-                } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Expr\ConstFetch) {
-                    $node->name = $this->resolveName($node->name, \ConfigTransformer2021111010\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
-                } elseif ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\TraitUse) {
+                } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Expr\ConstFetch) {
+                    $node->name = $this->resolveName($node->name, \ConfigTransformer202111108\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
+                } elseif ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\TraitUse) {
                     foreach ($node->traits as &$trait) {
                         $trait = $this->resolveClassName($trait);
                     }
@@ -142,7 +142,7 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
                         if (null !== $adaptation->trait) {
                             $adaptation->trait = $this->resolveClassName($adaptation->trait);
                         }
-                        if ($adaptation instanceof \ConfigTransformer2021111010\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence) {
+                        if ($adaptation instanceof \ConfigTransformer202111108\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence) {
                             foreach ($adaptation->insteadof as &$insteadof) {
                                 $insteadof = $this->resolveClassName($insteadof);
                             }
@@ -153,10 +153,10 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
         }
         return null;
     }
-    private function addAlias(\ConfigTransformer2021111010\PhpParser\Node\Stmt\UseUse $use, $type, \ConfigTransformer2021111010\PhpParser\Node\Name $prefix = null)
+    private function addAlias(\ConfigTransformer202111108\PhpParser\Node\Stmt\UseUse $use, $type, \ConfigTransformer202111108\PhpParser\Node\Name $prefix = null)
     {
         // Add prefix for group uses
-        $name = $prefix ? \ConfigTransformer2021111010\PhpParser\Node\Name::concat($prefix, $use->name) : $use->name;
+        $name = $prefix ? \ConfigTransformer202111108\PhpParser\Node\Name::concat($prefix, $use->name) : $use->name;
         // Type is determined either by individual element or whole use declaration
         $type |= $use->type;
         $this->nameContext->addAlias($name, (string) $use->getAlias(), $type, $use->getAttributes());
@@ -172,14 +172,14 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
     }
     private function resolveType($node)
     {
-        if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\Name) {
+        if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\Name) {
             return $this->resolveClassName($node);
         }
-        if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\NullableType) {
+        if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\NullableType) {
             $node->type = $this->resolveType($node->type);
             return $node;
         }
-        if ($node instanceof \ConfigTransformer2021111010\PhpParser\Node\UnionType || $node instanceof \ConfigTransformer2021111010\PhpParser\Node\IntersectionType) {
+        if ($node instanceof \ConfigTransformer202111108\PhpParser\Node\UnionType || $node instanceof \ConfigTransformer202111108\PhpParser\Node\IntersectionType) {
             foreach ($node->types as &$type) {
                 $type = $this->resolveType($type);
             }
@@ -195,14 +195,14 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
      *
      * @return Name Resolved name, or original name with attribute
      */
-    protected function resolveName($name, $type) : \ConfigTransformer2021111010\PhpParser\Node\Name
+    protected function resolveName($name, $type) : \ConfigTransformer202111108\PhpParser\Node\Name
     {
         if (!$this->replaceNodes) {
             $resolvedName = $this->nameContext->getResolvedName($name, $type);
             if (null !== $resolvedName) {
                 $name->setAttribute('resolvedName', $resolvedName);
             } else {
-                $name->setAttribute('namespacedName', \ConfigTransformer2021111010\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
+                $name->setAttribute('namespacedName', \ConfigTransformer202111108\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
             }
             return $name;
         }
@@ -218,7 +218,7 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
         }
         // unqualified names inside a namespace cannot be resolved at compile-time
         // add the namespaced version of the name as an attribute
-        $name->setAttribute('namespacedName', \ConfigTransformer2021111010\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
+        $name->setAttribute('namespacedName', \ConfigTransformer202111108\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
         return $name;
     }
     /**
@@ -226,14 +226,14 @@ class NameResolver extends \ConfigTransformer2021111010\PhpParser\NodeVisitorAbs
      */
     protected function resolveClassName($name)
     {
-        return $this->resolveName($name, \ConfigTransformer2021111010\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
+        return $this->resolveName($name, \ConfigTransformer202111108\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
     }
     /**
      * @param \PhpParser\Node $node
      */
     protected function addNamespacedName($node)
     {
-        $node->namespacedName = \ConfigTransformer2021111010\PhpParser\Node\Name::concat($this->nameContext->getNamespace(), (string) $node->name);
+        $node->namespacedName = \ConfigTransformer202111108\PhpParser\Node\Name::concat($this->nameContext->getNamespace(), (string) $node->name);
     }
     /**
      * @param \PhpParser\Node $node
