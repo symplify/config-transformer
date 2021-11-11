@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111118\Symplify\ConfigTransformer\DependencyInjection\Loader;
+namespace ConfigTransformer202111114\Symplify\ConfigTransformer\DependencyInjection\Loader;
 
-use ConfigTransformer202111118\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202111118\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111118\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use ConfigTransformer202111118\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+use ConfigTransformer202111114\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202111114\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202111114\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202111114\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 /**
  * @see https://github.com/symplify/config-transformer/commit/0244abf3953eb0c5578d203b75749545f705c2a3
  */
-final class CheckerTolerantYamlFileLoader extends \ConfigTransformer202111118\Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+final class CheckerTolerantYamlFileLoader extends \ConfigTransformer202111114\Symfony\Component\DependencyInjection\Loader\YamlFileLoader
 {
     /**
      * @var \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter
      */
     private $checkerServiceParametersShifter;
-    public function __construct(\ConfigTransformer202111118\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202111118\Symfony\Component\Config\FileLocatorInterface $fileLocator)
+    public function __construct(\ConfigTransformer202111114\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202111114\Symfony\Component\Config\FileLocatorInterface $fileLocator)
     {
-        $this->checkerServiceParametersShifter = new \ConfigTransformer202111118\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter();
+        $this->checkerServiceParametersShifter = new \ConfigTransformer202111114\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter();
         parent::__construct($containerBuilder, $fileLocator);
     }
     /**
