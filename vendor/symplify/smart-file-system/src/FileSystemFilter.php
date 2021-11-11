@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111108\Symplify\SmartFileSystem;
+namespace ConfigTransformer202111113\Symplify\SmartFileSystem;
 
 /**
  * @see \Symplify\SmartFileSystem\Tests\FileSystemFilter\FileSystemFilterTest
