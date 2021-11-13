@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111123\Symplify\Astral\ValueObject\NodeBuilder;
+namespace ConfigTransformer202111130\Symplify\Astral\ValueObject\NodeBuilder;
 
-use ConfigTransformer202111123\PhpParser\Builder\Param;
+use ConfigTransformer202111130\PhpParser\Builder\Param;
 /**
  * @api
  * Fixed duplicated naming in php-parser and prevents confusion
  */
-final class ParamBuilder extends \ConfigTransformer202111123\PhpParser\Builder\Param
+final class ParamBuilder extends \ConfigTransformer202111130\PhpParser\Builder\Param
 {
 }
