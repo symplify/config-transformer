@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111135\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202111130\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202111135\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202111130\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ExtensionInterface is the interface implemented by container extension classes.
  *
