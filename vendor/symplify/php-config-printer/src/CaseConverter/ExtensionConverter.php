@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111147\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202111142\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202111147\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111147\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202111147\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202111147\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202111147\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class ExtensionConverter implements \ConfigTransformer202111147\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202111142\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202111142\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202111142\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202111142\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202111142\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class ExtensionConverter implements \ConfigTransformer202111142\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var string|null
@@ -21,7 +21,7 @@ final class ExtensionConverter implements \ConfigTransformer202111147\Symplify\P
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202111147\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202111142\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
@@ -29,12 +29,12 @@ final class ExtensionConverter implements \ConfigTransformer202111147\Symplify\P
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202111147\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202111142\PhpParser\Node\Stmt\Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$this->rootKey, [$key => $values]]);
-        $containerConfiguratorVariable = new \ConfigTransformer202111147\PhpParser\Node\Expr\Variable(\ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $methodCall = new \ConfigTransformer202111147\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
-        return new \ConfigTransformer202111147\PhpParser\Node\Stmt\Expression($methodCall);
+        $containerConfiguratorVariable = new \ConfigTransformer202111142\PhpParser\Node\Expr\Variable(\ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $methodCall = new \ConfigTransformer202111142\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
+        return new \ConfigTransformer202111142\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed $key
@@ -44,6 +44,6 @@ final class ExtensionConverter implements \ConfigTransformer202111147\Symplify\P
     public function match($rootKey, $key, $values) : bool
     {
         $this->rootKey = $rootKey;
-        return !\in_array($rootKey, \ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\YamlKey::provideRootKeys(), \true);
+        return !\in_array($rootKey, \ConfigTransformer202111142\Symplify\PhpConfigPrinter\ValueObject\YamlKey::provideRootKeys(), \true);
     }
 }

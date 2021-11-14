@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111147\Symplify\PackageBuilder\Strings;
+namespace ConfigTransformer202111142\Symplify\PackageBuilder\Strings;
 
-use ConfigTransformer202111147\Nette\Utils\Strings;
+use ConfigTransformer202111142\Nette\Utils\Strings;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Strings\StringFormatConverterTest
@@ -51,7 +51,7 @@ final class StringFormatConverter
     }
     private function camelCaseToGlue(string $input, string $glue) : string
     {
-        $matches = \ConfigTransformer202111147\Nette\Utils\Strings::matchAll($input, self::BIG_LETTER_REGEX);
+        $matches = \ConfigTransformer202111142\Nette\Utils\Strings::matchAll($input, self::BIG_LETTER_REGEX);
         $parts = [];
         foreach ($matches as $match) {
             $parts[] = $match[0] === \strtoupper($match[0]) ? \strtolower($match[0]) : \lcfirst($match[0]);
