@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111145\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202111140\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202111145\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer202111140\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent service is requested.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ServiceNotFoundException extends \ConfigTransformer202111145\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202111145\Psr\Container\NotFoundExceptionInterface
+class ServiceNotFoundException extends \ConfigTransformer202111140\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202111140\Psr\Container\NotFoundExceptionInterface
 {
     private $id;
     private $sourceId;

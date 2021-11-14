@@ -1,30 +1,30 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111145\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202111140\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202111145\Nette\Utils\Strings;
-use ConfigTransformer202111145\PhpParser\BuilderHelpers;
-use ConfigTransformer202111145\PhpParser\Node\Arg;
-use ConfigTransformer202111145\PhpParser\Node\Expr;
-use ConfigTransformer202111145\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202111145\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111145\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202111145\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202111145\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202111145\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202111140\Nette\Utils\Strings;
+use ConfigTransformer202111140\PhpParser\BuilderHelpers;
+use ConfigTransformer202111140\PhpParser\Node\Arg;
+use ConfigTransformer202111140\PhpParser\Node\Expr;
+use ConfigTransformer202111140\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202111140\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202111140\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202111140\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202111140\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202111140\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * Handles this part:
  *
  * imports: <---
  */
-final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ImportCaseConverter implements \ConfigTransformer202111140\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @see https://regex101.com/r/hOTdIE/1
@@ -39,7 +39,7 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer202111145\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \ConfigTransformer202111145\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202111140\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \ConfigTransformer202111140\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->yamlArgumentSorter = $yamlArgumentSorter;
         $this->commonNodeFactory = $commonNodeFactory;
@@ -51,32 +51,32 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
      */
     public function match($rootKey, $key, $values) : bool
     {
-        return $rootKey === \ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
+        return $rootKey === \ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
     }
     /**
      * @param mixed $values
      * @param mixed $key
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202111145\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202111140\PhpParser\Node\Stmt\Expression
     {
         if (\is_array($values)) {
-            $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [\ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => '', 'type' => null, \ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => \false]);
+            $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [\ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => '', 'type' => null, \ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => \false]);
             return $this->createImportMethodCall($arguments);
         }
         if (\is_string($values)) {
             return $this->createImportMethodCall([$values]);
         }
-        throw new \ConfigTransformer202111145\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
+        throw new \ConfigTransformer202111140\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
     }
     /**
      * @param mixed[] $arguments
      */
-    private function createImportMethodCall(array $arguments) : \ConfigTransformer202111145\PhpParser\Node\Stmt\Expression
+    private function createImportMethodCall(array $arguments) : \ConfigTransformer202111140\PhpParser\Node\Stmt\Expression
     {
-        $containerConfiguratorVariable = new \ConfigTransformer202111145\PhpParser\Node\Expr\Variable(\ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $containerConfiguratorVariable = new \ConfigTransformer202111140\PhpParser\Node\Expr\Variable(\ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
         $args = $this->createArgs($arguments);
-        $methodCall = new \ConfigTransformer202111145\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
-        return new \ConfigTransformer202111145\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \ConfigTransformer202111140\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
+        return new \ConfigTransformer202111140\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param array<int|string, mixed> $arguments
@@ -90,7 +90,7 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
                 continue;
             }
             $expr = $this->resolveExpr($value);
-            $args[] = new \ConfigTransformer202111145\PhpParser\Node\Arg($expr);
+            $args[] = new \ConfigTransformer202111140\PhpParser\Node\Arg($expr);
         }
         return $args;
     }
@@ -100,7 +100,7 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
     private function shouldSkipDefaultValue(string $name, $value, array $arguments) : bool
     {
         // skip default value for "ignore_errors"
-        if ($name === \ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS && $value === \false) {
+        if ($name === \ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS && $value === \false) {
             return \true;
         }
         // check if default value for "type"
@@ -111,10 +111,10 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
             return \false;
         }
         // follow by default value for "ignore_errors"
-        if (!isset($arguments[\ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS])) {
+        if (!isset($arguments[\ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS])) {
             return \false;
         }
-        return $arguments[\ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS] === \false;
+        return $arguments[\ConfigTransformer202111140\Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS] === \false;
     }
     /**
      * @return mixed|string
@@ -125,25 +125,25 @@ final class ImportCaseConverter implements \ConfigTransformer202111145\Symplify\
         if (!\is_string($value)) {
             return $value;
         }
-        return \ConfigTransformer202111145\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
+        return \ConfigTransformer202111140\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
     }
     /**
      * @param mixed $value
      */
-    private function resolveExpr($value) : \ConfigTransformer202111145\PhpParser\Node\Expr
+    private function resolveExpr($value) : \ConfigTransformer202111140\PhpParser\Node\Expr
     {
         if (\is_bool($value)) {
-            return \ConfigTransformer202111145\PhpParser\BuilderHelpers::normalizeValue($value);
+            return \ConfigTransformer202111140\PhpParser\BuilderHelpers::normalizeValue($value);
         }
         if (\in_array($value, ['annotations', 'directory', 'glob'], \true)) {
-            return \ConfigTransformer202111145\PhpParser\BuilderHelpers::normalizeValue($value);
+            return \ConfigTransformer202111140\PhpParser\BuilderHelpers::normalizeValue($value);
         }
         if ($value === 'not_found') {
-            return new \ConfigTransformer202111145\PhpParser\Node\Scalar\String_('not_found');
+            return new \ConfigTransformer202111140\PhpParser\Node\Scalar\String_('not_found');
         }
         if (\is_string($value) && \strpos($value, '::') !== \false) {
             [$className, $constantName] = \explode('::', $value);
-            return new \ConfigTransformer202111145\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202111145\PhpParser\Node\Name\FullyQualified($className), $constantName);
+            return new \ConfigTransformer202111140\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202111140\PhpParser\Node\Name\FullyQualified($className), $constantName);
         }
         $value = $this->replaceImportedFileSuffix($value);
         return $this->commonNodeFactory->createAbsoluteDirExpr($value);
