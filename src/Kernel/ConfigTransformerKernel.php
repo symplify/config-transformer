@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111144\Symplify\ConfigTransformer\Kernel;
+namespace ConfigTransformer202111147\Symplify\ConfigTransformer\Kernel;
 
-use ConfigTransformer202111144\Psr\Container\ContainerInterface;
-use ConfigTransformer202111144\Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig;
-use ConfigTransformer202111144\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class ConfigTransformerKernel extends \ConfigTransformer202111144\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202111147\Psr\Container\ContainerInterface;
+use ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig;
+use ConfigTransformer202111147\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class ConfigTransformerKernel extends \ConfigTransformer202111147\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
      * @param string[] $configFiles
      */
-    public function createFromConfigs($configFiles) : \ConfigTransformer202111144\Psr\Container\ContainerInterface
+    public function createFromConfigs($configFiles) : \ConfigTransformer202111147\Psr\Container\ContainerInterface
     {
         $configFiles[] = __DIR__ . '/../../config/config.php';
-        $configFiles[] = \ConfigTransformer202111144\Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig::FILE_PATH;
+        $configFiles[] = \ConfigTransformer202111147\Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig::FILE_PATH;
         return $this->create([], [], $configFiles);
     }
 }
