@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111133\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer202111145\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer202111133\PhpParser\NodeFinder;
-use ConfigTransformer202111133\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202111133\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202111133\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202111145\PhpParser\NodeFinder;
+use ConfigTransformer202111145\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202111145\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202111145\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @api
  */
 final class NodeValueResolverStaticFactory
 {
-    public static function create() : \ConfigTransformer202111133\Symplify\Astral\NodeValue\NodeValueResolver
+    public static function create() : \ConfigTransformer202111145\Symplify\Astral\NodeValue\NodeValueResolver
     {
-        $simpleNameResolver = \ConfigTransformer202111133\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
-        $simpleNodeFinder = new \ConfigTransformer202111133\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202111133\Symplify\PackageBuilder\Php\TypeChecker(), new \ConfigTransformer202111133\PhpParser\NodeFinder());
-        return new \ConfigTransformer202111133\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202111133\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
+        $simpleNameResolver = \ConfigTransformer202111145\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
+        $simpleNodeFinder = new \ConfigTransformer202111145\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202111145\Symplify\PackageBuilder\Php\TypeChecker(), new \ConfigTransformer202111145\PhpParser\NodeFinder());
+        return new \ConfigTransformer202111145\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202111145\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
     }
 }

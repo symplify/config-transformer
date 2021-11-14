@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111133;
+namespace ConfigTransformer202111145;
 
-use ConfigTransformer202111133\PhpParser\BuilderFactory;
-use ConfigTransformer202111133\PhpParser\NodeFinder;
-use ConfigTransformer202111133\Symfony\Component\Console\Application;
+use ConfigTransformer202111145\PhpParser\BuilderFactory;
+use ConfigTransformer202111145\PhpParser\NodeFinder;
+use ConfigTransformer202111145\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202111133\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202111133\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication;
-use ConfigTransformer202111133\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer202111133\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer202111133\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer202111145\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202111145\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication;
+use ConfigTransformer202111145\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202111145\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202111145\Symplify\SmartFileSystem\FileSystemFilter;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202111133\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202111145\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202111133\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
-    $services->alias(\ConfigTransformer202111133\Symfony\Component\Console\Application::class, \ConfigTransformer202111133\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
-    $services->set(\ConfigTransformer202111133\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer202111133\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer202111133\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer202111133\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->set(\ConfigTransformer202111133\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
-    $services->set(\ConfigTransformer202111133\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
+    $services->set(\ConfigTransformer202111145\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
+    $services->alias(\ConfigTransformer202111145\Symfony\Component\Console\Application::class, \ConfigTransformer202111145\Symplify\ConfigTransformer\Console\ConfigTransfomerConsoleApplication::class);
+    $services->set(\ConfigTransformer202111145\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202111145\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202111145\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202111145\Symplify\SmartFileSystem\FileSystemFilter::class);
+    $services->set(\ConfigTransformer202111145\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->set(\ConfigTransformer202111145\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
 };

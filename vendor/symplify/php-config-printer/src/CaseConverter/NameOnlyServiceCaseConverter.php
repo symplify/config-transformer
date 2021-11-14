@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111133\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202111145\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202111133\PhpParser\Node\Arg;
-use ConfigTransformer202111133\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111133\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202111133\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202111133\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202111133\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202111133\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202111133\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class NameOnlyServiceCaseConverter implements \ConfigTransformer202111133\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
+use ConfigTransformer202111145\PhpParser\Node\Arg;
+use ConfigTransformer202111145\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202111145\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202111145\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202111145\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202111145\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class NameOnlyServiceCaseConverter implements \ConfigTransformer202111145\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer202111133\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202111145\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
@@ -25,11 +25,11 @@ final class NameOnlyServiceCaseConverter implements \ConfigTransformer202111133\
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : \ConfigTransformer202111133\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \ConfigTransformer202111145\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $setMethodCall = new \ConfigTransformer202111133\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202111133\PhpParser\Node\Expr\Variable(\ConfigTransformer202111133\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \ConfigTransformer202111133\PhpParser\Node\Arg($classConstFetch)]);
-        return new \ConfigTransformer202111133\PhpParser\Node\Stmt\Expression($setMethodCall);
+        $setMethodCall = new \ConfigTransformer202111145\PhpParser\Node\Expr\MethodCall(new \ConfigTransformer202111145\PhpParser\Node\Expr\Variable(\ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \ConfigTransformer202111145\PhpParser\Node\Arg($classConstFetch)]);
+        return new \ConfigTransformer202111145\PhpParser\Node\Stmt\Expression($setMethodCall);
     }
     /**
      * @param mixed $key
@@ -38,7 +38,7 @@ final class NameOnlyServiceCaseConverter implements \ConfigTransformer202111133\
      */
     public function match($rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \ConfigTransformer202111133\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \ConfigTransformer202111145\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
         return $values === null || $values === [];
