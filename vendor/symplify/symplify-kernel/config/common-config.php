@@ -1,32 +1,32 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111169;
+namespace ConfigTransformer202111161;
 
-use ConfigTransformer202111169\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202111169\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202111161\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202111161\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202111169\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer202111169\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202111169\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use ConfigTransformer202111169\Symplify\SmartFileSystem\FileSystemFilter;
-use ConfigTransformer202111169\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer202111169\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer202111169\Symplify\SmartFileSystem\Finder\SmartFinder;
-use ConfigTransformer202111169\Symplify\SmartFileSystem\SmartFileSystem;
-use function ConfigTransformer202111169\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202111161\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer202111161\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202111161\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202111161\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer202111161\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer202111161\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer202111161\Symplify\SmartFileSystem\Finder\SmartFinder;
+use ConfigTransformer202111161\Symplify\SmartFileSystem\SmartFileSystem;
+use function ConfigTransformer202111161\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     // symfony style
-    $services->set(\ConfigTransformer202111169\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\ConfigTransformer202111169\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\ConfigTransformer202111169\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202111169\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
+    $services->set(\ConfigTransformer202111161\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
+    $services->set(\ConfigTransformer202111161\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\ConfigTransformer202111161\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202111161\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
     // filesystem
-    $services->set(\ConfigTransformer202111169\Symplify\SmartFileSystem\Finder\FinderSanitizer::class);
-    $services->set(\ConfigTransformer202111169\Symplify\SmartFileSystem\SmartFileSystem::class);
-    $services->set(\ConfigTransformer202111169\Symplify\SmartFileSystem\Finder\SmartFinder::class);
-    $services->set(\ConfigTransformer202111169\Symplify\SmartFileSystem\FileSystemGuard::class);
-    $services->set(\ConfigTransformer202111169\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->set(\ConfigTransformer202111169\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202111169\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202111169\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
-    $services->set(\ConfigTransformer202111169\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
+    $services->set(\ConfigTransformer202111161\Symplify\SmartFileSystem\Finder\FinderSanitizer::class);
+    $services->set(\ConfigTransformer202111161\Symplify\SmartFileSystem\SmartFileSystem::class);
+    $services->set(\ConfigTransformer202111161\Symplify\SmartFileSystem\Finder\SmartFinder::class);
+    $services->set(\ConfigTransformer202111161\Symplify\SmartFileSystem\FileSystemGuard::class);
+    $services->set(\ConfigTransformer202111161\Symplify\SmartFileSystem\FileSystemFilter::class);
+    $services->set(\ConfigTransformer202111161\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202111161\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202111161\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
+    $services->set(\ConfigTransformer202111161\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
 };
