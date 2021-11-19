@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111198\Symplify\ConfigTransformer\Enum;
+namespace ConfigTransformer202111199\Symplify\ConfigTransformer\Enum;
 
 final class Format
 {

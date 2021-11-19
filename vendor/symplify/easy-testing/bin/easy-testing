@@ -1,5 +1,5 @@
 #!/usr/bin/env php
 <?php 
-namespace ConfigTransformer202111198;
+namespace ConfigTransformer202111199;
 
 require __DIR__ . '/easy-testing.php';
