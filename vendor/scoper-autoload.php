@@ -6,8 +6,8 @@ $loader = require_once __DIR__.'/autoload.php';
 
 // Aliases for the whitelisted classes. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#class-whitelisting
-if (!class_exists('ComposerAutoloaderInitf65b5dd34ca4efd2e29b8a6bdf86e716', false) && !interface_exists('ComposerAutoloaderInitf65b5dd34ca4efd2e29b8a6bdf86e716', false) && !trait_exists('ComposerAutoloaderInitf65b5dd34ca4efd2e29b8a6bdf86e716', false)) {
-    spl_autoload_call('ConfigTransformer202111198\ComposerAutoloaderInitf65b5dd34ca4efd2e29b8a6bdf86e716');
+if (!class_exists('ComposerAutoloaderInitccc50a2d6e2d57ddb1c58aed6c9f8e72', false) && !interface_exists('ComposerAutoloaderInitccc50a2d6e2d57ddb1c58aed6c9f8e72', false) && !trait_exists('ComposerAutoloaderInitccc50a2d6e2d57ddb1c58aed6c9f8e72', false)) {
+    spl_autoload_call('ConfigTransformer202111198\ComposerAutoloaderInitccc50a2d6e2d57ddb1c58aed6c9f8e72');
 }
 if (!class_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false) && !interface_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false) && !trait_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false)) {
     spl_autoload_call('ConfigTransformer202111198\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator');
@@ -18,9 +18,9 @@ if (!class_exists('Normalizer', false) && !interface_exists('Normalizer', false)
 
 // Functions whitelisting. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#functions-whitelisting
-if (!function_exists('composerRequiref65b5dd34ca4efd2e29b8a6bdf86e716')) {
-    function composerRequiref65b5dd34ca4efd2e29b8a6bdf86e716() {
-        return \ConfigTransformer202111198\composerRequiref65b5dd34ca4efd2e29b8a6bdf86e716(...func_get_args());
+if (!function_exists('composerRequireccc50a2d6e2d57ddb1c58aed6c9f8e72')) {
+    function composerRequireccc50a2d6e2d57ddb1c58aed6c9f8e72() {
+        return \ConfigTransformer202111198\composerRequireccc50a2d6e2d57ddb1c58aed6c9f8e72(...func_get_args());
     }
 }
 if (!function_exists('scanPath')) {
