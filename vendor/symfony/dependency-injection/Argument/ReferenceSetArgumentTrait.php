@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111205\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202111203\Symfony\Component\DependencyInjection\Argument;
 
-use ConfigTransformer202111205\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202111205\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202111203\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202111203\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -39,8 +39,8 @@ trait ReferenceSetArgumentTrait
     public function setValues($values)
     {
         foreach ($values as $k => $v) {
-            if (null !== $v && !$v instanceof \ConfigTransformer202111205\Symfony\Component\DependencyInjection\Reference) {
-                throw new \ConfigTransformer202111205\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A "%s" must hold only Reference instances, "%s" given.', __CLASS__, \get_debug_type($v)));
+            if (null !== $v && !$v instanceof \ConfigTransformer202111203\Symfony\Component\DependencyInjection\Reference) {
+                throw new \ConfigTransformer202111203\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A "%s" must hold only Reference instances, "%s" given.', __CLASS__, \get_debug_type($v)));
             }
         }
         $this->values = $values;
