@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111192\Symfony\Component\Cache;
+namespace ConfigTransformer202111205\Symfony\Component\Cache;
 
-use ConfigTransformer202111192\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202111205\Symfony\Contracts\Service\ResetInterface;
 /**
  * Resets a pool's local state.
  */
-interface ResettableInterface extends \ConfigTransformer202111192\Symfony\Contracts\Service\ResetInterface
+interface ResettableInterface extends \ConfigTransformer202111205\Symfony\Contracts\Service\ResetInterface
 {
 }
