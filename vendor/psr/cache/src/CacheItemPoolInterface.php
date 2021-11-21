@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202111210\Psr\Cache;
+namespace ConfigTransformer202111214\Psr\Cache;
 
 /**
  * CacheItemPoolInterface generates CacheItemInterface objects.
