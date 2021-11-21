@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111215\Symplify\PackageBuilder\Console\Command;
+namespace ConfigTransformer202111214\Symplify\PackageBuilder\Console\Command;
 
-use ConfigTransformer202111215\Nette\Utils\Strings;
-use ConfigTransformer202111215\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202111214\Nette\Utils\Strings;
+use ConfigTransformer202111214\Symfony\Component\Console\Command\Command;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Console\Command\CommandNamingTest
@@ -21,7 +21,7 @@ final class CommandNaming
      * - "SomeClass\SomeSuperCommand" → "some-super"
      * - "SomeClass\SOMESuperCommand" → "some-super"
      */
-    public function resolveFromCommand(\ConfigTransformer202111215\Symfony\Component\Console\Command\Command $command) : string
+    public function resolveFromCommand(\ConfigTransformer202111214\Symfony\Component\Console\Command\Command $command) : string
     {
         $commandClass = \get_class($command);
         return self::classToName($commandClass);
@@ -35,7 +35,7 @@ final class CommandNaming
     {
         /** @var string $shortClassName */
         $shortClassName = self::resolveShortName($class);
-        $rawCommandName = \ConfigTransformer202111215\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
+        $rawCommandName = \ConfigTransformer202111214\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
         // ECSCommand => ecs
         for ($i = 0; $i < \strlen($rawCommandName); ++$i) {
             if (\ctype_upper($rawCommandName[$i]) && self::isFollowedByUpperCaseLetterOrNothing($rawCommandName, $i)) {
@@ -45,7 +45,7 @@ final class CommandNaming
             }
         }
         $lowercasedRawCommandName = \lcfirst($rawCommandName);
-        return \ConfigTransformer202111215\Nette\Utils\Strings::replace($lowercasedRawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
+        return \ConfigTransformer202111214\Nette\Utils\Strings::replace($lowercasedRawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
             return '-' . \strtolower($matches[0]);
         });
     }
