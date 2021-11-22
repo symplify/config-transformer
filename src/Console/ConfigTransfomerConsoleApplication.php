@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021112210\Symplify\ConfigTransformer\Console;
+namespace ConfigTransformer202111227\Symplify\ConfigTransformer\Console;
 
-use ConfigTransformer2021112210\Symfony\Component\Console\Application;
-use ConfigTransformer2021112210\Symfony\Component\Console\Command\Command;
-final class ConfigTransfomerConsoleApplication extends \ConfigTransformer2021112210\Symfony\Component\Console\Application
+use ConfigTransformer202111227\Symfony\Component\Console\Application;
+use ConfigTransformer202111227\Symfony\Component\Console\Command\Command;
+final class ConfigTransfomerConsoleApplication extends \ConfigTransformer202111227\Symfony\Component\Console\Application
 {
     /**
      * @param Command[] $commands

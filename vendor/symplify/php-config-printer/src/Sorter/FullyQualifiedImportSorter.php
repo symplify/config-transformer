@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021112210\Symplify\PhpConfigPrinter\Sorter;
+namespace ConfigTransformer202111227\Symplify\PhpConfigPrinter\Sorter;
 
-use ConfigTransformer2021112210\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer2021112210\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+use ConfigTransformer202111227\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202111227\Symplify\PhpConfigPrinter\ValueObject\ImportType;
 final class FullyQualifiedImportSorter
 {
     /**
      * @var array<string, int>
      */
-    private const TYPE_ORDER = [\ConfigTransformer2021112210\Symplify\PhpConfigPrinter\ValueObject\ImportType::CLASS_TYPE => 0, \ConfigTransformer2021112210\Symplify\PhpConfigPrinter\ValueObject\ImportType::CONSTANT_TYPE => 1, \ConfigTransformer2021112210\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE => 2];
+    private const TYPE_ORDER = [\ConfigTransformer202111227\Symplify\PhpConfigPrinter\ValueObject\ImportType::CLASS_TYPE => 0, \ConfigTransformer202111227\Symplify\PhpConfigPrinter\ValueObject\ImportType::CONSTANT_TYPE => 1, \ConfigTransformer202111227\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE => 2];
     /**
      * @param FullyQualifiedImport[] $imports
      *
