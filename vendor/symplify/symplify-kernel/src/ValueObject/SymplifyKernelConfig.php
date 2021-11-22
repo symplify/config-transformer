@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111216\Symplify\SymplifyKernel\ValueObject;
+namespace ConfigTransformer2021112210\Symplify\SymplifyKernel\ValueObject;
 
 /**
  * @api

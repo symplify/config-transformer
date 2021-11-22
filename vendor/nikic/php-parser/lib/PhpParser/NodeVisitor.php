@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111216\PhpParser;
+namespace ConfigTransformer2021112210\PhpParser;
 
 interface NodeVisitor
 {
