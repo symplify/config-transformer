@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111233\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202111233\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111233\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Sets a service to be an alias of another one, given a format pattern.
  */
-class AutoAliasServicePass implements \ConfigTransformer202111233\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AutoAliasServicePass implements \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -27,11 +27,11 @@ class AutoAliasServicePass implements \ConfigTransformer202111233\Symfony\Compon
         foreach ($container->findTaggedServiceIds('auto_alias') as $serviceId => $tags) {
             foreach ($tags as $tag) {
                 if (!isset($tag['format'])) {
-                    throw new \ConfigTransformer202111233\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Missing tag information "format" on auto_alias service "%s".', $serviceId));
+                    throw new \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Missing tag information "format" on auto_alias service "%s".', $serviceId));
                 }
                 $aliasId = $container->getParameterBag()->resolveValue($tag['format']);
                 if ($container->hasDefinition($aliasId) || $container->hasAlias($aliasId)) {
-                    $container->setAlias($serviceId, new \ConfigTransformer202111233\Symfony\Component\DependencyInjection\Alias($aliasId, \true));
+                    $container->setAlias($serviceId, new \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Alias($aliasId, \true));
                 }
             }
         }

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111233\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ReferenceConfigurator extends \ConfigTransformer202111233\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ReferenceConfigurator extends \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     /** @internal */
     protected $id;
     /** @internal */
-    protected $invalidBehavior = \ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+    protected $invalidBehavior = \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
     public function __construct(string $id)
     {
         $this->id = $id;
@@ -29,7 +29,7 @@ class ReferenceConfigurator extends \ConfigTransformer202111233\Symfony\Componen
      */
     public final function ignoreOnInvalid() : self
     {
-        $this->invalidBehavior = \ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
         return $this;
     }
     /**
@@ -37,7 +37,7 @@ class ReferenceConfigurator extends \ConfigTransformer202111233\Symfony\Componen
      */
     public final function nullOnInvalid() : self
     {
-        $this->invalidBehavior = \ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE;
         return $this;
     }
     /**
@@ -45,7 +45,7 @@ class ReferenceConfigurator extends \ConfigTransformer202111233\Symfony\Componen
      */
     public final function ignoreOnUninitialized() : self
     {
-        $this->invalidBehavior = \ConfigTransformer202111233\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021112310\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE;
         return $this;
     }
     /**

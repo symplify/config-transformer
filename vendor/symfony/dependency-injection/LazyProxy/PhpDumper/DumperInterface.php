@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111233\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace ConfigTransformer2021112310\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use ConfigTransformer202111233\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021112310\Symfony\Component\DependencyInjection\Definition;
 /**
  * Lazy proxy dumper capable of generating the instantiation logic PHP code for proxied services.
  *
