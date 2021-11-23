@@ -8,32 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111238\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202111235\Symfony\Component\DependencyInjection\Dumper;
 
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202111238\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202111238\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer202111238\Symfony\Component\Yaml\Dumper as YmlDumper;
-use ConfigTransformer202111238\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202111238\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202111235\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202111235\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202111235\Symfony\Component\Yaml\Dumper as YmlDumper;
+use ConfigTransformer202111235\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202111235\Symfony\Component\Yaml\Yaml;
 /**
  * YamlDumper dumps a service container as a YAML string.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Dumper\Dumper
+class YamlDumper extends \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     private $dumper;
     /**
@@ -44,15 +44,15 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
      */
     public function dump($options = [])
     {
-        if (!\class_exists(\ConfigTransformer202111238\Symfony\Component\Yaml\Dumper::class)) {
-            throw new \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
+        if (!\class_exists(\ConfigTransformer202111235\Symfony\Component\Yaml\Dumper::class)) {
+            throw new \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
         }
         if (null === $this->dumper) {
-            $this->dumper = new \ConfigTransformer202111238\Symfony\Component\Yaml\Dumper();
+            $this->dumper = new \ConfigTransformer202111235\Symfony\Component\Yaml\Dumper();
         }
         return $this->container->resolveEnvPlaceholders($this->addParameters() . "\n" . $this->addServices());
     }
-    private function addService(string $id, \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Definition $definition) : string
+    private function addService(string $id, \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Definition $definition) : string
     {
         $code = "    {$id}:\n";
         if ($class = $definition->getClass()) {
@@ -125,9 +125,9 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
             if (0 !== $priority) {
                 $code .= \sprintf("        decoration_priority: %s\n", $priority);
             }
-            $decorationOnInvalid = $decoratedService[3] ?? \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
-            if (\in_array($decorationOnInvalid, [\ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE, \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE])) {
-                $invalidBehavior = \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $decorationOnInvalid ? 'null' : 'ignore';
+            $decorationOnInvalid = $decoratedService[3] ?? \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            if (\in_array($decorationOnInvalid, [\ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE, \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE])) {
+                $invalidBehavior = \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $decorationOnInvalid ? 'null' : 'ignore';
                 $code .= \sprintf("        decoration_on_invalid: %s\n", $invalidBehavior);
             }
         }
@@ -139,7 +139,7 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
         }
         return $code;
     }
-    private function addServiceAlias(string $alias, \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Alias $id) : string
+    private function addServiceAlias(string $alias, \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Alias $id) : string
     {
         $deprecated = '';
         if ($id->isDeprecated()) {
@@ -194,7 +194,7 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
     private function dumpCallable($callable)
     {
         if (\is_array($callable)) {
-            if ($callable[0] instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Reference) {
+            if ($callable[0] instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Reference) {
                 $callable = [$this->getServiceCall((string) $callable[0], $callable[0]), $callable[1]];
             } else {
                 $callable = [$callable[0], $callable[1]];
@@ -211,13 +211,13 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
      */
     private function dumpValue($value)
     {
-        if ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
+        if ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
             $value = $value->getValues()[0];
-            return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue('service_closure', $this->getServiceCall((string) $value, $value));
+            return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue('service_closure', $this->getServiceCall((string) $value, $value));
         }
-        if ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        if ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             $tag = $value;
-            if ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument || $value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument && ($tag = $value->getTaggedIteratorArgument())) {
+            if ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument || $value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument && ($tag = $value->getTaggedIteratorArgument())) {
                 if (null === $tag->getIndexAttribute()) {
                     $content = $tag->getTag();
                 } else {
@@ -229,16 +229,16 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
                         $content['default_priority_method'] = $tag->getDefaultPriorityMethod();
                     }
                 }
-                return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument ? 'tagged_iterator' : 'tagged_locator', $content);
+                return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument ? 'tagged_iterator' : 'tagged_locator', $content);
             }
-            if ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
+            if ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
                 $tag = 'iterator';
-            } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
+            } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
                 $tag = 'service_locator';
             } else {
-                throw new \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unspecified Yaml tag for type "%s".', \get_debug_type($value)));
+                throw new \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unspecified Yaml tag for type "%s".', \get_debug_type($value)));
             }
-            return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue($tag, $this->dumpValue($value->getValues()));
+            return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue($tag, $this->dumpValue($value->getValues()));
         }
         if (\is_array($value)) {
             $code = [];
@@ -246,32 +246,32 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
                 $code[$k] = $this->dumpValue($v);
             }
             return $code;
-        } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Reference) {
             return $this->getServiceCall((string) $value, $value);
-        } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Parameter) {
+        } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Parameter) {
             return $this->getParameterCall((string) $value);
-        } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\ExpressionLanguage\Expression) {
+        } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\ExpressionLanguage\Expression) {
             return $this->getExpressionCall((string) $value);
-        } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Definition) {
-            return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue('service', (new \ConfigTransformer202111238\Symfony\Component\Yaml\Parser())->parse("_:\n" . $this->addService('_', $value), \ConfigTransformer202111238\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS)['_']['_']);
-        } elseif ($value instanceof \ConfigTransformer202111238\UnitEnum) {
-            return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue('php/const', \sprintf('%s::%s', \get_class($value), $value->name));
-        } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Argument\AbstractArgument) {
-            return new \ConfigTransformer202111238\Symfony\Component\Yaml\Tag\TaggedValue('abstract', $value->getText());
+        } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Definition) {
+            return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue('service', (new \ConfigTransformer202111235\Symfony\Component\Yaml\Parser())->parse("_:\n" . $this->addService('_', $value), \ConfigTransformer202111235\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS)['_']['_']);
+        } elseif ($value instanceof \ConfigTransformer202111235\UnitEnum) {
+            return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue('php/const', \sprintf('%s::%s', \get_class($value), $value->name));
+        } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Argument\AbstractArgument) {
+            return new \ConfigTransformer202111235\Symfony\Component\Yaml\Tag\TaggedValue('abstract', $value->getText());
         } elseif (\is_object($value) || \is_resource($value)) {
-            throw new \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
+            throw new \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
         }
         return $value;
     }
-    private function getServiceCall(string $id, \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Reference $reference = null) : string
+    private function getServiceCall(string $id, \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Reference $reference = null) : string
     {
         if (null !== $reference) {
             switch ($reference->getInvalidBehavior()) {
-                case \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE:
+                case \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE:
                     break;
-                case \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE:
+                case \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE:
                     break;
-                case \ConfigTransformer202111238\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE:
+                case \ConfigTransformer202111235\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE:
                     return \sprintf('@!%s', $id);
                 default:
                     return \sprintf('@?%s', $id);
@@ -293,7 +293,7 @@ class YamlDumper extends \ConfigTransformer202111238\Symfony\Component\Dependenc
         foreach ($parameters as $key => $value) {
             if (\is_array($value)) {
                 $value = $this->prepareParameters($value, $escape);
-            } elseif ($value instanceof \ConfigTransformer202111238\Symfony\Component\DependencyInjection\Reference || \is_string($value) && \strncmp($value, '@', \strlen('@')) === 0) {
+            } elseif ($value instanceof \ConfigTransformer202111235\Symfony\Component\DependencyInjection\Reference || \is_string($value) && \strncmp($value, '@', \strlen('@')) === 0) {
                 $value = '@' . $value;
             }
             $filtered[$key] = $value;
