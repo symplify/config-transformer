@@ -8,12 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111227\Symfony\Contracts\Service;
+namespace ConfigTransformer202111238\Symfony\Contracts\Service;
 
-use ConfigTransformer202111227\Psr\Container\ContainerInterface;
+use ConfigTransformer202111238\Psr\Container\ContainerInterface;
+use ConfigTransformer202111238\Symfony\Contracts\Service\Attribute\SubscribedService;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
- * private method return types. Service ids are available as "ClassName::methodName".
+ * method return types. Service ids are available as "ClassName::methodName".
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
@@ -31,11 +32,46 @@ trait ServiceSubscriberTrait
             return $services;
         }
         $services = \is_callable(['parent', __FUNCTION__]) ? parent::getSubscribedServices() : [];
-        foreach ((new \ReflectionClass(self::class))->getMethods() as $method) {
-            if ($method->isStatic() || $method->isAbstract() || $method->isGenerator() || $method->isInternal() || $method->getNumberOfRequiredParameters()) {
-                continue;
+        $attributeOptIn = \false;
+        if (\PHP_VERSION_ID >= 80000) {
+            foreach ((new \ReflectionClass(self::class))->getMethods() as $method) {
+                if (self::class !== $method->getDeclaringClass()->name) {
+                    continue;
+                }
+                if (!($attribute = $method->getAttributes(\ConfigTransformer202111238\Symfony\Contracts\Service\Attribute\SubscribedService::class)[0] ?? null)) {
+                    continue;
+                }
+                if ($method->isStatic() || $method->isAbstract() || $method->isGenerator() || $method->isInternal() || $method->getNumberOfRequiredParameters()) {
+                    throw new \LogicException(\sprintf('Cannot use "%s" on method "%s::%s()" (can only be used on non-static, non-abstract methods with no parameters).', \ConfigTransformer202111238\Symfony\Contracts\Service\Attribute\SubscribedService::class, self::class, $method->name));
+                }
+                if (!($returnType = $method->getReturnType())) {
+                    throw new \LogicException(\sprintf('Cannot use "%s" on methods without a return type in "%s::%s()".', \ConfigTransformer202111238\Symfony\Contracts\Service\Attribute\SubscribedService::class, $method->name, self::class));
+                }
+                $serviceId = $returnType instanceof \ReflectionNamedType ? $returnType->getName() : (string) $returnType;
+                if ($returnType->allowsNull()) {
+                    $serviceId = '?' . $serviceId;
+                }
+                $services[$attribute->newInstance()->key ?? self::class . '::' . $method->name] = $serviceId;
+                $attributeOptIn = \true;
             }
-            if (self::class === $method->getDeclaringClass()->name && ($returnType = $method->getReturnType()) && !$returnType->isBuiltin()) {
+        }
+        if (!$attributeOptIn) {
+            foreach ((new \ReflectionClass(self::class))->getMethods() as $method) {
+                if ($method->isStatic() || $method->isAbstract() || $method->isGenerator() || $method->isInternal() || $method->getNumberOfRequiredParameters()) {
+                    continue;
+                }
+                if (self::class !== $method->getDeclaringClass()->name) {
+                    continue;
+                }
+                if (!($returnType = $method->getReturnType()) instanceof \ReflectionNamedType) {
+                    continue;
+                }
+                if ($returnType->isBuiltin()) {
+                    continue;
+                }
+                if (\PHP_VERSION_ID >= 80000) {
+                    trigger_deprecation('symfony/service-contracts', '2.5', 'Using "%s" in "%s" without using the "%s" attribute on any method is deprecated.', \ConfigTransformer202111238\Symfony\Contracts\Service\ServiceSubscriberTrait::class, self::class, \ConfigTransformer202111238\Symfony\Contracts\Service\Attribute\SubscribedService::class);
+                }
                 $services[self::class . '::' . $method->name] = '?' . ($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $returnType);
             }
         }
@@ -43,8 +79,10 @@ trait ServiceSubscriberTrait
     }
     /**
      * @required
+     *
+     * @return ContainerInterface|null
      */
-    public function setContainer(\ConfigTransformer202111227\Psr\Container\ContainerInterface $container)
+    public function setContainer(\ConfigTransformer202111238\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
         if (\is_callable(['parent', __FUNCTION__])) {
