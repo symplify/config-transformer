@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111231\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202111232\Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202111231\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202111232\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
     /**
@@ -14,7 +14,7 @@ final class ConvertedContent
      * @var \Symplify\SmartFileSystem\SmartFileInfo
      */
     private $originalFileInfo;
-    public function __construct(string $convertedContent, \ConfigTransformer202111231\Symplify\SmartFileSystem\SmartFileInfo $originalFileInfo)
+    public function __construct(string $convertedContent, \ConfigTransformer202111232\Symplify\SmartFileSystem\SmartFileInfo $originalFileInfo)
     {
         $this->convertedContent = $convertedContent;
         $this->originalFileInfo = $originalFileInfo;

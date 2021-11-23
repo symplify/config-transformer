@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111231\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202111232\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\ExceptionInterface;
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\ExceptionInterface;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 /**
  * This replaces all ChildDefinition instances with their equivalent fully
  * merged Definition instance.
@@ -23,7 +23,7 @@ use ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\S
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveChildDefinitionsPass extends \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $currentPath;
     /**
@@ -31,7 +31,7 @@ class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Co
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         if ($isRoot) {
@@ -39,7 +39,7 @@ class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Co
             // container to ensure we are not operating on stale data
             $value = $this->container->getDefinition($this->currentId);
         }
-        if ($value instanceof \ConfigTransformer202111231\Symfony\Component\DependencyInjection\ChildDefinition) {
+        if ($value instanceof \ConfigTransformer202111232\Symfony\Component\DependencyInjection\ChildDefinition) {
             $this->currentPath = [];
             $value = $this->resolveDefinition($value);
             if ($isRoot) {
@@ -53,31 +53,31 @@ class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Co
      *
      * @throws RuntimeException When the definition is invalid
      */
-    private function resolveDefinition(\ConfigTransformer202111231\Symfony\Component\DependencyInjection\ChildDefinition $definition) : \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Definition
+    private function resolveDefinition(\ConfigTransformer202111232\Symfony\Component\DependencyInjection\ChildDefinition $definition) : \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Definition
     {
         try {
             return $this->doResolveDefinition($definition);
-        } catch (\ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException $e) {
+        } catch (\ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException $e) {
             throw $e;
-        } catch (\ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\ExceptionInterface $e) {
+        } catch (\ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\ExceptionInterface $e) {
             $r = new \ReflectionProperty($e, 'message');
             $r->setAccessible(\true);
             $r->setValue($e, \sprintf('Service "%s": %s', $this->currentId, $e->getMessage()));
             throw $e;
         }
     }
-    private function doResolveDefinition(\ConfigTransformer202111231\Symfony\Component\DependencyInjection\ChildDefinition $definition) : \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Definition
+    private function doResolveDefinition(\ConfigTransformer202111232\Symfony\Component\DependencyInjection\ChildDefinition $definition) : \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Definition
     {
         if (!$this->container->has($parent = $definition->getParent())) {
-            throw new \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Parent definition "%s" does not exist.', $parent));
+            throw new \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Parent definition "%s" does not exist.', $parent));
         }
         $searchKey = \array_search($parent, $this->currentPath);
         $this->currentPath[] = $parent;
         if (\false !== $searchKey) {
-            throw new \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($parent, \array_slice($this->currentPath, $searchKey));
+            throw new \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($parent, \array_slice($this->currentPath, $searchKey));
         }
         $parentDef = $this->container->findDefinition($parent);
-        if ($parentDef instanceof \ConfigTransformer202111231\Symfony\Component\DependencyInjection\ChildDefinition) {
+        if ($parentDef instanceof \ConfigTransformer202111232\Symfony\Component\DependencyInjection\ChildDefinition) {
             $id = $this->currentId;
             $this->currentId = $parent;
             $parentDef = $this->resolveDefinition($parentDef);
@@ -85,7 +85,7 @@ class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Co
             $this->currentId = $id;
         }
         $this->container->log($this, \sprintf('Resolving inheritance for "%s" (parent: %s).', $this->currentId, $parent));
-        $def = new \ConfigTransformer202111231\Symfony\Component\DependencyInjection\Definition();
+        $def = new \ConfigTransformer202111232\Symfony\Component\DependencyInjection\Definition();
         // merge in parent definition
         // purposely ignored attributes: abstract, shared, tags, autoconfigured
         $def->setClass($parentDef->getClass());
@@ -145,7 +145,7 @@ class ResolveChildDefinitionsPass extends \ConfigTransformer202111231\Symfony\Co
             if (null === $decoratedService) {
                 $def->setDecoratedService($decoratedService);
             } else {
-                $def->setDecoratedService($decoratedService[0], $decoratedService[1], $decoratedService[2], $decoratedService[3] ?? \ConfigTransformer202111231\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE);
+                $def->setDecoratedService($decoratedService[0], $decoratedService[1], $decoratedService[2], $decoratedService[3] ?? \ConfigTransformer202111232\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE);
             }
         }
         // merge arguments

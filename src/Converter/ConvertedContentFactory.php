@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111231\Symplify\ConfigTransformer\Converter;
+namespace ConfigTransformer202111232\Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202111231\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202111231\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202111231\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202111232\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202111232\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202111232\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContentFactory
 {
     /**
@@ -16,7 +16,7 @@ final class ConvertedContentFactory
      * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
     private $configFormatConverter;
-    public function __construct(\ConfigTransformer202111231\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202111231\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
+    public function __construct(\ConfigTransformer202111232\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202111232\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;
@@ -32,7 +32,7 @@ final class ConvertedContentFactory
             $message = \sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
             $this->symfonyStyle->note($message);
             $convertedContent = $this->configFormatConverter->convert($fileInfo);
-            $convertedContentFromFileInfo[] = new \ConfigTransformer202111231\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
+            $convertedContentFromFileInfo[] = new \ConfigTransformer202111232\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
         }
         return $convertedContentFromFileInfo;
     }
