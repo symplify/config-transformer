@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202111238\PhpParser\Node\Arg;
-use ConfigTransformer202111238\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202111238\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202111238\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202111238\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202111238\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202111231\PhpParser\Node\Arg;
+use ConfigTransformer202111231\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202111231\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202111231\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202111231\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202111231\Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ServicesPhpNodeFactory
 {
     /**
@@ -29,7 +29,7 @@ final class ServicesPhpNodeFactory
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202111238\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202111231\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
@@ -38,12 +38,12 @@ final class ServicesPhpNodeFactory
     /**
      * @param mixed[] $serviceValues
      */
-    public function createResource(string $serviceKey, array $serviceValues) : \ConfigTransformer202111238\PhpParser\Node\Stmt\Expression
+    public function createResource(string $serviceKey, array $serviceValues) : \ConfigTransformer202111231\PhpParser\Node\Stmt\Expression
     {
         $servicesLoadMethodCall = $this->createServicesLoadMethodCall($serviceKey, $serviceValues);
         $decoratedMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($serviceValues, $servicesLoadMethodCall);
         if (!isset($serviceValues[self::EXCLUDE])) {
-            return new \ConfigTransformer202111238\PhpParser\Node\Stmt\Expression($decoratedMethodCall);
+            return new \ConfigTransformer202111231\PhpParser\Node\Stmt\Expression($decoratedMethodCall);
         }
         $exclude = $serviceValues[self::EXCLUDE];
         if (!\is_array($exclude)) {
@@ -54,19 +54,19 @@ final class ServicesPhpNodeFactory
             $excludeValue[$key] = $this->commonNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
         $args = $this->argsNodeFactory->createFromValues([$excludeValue]);
-        $excludeMethodCall = new \ConfigTransformer202111238\PhpParser\Node\Expr\MethodCall($decoratedMethodCall, self::EXCLUDE, $args);
-        return new \ConfigTransformer202111238\PhpParser\Node\Stmt\Expression($excludeMethodCall);
+        $excludeMethodCall = new \ConfigTransformer202111231\PhpParser\Node\Expr\MethodCall($decoratedMethodCall, self::EXCLUDE, $args);
+        return new \ConfigTransformer202111231\PhpParser\Node\Stmt\Expression($excludeMethodCall);
     }
     /**
      * @param mixed[] $serviceValues
      */
-    private function createServicesLoadMethodCall(string $serviceKey, array $serviceValues) : \ConfigTransformer202111238\PhpParser\Node\Expr\MethodCall
+    private function createServicesLoadMethodCall(string $serviceKey, array $serviceValues) : \ConfigTransformer202111231\PhpParser\Node\Expr\MethodCall
     {
-        $servicesVariable = new \ConfigTransformer202111238\PhpParser\Node\Expr\Variable(\ConfigTransformer202111238\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \ConfigTransformer202111231\PhpParser\Node\Expr\Variable(\ConfigTransformer202111231\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         $resource = $serviceValues['resource'];
         $args = [];
-        $args[] = new \ConfigTransformer202111238\PhpParser\Node\Arg(new \ConfigTransformer202111238\PhpParser\Node\Scalar\String_($serviceKey));
-        $args[] = new \ConfigTransformer202111238\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
-        return new \ConfigTransformer202111238\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
+        $args[] = new \ConfigTransformer202111231\PhpParser\Node\Arg(new \ConfigTransformer202111231\PhpParser\Node\Scalar\String_($serviceKey));
+        $args[] = new \ConfigTransformer202111231\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
+        return new \ConfigTransformer202111231\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
     }
 }
