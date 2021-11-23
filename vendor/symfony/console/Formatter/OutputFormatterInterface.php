@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111232\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202111233\Symfony\Component\Console\Formatter;
 
 /**
  * Formatter interface for console output.
