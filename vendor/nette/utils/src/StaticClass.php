@@ -5,14 +5,17 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111246\Nette;
+namespace ConfigTransformer202111241\Nette;
 
 /**
  * Static class.
  */
 trait StaticClass
 {
-    /** @throws \Error */
+    /**
+     * @return never
+     * @throws \Error
+     */
     public final function __construct()
     {
         throw new \Error('Class ' . static::class . ' is static and cannot be instantiated.');
@@ -24,6 +27,6 @@ trait StaticClass
      */
     public static function __callStatic(string $name, array $args)
     {
-        \ConfigTransformer202111246\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
+        \ConfigTransformer202111241\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
     }
 }

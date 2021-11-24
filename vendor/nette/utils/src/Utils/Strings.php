@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111246\Nette\Utils;
+namespace ConfigTransformer202111241\Nette\Utils;
 
-use ConfigTransformer202111246\Nette;
+use ConfigTransformer202111241\Nette;
 use function is_array, is_object, strlen;
 /**
  * String tools library.
@@ -41,9 +41,9 @@ class Strings
     public static function chr($code) : string
     {
         if ($code < 0 || $code >= 0xd800 && $code <= 0xdfff || $code > 0x10ffff) {
-            throw new \ConfigTransformer202111246\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
+            throw new \ConfigTransformer202111241\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
         } elseif (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202111246\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
+            throw new \ConfigTransformer202111241\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
         }
         return \iconv('UTF-32BE', 'UTF-8//IGNORE', \pack('N', $code));
     }
@@ -87,7 +87,7 @@ class Strings
             return \mb_substr($s, $start, $length, 'UTF-8');
             // MB is much faster
         } elseif (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202111246\Nette\NotSupportedException(__METHOD__ . '() requires extension ICONV or MBSTRING, neither is loaded.');
+            throw new \ConfigTransformer202111241\Nette\NotSupportedException(__METHOD__ . '() requires extension ICONV or MBSTRING, neither is loaded.');
         } elseif ($length === null) {
             $length = self::length($s);
         } elseif ($start < 0 && $length < 0) {
@@ -372,7 +372,7 @@ class Strings
     public static function reverse($s) : string
     {
         if (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202111246\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
+            throw new \ConfigTransformer202111241\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
         }
         return \iconv('UTF-32LE', 'UTF-8', \strrev(\iconv('UTF-8', 'UTF-32BE', $s)));
     }
@@ -431,17 +431,19 @@ class Strings
             $len = \strlen($haystack);
             if ($needle === '') {
                 return $len;
+            } elseif ($len === 0) {
+                return null;
             }
             $pos = $len - 1;
             while (($pos = \strrpos($haystack, $needle, $pos - $len)) !== \false && ++$nth) {
                 $pos--;
             }
         }
-        return \ConfigTransformer202111246\Nette\Utils\Helpers::falseToNull($pos);
+        return \ConfigTransformer202111241\Nette\Utils\Helpers::falseToNull($pos);
     }
     /**
-     * Splits a string into array by the regular expression.
-     * Argument $flag takes same arguments as preg_split(), but PREG_SPLIT_DELIM_CAPTURE is set by default.
+     * Splits a string into array by the regular expression. Parenthesized expression in the delimiter are captured.
+     * Parameter $flags can be any combination of PREG_SPLIT_NO_EMPTY and PREG_OFFSET_CAPTURE flags.
      * @param string $subject
      * @param string $pattern
      * @param int $flags
@@ -452,7 +454,7 @@ class Strings
     }
     /**
      * Checks if given string matches a regular expression pattern and returns an array with first found match and each subpattern.
-     * Argument $flag takes same arguments as function preg_match().
+     * Parameter $flags can be any combination of PREG_OFFSET_CAPTURE and PREG_UNMATCHED_AS_NULL flags.
      * @param string $subject
      * @param string $pattern
      * @param int $flags
@@ -466,8 +468,8 @@ class Strings
         return self::pcre('preg_match', [$pattern, $subject, &$m, $flags, $offset]) ? $m : null;
     }
     /**
-     * Finds all occurrences matching regular expression pattern and returns a two-dimensional array.
-     * Argument $flag takes same arguments as function preg_match_all(), but PREG_SET_ORDER is set by default.
+     * Finds all occurrences matching regular expression pattern and returns a two-dimensional array. Result is array of matches (ie uses by default PREG_SET_ORDER).
+     * Parameter $flags can be any combination of PREG_OFFSET_CAPTURE, PREG_UNMATCHED_AS_NULL and PREG_PATTERN_ORDER flags.
      * @param string $subject
      * @param string $pattern
      * @param int $flags
@@ -492,7 +494,7 @@ class Strings
     {
         if (\is_object($replacement) || \is_array($replacement)) {
             if (!\is_callable($replacement, \false, $textual)) {
-                throw new \ConfigTransformer202111246\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
+                throw new \ConfigTransformer202111241\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
             }
             return self::pcre('preg_replace_callback', [$pattern, $replacement, $subject, $limit]);
         } elseif (\is_array($pattern) && \is_string(\key($pattern))) {
@@ -506,12 +508,12 @@ class Strings
      * @param mixed[] $args */
     public static function pcre($func, $args)
     {
-        $res = \ConfigTransformer202111246\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
+        $res = \ConfigTransformer202111241\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
             // compile-time error, not detectable by preg_last_error
-            throw new \ConfigTransformer202111246\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
+            throw new \ConfigTransformer202111241\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
         });
         if (($code = \preg_last_error()) && ($res === null || !\in_array($func, ['preg_filter', 'preg_replace_callback', 'preg_replace'], \true))) {
-            throw new \ConfigTransformer202111246\Nette\Utils\RegexpException((\ConfigTransformer202111246\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
+            throw new \ConfigTransformer202111241\Nette\Utils\RegexpException((\ConfigTransformer202111241\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
         }
         return $res;
     }

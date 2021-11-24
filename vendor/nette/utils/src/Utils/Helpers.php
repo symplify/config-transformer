@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111246\Nette\Utils;
+namespace ConfigTransformer202111241\Nette\Utils;
 
 class Helpers
 {
@@ -32,7 +32,7 @@ class Helpers
     public static function getLastError() : string
     {
         $message = \error_get_last()['message'] ?? '';
-        $message = \ini_get('html_errors') ? \ConfigTransformer202111246\Nette\Utils\Html::htmlToText($message) : $message;
+        $message = \ini_get('html_errors') ? \ConfigTransformer202111241\Nette\Utils\Html::htmlToText($message) : $message;
         $message = \preg_replace('#^\\w+\\(.*?\\): #', '', $message);
         return $message;
     }
@@ -44,6 +44,20 @@ class Helpers
     public static function falseToNull($value)
     {
         return $value === \false ? null : $value;
+    }
+    /**
+     * Returns value clamped to the inclusive range of min and max.
+     * @param  int|float  $value
+     * @param  int|float  $min
+     * @param  int|float  $max
+     * @return int|float
+     */
+    public static function clamp($value, $min, $max)
+    {
+        if ($min > $max) {
+            throw new \InvalidArgumentException("Minimum ({$min}) is not less than maximum ({$max}).");
+        }
+        return \min(\max($value, $min), $max);
     }
     /**
      * Looks for a string from possibilities that is most similar to value, but not the same (for 8-bit encoding).

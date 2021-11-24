@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111246\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202111241\Symfony\Component\Finder\Iterator;
 
 /**
  * FileTypeFilterIterator only keeps files, directories, or both.
