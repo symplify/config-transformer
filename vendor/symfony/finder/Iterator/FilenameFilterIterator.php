@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111246\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202111248\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202111246\Symfony\Component\Finder\Glob;
+use ConfigTransformer202111248\Symfony\Component\Finder\Glob;
 /**
  * FilenameFilterIterator filters files by patterns (a regexp, a glob, or a string).
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FilenameFilterIterator extends \ConfigTransformer202111246\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+class FilenameFilterIterator extends \ConfigTransformer202111248\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
 {
     /**
      * Filters the iterator values.
@@ -40,6 +40,6 @@ class FilenameFilterIterator extends \ConfigTransformer202111246\Symfony\Compone
      */
     protected function toRegex($str)
     {
-        return $this->isRegex($str) ? $str : \ConfigTransformer202111246\Symfony\Component\Finder\Glob::toRegex($str);
+        return $this->isRegex($str) ? $str : \ConfigTransformer202111248\Symfony\Component\Finder\Glob::toRegex($str);
     }
 }
