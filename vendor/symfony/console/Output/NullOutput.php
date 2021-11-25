@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111246\Symfony\Component\Console\Output;
+namespace ConfigTransformer202111253\Symfony\Component\Console\Output;
 
-use ConfigTransformer202111246\Symfony\Component\Console\Formatter\NullOutputFormatter;
-use ConfigTransformer202111246\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202111253\Symfony\Component\Console\Formatter\NullOutputFormatter;
+use ConfigTransformer202111253\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * NullOutput suppresses all output.
  *
@@ -20,13 +20,13 @@ use ConfigTransformer202111246\Symfony\Component\Console\Formatter\OutputFormatt
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class NullOutput implements \ConfigTransformer202111246\Symfony\Component\Console\Output\OutputInterface
+class NullOutput implements \ConfigTransformer202111253\Symfony\Component\Console\Output\OutputInterface
 {
     private $formatter;
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\ConfigTransformer202111246\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\ConfigTransformer202111253\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         // do nothing
     }
@@ -39,7 +39,7 @@ class NullOutput implements \ConfigTransformer202111246\Symfony\Component\Consol
             return $this->formatter;
         }
         // to comply with the interface we must return a OutputFormatterInterface
-        return $this->formatter = new \ConfigTransformer202111246\Symfony\Component\Console\Formatter\NullOutputFormatter();
+        return $this->formatter = new \ConfigTransformer202111253\Symfony\Component\Console\Formatter\NullOutputFormatter();
     }
     /**
      * {@inheritdoc}

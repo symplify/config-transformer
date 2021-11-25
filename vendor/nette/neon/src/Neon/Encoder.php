@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111246\Nette\Neon;
+namespace ConfigTransformer202111253\Nette\Neon;
 
 /**
  * Converts value to NEON format.
@@ -13,35 +13,45 @@ namespace ConfigTransformer202111246\Nette\Neon;
  */
 final class Encoder
 {
-    public const BLOCK = 1;
+    /** @deprecated */
+    public const BLOCK = \true;
+    /** @var bool */
+    public $blockMode = \false;
+    /** @var string */
+    public $indentation = "\t";
     /**
      * Returns the NEON representation of a value.
      */
-    public function encode($val, int $flags = 0) : string
+    public function encode($val) : string
     {
-        $node = $this->valueToNode($val, (bool) ($flags & self::BLOCK));
+        $node = $this->valueToNode($val, $this->blockMode);
         return $node->toString();
     }
-    public function valueToNode($val, bool $blockMode = \false) : \ConfigTransformer202111246\Nette\Neon\Node
+    public function valueToNode($val, bool $blockMode = \false) : \ConfigTransformer202111253\Nette\Neon\Node
     {
         if ($val instanceof \DateTimeInterface) {
-            return new \ConfigTransformer202111246\Nette\Neon\Node\LiteralNode($val);
-        } elseif ($val instanceof \ConfigTransformer202111246\Nette\Neon\Entity && $val->value === \ConfigTransformer202111246\Nette\Neon\Neon::CHAIN) {
-            $node = new \ConfigTransformer202111246\Nette\Neon\Node\EntityChainNode();
+            return new \ConfigTransformer202111253\Nette\Neon\Node\LiteralNode($val);
+        } elseif ($val instanceof \ConfigTransformer202111253\Nette\Neon\Entity && $val->value === \ConfigTransformer202111253\Nette\Neon\Neon::CHAIN) {
+            $node = new \ConfigTransformer202111253\Nette\Neon\Node\EntityChainNode();
             foreach ($val->attributes as $entity) {
-                $node->chain[] = $this->valueToNode($entity, $blockMode);
+                $node->chain[] = $this->valueToNode($entity);
             }
             return $node;
-        } elseif ($val instanceof \ConfigTransformer202111246\Nette\Neon\Entity) {
-            return new \ConfigTransformer202111246\Nette\Neon\Node\EntityNode($this->valueToNode($val->value), $this->arrayToNodes((array) $val->attributes));
+        } elseif ($val instanceof \ConfigTransformer202111253\Nette\Neon\Entity) {
+            return new \ConfigTransformer202111253\Nette\Neon\Node\EntityNode($this->valueToNode($val->value), $this->arrayToNodes((array) $val->attributes));
         } elseif (\is_object($val) || \is_array($val)) {
-            $node = new \ConfigTransformer202111246\Nette\Neon\Node\ArrayNode($blockMode ? '' : null);
+            if ($blockMode) {
+                $node = new \ConfigTransformer202111253\Nette\Neon\Node\BlockArrayNode();
+            } else {
+                $isList = \is_array($val) && (!$val || \array_keys($val) === \range(0, \count($val) - 1));
+                $node = new \ConfigTransformer202111253\Nette\Neon\Node\InlineArrayNode($isList ? '[' : '{');
+            }
             $node->items = $this->arrayToNodes($val, $blockMode);
             return $node;
-        } elseif (\is_string($val) && \ConfigTransformer202111246\Nette\Neon\Lexer::requiresDelimiters($val)) {
-            return new \ConfigTransformer202111246\Nette\Neon\Node\StringNode($val);
+        } elseif (\is_string($val) && \ConfigTransformer202111253\Nette\Neon\Lexer::requiresDelimiters($val)) {
+            return new \ConfigTransformer202111253\Nette\Neon\Node\StringNode($val);
         } else {
-            return new \ConfigTransformer202111246\Nette\Neon\Node\LiteralNode($val);
+            return new \ConfigTransformer202111253\Nette\Neon\Node\LiteralNode($val);
         }
     }
     private function arrayToNodes($val, bool $blockMode = \false) : array
@@ -50,9 +60,12 @@ final class Encoder
         $counter = 0;
         $hide = \true;
         foreach ($val as $k => $v) {
-            $res[] = $item = new \ConfigTransformer202111246\Nette\Neon\Node\ArrayItemNode();
+            $res[] = $item = new \ConfigTransformer202111253\Nette\Neon\Node\ArrayItemNode();
             $item->key = $hide && $k === $counter ? null : self::valueToNode($k);
             $item->value = self::valueToNode($v, $blockMode);
+            if ($item->value instanceof \ConfigTransformer202111253\Nette\Neon\Node\BlockArrayNode) {
+                $item->value->indentation = $this->indentation;
+            }
             if ($hide && \is_int($k)) {
                 $hide = $k === $counter;
                 $counter = \max($k + 1, $counter);
