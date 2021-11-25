@@ -863,6 +863,7 @@ return array(
     'ConfigTransformer202111253\\Symplify\\Astral\\NodeVisitor\\CallableNodeVisitor' => $vendorDir . '/symplify/astral/src/NodeVisitor/CallableNodeVisitor.php',
     'ConfigTransformer202111253\\Symplify\\Astral\\PhpParser\\SmartPhpParser' => $vendorDir . '/symplify/astral/src/PhpParser/SmartPhpParser.php',
     'ConfigTransformer202111253\\Symplify\\Astral\\PhpParser\\SmartPhpParserFactory' => $vendorDir . '/symplify/astral/src/PhpParser/SmartPhpParserFactory.php',
+    'ConfigTransformer202111253\\Symplify\\Astral\\Reflection\\MethodCallParser' => $vendorDir . '/symplify/astral/src/Reflection/MethodCallParser.php',
     'ConfigTransformer202111253\\Symplify\\Astral\\Reflection\\ReflectionParser' => $vendorDir . '/symplify/astral/src/Reflection/ReflectionParser.php',
     'ConfigTransformer202111253\\Symplify\\Astral\\StaticFactory\\NodeValueResolverStaticFactory' => $vendorDir . '/symplify/astral/src/StaticFactory/NodeValueResolverStaticFactory.php',
     'ConfigTransformer202111253\\Symplify\\Astral\\StaticFactory\\SimpleNameResolverStaticFactory' => $vendorDir . '/symplify/astral/src/StaticFactory/SimpleNameResolverStaticFactory.php',
