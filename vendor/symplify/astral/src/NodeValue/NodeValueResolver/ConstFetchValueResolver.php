@@ -1,30 +1,30 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111253\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer2021112610\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202111253\PhpParser\Node\Expr;
-use ConfigTransformer202111253\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202111253\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202111253\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer2021112610\PhpParser\Node\Expr;
+use ConfigTransformer2021112610\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer2021112610\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer2021112610\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<ConstFetch>
  */
-final class ConstFetchValueResolver implements \ConfigTransformer202111253\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class ConstFetchValueResolver implements \ConfigTransformer2021112610\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
     private $simpleNameResolver;
-    public function __construct(\ConfigTransformer202111253\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
+    public function __construct(\ConfigTransformer2021112610\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
     {
         $this->simpleNameResolver = $simpleNameResolver;
     }
     public function getType() : string
     {
-        return \ConfigTransformer202111253\PhpParser\Node\Expr\ConstFetch::class;
+        return \ConfigTransformer2021112610\PhpParser\Node\Expr\ConstFetch::class;
     }
     /**
      * @param \PhpParser\Node\Expr $expr
