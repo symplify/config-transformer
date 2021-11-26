@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111268\Nette\Utils;
+namespace ConfigTransformer202111267\Nette\Utils;
 
-use ConfigTransformer202111268\Nette;
+use ConfigTransformer202111267\Nette;
 /**
  * PHP reflection helpers.
  */
@@ -49,7 +49,7 @@ final class Reflection
      */
     public static function getReturnTypes($func) : array
     {
-        $type = \ConfigTransformer202111268\Nette\Utils\Type::fromReflection($func);
+        $type = \ConfigTransformer202111267\Nette\Utils\Type::fromReflection($func);
         return $type ? $type->getNames() : [];
     }
     /**
@@ -68,7 +68,7 @@ final class Reflection
      */
     public static function getParameterTypes($param) : array
     {
-        $type = \ConfigTransformer202111268\Nette\Utils\Type::fromReflection($param);
+        $type = \ConfigTransformer202111267\Nette\Utils\Type::fromReflection($param);
         return $type ? $type->getNames() : [];
     }
     /**
@@ -87,7 +87,7 @@ final class Reflection
      */
     public static function getPropertyTypes($prop) : array
     {
-        $type = \ConfigTransformer202111268\Nette\Utils\Type::fromReflection($prop);
+        $type = \ConfigTransformer202111267\Nette\Utils\Type::fromReflection($prop);
         return $type ? $type->getNames() : [];
     }
     /**
@@ -98,11 +98,11 @@ final class Reflection
         if ($type === null) {
             return null;
         } elseif ($type instanceof \ReflectionNamedType) {
-            return \ConfigTransformer202111268\Nette\Utils\Type::resolve($type->getName(), $reflection);
-        } elseif ($type instanceof \ReflectionUnionType || $type instanceof \ConfigTransformer202111268\ReflectionIntersectionType) {
-            throw new \ConfigTransformer202111268\Nette\InvalidStateException('The ' . self::toString($reflection) . ' is not expected to have a union or intersection type.');
+            return \ConfigTransformer202111267\Nette\Utils\Type::resolve($type->getName(), $reflection);
+        } elseif ($type instanceof \ReflectionUnionType || $type instanceof \ConfigTransformer202111267\ReflectionIntersectionType) {
+            throw new \ConfigTransformer202111267\Nette\InvalidStateException('The ' . self::toString($reflection) . ' is not expected to have a union or intersection type.');
         } else {
-            throw new \ConfigTransformer202111268\Nette\InvalidStateException('Unexpected type of ' . self::toString($reflection));
+            throw new \ConfigTransformer202111267\Nette\InvalidStateException('Unexpected type of ' . self::toString($reflection));
         }
     }
     /**
@@ -117,7 +117,7 @@ final class Reflection
             $const = $orig = $param->getDefaultValueConstantName();
             $pair = \explode('::', $const);
             if (isset($pair[1])) {
-                $pair[0] = \ConfigTransformer202111268\Nette\Utils\Type::resolve($pair[0], $param);
+                $pair[0] = \ConfigTransformer202111267\Nette\Utils\Type::resolve($pair[0], $param);
                 try {
                     $rcc = new \ReflectionClassConstant($pair[0], $pair[1]);
                 } catch (\ReflectionException $e) {
@@ -196,7 +196,7 @@ final class Reflection
         } elseif ($ref instanceof \ReflectionParameter) {
             return '$' . $ref->name . ' in ' . self::toString($ref->getDeclaringFunction());
         } else {
-            throw new \ConfigTransformer202111268\Nette\InvalidArgumentException();
+            throw new \ConfigTransformer202111267\Nette\InvalidArgumentException();
         }
     }
     /**
@@ -210,7 +210,7 @@ final class Reflection
     {
         $lower = \strtolower($name);
         if (empty($name)) {
-            throw new \ConfigTransformer202111268\Nette\InvalidArgumentException('Class name must not be empty.');
+            throw new \ConfigTransformer202111267\Nette\InvalidArgumentException('Class name must not be empty.');
         } elseif (isset(self::BUILTIN_TYPES[$lower])) {
             return $lower;
         } elseif ($lower === 'self' || $lower === 'static') {
@@ -237,7 +237,7 @@ final class Reflection
     public static function getUseStatements($class) : array
     {
         if ($class->isAnonymous()) {
-            throw new \ConfigTransformer202111268\Nette\NotImplementedException('Anonymous classes are not supported.');
+            throw new \ConfigTransformer202111267\Nette\NotImplementedException('Anonymous classes are not supported.');
         }
         static $cache = [];
         if (!isset($cache[$name = $class->name])) {

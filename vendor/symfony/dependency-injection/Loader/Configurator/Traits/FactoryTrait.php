@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111268\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202111267\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202111268\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202111268\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+use ConfigTransformer202111267\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202111267\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 trait FactoryTrait
 {
     /**
@@ -25,7 +25,7 @@ trait FactoryTrait
     {
         if (\is_string($factory) && 1 === \substr_count($factory, ':')) {
             $factoryParts = \explode(':', $factory);
-            throw new \ConfigTransformer202111268\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid factory "%s": the "service:method" notation is not available when using PHP-based DI configuration. Use "[service(\'%s\'), \'%s\']" instead.', $factory, $factoryParts[0], $factoryParts[1]));
+            throw new \ConfigTransformer202111267\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid factory "%s": the "service:method" notation is not available when using PHP-based DI configuration. Use "[service(\'%s\'), \'%s\']" instead.', $factory, $factoryParts[0], $factoryParts[1]));
         }
         $this->definition->setFactory(static::processValue($factory, \true));
         return $this;
