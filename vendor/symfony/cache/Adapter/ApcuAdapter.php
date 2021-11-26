@@ -8,31 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111266\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202111268\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111266\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111266\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202111266\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202111268\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202111268\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202111268\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ApcuAdapter extends \ConfigTransformer202111266\Symfony\Component\Cache\Adapter\AbstractAdapter
+class ApcuAdapter extends \ConfigTransformer202111268\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $marshaller;
     /**
      * @throws CacheException if APCu is not enabled
      */
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null, \ConfigTransformer202111266\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null, \ConfigTransformer202111268\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202111266\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled.');
+            throw new \ConfigTransformer202111268\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled.');
         }
         if ('cli' === \PHP_SAPI) {
             \ini_set('apc.use_request_time', 0);
         }
         parent::__construct($namespace, $defaultLifetime);
         if (null !== $version) {
-            \ConfigTransformer202111266\Symfony\Component\Cache\CacheItem::validateKey($version);
+            \ConfigTransformer202111268\Symfony\Component\Cache\CacheItem::validateKey($version);
             if (!\apcu_exists($version . '@' . $namespace)) {
                 $this->doClear($namespace);
                 \apcu_add($version . '@' . $namespace, null);
