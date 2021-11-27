@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111274\PhpParser\ErrorHandler;
+namespace ConfigTransformer202111277\PhpParser\ErrorHandler;
 
-use ConfigTransformer202111274\PhpParser\Error;
-use ConfigTransformer202111274\PhpParser\ErrorHandler;
+use ConfigTransformer202111277\PhpParser\Error;
+use ConfigTransformer202111277\PhpParser\ErrorHandler;
 /**
  * Error handler that handles all errors by throwing them.
  *
  * This is the default strategy used by all components.
  */
-class Throwing implements \ConfigTransformer202111274\PhpParser\ErrorHandler
+class Throwing implements \ConfigTransformer202111277\PhpParser\ErrorHandler
 {
     /**
      * @param \PhpParser\Error $error
