@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202111289\Nette\Neon;
+namespace ConfigTransformer202111284\Nette\Neon;
 
 /** @internal */
 abstract class Node
