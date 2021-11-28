@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111284\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Attribute;
 
 /**
  * An attribute to tell under which environement this class should be registered as a service.

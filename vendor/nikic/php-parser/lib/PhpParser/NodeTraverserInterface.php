@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111284\PhpParser;
+namespace ConfigTransformer202111287\PhpParser;
 
 interface NodeTraverserInterface
 {
