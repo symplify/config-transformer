@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021113010\PhpParser;
+namespace ConfigTransformer202111308\PhpParser;
 
 /**
  * @codeCoverageIgnore
  */
-class NodeVisitorAbstract implements \ConfigTransformer2021113010\PhpParser\NodeVisitor
+class NodeVisitorAbstract implements \ConfigTransformer202111308\PhpParser\NodeVisitor
 {
     /**
      * @param mixed[] $nodes

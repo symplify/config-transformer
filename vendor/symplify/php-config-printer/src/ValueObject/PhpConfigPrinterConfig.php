@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021113010\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202111308\Symplify\PhpConfigPrinter\ValueObject;
 
 /**
  * @api

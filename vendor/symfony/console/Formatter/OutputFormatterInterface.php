@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021113010\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202111308\Symfony\Component\Console\Formatter;
 
 /**
  * Formatter interface for console output.
@@ -43,7 +43,7 @@ interface OutputFormatterInterface
      * @throws \InvalidArgumentException When style isn't defined
      * @param string $name
      */
-    public function getStyle($name) : \ConfigTransformer2021113010\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface;
+    public function getStyle($name) : \ConfigTransformer202111308\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface;
     /**
      * Formats a message according to the given styles.
      * @param string|null $message
