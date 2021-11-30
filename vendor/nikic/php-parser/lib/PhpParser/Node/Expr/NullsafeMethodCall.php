@@ -1,32 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111308\PhpParser\Node\Expr;
+namespace ConfigTransformer202111301\PhpParser\Node\Expr;
 
-use ConfigTransformer202111308\PhpParser\Node\Arg;
-use ConfigTransformer202111308\PhpParser\Node\Expr;
-use ConfigTransformer202111308\PhpParser\Node\Identifier;
-class NullsafeMethodCall extends \ConfigTransformer202111308\PhpParser\Node\Expr
+use ConfigTransformer202111301\PhpParser\Node\Arg;
+use ConfigTransformer202111301\PhpParser\Node\Expr;
+use ConfigTransformer202111301\PhpParser\Node\Identifier;
+use ConfigTransformer202111301\PhpParser\Node\VariadicPlaceholder;
+class NullsafeMethodCall extends \ConfigTransformer202111301\PhpParser\Node\Expr\CallLike
 {
     /** @var Expr Variable holding object */
     public $var;
     /** @var Identifier|Expr Method name */
     public $name;
-    /** @var Arg[] Arguments */
+    /** @var array<Arg|VariadicPlaceholder> Arguments */
     public $args;
     /**
      * Constructs a nullsafe method call node.
      *
-     * @param Expr                   $var        Variable holding object
-     * @param string|Identifier|Expr $name       Method name
-     * @param Arg[]                  $args       Arguments
-     * @param array                  $attributes Additional attributes
+     * @param Expr                           $var        Variable holding object
+     * @param string|Identifier|Expr         $name       Method name
+     * @param array<Arg|VariadicPlaceholder> $args       Arguments
+     * @param array                          $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202111308\PhpParser\Node\Expr $var, $name, array $args = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202111301\PhpParser\Node\Expr $var, $name, array $args = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
-        $this->name = \is_string($name) ? new \ConfigTransformer202111308\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202111301\PhpParser\Node\Identifier($name) : $name;
         $this->args = $args;
     }
     public function getSubNodeNames() : array
@@ -36,5 +37,9 @@ class NullsafeMethodCall extends \ConfigTransformer202111308\PhpParser\Node\Expr
     public function getType() : string
     {
         return 'Expr_NullsafeMethodCall';
+    }
+    public function getRawArgs() : array
+    {
+        return $this->args;
     }
 }
