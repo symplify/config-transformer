@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111303\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer202111307\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-use ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -54,13 +54,13 @@ class Registry
     public static function getClassReflector($class, $instantiableWithoutConstructor = \false, $cloneable = null)
     {
         if (!($isClass = \class_exists($class)) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
-            throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+            throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
         }
         $reflector = new \ReflectionClass($class);
         if ($instantiableWithoutConstructor) {
             $proto = $reflector->newInstanceWithoutConstructor();
         } elseif (!$isClass || $reflector->isAbstract()) {
-            throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+            throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
         } elseif ($reflector->name !== $class) {
             $reflector = self::$reflectors[$name = $reflector->name] ?? self::getClassReflector($name, \false, $cloneable);
             self::$cloneable[$class] = self::$cloneable[$name];
@@ -82,10 +82,10 @@ class Registry
                         if (__FILE__ !== $e->getFile()) {
                             throw $e;
                         }
-                        throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
+                        throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
                     }
                     if (\false === $proto) {
-                        throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                        throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
                     }
                 }
             }
@@ -93,13 +93,13 @@ class Registry
                 try {
                     \serialize($proto);
                 } catch (\Exception $e) {
-                    throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
+                    throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
                 }
             }
         }
         if (null === $cloneable) {
             if (($proto instanceof \Reflector || $proto instanceof \ReflectionGenerator || $proto instanceof \ReflectionType || $proto instanceof \IteratorIterator || $proto instanceof \RecursiveIteratorIterator) && (!$proto instanceof \Serializable && !\method_exists($proto, '__wakeup') && !\method_exists($class, '__unserialize'))) {
-                throw new \ConfigTransformer202111303\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                throw new \ConfigTransformer202111307\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
             }
             $cloneable = $reflector->isCloneable() && !$reflector->hasMethod('__clone');
         }

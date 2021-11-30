@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202111303\Psr\Cache;
+namespace ConfigTransformer202111307\Psr\Cache;
 
 /**
  * CacheItemPoolInterface generates CacheItemInterface objects.
@@ -29,7 +29,7 @@ interface CacheItemPoolInterface
      * @return CacheItemInterface
      *   The corresponding Cache Item.
      */
-    public function getItem($key) : \ConfigTransformer202111303\Psr\Cache\CacheItemInterface;
+    public function getItem($key) : \ConfigTransformer202111307\Psr\Cache\CacheItemInterface;
     /**
      * Returns a traversable set of cache items.
      *
