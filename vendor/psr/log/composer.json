@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111287\\Psr\\Log\\": "src"
+            "ConfigTransformer2021113010\\Psr\\Log\\": "src"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.x-dev"
         }
     }
 }

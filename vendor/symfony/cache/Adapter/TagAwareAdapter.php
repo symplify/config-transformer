@@ -8,56 +8,56 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202111287\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202111287\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202111287\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202111287\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202111287\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer2021113010\Psr\Cache\CacheItemInterface;
+use ConfigTransformer2021113010\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer2021113010\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer2021113010\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer2021113010\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202111287\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202111287\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer202111287\Psr\Log\LoggerAwareInterface
+class TagAwareAdapter implements \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer2021113010\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer2021113010\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer2021113010\Psr\Log\LoggerAwareInterface
 {
     use ContractsTrait;
     use LoggerAwareTrait;
     use ProxyTrait;
     public const TAGS_PREFIX = "\0tags\0";
-    private $deferred = [];
-    private $tags;
-    private $knownTagVersions = [];
-    private $knownTagVersionsTtl;
-    private static $createCacheItem;
-    private static $setCacheItemTags;
-    private static $getTagsByKey;
-    private static $invalidateTags;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
+    private array $deferred = [];
+    private \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $tags;
+    private array $knownTagVersions = [];
+    private float $knownTagVersionsTtl;
+    private static \Closure $createCacheItem;
+    private static \Closure $setCacheItemTags;
+    private static \Closure $getTagsByKey;
+    private static \Closure $saveTags;
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
-        $this->tags = $tagsPool ?: $itemsPool;
+        $this->tags = $tagsPool ?? $itemsPool;
         $this->knownTagVersionsTtl = $knownTagVersionsTtl;
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $protoItem) {
-            $item = new \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem();
+        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $protoItem) {
+            $item = new \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->expiry = $protoItem->expiry;
             $item->poolHash = $protoItem->poolHash;
             return $item;
-        }, null, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class));
-        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
+        }, null, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class));
+        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
             $item->isTaggable = \true;
             if (!$item->isHit) {
                 return $item;
             }
             if (isset($itemTags[$key])) {
                 foreach ($itemTags[$key] as $tag => $version) {
-                    $item->metadata[\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
+                    $item->metadata[\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
                 }
                 unset($itemTags[$key]);
             } else {
@@ -65,63 +65,41 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
                 $item->isHit = \false;
             }
             return $item;
-        }, null, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class));
         self::$getTagsByKey ?? (self::$getTagsByKey = \Closure::bind(static function ($deferred) {
             $tagsByKey = [];
             foreach ($deferred as $key => $item) {
-                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
+                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
                 $item->metadata = $item->newMetadata;
             }
             return $tagsByKey;
-        }, null, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class));
-        self::$invalidateTags ?? (self::$invalidateTags = \Closure::bind(static function (\ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+        }, null, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class));
+        self::$saveTags ?? (self::$saveTags = \Closure::bind(static function (\ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+            \ksort($tags);
             foreach ($tags as $v) {
                 $v->expiry = 0;
                 $tagsAdapter->saveDeferred($v);
             }
             return $tagsAdapter->commit();
-        }, null, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
      */
-    public function invalidateTags(array $tags)
+    public function invalidateTags(array $tags) : bool
     {
-        $ok = \true;
-        $tagsByKey = [];
-        $invalidatedTags = [];
+        $ids = [];
         foreach ($tags as $tag) {
-            \assert('' !== \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::validateKey($tag));
-            $invalidatedTags[$tag] = 0;
+            \assert('' !== \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::validateKey($tag));
+            unset($this->knownTagVersions[$tag]);
+            $ids[] = $tag . static::TAGS_PREFIX;
         }
-        if ($this->deferred) {
-            $items = $this->deferred;
-            foreach ($items as $key => $item) {
-                if (!$this->pool->saveDeferred($item)) {
-                    unset($this->deferred[$key]);
-                    $ok = \false;
-                }
-            }
-            $tagsByKey = (self::$getTagsByKey)($items);
-            $this->deferred = [];
-        }
-        $tagVersions = $this->getTagVersions($tagsByKey, $invalidatedTags);
-        $f = self::$createCacheItem;
-        foreach ($tagsByKey as $key => $tags) {
-            $this->pool->saveDeferred($f(static::TAGS_PREFIX . $key, \array_intersect_key($tagVersions, $tags), $items[$key]));
-        }
-        $ok = $this->pool->commit() && $ok;
-        if ($invalidatedTags) {
-            $ok = (self::$invalidateTags)($this->tags, $invalidatedTags) && $ok;
-        }
-        return $ok;
+        return !$tags || $this->tags->deleteItems($ids);
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function hasItem($key)
+    public function hasItem(mixed $key) : bool
     {
         if (\is_string($key) && isset($this->deferred[$key])) {
             $this->commit();
@@ -137,7 +115,7 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
             return \true;
         }
         foreach ($this->getTagVersions([$itemTags]) as $tag => $version) {
-            if ($itemTags[$tag] !== $version && 1 !== $itemTags[$tag] - $version) {
+            if ($itemTags[$tag] !== $version) {
                 return \false;
             }
         }
@@ -146,17 +124,16 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem(mixed $key) : \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem
     {
         foreach ($this->getItems([$key]) as $item) {
             return $item;
         }
-        return null;
     }
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = [])
+    public function getItems(array $keys = []) : iterable
     {
         $tagKeys = [];
         $commit = \false;
@@ -172,7 +149,7 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
         }
         try {
             $items = $this->pool->getItems($tagKeys + $keys);
-        } catch (\ConfigTransformer202111287\Psr\Cache\InvalidArgumentException $e) {
+        } catch (\ConfigTransformer2021113010\Psr\Cache\InvalidArgumentException $e) {
             $this->pool->getItems($keys);
             // Should throw an exception
             throw $e;
@@ -181,10 +158,8 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function clear(string $prefix = '')
+    public function clear(string $prefix = '') : bool
     {
         if ('' !== $prefix) {
             foreach ($this->deferred as $key => $item) {
@@ -195,26 +170,22 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
         } else {
             $this->deferred = [];
         }
-        if ($this->pool instanceof \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix);
         }
         return $this->pool->clear();
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItem($key)
+    public function deleteItem(mixed $key) : bool
     {
         return $this->deleteItems([$key]);
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys) : bool
     {
         foreach ($keys as $key) {
             if ('' !== $key && \is_string($key)) {
@@ -225,12 +196,10 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function save(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function save(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -238,12 +207,10 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function saveDeferred(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -251,17 +218,30 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function commit()
+    public function commit() : bool
     {
-        return $this->invalidateTags([]);
+        if (!$this->deferred) {
+            return \true;
+        }
+        $ok = \true;
+        foreach ($this->deferred as $key => $item) {
+            if (!$this->pool->saveDeferred($item)) {
+                unset($this->deferred[$key]);
+                $ok = \false;
+            }
+        }
+        $items = $this->deferred;
+        $tagsByKey = (self::$getTagsByKey)($items);
+        $this->deferred = [];
+        $tagVersions = $this->getTagVersions($tagsByKey);
+        $f = self::$createCacheItem;
+        foreach ($tagsByKey as $key => $tags) {
+            $this->pool->saveDeferred($f(static::TAGS_PREFIX . $key, \array_intersect_key($tagVersions, $tags), $items[$key]));
+        }
+        return $this->pool->commit() && $ok;
     }
-    /**
-     * @return array
-     */
-    public function __sleep()
+    public function __sleep() : array
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -294,7 +274,7 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
                 $tagVersions = $this->getTagVersions($itemTags);
                 foreach ($itemTags as $key => $tags) {
                     foreach ($tags as $tag => $version) {
-                        if ($tagVersions[$tag] !== $version && 1 !== $version - $tagVersions[$tag]) {
+                        if ($tagVersions[$tag] !== $version) {
                             unset($itemTags[$key]);
                             continue 2;
                         }
@@ -308,49 +288,44 @@ class TagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\C
             }
         }
     }
-    private function getTagVersions(array $tagsByKey, array &$invalidatedTags = [])
+    private function getTagVersions(array $tagsByKey) : array
     {
-        $tagVersions = $invalidatedTags;
+        $tagVersions = [];
+        $fetchTagVersions = \false;
         foreach ($tagsByKey as $tags) {
             $tagVersions += $tags;
+            foreach ($tags as $tag => $version) {
+                if ($tagVersions[$tag] !== $version) {
+                    unset($this->knownTagVersions[$tag]);
+                }
+            }
         }
         if (!$tagVersions) {
             return [];
-        }
-        if (!($fetchTagVersions = 1 !== \func_num_args())) {
-            foreach ($tagsByKey as $tags) {
-                foreach ($tags as $tag => $version) {
-                    if ($tagVersions[$tag] > $version) {
-                        $tagVersions[$tag] = $version;
-                    }
-                }
-            }
         }
         $now = \microtime(\true);
         $tags = [];
         foreach ($tagVersions as $tag => $version) {
             $tags[$tag . static::TAGS_PREFIX] = $tag;
-            if ($fetchTagVersions || !isset($this->knownTagVersions[$tag])) {
+            if ($fetchTagVersions || ($this->knownTagVersions[$tag][1] ?? null) !== $version || $now - $this->knownTagVersions[$tag][0] >= $this->knownTagVersionsTtl) {
+                // reuse previously fetched tag versions up to the ttl
                 $fetchTagVersions = \true;
-                continue;
-            }
-            $version -= $this->knownTagVersions[$tag][1];
-            if (0 !== $version && 1 !== $version || $now - $this->knownTagVersions[$tag][0] >= $this->knownTagVersionsTtl) {
-                // reuse previously fetched tag versions up to the ttl, unless we are storing items or a potential miss arises
-                $fetchTagVersions = \true;
-            } else {
-                $this->knownTagVersions[$tag][1] += $version;
             }
         }
         if (!$fetchTagVersions) {
             return $tagVersions;
         }
+        $newTags = [];
+        $newVersion = null;
         foreach ($this->tags->getItems(\array_keys($tags)) as $tag => $version) {
-            $tagVersions[$tag = $tags[$tag]] = $version->get() ?: 0;
-            if (isset($invalidatedTags[$tag])) {
-                $invalidatedTags[$tag] = $version->set(++$tagVersions[$tag]);
+            if (!$version->isHit()) {
+                $newTags[$tag] = $version->set($newVersion ?? ($newVersion = \random_int(\PHP_INT_MIN, \PHP_INT_MAX)));
             }
+            $tagVersions[$tag = $tags[$tag]] = $version->get();
             $this->knownTagVersions[$tag] = [$now, $tagVersions[$tag]];
+        }
+        if ($newTags) {
+            (self::$saveTags)($this->tags, $newTags);
         }
         return $tagVersions;
     }

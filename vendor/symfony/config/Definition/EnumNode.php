@@ -8,18 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Definition;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer2021113010\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * Node which only allows a finite set of values.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class EnumNode extends \ConfigTransformer202111287\Symfony\Component\Config\Definition\ScalarNode
+class EnumNode extends \ConfigTransformer2021113010\Symfony\Component\Config\Definition\ScalarNode
 {
+    /**
+     * @var mixed[]
+     */
     private $values;
-    public function __construct(?string $name, \ConfigTransformer202111287\Symfony\Component\Config\Definition\NodeInterface $parent = null, array $values = [], string $pathSeparator = \ConfigTransformer202111287\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \ConfigTransformer2021113010\Symfony\Component\Config\Definition\NodeInterface $parent = null, array $values = [], string $pathSeparator = \ConfigTransformer2021113010\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
     {
         $values = \array_unique($values);
         if (empty($values)) {
@@ -34,12 +37,14 @@ class EnumNode extends \ConfigTransformer202111287\Symfony\Component\Config\Defi
     }
     /**
      * {@inheritdoc}
+     * @param mixed $value
+     * @return mixed
      */
     protected function finalizeValue($value)
     {
         $value = parent::finalizeValue($value);
         if (!\in_array($value, $this->values, \true)) {
-            $ex = new \ConfigTransformer202111287\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The value %s is not allowed for path "%s". Permissible values: %s', \json_encode($value), $this->getPath(), \implode(', ', \array_map('json_encode', $this->values))));
+            $ex = new \ConfigTransformer2021113010\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The value %s is not allowed for path "%s". Permissible values: %s', \json_encode($value), $this->getPath(), \implode(', ', \array_map('json_encode', $this->values))));
             $ex->setPath($this->getPath());
             throw $ex;
         }

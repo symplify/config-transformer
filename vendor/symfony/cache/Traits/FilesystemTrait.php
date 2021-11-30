@@ -8,9 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -20,11 +21,8 @@ use ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException;
 trait FilesystemTrait
 {
     use FilesystemCommonTrait;
-    private $marshaller;
-    /**
-     * @return bool
-     */
-    public function prune()
+    private \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
+    public function prune() : bool
     {
         $time = \time();
         $pruned = \true;
@@ -44,7 +42,7 @@ trait FilesystemTrait
     /**
      * {@inheritdoc}
      */
-    protected function doFetch(array $ids)
+    protected function doFetch(array $ids) : iterable
     {
         $values = [];
         $now = \time();
@@ -70,7 +68,7 @@ trait FilesystemTrait
     /**
      * {@inheritdoc}
      */
-    protected function doHave(string $id)
+    protected function doHave(string $id) : bool
     {
         $file = $this->getFile($id);
         return \is_file($file) && (@\filemtime($file) > \time() || $this->doFetch([$id]));
@@ -78,7 +76,7 @@ trait FilesystemTrait
     /**
      * {@inheritdoc}
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, int $lifetime) : array|bool
     {
         $expiresAt = $lifetime ? \time() + $lifetime : 0;
         $values = $this->marshaller->marshall($values, $failed);
@@ -88,7 +86,7 @@ trait FilesystemTrait
             }
         }
         if ($failed && !\is_writable($this->directory)) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $failed;
     }

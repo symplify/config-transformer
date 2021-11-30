@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
-use ConfigTransformer202111287\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Piotr Stankowski <git@trakos.pl>
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
  */
-class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface
+class PhpFilesAdapter extends \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemCommonTrait {
         doClear as private doCommonClear;
         doDelete as private doCommonDelete;
     }
-    private $includeHandler;
-    private $appendOnly;
-    private $values = [];
-    private $files = [];
-    private static $startTime;
-    private static $valuesCache = [];
+    private \Closure $includeHandler;
+    private bool $appendOnly;
+    private array $values = [];
+    private array $files = [];
+    private static int $startTime;
+    private static array $valuesCache = [];
     /**
      * @param $appendOnly Set to `true` to gain extra performance when the items stored in this pool never expire.
      *                    Doing so is encouraged because it fits perfectly OPcache's memory model.
@@ -53,10 +53,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
         self::$startTime = self::$startTime ?? $_SERVER['REQUEST_TIME'] ?? \time();
         return \function_exists('opcache_invalidate') && \filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN) && (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) || \filter_var(\ini_get('opcache.enable_cli'), \FILTER_VALIDATE_BOOLEAN));
     }
-    /**
-     * @return bool
-     */
-    public function prune()
+    public function prune() : bool
     {
         $time = \time();
         $pruned = \true;
@@ -83,7 +80,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    protected function doFetch(array $ids)
+    protected function doFetch(array $ids) : iterable
     {
         if ($this->appendOnly) {
             $now = 0;
@@ -103,7 +100,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
                 $values[$id] = null;
             } elseif (!\is_object($value)) {
                 $values[$id] = $value;
-            } elseif (!$value instanceof \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\LazyValue) {
+            } elseif (!$value instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\LazyValue) {
                 $values[$id] = $value();
             } elseif (\false === ($values[$id] = (include $value->file))) {
                 unset($values[$id], $this->values[$id]);
@@ -130,7 +127,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
                         }
                         [$expiresAt, $this->values[$id]] = $expiresAt;
                     } elseif ($now < $expiresAt) {
-                        $this->values[$id] = new \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\LazyValue($file);
+                        $this->values[$id] = new \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\LazyValue($file);
                     }
                     if ($now >= $expiresAt) {
                         unset($this->values[$id], $missingIds[$k], self::$valuesCache[$file]);
@@ -149,7 +146,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    protected function doHave(string $id)
+    protected function doHave(string $id) : bool
     {
         if ($this->appendOnly && isset($this->values[$id])) {
             return \true;
@@ -166,7 +163,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
                 }
                 [$expiresAt, $value] = $expiresAt;
             } elseif ($this->appendOnly) {
-                $value = new \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\LazyValue($file);
+                $value = new \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\LazyValue($file);
             }
         } catch (\ErrorException $e) {
             return \false;
@@ -184,7 +181,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, int $lifetime) : array|bool
     {
         $ok = \true;
         $expiry = $lifetime ? \time() + $lifetime : 'PHP_INT_MAX';
@@ -196,9 +193,9 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
                 $value = "'N;'";
             } elseif (\is_object($value) || \is_array($value)) {
                 try {
-                    $value = \ConfigTransformer202111287\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
+                    $value = \ConfigTransformer2021113010\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
                 } catch (\Exception $e) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
+                    throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
                 }
             } elseif (\is_string($value)) {
                 // Wrap "N;" in a closure to not confuse it with an encoded `null`
@@ -207,7 +204,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
                 }
                 $value = \var_export($value, \true);
             } elseif (!\is_scalar($value)) {
-                throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
+                throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
             } else {
                 $value = \var_export($value, \true);
             }
@@ -231,14 +228,14 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
             unset(self::$valuesCache[$file]);
         }
         if (!$ok && !\is_writable($this->directory)) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $ok;
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear(string $namespace)
+    protected function doClear(string $namespace) : bool
     {
         $this->values = [];
         return $this->doCommonClear($namespace);
@@ -246,7 +243,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    protected function doDelete(array $ids)
+    protected function doDelete(array $ids) : bool
     {
         foreach ($ids as $id) {
             unset($this->values[$id]);
@@ -276,7 +273,7 @@ class PhpFilesAdapter extends \ConfigTransformer202111287\Symfony\Component\Cach
  */
 class LazyValue
 {
-    public $file;
+    public string $file;
     public function __construct(string $file)
     {
         $this->file = $file;

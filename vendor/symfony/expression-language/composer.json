@@ -16,13 +16,13 @@
         }
     ],
     "require": {
-        "php": ">=7.2.5",
-        "symfony\/cache": "^4.4|^5.0",
-        "symfony\/service-contracts": "^1.1|^2"
+        "php": ">=8.0.2",
+        "symfony\/cache": "^5.4|^6.0",
+        "symfony\/service-contracts": "^1.1|^2|^3"
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202111287\\Symfony\\Component\\ExpressionLanguage\\": ""
+            "ConfigTransformer2021113010\\Symfony\\Component\\ExpressionLanguage\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

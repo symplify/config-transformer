@@ -8,17 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader;
 
 /**
  * GlobFileLoader loads files from a glob pattern.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class GlobFileLoader extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\FileLoader
+class GlobFileLoader extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     /**
      * {@inheritdoc}
+     * @param mixed $resource
+     * @return mixed
      * @param string|null $type
      */
     public function load($resource, $type = null)
@@ -27,12 +29,14 @@ class GlobFileLoader extends \ConfigTransformer202111287\Symfony\Component\Depen
             $this->import($path);
         }
         $this->container->addResource($globResource);
+        return null;
     }
     /**
      * {@inheritdoc}
+     * @param mixed $resource
      * @param string|null $type
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, $type = null) : bool
     {
         return 'glob' === $type;
     }

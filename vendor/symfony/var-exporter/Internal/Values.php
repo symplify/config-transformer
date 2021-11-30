@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202111287\Symplify\PhpConfigPrinter\Contract\Converter;
+namespace ConfigTransformer2021113010\Symplify\PhpConfigPrinter\Contract\Converter;
 
-use ConfigTransformer202111287\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2021113010\PhpParser\Node\Expr\MethodCall;
 interface ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
@@ -12,7 +12,7 @@ interface ServiceOptionsKeyYamlToPhpFactoryInterface
      * @param mixed $values
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer202111287\PhpParser\Node\Expr\MethodCall;
+    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer2021113010\PhpParser\Node\Expr\MethodCall;
     /**
      * @param mixed $key
      * @param mixed $values

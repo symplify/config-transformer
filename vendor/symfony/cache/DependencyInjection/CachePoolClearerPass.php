@@ -8,36 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CachePoolClearerPass implements \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolClearerPass implements \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    private $cachePoolClearerTag;
-    public function __construct(string $cachePoolClearerTag = 'cache.pool.clearer')
-    {
-        if (0 < \func_num_args()) {
-            trigger_deprecation('symfony/cache', '5.3', 'Configuring "%s" is deprecated.', __CLASS__);
-        }
-        $this->cachePoolClearerTag = $cachePoolClearerTag;
-    }
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $container->getParameterBag()->remove('cache.prefix.seed');
-        foreach ($container->findTaggedServiceIds($this->cachePoolClearerTag) as $id => $attr) {
+        foreach ($container->findTaggedServiceIds('cache.pool.clearer') as $id => $attr) {
             $clearer = $container->getDefinition($id);
             $pools = [];
             foreach ($clearer->getArgument(0) as $name => $ref) {
                 if ($container->hasDefinition($ref)) {
-                    $pools[$name] = new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference($ref);
+                    $pools[$name] = new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference($ref);
                 }
             }
             $clearer->replaceArgument(0, $pools);

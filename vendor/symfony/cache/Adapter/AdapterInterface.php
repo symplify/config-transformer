@@ -8,35 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class);
+\class_exists(\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class);
 /**
  * Interface for adapters managing instances of Symfony's CacheItem.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-interface AdapterInterface extends \ConfigTransformer202111287\Psr\Cache\CacheItemPoolInterface
+interface AdapterInterface extends \ConfigTransformer2021113010\Psr\Cache\CacheItemPoolInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @return CacheItem
      */
-    public function getItem($key);
+    public function getItem(mixed $key) : \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
     /**
      * {@inheritdoc}
      *
-     * @return \Traversable|CacheItem[]
+     * @return iterable<string, CacheItem>
      */
-    public function getItems(array $keys = []);
+    public function getItems(array $keys = []) : iterable;
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function clear(string $prefix = '');
+    public function clear(string $prefix = '') : bool;
 }

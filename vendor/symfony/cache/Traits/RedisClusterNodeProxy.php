@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Traits;
 
 /**
  * This file acts as a wrapper to the \RedisCluster implementation so it can accept the same type of calls as
@@ -23,12 +23,9 @@ namespace ConfigTransformer202111287\Symfony\Component\Cache\Traits;
  */
 class RedisClusterNodeProxy
 {
-    private $host;
-    private $redis;
-    /**
-     * @param \RedisCluster|RedisClusterProxy $redis
-     */
-    public function __construct(array $host, $redis)
+    private array $host;
+    private \RedisCluster|RedisClusterProxy $redis;
+    public function __construct(array $host, \RedisCluster|RedisClusterProxy $redis)
     {
         $this->host = $host;
         $this->redis = $redis;

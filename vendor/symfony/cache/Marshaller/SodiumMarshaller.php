@@ -8,33 +8,33 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * Encrypt/decrypt values using Libsodium.
  *
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
-class SodiumMarshaller implements \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class SodiumMarshaller implements \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
-    private $marshaller;
-    private $decryptionKeys;
+    private \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
+    private array $decryptionKeys;
     /**
      * @param string[] $decryptionKeys The key at index "0" is required and is used to decrypt and encrypt values;
      *                                 more rotating keys can be provided to decrypt values;
      *                                 each key must be generated using sodium_crypto_box_keypair()
      */
-    public function __construct(array $decryptionKeys, \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(array $decryptionKeys, \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!self::isSupported()) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException('The "sodium" PHP extension is not loaded.');
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException('The "sodium" PHP extension is not loaded.');
         }
         if (!isset($decryptionKeys[0])) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one decryption key must be provided at index "0".');
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one decryption key must be provided at index "0".');
         }
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         $this->decryptionKeys = $decryptionKeys;
     }
     public static function isSupported() : bool
@@ -56,7 +56,7 @@ class SodiumMarshaller implements \ConfigTransformer202111287\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function unmarshall(string $value)
+    public function unmarshall(string $value) : mixed
     {
         foreach ($this->decryptionKeys as $k) {
             if (\false !== ($decryptedValue = @\sodium_crypto_box_seal_open($value, $k))) {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a Token.
@@ -27,9 +27,9 @@ class Token
     public const OPERATOR_TYPE = 'operator';
     public const PUNCTUATION_TYPE = 'punctuation';
     /**
-     * @param string                $type   The type of the token (self::*_TYPE)
-     * @param string|int|float|null $value  The token value
-     * @param int                   $cursor The cursor position in the source
+     * @param string $type   The type of the token (self::*_TYPE)
+     * @param int    $cursor The cursor position in the source
+     * @param float|int|string|null $value
      */
     public function __construct(string $type, $value, ?int $cursor)
     {
@@ -39,21 +39,17 @@ class Token
     }
     /**
      * Returns a string representation of the token.
-     *
-     * @return string A string representation of the token
      */
-    public function __toString()
+    public function __toString() : string
     {
         return \sprintf('%3d %-11s %s', $this->cursor, \strtoupper($this->type), $this->value);
     }
     /**
      * Tests the current token for a type and/or a value.
-     *
-     * @return bool
      * @param string $type
      * @param string|null $value
      */
-    public function test($type, $value = null)
+    public function test($type, $value = null) : bool
     {
         return $this->type === $type && (null === $value || $this->value == $value);
     }

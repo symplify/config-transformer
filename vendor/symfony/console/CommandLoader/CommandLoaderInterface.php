@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer2021113010\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202111287\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202111287\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer2021113010\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2021113010\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
@@ -20,21 +20,17 @@ interface CommandLoaderInterface
     /**
      * Loads a command.
      *
-     * @return Command
-     *
      * @throws CommandNotFoundException
      * @param string $name
      */
-    public function get($name);
+    public function get($name) : \ConfigTransformer2021113010\Symfony\Component\Console\Command\Command;
     /**
      * Checks if a command exists.
-     *
-     * @return bool
      * @param string $name
      */
-    public function has($name);
+    public function has($name) : bool;
     /**
-     * @return string[] All registered command names
+     * @return string[]
      */
-    public function getNames();
+    public function getNames() : array;
 }

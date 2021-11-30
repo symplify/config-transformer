@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * Represents a node in the AST.
  *
@@ -29,10 +29,7 @@ class Node
         $this->nodes = $nodes;
         $this->attributes = $attributes;
     }
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString() : string
     {
         $attributes = [];
         foreach ($this->attributes as $name => $value) {

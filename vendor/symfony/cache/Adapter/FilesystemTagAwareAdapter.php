@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\Traits\FilesystemTrait;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface
+class FilesystemTagAwareAdapter extends \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -30,16 +30,16 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202111287\Symfony\Comp
      * Folder used for tag symlinks.
      */
     private const TAG_FOLDER = 'tags';
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = new \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
+        $this->marshaller = new \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear(string $namespace)
+    protected function doClear(string $namespace) : bool
     {
         $ok = $this->doClearCache($namespace);
         if ('' !== $namespace) {
@@ -122,7 +122,7 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202111287\Symfony\Comp
             if (!\is_file($file) || !($h = @\fopen($file, 'r'))) {
                 continue;
             }
-            if ((\PHP_VERSION_ID >= 70300 || '\\' !== \DIRECTORY_SEPARATOR) && !@\unlink($file)) {
+            if (!@\unlink($file)) {
                 \fclose($h);
                 continue;
             }
@@ -142,9 +142,6 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202111287\Symfony\Comp
                 }
             }
             \fclose($h);
-            if (\PHP_VERSION_ID < 70300 && '\\' === \DIRECTORY_SEPARATOR) {
-                @\unlink($file);
-            }
         }
     }
     /**

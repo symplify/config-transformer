@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Contracts\Cache;
+namespace ConfigTransformer2021113010\Symfony\Contracts\Cache;
 
-use ConfigTransformer202111287\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202111287\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer2021113010\Psr\Cache\CacheItemInterface;
+use ConfigTransformer2021113010\Psr\Cache\InvalidArgumentException;
 /**
  * Covers most simple to advanced caching needs.
  *
@@ -36,9 +36,8 @@ interface CacheInterface
      *                                              See https://en.wikipedia.org/wiki/Cache_stampede#Probabilistic_early_expiration
      * @param array                      &$metadata The metadata of the cached item {@see ItemInterface::getMetadata()}
      *
-     * @return mixed
-     *
      * @throws InvalidArgumentException When $key is not valid or when $beta is negative
+     * @return mixed
      */
     public function get($key, $callback, $beta = null, &$metadata = null);
     /**

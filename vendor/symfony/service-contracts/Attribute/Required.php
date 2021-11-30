@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Contracts\Service\Attribute;
+namespace ConfigTransformer2021113010\Symfony\Contracts\Service\Attribute;
 
 /**
  * A required dependency.

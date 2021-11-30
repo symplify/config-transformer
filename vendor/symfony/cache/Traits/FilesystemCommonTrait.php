@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -18,8 +18,8 @@ use ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgument
  */
 trait FilesystemCommonTrait
 {
-    private $directory;
-    private $tmp;
+    private string $directory;
+    private string $tmp;
     private function init(string $namespace, ?string $directory)
     {
         if (!isset($directory[0])) {
@@ -29,7 +29,7 @@ trait FilesystemCommonTrait
         }
         if (isset($namespace[0])) {
             if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-                throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+                throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
             }
             $directory .= \DIRECTORY_SEPARATOR . $namespace;
         } else {
@@ -41,14 +41,14 @@ trait FilesystemCommonTrait
         $directory .= \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
         if ('\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
         }
         $this->directory = $directory;
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear(string $namespace)
+    protected function doClear(string $namespace) : bool
     {
         $ok = \true;
         foreach ($this->scanHashDir($this->directory) as $file) {
@@ -62,7 +62,7 @@ trait FilesystemCommonTrait
     /**
      * {@inheritdoc}
      */
-    protected function doDelete(array $ids)
+    protected function doDelete(array $ids) : bool
     {
         $ok = \true;
         foreach ($ids as $id) {
@@ -79,7 +79,7 @@ trait FilesystemCommonTrait
     {
         \set_error_handler(__CLASS__ . '::throwError');
         try {
-            if (null === $this->tmp) {
+            if (!isset($this->tmp)) {
                 $this->tmp = $this->directory . \bin2hex(\random_bytes(6));
             }
             try {
@@ -144,10 +144,7 @@ trait FilesystemCommonTrait
     {
         throw new \ErrorException($message, 0, $type, $file, $line);
     }
-    /**
-     * @return array
-     */
-    public function __sleep()
+    public function __sleep() : array
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -160,7 +157,7 @@ trait FilesystemCommonTrait
         if (\method_exists(parent::class, '__destruct')) {
             parent::__destruct();
         }
-        if (null !== $this->tmp && \is_file($this->tmp)) {
+        if (isset($this->tmp) && \is_file($this->tmp)) {
             \unlink($this->tmp);
         }
     }

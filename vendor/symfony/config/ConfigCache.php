@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config;
+namespace ConfigTransformer2021113010\Symfony\Component\Config;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
+use ConfigTransformer2021113010\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
 /**
  * ConfigCache caches arbitrary content in files on disk.
  *
@@ -21,8 +21,11 @@ use ConfigTransformer202111287\Symfony\Component\Config\Resource\SelfCheckingRes
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ConfigCache extends \ConfigTransformer202111287\Symfony\Component\Config\ResourceCheckerConfigCache
+class ConfigCache extends \ConfigTransformer2021113010\Symfony\Component\Config\ResourceCheckerConfigCache
 {
+    /**
+     * @var bool
+     */
     private $debug;
     /**
      * @param string $file  The absolute cache path
@@ -33,7 +36,7 @@ class ConfigCache extends \ConfigTransformer202111287\Symfony\Component\Config\R
         $this->debug = $debug;
         $checkers = [];
         if (\true === $this->debug) {
-            $checkers = [new \ConfigTransformer202111287\Symfony\Component\Config\Resource\SelfCheckingResourceChecker()];
+            $checkers = [new \ConfigTransformer2021113010\Symfony\Component\Config\Resource\SelfCheckingResourceChecker()];
         }
         parent::__construct($file, $checkers);
     }
@@ -42,10 +45,8 @@ class ConfigCache extends \ConfigTransformer202111287\Symfony\Component\Config\R
      *
      * This implementation always returns true when debug is off and the
      * cache file exists.
-     *
-     * @return bool true if the cache is fresh, false otherwise
      */
-    public function isFresh()
+    public function isFresh() : bool
     {
         if (!$this->debug && \is_file($this->getPath())) {
             return \true;

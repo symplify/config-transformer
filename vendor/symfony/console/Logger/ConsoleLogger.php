@@ -8,16 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Console\Logger;
+namespace ConfigTransformer2021113010\Symfony\Component\Console\Logger;
 
-use ConfigTransformer202111287\Psr\Log\AbstractLogger;
-use ConfigTransformer202111287\Psr\Log\InvalidArgumentException;
-use ConfigTransformer202111287\Psr\Log\LogLevel;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface;
-if ((new \ReflectionMethod(\ConfigTransformer202111287\Psr\Log\AbstractLogger::class, 'log'))->hasReturnType()) {
-    throw new \RuntimeException(\sprintf('The "%s" logger is not compatible with psr/log >= 3.0. Try running "composer require psr/log:^2.".', \ConfigTransformer202111287\Symfony\Component\Console\Logger\ConsoleLogger::class));
-}
+use ConfigTransformer2021113010\Psr\Log\AbstractLogger;
+use ConfigTransformer2021113010\Psr\Log\InvalidArgumentException;
+use ConfigTransformer2021113010\Psr\Log\LogLevel;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  *
@@ -25,15 +22,27 @@ if ((new \ReflectionMethod(\ConfigTransformer202111287\Psr\Log\AbstractLogger::c
  *
  * @see https://www.php-fig.org/psr/psr-3/
  */
-class ConsoleLogger extends \ConfigTransformer202111287\Psr\Log\AbstractLogger
+class ConsoleLogger extends \ConfigTransformer2021113010\Psr\Log\AbstractLogger
 {
     public const INFO = 'info';
     public const ERROR = 'error';
+    /**
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
     private $output;
-    private $verbosityLevelMap = [\ConfigTransformer202111287\Psr\Log\LogLevel::EMERGENCY => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202111287\Psr\Log\LogLevel::ALERT => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202111287\Psr\Log\LogLevel::CRITICAL => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202111287\Psr\Log\LogLevel::ERROR => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202111287\Psr\Log\LogLevel::WARNING => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202111287\Psr\Log\LogLevel::NOTICE => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \ConfigTransformer202111287\Psr\Log\LogLevel::INFO => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \ConfigTransformer202111287\Psr\Log\LogLevel::DEBUG => \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
-    private $formatLevelMap = [\ConfigTransformer202111287\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \ConfigTransformer202111287\Psr\Log\LogLevel::ALERT => self::ERROR, \ConfigTransformer202111287\Psr\Log\LogLevel::CRITICAL => self::ERROR, \ConfigTransformer202111287\Psr\Log\LogLevel::ERROR => self::ERROR, \ConfigTransformer202111287\Psr\Log\LogLevel::WARNING => self::INFO, \ConfigTransformer202111287\Psr\Log\LogLevel::NOTICE => self::INFO, \ConfigTransformer202111287\Psr\Log\LogLevel::INFO => self::INFO, \ConfigTransformer202111287\Psr\Log\LogLevel::DEBUG => self::INFO];
+    /**
+     * @var mixed[]
+     */
+    private $verbosityLevelMap = [\ConfigTransformer2021113010\Psr\Log\LogLevel::EMERGENCY => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer2021113010\Psr\Log\LogLevel::ALERT => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer2021113010\Psr\Log\LogLevel::CRITICAL => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer2021113010\Psr\Log\LogLevel::ERROR => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer2021113010\Psr\Log\LogLevel::WARNING => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer2021113010\Psr\Log\LogLevel::NOTICE => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \ConfigTransformer2021113010\Psr\Log\LogLevel::INFO => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \ConfigTransformer2021113010\Psr\Log\LogLevel::DEBUG => \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
+    /**
+     * @var mixed[]
+     */
+    private $formatLevelMap = [\ConfigTransformer2021113010\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \ConfigTransformer2021113010\Psr\Log\LogLevel::ALERT => self::ERROR, \ConfigTransformer2021113010\Psr\Log\LogLevel::CRITICAL => self::ERROR, \ConfigTransformer2021113010\Psr\Log\LogLevel::ERROR => self::ERROR, \ConfigTransformer2021113010\Psr\Log\LogLevel::WARNING => self::INFO, \ConfigTransformer2021113010\Psr\Log\LogLevel::NOTICE => self::INFO, \ConfigTransformer2021113010\Psr\Log\LogLevel::INFO => self::INFO, \ConfigTransformer2021113010\Psr\Log\LogLevel::DEBUG => self::INFO];
+    /**
+     * @var bool
+     */
     private $errored = \false;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
     {
         $this->output = $output;
         $this->verbosityLevelMap = $verbosityLevelMap + $this->verbosityLevelMap;
@@ -41,19 +50,17 @@ class ConsoleLogger extends \ConfigTransformer202111287\Psr\Log\AbstractLogger
     }
     /**
      * {@inheritdoc}
-     *
-     * @return void
      * @param mixed[] $context
      */
-    public function log($level, $message, $context = [])
+    public function log($level, $message, $context = []) : void
     {
         if (!isset($this->verbosityLevelMap[$level])) {
-            throw new \ConfigTransformer202111287\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
+            throw new \ConfigTransformer2021113010\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
         }
         $output = $this->output;
         // Write to the error output if necessary and available
         if (self::ERROR === $this->formatLevelMap[$level]) {
-            if ($this->output instanceof \ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+            if ($this->output instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleOutputInterface) {
                 $output = $output->getErrorOutput();
             }
             $this->errored = \true;
@@ -66,10 +73,8 @@ class ConsoleLogger extends \ConfigTransformer202111287\Psr\Log\AbstractLogger
     }
     /**
      * Returns true when any messages have been logged at error levels.
-     *
-     * @return bool
      */
-    public function hasErrored()
+    public function hasErrored() : bool
     {
         return $this->errored;
     }
@@ -85,7 +90,7 @@ class ConsoleLogger extends \ConfigTransformer202111287\Psr\Log\AbstractLogger
         }
         $replacements = [];
         foreach ($context as $key => $val) {
-            if (null === $val || \is_scalar($val) || \is_object($val) && \method_exists($val, '__toString')) {
+            if (null === $val || \is_scalar($val) || $val instanceof \Stringable) {
                 $replacements["{{$key}}"] = $val;
             } elseif ($val instanceof \DateTimeInterface) {
                 $replacements["{{$key}}"] = $val->format(\DateTime::RFC3339);

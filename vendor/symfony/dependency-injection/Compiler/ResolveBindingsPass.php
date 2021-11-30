@@ -8,26 +8,35 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Attribute\Target;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Attribute\Target;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * @author Guilhem Niot <guilhem.niot@gmail.com>
  */
-class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveBindingsPass extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
+    /**
+     * @var mixed[]
+     */
     private $usedBindings = [];
+    /**
+     * @var mixed[]
+     */
     private $unusedBindings = [];
+    /**
+     * @var mixed[]
+     */
     private $errorMessages = [];
     /**
      * {@inheritdoc}
@@ -53,9 +62,9 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
                 if ($argumentName) {
                     $message .= \sprintf('named "%s" ', $argumentName);
                 }
-                if (\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING === $bindingType) {
+                if (\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING === $bindingType) {
                     $message .= 'under "_defaults"';
-                } elseif (\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING === $bindingType) {
+                } elseif (\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING === $bindingType) {
                     $message .= 'under "_instanceof"';
                 } else {
                     $message .= \sprintf('for service "%s"', $serviceId);
@@ -70,7 +79,7 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
                 foreach ($this->errorMessages as $m) {
                     $message .= "\n - " . $m;
                 }
-                throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException($message);
+                throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException($message);
             }
         } finally {
             $this->usedBindings = [];
@@ -80,11 +89,13 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
+     * @param mixed $value
+     * @return mixed
      * @param bool $isRoot
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\TypedReference && $value->getType() === (string) $value) {
+        if ($value instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\TypedReference && $value->getType() === (string) $value) {
             // Already checked
             $bindings = $this->container->getDefinition($this->currentId)->getBindings();
             $name = $value->getName();
@@ -96,7 +107,7 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
             }
             return parent::processValue($value, $isRoot);
         }
-        if (!$value instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition || !($bindings = $value->getBindings())) {
+        if (!$value instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition || !($bindings = $value->getBindings())) {
             return parent::processValue($value, $isRoot);
         }
         $bindingNames = [];
@@ -114,8 +125,8 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
             if (!isset($m[1])) {
                 continue;
             }
-            if (null !== $bindingValue && !$bindingValue instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference && !$bindingValue instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition && !$bindingValue instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument && !$bindingValue instanceof \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
-                throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid value for binding key "%s" for service "%s": expected "%s", "%s", "%s", "%s" or null, "%s" given.', $key, $this->currentId, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference::class, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition::class, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument::class, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument::class, \get_debug_type($bindingValue)));
+            if (null !== $bindingValue && !$bindingValue instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference && !$bindingValue instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition && !$bindingValue instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument && !$bindingValue instanceof \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
+                throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid value for binding key "%s" for service "%s": expected "%s", "%s", "%s", "%s" or null, "%s" given.', $key, $this->currentId, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference::class, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition::class, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument::class, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument::class, \get_debug_type($bindingValue)));
             }
         }
         if ($value->isAbstract()) {
@@ -126,7 +137,7 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
             if ($constructor = $this->getConstructor($value, \false)) {
                 $calls[] = [$constructor, $value->getArguments()];
             }
-        } catch (\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+        } catch (\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
             $this->errorMessages[] = $e->getMessage();
             $this->container->getDefinition($this->currentId)->addError($e->getMessage());
             return parent::processValue($value, $isRoot);
@@ -138,7 +149,7 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
             } else {
                 try {
                     $reflectionMethod = $this->getReflectionMethod($value, $method);
-                } catch (\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+                } catch (\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
                     if ($value->getFactory()) {
                         continue;
                     }
@@ -149,8 +160,8 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
                 if (\array_key_exists($key, $arguments) && '' !== $arguments[$key]) {
                     continue;
                 }
-                $typeHint = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter);
-                $name = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Attribute\Target::parseName($parameter);
+                $typeHint = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter);
+                $name = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Attribute\Target::parseName($parameter);
                 if ($typeHint && \array_key_exists($k = \ltrim($typeHint, '\\') . ' $' . $name, $bindings)) {
                     $arguments[$key] = $this->getBindingValue($bindings[$k]);
                     continue;
@@ -188,7 +199,7 @@ class ResolveBindingsPass extends \ConfigTransformer202111287\Symfony\Component\
     /**
      * @return mixed
      */
-    private function getBindingValue(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\BoundArgument $binding)
+    private function getBindingValue(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\BoundArgument $binding)
     {
         [$bindingValue, $bindingId] = $binding->getValues();
         $this->usedBindings[$bindingId] = \true;

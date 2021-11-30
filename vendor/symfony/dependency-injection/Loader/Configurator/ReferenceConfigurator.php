@@ -8,18 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ReferenceConfigurator extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ReferenceConfigurator extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
-    /** @internal */
+    /** @internal
+     * @var string */
     protected $id;
-    /** @internal */
-    protected $invalidBehavior = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+    /** @internal
+     * @var int */
+    protected $invalidBehavior = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
     public function __construct(string $id)
     {
         $this->id = $id;
@@ -27,31 +29,28 @@ class ReferenceConfigurator extends \ConfigTransformer202111287\Symfony\Componen
     /**
      * @return $this
      */
-    public final function ignoreOnInvalid() : self
+    public final function ignoreOnInvalid()
     {
-        $this->invalidBehavior = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
         return $this;
     }
     /**
      * @return $this
      */
-    public final function nullOnInvalid() : self
+    public final function nullOnInvalid()
     {
-        $this->invalidBehavior = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE;
         return $this;
     }
     /**
      * @return $this
      */
-    public final function ignoreOnUninitialized() : self
+    public final function ignoreOnUninitialized()
     {
-        $this->invalidBehavior = \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE;
+        $this->invalidBehavior = \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE;
         return $this;
     }
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->id;
     }

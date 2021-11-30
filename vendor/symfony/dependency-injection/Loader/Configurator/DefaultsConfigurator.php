@@ -8,22 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultsConfigurator extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class DefaultsConfigurator extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\AutoconfigureTrait;
     use Traits\AutowireTrait;
     use Traits\BindTrait;
     use Traits\PublicTrait;
     public const FACTORY = 'defaults';
+    /**
+     * @var string|null
+     */
     private $path;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Definition $definition, string $path = null)
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Definition $definition, string $path = null)
     {
         parent::__construct($parent, $definition, null, []);
         $this->path = $path;
@@ -37,14 +40,14 @@ class DefaultsConfigurator extends \ConfigTransformer202111287\Symfony\Component
      * @param string $name
      * @param mixed[] $attributes
      */
-    public final function tag($name, $attributes = []) : self
+    public final function tag($name, $attributes = [])
     {
         if ('' === $name) {
-            throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The tag name in "_defaults" must be a non-empty string.');
+            throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The tag name in "_defaults" must be a non-empty string.');
         }
         foreach ($attributes as $attribute => $value) {
             if (null !== $value && !\is_scalar($value)) {
-                throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Tag "%s", attribute "%s" in "_defaults" must be of a scalar-type.', $name, $attribute));
+                throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Tag "%s", attribute "%s" in "_defaults" must be of a scalar-type.', $name, $attribute));
             }
         }
         $this->definition->addTag($name, $attributes);
@@ -54,7 +57,7 @@ class DefaultsConfigurator extends \ConfigTransformer202111287\Symfony\Component
      * Defines an instanceof-conditional to be applied to following service definitions.
      * @param string $fqcn
      */
-    public final function instanceof($fqcn) : \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
+    public final function instanceof($fqcn) : \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
     {
         return $this->parent->instanceof($fqcn);
     }

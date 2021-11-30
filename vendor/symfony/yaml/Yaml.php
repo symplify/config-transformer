@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Yaml;
+namespace ConfigTransformer2021113010\Symfony\Component\Yaml;
 
-use ConfigTransformer202111287\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer2021113010\Symfony\Component\Yaml\Exception\ParseException;
 /**
  * Yaml offers convenience methods to load and dump YAML.
  *
@@ -43,13 +43,12 @@ class Yaml
      * @param string $filename The path to the YAML file to be parsed
      * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser behavior
      *
-     * @return mixed The YAML converted to a PHP value
-     *
      * @throws ParseException If the file could not be read or the YAML is not valid
+     * @return mixed
      */
     public static function parseFile(string $filename, int $flags = 0)
     {
-        $yaml = new \ConfigTransformer202111287\Symfony\Component\Yaml\Parser();
+        $yaml = new \ConfigTransformer2021113010\Symfony\Component\Yaml\Parser();
         return $yaml->parseFile($filename, $flags);
     }
     /**
@@ -64,13 +63,12 @@ class Yaml
      * @param string $input A string containing YAML
      * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser behavior
      *
-     * @return mixed The YAML converted to a PHP value
-     *
      * @throws ParseException If the YAML is not valid
+     * @return mixed
      */
     public static function parse(string $input, int $flags = 0)
     {
-        $yaml = new \ConfigTransformer202111287\Symfony\Component\Yaml\Parser();
+        $yaml = new \ConfigTransformer2021113010\Symfony\Component\Yaml\Parser();
         return $yaml->parse($input, $flags);
     }
     /**
@@ -83,12 +81,10 @@ class Yaml
      * @param int   $inline The level where you switch to inline YAML
      * @param int   $indent The amount of spaces to use for indentation of nested nodes
      * @param int   $flags  A bit field of DUMP_* constants to customize the dumped YAML string
-     *
-     * @return string A YAML string representing the original PHP value
      */
     public static function dump($input, int $inline = 2, int $indent = 4, int $flags = 0) : string
     {
-        $yaml = new \ConfigTransformer202111287\Symfony\Component\Yaml\Dumper($indent);
+        $yaml = new \ConfigTransformer2021113010\Symfony\Component\Yaml\Dumper($indent);
         return $yaml->dump($input, $inline, 0, $flags);
     }
 }

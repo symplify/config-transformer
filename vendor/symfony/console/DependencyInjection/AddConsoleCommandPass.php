@@ -8,60 +8,46 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Console\DependencyInjection;
+namespace ConfigTransformer2021113010\Symfony\Component\Console\DependencyInjection;
 
-use ConfigTransformer202111287\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202111287\Symfony\Component\Console\Command\LazyCommand;
-use ConfigTransformer202111287\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer2021113010\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2021113010\Symfony\Component\Console\Command\LazyCommand;
+use ConfigTransformer2021113010\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class AddConsoleCommandPass implements \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AddConsoleCommandPass implements \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    private $commandLoaderServiceId;
-    private $commandTag;
-    private $noPreloadTag;
-    private $privateTagName;
-    public function __construct(string $commandLoaderServiceId = 'console.command_loader', string $commandTag = 'console.command', string $noPreloadTag = 'container.no_preload', string $privateTagName = 'container.private')
-    {
-        if (0 < \func_num_args()) {
-            trigger_deprecation('symfony/console', '5.3', 'Configuring "%s" is deprecated.', __CLASS__);
-        }
-        $this->commandLoaderServiceId = $commandLoaderServiceId;
-        $this->commandTag = $commandTag;
-        $this->noPreloadTag = $noPreloadTag;
-        $this->privateTagName = $privateTagName;
-    }
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function process($container)
     {
-        $commandServices = $container->findTaggedServiceIds($this->commandTag, \true);
+        $commandServices = $container->findTaggedServiceIds('console.command', \true);
         $lazyCommandMap = [];
         $lazyCommandRefs = [];
         $serviceIds = [];
         foreach ($commandServices as $id => $tags) {
             $definition = $container->getDefinition($id);
-            $definition->addTag($this->noPreloadTag);
+            $definition->addTag('container.no_preload');
             $class = $container->getParameterBag()->resolveValue($definition->getClass());
             if (isset($tags[0]['command'])) {
                 $aliases = $tags[0]['command'];
             } else {
                 if (!($r = $container->getReflectionClass($class))) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                    throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
                 }
-                if (!$r->isSubclassOf(\ConfigTransformer202111287\Symfony\Component\Console\Command\Command::class)) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, $this->commandTag, \ConfigTransformer202111287\Symfony\Component\Console\Command\Command::class));
+                if (!$r->isSubclassOf(\ConfigTransformer2021113010\Symfony\Component\Console\Command\Command::class)) {
+                    throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, 'console.command', \ConfigTransformer2021113010\Symfony\Component\Console\Command\Command::class));
                 }
                 $aliases = $class::getDefaultName();
             }
@@ -71,7 +57,7 @@ class AddConsoleCommandPass implements \ConfigTransformer202111287\Symfony\Compo
                 $commandName = \array_shift($aliases);
             }
             if (null === $commandName) {
-                if (!$definition->isPublic() || $definition->isPrivate() || $definition->hasTag($this->privateTagName)) {
+                if (!$definition->isPublic() || $definition->isPrivate() || $definition->hasTag('container.private')) {
                     $commandId = 'console.command.public_alias.' . $id;
                     $container->setAlias($commandId, $id)->setPublic(\true);
                     $id = $commandId;
@@ -82,7 +68,7 @@ class AddConsoleCommandPass implements \ConfigTransformer202111287\Symfony\Compo
             $description = $tags[0]['description'] ?? null;
             unset($tags[0]);
             $lazyCommandMap[$commandName] = $id;
-            $lazyCommandRefs[$id] = new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\TypedReference($id, $class);
+            $lazyCommandRefs[$id] = new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\TypedReference($id, $class);
             foreach ($aliases as $alias) {
                 $lazyCommandMap[$alias] = $id;
             }
@@ -102,20 +88,20 @@ class AddConsoleCommandPass implements \ConfigTransformer202111287\Symfony\Compo
             }
             if (!$description) {
                 if (!($r = $container->getReflectionClass($class))) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                    throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
                 }
-                if (!$r->isSubclassOf(\ConfigTransformer202111287\Symfony\Component\Console\Command\Command::class)) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, $this->commandTag, \ConfigTransformer202111287\Symfony\Component\Console\Command\Command::class));
+                if (!$r->isSubclassOf(\ConfigTransformer2021113010\Symfony\Component\Console\Command\Command::class)) {
+                    throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, 'console.command', \ConfigTransformer2021113010\Symfony\Component\Console\Command\Command::class));
                 }
                 $description = $class::getDefaultDescription();
             }
             if ($description) {
                 $definition->addMethodCall('setDescription', [$description]);
-                $container->register('.' . $id . '.lazy', \ConfigTransformer202111287\Symfony\Component\Console\Command\LazyCommand::class)->setArguments([$commandName, $aliases, $description, $isHidden, new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument($lazyCommandRefs[$id])]);
-                $lazyCommandRefs[$id] = new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Reference('.' . $id . '.lazy');
+                $container->register('.' . $id . '.lazy', \ConfigTransformer2021113010\Symfony\Component\Console\Command\LazyCommand::class)->setArguments([$commandName, $aliases, $description, $isHidden, new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument($lazyCommandRefs[$id])]);
+                $lazyCommandRefs[$id] = new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Reference('.' . $id . '.lazy');
             }
         }
-        $container->register($this->commandLoaderServiceId, \ConfigTransformer202111287\Symfony\Component\Console\CommandLoader\ContainerCommandLoader::class)->setPublic(\true)->addTag($this->noPreloadTag)->setArguments([\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $lazyCommandRefs), $lazyCommandMap]);
+        $container->register('console.command_loader', \ConfigTransformer2021113010\Symfony\Component\Console\CommandLoader\ContainerCommandLoader::class)->setPublic(\true)->addTag('container.no_preload')->setArguments([\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $lazyCommandRefs), $lazyCommandMap]);
         $container->setParameter('console.command.ids', $serviceIds);
     }
 }

@@ -8,17 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ConstantNode extends \ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\Node\Node
+class ConstantNode extends \ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\Node\Node
 {
+    /**
+     * @var bool
+     */
     private $isIdentifier;
+    /**
+     * @param mixed $value
+     */
     public function __construct($value, bool $isIdentifier = \false)
     {
         $this->isIdentifier = $isIdentifier;

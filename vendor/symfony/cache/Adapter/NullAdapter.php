@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer2021113010\Psr\Cache\CacheItemInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface
 {
     private static $createCacheItem;
     public function __construct()
     {
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key) {
-            $item = new \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem();
+            $item = new \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, null, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
      */
-    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
         $save = \true;
         return $callback((self::$createCacheItem)($key), $save);
@@ -39,77 +39,63 @@ class NullAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem(mixed $key) : \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem
     {
         return (self::$createCacheItem)($key);
     }
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = [])
+    public function getItems(array $keys = []) : iterable
     {
         return $this->generateItems($keys);
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function hasItem($key)
+    public function hasItem(mixed $key) : bool
     {
         return \false;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function clear(string $prefix = '')
+    public function clear(string $prefix = '') : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItem($key)
+    public function deleteItem(mixed $key) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function save(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function save(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function saveDeferred(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function commit()
+    public function commit() : bool
     {
         return \true;
     }

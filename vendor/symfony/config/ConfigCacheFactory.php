@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config;
+namespace ConfigTransformer2021113010\Symfony\Component\Config;
 
 /**
  * Basic implementation of ConfigCacheFactoryInterface that
@@ -19,8 +19,11 @@ namespace ConfigTransformer202111287\Symfony\Component\Config;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ConfigCacheFactory implements \ConfigTransformer202111287\Symfony\Component\Config\ConfigCacheFactoryInterface
+class ConfigCacheFactory implements \ConfigTransformer2021113010\Symfony\Component\Config\ConfigCacheFactoryInterface
 {
+    /**
+     * @var bool
+     */
     private $debug;
     /**
      * @param bool $debug The debug flag to pass to ConfigCache
@@ -34,9 +37,9 @@ class ConfigCacheFactory implements \ConfigTransformer202111287\Symfony\Componen
      * @param string $file
      * @param callable $callback
      */
-    public function cache($file, $callback)
+    public function cache($file, $callback) : \ConfigTransformer2021113010\Symfony\Component\Config\ConfigCacheInterface
     {
-        $cache = new \ConfigTransformer202111287\Symfony\Component\Config\ConfigCache($file, $this->debug);
+        $cache = new \ConfigTransformer2021113010\Symfony\Component\Config\ConfigCache($file, $this->debug);
         if (!$cache->isFresh()) {
             $callback($cache);
         }

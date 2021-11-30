@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\VarExporter;
+namespace ConfigTransformer2021113010\Symfony\Component\VarExporter;
 
-use ConfigTransformer202111287\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Exporter;
-use ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Registry;
-use ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Values;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Exporter;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *
@@ -30,25 +30,22 @@ final class VarExporter
     /**
      * Exports a serializable PHP value to PHP code.
      *
-     * @param mixed $value          The value to export
-     * @param bool  &$isStaticValue Set to true after execution if the provided value is static, false otherwise
-     * @param bool  &$classes       Classes found in the value are added to this list as both keys and values
-     *
-     * @return string The value exported as PHP code
+     * @param bool &$isStaticValue Set to true after execution if the provided value is static, false otherwise
+     * @param bool &$classes       Classes found in the value are added to this list as both keys and values
      *
      * @throws ExceptionInterface When the provided value cannot be serialized
      */
-    public static function export($value, bool &$isStaticValue = null, array &$foundClasses = []) : string
+    public static function export(mixed $value, bool &$isStaticValue = null, array &$foundClasses = []) : string
     {
         $isStaticValue = \true;
-        if (!\is_object($value) && !(\is_array($value) && $value) && !\is_resource($value) || $value instanceof \ConfigTransformer202111287\UnitEnum) {
-            return \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+        if (!\is_object($value) && !(\is_array($value) && $value) && !\is_resource($value) || $value instanceof \ConfigTransformer2021113010\UnitEnum) {
+            return \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
         $objectsPool = new \SplObjectStorage();
         $refsPool = [];
         $objectsCount = 0;
         try {
-            $value = \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
+            $value = \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
         } finally {
             $references = [];
             foreach ($refsPool as $i => $v) {
@@ -59,7 +56,7 @@ final class VarExporter
             }
         }
         if ($isStaticValue) {
-            return \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+            return \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
         $classes = [];
         $values = [];
@@ -95,10 +92,10 @@ final class VarExporter
             }
         }
         if ($classes || $references) {
-            $value = new \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Hydrator(new \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Registry($classes), $references ? new \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Values($references) : null, $properties, $value, $wakeups);
+            $value = new \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Hydrator(new \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Registry($classes), $references ? new \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Values($references) : null, $properties, $value, $wakeups);
         } else {
             $isStaticValue = \true;
         }
-        return \ConfigTransformer202111287\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+        return \ConfigTransformer2021113010\Symfony\Component\VarExporter\Internal\Exporter::export($value);
     }
 }

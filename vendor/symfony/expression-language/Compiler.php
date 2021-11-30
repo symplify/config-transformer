@@ -8,17 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202111287\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer2021113010\Symfony\Contracts\Service\ResetInterface;
 /**
  * Compiles a node to PHP code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Compiler implements \ConfigTransformer202111287\Symfony\Contracts\Service\ResetInterface
+class Compiler implements \ConfigTransformer2021113010\Symfony\Contracts\Service\ResetInterface
 {
-    private $source;
+    /**
+     * @var string
+     */
+    private $source = '';
+    /**
+     * @var mixed[]
+     */
     private $functions;
     public function __construct(array $functions)
     {
@@ -33,13 +39,14 @@ class Compiler implements \ConfigTransformer202111287\Symfony\Contracts\Service\
     }
     /**
      * Gets the current PHP code after compilation.
-     *
-     * @return string The PHP code
      */
-    public function getSource()
+    public function getSource() : string
     {
         return $this->source;
     }
+    /**
+     * @return $this
+     */
     public function reset()
     {
         $this->source = '';
@@ -93,9 +100,8 @@ class Compiler implements \ConfigTransformer202111287\Symfony\Contracts\Service\
     /**
      * Returns a PHP representation of a given value.
      *
-     * @param mixed $value The value to convert
-     *
      * @return $this
+     * @param mixed $value
      */
     public function repr($value)
     {

@@ -8,21 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Console\Event;
+namespace ConfigTransformer2021113010\Symfony\Component\Console\Event;
 
-use ConfigTransformer202111287\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202111287\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2021113010\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to handle throwables thrown while running a command.
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class ConsoleErrorEvent extends \ConfigTransformer202111287\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleErrorEvent extends \ConfigTransformer2021113010\Symfony\Component\Console\Event\ConsoleEvent
 {
+    /**
+     * @var \Throwable
+     */
     private $error;
+    /**
+     * @var int
+     */
     private $exitCode;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \ConfigTransformer202111287\Symfony\Component\Console\Command\Command $command = null)
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \ConfigTransformer2021113010\Symfony\Component\Console\Command\Command $command = null)
     {
         parent::__construct($command, $input, $output);
         $this->error = $error;

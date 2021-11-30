@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Resource;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Resource;
 
 /**
  * ResourceInterface is the interface that must be implemented by all Resource classes.
@@ -26,5 +26,5 @@ interface ResourceInterface
      * resource; and it should be unlikely to collide with that of other, unrelated
      * resource instances.
      */
-    public function __toString();
+    public function __toString() : string;
 }

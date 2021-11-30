@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFunction;
-use ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 /**
  * Define some ExpressionLanguage functions.
  *
@@ -20,20 +20,23 @@ use ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFu
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ExpressionLanguageProvider implements \ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+class ExpressionLanguageProvider implements \ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
 {
+    /**
+     * @var \Closure|null
+     */
     private $serviceCompiler;
     public function __construct(callable $serviceCompiler = null)
     {
-        $this->serviceCompiler = $serviceCompiler;
+        $this->serviceCompiler = null !== $serviceCompiler && !$serviceCompiler instanceof \Closure ? \Closure::fromCallable($serviceCompiler) : $serviceCompiler;
     }
-    public function getFunctions()
+    public function getFunctions() : array
     {
-        return [new \ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFunction('service', $this->serviceCompiler ?: function ($arg) {
+        return [new \ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\ExpressionFunction('service', $this->serviceCompiler ?? function ($arg) {
             return \sprintf('$this->get(%s)', $arg);
         }, function (array $variables, $value) {
             return $variables['container']->get($value);
-        }), new \ConfigTransformer202111287\Symfony\Component\ExpressionLanguage\ExpressionFunction('parameter', function ($arg) {
+        }), new \ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage\ExpressionFunction('parameter', function ($arg) {
             return \sprintf('$this->getParameter(%s)', $arg);
         }, function (array $variables, $value) {
             return $variables['container']->getParameter($value);

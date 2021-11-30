@@ -8,16 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Definition\EnumNode;
+use ConfigTransformer2021113010\Symfony\Component\Config\Definition\EnumNode;
 /**
  * Enum Node Definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class EnumNodeDefinition extends \ConfigTransformer202111287\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class EnumNodeDefinition extends \ConfigTransformer2021113010\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
+    /**
+     * @var mixed[]
+     */
     private $values;
     /**
      * @return $this
@@ -35,15 +38,13 @@ class EnumNodeDefinition extends \ConfigTransformer202111287\Symfony\Component\C
     /**
      * Instantiate a Node.
      *
-     * @return EnumNode The node
-     *
      * @throws \RuntimeException
      */
-    protected function instantiateNode()
+    protected function instantiateNode() : \ConfigTransformer2021113010\Symfony\Component\Config\Definition\ScalarNode
     {
-        if (null === $this->values) {
+        if (!isset($this->values)) {
             throw new \RuntimeException('You must call ->values() on enum nodes.');
         }
-        return new \ConfigTransformer202111287\Symfony\Component\Config\Definition\EnumNode($this->name, $this->parent, $this->values, $this->pathSeparator);
+        return new \ConfigTransformer2021113010\Symfony\Component\Config\Definition\EnumNode($this->name, $this->parent, $this->values, $this->pathSeparator);
     }
 }

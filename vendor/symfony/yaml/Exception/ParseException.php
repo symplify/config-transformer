@@ -8,18 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer2021113010\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParseException extends \ConfigTransformer202111287\Symfony\Component\Yaml\Exception\RuntimeException
+class ParseException extends \ConfigTransformer2021113010\Symfony\Component\Yaml\Exception\RuntimeException
 {
+    /**
+     * @var string|null
+     */
     private $parsedFile;
+    /**
+     * @var int
+     */
     private $parsedLine;
+    /**
+     * @var string|null
+     */
     private $snippet;
+    /**
+     * @var string
+     */
     private $rawMessage;
     /**
      * @param string      $message    The error message
@@ -38,10 +50,8 @@ class ParseException extends \ConfigTransformer202111287\Symfony\Component\Yaml\
     }
     /**
      * Gets the snippet of code near the error.
-     *
-     * @return string The snippet of code
      */
-    public function getSnippet()
+    public function getSnippet() : string
     {
         return $this->snippet;
     }
@@ -58,10 +68,8 @@ class ParseException extends \ConfigTransformer202111287\Symfony\Component\Yaml\
      * Gets the filename where the error occurred.
      *
      * This method returns null if a string is parsed.
-     *
-     * @return string The filename
      */
-    public function getParsedFile()
+    public function getParsedFile() : string
     {
         return $this->parsedFile;
     }
@@ -76,10 +84,8 @@ class ParseException extends \ConfigTransformer202111287\Symfony\Component\Yaml\
     }
     /**
      * Gets the line where the error occurred.
-     *
-     * @return int The file line
      */
-    public function getParsedLine()
+    public function getParsedLine() : int
     {
         return $this->parsedLine;
     }

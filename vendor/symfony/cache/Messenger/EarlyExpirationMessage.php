@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Messenger;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Messenger;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer;
 /**
  * Conveys a cached value that needs to be computed.
  */
 final class EarlyExpirationMessage
 {
-    private $item;
-    private $pool;
-    private $callback;
-    public static function create(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer, callable $callback, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $item, \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $pool) : ?self
+    private \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item;
+    private string $pool;
+    private string|array $callback;
+    public static function create(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer, callable $callback, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item, \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $pool) : ?self
     {
         try {
             $item = clone $item;
@@ -47,7 +47,7 @@ final class EarlyExpirationMessage
         }
         return new self($item, $pool, $callback);
     }
-    public function getItem() : \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem
+    public function getItem() : \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem
     {
         return $this->item;
     }
@@ -55,15 +55,18 @@ final class EarlyExpirationMessage
     {
         return $this->pool;
     }
-    public function getCallback()
+    /**
+     * @return string|string[]
+     */
+    public function getCallback() : string|array
     {
         return $this->callback;
     }
-    public function findPool(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer) : \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface
+    public function findPool(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer) : \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface
     {
         return $reverseContainer->getService($this->pool);
     }
-    public function findCallback(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer) : callable
+    public function findCallback(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer) : callable
     {
         if (\is_string($callback = $this->callback)) {
             return '@' === $callback[0] ? $reverseContainer->getService(\substr($callback, 1)) : $callback;
@@ -73,7 +76,7 @@ final class EarlyExpirationMessage
         }
         return $callback;
     }
-    private function __construct(\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $item, string $pool, $callback)
+    private function __construct(\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item, string $pool, string|array $callback)
     {
         $this->item = $item;
         $this->pool = $pool;

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a function that can be used in an expression.
@@ -29,8 +29,17 @@ namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
  */
 class ExpressionFunction
 {
+    /**
+     * @var string
+     */
     private $name;
+    /**
+     * @var \Closure
+     */
     private $compiler;
+    /**
+     * @var \Closure
+     */
     private $evaluator;
     /**
      * @param string   $name      The function name
@@ -40,18 +49,18 @@ class ExpressionFunction
     public function __construct(string $name, callable $compiler, callable $evaluator)
     {
         $this->name = $name;
-        $this->compiler = $compiler;
-        $this->evaluator = $evaluator;
+        $this->compiler = $compiler instanceof \Closure ? $compiler : \Closure::fromCallable($compiler);
+        $this->evaluator = $evaluator instanceof \Closure ? $evaluator : \Closure::fromCallable($evaluator);
     }
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
-    public function getCompiler()
+    public function getCompiler() : \Closure
     {
         return $this->compiler;
     }
-    public function getEvaluator()
+    public function getEvaluator() : \Closure
     {
         return $this->evaluator;
     }
@@ -60,14 +69,12 @@ class ExpressionFunction
      *
      * @param string|null $expressionFunctionName The expression function name (default: same than the PHP function name)
      *
-     * @return self
-     *
      * @throws \InvalidArgumentException if given PHP function name does not exist
      * @throws \InvalidArgumentException if given PHP function name is in namespace
      *                                   and expression function name is not defined
      * @param string $phpFunctionName
      */
-    public static function fromPhp($phpFunctionName, $expressionFunctionName = null)
+    public static function fromPhp($phpFunctionName, $expressionFunctionName = null) : self
     {
         $phpFunctionName = \ltrim($phpFunctionName, '\\');
         if (!\function_exists($phpFunctionName)) {

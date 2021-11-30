@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer2021113010\Symfony\Component\ExpressionLanguage;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
@@ -16,7 +16,7 @@ namespace ConfigTransformer202111287\Symfony\Component\ExpressionLanguage;
 interface ExpressionFunctionProviderInterface
 {
     /**
-     * @return ExpressionFunction[] An array of Function instances
+     * @return ExpressionFunction[]
      */
     public function getFunctions();
 }

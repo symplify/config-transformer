@@ -8,38 +8,38 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Messenger;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Messenger;
 
-use ConfigTransformer202111287\Psr\Log\LoggerInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer;
-use ConfigTransformer202111287\Symfony\Component\Messenger\MessageBusInterface;
-use ConfigTransformer202111287\Symfony\Component\Messenger\Stamp\HandledStamp;
+use ConfigTransformer2021113010\Psr\Log\LoggerInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer;
+use ConfigTransformer2021113010\Symfony\Component\Messenger\MessageBusInterface;
+use ConfigTransformer2021113010\Symfony\Component\Messenger\Stamp\HandledStamp;
 /**
  * Sends the computation of cached values to a message bus.
  */
 class EarlyExpirationDispatcher
 {
-    private $bus;
-    private $reverseContainer;
-    private $callbackWrapper;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Messenger\MessageBusInterface $bus, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer, callable $callbackWrapper = null)
+    private \ConfigTransformer2021113010\Symfony\Component\Messenger\MessageBusInterface $bus;
+    private \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer;
+    private ?\Closure $callbackWrapper;
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Messenger\MessageBusInterface $bus, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer, callable $callbackWrapper = null)
     {
         $this->bus = $bus;
         $this->reverseContainer = $reverseContainer;
-        $this->callbackWrapper = $callbackWrapper;
+        $this->callbackWrapper = null === $callbackWrapper || $callbackWrapper instanceof \Closure ? $callbackWrapper : \Closure::fromCallable($callbackWrapper);
     }
-    public function __invoke(callable $callback, \ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $item, bool &$save, \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $pool, \Closure $setMetadata, \ConfigTransformer202111287\Psr\Log\LoggerInterface $logger = null)
+    public function __invoke(callable $callback, \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item, bool &$save, \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $pool, \Closure $setMetadata, \ConfigTransformer2021113010\Psr\Log\LoggerInterface $logger = null)
     {
-        if (!$item->isHit() || null === ($message = \ConfigTransformer202111287\Symfony\Component\Cache\Messenger\EarlyExpirationMessage::create($this->reverseContainer, $callback, $item, $pool))) {
+        if (!$item->isHit() || null === ($message = \ConfigTransformer2021113010\Symfony\Component\Cache\Messenger\EarlyExpirationMessage::create($this->reverseContainer, $callback, $item, $pool))) {
             // The item is stale or the callback cannot be reversed: we must compute the value now
             $logger && $logger->info('Computing item "{key}" online: ' . ($item->isHit() ? 'callback cannot be reversed' : 'item is stale'), ['key' => $item->getKey()]);
             return null !== $this->callbackWrapper ? ($this->callbackWrapper)($callback, $item, $save, $pool, $setMetadata, $logger) : $callback($item, $save);
         }
         $envelope = $this->bus->dispatch($message);
         if ($logger) {
-            if ($envelope->last(\ConfigTransformer202111287\Symfony\Component\Messenger\Stamp\HandledStamp::class)) {
+            if ($envelope->last(\ConfigTransformer2021113010\Symfony\Component\Messenger\Stamp\HandledStamp::class)) {
                 $logger->info('Item "{key}" was computed online', ['key' => $item->getKey()]);
             } else {
                 $logger->info('Item "{key}" sent for recomputation', ['key' => $item->getKey()]);

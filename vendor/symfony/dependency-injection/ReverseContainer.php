@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202111287\Psr\Container\ContainerInterface;
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer2021113010\Psr\Container\ContainerInterface;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * Turns public and "container.reversible" services back to their ids.
  *
@@ -19,18 +19,30 @@ use ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\S
  */
 final class ReverseContainer
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\Container
+     */
     private $serviceContainer;
+    /**
+     * @var \Psr\Container\ContainerInterface
+     */
     private $reversibleLocator;
+    /**
+     * @var string
+     */
     private $tagName;
+    /**
+     * @var \Closure
+     */
     private $getServiceId;
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\DependencyInjection\Container $serviceContainer, \ConfigTransformer202111287\Psr\Container\ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Container $serviceContainer, \ConfigTransformer2021113010\Psr\Container\ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
     {
         $this->serviceContainer = $serviceContainer;
         $this->reversibleLocator = $reversibleLocator;
         $this->tagName = $tagName;
         $this->getServiceId = \Closure::bind(function ($service) : ?string {
             return (\array_search($service, $this->services, \true) ?: \array_search($service, $this->privates, \true)) ?: null;
-        }, $serviceContainer, \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Container::class);
+        }, $serviceContainer, \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Container::class);
     }
     /**
      * Returns the id of the passed object when it exists as a service.
@@ -64,7 +76,7 @@ final class ReverseContainer
             return $this->reversibleLocator->get($id);
         }
         if (isset($this->serviceContainer->getRemovedIds()[$id])) {
-            throw new \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is private and cannot be accessed by reference. You should either make it public, or tag it as "%s".', $id, $this->tagName));
+            throw new \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is private and cannot be accessed by reference. You should either make it public, or tag it as "%s".', $id, $this->tagName));
         }
         // will throw a ServiceNotFoundException
         $this->serviceContainer->get($id);

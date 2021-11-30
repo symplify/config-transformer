@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Loader;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Loader;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer2021113010\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Loader implements \ConfigTransformer202111287\Symfony\Component\Config\Loader\LoaderInterface
+abstract class Loader implements \ConfigTransformer2021113010\Symfony\Component\Config\Loader\LoaderInterface
 {
     protected $resolver;
     protected $env;
@@ -27,7 +27,7 @@ abstract class Loader implements \ConfigTransformer202111287\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function getResolver()
+    public function getResolver() : \ConfigTransformer2021113010\Symfony\Component\Config\Loader\LoaderResolverInterface
     {
         return $this->resolver;
     }
@@ -42,10 +42,9 @@ abstract class Loader implements \ConfigTransformer202111287\Symfony\Component\C
     /**
      * Imports a resource.
      *
-     * @param mixed       $resource A resource
-     * @param string|null $type     The resource type or null if unknown
-     *
      * @return mixed
+     * @param mixed $resource
+     * @param string|null $type
      */
     public function import($resource, $type = null)
     {
@@ -54,21 +53,18 @@ abstract class Loader implements \ConfigTransformer202111287\Symfony\Component\C
     /**
      * Finds a loader able to load an imported resource.
      *
-     * @param mixed       $resource A resource
-     * @param string|null $type     The resource type or null if unknown
-     *
-     * @return $this|LoaderInterface
-     *
      * @throws LoaderLoadException If no loader is found
+     * @param mixed $resource
+     * @param string|null $type
      */
-    public function resolve($resource, $type = null)
+    public function resolve($resource, $type = null) : \ConfigTransformer2021113010\Symfony\Component\Config\Loader\LoaderInterface
     {
         if ($this->supports($resource, $type)) {
             return $this;
         }
         $loader = null === $this->resolver ? \false : $this->resolver->resolve($resource, $type);
         if (\false === $loader) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
+            throw new \ConfigTransformer2021113010\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
         }
         return $loader;
     }

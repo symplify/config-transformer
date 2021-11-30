@@ -8,25 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultMarshaller implements \ConfigTransformer202111287\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DefaultMarshaller implements \ConfigTransformer2021113010\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
-    private $useIgbinarySerialize = \true;
-    public function __construct(bool $useIgbinarySerialize = null)
+    private bool $useIgbinarySerialize = \true;
+    private bool $throwOnSerializationFailure = \false;
+    public function __construct(bool $useIgbinarySerialize = null, bool $throwOnSerializationFailure = \false)
     {
         if (null === $useIgbinarySerialize) {
-            $useIgbinarySerialize = \extension_loaded('igbinary') && (\PHP_VERSION_ID < 70400 || \version_compare('3.1.6', \phpversion('igbinary'), '<='));
-        } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \PHP_VERSION_ID >= 70400 && \version_compare('3.1.6', \phpversion('igbinary'), '>'))) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') && \PHP_VERSION_ID >= 70400 ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
+            $useIgbinarySerialize = \extension_loaded('igbinary') && \version_compare('3.1.6', \phpversion('igbinary'), '<=');
+        } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \version_compare('3.1.6', \phpversion('igbinary'), '>'))) {
+            throw new \ConfigTransformer2021113010\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
         }
         $this->useIgbinarySerialize = $useIgbinarySerialize;
+        $this->throwOnSerializationFailure = $throwOnSerializationFailure;
     }
     /**
      * {@inheritdoc}
@@ -42,6 +44,9 @@ class DefaultMarshaller implements \ConfigTransformer202111287\Symfony\Component
                     $serialized[$id] = \serialize($value);
                 }
             } catch (\Exception $e) {
+                if ($this->throwOnSerializationFailure) {
+                    throw new \ValueError($e->getMessage(), 0, $e);
+                }
                 $failed[] = $id;
             }
         }
@@ -50,7 +55,7 @@ class DefaultMarshaller implements \ConfigTransformer202111287\Symfony\Component
     /**
      * {@inheritdoc}
      */
-    public function unmarshall(string $value)
+    public function unmarshall(string $value) : mixed
     {
         if ('b:0;' === $value) {
             return \false;

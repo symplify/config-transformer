@@ -8,18 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202111287\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer2021113010\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent service is requested.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ServiceNotFoundException extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202111287\Psr\Container\NotFoundExceptionInterface
+class ServiceNotFoundException extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer2021113010\Psr\Container\NotFoundExceptionInterface
 {
+    /**
+     * @var string
+     */
     private $id;
+    /**
+     * @var string|null
+     */
     private $sourceId;
+    /**
+     * @var mixed[]
+     */
     private $alternatives;
     public function __construct(string $id, string $sourceId = null, \Throwable $previous = null, array $alternatives = [], string $msg = null)
     {

@@ -8,18 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Argument;
 
-use ConfigTransformer202111287\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @internal
  */
-class ServiceLocator extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\ServiceLocator
+class ServiceLocator extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\ServiceLocator
 {
+    /**
+     * @var \Closure
+     */
     private $factory;
+    /**
+     * @var mixed[]
+     */
     private $serviceMap;
+    /**
+     * @var mixed[]|null
+     */
     private $serviceTypes;
     public function __construct(\Closure $factory, array $serviceMap, array $serviceTypes = null)
     {
@@ -30,7 +39,6 @@ class ServiceLocator extends \ConfigTransformer202111287\Symfony\Component\Depen
     }
     /**
      * {@inheritdoc}
-     *
      * @return mixed
      * @param string $id
      */

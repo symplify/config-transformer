@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Loader;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Loader;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer2021113010\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * DelegatingLoader delegates loading to other loaders using a loader resolver.
  *
@@ -19,28 +19,31 @@ use ConfigTransformer202111287\Symfony\Component\Config\Exception\LoaderLoadExce
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DelegatingLoader extends \ConfigTransformer202111287\Symfony\Component\Config\Loader\Loader
+class DelegatingLoader extends \ConfigTransformer2021113010\Symfony\Component\Config\Loader\Loader
 {
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
     {
         $this->resolver = $resolver;
     }
     /**
      * {@inheritdoc}
+     * @param mixed $resource
+     * @return mixed
      * @param string|null $type
      */
     public function load($resource, $type = null)
     {
         if (\false === ($loader = $this->resolver->resolve($resource, $type))) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
+            throw new \ConfigTransformer2021113010\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
         }
         return $loader->load($resource, $type);
     }
     /**
      * {@inheritdoc}
+     * @param mixed $resource
      * @param string|null $type
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, $type = null) : bool
     {
         return \false !== $this->resolver->resolve($resource, $type);
     }

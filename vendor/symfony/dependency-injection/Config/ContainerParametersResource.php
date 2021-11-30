@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202111287\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer2021113010\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *
@@ -18,8 +18,11 @@ use ConfigTransformer202111287\Symfony\Component\Config\Resource\ResourceInterfa
  *
  * @final
  */
-class ContainerParametersResource implements \ConfigTransformer202111287\Symfony\Component\Config\Resource\ResourceInterface
+class ContainerParametersResource implements \ConfigTransformer2021113010\Symfony\Component\Config\Resource\ResourceInterface
 {
+    /**
+     * @var mixed[]
+     */
     private $parameters;
     /**
      * @param array $parameters The container parameters to track
@@ -32,9 +35,6 @@ class ContainerParametersResource implements \ConfigTransformer202111287\Symfony
     {
         return 'container_parameters_' . \md5(\serialize($this->parameters));
     }
-    /**
-     * @return array Tracked parameters
-     */
     public function getParameters() : array
     {
         return $this->parameters;

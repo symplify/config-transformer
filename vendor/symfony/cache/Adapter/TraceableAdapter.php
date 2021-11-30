@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2021113010\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202111287\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202111287\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202111287\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer2021113010\Psr\Cache\CacheItemInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2021113010\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer2021113010\Symfony\Contracts\Service\ResetInterface;
 /**
  * An adapter that collects data about all cache calls.
  *
@@ -23,24 +23,24 @@ use ConfigTransformer202111287\Symfony\Contracts\Service\ResetInterface;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202111287\Symfony\Component\Cache\ResettableInterface
+class TraceableAdapter implements \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer2021113010\Symfony\Component\Cache\ResettableInterface
 {
     protected $pool;
-    private $calls = [];
-    public function __construct(\ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
+    private array $calls = [];
+    public function __construct(\ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
     {
         $this->pool = $pool;
     }
     /**
      * {@inheritdoc}
      */
-    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
-        if (!$this->pool instanceof \ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface) {
-            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), \ConfigTransformer202111287\Symfony\Contracts\Cache\CacheInterface::class));
+        if (!$this->pool instanceof \ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface) {
+            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), \ConfigTransformer2021113010\Symfony\Contracts\Cache\CacheInterface::class));
         }
         $isHit = \true;
-        $callback = function (\ConfigTransformer202111287\Symfony\Component\Cache\CacheItem $item, bool &$save) use($callback, &$isHit) {
+        $callback = function (\ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem $item, bool &$save) use($callback, &$isHit) {
             $isHit = $item->isHit();
             return $callback($item, $save);
         };
@@ -61,7 +61,7 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem(mixed $key) : \ConfigTransformer2021113010\Symfony\Component\Cache\CacheItem
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -78,10 +78,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function hasItem($key)
+    public function hasItem(mixed $key) : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -92,10 +90,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItem($key)
+    public function deleteItem(mixed $key) : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -106,10 +102,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function save(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function save(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -120,10 +114,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function saveDeferred(\ConfigTransformer202111287\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\ConfigTransformer2021113010\Psr\Cache\CacheItemInterface $item) : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -135,7 +127,7 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = [])
+    public function getItems(array $keys = []) : iterable
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -158,14 +150,12 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function clear(string $prefix = '')
+    public function clear(string $prefix = '') : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
-            if ($this->pool instanceof \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->pool instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 return $event->result = $this->pool->clear($prefix);
             }
             return $event->result = $this->pool->clear();
@@ -175,10 +165,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys) : bool
     {
         $event = $this->start(__FUNCTION__);
         $event->result['keys'] = $keys;
@@ -190,10 +178,8 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     *
-     * @return bool
      */
-    public function commit()
+    public function commit() : bool
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -205,9 +191,9 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function prune()
+    public function prune() : bool
     {
-        if (!$this->pool instanceof \ConfigTransformer202111287\Symfony\Component\Cache\PruneableInterface) {
+        if (!$this->pool instanceof \ConfigTransformer2021113010\Symfony\Component\Cache\PruneableInterface) {
             return \false;
         }
         $event = $this->start(__FUNCTION__);
@@ -222,7 +208,7 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
      */
     public function reset()
     {
-        if ($this->pool instanceof \ConfigTransformer202111287\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \ConfigTransformer2021113010\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
         $this->clearCalls();
@@ -249,18 +235,21 @@ class TraceableAdapter implements \ConfigTransformer202111287\Symfony\Component\
     }
     protected function start(string $name)
     {
-        $this->calls[] = $event = new \ConfigTransformer202111287\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
+        $this->calls[] = $event = new \ConfigTransformer2021113010\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
         $event->name = $name;
         $event->start = \microtime(\true);
         return $event;
     }
 }
+/**
+ * @internal
+ */
 class TraceableAdapterEvent
 {
-    public $name;
-    public $start;
-    public $end;
-    public $result;
-    public $hits = 0;
-    public $misses = 0;
+    public string $name;
+    public float $start;
+    public float $end;
+    public array|bool $result;
+    public int $hits = 0;
+    public int $misses = 0;
 }

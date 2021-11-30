@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Config\Loader;
+namespace ConfigTransformer2021113010\Symfony\Component\Config\Loader;
 
 /**
  * LoaderResolver selects a loader for a given resource.
@@ -18,7 +18,7 @@ namespace ConfigTransformer202111287\Symfony\Component\Config\Loader;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LoaderResolver implements \ConfigTransformer202111287\Symfony\Component\Config\Loader\LoaderResolverInterface
+class LoaderResolver implements \ConfigTransformer2021113010\Symfony\Component\Config\Loader\LoaderResolverInterface
 {
     /**
      * @var LoaderInterface[] An array of LoaderInterface objects
@@ -35,6 +35,8 @@ class LoaderResolver implements \ConfigTransformer202111287\Symfony\Component\Co
     }
     /**
      * {@inheritdoc}
+     * @return bool|\Symfony\Component\Config\Loader\LoaderInterface
+     * @param mixed $resource
      * @param string|null $type
      */
     public function resolve($resource, $type = null)
@@ -57,9 +59,9 @@ class LoaderResolver implements \ConfigTransformer202111287\Symfony\Component\Co
     /**
      * Returns the registered loaders.
      *
-     * @return LoaderInterface[] An array of LoaderInterface instances
+     * @return LoaderInterface[]
      */
-    public function getLoaders()
+    public function getLoaders() : array
     {
         return $this->loaders;
     }

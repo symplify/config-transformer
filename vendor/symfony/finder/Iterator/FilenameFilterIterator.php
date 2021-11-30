@@ -8,23 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer2021113010\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202111287\Symfony\Component\Finder\Glob;
+use ConfigTransformer2021113010\Symfony\Component\Finder\Glob;
 /**
  * FilenameFilterIterator filters files by patterns (a regexp, a glob, or a string).
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @extends MultiplePcreFilterIterator<string, \SplFileInfo>
  */
-class FilenameFilterIterator extends \ConfigTransformer202111287\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+class FilenameFilterIterator extends \ConfigTransformer2021113010\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
 {
     /**
      * Filters the iterator values.
-     *
-     * @return bool true if the value should be kept, false otherwise
      */
-    #[\ReturnTypeWillChange]
-    public function accept()
+    public function accept() : bool
     {
         return $this->isAccepted($this->current()->getFilename());
     }
@@ -35,11 +34,9 @@ class FilenameFilterIterator extends \ConfigTransformer202111287\Symfony\Compone
      * Glob strings are transformed with Glob::toRegex().
      *
      * @param string $str Pattern: glob or regexp
-     *
-     * @return string regexp corresponding to a given glob or regexp
      */
-    protected function toRegex($str)
+    protected function toRegex($str) : string
     {
-        return $this->isRegex($str) ? $str : \ConfigTransformer202111287\Symfony\Component\Finder\Glob::toRegex($str);
+        return $this->isRegex($str) ? $str : \ConfigTransformer2021113010\Symfony\Component\Finder\Glob::toRegex($str);
     }
 }

@@ -8,32 +8,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\Console\Helper;
+namespace ConfigTransformer2021113010\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202111287\Symfony\Component\Console\Cursor;
-use ConfigTransformer202111287\Symfony\Component\Console\Exception\MissingInputException;
-use ConfigTransformer202111287\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202111287\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202111287\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use ConfigTransformer202111287\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Input\StreamableInputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202111287\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202111287\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202111287\Symfony\Component\Console\Terminal;
-use function ConfigTransformer202111287\Symfony\Component\String\s;
+use ConfigTransformer2021113010\Symfony\Component\Console\Cursor;
+use ConfigTransformer2021113010\Symfony\Component\Console\Exception\MissingInputException;
+use ConfigTransformer2021113010\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer2021113010\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer2021113010\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use ConfigTransformer2021113010\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Input\StreamableInputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2021113010\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer2021113010\Symfony\Component\Console\Question\Question;
+use ConfigTransformer2021113010\Symfony\Component\Console\Terminal;
+use function ConfigTransformer2021113010\Symfony\Component\String\s;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Console\Helper\Helper
+class QuestionHelper extends \ConfigTransformer2021113010\Symfony\Component\Console\Helper\Helper
 {
+    /**
+     * @var resource|null
+     */
     private $inputStream;
-    private static $shell;
+    /**
+     * @var bool
+     */
     private static $stty = \true;
+    /**
+     * @var bool
+     */
     private static $stdinIsInteractive;
     /**
      * Asks a question to the user.
@@ -47,13 +55,13 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      */
     public function ask($input, $output, $question)
     {
-        if ($output instanceof \ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if ($output instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
         }
         if (!$input->isInteractive()) {
             return $this->getDefaultAnswer($question);
         }
-        if ($input instanceof \ConfigTransformer202111287\Symfony\Component\Console\Input\StreamableInputInterface && ($stream = $input->getStream())) {
+        if ($input instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Input\StreamableInputInterface && ($stream = $input->getStream())) {
             $this->inputStream = $stream;
         }
         try {
@@ -64,7 +72,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
                 return $this->doAsk($output, $question);
             };
             return $this->validateAttempts($interviewer, $output, $question);
-        } catch (\ConfigTransformer202111287\Symfony\Component\Console\Exception\MissingInputException $exception) {
+        } catch (\ConfigTransformer2021113010\Symfony\Component\Console\Exception\MissingInputException $exception) {
             $input->setInteractive(\false);
             if (null === ($fallbackOutput = $this->getDefaultAnswer($question))) {
                 throw $exception;
@@ -75,7 +83,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return 'question';
     }
@@ -89,22 +97,21 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
     /**
      * Asks the question to the user.
      *
-     * @return mixed
-     *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
+     * @return mixed
      */
-    private function doAsk(\ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202111287\Symfony\Component\Console\Question\Question $question)
+    private function doAsk(\ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer2021113010\Symfony\Component\Console\Question\Question $question)
     {
         $this->writePrompt($output, $question);
         $inputStream = $this->inputStream ?: \STDIN;
         $autocomplete = $question->getAutocompleterCallback();
-        if (null === $autocomplete || !self::$stty || !\ConfigTransformer202111287\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+        if (null === $autocomplete || !self::$stty || !\ConfigTransformer2021113010\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
             $ret = \false;
             if ($question->isHidden()) {
                 try {
                     $hiddenResponse = $this->getHiddenResponse($output, $inputStream, $question->isTrimmable());
                     $ret = $question->isTrimmable() ? \trim($hiddenResponse) : $hiddenResponse;
-                } catch (\ConfigTransformer202111287\Symfony\Component\Console\Exception\RuntimeException $e) {
+                } catch (\ConfigTransformer2021113010\Symfony\Component\Console\Exception\RuntimeException $e) {
                     if (!$question->isHiddenFallback()) {
                         throw $e;
                     }
@@ -113,7 +120,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
             if (\false === $ret) {
                 $ret = $this->readInput($inputStream, $question);
                 if (\false === $ret) {
-                    throw new \ConfigTransformer202111287\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
+                    throw new \ConfigTransformer2021113010\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
                 }
                 if ($question->isTrimmable()) {
                     $ret = \trim($ret);
@@ -123,7 +130,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
             $autocomplete = $this->autocomplete($output, $question, $inputStream, $autocomplete);
             $ret = $question->isTrimmable() ? \trim($autocomplete) : $autocomplete;
         }
-        if ($output instanceof \ConfigTransformer202111287\Symfony\Component\Console\Output\ConsoleSectionOutput) {
+        if ($output instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Output\ConsoleSectionOutput) {
             $output->addContent($ret);
         }
         $ret = \strlen($ret) > 0 ? $ret : $question->getDefault();
@@ -135,7 +142,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
     /**
      * @return mixed
      */
-    private function getDefaultAnswer(\ConfigTransformer202111287\Symfony\Component\Console\Question\Question $question)
+    private function getDefaultAnswer(\ConfigTransformer2021113010\Symfony\Component\Console\Question\Question $question)
     {
         $default = $question->getDefault();
         if (null === $default) {
@@ -143,7 +150,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
         }
         if ($validator = $question->getValidator()) {
             return \call_user_func($question->getValidator(), $default);
-        } elseif ($question instanceof \ConfigTransformer202111287\Symfony\Component\Console\Question\ChoiceQuestion) {
+        } elseif ($question instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Question\ChoiceQuestion) {
             $choices = $question->getChoices();
             if (!$question->isMultiselect()) {
                 return $choices[$default] ?? $default;
@@ -164,7 +171,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
     protected function writePrompt($output, $question)
     {
         $message = $question->getQuestion();
-        if ($question instanceof \ConfigTransformer202111287\Symfony\Component\Console\Question\ChoiceQuestion) {
+        if ($question instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Question\ChoiceQuestion) {
             $output->writeln(\array_merge([$question->getQuestion()], $this->formatChoiceQuestionChoices($question, 'info')));
             $message = $question->getPrompt();
         }
@@ -175,7 +182,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      * @param \Symfony\Component\Console\Question\ChoiceQuestion $question
      * @param string $tag
      */
-    protected function formatChoiceQuestionChoices($question, $tag)
+    protected function formatChoiceQuestionChoices($question, $tag) : array
     {
         $messages = [];
         $maxWidth = \max(\array_map([__CLASS__, 'width'], \array_keys($choices = $question->getChoices())));
@@ -204,9 +211,9 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      *
      * @param resource $inputStream
      */
-    private function autocomplete(\ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202111287\Symfony\Component\Console\Question\Question $question, $inputStream, callable $autocomplete) : string
+    private function autocomplete(\ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer2021113010\Symfony\Component\Console\Question\Question $question, $inputStream, callable $autocomplete) : string
     {
-        $cursor = new \ConfigTransformer202111287\Symfony\Component\Console\Cursor($output, $inputStream);
+        $cursor = new \ConfigTransformer2021113010\Symfony\Component\Console\Cursor($output, $inputStream);
         $fullChoice = '';
         $ret = '';
         $i = 0;
@@ -217,19 +224,19 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
         // Disable icanon (so we can fread each keypress) and echo (we'll do echoing here instead)
         \shell_exec('stty -icanon -echo');
         // Add highlighted text style
-        $output->getFormatter()->setStyle('hl', new \ConfigTransformer202111287\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'white'));
+        $output->getFormatter()->setStyle('hl', new \ConfigTransformer2021113010\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'white'));
         // Read a keypress
         while (!\feof($inputStream)) {
             $c = \fread($inputStream, 1);
             // as opposed to fgets(), fread() returns an empty string when the stream content is empty, not false.
             if (\false === $c || '' === $ret && '' === $c && null === $question->getDefault()) {
                 \shell_exec(\sprintf('stty %s', $sttyMode));
-                throw new \ConfigTransformer202111287\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
+                throw new \ConfigTransformer2021113010\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
             } elseif ("" === $c) {
                 // Backspace Character
                 if (0 === $numMatches && 0 !== $i) {
                     --$i;
-                    $cursor->moveLeft(\ConfigTransformer202111287\Symfony\Component\String\s($fullChoice)->slice(-1)->width(\false));
+                    $cursor->moveLeft(\ConfigTransformer2021113010\Symfony\Component\String\s($fullChoice)->slice(-1)->width(\false));
                     $fullChoice = self::substr($fullChoice, 0, $i);
                 }
                 if (0 === $i) {
@@ -286,7 +293,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
                 $fullChoice .= $c;
                 ++$i;
                 $tempRet = $ret;
-                if ($question instanceof \ConfigTransformer202111287\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect()) {
+                if ($question instanceof \ConfigTransformer2021113010\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect()) {
                     $tempRet = $this->mostRecentlyEnteredValue($fullChoice);
                 }
                 $numMatches = 0;
@@ -303,7 +310,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
                 $cursor->savePosition();
                 // Write highlighted text, complete the partially entered response
                 $charactersEntered = \strlen(\trim($this->mostRecentlyEnteredValue($fullChoice)));
-                $output->write('<hl>' . \ConfigTransformer202111287\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash(\substr($matches[$ofs], $charactersEntered)) . '</hl>');
+                $output->write('<hl>' . \ConfigTransformer2021113010\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash(\substr($matches[$ofs], $charactersEntered)) . '</hl>');
                 $cursor->restorePosition();
             }
         }
@@ -331,7 +338,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
      */
-    private function getHiddenResponse(\ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, $inputStream, bool $trimmable = \true) : string
+    private function getHiddenResponse(\ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, $inputStream, bool $trimmable = \true) : string
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $exe = __DIR__ . '/../Resources/bin/hiddeninput.exe';
@@ -349,18 +356,18 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
             }
             return $value;
         }
-        if (self::$stty && \ConfigTransformer202111287\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+        if (self::$stty && \ConfigTransformer2021113010\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
             $sttyMode = \shell_exec('stty -g');
             \shell_exec('stty -echo');
         } elseif ($this->isInteractiveInput($inputStream)) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Console\Exception\RuntimeException('Unable to hide the response.');
+            throw new \ConfigTransformer2021113010\Symfony\Component\Console\Exception\RuntimeException('Unable to hide the response.');
         }
         $value = \fgets($inputStream, 4096);
-        if (self::$stty && \ConfigTransformer202111287\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+        if (self::$stty && \ConfigTransformer2021113010\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
             \shell_exec(\sprintf('stty %s', $sttyMode));
         }
         if (\false === $value) {
-            throw new \ConfigTransformer202111287\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
+            throw new \ConfigTransformer2021113010\Symfony\Component\Console\Exception\MissingInputException('Aborted.');
         }
         if ($trimmable) {
             $value = \trim($value);
@@ -373,11 +380,10 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      *
      * @param callable $interviewer A callable that will ask for a question and return the result
      *
-     * @return mixed The validated response
-     *
      * @throws \Exception In case the max number of attempts has been reached and no valid response has been given
+     * @return mixed
      */
-    private function validateAttempts(callable $interviewer, \ConfigTransformer202111287\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer202111287\Symfony\Component\Console\Question\Question $question)
+    private function validateAttempts(callable $interviewer, \ConfigTransformer2021113010\Symfony\Component\Console\Output\OutputInterface $output, \ConfigTransformer2021113010\Symfony\Component\Console\Question\Question $question)
     {
         $error = null;
         $attempts = $question->getMaxAttempts();
@@ -387,7 +393,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
             }
             try {
                 return $question->getValidator()($interviewer());
-            } catch (\ConfigTransformer202111287\Symfony\Component\Console\Exception\RuntimeException $e) {
+            } catch (\ConfigTransformer2021113010\Symfony\Component\Console\Exception\RuntimeException $e) {
                 throw $e;
             } catch (\Exception $error) {
             }
@@ -399,7 +405,7 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
         if ('php://stdin' !== (\stream_get_meta_data($inputStream)['uri'] ?? null)) {
             return \false;
         }
-        if (null !== self::$stdinIsInteractive) {
+        if (isset(self::$stdinIsInteractive)) {
             return self::$stdinIsInteractive;
         }
         if (\function_exists('stream_isatty')) {
@@ -419,10 +425,9 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
      *
      * @param resource $inputStream The handler resource
      * @param Question $question    The question being asked
-     *
-     * @return string|false The input received, false in case input could not be read
+     * @return bool|string
      */
-    private function readInput($inputStream, \ConfigTransformer202111287\Symfony\Component\Console\Question\Question $question)
+    private function readInput($inputStream, \ConfigTransformer2021113010\Symfony\Component\Console\Question\Question $question)
     {
         if (!$question->isMultiline()) {
             $cp = $this->setIOCodepage();
@@ -443,11 +448,6 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
         }
         return $this->resetIOCodepage($cp, $ret);
     }
-    /**
-     * Sets console I/O to the host code page.
-     *
-     * @return int Previous code page in IBM/EBCDIC format
-     */
     private function setIOCodepage() : int
     {
         if (\function_exists('sapi_windows_cp_set')) {
@@ -459,10 +459,8 @@ class QuestionHelper extends \ConfigTransformer202111287\Symfony\Component\Conso
     }
     /**
      * Sets console I/O to the specified code page and converts the user input.
-     *
-     * @param string|false $input
-     *
-     * @return string|false
+     * @param bool|string $input
+     * @return bool|string
      */
     private function resetIOCodepage(int $cp, $input)
     {

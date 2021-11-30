@@ -8,15 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when a definition cannot be autowired.
  */
-class AutowiringFailedException extends \ConfigTransformer202111287\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class AutowiringFailedException extends \ConfigTransformer2021113010\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
+    /**
+     * @var string
+     */
     private $serviceId;
+    /**
+     * @var \Closure|null
+     */
     private $messageCallback;
+    /**
+     * @param \Closure|string $message
+     */
     public function __construct(string $serviceId, $message = '', int $code = 0, \Throwable $previous = null)
     {
         $this->serviceId = $serviceId;
@@ -31,7 +40,13 @@ class AutowiringFailedException extends \ConfigTransformer202111287\Symfony\Comp
         parent::__construct('', $code, $previous);
         $this->message = new class($this->message, $this->messageCallback)
         {
+            /**
+             * @var string
+             */
             private $message;
+            /**
+             * @var \Closure|null
+             */
             private $messageCallback;
             public function __construct(&$message, &$messageCallback)
             {
