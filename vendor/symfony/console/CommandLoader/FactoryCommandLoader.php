@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202111307\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202112011\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202111307\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202111307\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202112011\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112011\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class FactoryCommandLoader implements \ConfigTransformer202111307\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class FactoryCommandLoader implements \ConfigTransformer202112011\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     /**
      * @var mixed[]
@@ -42,10 +42,10 @@ class FactoryCommandLoader implements \ConfigTransformer202111307\Symfony\Compon
      * {@inheritdoc}
      * @param string $name
      */
-    public function get($name) : \ConfigTransformer202111307\Symfony\Component\Console\Command\Command
+    public function get($name) : \ConfigTransformer202112011\Symfony\Component\Console\Command\Command
     {
         if (!isset($this->factories[$name])) {
-            throw new \ConfigTransformer202111307\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202112011\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         $factory = $this->factories[$name];
         return $factory();
