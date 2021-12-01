@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112011\Symfony\Component\Console\Output;
+namespace ConfigTransformer202112016\Symfony\Component\Console\Output;
 
-use ConfigTransformer202112011\Symfony\Component\Console\Formatter\NullOutputFormatter;
-use ConfigTransformer202112011\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202112016\Symfony\Component\Console\Formatter\NullOutputFormatter;
+use ConfigTransformer202112016\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * NullOutput suppresses all output.
  *
@@ -20,7 +20,7 @@ use ConfigTransformer202112011\Symfony\Component\Console\Formatter\OutputFormatt
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class NullOutput implements \ConfigTransformer202112011\Symfony\Component\Console\Output\OutputInterface
+class NullOutput implements \ConfigTransformer202112016\Symfony\Component\Console\Output\OutputInterface
 {
     /**
      * @var \Symfony\Component\Console\Formatter\NullOutputFormatter
@@ -29,17 +29,17 @@ class NullOutput implements \ConfigTransformer202112011\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\ConfigTransformer202112011\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\ConfigTransformer202112016\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
      */
-    public function getFormatter() : \ConfigTransformer202112011\Symfony\Component\Console\Formatter\OutputFormatterInterface
+    public function getFormatter() : \ConfigTransformer202112016\Symfony\Component\Console\Formatter\OutputFormatterInterface
     {
         // to comply with the interface we must return a OutputFormatterInterface
-        return $this->formatter = $this->formatter ?? new \ConfigTransformer202112011\Symfony\Component\Console\Formatter\NullOutputFormatter();
+        return $this->formatter = $this->formatter ?? new \ConfigTransformer202112016\Symfony\Component\Console\Formatter\NullOutputFormatter();
     }
     /**
      * {@inheritdoc}
