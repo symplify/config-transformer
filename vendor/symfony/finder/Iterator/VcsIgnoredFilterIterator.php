@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120210\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202112023\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer2021120210\Symfony\Component\Finder\Gitignore;
+use ConfigTransformer202112023\Symfony\Component\Finder\Gitignore;
 final class VcsIgnoredFilterIterator extends \FilterIterator
 {
     /**
@@ -102,7 +102,7 @@ final class VcsIgnoredFilterIterator extends \FilterIterator
             throw new \RuntimeException("The \"ignoreVCSIgnored\" option cannot be used by the Finder as the \"{$path}\" file is not readable.");
         }
         $gitignoreFileContent = \file_get_contents($path);
-        return $this->gitignoreFilesCache[$path] = [\ConfigTransformer2021120210\Symfony\Component\Finder\Gitignore::toRegex($gitignoreFileContent), \ConfigTransformer2021120210\Symfony\Component\Finder\Gitignore::toRegexMatchingNegatedPatterns($gitignoreFileContent)];
+        return $this->gitignoreFilesCache[$path] = [\ConfigTransformer202112023\Symfony\Component\Finder\Gitignore::toRegex($gitignoreFileContent), \ConfigTransformer202112023\Symfony\Component\Finder\Gitignore::toRegexMatchingNegatedPatterns($gitignoreFileContent)];
     }
     private function normalizePath(string $path) : string
     {

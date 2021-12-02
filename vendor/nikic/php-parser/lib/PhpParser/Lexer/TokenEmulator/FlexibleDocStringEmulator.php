@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120210\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112023\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer2021120210\PhpParser\Lexer\Emulative;
-final class FlexibleDocStringEmulator extends \ConfigTransformer2021120210\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer202112023\PhpParser\Lexer\Emulative;
+final class FlexibleDocStringEmulator extends \ConfigTransformer202112023\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     const FLEXIBLE_DOC_STRING_REGEX = <<<'REGEX'
 /<<<[ \t]*(['"]?)([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)\1\r?\n
@@ -13,7 +13,7 @@ final class FlexibleDocStringEmulator extends \ConfigTransformer2021120210\PhpPa
 REGEX;
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer2021120210\PhpParser\Lexer\Emulative::PHP_7_3;
+        return \ConfigTransformer202112023\PhpParser\Lexer\Emulative::PHP_7_3;
     }
     /**
      * @param string $code
