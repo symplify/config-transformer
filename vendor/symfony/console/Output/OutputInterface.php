@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112022\Symfony\Component\Console\Output;
+namespace ConfigTransformer2021120210\Symfony\Component\Console\Output;
 
-use ConfigTransformer202112022\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer2021120210\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * OutputInterface is the interface implemented by all Output classes.
  *
@@ -71,9 +71,9 @@ interface OutputInterface
      * Gets the decorated flag.
      */
     public function isDecorated() : bool;
-    public function setFormatter(\ConfigTransformer202112022\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter);
+    public function setFormatter(\ConfigTransformer2021120210\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter);
     /**
      * Returns current output formatter instance.
      */
-    public function getFormatter() : \ConfigTransformer202112022\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+    public function getFormatter() : \ConfigTransformer2021120210\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 }

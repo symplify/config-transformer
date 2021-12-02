@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112022\Symplify\PackageBuilder\Neon;
+namespace ConfigTransformer2021120210\Symplify\PackageBuilder\Neon;
 
-use ConfigTransformer202112022\Nette\Neon\Encoder;
-use ConfigTransformer202112022\Nette\Neon\Neon;
-use ConfigTransformer202112022\Nette\Utils\Strings;
+use ConfigTransformer2021120210\Nette\Neon\Encoder;
+use ConfigTransformer2021120210\Nette\Neon\Neon;
+use ConfigTransformer2021120210\Nette\Utils\Strings;
 /**
  * @api
  */
@@ -26,24 +26,18 @@ final class NeonPrinter
      */
     public function printNeon(array $phpStanNeon) : string
     {
-        $neonContent = \ConfigTransformer202112022\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer202112022\Nette\Neon\Encoder::BLOCK);
-        // tabs to spaces for consistency
-        $neonContent = $this->replaceTabsWithSpaces($neonContent);
+        $neonContent = \ConfigTransformer2021120210\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer2021120210\Nette\Neon\Encoder::BLOCK, '    ');
         // inline single tags, dummy
         $neonContent = $this->inlineSingleTags($neonContent);
         $neonContent = $this->fixDoubleSpaceInArguments($neonContent);
         return \rtrim($neonContent) . \PHP_EOL;
     }
-    private function replaceTabsWithSpaces(string $neonContent) : string
-    {
-        return \ConfigTransformer202112022\Nette\Utils\Strings::replace($neonContent, '#\\t#', '    ');
-    }
     private function inlineSingleTags(string $neonContent) : string
     {
-        return \ConfigTransformer202112022\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
+        return \ConfigTransformer2021120210\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
     }
     private function fixDoubleSpaceInArguments(string $neonContent) : string
     {
-        return \ConfigTransformer202112022\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
+        return \ConfigTransformer2021120210\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
     }
 }

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112022\Symfony\Component\Console\Command;
+namespace ConfigTransformer2021120210\Symfony\Component\Console\Command;
 
-use ConfigTransformer202112022\Symfony\Component\Console\Application;
-use ConfigTransformer202112022\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202112022\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202112022\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer202112022\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202112022\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202112022\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2021120210\Symfony\Component\Console\Application;
+use ConfigTransformer2021120210\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer2021120210\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer2021120210\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer2021120210\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer2021120210\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2021120210\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class LazyCommand extends \ConfigTransformer202112022\Symfony\Component\Console\Command\Command
+final class LazyCommand extends \ConfigTransformer2021120210\Symfony\Component\Console\Command\Command
 {
     /**
      * @var \Closure|\Symfony\Component\Console\Command\Command
@@ -106,11 +106,11 @@ final class LazyCommand extends \ConfigTransformer202112022\Symfony\Component\Co
         $this->getCommand()->setDefinition($definition);
         return $this;
     }
-    public function getDefinition() : \ConfigTransformer202112022\Symfony\Component\Console\Input\InputDefinition
+    public function getDefinition() : \ConfigTransformer2021120210\Symfony\Component\Console\Input\InputDefinition
     {
         return $this->getCommand()->getDefinition();
     }
-    public function getNativeDefinition() : \ConfigTransformer202112022\Symfony\Component\Console\Input\InputDefinition
+    public function getNativeDefinition() : \ConfigTransformer2021120210\Symfony\Component\Console\Input\InputDefinition
     {
         return $this->getCommand()->getNativeDefinition();
     }
