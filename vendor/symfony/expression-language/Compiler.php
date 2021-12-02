@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112028\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202112022\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202112028\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202112022\Symfony\Contracts\Service\ResetInterface;
 /**
  * Compiles a node to PHP code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Compiler implements \ConfigTransformer202112028\Symfony\Contracts\Service\ResetInterface
+class Compiler implements \ConfigTransformer202112022\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * @var string
