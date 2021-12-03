@@ -1,18 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112023;
+namespace ConfigTransformer202112030;
 
-use ConfigTransformer202112023\Symfony\Component\Console\Application;
+use ConfigTransformer202112030\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202112023\Symplify\EasyTesting\Console\EasyTestingConsoleApplication;
-use ConfigTransformer202112023\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer202112030\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand;
+use function ConfigTransformer202112030\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202112023\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/Kernel', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202112030\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/Kernel', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202112023\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->alias(\ConfigTransformer202112023\Symfony\Component\Console\Application::class, \ConfigTransformer202112023\Symplify\EasyTesting\Console\EasyTestingConsoleApplication::class);
-    $services->set(\ConfigTransformer202112023\Symplify\PackageBuilder\Console\Command\CommandNaming::class);
+    $services->set(\ConfigTransformer202112030\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202112030\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202112030\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand::class)]);
 };
