@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ParametersConfigurator extends \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ParametersConfigurator extends \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'parameters';
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerBuilder
      */
     private $container;
-    public function __construct(\ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function __construct(\ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
     }

@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120410\Symplify\ConfigTransformer;
+namespace ConfigTransformer202112063\Symplify\ConfigTransformer;
 
-use ConfigTransformer2021120410\Nette\Utils\Strings;
-use ConfigTransformer2021120410\Symfony\Component\Config\FileLocator;
-use ConfigTransformer2021120410\Symfony\Component\Config\Loader\DelegatingLoader;
-use ConfigTransformer2021120410\Symfony\Component\Config\Loader\Loader;
-use ConfigTransformer2021120410\Symfony\Component\Config\Loader\LoaderResolver;
-use ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
-use ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\Exception\NotImplementedYetException;
-use ConfigTransformer2021120410\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
-use ConfigTransformer2021120410\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer2021120410\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202112063\Nette\Utils\Strings;
+use ConfigTransformer202112063\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202112063\Symfony\Component\Config\Loader\DelegatingLoader;
+use ConfigTransformer202112063\Symfony\Component\Config\Loader\Loader;
+use ConfigTransformer202112063\Symfony\Component\Config\Loader\LoaderResolver;
+use ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\Exception\NotImplementedYetException;
+use ConfigTransformer202112063\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
+use ConfigTransformer202112063\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202112063\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigLoader
 {
     /**
@@ -39,21 +39,21 @@ final class ConfigLoader
      * @var \Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker
      */
     private $extensionFaker;
-    public function __construct(\ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory, \ConfigTransformer2021120410\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker $extensionFaker)
+    public function __construct(\ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory, \ConfigTransformer202112063\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker $extensionFaker)
     {
         $this->idAwareXmlFileLoaderFactory = $idAwareXmlFileLoaderFactory;
         $this->smartFileSystem = $smartFileSystem;
         $this->extensionFaker = $extensionFaker;
     }
-    public function createAndLoadContainerBuilderFromFileInfo(\ConfigTransformer2021120410\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \ConfigTransformer2021120410\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent
+    public function createAndLoadContainerBuilderFromFileInfo(\ConfigTransformer202112063\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \ConfigTransformer202112063\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent
     {
-        $containerBuilder = new \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder();
+        $containerBuilder = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder();
         $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $smartFileInfo->getSuffix());
         $fileRealPath = $smartFileInfo->getRealPath();
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
-        if (\in_array($smartFileInfo->getSuffix(), [\ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::YAML], \true)) {
-            $content = \ConfigTransformer2021120410\Nette\Utils\Strings::replace($content, self::PHP_CONST_REGEX, '!php/const ');
+        if (\in_array($smartFileInfo->getSuffix(), [\ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::YAML], \true)) {
+            $content = \ConfigTransformer202112063\Nette\Utils\Strings::replace($content, self::PHP_CONST_REGEX, '!php/const ');
             if ($content !== $smartFileInfo->getContents()) {
                 $fileRealPath = \sys_get_temp_dir() . '/_migrify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
                 $this->smartFileSystem->dumpFile($fileRealPath, $content);
@@ -61,29 +61,29 @@ final class ConfigLoader
             $this->extensionFaker->fakeInContainerBuilder($containerBuilder, $content);
         }
         $delegatingLoader->load($fileRealPath);
-        return new \ConfigTransformer2021120410\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent($containerBuilder, $content);
+        return new \ConfigTransformer202112063\Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent($containerBuilder, $content);
     }
-    private function createLoaderBySuffix(\ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $suffix) : \ConfigTransformer2021120410\Symfony\Component\Config\Loader\DelegatingLoader
+    private function createLoaderBySuffix(\ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $suffix) : \ConfigTransformer202112063\Symfony\Component\Config\Loader\DelegatingLoader
     {
-        if ($suffix === \ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::XML) {
+        if ($suffix === \ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::XML) {
             $idAwareXmlFileLoader = $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
             return $this->wrapToDelegatingLoader($idAwareXmlFileLoader, $containerBuilder);
         }
-        if (\in_array($suffix, [\ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::YAML], \true)) {
-            $yamlFileLoader = new \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\YamlFileLoader($containerBuilder, new \ConfigTransformer2021120410\Symfony\Component\Config\FileLocator());
+        if (\in_array($suffix, [\ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::YAML], \true)) {
+            $yamlFileLoader = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\YamlFileLoader($containerBuilder, new \ConfigTransformer202112063\Symfony\Component\Config\FileLocator());
             return $this->wrapToDelegatingLoader($yamlFileLoader, $containerBuilder);
         }
-        if ($suffix === \ConfigTransformer2021120410\Symplify\ConfigTransformer\Enum\Format::PHP) {
-            $phpFileLoader = new \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer2021120410\Symfony\Component\Config\FileLocator());
+        if ($suffix === \ConfigTransformer202112063\Symplify\ConfigTransformer\Enum\Format::PHP) {
+            $phpFileLoader = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202112063\Symfony\Component\Config\FileLocator());
             return $this->wrapToDelegatingLoader($phpFileLoader, $containerBuilder);
         }
-        throw new \ConfigTransformer2021120410\Symplify\ConfigTransformer\Exception\NotImplementedYetException($suffix);
+        throw new \ConfigTransformer202112063\Symplify\ConfigTransformer\Exception\NotImplementedYetException($suffix);
     }
-    private function wrapToDelegatingLoader(\ConfigTransformer2021120410\Symfony\Component\Config\Loader\Loader $loader, \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \ConfigTransformer2021120410\Symfony\Component\Config\Loader\DelegatingLoader
+    private function wrapToDelegatingLoader(\ConfigTransformer202112063\Symfony\Component\Config\Loader\Loader $loader, \ConfigTransformer202112063\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \ConfigTransformer202112063\Symfony\Component\Config\Loader\DelegatingLoader
     {
-        $globFileLoader = new \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\GlobFileLoader($containerBuilder, new \ConfigTransformer2021120410\Symfony\Component\Config\FileLocator());
-        $phpFileLoader = new \ConfigTransformer2021120410\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer2021120410\Symfony\Component\Config\FileLocator());
-        $checkerTolerantYamlFileLoader = new \ConfigTransformer2021120410\Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader($containerBuilder, new \ConfigTransformer2021120410\Symfony\Component\Config\FileLocator());
-        return new \ConfigTransformer2021120410\Symfony\Component\Config\Loader\DelegatingLoader(new \ConfigTransformer2021120410\Symfony\Component\Config\Loader\LoaderResolver([$globFileLoader, $phpFileLoader, $checkerTolerantYamlFileLoader, $loader]));
+        $globFileLoader = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\GlobFileLoader($containerBuilder, new \ConfigTransformer202112063\Symfony\Component\Config\FileLocator());
+        $phpFileLoader = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \ConfigTransformer202112063\Symfony\Component\Config\FileLocator());
+        $checkerTolerantYamlFileLoader = new \ConfigTransformer202112063\Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader($containerBuilder, new \ConfigTransformer202112063\Symfony\Component\Config\FileLocator());
+        return new \ConfigTransformer202112063\Symfony\Component\Config\Loader\DelegatingLoader(new \ConfigTransformer202112063\Symfony\Component\Config\Loader\LoaderResolver([$globFileLoader, $phpFileLoader, $checkerTolerantYamlFileLoader, $loader]));
     }
 }
