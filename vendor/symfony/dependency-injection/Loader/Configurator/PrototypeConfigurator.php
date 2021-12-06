@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112066\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112063\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202112066\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112066\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PrototypeConfigurator extends \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class PrototypeConfigurator extends \ConfigTransformer202112066\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
@@ -49,9 +49,9 @@ class PrototypeConfigurator extends \ConfigTransformer202112063\Symfony\Componen
      * @var bool
      */
     private $allowParent;
-    public function __construct(\ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Definition $defaults, string $namespace, string $resource, bool $allowParent)
+    public function __construct(\ConfigTransformer202112066\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202112066\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, \ConfigTransformer202112066\Symfony\Component\DependencyInjection\Definition $defaults, string $namespace, string $resource, bool $allowParent)
     {
-        $definition = new \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Definition();
+        $definition = new \ConfigTransformer202112066\Symfony\Component\DependencyInjection\Definition();
         if (!$defaults->isPublic() || !$defaults->isPrivate()) {
             $definition->setPublic($defaults->isPublic());
         }

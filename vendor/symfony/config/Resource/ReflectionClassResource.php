@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112063\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202112066\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202112063\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202112063\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
-use ConfigTransformer202112063\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202112066\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202112066\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use ConfigTransformer202112066\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
  */
-class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ReflectionClassResource implements \ConfigTransformer202112066\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var mixed[]
@@ -121,7 +121,7 @@ class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Com
     private function generateSignature(\ReflectionClass $class) : iterable
     {
         $attributes = [];
-        foreach ($class->getAttributes() as $a) {
+        foreach ([] as $a) {
             $attributes[] = [$a->getName(), \PHP_VERSION_ID >= 80100 ? (string) $a : $a->getArguments()];
         }
         (yield \print_r($attributes, \true));
@@ -139,7 +139,7 @@ class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Com
         if (!$class->isInterface()) {
             $defaults = $class->getDefaultProperties();
             foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED) as $p) {
-                foreach ($p->getAttributes() as $a) {
+                foreach ([] as $a) {
                     $attributes[] = [$a->getName(), \PHP_VERSION_ID >= 80100 ? (string) $a : $a->getArguments()];
                 }
                 (yield \print_r($attributes, \true));
@@ -156,7 +156,7 @@ class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Com
             return \defined($c);
         }, null, $class->name);
         foreach ($class->getMethods(\ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED) as $m) {
-            foreach ($m->getAttributes() as $a) {
+            foreach ([] as $a) {
                 $attributes[] = [$a->getName(), \PHP_VERSION_ID >= 80100 ? (string) $a : $a->getArguments()];
             }
             (yield \print_r($attributes, \true));
@@ -164,7 +164,7 @@ class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Com
             $defaults = [];
             $parametersWithUndefinedConstants = [];
             foreach ($m->getParameters() as $p) {
-                foreach ($p->getAttributes() as $a) {
+                foreach ([] as $a) {
                     $attributes[] = [$a->getName(), \PHP_VERSION_ID >= 80100 ? (string) $a : $a->getArguments()];
                 }
                 (yield \print_r($attributes, \true));
@@ -208,18 +208,18 @@ class ReflectionClassResource implements \ConfigTransformer202112063\Symfony\Com
         if ($class->isAbstract() || $class->isInterface() || $class->isTrait()) {
             return;
         }
-        if (\interface_exists(\ConfigTransformer202112063\Symfony\Component\EventDispatcher\EventSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112063\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
-            (yield \ConfigTransformer202112063\Symfony\Component\EventDispatcher\EventSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202112066\Symfony\Component\EventDispatcher\EventSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112066\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
+            (yield \ConfigTransformer202112066\Symfony\Component\EventDispatcher\EventSubscriberInterface::class);
             (yield \print_r($class->name::getSubscribedEvents(), \true));
         }
-        if (\interface_exists(\ConfigTransformer202112063\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112063\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class)) {
-            (yield \ConfigTransformer202112063\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202112066\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112066\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class)) {
+            (yield \ConfigTransformer202112066\Symfony\Component\Messenger\Handler\MessageSubscriberInterface::class);
             foreach ($class->name::getHandledMessages() as $key => $value) {
                 (yield $key . \print_r($value, \true));
             }
         }
-        if (\interface_exists(\ConfigTransformer202112063\Symfony\Contracts\Service\ServiceSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112063\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
-            (yield \ConfigTransformer202112063\Symfony\Contracts\Service\ServiceSubscriberInterface::class);
+        if (\interface_exists(\ConfigTransformer202112066\Symfony\Contracts\Service\ServiceSubscriberInterface::class, \false) && $class->isSubclassOf(\ConfigTransformer202112066\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
+            (yield \ConfigTransformer202112066\Symfony\Contracts\Service\ServiceSubscriberInterface::class);
             (yield \print_r($class->name::getSubscribedServices(), \true));
         }
     }
