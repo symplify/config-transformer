@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112063\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer2021120610\Symfony\Component\DependencyInjection\Dumper;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
@@ -74,7 +74,7 @@ final class Preloader
             $r->getConstants();
             $r->getDefaultProperties();
             foreach ($r->getProperties(\ReflectionProperty::IS_PUBLIC) as $p) {
-                self::preloadType($p->getType(), $preloaded);
+                self::preloadType(null, $preloaded);
             }
             foreach ($r->getMethods(\ReflectionMethod::IS_PUBLIC) as $m) {
                 foreach ($m->getParameters() as $p) {
@@ -97,7 +97,7 @@ final class Preloader
         if (!$t) {
             return;
         }
-        foreach ($t instanceof \ReflectionUnionType || $t instanceof \ConfigTransformer202112063\ReflectionIntersectionType ? $t->getTypes() : [$t] as $t) {
+        foreach ($t instanceof \ReflectionUnionType || $t instanceof \ConfigTransformer2021120610\ReflectionIntersectionType ? $t->getTypes() : [$t] as $t) {
             if (!$t->isBuiltin()) {
                 self::doPreload($t instanceof \ReflectionNamedType ? $t->getName() : $t, $preloaded);
             }

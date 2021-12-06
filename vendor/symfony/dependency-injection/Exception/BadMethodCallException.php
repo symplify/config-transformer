@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112063\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer2021120610\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Base BadMethodCallException for Dependency Injection component.
  */
-class BadMethodCallException extends \BadMethodCallException implements \ConfigTransformer202112063\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+class BadMethodCallException extends \BadMethodCallException implements \ConfigTransformer2021120610\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
 {
 }

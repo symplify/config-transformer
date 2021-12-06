@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112063\Nette\Neon;
+namespace ConfigTransformer2021120610\Nette\Neon;
 
 /**
  * Parser for Nette Object Notation.
@@ -22,10 +22,10 @@ final class Decoder
         $node = $this->parseToNode($input);
         return $node->toValue();
     }
-    public function parseToNode(string $input) : \ConfigTransformer202112063\Nette\Neon\Node
+    public function parseToNode(string $input) : \ConfigTransformer2021120610\Nette\Neon\Node
     {
-        $lexer = new \ConfigTransformer202112063\Nette\Neon\Lexer();
-        $parser = new \ConfigTransformer202112063\Nette\Neon\Parser();
+        $lexer = new \ConfigTransformer2021120610\Nette\Neon\Lexer();
+        $parser = new \ConfigTransformer2021120610\Nette\Neon\Parser();
         $tokens = $lexer->tokenize($input);
         return $parser->parse($tokens);
     }

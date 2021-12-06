@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112063\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer2021120610\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202112063\PhpParser\BuilderHelpers;
-use ConfigTransformer202112063\PhpParser\Node\Arg;
-use ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202112063\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202112063\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-final class ParentLazyServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202112063\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer2021120610\PhpParser\BuilderHelpers;
+use ConfigTransformer2021120610\PhpParser\Node\Arg;
+use ConfigTransformer2021120610\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2021120610\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer2021120610\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+final class ParentLazyServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer2021120610\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer2021120610\PhpParser\Node\Expr\MethodCall
     {
         $method = $key;
-        $methodCall = new \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall($methodCall, $method);
-        $methodCall->args[] = new \ConfigTransformer202112063\PhpParser\Node\Arg(\ConfigTransformer202112063\PhpParser\BuilderHelpers::normalizeValue($values[$key]));
+        $methodCall = new \ConfigTransformer2021120610\PhpParser\Node\Expr\MethodCall($methodCall, $method);
+        $methodCall->args[] = new \ConfigTransformer2021120610\PhpParser\Node\Arg(\ConfigTransformer2021120610\PhpParser\BuilderHelpers::normalizeValue($values[$key]));
         return $methodCall;
     }
     /**
@@ -26,6 +26,6 @@ final class ParentLazyServiceOptionKeyYamlToPhpFactory implements \ConfigTransfo
      */
     public function isMatch($key, $values) : bool
     {
-        return \in_array($key, [\ConfigTransformer202112063\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARENT, \ConfigTransformer202112063\Symplify\PhpConfigPrinter\ValueObject\YamlKey::LAZY], \true);
+        return \in_array($key, [\ConfigTransformer2021120610\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARENT, \ConfigTransformer2021120610\Symplify\PhpConfigPrinter\ValueObject\YamlKey::LAZY], \true);
     }
 }
