@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112066\Nette\Utils;
+namespace ConfigTransformer202112060\Nette\Utils;
 
-use ConfigTransformer202112066\Nette;
-use ConfigTransformer202112066\Nette\HtmlStringable;
+use ConfigTransformer202112060\Nette;
+use ConfigTransformer202112060\Nette\HtmlStringable;
 use function is_array, is_float, is_object, is_string;
 /**
  * HTML helper.
@@ -227,7 +227,7 @@ use function is_array, is_float, is_object, is_string;
  * @method self width(?int $val)
  * @method self wrap(?string $val)
  */
-class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTransformer202112066\Nette\HtmlStringable
+class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTransformer202112060\Nette\HtmlStringable
 {
     use Nette\SmartObject;
     /** @var array<string, mixed>  element's attributes */
@@ -259,7 +259,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTrans
             $el->setText($attrs);
         }
         if (isset($parts[1])) {
-            foreach (\ConfigTransformer202112066\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
+            foreach (\ConfigTransformer202112060\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
                 $el->attrs[$m[1]] = $m[3] ?? \true;
             }
         }
@@ -517,7 +517,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTrans
      */
     public final function setText($text)
     {
-        if (!$text instanceof \ConfigTransformer202112066\Nette\HtmlStringable) {
+        if (!$text instanceof \ConfigTransformer202112060\Nette\HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         $this->children = [(string) $text];
@@ -546,7 +546,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTrans
      */
     public function addText($text)
     {
-        if (!$text instanceof \ConfigTransformer202112066\Nette\HtmlStringable) {
+        if (!$text instanceof \ConfigTransformer202112060\Nette\HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         return $this->insert(null, $text);
@@ -723,7 +723,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \ConfigTrans
                 continue;
             } elseif (\is_array($value)) {
                 if (\strncmp($key, 'data-', 5) === 0) {
-                    $value = \ConfigTransformer202112066\Nette\Utils\Json::encode($value);
+                    $value = \ConfigTransformer202112060\Nette\Utils\Json::encode($value);
                 } else {
                     $tmp = null;
                     foreach ($value as $k => $v) {

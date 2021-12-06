@@ -8,41 +8,41 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112066\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202112060\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202112066\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202112066\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202112066\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202112066\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202112060\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202112060\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202112060\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202112060\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */
-class CouchbaseBucketAdapter extends \ConfigTransformer202112066\Symfony\Component\Cache\Adapter\AbstractAdapter
+class CouchbaseBucketAdapter extends \ConfigTransformer202112060\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private const THIRTY_DAYS_IN_SECONDS = 2592000;
     private const MAX_KEY_LENGTH = 250;
     private const KEY_NOT_FOUND = 13;
     private const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
-    private \ConfigTransformer202112066\CouchbaseBucket $bucket;
-    private \ConfigTransformer202112066\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
-    public function __construct(\ConfigTransformer202112066\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202112066\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    private \ConfigTransformer202112060\CouchbaseBucket $bucket;
+    private \ConfigTransformer202112060\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
+    public function __construct(\ConfigTransformer202112060\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202112060\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202112066\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
+            throw new \ConfigTransformer202112060\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
         }
         $this->maxIdLength = static::MAX_KEY_LENGTH;
         $this->bucket = $bucket;
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202112066\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202112060\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
-    public static function createConnection(array|string $servers, array $options = []) : \ConfigTransformer202112066\CouchbaseBucket
+    public static function createConnection(array|string $servers, array $options = []) : \ConfigTransformer202112060\CouchbaseBucket
     {
         if (\is_string($servers)) {
             $servers = [$servers];
         }
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202112066\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
+            throw new \ConfigTransformer202112060\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
         }
         \set_error_handler(function ($type, $msg, $file, $line) {
             throw new \ErrorException($msg, 0, $type, $file, $line);
@@ -56,7 +56,7 @@ class CouchbaseBucketAdapter extends \ConfigTransformer202112066\Symfony\Compone
             $password = $options['password'];
             foreach ($servers as $dsn) {
                 if (0 !== \strpos($dsn, 'couchbase:')) {
-                    throw new \ConfigTransformer202112066\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $dsn));
+                    throw new \ConfigTransformer202112060\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $dsn));
                 }
                 \preg_match($dsnPattern, $dsn, $matches);
                 $username = $matches['username'] ?: $username;
@@ -71,7 +71,7 @@ class CouchbaseBucketAdapter extends \ConfigTransformer202112066\Symfony\Compone
                 $newServers[] = $matches['host'];
             }
             $connectionString = $protocol . '://' . \implode(',', $newServers);
-            $client = new \ConfigTransformer202112066\CouchbaseCluster($connectionString);
+            $client = new \ConfigTransformer202112060\CouchbaseCluster($connectionString);
             $client->authenticateAs($username, $password);
             $bucket = $client->openBucket($matches['bucketName']);
             unset($options['username'], $options['password']);
