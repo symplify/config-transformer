@@ -1,41 +1,41 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112060\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202112063\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202112060\PhpParser\Node\Arg;
-use ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202112060\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202112060\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202112060\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202112060\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202112063\PhpParser\Node\Arg;
+use ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202112063\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202112063\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer202112063\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202112063\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer202112060\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202112063\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
     /**
      * @param \PhpParser\Node\Expr\MethodCall $methodCall
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, $methodCall) : \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall
     {
         if ($key === 'public') {
             if ($yaml === \false) {
-                return new \ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
+                return new \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
             }
-            return new \ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
+            return new \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
         }
         if ($key === 'shared') {
             if ($yaml === \false) {
-                return new \ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall($methodCall, 'share', [new \ConfigTransformer202112060\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())]);
+                return new \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall($methodCall, 'share', [new \ConfigTransformer202112063\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())]);
             }
-            return new \ConfigTransformer202112060\PhpParser\Node\Expr\MethodCall($methodCall, 'share');
+            return new \ConfigTransformer202112063\PhpParser\Node\Expr\MethodCall($methodCall, 'share');
         }
-        throw new \ConfigTransformer202112060\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
+        throw new \ConfigTransformer202112063\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
     }
     /**
      * @param mixed $key
