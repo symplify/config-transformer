@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112075\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202112074\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202112075\Symfony\Component\Console\Application;
-use ConfigTransformer202112075\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202112075\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202112075\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202112075\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202112075\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202112075\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112074\Symfony\Component\Console\Application;
+use ConfigTransformer202112074\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112074\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112074\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202112074\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202112074\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202112074\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
  * @internal
  */
-abstract class Descriptor implements \ConfigTransformer202112075\Symfony\Component\Console\Descriptor\DescriptorInterface
+abstract class Descriptor implements \ConfigTransformer202112074\Symfony\Component\Console\Descriptor\DescriptorInterface
 {
     /**
      * @var OutputInterface
@@ -38,23 +38,23 @@ abstract class Descriptor implements \ConfigTransformer202112075\Symfony\Compone
     {
         $this->output = $output;
         switch (\true) {
-            case $object instanceof \ConfigTransformer202112075\Symfony\Component\Console\Input\InputArgument:
+            case $object instanceof \ConfigTransformer202112074\Symfony\Component\Console\Input\InputArgument:
                 $this->describeInputArgument($object, $options);
                 break;
-            case $object instanceof \ConfigTransformer202112075\Symfony\Component\Console\Input\InputOption:
+            case $object instanceof \ConfigTransformer202112074\Symfony\Component\Console\Input\InputOption:
                 $this->describeInputOption($object, $options);
                 break;
-            case $object instanceof \ConfigTransformer202112075\Symfony\Component\Console\Input\InputDefinition:
+            case $object instanceof \ConfigTransformer202112074\Symfony\Component\Console\Input\InputDefinition:
                 $this->describeInputDefinition($object, $options);
                 break;
-            case $object instanceof \ConfigTransformer202112075\Symfony\Component\Console\Command\Command:
+            case $object instanceof \ConfigTransformer202112074\Symfony\Component\Console\Command\Command:
                 $this->describeCommand($object, $options);
                 break;
-            case $object instanceof \ConfigTransformer202112075\Symfony\Component\Console\Application:
+            case $object instanceof \ConfigTransformer202112074\Symfony\Component\Console\Application:
                 $this->describeApplication($object, $options);
                 break;
             default:
-                throw new \ConfigTransformer202112075\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Object of type "%s" is not describable.', \get_debug_type($object)));
+                throw new \ConfigTransformer202112074\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Object of type "%s" is not describable.', \get_debug_type($object)));
         }
     }
     /**
@@ -64,7 +64,7 @@ abstract class Descriptor implements \ConfigTransformer202112075\Symfony\Compone
      */
     protected function write($content, $decorated = \false)
     {
-        $this->output->write($content, \false, $decorated ? \ConfigTransformer202112075\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL : \ConfigTransformer202112075\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
+        $this->output->write($content, \false, $decorated ? \ConfigTransformer202112074\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL : \ConfigTransformer202112074\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
     }
     /**
      * Describes an InputArgument instance.
