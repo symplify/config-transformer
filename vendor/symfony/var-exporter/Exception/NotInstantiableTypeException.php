@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112073\Symfony\Component\VarExporter\Exception;
+namespace ConfigTransformer202112078\Symfony\Component\VarExporter\Exception;
 
-class NotInstantiableTypeException extends \Exception implements \ConfigTransformer202112073\Symfony\Component\VarExporter\Exception\ExceptionInterface
+class NotInstantiableTypeException extends \Exception implements \ConfigTransformer202112078\Symfony\Component\VarExporter\Exception\ExceptionInterface
 {
     public function __construct(string $type, \Throwable $previous = null)
     {
