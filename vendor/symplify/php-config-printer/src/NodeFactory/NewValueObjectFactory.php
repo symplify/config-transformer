@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112073\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer2021120710\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202112073\MyCLabs\Enum\Enum;
-use ConfigTransformer202112073\PhpParser\BuilderHelpers;
-use ConfigTransformer202112073\PhpParser\Node\Arg;
-use ConfigTransformer202112073\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202112073\PhpParser\Node\Expr\New_;
-use ConfigTransformer202112073\PhpParser\Node\Expr\StaticCall;
-use ConfigTransformer202112073\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer2021120710\MyCLabs\Enum\Enum;
+use ConfigTransformer2021120710\PhpParser\BuilderHelpers;
+use ConfigTransformer2021120710\PhpParser\Node\Arg;
+use ConfigTransformer2021120710\PhpParser\Node\Expr\Array_;
+use ConfigTransformer2021120710\PhpParser\Node\Expr\New_;
+use ConfigTransformer2021120710\PhpParser\Node\Expr\StaticCall;
+use ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified;
 use ReflectionClass;
 final class NewValueObjectFactory
 {
@@ -20,13 +20,13 @@ final class NewValueObjectFactory
     public function create($valueObject)
     {
         $valueObjectClass = \get_class($valueObject);
-        if ($valueObject instanceof \ConfigTransformer202112073\MyCLabs\Enum\Enum) {
-            return new \ConfigTransformer202112073\PhpParser\Node\Expr\StaticCall(new \ConfigTransformer202112073\PhpParser\Node\Name\FullyQualified($valueObjectClass), $valueObject->getKey());
+        if ($valueObject instanceof \ConfigTransformer2021120710\MyCLabs\Enum\Enum) {
+            return new \ConfigTransformer2021120710\PhpParser\Node\Expr\StaticCall(new \ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified($valueObjectClass), $valueObject->getKey());
         }
         // assumption that constructor parameters share the same value as property names
         $propertyValues = $this->resolvePropertyValuesFromValueObject($valueObjectClass, $valueObject);
         $args = $this->createArgs($propertyValues);
-        return new \ConfigTransformer202112073\PhpParser\Node\Expr\New_(new \ConfigTransformer202112073\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
+        return new \ConfigTransformer2021120710\PhpParser\Node\Expr\New_(new \ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
     }
     /**
      * @return mixed[]
@@ -58,11 +58,11 @@ final class NewValueObjectFactory
         foreach ($propertyValues as $propertyValue) {
             if (\is_object($propertyValue)) {
                 $nestedValueObject = $this->create($propertyValue);
-                $args[] = new \ConfigTransformer202112073\PhpParser\Node\Arg($nestedValueObject);
+                $args[] = new \ConfigTransformer2021120710\PhpParser\Node\Arg($nestedValueObject);
             } elseif (\is_array($propertyValue)) {
-                $args[] = new \ConfigTransformer202112073\PhpParser\Node\Arg(new \ConfigTransformer202112073\PhpParser\Node\Expr\Array_($this->createArgs($propertyValue)));
+                $args[] = new \ConfigTransformer2021120710\PhpParser\Node\Arg(new \ConfigTransformer2021120710\PhpParser\Node\Expr\Array_($this->createArgs($propertyValue)));
             } else {
-                $args[] = new \ConfigTransformer202112073\PhpParser\Node\Arg(\ConfigTransformer202112073\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
+                $args[] = new \ConfigTransformer2021120710\PhpParser\Node\Arg(\ConfigTransformer2021120710\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
             }
         }
         return $args;

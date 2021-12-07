@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112073\Symfony\Component\Cache;
+namespace ConfigTransformer2021120710\Symfony\Component\Cache;
 
-use ConfigTransformer202112073\Psr\Log\LoggerInterface;
-use ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202112073\Symfony\Component\Cache\Exception\LogicException;
-use ConfigTransformer202112073\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer2021120710\Psr\Log\LoggerInterface;
+use ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2021120710\Symfony\Component\Cache\Exception\LogicException;
+use ConfigTransformer2021120710\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\Cache\ItemInterface
+final class CacheItem implements \ConfigTransformer2021120710\Symfony\Contracts\Cache\ItemInterface
 {
     private const METADATA_EXPIRY_OFFSET = 1527506807;
     protected string $key;
@@ -26,7 +26,7 @@ final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\C
     protected float|int|null $expiry = null;
     protected array $metadata = [];
     protected array $newMetadata = [];
-    protected ?\ConfigTransformer202112073\Symfony\Contracts\Cache\ItemInterface $innerItem = null;
+    protected ?\ConfigTransformer2021120710\Symfony\Contracts\Cache\ItemInterface $innerItem = null;
     protected ?string $poolHash = null;
     protected bool $isTaggable = \false;
     /**
@@ -84,7 +84,7 @@ final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\C
         } elseif (\is_int($time)) {
             $this->expiry = $time + \microtime(\true);
         } else {
-            throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given.', \get_debug_type($time)));
+            throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given.', \get_debug_type($time)));
         }
         return $this;
     }
@@ -94,24 +94,24 @@ final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\C
     public function tag(mixed $tags) : static
     {
         if (!$this->isTaggable) {
-            throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\LogicException(\sprintf('Cache item "%s" comes from a non tag-aware pool: you cannot tag it.', $this->key));
+            throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\LogicException(\sprintf('Cache item "%s" comes from a non tag-aware pool: you cannot tag it.', $this->key));
         }
         if (!\is_iterable($tags)) {
             $tags = [$tags];
         }
         foreach ($tags as $tag) {
             if (!\is_string($tag) && !$tag instanceof \Stringable) {
-                throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag must be string or object that implements __toString(), "%s" given.', \get_debug_type($tag)));
+                throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag must be string or object that implements __toString(), "%s" given.', \get_debug_type($tag)));
             }
             $tag = (string) $tag;
             if (isset($this->newMetadata[self::METADATA_TAGS][$tag])) {
                 continue;
             }
             if ('' === $tag) {
-                throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache tag length must be greater than zero.');
+                throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache tag length must be greater than zero.');
             }
             if (\false !== \strpbrk($tag, self::RESERVED_CHARACTERS)) {
-                throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag "%s" contains reserved characters "%s".', $tag, self::RESERVED_CHARACTERS));
+                throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag "%s" contains reserved characters "%s".', $tag, self::RESERVED_CHARACTERS));
             }
             $this->newMetadata[self::METADATA_TAGS][$tag] = $tag;
         }
@@ -134,13 +134,13 @@ final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\C
     public static function validateKey($key) : string
     {
         if (!\is_string($key)) {
-            throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
+            throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
         }
         if ('' === $key) {
-            throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache key length must be greater than zero.');
+            throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache key length must be greater than zero.');
         }
         if (\false !== \strpbrk($key, self::RESERVED_CHARACTERS)) {
-            throw new \ConfigTransformer202112073\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" contains reserved characters "%s".', $key, self::RESERVED_CHARACTERS));
+            throw new \ConfigTransformer2021120710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" contains reserved characters "%s".', $key, self::RESERVED_CHARACTERS));
         }
         return $key;
     }
@@ -149,7 +149,7 @@ final class CacheItem implements \ConfigTransformer202112073\Symfony\Contracts\C
      *
      * @internal
      */
-    public static function log(?\ConfigTransformer202112073\Psr\Log\LoggerInterface $logger, string $message, array $context = [])
+    public static function log(?\ConfigTransformer2021120710\Psr\Log\LoggerInterface $logger, string $message, array $context = [])
     {
         if ($logger) {
             $logger->warning($message, $context);

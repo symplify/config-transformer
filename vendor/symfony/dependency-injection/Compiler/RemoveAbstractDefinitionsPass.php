@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112073\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2021120710\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Removes abstract Definitions.
  */
-class RemoveAbstractDefinitionsPass implements \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RemoveAbstractDefinitionsPass implements \ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * Removes abstract definitions from the ContainerBuilder.
