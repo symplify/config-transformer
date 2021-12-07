@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120710\Symfony\Component\Console\Input;
+namespace ConfigTransformer202112073\Symfony\Component\Console\Input;
 
-use ConfigTransformer2021120710\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer2021120710\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202112073\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112073\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * InputInterface is the interface implemented by all input classes.
  *

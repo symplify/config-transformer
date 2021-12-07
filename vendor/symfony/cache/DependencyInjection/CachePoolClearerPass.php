@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120710\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202112073\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2021120710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CachePoolClearerPass implements \ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolClearerPass implements \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer2021120710\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202112073\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $container->getParameterBag()->remove('cache.prefix.seed');
         foreach ($container->findTaggedServiceIds('cache.pool.clearer') as $id => $attr) {
@@ -29,7 +29,7 @@ class CachePoolClearerPass implements \ConfigTransformer2021120710\Symfony\Compo
             $pools = [];
             foreach ($clearer->getArgument(0) as $name => $ref) {
                 if ($container->hasDefinition($ref)) {
-                    $pools[$name] = new \ConfigTransformer2021120710\Symfony\Component\DependencyInjection\Reference($ref);
+                    $pools[$name] = new \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Reference($ref);
                 }
             }
             $clearer->replaceArgument(0, $pools);
