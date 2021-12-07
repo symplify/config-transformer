@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112078\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202112079\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202112078\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202112078\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202112078\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202112079\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112079\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202112079\Symfony\Component\Console\Completion\CompletionSuggestions;
 /**
  * Eases the testing of command completion.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202112078\Symfony\Component\Console\Completion\CompletionSu
 class CommandCompletionTester
 {
     private $command;
-    public function __construct(\ConfigTransformer202112078\Symfony\Component\Console\Command\Command $command)
+    public function __construct(\ConfigTransformer202112079\Symfony\Component\Console\Command\Command $command)
     {
         $this->command = $command;
     }
@@ -36,9 +36,9 @@ class CommandCompletionTester
             \array_pop($input);
         }
         \array_unshift($input, $this->command->getName());
-        $completionInput = \ConfigTransformer202112078\Symfony\Component\Console\Completion\CompletionInput::fromTokens($input, $currentIndex);
+        $completionInput = \ConfigTransformer202112079\Symfony\Component\Console\Completion\CompletionInput::fromTokens($input, $currentIndex);
         $completionInput->bind($this->command->getDefinition());
-        $suggestions = new \ConfigTransformer202112078\Symfony\Component\Console\Completion\CompletionSuggestions();
+        $suggestions = new \ConfigTransformer202112079\Symfony\Component\Console\Completion\CompletionSuggestions();
         $this->command->complete($completionInput, $suggestions);
         $options = [];
         foreach ($suggestions->getOptionSuggestions() as $option) {

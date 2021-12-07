@@ -18,17 +18,17 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\PackageBuilder\\": "src"
+            "ConfigTransformer202112079\\Symplify\\PackageBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\PackageBuilder\\Tests\\": "tests"
+            "ConfigTransformer202112079\\Symplify\\PackageBuilder\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.0-dev"
+            "dev-main": "10.1-dev"
         }
     },
     "conflict": {

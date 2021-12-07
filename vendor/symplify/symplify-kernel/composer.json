@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\SymplifyKernel\\": "src"
+            "ConfigTransformer202112079\\Symplify\\SymplifyKernel\\": "src"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.0-dev"
+            "dev-main": "10.1-dev"
         }
     },
     "conflict": {

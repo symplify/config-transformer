@@ -19,17 +19,17 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202112079\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202112079\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.0-dev"
+            "dev-main": "10.1-dev"
         },
         "phpstan": {
             "includes": [

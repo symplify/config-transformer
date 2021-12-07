@@ -13,17 +13,17 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\AutowireArrayParameter\\": "src"
+            "ConfigTransformer202112079\\Symplify\\AutowireArrayParameter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202112078\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
+            "ConfigTransformer202112079\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.0-dev"
+            "dev-main": "10.1-dev"
         }
     },
     "conflict": {
