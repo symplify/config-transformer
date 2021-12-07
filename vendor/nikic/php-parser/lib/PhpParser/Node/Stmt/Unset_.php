@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112074\PhpParser\Node\Stmt;
+namespace ConfigTransformer202112079\PhpParser\Node\Stmt;
 
-use ConfigTransformer202112074\PhpParser\Node;
-class Unset_ extends \ConfigTransformer202112074\PhpParser\Node\Stmt
+use ConfigTransformer202112079\PhpParser\Node;
+class Unset_ extends \ConfigTransformer202112079\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Variables to unset */
     public $vars;
