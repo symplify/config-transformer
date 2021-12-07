@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112073\PhpParser\Node\Stmt;
+namespace ConfigTransformer202112075\PhpParser\Node\Stmt;
 
-use ConfigTransformer202112073\PhpParser\Node;
-class Trait_ extends \ConfigTransformer202112073\PhpParser\Node\Stmt\ClassLike
+use ConfigTransformer202112075\PhpParser\Node;
+class Trait_ extends \ConfigTransformer202112075\PhpParser\Node\Stmt\ClassLike
 {
     /**
      * Constructs a trait node.
@@ -18,7 +18,7 @@ class Trait_ extends \ConfigTransformer202112073\PhpParser\Node\Stmt\ClassLike
     public function __construct($name, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer202112073\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202112075\PhpParser\Node\Identifier($name) : $name;
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }

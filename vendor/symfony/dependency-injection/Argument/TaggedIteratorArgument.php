@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112073\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202112075\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * Represents a collection of services found by tag name to lazily iterate over.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class TaggedIteratorArgument extends \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Argument\IteratorArgument
+class TaggedIteratorArgument extends \ConfigTransformer202112075\Symfony\Component\DependencyInjection\Argument\IteratorArgument
 {
     /**
      * @var string
