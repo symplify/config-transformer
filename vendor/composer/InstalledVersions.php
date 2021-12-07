@@ -9,10 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112071\Composer;
+namespace ConfigTransformer202112073\Composer;
 
-use ConfigTransformer202112071\Composer\Autoload\ClassLoader;
-use ConfigTransformer202112071\Composer\Semver\VersionParser;
+use ConfigTransformer202112073\Composer\Autoload\ClassLoader;
+use ConfigTransformer202112073\Composer\Semver\VersionParser;
 /**
  * This class is copied in every Composer installed project and available to all
  *
@@ -275,11 +275,11 @@ class InstalledVersions
     private static function getInstalled()
     {
         if (null === self::$canGetVendors) {
-            self::$canGetVendors = \method_exists('ConfigTransformer202112071\\Composer\\Autoload\\ClassLoader', 'getRegisteredLoaders');
+            self::$canGetVendors = \method_exists('ConfigTransformer202112073\\Composer\\Autoload\\ClassLoader', 'getRegisteredLoaders');
         }
         $installed = array();
         if (self::$canGetVendors) {
-            foreach (\ConfigTransformer202112071\Composer\Autoload\ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
+            foreach (\ConfigTransformer202112073\Composer\Autoload\ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
                 if (isset(self::$installedByVendor[$vendorDir])) {
                     $installed[] = self::$installedByVendor[$vendorDir];
                 } elseif (\is_file($vendorDir . '/composer/installed.php')) {

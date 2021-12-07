@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112071\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202112071\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
 /**
  * This class is used to remove circular dependencies between individual passes.
  *
@@ -33,14 +33,14 @@ class Compiler
     private $serviceReferenceGraph;
     public function __construct()
     {
-        $this->passConfig = new \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler\PassConfig();
-        $this->serviceReferenceGraph = new \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
+        $this->passConfig = new \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\PassConfig();
+        $this->serviceReferenceGraph = new \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
     }
-    public function getPassConfig() : \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler\PassConfig
+    public function getPassConfig() : \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\PassConfig
     {
         return $this->passConfig;
     }
-    public function getServiceReferenceGraph() : \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph
+    public function getServiceReferenceGraph() : \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph
     {
         return $this->serviceReferenceGraph;
     }
@@ -49,7 +49,7 @@ class Compiler
      * @param string $type
      * @param int $priority
      */
-    public function addPass($pass, $type = \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
+    public function addPass($pass, $type = \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
     {
         $this->passConfig->addPass($pass, $type, $priority);
     }
@@ -91,7 +91,7 @@ class Compiler
                 }
             } while ($prev = $prev->getPrevious());
             if ($usedEnvs) {
-                $e = new \ConfigTransformer202112071\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
+                $e = new \ConfigTransformer202112073\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
             }
             throw $e;
         } finally {
