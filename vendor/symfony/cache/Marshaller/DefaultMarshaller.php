@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112075\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202112078\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202112075\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202112078\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultMarshaller implements \ConfigTransformer202112075\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DefaultMarshaller implements \ConfigTransformer202112078\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private bool $useIgbinarySerialize = \true;
     private bool $throwOnSerializationFailure = \false;
@@ -25,7 +25,7 @@ class DefaultMarshaller implements \ConfigTransformer202112075\Symfony\Component
         if (null === $useIgbinarySerialize) {
             $useIgbinarySerialize = \extension_loaded('igbinary') && \version_compare('3.1.6', \phpversion('igbinary'), '<=');
         } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \version_compare('3.1.6', \phpversion('igbinary'), '>'))) {
-            throw new \ConfigTransformer202112075\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
+            throw new \ConfigTransformer202112078\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
         }
         $this->useIgbinarySerialize = $useIgbinarySerialize;
         $this->throwOnSerializationFailure = $throwOnSerializationFailure;
