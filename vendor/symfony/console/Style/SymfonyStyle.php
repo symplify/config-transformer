@@ -381,7 +381,10 @@ class SymfonyStyle extends \ConfigTransformer202112079\Symfony\Component\Console
     }
     private function getProgressBar() : \ConfigTransformer202112079\Symfony\Component\Console\Helper\ProgressBar
     {
-        return $this->progressBar ?? throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\RuntimeException('The ProgressBar is not started.');
+        if ($this->progressBar === null) {
+            throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\RuntimeException('The ProgressBar is not started.');
+        }
+        return $this->progressBar;
     }
     private function autoPrependBlock() : void
     {

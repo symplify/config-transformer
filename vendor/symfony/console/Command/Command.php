@@ -412,7 +412,10 @@ class Command
      */
     public function getNativeDefinition() : \ConfigTransformer202112079\Symfony\Component\Console\Input\InputDefinition
     {
-        return $this->definition ?? throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\LogicException(\sprintf('Command class "%s" is not correctly initialized. You probably forgot to call the parent constructor.', static::class));
+        if ($this->definition === null) {
+            throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\LogicException(\sprintf('Command class "%s" is not correctly initialized. You probably forgot to call the parent constructor.', static::class));
+        }
+        return $this->definition;
     }
     /**
      * Adds an argument.

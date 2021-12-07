@@ -112,7 +112,10 @@ class Table
     public static function getStyleDefinition($name) : \ConfigTransformer202112079\Symfony\Component\Console\Helper\TableStyle
     {
         self::$styles = self::$styles ?? self::initStyles();
-        return self::$styles[$name] ?? throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Style "%s" is not defined.', $name));
+        if (self::$styles[$name] === null) {
+            throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Style "%s" is not defined.', $name));
+        }
+        return self::$styles[$name];
     }
     /**
      * Sets table style.
@@ -742,6 +745,9 @@ class Table
         if ($name instanceof \ConfigTransformer202112079\Symfony\Component\Console\Helper\TableStyle) {
             return $name;
         }
-        return self::$styles[$name] ?? throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Style "%s" is not defined.', $name));
+        if (self::$styles[$name] === null) {
+            throw new \ConfigTransformer202112079\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Style "%s" is not defined.', $name));
+        }
+        return self::$styles[$name];
     }
 }
