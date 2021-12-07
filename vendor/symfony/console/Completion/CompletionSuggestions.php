@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120610\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202112073\Symfony\Component\Console\Completion;
 
-use ConfigTransformer2021120610\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202112073\Symfony\Component\Console\Input\InputOption;
 /**
  * Stores all completion suggestions for the current input.
  *
@@ -28,7 +28,7 @@ final class CompletionSuggestions
      */
     public function suggestValue($value)
     {
-        $this->valueSuggestions[] = !$value instanceof \ConfigTransformer2021120610\Symfony\Component\Console\Completion\Suggestion ? new \ConfigTransformer2021120610\Symfony\Component\Console\Completion\Suggestion($value) : $value;
+        $this->valueSuggestions[] = !$value instanceof \ConfigTransformer202112073\Symfony\Component\Console\Completion\Suggestion ? new \ConfigTransformer202112073\Symfony\Component\Console\Completion\Suggestion($value) : $value;
         return $this;
     }
     /**
@@ -50,7 +50,7 @@ final class CompletionSuggestions
      *
      * @return $this
      */
-    public function suggestOption(\ConfigTransformer2021120610\Symfony\Component\Console\Input\InputOption $option)
+    public function suggestOption(\ConfigTransformer202112073\Symfony\Component\Console\Input\InputOption $option)
     {
         $this->optionSuggestions[] = $option;
         return $this;

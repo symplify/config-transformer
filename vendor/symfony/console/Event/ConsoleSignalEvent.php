@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120610\Symfony\Component\Console\Event;
+namespace ConfigTransformer202112073\Symfony\Component\Console\Event;
 
-use ConfigTransformer2021120610\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2021120610\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2021120610\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112073\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112073\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112073\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author marie <marie@users.noreply.github.com>
  */
-final class ConsoleSignalEvent extends \ConfigTransformer2021120610\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleSignalEvent extends \ConfigTransformer202112073\Symfony\Component\Console\Event\ConsoleEvent
 {
     /**
      * @var int
      */
     private $handlingSignal;
-    public function __construct(\ConfigTransformer2021120610\Symfony\Component\Console\Command\Command $command, \ConfigTransformer2021120610\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2021120610\Symfony\Component\Console\Output\OutputInterface $output, int $handlingSignal)
+    public function __construct(\ConfigTransformer202112073\Symfony\Component\Console\Command\Command $command, \ConfigTransformer202112073\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112073\Symfony\Component\Console\Output\OutputInterface $output, int $handlingSignal)
     {
         parent::__construct($command, $input, $output);
         $this->handlingSignal = $handlingSignal;

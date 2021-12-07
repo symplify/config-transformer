@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120610\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202112073\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer2021120610\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112073\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait CallTrait
 {
     /**

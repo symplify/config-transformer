@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120610\Symplify\EasyTesting\PHPUnit\Behavior;
+namespace ConfigTransformer202112073\Symplify\EasyTesting\PHPUnit\Behavior;
 
-use ConfigTransformer2021120610\Symfony\Component\Finder\Finder;
-use ConfigTransformer2021120610\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
-use ConfigTransformer2021120610\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer2021120610\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202112073\Symfony\Component\Finder\Finder;
+use ConfigTransformer202112073\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
+use ConfigTransformer202112073\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer202112073\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * Use only in "\PHPUnit\Framework\TestCase"
  *
@@ -41,9 +41,9 @@ trait DirectoryAssertableTrait
      */
     private function findFileInfosInDirectory(string $directory) : array
     {
-        $firstDirectoryFinder = new \ConfigTransformer2021120610\Symfony\Component\Finder\Finder();
+        $firstDirectoryFinder = new \ConfigTransformer202112073\Symfony\Component\Finder\Finder();
         $firstDirectoryFinder->files()->in($directory);
-        $finderSanitizer = new \ConfigTransformer2021120610\Symplify\SmartFileSystem\Finder\FinderSanitizer();
+        $finderSanitizer = new \ConfigTransformer202112073\Symplify\SmartFileSystem\Finder\FinderSanitizer();
         return $finderSanitizer->sanitize($firstDirectoryFinder);
     }
     /**
@@ -58,14 +58,14 @@ trait DirectoryAssertableTrait
             $relativeFilePath = $expectedFileInfo->getRelativeFilePathFromDirectory($expectedDirectory);
             // match output file info
             $outputFileInfo = $this->resolveFileInfoByRelativeFilePath($outputFileInfos, $outputDirectory, $relativeFilePath);
-            $fileInfosByRelativeFilePath[$relativeFilePath] = new \ConfigTransformer2021120610\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair($expectedFileInfo, $outputFileInfo);
+            $fileInfosByRelativeFilePath[$relativeFilePath] = new \ConfigTransformer202112073\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair($expectedFileInfo, $outputFileInfo);
         }
         return $fileInfosByRelativeFilePath;
     }
     /**
      * @param SmartFileInfo[] $fileInfos
      */
-    private function resolveFileInfoByRelativeFilePath(array $fileInfos, string $directory, string $desiredRelativeFilePath) : ?\ConfigTransformer2021120610\Symplify\SmartFileSystem\SmartFileInfo
+    private function resolveFileInfoByRelativeFilePath(array $fileInfos, string $directory, string $desiredRelativeFilePath) : ?\ConfigTransformer202112073\Symplify\SmartFileSystem\SmartFileInfo
     {
         foreach ($fileInfos as $fileInfo) {
             $relativeFilePath = $fileInfo->getRelativeFilePathFromDirectory($directory);
