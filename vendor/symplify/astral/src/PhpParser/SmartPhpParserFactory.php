@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112078\Symplify\Astral\PhpParser;
+namespace ConfigTransformer202112071\Symplify\Astral\PhpParser;
 
-use ConfigTransformer202112078\PhpParser\Lexer\Emulative;
-use ConfigTransformer202112078\PhpParser\NodeVisitor\NameResolver;
-use ConfigTransformer202112078\PhpParser\Parser;
-use ConfigTransformer202112078\PhpParser\ParserFactory;
-use ConfigTransformer202112078\PHPStan\Parser\CachedParser;
-use ConfigTransformer202112078\PHPStan\Parser\SimpleParser;
+use ConfigTransformer202112071\PhpParser\Lexer\Emulative;
+use ConfigTransformer202112071\PhpParser\NodeVisitor\NameResolver;
+use ConfigTransformer202112071\PhpParser\Parser;
+use ConfigTransformer202112071\PhpParser\ParserFactory;
+use ConfigTransformer202112071\PHPStan\Parser\CachedParser;
+use ConfigTransformer202112071\PHPStan\Parser\SimpleParser;
 /**
  * Based on PHPStan-based PHP-Parser best practices:
  *
@@ -17,22 +17,22 @@ use ConfigTransformer202112078\PHPStan\Parser\SimpleParser;
  */
 final class SmartPhpParserFactory
 {
-    public function create() : \ConfigTransformer202112078\Symplify\Astral\PhpParser\SmartPhpParser
+    public function create() : \ConfigTransformer202112071\Symplify\Astral\PhpParser\SmartPhpParser
     {
         $nativePhpParser = $this->createNativePhpParser();
         $cachedParser = $this->createPHPStanParser($nativePhpParser);
-        return new \ConfigTransformer202112078\Symplify\Astral\PhpParser\SmartPhpParser($cachedParser);
+        return new \ConfigTransformer202112071\Symplify\Astral\PhpParser\SmartPhpParser($cachedParser);
     }
-    private function createNativePhpParser() : \ConfigTransformer202112078\PhpParser\Parser
+    private function createNativePhpParser() : \ConfigTransformer202112071\PhpParser\Parser
     {
-        $parserFactory = new \ConfigTransformer202112078\PhpParser\ParserFactory();
-        $lexerEmulative = new \ConfigTransformer202112078\PhpParser\Lexer\Emulative();
-        return $parserFactory->create(\ConfigTransformer202112078\PhpParser\ParserFactory::PREFER_PHP7, $lexerEmulative);
+        $parserFactory = new \ConfigTransformer202112071\PhpParser\ParserFactory();
+        $lexerEmulative = new \ConfigTransformer202112071\PhpParser\Lexer\Emulative();
+        return $parserFactory->create(\ConfigTransformer202112071\PhpParser\ParserFactory::PREFER_PHP7, $lexerEmulative);
     }
-    private function createPHPStanParser(\ConfigTransformer202112078\PhpParser\Parser $parser) : \ConfigTransformer202112078\PHPStan\Parser\CachedParser
+    private function createPHPStanParser(\ConfigTransformer202112071\PhpParser\Parser $parser) : \ConfigTransformer202112071\PHPStan\Parser\CachedParser
     {
-        $nameResolver = new \ConfigTransformer202112078\PhpParser\NodeVisitor\NameResolver();
-        $simpleParser = new \ConfigTransformer202112078\PHPStan\Parser\SimpleParser($parser, $nameResolver);
-        return new \ConfigTransformer202112078\PHPStan\Parser\CachedParser($simpleParser, 1024);
+        $nameResolver = new \ConfigTransformer202112071\PhpParser\NodeVisitor\NameResolver();
+        $simpleParser = new \ConfigTransformer202112071\PHPStan\Parser\SimpleParser($parser, $nameResolver);
+        return new \ConfigTransformer202112071\PHPStan\Parser\CachedParser($simpleParser, 1024);
     }
 }
