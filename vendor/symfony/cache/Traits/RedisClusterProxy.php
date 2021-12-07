@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112074\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202112075\Symfony\Component\Cache\Traits;
 
 /**
  * @author Alessandro Chitolina <alekitto@gmail.com>

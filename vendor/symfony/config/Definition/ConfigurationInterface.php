@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112074\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202112075\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202112074\Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use ConfigTransformer202112075\Symfony\Component\Config\Definition\Builder\TreeBuilder;
 /**
  * Configuration interface.
  *
