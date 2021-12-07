@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112079\Symplify\EasyTesting\DataProvider;
+namespace ConfigTransformer2021120710\Symplify\EasyTesting\DataProvider;
 
-use ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @api
  */
@@ -13,7 +13,7 @@ final class StaticFixtureUpdater
     /**
      * @param \Symplify\SmartFileSystem\SmartFileInfo|string $originalFileInfo
      */
-    public static function updateFixtureContent($originalFileInfo, string $changedContent, \ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo) : void
+    public static function updateFixtureContent($originalFileInfo, string $changedContent, \ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo) : void
     {
         if (!\getenv('UPDATE_TESTS') && !\getenv('UT')) {
             return;
@@ -21,23 +21,23 @@ final class StaticFixtureUpdater
         $newOriginalContent = self::resolveNewFixtureContent($originalFileInfo, $changedContent);
         self::getSmartFileSystem()->dumpFile($fixtureFileInfo->getRealPath(), $newOriginalContent);
     }
-    public static function updateExpectedFixtureContent(string $newOriginalContent, \ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileInfo $expectedFixtureFileInfo) : void
+    public static function updateExpectedFixtureContent(string $newOriginalContent, \ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileInfo $expectedFixtureFileInfo) : void
     {
         if (!\getenv('UPDATE_TESTS') && !\getenv('UT')) {
             return;
         }
         self::getSmartFileSystem()->dumpFile($expectedFixtureFileInfo->getRealPath(), $newOriginalContent);
     }
-    private static function getSmartFileSystem() : \ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileSystem
+    private static function getSmartFileSystem() : \ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileSystem
     {
-        return new \ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileSystem();
+        return new \ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileSystem();
     }
     /**
      * @param \Symplify\SmartFileSystem\SmartFileInfo|string $originalFileInfo
      */
     private static function resolveNewFixtureContent($originalFileInfo, string $changedContent) : string
     {
-        if ($originalFileInfo instanceof \ConfigTransformer202112079\Symplify\SmartFileSystem\SmartFileInfo) {
+        if ($originalFileInfo instanceof \ConfigTransformer2021120710\Symplify\SmartFileSystem\SmartFileInfo) {
             $originalContent = $originalFileInfo->getContents();
         } else {
             $originalContent = $originalFileInfo;

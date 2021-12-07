@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112079\\Psr\\Cache\\": "src\/"
+            "ConfigTransformer2021120710\\Psr\\Cache\\": "src\/"
         }
     },
     "extra": {
