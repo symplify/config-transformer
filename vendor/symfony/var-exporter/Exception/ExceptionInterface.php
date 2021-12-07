@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120710\Symfony\Component\VarExporter\Exception;
+namespace ConfigTransformer202112074\Symfony\Component\VarExporter\Exception;
 
 interface ExceptionInterface extends \Throwable
 {

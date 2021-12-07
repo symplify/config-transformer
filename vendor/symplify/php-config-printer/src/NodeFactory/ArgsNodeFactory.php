@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120710\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202112074\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer2021120710\PhpParser\BuilderHelpers;
-use ConfigTransformer2021120710\PhpParser\Node;
-use ConfigTransformer2021120710\PhpParser\Node\Arg;
-use ConfigTransformer2021120710\PhpParser\Node\Expr;
-use ConfigTransformer2021120710\PhpParser\Node\Expr\Array_;
-use ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer2021120710\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer2021120710\PhpParser\Node\Identifier;
-use ConfigTransformer2021120710\PhpParser\Node\Name;
-use ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2021120710\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer2021120710\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
-use ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
-use ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
-use ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202112074\PhpParser\BuilderHelpers;
+use ConfigTransformer202112074\PhpParser\Node;
+use ConfigTransformer202112074\PhpParser\Node\Arg;
+use ConfigTransformer202112074\PhpParser\Node\Expr;
+use ConfigTransformer202112074\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202112074\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202112074\PhpParser\Node\Identifier;
+use ConfigTransformer202112074\PhpParser\Node\Name;
+use ConfigTransformer202112074\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202112074\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202112074\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
+use ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
+use ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
+use ConfigTransformer202112074\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ArgsNodeFactory
 {
     /**
@@ -45,7 +45,7 @@ final class ArgsNodeFactory
      * @var \Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver
      */
     private $taggedServiceResolver;
-    public function __construct(\ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver $stringExprResolver, \ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver $taggedReturnsCloneResolver, \ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver $taggedServiceResolver)
+    public function __construct(\ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver $stringExprResolver, \ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver $taggedReturnsCloneResolver, \ConfigTransformer202112074\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver $taggedServiceResolver)
     {
         $this->stringExprResolver = $stringExprResolver;
         $this->taggedReturnsCloneResolver = $taggedReturnsCloneResolver;
@@ -62,10 +62,10 @@ final class ArgsNodeFactory
             $array = $this->resolveExprFromArray($values);
         } else {
             $expr = $this->resolveExpr($values);
-            $items = [new \ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem($expr)];
-            $array = new \ConfigTransformer2021120710\PhpParser\Node\Expr\Array_($items);
+            $items = [new \ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem($expr)];
+            $array = new \ConfigTransformer202112074\PhpParser\Node\Expr\Array_($items);
         }
-        return [new \ConfigTransformer2021120710\PhpParser\Node\Arg($array)];
+        return [new \ConfigTransformer202112074\PhpParser\Node\Arg($array)];
     }
     /**
      * @return Arg[]
@@ -78,63 +78,63 @@ final class ArgsNodeFactory
             foreach ($values as $key => $value) {
                 $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
                 if (!\is_int($key) && $this->isPhpNamedArguments) {
-                    $args[] = new \ConfigTransformer2021120710\PhpParser\Node\Arg($expr, \false, \false, [], new \ConfigTransformer2021120710\PhpParser\Node\Identifier($key));
+                    $args[] = new \ConfigTransformer202112074\PhpParser\Node\Arg($expr, \false, \false, [], new \ConfigTransformer202112074\PhpParser\Node\Identifier($key));
                 } else {
-                    $args[] = new \ConfigTransformer2021120710\PhpParser\Node\Arg($expr);
+                    $args[] = new \ConfigTransformer202112074\PhpParser\Node\Arg($expr);
                 }
             }
             return $args;
         }
-        if ($values instanceof \ConfigTransformer2021120710\PhpParser\Node) {
-            if ($values instanceof \ConfigTransformer2021120710\PhpParser\Node\Arg) {
+        if ($values instanceof \ConfigTransformer202112074\PhpParser\Node) {
+            if ($values instanceof \ConfigTransformer202112074\PhpParser\Node\Arg) {
                 return [$values];
             }
-            if ($values instanceof \ConfigTransformer2021120710\PhpParser\Node\Expr) {
-                return [new \ConfigTransformer2021120710\PhpParser\Node\Arg($values)];
+            if ($values instanceof \ConfigTransformer202112074\PhpParser\Node\Expr) {
+                return [new \ConfigTransformer202112074\PhpParser\Node\Arg($values)];
             }
         }
         if (\is_string($values)) {
             $expr = $this->resolveExpr($values);
-            return [new \ConfigTransformer2021120710\PhpParser\Node\Arg($expr)];
+            return [new \ConfigTransformer202112074\PhpParser\Node\Arg($expr)];
         }
-        throw new \ConfigTransformer2021120710\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
+        throw new \ConfigTransformer202112074\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
     }
     /**
      * @param mixed $value
      */
-    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : \ConfigTransformer2021120710\PhpParser\Node\Expr
+    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : \ConfigTransformer202112074\PhpParser\Node\Expr
     {
         if (\is_string($value)) {
             return $this->stringExprResolver->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
         }
-        if ($value instanceof \ConfigTransformer2021120710\PhpParser\Node\Expr) {
+        if ($value instanceof \ConfigTransformer202112074\PhpParser\Node\Expr) {
             return $value;
         }
-        if ($value instanceof \ConfigTransformer2021120710\Symfony\Component\Yaml\Tag\TaggedValue) {
+        if ($value instanceof \ConfigTransformer202112074\Symfony\Component\Yaml\Tag\TaggedValue) {
             return $this->createServiceReferenceFromTaggedValue($value);
         }
         if (\is_array($value)) {
             $arrayItems = $this->resolveArrayItems($value, $skipClassesToConstantReference);
-            return new \ConfigTransformer2021120710\PhpParser\Node\Expr\Array_($arrayItems);
+            return new \ConfigTransformer202112074\PhpParser\Node\Expr\Array_($arrayItems);
         }
-        return \ConfigTransformer2021120710\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \ConfigTransformer202112074\PhpParser\BuilderHelpers::normalizeValue($value);
     }
-    private function resolveExprFromArray(array $values) : \ConfigTransformer2021120710\PhpParser\Node\Expr\Array_
+    private function resolveExprFromArray(array $values) : \ConfigTransformer202112074\PhpParser\Node\Expr\Array_
     {
         $arrayItems = [];
         foreach ($values as $key => $value) {
             $expr = \is_array($value) ? $this->resolveExprFromArray($value) : $this->resolveExpr($value);
             if (!\is_int($key)) {
                 $keyExpr = $this->resolveExpr($key);
-                $arrayItem = new \ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem($expr, $keyExpr);
+                $arrayItem = new \ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem($expr, $keyExpr);
             } else {
-                $arrayItem = new \ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem($expr);
+                $arrayItem = new \ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem($expr);
             }
             $arrayItems[] = $arrayItem;
         }
-        return new \ConfigTransformer2021120710\PhpParser\Node\Expr\Array_($arrayItems);
+        return new \ConfigTransformer202112074\PhpParser\Node\Expr\Array_($arrayItems);
     }
-    private function createServiceReferenceFromTaggedValue(\ConfigTransformer2021120710\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer2021120710\PhpParser\Node\Expr
+    private function createServiceReferenceFromTaggedValue(\ConfigTransformer202112074\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer202112074\PhpParser\Node\Expr
     {
         // that's the only value
         if ($taggedValue->getTag() === self::TAG_RETURNS_CLONE) {
@@ -145,17 +145,17 @@ final class ArgsNodeFactory
         }
         switch ($taggedValue->getTag()) {
             case 'tagged_iterator':
-                $name = new \ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified(\ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ValueObject\FunctionName::TAGGED_ITERATOR);
+                $name = new \ConfigTransformer202112074\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202112074\Symplify\PhpConfigPrinter\ValueObject\FunctionName::TAGGED_ITERATOR);
                 break;
             case 'tagged_locator':
-                $name = new \ConfigTransformer2021120710\PhpParser\Node\Name\FullyQualified(\ConfigTransformer2021120710\Symplify\PhpConfigPrinter\ValueObject\FunctionName::TAGGED_LOCATOR);
+                $name = new \ConfigTransformer202112074\PhpParser\Node\Name\FullyQualified(\ConfigTransformer202112074\Symplify\PhpConfigPrinter\ValueObject\FunctionName::TAGGED_LOCATOR);
                 break;
             default:
-                $name = new \ConfigTransformer2021120710\PhpParser\Node\Name($taggedValue->getTag());
+                $name = new \ConfigTransformer202112074\PhpParser\Node\Name($taggedValue->getTag());
                 break;
         }
         $args = $this->createFromValues($taggedValue->getValue());
-        return new \ConfigTransformer2021120710\PhpParser\Node\Expr\FuncCall($name, $args);
+        return new \ConfigTransformer202112074\PhpParser\Node\Expr\FuncCall($name, $args);
     }
     /**
      * @param mixed[] $value
@@ -169,9 +169,9 @@ final class ArgsNodeFactory
             $valueExpr = $this->resolveExpr($nestedValue, \false, $skipClassesToConstantReference);
             if (!\is_int($nestedKey) || $nestedKey !== $naturalKey) {
                 $keyExpr = $this->resolveExpr($nestedKey, \false, $skipClassesToConstantReference);
-                $arrayItem = new \ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem($valueExpr, $keyExpr);
+                $arrayItem = new \ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem($valueExpr, $keyExpr);
             } else {
-                $arrayItem = new \ConfigTransformer2021120710\PhpParser\Node\Expr\ArrayItem($valueExpr);
+                $arrayItem = new \ConfigTransformer202112074\PhpParser\Node\Expr\ArrayItem($valueExpr);
             }
             $arrayItems[] = $arrayItem;
             ++$naturalKey;
