@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112079\Symplify\PackageBuilder\ValueObject;
+namespace ConfigTransformer202112083\Symplify\PackageBuilder\ValueObject;
 
 final class Option
 {
