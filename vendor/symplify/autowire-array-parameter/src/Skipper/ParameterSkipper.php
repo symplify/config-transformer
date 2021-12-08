@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112083\Symplify\AutowireArrayParameter\Skipper;
+namespace ConfigTransformer202112088\Symplify\AutowireArrayParameter\Skipper;
 
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionParameter;
-use ConfigTransformer202112083\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202112083\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
+use ConfigTransformer202112088\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112088\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
 final class ParameterSkipper
 {
     /**
@@ -15,7 +15,7 @@ final class ParameterSkipper
      *
      * @var string[]
      */
-    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['ConfigTransformer202112083\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202112083\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202112083\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202112083\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202112083\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202112083\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202112083\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202112083\\Sonata\\Twig\\Extension\\TemplateExtension'];
+    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['ConfigTransformer202112088\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202112088\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202112088\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202112088\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202112088\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202112088\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202112088\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202112088\\Sonata\\Twig\\Extension\\TemplateExtension'];
     /**
      * @var string[]
      */
@@ -27,12 +27,12 @@ final class ParameterSkipper
     /**
      * @param string[] $excludedFatalClasses
      */
-    public function __construct(\ConfigTransformer202112083\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver $parameterTypeResolver, array $excludedFatalClasses)
+    public function __construct(\ConfigTransformer202112088\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver $parameterTypeResolver, array $excludedFatalClasses)
     {
         $this->parameterTypeResolver = $parameterTypeResolver;
         $this->excludedFatalClasses = \array_merge(self::DEFAULT_EXCLUDED_FATAL_CLASSES, $excludedFatalClasses);
     }
-    public function shouldSkipParameter(\ReflectionMethod $reflectionMethod, \ConfigTransformer202112083\Symfony\Component\DependencyInjection\Definition $definition, \ReflectionParameter $reflectionParameter) : bool
+    public function shouldSkipParameter(\ReflectionMethod $reflectionMethod, \ConfigTransformer202112088\Symfony\Component\DependencyInjection\Definition $definition, \ReflectionParameter $reflectionParameter) : bool
     {
         if (!$this->isArrayType($reflectionParameter)) {
             return \true;
