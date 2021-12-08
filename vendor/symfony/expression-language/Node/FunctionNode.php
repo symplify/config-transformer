@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112087\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202112085\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202112087\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202112085\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class FunctionNode extends \ConfigTransformer202112087\Symfony\Component\ExpressionLanguage\Node\Node
+class FunctionNode extends \ConfigTransformer202112085\Symfony\Component\ExpressionLanguage\Node\Node
 {
-    public function __construct(string $name, \ConfigTransformer202112087\Symfony\Component\ExpressionLanguage\Node\Node $arguments)
+    public function __construct(string $name, \ConfigTransformer202112085\Symfony\Component\ExpressionLanguage\Node\Node $arguments)
     {
         parent::__construct(['arguments' => $arguments], ['name' => $name]);
     }

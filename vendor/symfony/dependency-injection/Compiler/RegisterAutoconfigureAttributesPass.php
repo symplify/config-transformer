@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112087\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202112085\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112087\Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use ConfigTransformer202112087\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202112087\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202112087\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * Reads #[Autoconfigure] attributes on definitions that are autoconfigured
  * and don't have the "container.ignore_attributes" tag.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class RegisterAutoconfigureAttributesPass implements \ConfigTransformer202112087\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class RegisterAutoconfigureAttributesPass implements \ConfigTransformer202112085\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private static $registerForAutoconfiguration;
     /**
@@ -52,15 +52,15 @@ final class RegisterAutoconfigureAttributesPass implements \ConfigTransformer202
             self::registerForAutoconfiguration($container, $class, $attribute);
         }
     }
-    private static function registerForAutoconfiguration(\ConfigTransformer202112087\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute)
+    private static function registerForAutoconfiguration(\ConfigTransformer202112085\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute)
     {
         if (self::$registerForAutoconfiguration) {
             return (self::$registerForAutoconfiguration)($container, $class, $attribute);
         }
-        $parseDefinitions = new \ReflectionMethod(\ConfigTransformer202112087\Symfony\Component\DependencyInjection\Loader\YamlFileLoader::class, 'parseDefinitions');
+        $parseDefinitions = new \ReflectionMethod(\ConfigTransformer202112085\Symfony\Component\DependencyInjection\Loader\YamlFileLoader::class, 'parseDefinitions');
         $parseDefinitions->setAccessible(\true);
         $yamlLoader = $parseDefinitions->getDeclaringClass()->newInstanceWithoutConstructor();
-        self::$registerForAutoconfiguration = static function (\ConfigTransformer202112087\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute) use($parseDefinitions, $yamlLoader) {
+        self::$registerForAutoconfiguration = static function (\ConfigTransformer202112085\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute) use($parseDefinitions, $yamlLoader) {
             $attribute = (array) $attribute->newInstance();
             foreach ($attribute['tags'] ?? [] as $i => $tag) {
                 if (\is_array($tag) && [0] === \array_keys($tag)) {

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112087\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112085\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112087\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class InlineServiceConfigurator extends \ConfigTransformer202112087\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class InlineServiceConfigurator extends \ConfigTransformer202112085\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     use Traits\ArgumentTrait;
     use Traits\AutowireTrait;
@@ -40,7 +40,7 @@ class InlineServiceConfigurator extends \ConfigTransformer202112087\Symfony\Comp
      * @var string|null
      */
     private $path;
-    public function __construct(\ConfigTransformer202112087\Symfony\Component\DependencyInjection\Definition $definition)
+    public function __construct(\ConfigTransformer202112085\Symfony\Component\DependencyInjection\Definition $definition)
     {
         $this->definition = $definition;
     }
