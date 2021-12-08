@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112083\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202112086\Symfony\Component\Config\Builder;
 
 /**
  * Build PHP classes to generate config.
@@ -136,15 +136,15 @@ BODY
      */
     public function addMethod($name, $body, $params = []) : void
     {
-        $this->methods[] = new \ConfigTransformer202112083\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
+        $this->methods[] = new \ConfigTransformer202112086\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
     }
     /**
      * @param string $name
      * @param string|null $classType
      */
-    public function addProperty($name, $classType = null) : \ConfigTransformer202112083\Symfony\Component\Config\Builder\Property
+    public function addProperty($name, $classType = null) : \ConfigTransformer202112086\Symfony\Component\Config\Builder\Property
     {
-        $property = new \ConfigTransformer202112083\Symfony\Component\Config\Builder\Property($name, '_' !== $name[0] ? $this->camelCase($name) : $name);
+        $property = new \ConfigTransformer202112086\Symfony\Component\Config\Builder\Property($name, '_' !== $name[0] ? $this->camelCase($name) : $name);
         if (null !== $classType) {
             $property->setType($classType);
         }
