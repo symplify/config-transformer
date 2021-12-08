@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112088\Symplify\SymplifyKernel\HttpKernel;
+namespace ConfigTransformer2021120810\Symplify\SymplifyKernel\HttpKernel;
 
-use ConfigTransformer202112088\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer202112088\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202112088\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use ConfigTransformer202112088\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
-use ConfigTransformer202112088\Symplify\SymplifyKernel\ContainerBuilderFactory;
-use ConfigTransformer202112088\Symplify\SymplifyKernel\Contract\LightKernelInterface;
-use ConfigTransformer202112088\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-use ConfigTransformer202112088\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig;
+use ConfigTransformer2021120810\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer2021120810\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2021120810\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+use ConfigTransformer2021120810\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
+use ConfigTransformer2021120810\Symplify\SymplifyKernel\ContainerBuilderFactory;
+use ConfigTransformer2021120810\Symplify\SymplifyKernel\Contract\LightKernelInterface;
+use ConfigTransformer2021120810\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer2021120810\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig;
 /**
  * @api
  */
-abstract class AbstractSymplifyKernel implements \ConfigTransformer202112088\Symplify\SymplifyKernel\Contract\LightKernelInterface
+abstract class AbstractSymplifyKernel implements \ConfigTransformer2021120810\Symplify\SymplifyKernel\Contract\LightKernelInterface
 {
     /**
      * @var \Symfony\Component\DependencyInjection\Container|null
@@ -25,20 +25,20 @@ abstract class AbstractSymplifyKernel implements \ConfigTransformer202112088\Sym
      * @param mixed[] $extensions
      * @param mixed[] $compilerPasses
      */
-    public function create($extensions, $compilerPasses, $configFiles) : \ConfigTransformer202112088\Symfony\Component\DependencyInjection\ContainerInterface
+    public function create($extensions, $compilerPasses, $configFiles) : \ConfigTransformer2021120810\Symfony\Component\DependencyInjection\ContainerInterface
     {
-        $containerBuilderFactory = new \ConfigTransformer202112088\Symplify\SymplifyKernel\ContainerBuilderFactory(new \ConfigTransformer202112088\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory());
-        $compilerPasses[] = new \ConfigTransformer202112088\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass();
-        $configFiles[] = \ConfigTransformer202112088\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig::FILE_PATH;
+        $containerBuilderFactory = new \ConfigTransformer2021120810\Symplify\SymplifyKernel\ContainerBuilderFactory(new \ConfigTransformer2021120810\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory());
+        $compilerPasses[] = new \ConfigTransformer2021120810\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass();
+        $configFiles[] = \ConfigTransformer2021120810\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig::FILE_PATH;
         $containerBuilder = $containerBuilderFactory->create($extensions, $compilerPasses, $configFiles);
         $containerBuilder->compile();
         $this->container = $containerBuilder;
         return $containerBuilder;
     }
-    public function getContainer() : \ConfigTransformer202112088\Psr\Container\ContainerInterface
+    public function getContainer() : \ConfigTransformer2021120810\Psr\Container\ContainerInterface
     {
-        if (!$this->container instanceof \ConfigTransformer202112088\Symfony\Component\DependencyInjection\Container) {
-            throw new \ConfigTransformer202112088\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        if (!$this->container instanceof \ConfigTransformer2021120810\Symfony\Component\DependencyInjection\Container) {
+            throw new \ConfigTransformer2021120810\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $this->container;
     }

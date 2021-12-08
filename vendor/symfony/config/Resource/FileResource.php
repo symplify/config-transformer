@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112088\Symfony\Component\Config\Resource;
+namespace ConfigTransformer2021120810\Symfony\Component\Config\Resource;
 
 /**
  * FileResource represents a resource stored on the filesystem.
@@ -19,7 +19,7 @@ namespace ConfigTransformer202112088\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class FileResource implements \ConfigTransformer202112088\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class FileResource implements \ConfigTransformer2021120810\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var string

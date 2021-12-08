@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112088\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2021120810\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202112088\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer2021120810\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * Abstract class that contains common code of integer and float node definitions.
  *
  * @author David Jeanmonod <david.jeanmonod@gmail.com>
  */
-abstract class NumericNodeDefinition extends \ConfigTransformer202112088\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+abstract class NumericNodeDefinition extends \ConfigTransformer2021120810\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     protected $min;
     protected $max;
@@ -60,6 +60,6 @@ abstract class NumericNodeDefinition extends \ConfigTransformer202112088\Symfony
      */
     public function cannotBeEmpty()
     {
-        throw new \ConfigTransformer202112088\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to NumericNodeDefinition.');
+        throw new \ConfigTransformer2021120810\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to NumericNodeDefinition.');
     }
 }

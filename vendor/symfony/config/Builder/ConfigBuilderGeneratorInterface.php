@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112088\Symfony\Component\Config\Builder;
+namespace ConfigTransformer2021120810\Symfony\Component\Config\Builder;
 
-use ConfigTransformer202112088\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer2021120810\Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Generates ConfigBuilders to help create valid config.
  *
