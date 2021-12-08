@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112089\Symfony\Component\Console\Question;
+namespace ConfigTransformer202112087\Symfony\Component\Console\Question;
 
-use ConfigTransformer202112089\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112087\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Represents a choice question.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ChoiceQuestion extends \ConfigTransformer202112089\Symfony\Component\Console\Question\Question
+class ChoiceQuestion extends \ConfigTransformer202112087\Symfony\Component\Console\Question\Question
 {
     /**
      * @var mixed[]
@@ -119,7 +119,7 @@ class ChoiceQuestion extends \ConfigTransformer202112089\Symfony\Component\Conso
             if ($multiselect) {
                 // Check for a separated comma values
                 if (!\preg_match('/^[^,]+(?:,[^,]+)*$/', $selected, $matches)) {
-                    throw new \ConfigTransformer202112089\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf($errorMessage, $selected));
+                    throw new \ConfigTransformer202112087\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf($errorMessage, $selected));
                 }
                 $selectedChoices = \explode(',', $selected);
             } else {
@@ -139,7 +139,7 @@ class ChoiceQuestion extends \ConfigTransformer202112089\Symfony\Component\Conso
                     }
                 }
                 if (\count($results) > 1) {
-                    throw new \ConfigTransformer202112089\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The provided answer is ambiguous. Value should be one of "%s".', \implode('" or "', $results)));
+                    throw new \ConfigTransformer202112087\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The provided answer is ambiguous. Value should be one of "%s".', \implode('" or "', $results)));
                 }
                 $result = \array_search($value, $choices);
                 if (!$isAssoc) {
@@ -152,7 +152,7 @@ class ChoiceQuestion extends \ConfigTransformer202112089\Symfony\Component\Conso
                     $result = $value;
                 }
                 if (\false === $result) {
-                    throw new \ConfigTransformer202112089\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf($errorMessage, $value));
+                    throw new \ConfigTransformer202112087\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf($errorMessage, $value));
                 }
                 // For associative choices, consistently return the key as string:
                 $multiselectChoices[] = $isAssoc ? (string) $result : $result;
