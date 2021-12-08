@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112086\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202112083\Symfony\Component\Config\Loader;
 
-use ConfigTransformer202112086\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer202112083\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Loader implements \ConfigTransformer202112086\Symfony\Component\Config\Loader\LoaderInterface
+abstract class Loader implements \ConfigTransformer202112083\Symfony\Component\Config\Loader\LoaderInterface
 {
     protected $resolver;
     protected $env;
@@ -27,7 +27,7 @@ abstract class Loader implements \ConfigTransformer202112086\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function getResolver() : \ConfigTransformer202112086\Symfony\Component\Config\Loader\LoaderResolverInterface
+    public function getResolver() : \ConfigTransformer202112083\Symfony\Component\Config\Loader\LoaderResolverInterface
     {
         return $this->resolver;
     }
@@ -57,14 +57,14 @@ abstract class Loader implements \ConfigTransformer202112086\Symfony\Component\C
      * @param mixed $resource
      * @param string|null $type
      */
-    public function resolve($resource, $type = null) : \ConfigTransformer202112086\Symfony\Component\Config\Loader\LoaderInterface
+    public function resolve($resource, $type = null) : \ConfigTransformer202112083\Symfony\Component\Config\Loader\LoaderInterface
     {
         if ($this->supports($resource, $type)) {
             return $this;
         }
         $loader = null === $this->resolver ? \false : $this->resolver->resolve($resource, $type);
         if (\false === $loader) {
-            throw new \ConfigTransformer202112086\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
+            throw new \ConfigTransformer202112083\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
         }
         return $loader;
     }
