@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112083\Symplify\PackageBuilder\DependencyInjection\CompilerPass;
+namespace ConfigTransformer202112085\Symplify\PackageBuilder\DependencyInjection\CompilerPass;
 
-use ConfigTransformer202112083\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202112083\Symfony\Component\DependencyInjection\ContainerBuilder;
-final class AutowireInterfacesCompilerPass implements \ConfigTransformer202112083\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202112085\Symfony\Component\DependencyInjection\ContainerBuilder;
+final class AutowireInterfacesCompilerPass implements \ConfigTransformer202112085\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @var string[]
