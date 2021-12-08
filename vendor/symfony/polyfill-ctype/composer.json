@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112089\\Symfony\\Polyfill\\Ctype\\": ""
+            "ConfigTransformer202112083\\Symfony\\Polyfill\\Ctype\\": ""
         },
         "files": [
             "bootstrap.php"

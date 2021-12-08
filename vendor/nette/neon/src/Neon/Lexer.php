@@ -5,21 +5,21 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112089\Nette\Neon;
+namespace ConfigTransformer202112083\Nette\Neon;
 
 /** @internal */
 final class Lexer
 {
     public const PATTERNS = [
         // strings
-        \ConfigTransformer202112089\Nette\Neon\Token::STRING => '
+        \ConfigTransformer202112083\Nette\Neon\Token::STRING => '
 			\'\'\'\\n (?:(?: [^\\n] | \\n(?![\\t\\ ]*+\'\'\') )*+ \\n)?[\\t\\ ]*+\'\'\' |
 			"""\\n (?:(?: [^\\n] | \\n(?![\\t\\ ]*+""") )*+ \\n)?[\\t\\ ]*+""" |
 			\' (?: \'\' | [^\'\\n] )*+ \' |
 			" (?: \\\\. | [^"\\\\\\n] )*+ "
 		',
         // literal / boolean / integer / float
-        \ConfigTransformer202112089\Nette\Neon\Token::LITERAL => '
+        \ConfigTransformer202112083\Nette\Neon\Token::LITERAL => '
 			(?: [^#"\',:=[\\]{}()\\n\\t\\ `-] | (?<!["\']) [:-] [^"\',=[\\]{}()\\n\\t\\ ] )
 			(?:
 				[^,:=\\]})(\\n\\t\\ ]++ |
@@ -28,21 +28,21 @@ final class Lexer
 			)*+
 		',
         // punctuation
-        \ConfigTransformer202112089\Nette\Neon\Token::CHAR => '[,:=[\\]{}()-]',
+        \ConfigTransformer202112083\Nette\Neon\Token::CHAR => '[,:=[\\]{}()-]',
         // comment
-        \ConfigTransformer202112089\Nette\Neon\Token::COMMENT => '\\#.*+',
+        \ConfigTransformer202112083\Nette\Neon\Token::COMMENT => '\\#.*+',
         // new line
-        \ConfigTransformer202112089\Nette\Neon\Token::NEWLINE => '\\n++',
+        \ConfigTransformer202112083\Nette\Neon\Token::NEWLINE => '\\n++',
         // whitespace
-        \ConfigTransformer202112089\Nette\Neon\Token::WHITESPACE => '[\\t\\ ]++',
+        \ConfigTransformer202112083\Nette\Neon\Token::WHITESPACE => '[\\t\\ ]++',
     ];
-    public function tokenize(string $input) : \ConfigTransformer202112089\Nette\Neon\TokenStream
+    public function tokenize(string $input) : \ConfigTransformer202112083\Nette\Neon\TokenStream
     {
         $input = \str_replace("\r", '', $input);
         $pattern = '~(' . \implode(')|(', self::PATTERNS) . ')~Amixu';
         $res = \preg_match_all($pattern, $input, $tokens, \PREG_SET_ORDER);
         if ($res === \false) {
-            throw new \ConfigTransformer202112089\Nette\Neon\Exception('Invalid UTF-8 sequence.');
+            throw new \ConfigTransformer202112083\Nette\Neon\Exception('Invalid UTF-8 sequence.');
         }
         $types = \array_keys(self::PATTERNS);
         $offset = 0;
@@ -53,16 +53,16 @@ final class Lexer
                     break;
                 } elseif ($token[$i] !== '') {
                     $type = $types[$i - 1];
-                    if ($type === \ConfigTransformer202112089\Nette\Neon\Token::CHAR) {
+                    if ($type === \ConfigTransformer202112083\Nette\Neon\Token::CHAR) {
                         $type = $token[0];
                     }
                     break;
                 }
             }
-            $token = new \ConfigTransformer202112089\Nette\Neon\Token($token[0], $offset, $type);
+            $token = new \ConfigTransformer202112083\Nette\Neon\Token($token[0], $offset, $type);
             $offset += \strlen($token->value);
         }
-        $stream = new \ConfigTransformer202112089\Nette\Neon\TokenStream($tokens);
+        $stream = new \ConfigTransformer202112083\Nette\Neon\TokenStream($tokens);
         if ($offset !== \strlen($input)) {
             $s = \str_replace("\n", '\\n', \substr($input, $offset, 40));
             $stream->error("Unexpected '{$s}'", \count($tokens));
@@ -71,6 +71,6 @@ final class Lexer
     }
     public static function requiresDelimiters(string $s) : bool
     {
-        return \preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $s) || !\preg_match('~^' . self::PATTERNS[\ConfigTransformer202112089\Nette\Neon\Token::LITERAL] . '$~Dx', $s);
+        return \preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $s) || !\preg_match('~^' . self::PATTERNS[\ConfigTransformer202112083\Nette\Neon\Token::LITERAL] . '$~Dx', $s);
     }
 }
