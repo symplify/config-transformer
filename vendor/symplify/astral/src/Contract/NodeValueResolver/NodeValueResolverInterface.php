@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112088\Symplify\Astral\Contract\NodeValueResolver;
+namespace ConfigTransformer202112081\Symplify\Astral\Contract\NodeValueResolver;
 
-use ConfigTransformer202112088\PhpParser\Node\Expr;
+use ConfigTransformer202112081\PhpParser\Node\Expr;
 /**
  * @template TExpr as Expr
  */
