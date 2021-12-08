@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112081\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202112081\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202112080\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202112080\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerConfigurator extends \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ContainerConfigurator extends \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'container';
     /**
@@ -55,7 +55,7 @@ class ContainerConfigurator extends \ConfigTransformer202112081\Symfony\Componen
      * @var string|null
      */
     private $env;
-    public function __construct(\ConfigTransformer202112081\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, array &$instanceof, string $path, string $file, string $env = null)
+    public function __construct(\ConfigTransformer202112080\Symfony\Component\DependencyInjection\ContainerBuilder $container, \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, array &$instanceof, string $path, string $file, string $env = null)
     {
         $this->container = $container;
         $this->loader = $loader;
@@ -71,10 +71,10 @@ class ContainerConfigurator extends \ConfigTransformer202112081\Symfony\Componen
     public final function extension($namespace, $config)
     {
         if (!$this->container->hasExtension($namespace)) {
-            $extensions = \array_filter(\array_map(function (\ConfigTransformer202112081\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $ext) {
+            $extensions = \array_filter(\array_map(function (\ConfigTransformer202112080\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $ext) {
                 return $ext->getAlias();
             }, $this->container->getExtensions()));
-            throw new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('There is no extension able to load the configuration for "%s" (in "%s"). Looked for namespace "%s", found "%s".', $namespace, $this->file, $namespace, $extensions ? \implode('", "', $extensions) : 'none'));
+            throw new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('There is no extension able to load the configuration for "%s" (in "%s"). Looked for namespace "%s", found "%s".', $namespace, $this->file, $namespace, $extensions ? \implode('", "', $extensions) : 'none'));
         }
         $this->container->loadFromExtension($namespace, static::processValue($config));
     }
@@ -88,13 +88,13 @@ class ContainerConfigurator extends \ConfigTransformer202112081\Symfony\Componen
         $this->loader->setCurrentDir(\dirname($this->path));
         $this->loader->import($resource, $type, $ignoreErrors, $this->file);
     }
-    public final function parameters() : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ParametersConfigurator
+    public final function parameters() : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ParametersConfigurator
     {
-        return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ParametersConfigurator($this->container);
+        return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ParametersConfigurator($this->container);
     }
-    public final function services() : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator
+    public final function services() : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator
     {
-        return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator($this->container, $this->loader, $this->instanceof, $this->path, $this->anonymousCount);
+        return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator($this->container, $this->loader, $this->instanceof, $this->path, $this->anonymousCount);
     }
     /**
      * Get the current environment to be able to write conditional configuration.
@@ -118,85 +118,85 @@ class ContainerConfigurator extends \ConfigTransformer202112081\Symfony\Componen
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-\class_alias('ConfigTransformer202112081\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', \false);
+\class_alias('ConfigTransformer202112080\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', \false);
 /**
  * Creates a parameter.
  */
-function param(string $name) : \ConfigTransformer202112081\Symfony\Component\Config\Loader\ParamConfigurator
+function param(string $name) : \ConfigTransformer202112080\Symfony\Component\Config\Loader\ParamConfigurator
 {
-    return new \ConfigTransformer202112081\Symfony\Component\Config\Loader\ParamConfigurator($name);
+    return new \ConfigTransformer202112080\Symfony\Component\Config\Loader\ParamConfigurator($name);
 }
 /**
  * Creates a reference to a service.
  */
-function service(string $serviceId) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
+function service(string $serviceId) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator($serviceId);
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator($serviceId);
 }
 /**
  * Creates an inline service.
  */
-function inline_service(string $class = null) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator
+function inline_service(string $class = null) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator(new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Definition($class));
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator(new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Definition($class));
 }
 /**
  * Creates a service locator.
  *
  * @param ReferenceConfigurator[] $values
  */
-function service_locator(array $values) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+function service_locator(array $values) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(\ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator::processValue($values, \true));
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(\ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator::processValue($values, \true));
 }
 /**
  * Creates a lazy iterator.
  *
  * @param ReferenceConfigurator[] $values
  */
-function iterator(array $values) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\IteratorArgument
+function iterator(array $values) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\IteratorArgument
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\IteratorArgument(\ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator::processValue($values, \true));
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\IteratorArgument(\ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator::processValue($values, \true));
 }
 /**
  * Creates a lazy iterator by tag name.
  */
-function tagged_iterator(string $tag, string $indexAttribute = null, string $defaultIndexMethod = null, string $defaultPriorityMethod = null) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+function tagged_iterator(string $tag, string $indexAttribute = null, string $defaultIndexMethod = null, string $defaultPriorityMethod = null) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($tag, $indexAttribute, $defaultIndexMethod, \false, $defaultPriorityMethod);
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($tag, $indexAttribute, $defaultIndexMethod, \false, $defaultPriorityMethod);
 }
 /**
  * Creates a service locator by tag name.
  */
-function tagged_locator(string $tag, string $indexAttribute = null, string $defaultIndexMethod = null, string $defaultPriorityMethod = null) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+function tagged_locator(string $tag, string $indexAttribute = null, string $defaultIndexMethod = null, string $defaultPriorityMethod = null) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($tag, $indexAttribute, $defaultIndexMethod, \true, $defaultPriorityMethod));
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument(new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument($tag, $indexAttribute, $defaultIndexMethod, \true, $defaultPriorityMethod));
 }
 /**
  * Creates an expression.
  */
-function expr(string $expression) : \ConfigTransformer202112081\Symfony\Component\ExpressionLanguage\Expression
+function expr(string $expression) : \ConfigTransformer202112080\Symfony\Component\ExpressionLanguage\Expression
 {
-    return new \ConfigTransformer202112081\Symfony\Component\ExpressionLanguage\Expression($expression);
+    return new \ConfigTransformer202112080\Symfony\Component\ExpressionLanguage\Expression($expression);
 }
 /**
  * Creates an abstract argument.
  */
-function abstract_arg(string $description) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\AbstractArgument
+function abstract_arg(string $description) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\AbstractArgument
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Argument\AbstractArgument($description);
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Argument\AbstractArgument($description);
 }
 /**
  * Creates an environment variable reference.
  */
-function env(string $name) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator
+function env(string $name) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator($name);
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator($name);
 }
 /**
  * Creates a closure service reference.
  */
-function service_closure(string $serviceId) : \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator
+function service_closure(string $serviceId) : \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator
 {
-    return new \ConfigTransformer202112081\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator($serviceId);
+    return new \ConfigTransformer202112080\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator($serviceId);
 }

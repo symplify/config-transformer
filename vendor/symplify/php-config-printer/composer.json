@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112081\\Symplify\\PhpConfigPrinter\\": "src"
+            "ConfigTransformer202112080\\Symplify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202112081\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+            "ConfigTransformer202112080\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
         },
         "files": [
             "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",
