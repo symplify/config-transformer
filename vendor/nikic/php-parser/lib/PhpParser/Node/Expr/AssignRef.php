@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120810\PhpParser\Node\Expr;
+namespace ConfigTransformer202112090\PhpParser\Node\Expr;
 
-use ConfigTransformer2021120810\PhpParser\Node\Expr;
-class AssignRef extends \ConfigTransformer2021120810\PhpParser\Node\Expr
+use ConfigTransformer202112090\PhpParser\Node\Expr;
+class AssignRef extends \ConfigTransformer202112090\PhpParser\Node\Expr
 {
     /** @var Expr Variable reference is assigned to */
     public $var;
@@ -17,7 +17,7 @@ class AssignRef extends \ConfigTransformer2021120810\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021120810\PhpParser\Node\Expr $var, \ConfigTransformer2021120810\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\ConfigTransformer202112090\PhpParser\Node\Expr $var, \ConfigTransformer202112090\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

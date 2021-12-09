@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120810\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202112090\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer2021120810\Doctrine\DBAL\Connection;
-use ConfigTransformer2021120810\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer2021120810\Symfony\Component\Cache\PruneableInterface;
-class PdoAdapter extends \ConfigTransformer2021120810\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer2021120810\Symfony\Component\Cache\PruneableInterface
+use ConfigTransformer202112090\Doctrine\DBAL\Connection;
+use ConfigTransformer202112090\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202112090\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202112090\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202112090\Symfony\Component\Cache\PruneableInterface;
+class PdoAdapter extends \ConfigTransformer202112090\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202112090\Symfony\Component\Cache\PruneableInterface
 {
     protected $maxIdLength = 255;
-    private \ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
-    private \PDO|Connection $conn;
+    private $marshaller;
+    private $conn;
     private string $dsn;
     private string $driver;
     private string $serverVersion;
@@ -51,17 +51,17 @@ class PdoAdapter extends \ConfigTransformer2021120810\Symfony\Component\Cache\Ad
      * @throws InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      * @throws InvalidArgumentException When namespace contains invalid characters
      */
-    public function __construct(\PDO|string $connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(\PDO|string $connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \ConfigTransformer202112090\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (\is_string($connOrDsn) && \str_contains($connOrDsn, '://')) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Usage of Doctrine DBAL URL with "%s" is not supported. Use a PDO DSN or "%s" instead. Got "%s".', __CLASS__, \ConfigTransformer2021120810\Symfony\Component\Cache\Adapter\DoctrineDbalAdapter::class, $connOrDsn));
+            throw new \ConfigTransformer202112090\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Usage of Doctrine DBAL URL with "%s" is not supported. Use a PDO DSN or "%s" instead. Got "%s".', __CLASS__, \ConfigTransformer202112090\Symfony\Component\Cache\Adapter\DoctrineDbalAdapter::class, $connOrDsn));
         }
         if (isset($namespace[0]) && \preg_match('#[^-+.A-Za-z0-9]#', $namespace, $match)) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
+            throw new \ConfigTransformer202112090\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
         }
         if ($connOrDsn instanceof \PDO) {
             if (\PDO::ERRMODE_EXCEPTION !== $connOrDsn->getAttribute(\PDO::ATTR_ERRMODE)) {
-                throw new \ConfigTransformer2021120810\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
+                throw new \ConfigTransformer202112090\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
             }
             $this->conn = $connOrDsn;
         } else {
@@ -76,7 +76,7 @@ class PdoAdapter extends \ConfigTransformer2021120810\Symfony\Component\Cache\Ad
         $this->password = $options['db_password'] ?? $this->password;
         $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
         $this->namespace = $namespace;
-        $this->marshaller = $marshaller ?? new \ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202112090\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct($namespace, $defaultLifetime);
     }
     /**

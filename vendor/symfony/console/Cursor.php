@@ -8,23 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120810\Symfony\Component\Console;
+namespace ConfigTransformer202112090\Symfony\Component\Console;
 
-use ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  */
 final class Cursor
 {
-    /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
     private $output;
     private $input;
     /**
      * @param resource|null $input
      */
-    public function __construct(\ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface $output, $input = null)
+    public function __construct(\ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface $output, $input = null)
     {
         $this->output = $output;
         $this->input = $input ?? (\defined('STDIN') ? \STDIN : \fopen('php://input', 'r+'));

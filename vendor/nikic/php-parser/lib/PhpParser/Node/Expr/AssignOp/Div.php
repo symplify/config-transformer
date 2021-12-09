@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120810\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202112090\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer2021120810\PhpParser\Node\Expr\AssignOp;
-class Div extends \ConfigTransformer2021120810\PhpParser\Node\Expr\AssignOp
+use ConfigTransformer202112090\PhpParser\Node\Expr\AssignOp;
+class Div extends \ConfigTransformer202112090\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

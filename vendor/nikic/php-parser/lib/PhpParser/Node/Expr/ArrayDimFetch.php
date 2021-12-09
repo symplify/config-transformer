@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120810\PhpParser\Node\Expr;
+namespace ConfigTransformer202112090\PhpParser\Node\Expr;
 
-use ConfigTransformer2021120810\PhpParser\Node\Expr;
-class ArrayDimFetch extends \ConfigTransformer2021120810\PhpParser\Node\Expr
+use ConfigTransformer202112090\PhpParser\Node\Expr;
+class ArrayDimFetch extends \ConfigTransformer202112090\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -17,7 +17,7 @@ class ArrayDimFetch extends \ConfigTransformer2021120810\PhpParser\Node\Expr
      * @param null|Expr $dim        Array index / dim
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer2021120810\PhpParser\Node\Expr $var, \ConfigTransformer2021120810\PhpParser\Node\Expr $dim = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202112090\PhpParser\Node\Expr $var, \ConfigTransformer202112090\PhpParser\Node\Expr $dim = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

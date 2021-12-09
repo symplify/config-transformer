@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021120810\PhpParser\Node\Expr;
+namespace ConfigTransformer202112090\PhpParser\Node\Expr;
 
-use ConfigTransformer2021120810\PhpParser\Node;
-use ConfigTransformer2021120810\PhpParser\Node\Arg;
-use ConfigTransformer2021120810\PhpParser\Node\Expr;
-use ConfigTransformer2021120810\PhpParser\Node\Identifier;
-use ConfigTransformer2021120810\PhpParser\Node\VariadicPlaceholder;
-class StaticCall extends \ConfigTransformer2021120810\PhpParser\Node\Expr\CallLike
+use ConfigTransformer202112090\PhpParser\Node;
+use ConfigTransformer202112090\PhpParser\Node\Arg;
+use ConfigTransformer202112090\PhpParser\Node\Expr;
+use ConfigTransformer202112090\PhpParser\Node\Identifier;
+use ConfigTransformer202112090\PhpParser\Node\VariadicPlaceholder;
+class StaticCall extends \ConfigTransformer202112090\PhpParser\Node\Expr\CallLike
 {
     /** @var Node\Name|Expr Class name */
     public $class;
@@ -28,7 +28,7 @@ class StaticCall extends \ConfigTransformer2021120810\PhpParser\Node\Expr\CallLi
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \ConfigTransformer2021120810\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202112090\PhpParser\Node\Identifier($name) : $name;
         $this->args = $args;
     }
     public function getSubNodeNames() : array

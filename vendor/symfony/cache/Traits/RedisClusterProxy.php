@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120810\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202112090\Symfony\Component\Cache\Traits;
 
 /**
  * @author Alessandro Chitolina <alekitto@gmail.com>
@@ -17,7 +17,7 @@ namespace ConfigTransformer2021120810\Symfony\Component\Cache\Traits;
  */
 class RedisClusterProxy
 {
-    private \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy $redis;
+    private $redis;
     private \Closure $initializer;
     public function __construct(\Closure $initializer)
     {

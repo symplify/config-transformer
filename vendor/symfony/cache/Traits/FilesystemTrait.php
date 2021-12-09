@@ -8,10 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120810\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202112090\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer2021120810\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202112090\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -21,7 +20,7 @@ use ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInt
 trait FilesystemTrait
 {
     use FilesystemCommonTrait;
-    private \ConfigTransformer2021120810\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller;
+    private $marshaller;
     public function prune() : bool
     {
         $time = \time();
@@ -86,7 +85,7 @@ trait FilesystemTrait
             }
         }
         if ($failed && !\is_writable($this->directory)) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
+            throw new \ConfigTransformer202112090\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $failed;
     }

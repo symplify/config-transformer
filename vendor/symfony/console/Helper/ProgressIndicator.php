@@ -8,20 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021120810\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202112090\Symfony\Component\Console\Helper;
 
-use ConfigTransformer2021120810\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer2021120810\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112090\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112090\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
 class ProgressIndicator
 {
     private const FORMATS = ['normal' => ' %indicator% %message%', 'normal_no_ansi' => ' %message%', 'verbose' => ' %indicator% %message% (%elapsed:6s%)', 'verbose_no_ansi' => ' %message% (%elapsed:6s%)', 'very_verbose' => ' %indicator% %message% (%elapsed:6s%, %memory:6s%)', 'very_verbose_no_ansi' => ' %message% (%elapsed:6s%, %memory:6s%)'];
-    /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
     private $output;
     /**
      * @var int
@@ -63,7 +60,7 @@ class ProgressIndicator
      * @param int        $indicatorChangeInterval Change interval in milliseconds
      * @param array|null $indicatorValues         Animated indicator characters
      */
-    public function __construct(\ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface $output, string $format = null, int $indicatorChangeInterval = 100, array $indicatorValues = null)
+    public function __construct(\ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface $output, string $format = null, int $indicatorChangeInterval = 100, array $indicatorValues = null)
     {
         $this->output = $output;
         if (null === $format) {
@@ -74,7 +71,7 @@ class ProgressIndicator
         }
         $indicatorValues = \array_values($indicatorValues);
         if (2 > \count($indicatorValues)) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Console\Exception\InvalidArgumentException('Must have at least 2 indicator value characters.');
+            throw new \ConfigTransformer202112090\Symfony\Component\Console\Exception\InvalidArgumentException('Must have at least 2 indicator value characters.');
         }
         $this->format = self::getFormatDefinition($format);
         $this->indicatorChangeInterval = $indicatorChangeInterval;
@@ -97,7 +94,7 @@ class ProgressIndicator
     public function start($message)
     {
         if ($this->started) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Console\Exception\LogicException('Progress indicator already started.');
+            throw new \ConfigTransformer202112090\Symfony\Component\Console\Exception\LogicException('Progress indicator already started.');
         }
         $this->message = $message;
         $this->started = \true;
@@ -112,7 +109,7 @@ class ProgressIndicator
     public function advance()
     {
         if (!$this->started) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Console\Exception\LogicException('Progress indicator has not yet been started.');
+            throw new \ConfigTransformer202112090\Symfony\Component\Console\Exception\LogicException('Progress indicator has not yet been started.');
         }
         if (!$this->output->isDecorated()) {
             return;
@@ -133,7 +130,7 @@ class ProgressIndicator
     public function finish($message)
     {
         if (!$this->started) {
-            throw new \ConfigTransformer2021120810\Symfony\Component\Console\Exception\LogicException('Progress indicator has not yet been started.');
+            throw new \ConfigTransformer202112090\Symfony\Component\Console\Exception\LogicException('Progress indicator has not yet been started.');
         }
         $this->message = $message;
         $this->display();
@@ -171,7 +168,7 @@ class ProgressIndicator
     }
     private function display()
     {
-        if (\ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET === $this->output->getVerbosity()) {
+        if (\ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET === $this->output->getVerbosity()) {
             return;
         }
         $this->overwrite(\preg_replace_callback("{%([a-z\\-_]+)(?:\\:([^%]+))?%}i", function ($matches) {
@@ -185,10 +182,10 @@ class ProgressIndicator
     {
         switch ($this->output->getVerbosity()) {
             // OutputInterface::VERBOSITY_QUIET: display is disabled anyway
-            case \ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE:
+            case \ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE:
                 return $this->output->isDecorated() ? 'verbose' : 'verbose_no_ansi';
-            case \ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE:
-            case \ConfigTransformer2021120810\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG:
+            case \ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE:
+            case \ConfigTransformer202112090\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG:
                 return $this->output->isDecorated() ? 'very_verbose' : 'very_verbose_no_ansi';
             default:
                 return $this->output->isDecorated() ? 'normal' : 'normal_no_ansi';
@@ -220,9 +217,9 @@ class ProgressIndicator
         }, 'message' => function (self $indicator) {
             return $indicator->message;
         }, 'elapsed' => function (self $indicator) {
-            return \ConfigTransformer2021120810\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
+            return \ConfigTransformer202112090\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
         }, 'memory' => function () {
-            return \ConfigTransformer2021120810\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
+            return \ConfigTransformer202112090\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
         }];
     }
 }
