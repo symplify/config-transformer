@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112090\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202112107\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202112090\PhpParser\Node;
-use ConfigTransformer202112090\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer202112090\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class ClassLikeNodeNameResolver implements \ConfigTransformer202112090\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202112107\PhpParser\Node;
+use ConfigTransformer202112107\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer202112107\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class ClassLikeNodeNameResolver implements \ConfigTransformer202112107\Symplify\Astral\Contract\NodeNameResolverInterface
 {
     /**
      * @param \PhpParser\Node $node
      */
     public function match($node) : bool
     {
-        return $node instanceof \ConfigTransformer202112090\PhpParser\Node\Stmt\ClassLike;
+        return $node instanceof \ConfigTransformer202112107\PhpParser\Node\Stmt\ClassLike;
     }
     /**
      * @param \PhpParser\Node $node
