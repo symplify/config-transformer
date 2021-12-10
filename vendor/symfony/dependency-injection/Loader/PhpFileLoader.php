@@ -42,9 +42,8 @@ class PhpFileLoader extends \ConfigTransformer202112108\Symfony\Component\Depend
      * {@inheritdoc}
      * @param mixed $resource
      * @return mixed
-     * @param string|null $type
      */
-    public function load($resource, $type = null)
+    public function load($resource, string $type = null)
     {
         // the container and loader variables are exposed to the included file below
         $container = $this->container;

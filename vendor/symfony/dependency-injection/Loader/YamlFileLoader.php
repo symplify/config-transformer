@@ -55,9 +55,8 @@ class YamlFileLoader extends \ConfigTransformer202112108\Symfony\Component\Depen
      * {@inheritdoc}
      * @param mixed $resource
      * @return mixed
-     * @param string|null $type
      */
-    public function load($resource, $type = null)
+    public function load($resource, string $type = null)
     {
         $path = $this->locator->locate($resource);
         $content = $this->loadFile($path);
