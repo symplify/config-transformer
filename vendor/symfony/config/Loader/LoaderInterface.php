@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Loader;
 
 /**
  * LoaderInterface is the interface implemented by all loader classes.
@@ -33,9 +33,8 @@ interface LoaderInterface
      * @param mixed $resource A resource
      *
      * @return bool
-     * @param string|null $type
      */
-    public function supports($resource, $type = null);
+    public function supports($resource, string $type = null);
     /**
      * Gets the loader resolver.
      *
@@ -44,7 +43,6 @@ interface LoaderInterface
     public function getResolver();
     /**
      * Sets the loader resolver.
-     * @param \Symfony\Component\Config\Loader\LoaderResolverInterface $resolver
      */
-    public function setResolver($resolver);
+    public function setResolver(\ConfigTransformer202112108\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver);
 }

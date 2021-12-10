@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection;
 
 /**
  * ContainerAware trait.
@@ -21,10 +21,7 @@ trait ContainerAwareTrait
      * @var ContainerInterface
      */
     protected $container;
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface|null $container
-     */
-    public function setContainer($container = null)
+    public function setContainer(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerInterface $container = null)
     {
         $this->container = $container;
     }

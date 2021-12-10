@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * HelperSet represents a set of helpers to be used with a command.
  *
@@ -31,11 +31,7 @@ class HelperSet implements \IteratorAggregate
             $this->set($helper, \is_int($alias) ? null : $alias);
         }
     }
-    /**
-     * @param \Symfony\Component\Console\Helper\HelperInterface $helper
-     * @param string|null $alias
-     */
-    public function set($helper, $alias = null)
+    public function set(\ConfigTransformer202112108\Symfony\Component\Console\Helper\HelperInterface $helper, string $alias = null)
     {
         $this->helpers[$helper->getName()] = $helper;
         if (null !== $alias) {
@@ -45,9 +41,8 @@ class HelperSet implements \IteratorAggregate
     }
     /**
      * Returns true if the helper if defined.
-     * @param string $name
      */
-    public function has($name) : bool
+    public function has(string $name) : bool
     {
         return isset($this->helpers[$name]);
     }
@@ -55,12 +50,11 @@ class HelperSet implements \IteratorAggregate
      * Gets a helper value.
      *
      * @throws InvalidArgumentException if the helper is not defined
-     * @param string $name
      */
-    public function get($name) : \ConfigTransformer202112105\Symfony\Component\Console\Helper\HelperInterface
+    public function get(string $name) : \ConfigTransformer202112108\Symfony\Component\Console\Helper\HelperInterface
     {
         if (!$this->has($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The helper "%s" is not defined.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The helper "%s" is not defined.', $name));
         }
         return $this->helpers[$name];
     }

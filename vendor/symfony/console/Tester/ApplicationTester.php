@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Application;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\ArrayInput;
+use ConfigTransformer202112108\Symfony\Component\Console\Application;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\ArrayInput;
 /**
  * Eases the testing of console applications.
  *
@@ -26,7 +26,7 @@ class ApplicationTester
 {
     use TesterTrait;
     private $application;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\Console\Application $application)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\Console\Application $application)
     {
         $this->application = $application;
     }
@@ -41,12 +41,10 @@ class ApplicationTester
      *  * capture_stderr_separately: Make output of stdOut and stdErr separately available
      *
      * @return int The command exit code
-     * @param mixed[] $input
-     * @param mixed[] $options
      */
-    public function run($input, $options = []) : int
+    public function run(array $input, array $options = []) : int
     {
-        $this->input = new \ConfigTransformer202112105\Symfony\Component\Console\Input\ArrayInput($input);
+        $this->input = new \ConfigTransformer202112108\Symfony\Component\Console\Input\ArrayInput($input);
         if (isset($options['interactive'])) {
             $this->input->setInteractive($options['interactive']);
         }

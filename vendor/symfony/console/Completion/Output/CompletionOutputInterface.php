@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Completion\Output;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Completion\Output;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Transforms the {@see CompletionSuggestions} object into output readable by the shell completion.
  *
@@ -19,9 +19,5 @@ use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
  */
 interface CompletionOutputInterface
 {
-    /**
-     * @param \Symfony\Component\Console\Completion\CompletionSuggestions $suggestions
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     */
-    public function write($suggestions, $output) : void;
+    public function write(\ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output) : void;
 }

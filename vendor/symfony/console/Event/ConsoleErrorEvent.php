@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Event;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Event;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to handle throwables thrown while running a command.
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class ConsoleErrorEvent extends \ConfigTransformer202112105\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleErrorEvent extends \ConfigTransformer202112108\Symfony\Component\Console\Event\ConsoleEvent
 {
     /**
      * @var \Throwable
@@ -28,7 +28,7 @@ final class ConsoleErrorEvent extends \ConfigTransformer202112105\Symfony\Compon
      * @var int
      */
     private $exitCode;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \ConfigTransformer202112105\Symfony\Component\Console\Command\Command $command = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \ConfigTransformer202112108\Symfony\Component\Console\Command\Command $command = null)
     {
         parent::__construct($command, $input, $output);
         $this->error = $error;
@@ -37,17 +37,11 @@ final class ConsoleErrorEvent extends \ConfigTransformer202112105\Symfony\Compon
     {
         return $this->error;
     }
-    /**
-     * @param \Throwable $error
-     */
-    public function setError($error) : void
+    public function setError(\Throwable $error) : void
     {
         $this->error = $error;
     }
-    /**
-     * @param int $exitCode
-     */
-    public function setExitCode($exitCode) : void
+    public function setExitCode(int $exitCode) : void
     {
         $this->exitCode = $exitCode;
         $r = new \ReflectionProperty($this->error, 'code');

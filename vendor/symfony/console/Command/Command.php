@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Command;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Command;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Application;
-use ConfigTransformer202112105\Symfony\Component\Console\Attribute\AsCommand;
-use ConfigTransformer202112105\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202112105\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\ExceptionInterface;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer202112105\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Application;
+use ConfigTransformer202112108\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\ExceptionInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202112108\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Base class for all commands.
  *
@@ -111,7 +111,7 @@ class Command
      */
     public function __construct(string $name = null)
     {
-        $this->definition = new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition();
+        $this->definition = new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition();
         if (null === $name && null !== ($name = static::getDefaultName())) {
             $aliases = \explode('|', $name);
             if ('' === ($name = \array_shift($aliases))) {
@@ -137,10 +137,7 @@ class Command
     {
         $this->ignoreValidationErrors = \true;
     }
-    /**
-     * @param \Symfony\Component\Console\Application|null $application
-     */
-    public function setApplication($application = null)
+    public function setApplication(\ConfigTransformer202112108\Symfony\Component\Console\Application $application = null)
     {
         $this->application = $application;
         if ($application) {
@@ -150,24 +147,21 @@ class Command
         }
         $this->fullDefinition = null;
     }
-    /**
-     * @param \Symfony\Component\Console\Helper\HelperSet $helperSet
-     */
-    public function setHelperSet($helperSet)
+    public function setHelperSet(\ConfigTransformer202112108\Symfony\Component\Console\Helper\HelperSet $helperSet)
     {
         $this->helperSet = $helperSet;
     }
     /**
      * Gets the helper set.
      */
-    public function getHelperSet() : ?\ConfigTransformer202112105\Symfony\Component\Console\Helper\HelperSet
+    public function getHelperSet() : ?\ConfigTransformer202112108\Symfony\Component\Console\Helper\HelperSet
     {
         return $this->helperSet;
     }
     /**
      * Gets the application instance for this command.
      */
-    public function getApplication() : ?\ConfigTransformer202112105\Symfony\Component\Console\Application
+    public function getApplication() : ?\ConfigTransformer202112108\Symfony\Component\Console\Application
     {
         return $this->application;
     }
@@ -202,12 +196,10 @@ class Command
      * @throws LogicException When this abstract method is not implemented
      *
      * @see setCode()
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute($input, $output)
+    protected function execute(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException('You must override the execute() method in the concrete command class.');
+        throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException('You must override the execute() method in the concrete command class.');
     }
     /**
      * Interacts with the user.
@@ -215,10 +207,8 @@ class Command
      * This method is executed before the InputDefinition is validated.
      * This means that this is the only place where the command can
      * interactively ask for values of missing required arguments.
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function interact($input, $output)
+    protected function interact(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output)
     {
     }
     /**
@@ -230,10 +220,8 @@ class Command
      *
      * @see InputInterface::bind()
      * @see InputInterface::validate()
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function initialize($input, $output)
+    protected function initialize(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output)
     {
     }
     /**
@@ -249,17 +237,15 @@ class Command
      *
      * @see setCode()
      * @see execute()
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function run($input, $output) : int
+    public function run(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         // add the application arguments and options
         $this->mergeApplicationDefinition();
         // bind the input against the command specific arguments/options
         try {
             $input->bind($this->getDefinition());
-        } catch (\ConfigTransformer202112105\Symfony\Component\Console\Exception\ExceptionInterface $e) {
+        } catch (\ConfigTransformer202112108\Symfony\Component\Console\Exception\ExceptionInterface $e) {
             if (!$this->ignoreValidationErrors) {
                 throw $e;
             }
@@ -269,14 +255,14 @@ class Command
             if (\function_exists('cli_set_process_title')) {
                 if (!@\cli_set_process_title($this->processTitle)) {
                     if ('Darwin' === \PHP_OS) {
-                        $output->writeln('<comment>Running "cli_set_process_title" as an unprivileged user is not supported on MacOS.</comment>', \ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
+                        $output->writeln('<comment>Running "cli_set_process_title" as an unprivileged user is not supported on MacOS.</comment>', \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
                     } else {
                         \cli_set_process_title($this->processTitle);
                     }
                 }
-            } elseif (\function_exists('ConfigTransformer202112105\\setproctitle')) {
+            } elseif (\function_exists('ConfigTransformer202112108\\setproctitle')) {
                 setproctitle($this->processTitle);
-            } elseif (\ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
+            } elseif (\ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
                 $output->writeln('<comment>Install the proctitle PECL to be able to change the process title.</comment>');
             }
         }
@@ -302,10 +288,8 @@ class Command
     }
     /**
      * Adds suggestions to $suggestions for the current completion input (e.g. option or argument).
-     * @param \Symfony\Component\Console\Completion\CompletionInput $input
-     * @param \Symfony\Component\Console\Completion\CompletionSuggestions $suggestions
      */
-    public function complete($input, $suggestions) : void
+    public function complete(\ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer202112108\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
     {
     }
     /**
@@ -322,7 +306,7 @@ class Command
      *
      * @see execute()
      */
-    public function setCode($code)
+    public function setCode(callable $code)
     {
         if ($code instanceof \Closure) {
             $r = new \ReflectionFunction($code);
@@ -352,12 +336,12 @@ class Command
      *
      * @internal
      */
-    public function mergeApplicationDefinition($mergeArgs = \true)
+    public function mergeApplicationDefinition(bool $mergeArgs = \true)
     {
         if (null === $this->application) {
             return;
         }
-        $this->fullDefinition = new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition();
+        $this->fullDefinition = new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition();
         $this->fullDefinition->setOptions($this->definition->getOptions());
         $this->fullDefinition->addOptions($this->application->getDefinition()->getOptions());
         if ($mergeArgs) {
@@ -375,7 +359,7 @@ class Command
      */
     public function setDefinition($definition)
     {
-        if ($definition instanceof \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition) {
+        if ($definition instanceof \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition) {
             $this->definition = $definition;
         } else {
             $this->definition->setDefinition($definition);
@@ -386,7 +370,7 @@ class Command
     /**
      * Gets the InputDefinition attached to this Command.
      */
-    public function getDefinition() : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition
+    public function getDefinition() : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition
     {
         return $this->fullDefinition ?? $this->getNativeDefinition();
     }
@@ -398,10 +382,10 @@ class Command
      *
      * This method is not part of public API and should not be used directly.
      */
-    public function getNativeDefinition() : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition
+    public function getNativeDefinition() : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition
     {
         if (!isset($this->definition)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('Command class "%s" is not correctly initialized. You probably forgot to call the parent constructor.', static::class));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('Command class "%s" is not correctly initialized. You probably forgot to call the parent constructor.', static::class));
         }
         return $this->definition;
     }
@@ -414,14 +398,12 @@ class Command
      * @throws InvalidArgumentException When argument mode is not valid
      *
      * @return $this
-     * @param string $name
-     * @param string $description
      */
-    public function addArgument($name, $mode = null, $description = '', $default = null)
+    public function addArgument(string $name, int $mode = null, string $description = '', $default = null)
     {
-        $this->definition->addArgument(new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputArgument($name, $mode, $description, $default));
+        $this->definition->addArgument(new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputArgument($name, $mode, $description, $default));
         if (null !== $this->fullDefinition) {
-            $this->fullDefinition->addArgument(new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputArgument($name, $mode, $description, $default));
+            $this->fullDefinition->addArgument(new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputArgument($name, $mode, $description, $default));
         }
         return $this;
     }
@@ -436,11 +418,11 @@ class Command
      *
      * @return $this
      */
-    public function addOption($name, $shortcut = null, $mode = null, $description = '', $default = null)
+    public function addOption(string $name, $shortcut = null, int $mode = null, string $description = '', $default = null)
     {
-        $this->definition->addOption(new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption($name, $shortcut, $mode, $description, $default));
+        $this->definition->addOption(new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption($name, $shortcut, $mode, $description, $default));
         if (null !== $this->fullDefinition) {
-            $this->fullDefinition->addOption(new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption($name, $shortcut, $mode, $description, $default));
+            $this->fullDefinition->addOption(new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption($name, $shortcut, $mode, $description, $default));
         }
         return $this;
     }
@@ -455,9 +437,8 @@ class Command
      * @return $this
      *
      * @throws InvalidArgumentException When the name is invalid
-     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->validateName($name);
         $this->name = $name;
@@ -470,9 +451,8 @@ class Command
      * like a daemon.
      *
      * @return $this
-     * @param string $title
      */
-    public function setProcessTitle($title)
+    public function setProcessTitle(string $title)
     {
         $this->processTitle = $title;
         return $this;
@@ -489,7 +469,7 @@ class Command
      *
      * @return $this
      */
-    public function setHidden($hidden = \true)
+    public function setHidden(bool $hidden = \true)
     {
         $this->hidden = $hidden;
         return $this;
@@ -505,9 +485,8 @@ class Command
      * Sets the description for the command.
      *
      * @return $this
-     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
         return $this;
@@ -523,9 +502,8 @@ class Command
      * Sets the help for the command.
      *
      * @return $this
-     * @param string $help
      */
-    public function setHelp($help)
+    public function setHelp(string $help)
     {
         $this->help = $help;
         return $this;
@@ -558,7 +536,7 @@ class Command
      *
      * @throws InvalidArgumentException When an alias is invalid
      */
-    public function setAliases($aliases)
+    public function setAliases(iterable $aliases)
     {
         $list = [];
         foreach ($aliases as $alias) {
@@ -580,7 +558,7 @@ class Command
      *
      * @param bool $short Whether to show the short version of the synopsis (with options folded) or not
      */
-    public function getSynopsis($short = \false) : string
+    public function getSynopsis(bool $short = \false) : string
     {
         $key = $short ? 'short' : 'long';
         if (!isset($this->synopsis[$key])) {
@@ -592,9 +570,8 @@ class Command
      * Add a command usage example, it'll be prefixed with the command name.
      *
      * @return $this
-     * @param string $usage
      */
-    public function addUsage($usage)
+    public function addUsage(string $usage)
     {
         if (\strncmp($usage, $this->name, \strlen($this->name)) !== 0) {
             $usage = \sprintf('%s %s', $this->name, $usage);
@@ -615,12 +592,11 @@ class Command
      * @throws LogicException           if no HelperSet is defined
      * @throws InvalidArgumentException if the helper is not defined
      * @return mixed
-     * @param string $name
      */
-    public function getHelper($name)
+    public function getHelper(string $name)
     {
         if (null === $this->helperSet) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot retrieve helper "%s" because there is no HelperSet defined. Did you forget to add your command to the application or to set the application on the command using the setApplication() method? You can also set the HelperSet directly using the setHelperSet() method.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot retrieve helper "%s" because there is no HelperSet defined. Did you forget to add your command to the application or to set the application on the command using the setApplication() method? You can also set the HelperSet directly using the setHelperSet() method.', $name));
         }
         return $this->helperSet->get($name);
     }
@@ -634,7 +610,7 @@ class Command
     private function validateName(string $name)
     {
         if (!\preg_match('/^[^\\:]++(\\:[^\\:]++)*$/', $name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Command name "%s" is invalid.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Command name "%s" is invalid.', $name));
         }
     }
 }

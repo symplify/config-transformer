@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Dumper;
 
 /**
  * DumperInterface is the interface implemented by service container dumper classes.
@@ -20,7 +20,6 @@ interface DumperInterface
     /**
      * Dumps the service container.
      * @return mixed[]|string
-     * @param mixed[] $options
      */
-    public function dump($options = []);
+    public function dump(array $options = []);
 }

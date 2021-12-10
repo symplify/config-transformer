@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ExtensionInterface is the interface implemented by container extension classes.
  *
@@ -22,10 +22,8 @@ interface ExtensionInterface
      * Loads a specific configuration.
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
-     * @param mixed[] $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function load($configs, $container);
+    public function load(array $configs, \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder $container);
     /**
      * Returns the namespace to be used for this extension (XML namespace).
      *

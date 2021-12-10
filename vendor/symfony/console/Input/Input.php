@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Input;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Input;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * Input is the base class for all concrete Input classes.
  *
@@ -23,17 +23,17 @@ use ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeExcept
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface, \ConfigTransformer202112105\Symfony\Component\Console\Input\StreamableInputInterface
+abstract class Input implements \ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface, \ConfigTransformer202112108\Symfony\Component\Console\Input\StreamableInputInterface
 {
     protected $definition;
     protected $stream;
     protected $options = [];
     protected $arguments = [];
     protected $interactive = \true;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         if (null === $definition) {
-            $this->definition = new \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition();
+            $this->definition = new \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition();
         } else {
             $this->bind($definition);
             $this->validate();
@@ -41,9 +41,8 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\Console\Input\InputDefinition $definition
      */
-    public function bind($definition)
+    public function bind(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition $definition)
     {
         $this->arguments = [];
         $this->options = [];
@@ -65,7 +64,7 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
             return !\array_key_exists($argument, $givenArguments) && $definition->getArgument($argument)->isRequired();
         });
         if (\count($missingArguments) > 0) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('Not enough arguments (missing: "%s").', \implode(', ', $missingArguments)));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('Not enough arguments (missing: "%s").', \implode(', ', $missingArguments)));
         }
     }
     /**
@@ -77,9 +76,8 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
     }
     /**
      * {@inheritdoc}
-     * @param bool $interactive
      */
-    public function setInteractive($interactive)
+    public function setInteractive(bool $interactive)
     {
         $this->interactive = $interactive;
     }
@@ -93,32 +91,29 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
     /**
      * {@inheritdoc}
      * @return mixed
-     * @param string $name
      */
-    public function getArgument($name)
+    public function getArgument(string $name)
     {
         if (!$this->definition->hasArgument($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
         }
         return $this->arguments[$name] ?? $this->definition->getArgument($name)->getDefault();
     }
     /**
      * {@inheritdoc}
      * @param mixed $value
-     * @param string $name
      */
-    public function setArgument($name, $value)
+    public function setArgument(string $name, $value)
     {
         if (!$this->definition->hasArgument($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
         }
         $this->arguments[$name] = $value;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function hasArgument($name) : bool
+    public function hasArgument(string $name) : bool
     {
         return $this->definition->hasArgument($name);
     }
@@ -132,9 +127,8 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
     /**
      * {@inheritdoc}
      * @return mixed
-     * @param string $name
      */
-    public function getOption($name)
+    public function getOption(string $name)
     {
         if ($this->definition->hasNegation($name)) {
             if (null === ($value = $this->getOption($this->definition->negationToName($name)))) {
@@ -143,38 +137,35 @@ abstract class Input implements \ConfigTransformer202112105\Symfony\Component\Co
             return !$value;
         }
         if (!$this->definition->hasOption($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
         }
         return \array_key_exists($name, $this->options) ? $this->options[$name] : $this->definition->getOption($name)->getDefault();
     }
     /**
      * {@inheritdoc}
      * @param mixed $value
-     * @param string $name
      */
-    public function setOption($name, $value)
+    public function setOption(string $name, $value)
     {
         if ($this->definition->hasNegation($name)) {
             $this->options[$this->definition->negationToName($name)] = !$value;
             return;
         } elseif (!$this->definition->hasOption($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
         }
         $this->options[$name] = $value;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function hasOption($name) : bool
+    public function hasOption(string $name) : bool
     {
         return $this->definition->hasOption($name) || $this->definition->hasNegation($name);
     }
     /**
      * Escapes a token through escapeshellarg if it contains unsafe chars.
-     * @param string $token
      */
-    public function escapeToken($token) : string
+    public function escapeToken(string $token) : string
     {
         return \preg_match('{^[\\w-]+$}', $token) ? $token : \escapeshellarg($token);
     }

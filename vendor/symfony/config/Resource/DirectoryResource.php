@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Resource;
 
 /**
  * DirectoryResource represents a resources stored in a subdirectory tree.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class DirectoryResource implements \ConfigTransformer202112105\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class DirectoryResource implements \ConfigTransformer202112108\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var string
@@ -56,9 +56,8 @@ class DirectoryResource implements \ConfigTransformer202112105\Symfony\Component
     }
     /**
      * {@inheritdoc}
-     * @param int $timestamp
      */
-    public function isFresh($timestamp) : bool
+    public function isFresh(int $timestamp) : bool
     {
         if (!\is_dir($this->resource)) {
             return \false;

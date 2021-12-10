@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Formatter;
 
 /**
  * Formatter interface for console output.
@@ -19,34 +19,28 @@ interface OutputFormatterInterface
 {
     /**
      * Sets the decorated flag.
-     * @param bool $decorated
      */
-    public function setDecorated($decorated);
+    public function setDecorated(bool $decorated);
     /**
      * Whether the output will decorate messages.
      */
     public function isDecorated() : bool;
     /**
      * Sets a new style.
-     * @param string $name
-     * @param \Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function setStyle($name, $style);
+    public function setStyle(string $name, \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style);
     /**
      * Checks if output formatter has style with specified name.
-     * @param string $name
      */
-    public function hasStyle($name) : bool;
+    public function hasStyle(string $name) : bool;
     /**
      * Gets style options from style with specified name.
      *
      * @throws \InvalidArgumentException When style isn't defined
-     * @param string $name
      */
-    public function getStyle($name) : \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface;
+    public function getStyle(string $name) : \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface;
     /**
      * Formats a message according to the given styles.
-     * @param string|null $message
      */
-    public function format($message) : ?string;
+    public function format(?string $message) : ?string;
 }

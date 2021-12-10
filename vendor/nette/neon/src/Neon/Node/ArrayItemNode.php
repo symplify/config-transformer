@@ -5,11 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112105\Nette\Neon\Node;
+namespace ConfigTransformer202112108\Nette\Neon\Node;
 
-use ConfigTransformer202112105\Nette\Neon\Node;
+use ConfigTransformer202112108\Nette\Neon\Node;
 /** @internal */
-final class ArrayItemNode extends \ConfigTransformer202112105\Nette\Neon\Node
+final class ArrayItemNode extends \ConfigTransformer202112108\Nette\Neon\Node
 {
     /** @var ?Node */
     public $key;
@@ -20,7 +20,7 @@ final class ArrayItemNode extends \ConfigTransformer202112105\Nette\Neon\Node
         $this->startPos = $this->endPos = $pos;
     }
     /** @param  self[]  $items */
-    public static function itemsToArray($items) : array
+    public static function itemsToArray(array $items) : array
     {
         $res = [];
         foreach ($items as $item) {
@@ -33,7 +33,7 @@ final class ArrayItemNode extends \ConfigTransformer202112105\Nette\Neon\Node
         return $res;
     }
     /** @param  self[]  $items */
-    public static function itemsToInlineString($items) : string
+    public static function itemsToInlineString(array $items) : string
     {
         $res = '';
         foreach ($items as $item) {
@@ -42,12 +42,12 @@ final class ArrayItemNode extends \ConfigTransformer202112105\Nette\Neon\Node
         return $res;
     }
     /** @param  self[]  $items */
-    public static function itemsToBlockString($items) : string
+    public static function itemsToBlockString(array $items) : string
     {
         $res = '';
         foreach ($items as $item) {
             $v = $item->value->toString();
-            $res .= ($item->key ? $item->key->toString() . ':' : '-') . ($item->value instanceof \ConfigTransformer202112105\Nette\Neon\Node\BlockArrayNode && $item->value->items ? "\n" . $v . (\substr($v, -2, 1) === "\n" ? '' : "\n") : ' ' . $v . "\n");
+            $res .= ($item->key ? $item->key->toString() . ':' : '-') . ($item->value instanceof \ConfigTransformer202112108\Nette\Neon\Node\BlockArrayNode && $item->value->items ? "\n" . $v . (\substr($v, -2, 1) === "\n" ? '' : "\n") : ' ' . $v . "\n");
         }
         return $res;
     }

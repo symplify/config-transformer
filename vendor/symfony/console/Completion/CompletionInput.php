@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Completion;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption;
 /**
  * An input specialized for shell completion.
  *
@@ -22,7 +22,7 @@ use ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption;
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class CompletionInput extends \ConfigTransformer202112105\Symfony\Component\Console\Input\ArgvInput
+final class CompletionInput extends \ConfigTransformer202112108\Symfony\Component\Console\Input\ArgvInput
 {
     public const TYPE_ARGUMENT_VALUE = 'argument_value';
     public const TYPE_OPTION_VALUE = 'option_value';
@@ -37,10 +37,8 @@ final class CompletionInput extends \ConfigTransformer202112105\Symfony\Componen
      * Converts a terminal string into tokens.
      *
      * This is required for shell completions without COMP_WORDS support.
-     * @param string $inputStr
-     * @param int $currentIndex
      */
-    public static function fromString($inputStr, $currentIndex) : self
+    public static function fromString(string $inputStr, int $currentIndex) : self
     {
         \preg_match_all('/(?<=^|\\s)([\'"]?)(.+?)(?<!\\\\)\\1(?=$|\\s)/', $inputStr, $tokens);
         return self::fromTokens($tokens[0], $currentIndex);
@@ -51,7 +49,7 @@ final class CompletionInput extends \ConfigTransformer202112105\Symfony\Componen
      * @param string[] $tokens       the set of split tokens (e.g. COMP_WORDS or argv)
      * @param          $currentIndex the index of the cursor (e.g. COMP_CWORD)
      */
-    public static function fromTokens($tokens, $currentIndex) : self
+    public static function fromTokens(array $tokens, int $currentIndex) : self
     {
         $input = new self($tokens);
         $input->tokens = $tokens;
@@ -60,9 +58,8 @@ final class CompletionInput extends \ConfigTransformer202112105\Symfony\Componen
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\Console\Input\InputDefinition $definition
      */
-    public function bind($definition) : void
+    public function bind(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition $definition) : void
     {
         parent::bind($definition);
         $relevantToken = $this->getRelevantToken();
@@ -150,34 +147,24 @@ final class CompletionInput extends \ConfigTransformer202112105\Symfony\Componen
     {
         return $this->completionValue;
     }
-    /**
-     * @param string $optionName
-     */
-    public function mustSuggestOptionValuesFor($optionName) : bool
+    public function mustSuggestOptionValuesFor(string $optionName) : bool
     {
         return self::TYPE_OPTION_VALUE === $this->getCompletionType() && $optionName === $this->getCompletionName();
     }
-    /**
-     * @param string $argumentName
-     */
-    public function mustSuggestArgumentValuesFor($argumentName) : bool
+    public function mustSuggestArgumentValuesFor(string $argumentName) : bool
     {
         return self::TYPE_ARGUMENT_VALUE === $this->getCompletionType() && $argumentName === $this->getCompletionName();
     }
-    /**
-     * @param string $token
-     * @param bool $parseOptions
-     */
-    protected function parseToken($token, $parseOptions) : bool
+    protected function parseToken(string $token, bool $parseOptions) : bool
     {
         try {
             return parent::parseToken($token, $parseOptions);
-        } catch (\ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException $e) {
+        } catch (\ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException $e) {
             // suppress errors, completed input is almost never valid
         }
         return $parseOptions;
     }
-    private function getOptionFromToken(string $optionToken) : ?\ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption
+    private function getOptionFromToken(string $optionToken) : ?\ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption
     {
         $optionName = \ltrim($optionToken, '-');
         if (!$optionName) {

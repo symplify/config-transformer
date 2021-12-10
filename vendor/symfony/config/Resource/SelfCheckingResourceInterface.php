@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Resource;
 
 /**
  * Interface for Resources that can check for freshness autonomously,
@@ -16,12 +16,12 @@ namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-interface SelfCheckingResourceInterface extends \ConfigTransformer202112105\Symfony\Component\Config\Resource\ResourceInterface
+interface SelfCheckingResourceInterface extends \ConfigTransformer202112108\Symfony\Component\Config\Resource\ResourceInterface
 {
     /**
      * Returns true if the resource has not been updated since the given timestamp.
      *
      * @param int $timestamp The last time the resource was loaded
      */
-    public function isFresh($timestamp) : bool;
+    public function isFresh(int $timestamp) : bool;
 }

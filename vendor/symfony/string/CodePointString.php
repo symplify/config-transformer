@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\String;
+namespace ConfigTransformer202112108\Symfony\Component\String;
 
-use ConfigTransformer202112105\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException;
 /**
  * Represents a string of Unicode code points encoded as UTF-8.
  *
@@ -20,35 +20,31 @@ use ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumen
  *
  * @throws ExceptionInterface
  */
-class CodePointString extends \ConfigTransformer202112105\Symfony\Component\String\AbstractUnicodeString
+class CodePointString extends \ConfigTransformer202112108\Symfony\Component\String\AbstractUnicodeString
 {
     public function __construct(string $string = '')
     {
         if ('' !== $string && !\preg_match('//u', $string)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         $this->string = $string;
     }
     /**
      * @return $this
-     * @param string ...$suffix
      */
-    public function append(...$suffix)
+    public function append(string ...$suffix)
     {
         $str = clone $this;
         $str->string .= 1 >= \count($suffix) ? $suffix[0] ?? '' : \implode('', $suffix);
         if (!\preg_match('//u', $str->string)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
-    /**
-     * @param int $length
-     */
-    public function chunk($length = 1) : array
+    public function chunk(int $length = 1) : array
     {
         if (1 > $length) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('The chunk length must be greater than zero.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('The chunk length must be greater than zero.');
         }
         if ('' === $this->string) {
             return [];
@@ -67,10 +63,7 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
         }
         return $chunks;
     }
-    /**
-     * @param int $offset
-     */
-    public function codePointsAt($offset) : array
+    public function codePointsAt(int $offset) : array
     {
         $str = $offset ? $this->slice($offset, 1) : $this;
         return '' === $str->string ? [] : [\mb_ord($str->string, 'UTF-8')];
@@ -80,7 +73,7 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
      */
     public function endsWith($suffix) : bool
     {
-        if ($suffix instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($suffix instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $suffix = $suffix->string;
         } elseif (!\is_string($suffix)) {
             return parent::endsWith($suffix);
@@ -98,7 +91,7 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
      */
     public function equalsTo($string) : bool
     {
-        if ($string instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($string instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $string = $string->string;
         } elseif (!\is_string($string)) {
             return parent::equalsTo($string);
@@ -110,11 +103,10 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
     }
     /**
      * @param mixed[]|string|\Symfony\Component\String\AbstractString $needle
-     * @param int $offset
      */
-    public function indexOf($needle, $offset = 0) : ?int
+    public function indexOf($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (!\is_string($needle)) {
             return parent::indexOf($needle, $offset);
@@ -127,11 +119,10 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
     }
     /**
      * @param mixed[]|string|\Symfony\Component\String\AbstractString $needle
-     * @param int $offset
      */
-    public function indexOfLast($needle, $offset = 0) : ?int
+    public function indexOfLast($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (!\is_string($needle)) {
             return parent::indexOfLast($needle, $offset);
@@ -148,30 +139,27 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
     }
     /**
      * @return $this
-     * @param string ...$prefix
      */
-    public function prepend(...$prefix)
+    public function prepend(string ...$prefix)
     {
         $str = clone $this;
         $str->string = (1 >= \count($prefix) ? $prefix[0] ?? '' : \implode('', $prefix)) . $this->string;
         if (!\preg_match('//u', $str->string)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
     /**
      * @return $this
-     * @param string $from
-     * @param string $to
      */
-    public function replace($from, $to)
+    public function replace(string $from, string $to)
     {
         $str = clone $this;
         if ('' === $from || !\preg_match('//u', $from)) {
             return $str;
         }
         if ('' !== $to && !\preg_match('//u', $to)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         if ($this->ignoreCase) {
             $str->string = \implode($to, \preg_split('{' . \preg_quote($from) . '}iuD', $this->string));
@@ -182,10 +170,8 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
     }
     /**
      * @return $this
-     * @param int $start
-     * @param int|null $length
      */
-    public function slice($start = 0, $length = null)
+    public function slice(int $start = 0, int $length = null)
     {
         $str = clone $this;
         $str->string = \mb_substr($this->string, $start, $length, 'UTF-8');
@@ -193,14 +179,11 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
     }
     /**
      * @return $this
-     * @param string $replacement
-     * @param int $start
-     * @param int|null $length
      */
-    public function splice($replacement, $start = 0, $length = null)
+    public function splice(string $replacement, int $start = 0, int $length = null)
     {
         if (!\preg_match('//u', $replacement)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         $str = clone $this;
         $start = $start ? \strlen(\mb_substr($this->string, 0, $start, 'UTF-8')) : 0;
@@ -208,24 +191,19 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
         $str->string = \substr_replace($this->string, $replacement, $start, $length ?? \PHP_INT_MAX);
         return $str;
     }
-    /**
-     * @param string $delimiter
-     * @param int|null $limit
-     * @param int|null $flags
-     */
-    public function split($delimiter, $limit = null, $flags = null) : array
+    public function split(string $delimiter, int $limit = null, int $flags = null) : array
     {
         if (1 > ($limit = $limit ?? \PHP_INT_MAX)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Split limit must be a positive integer.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Split limit must be a positive integer.');
         }
         if ('' === $delimiter) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is empty.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is empty.');
         }
         if (null !== $flags) {
             return parent::split($delimiter . 'u', $limit, $flags);
         }
         if (!\preg_match('//u', $delimiter)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is not a valid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is not a valid UTF-8 string.');
         }
         $str = clone $this;
         $chunks = $this->ignoreCase ? \preg_split('{' . \preg_quote($delimiter) . '}iuD', $this->string, $limit) : \explode($delimiter, $this->string, $limit);
@@ -240,7 +218,7 @@ class CodePointString extends \ConfigTransformer202112105\Symfony\Component\Stri
      */
     public function startsWith($prefix) : bool
     {
-        if ($prefix instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($prefix instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $prefix = $prefix->string;
         } elseif (!\is_string($prefix)) {
             return parent::startsWith($prefix);

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202112108\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParseException extends \ConfigTransformer202112105\Symfony\Component\Yaml\Exception\RuntimeException
+class ParseException extends \ConfigTransformer202112108\Symfony\Component\Yaml\Exception\RuntimeException
 {
     /**
      * @var string|null
@@ -57,9 +57,8 @@ class ParseException extends \ConfigTransformer202112105\Symfony\Component\Yaml\
     }
     /**
      * Sets the snippet of code near the error.
-     * @param string $snippet
      */
-    public function setSnippet($snippet)
+    public function setSnippet(string $snippet)
     {
         $this->snippet = $snippet;
         $this->updateRepr();
@@ -75,9 +74,8 @@ class ParseException extends \ConfigTransformer202112105\Symfony\Component\Yaml\
     }
     /**
      * Sets the filename where the error occurred.
-     * @param string $parsedFile
      */
-    public function setParsedFile($parsedFile)
+    public function setParsedFile(string $parsedFile)
     {
         $this->parsedFile = $parsedFile;
         $this->updateRepr();
@@ -91,9 +89,8 @@ class ParseException extends \ConfigTransformer202112105\Symfony\Component\Yaml\
     }
     /**
      * Sets the line where the error occurred.
-     * @param int $parsedLine
      */
-    public function setParsedLine($parsedLine)
+    public function setParsedLine(int $parsedLine)
     {
         $this->parsedLine = $parsedLine;
         $this->updateRepr();

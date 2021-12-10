@@ -1,33 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator;
 
-abstract class KeywordEmulator extends \ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator\TokenEmulator
+abstract class KeywordEmulator extends \ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     abstract function getKeywordString() : string;
     abstract function getKeywordToken() : int;
-    /**
-     * @param string $code
-     */
-    public function isEmulationNeeded($code) : bool
+    public function isEmulationNeeded(string $code) : bool
     {
         return \strpos(\strtolower($code), $this->getKeywordString()) !== \false;
     }
-    /**
-     * @param mixed[] $tokens
-     * @param int $pos
-     */
-    protected function isKeywordContext($tokens, $pos) : bool
+    protected function isKeywordContext(array $tokens, int $pos) : bool
     {
         $previousNonSpaceToken = $this->getPreviousNonSpaceToken($tokens, $pos);
         return $previousNonSpaceToken === null || $previousNonSpaceToken[0] !== \T_OBJECT_OPERATOR;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function emulate($code, $tokens) : array
+    public function emulate(string $code, array $tokens) : array
     {
         $keywordString = $this->getKeywordString();
         foreach ($tokens as $i => $token) {
@@ -51,11 +40,7 @@ abstract class KeywordEmulator extends \ConfigTransformer202112105\PhpParser\Lex
         }
         return null;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function reverseEmulate($code, $tokens) : array
+    public function reverseEmulate(string $code, array $tokens) : array
     {
         $keywordToken = $this->getKeywordToken();
         foreach ($tokens as $i => $token) {

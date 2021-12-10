@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Node\Scalar;
+namespace ConfigTransformer202112108\PhpParser\Node\Scalar;
 
-use ConfigTransformer202112105\PhpParser\Error;
-use ConfigTransformer202112105\PhpParser\Node\Scalar;
-class String_ extends \ConfigTransformer202112105\PhpParser\Node\Scalar
+use ConfigTransformer202112108\PhpParser\Error;
+use ConfigTransformer202112108\PhpParser\Node\Scalar;
+class String_ extends \ConfigTransformer202112108\PhpParser\Node\Scalar
 {
     /* For use in "kind" attribute */
     const KIND_SINGLE_QUOTED = 1;
@@ -40,7 +40,7 @@ class String_ extends \ConfigTransformer202112105\PhpParser\Node\Scalar
      *
      * @return string The parsed string
      */
-    public static function parse($str, $parseUnicodeEscape = \true) : string
+    public static function parse(string $str, bool $parseUnicodeEscape = \true) : string
     {
         $bLength = 0;
         if ('b' === $str[0] || 'B' === $str[0]) {
@@ -63,7 +63,7 @@ class String_ extends \ConfigTransformer202112105\PhpParser\Node\Scalar
      *
      * @return string String with escape sequences parsed
      */
-    public static function parseEscapeSequences($str, $quote, $parseUnicodeEscape = \true) : string
+    public static function parseEscapeSequences(string $str, $quote, bool $parseUnicodeEscape = \true) : string
     {
         if (null !== $quote) {
             $str = \str_replace('\\' . $quote, $quote, $str);
@@ -106,7 +106,7 @@ class String_ extends \ConfigTransformer202112105\PhpParser\Node\Scalar
         if ($num <= 0x1fffff) {
             return \chr(($num >> 18) + 0xf0) . \chr(($num >> 12 & 0x3f) + 0x80) . \chr(($num >> 6 & 0x3f) + 0x80) . \chr(($num & 0x3f) + 0x80);
         }
-        throw new \ConfigTransformer202112105\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
+        throw new \ConfigTransformer202112108\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
     }
     public function getType() : string
     {

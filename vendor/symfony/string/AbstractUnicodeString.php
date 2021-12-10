@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\String;
+namespace ConfigTransformer202112108\Symfony\Component\String;
 
-use ConfigTransformer202112105\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract Unicode characters.
  *
@@ -24,7 +24,7 @@ use ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeExcepti
  *
  * @throws ExceptionInterface
  */
-abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony\Component\String\AbstractString
+abstract class AbstractUnicodeString extends \ConfigTransformer202112108\Symfony\Component\String\AbstractString
 {
     public const NFC = \Normalizer::NFC;
     public const NFD = \Normalizer::NFD;
@@ -44,9 +44,8 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     private static $transliterators = [];
     /**
      * @return $this
-     * @param int ...$codes
      */
-    public static function fromCodePoints(...$codes)
+    public static function fromCodePoints(int ...$codes)
     {
         $string = '';
         foreach ($codes as $code) {
@@ -69,7 +68,7 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
      *
      * @param string[]|\Transliterator[]|\Closure[] $rules See "*-Latin" rules from Transliterator::listIDs()
      */
-    public function ascii($rules = []) : self
+    public function ascii(array $rules = []) : self
     {
         $str = clone $this;
         $s = $str->string;
@@ -113,7 +112,7 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
                             $transliterator = self::$transliterators[$rule] ?? (self::$transliterators[$rule] = \Transliterator::create($rule));
                         }
                         if (null === $transliterator) {
-                            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Unknown transliteration rule "%s".', $rule));
+                            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Unknown transliteration rule "%s".', $rule));
                         }
                         self::$transliterators['any-latin/bgn'] = $transliterator;
                     }
@@ -147,9 +146,8 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return int[]
-     * @param int $offset
      */
-    public function codePointsAt($offset) : array
+    public function codePointsAt(int $offset) : array
     {
         $str = $this->slice($offset, 1);
         if ('' === $str->string) {
@@ -163,9 +161,8 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param bool $compat
      */
-    public function folded($compat = \true)
+    public function folded(bool $compat = \true)
     {
         $str = clone $this;
         if (!$compat || !\defined('Normalizer::NFKC_CF')) {
@@ -178,16 +175,14 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param mixed[] $strings
-     * @param string|null $lastGlue
      */
-    public function join($strings, $lastGlue = null)
+    public function join(array $strings, string $lastGlue = null)
     {
         $str = clone $this;
         $tail = null !== $lastGlue && 1 < \count($strings) ? $lastGlue . \array_pop($strings) : '';
         $str->string = \implode($this->string, $strings) . $tail;
         if (!\preg_match('//u', $str->string)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
@@ -200,29 +195,24 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
         $str->string = \mb_strtolower(\str_replace('İ', 'i̇', $str->string), 'UTF-8');
         return $str;
     }
-    /**
-     * @param string $regexp
-     * @param int $flags
-     * @param int $offset
-     */
-    public function match($regexp, $flags = 0, $offset = 0) : array
+    public function match(string $regexp, int $flags = 0, int $offset = 0) : array
     {
         $match = (\PREG_PATTERN_ORDER | \PREG_SET_ORDER) & $flags ? 'preg_match_all' : 'preg_match';
         if ($this->ignoreCase) {
             $regexp .= 'i';
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             if (\false === $match($regexp . 'u', $this->string, $matches, $flags, $offset)) {
                 $lastError = \preg_last_error();
                 foreach (\get_defined_constants(\true)['pcre'] as $k => $v) {
                     if ($lastError === $v && '_ERROR' === \substr($k, -6)) {
-                        throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
+                        throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
                     }
                 }
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
             }
             \array_walk_recursive($matches, function (&$value) {
                 if ($value === '') {
@@ -236,12 +226,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param int $form
      */
-    public function normalize($form = self::NFC)
+    public function normalize(int $form = self::NFC)
     {
         if (!\in_array($form, [self::NFC, self::NFD, self::NFKC, self::NFKD])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Unsupported normalization form.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Unsupported normalization form.');
         }
         $str = clone $this;
         \normalizer_is_normalized($str->string, $form) ?: ($str->string = \normalizer_normalize($str->string, $form));
@@ -249,13 +238,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padBoth($length, $padStr = ' ')
+    public function padBoth(int $length, string $padStr = ' ')
     {
         if ('' === $padStr || !\preg_match('//u', $padStr)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         $pad = clone $this;
         $pad->string = $padStr;
@@ -263,13 +250,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padEnd($length, $padStr = ' ')
+    public function padEnd(int $length, string $padStr = ' ')
     {
         if ('' === $padStr || !\preg_match('//u', $padStr)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         $pad = clone $this;
         $pad->string = $padStr;
@@ -277,13 +262,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padStart($length, $padStr = ' ')
+    public function padStart(int $length, string $padStr = ' ')
     {
         if ('' === $padStr || !\preg_match('//u', $padStr)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         }
         $pad = clone $this;
         $pad->string = $padStr;
@@ -292,9 +275,8 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     /**
      * @param callable|string $to
      * @return $this
-     * @param string $fromRegexp
      */
-    public function replaceMatches($fromRegexp, $to)
+    public function replaceMatches(string $fromRegexp, $to)
     {
         if ($this->ignoreCase) {
             $fromRegexp .= 'i';
@@ -304,27 +286,27 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
             $to = static function (array $m) use($to) : string {
                 $to = $to($m);
                 if ('' !== $to && (!\is_string($to) || !\preg_match('//u', $to))) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Replace callback must return a valid UTF-8 string.');
+                    throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Replace callback must return a valid UTF-8 string.');
                 }
                 return $to;
             };
         } elseif ('' !== $to && !\preg_match('//u', $to)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 string.');
         } else {
             $replace = 'preg_replace';
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             if (null === ($string = $replace($fromRegexp . 'u', $to, $this->string))) {
                 $lastError = \preg_last_error();
                 foreach (\get_defined_constants(\true)['pcre'] as $k => $v) {
                     if ($lastError === $v && '_ERROR' === \substr($k, -6)) {
-                        throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
+                        throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
                     }
                 }
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
             }
         } finally {
             \restore_error_handler();
@@ -348,14 +330,13 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     public function snake()
     {
         $str = $this->camel()->title();
-        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], 'ConfigTransformer202112105\\1_\\2', $str->string), 'UTF-8');
+        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], 'ConfigTransformer202112108\\1_\\2', $str->string), 'UTF-8');
         return $str;
     }
     /**
      * @return $this
-     * @param bool $allWords
      */
-    public function title($allWords = \false)
+    public function title(bool $allWords = \false)
     {
         $str = clone $this;
         $limit = $allWords ? -1 : 1;
@@ -366,12 +347,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trim($chars = " \t\n\r\0\v\f ﻿")
+    public function trim(string $chars = " \t\n\r\0\v\f ﻿")
     {
         if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
         $str = clone $this;
@@ -380,12 +360,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trimEnd($chars = " \t\n\r\0\v\f ﻿")
+    public function trimEnd(string $chars = " \t\n\r\0\v\f ﻿")
     {
         if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
         $str = clone $this;
@@ -412,12 +391,11 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trimStart($chars = " \t\n\r\0\v\f ﻿")
+    public function trimStart(string $chars = " \t\n\r\0\v\f ﻿")
     {
         if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
         $str = clone $this;
@@ -451,10 +429,7 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
         $str->string = \mb_strtoupper($str->string, 'UTF-8');
         return $str;
     }
-    /**
-     * @param bool $ignoreAnsiDecoration
-     */
-    public function width($ignoreAnsiDecoration = \true) : int
+    public function width(bool $ignoreAnsiDecoration = \true) : int
     {
         $width = 0;
         $s = \str_replace(["\0", "\5", "\7"], '', $this->string);
@@ -503,7 +478,7 @@ abstract class AbstractUnicodeString extends \ConfigTransformer202112105\Symfony
                 $len = $leftLen % $padLen;
                 return $str->prepend(\str_repeat($pad->string, \intdiv($leftLen, $padLen)) . ($len ? $pad->slice(0, $len) : ''));
             default:
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Invalid padding type.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Invalid padding type.');
         }
     }
     /**

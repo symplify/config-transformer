@@ -8,58 +8,52 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Formatter;
 
 /**
  * @author Tien Xuan Vo <tien.xuan.vo@gmail.com>
  */
-final class NullOutputFormatterStyle implements \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+final class NullOutputFormatterStyle implements \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     /**
      * {@inheritdoc}
-     * @param string $text
      */
-    public function apply($text) : string
+    public function apply(string $text) : string
     {
         return $text;
     }
     /**
      * {@inheritdoc}
-     * @param string|null $color
      */
-    public function setBackground($color = null) : void
+    public function setBackground(string $color = null) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param string|null $color
      */
-    public function setForeground($color = null) : void
+    public function setForeground(string $color = null) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param string $option
      */
-    public function setOption($option) : void
+    public function setOption(string $option) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $options
      */
-    public function setOptions($options) : void
+    public function setOptions(array $options) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param string $option
      */
-    public function unsetOption($option) : void
+    public function unsetOption(string $option) : void
     {
         // do nothing
     }

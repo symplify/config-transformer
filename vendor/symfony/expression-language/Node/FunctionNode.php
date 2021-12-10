@@ -8,24 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202112108\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202112105\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202112108\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class FunctionNode extends \ConfigTransformer202112105\Symfony\Component\ExpressionLanguage\Node\Node
+class FunctionNode extends \ConfigTransformer202112108\Symfony\Component\ExpressionLanguage\Node\Node
 {
-    public function __construct(string $name, \ConfigTransformer202112105\Symfony\Component\ExpressionLanguage\Node\Node $arguments)
+    public function __construct(string $name, \ConfigTransformer202112108\Symfony\Component\ExpressionLanguage\Node\Node $arguments)
     {
         parent::__construct(['arguments' => $arguments], ['name' => $name]);
     }
-    /**
-     * @param \Symfony\Component\ExpressionLanguage\Compiler $compiler
-     */
-    public function compile($compiler)
+    public function compile(\ConfigTransformer202112108\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $arguments = [];
         foreach ($this->nodes['arguments']->nodes as $node) {
@@ -34,11 +31,7 @@ class FunctionNode extends \ConfigTransformer202112105\Symfony\Component\Express
         $function = $compiler->getFunction($this->attributes['name']);
         $compiler->raw($function['compiler'](...$arguments));
     }
-    /**
-     * @param mixed[] $functions
-     * @param mixed[] $values
-     */
-    public function evaluate($functions, $values)
+    public function evaluate(array $functions, array $values)
     {
         $arguments = [$values];
         foreach ($this->nodes['arguments']->nodes as $node) {

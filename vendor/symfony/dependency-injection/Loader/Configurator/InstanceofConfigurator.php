@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class InstanceofConfigurator extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class InstanceofConfigurator extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\AutowireTrait;
     use Traits\BindTrait;
@@ -30,16 +30,15 @@ class InstanceofConfigurator extends \ConfigTransformer202112105\Symfony\Compone
      * @var string|null
      */
     private $path;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Definition $definition, string $id, string $path = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition $definition, string $id, string $path = null)
     {
         parent::__construct($parent, $definition, $id, []);
         $this->path = $path;
     }
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
-     * @param string $fqcn
      */
-    public final function instanceof($fqcn) : self
+    public final function instanceof(string $fqcn) : self
     {
         return $this->parent->instanceof($fqcn);
     }

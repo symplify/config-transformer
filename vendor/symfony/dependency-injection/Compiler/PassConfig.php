@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Compiler Pass Configuration.
  *
@@ -48,11 +48,11 @@ class PassConfig
     private $removingPasses;
     public function __construct()
     {
-        $this->mergePass = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass();
-        $this->beforeOptimizationPasses = [100 => [new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveClassPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RegisterAutoconfigureAttributesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AttributeAutoconfigurationPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass()], -1000 => [new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass()]];
-        $this->optimizationPasses = [[new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AutoAliasServicePass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveDecoratorStackPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass(\false, \false), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveNamedArgumentsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredPropertiesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AutowirePass(\false), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveInvalidReferencesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CheckReferenceValidityPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CheckArgumentsValidityPass(\false)]];
-        $this->removingPasses = [[new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass(new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass()), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass()]];
-        $this->afterRemovingPasses = [[new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveHotPathPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\ResolveNoPreloadPass(), new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\AliasDeprecatedPublicServicesPass()]];
+        $this->mergePass = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass();
+        $this->beforeOptimizationPasses = [100 => [new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveClassPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RegisterAutoconfigureAttributesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AttributeAutoconfigurationPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass()], -1000 => [new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass()]];
+        $this->optimizationPasses = [[new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AutoAliasServicePass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveDecoratorStackPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass(\false, \false), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveNamedArgumentsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredPropertiesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AutowirePass(\false), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveInvalidReferencesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CheckReferenceValidityPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CheckArgumentsValidityPass(\false)]];
+        $this->removingPasses = [[new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass(new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass()), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass()]];
+        $this->afterRemovingPasses = [[new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveHotPathPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\ResolveNoPreloadPass(), new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\AliasDeprecatedPublicServicesPass()]];
     }
     /**
      * Returns all passes in order to be processed.
@@ -67,15 +67,12 @@ class PassConfig
      * Adds a pass.
      *
      * @throws InvalidArgumentException when a pass type doesn't exist
-     * @param \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
-     * @param string $type
-     * @param int $priority
      */
-    public function addPass($pass, $type = self::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
+    public function addPass(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = self::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
     {
         $property = $type . 'Passes';
         if (!isset($this->{$property})) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid type "%s".', $type));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid type "%s".', $type));
         }
         $passes =& $this->{$property};
         if (!isset($passes[$priority])) {
@@ -131,14 +128,11 @@ class PassConfig
     /**
      * Gets the Merge pass.
      */
-    public function getMergePass() : \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+    public function getMergePass() : \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
     {
         return $this->mergePass;
     }
-    /**
-     * @param \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
-     */
-    public function setMergePass($pass)
+    public function setMergePass(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass)
     {
         $this->mergePass = $pass;
     }
@@ -147,7 +141,7 @@ class PassConfig
      *
      * @param CompilerPassInterface[] $passes
      */
-    public function setAfterRemovingPasses($passes)
+    public function setAfterRemovingPasses(array $passes)
     {
         $this->afterRemovingPasses = [$passes];
     }
@@ -156,7 +150,7 @@ class PassConfig
      *
      * @param CompilerPassInterface[] $passes
      */
-    public function setBeforeOptimizationPasses($passes)
+    public function setBeforeOptimizationPasses(array $passes)
     {
         $this->beforeOptimizationPasses = [$passes];
     }
@@ -165,7 +159,7 @@ class PassConfig
      *
      * @param CompilerPassInterface[] $passes
      */
-    public function setBeforeRemovingPasses($passes)
+    public function setBeforeRemovingPasses(array $passes)
     {
         $this->beforeRemovingPasses = [$passes];
     }
@@ -174,7 +168,7 @@ class PassConfig
      *
      * @param CompilerPassInterface[] $passes
      */
-    public function setOptimizationPasses($passes)
+    public function setOptimizationPasses(array $passes)
     {
         $this->optimizationPasses = [$passes];
     }
@@ -183,7 +177,7 @@ class PassConfig
      *
      * @param CompilerPassInterface[] $passes
      */
-    public function setRemovingPasses($passes)
+    public function setRemovingPasses(array $passes)
     {
         $this->removingPasses = [$passes];
     }

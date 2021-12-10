@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202112105\PHPUnit\Framework\Assert;
-use ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202112105\Symfony\Component\Console\Output\StreamOutput;
-use ConfigTransformer202112105\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
+use ConfigTransformer202112108\PHPUnit\Framework\Assert;
+use ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\StreamOutput;
+use ConfigTransformer202112108\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>
  */
@@ -39,9 +39,8 @@ trait TesterTrait
      * Gets the display returned by the last execution of the command or application.
      *
      * @throws \RuntimeException If it's called before the execute method
-     * @param bool $normalize
      */
-    public function getDisplay($normalize = \false) : string
+    public function getDisplay(bool $normalize = \false) : string
     {
         if (!isset($this->output)) {
             throw new \RuntimeException('Output not initialized, did you execute the command before requesting the display?');
@@ -58,7 +57,7 @@ trait TesterTrait
      *
      * @param bool $normalize Whether to normalize end of lines to \n or not
      */
-    public function getErrorOutput($normalize = \false) : string
+    public function getErrorOutput(bool $normalize = \false) : string
     {
         if (!$this->captureStreamsIndependently) {
             throw new \LogicException('The error output is not available when the tester is run without "capture_stderr_separately" option set.');
@@ -73,14 +72,14 @@ trait TesterTrait
     /**
      * Gets the input instance used by the last execution of the command or application.
      */
-    public function getInput() : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputInterface
+    public function getInput() : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputInterface
     {
         return $this->input;
     }
     /**
      * Gets the output instance used by the last execution of the command or application.
      */
-    public function getOutput() : \ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface
+    public function getOutput() : \ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface
     {
         return $this->output;
     }
@@ -96,12 +95,9 @@ trait TesterTrait
         }
         return $this->statusCode;
     }
-    /**
-     * @param string $message
-     */
-    public function assertCommandIsSuccessful($message = '') : void
+    public function assertCommandIsSuccessful(string $message = '') : void
     {
-        \ConfigTransformer202112105\PHPUnit\Framework\Assert::assertThat($this->statusCode, new \ConfigTransformer202112105\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful(), $message);
+        \ConfigTransformer202112108\PHPUnit\Framework\Assert::assertThat($this->statusCode, new \ConfigTransformer202112108\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful(), $message);
     }
     /**
      * Sets the user inputs.
@@ -111,7 +107,7 @@ trait TesterTrait
      *
      * @return $this
      */
-    public function setInputs($inputs)
+    public function setInputs(array $inputs)
     {
         $this->inputs = $inputs;
         return $this;
@@ -129,7 +125,7 @@ trait TesterTrait
     {
         $this->captureStreamsIndependently = \array_key_exists('capture_stderr_separately', $options) && $options['capture_stderr_separately'];
         if (!$this->captureStreamsIndependently) {
-            $this->output = new \ConfigTransformer202112105\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202112108\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             if (isset($options['decorated'])) {
                 $this->output->setDecorated($options['decorated']);
             }
@@ -137,8 +133,8 @@ trait TesterTrait
                 $this->output->setVerbosity($options['verbosity']);
             }
         } else {
-            $this->output = new \ConfigTransformer202112105\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer202112105\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
-            $errorOutput = new \ConfigTransformer202112105\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202112108\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer202112108\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
+            $errorOutput = new \ConfigTransformer202112108\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             $errorOutput->setFormatter($this->output->getFormatter());
             $errorOutput->setVerbosity($this->output->getVerbosity());
             $errorOutput->setDecorated($this->output->isDecorated());

@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202112105\Psr\Cache;
+namespace ConfigTransformer202112108\Psr\Cache;
 
 /**
  * CacheItemInterface defines an interface for interacting with objects inside a cache.
@@ -82,7 +82,7 @@ interface CacheItemInterface
      * @return static
      *   The called object.
      */
-    public function expiresAt($expiration);
+    public function expiresAt(?\DateTimeInterface $expiration);
     /**
      * Sets the expiration time for this cache item.
      *

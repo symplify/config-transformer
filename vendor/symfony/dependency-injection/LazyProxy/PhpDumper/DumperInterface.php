@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition;
 /**
  * Lazy proxy dumper capable of generating the instantiation logic PHP code for proxied services.
  *
@@ -20,19 +20,14 @@ interface DumperInterface
 {
     /**
      * Inspects whether the given definitions should produce proxy instantiation logic in the dumped container.
-     * @param \Symfony\Component\DependencyInjection\Definition $definition
      */
-    public function isProxyCandidate($definition) : bool;
+    public function isProxyCandidate(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition $definition) : bool;
     /**
      * Generates the code to be used to instantiate a proxy in the dumped factory code.
-     * @param \Symfony\Component\DependencyInjection\Definition $definition
-     * @param string $id
-     * @param string $factoryCode
      */
-    public function getProxyFactoryCode($definition, $id, $factoryCode) : string;
+    public function getProxyFactoryCode(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition $definition, string $id, string $factoryCode) : string;
     /**
      * Generates the code for the lazy proxy.
-     * @param \Symfony\Component\DependencyInjection\Definition $definition
      */
-    public function getProxyCode($definition) : string;
+    public function getProxyCode(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Definition $definition) : string;
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Node\Stmt;
+namespace ConfigTransformer202112108\PhpParser\Node\Stmt;
 
-use ConfigTransformer202112105\PhpParser\Node;
-abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
+use ConfigTransformer202112108\PhpParser\Node;
+abstract class ClassLike extends \ConfigTransformer202112108\PhpParser\Node\Stmt
 {
     /** @var Node\Identifier|null Name */
     public $name;
@@ -21,7 +21,7 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
     {
         $traitUses = [];
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\TraitUse) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\TraitUse) {
                 $traitUses[] = $stmt;
             }
         }
@@ -34,7 +34,7 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
     {
         $constants = [];
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\ClassConst) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\ClassConst) {
                 $constants[] = $stmt;
             }
         }
@@ -47,7 +47,7 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
     {
         $properties = [];
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\Property) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\Property) {
                 $properties[] = $stmt;
             }
         }
@@ -60,12 +60,12 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
      *
      * @return Property|null Property node or null if the property does not exist
      */
-    public function getProperty($name)
+    public function getProperty(string $name)
     {
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\Property) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\Property) {
                 foreach ($stmt->props as $prop) {
-                    if ($prop instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\PropertyProperty && $name === $prop->name->toString()) {
+                    if ($prop instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\PropertyProperty && $name === $prop->name->toString()) {
                         return $stmt;
                     }
                 }
@@ -82,7 +82,7 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
     {
         $methods = [];
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\ClassMethod) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\ClassMethod) {
                 $methods[] = $stmt;
             }
         }
@@ -95,11 +95,11 @@ abstract class ClassLike extends \ConfigTransformer202112105\PhpParser\Node\Stmt
      *
      * @return ClassMethod|null Method node or null if the method does not exist
      */
-    public function getMethod($name)
+    public function getMethod(string $name)
     {
         $lowerName = \strtolower($name);
         foreach ($this->stmts as $stmt) {
-            if ($stmt instanceof \ConfigTransformer202112105\PhpParser\Node\Stmt\ClassMethod && $lowerName === $stmt->name->toLowerString()) {
+            if ($stmt instanceof \ConfigTransformer202112108\PhpParser\Node\Stmt\ClassMethod && $lowerName === $stmt->name->toLowerString()) {
                 return $stmt;
             }
         }

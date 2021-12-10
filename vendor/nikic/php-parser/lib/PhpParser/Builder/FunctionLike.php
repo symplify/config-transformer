@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Builder;
+namespace ConfigTransformer202112108\PhpParser\Builder;
 
-use ConfigTransformer202112105\PhpParser\BuilderHelpers;
-use ConfigTransformer202112105\PhpParser\Node;
-abstract class FunctionLike extends \ConfigTransformer202112105\PhpParser\Builder\Declaration
+use ConfigTransformer202112108\PhpParser\BuilderHelpers;
+use ConfigTransformer202112108\PhpParser\Node;
+abstract class FunctionLike extends \ConfigTransformer202112108\PhpParser\Builder\Declaration
 {
     protected $returnByRef = \false;
     protected $params = [];
@@ -30,8 +30,8 @@ abstract class FunctionLike extends \ConfigTransformer202112105\PhpParser\Builde
      */
     public function addParam($param)
     {
-        $param = \ConfigTransformer202112105\PhpParser\BuilderHelpers::normalizeNode($param);
-        if (!$param instanceof \ConfigTransformer202112105\PhpParser\Node\Param) {
+        $param = \ConfigTransformer202112108\PhpParser\BuilderHelpers::normalizeNode($param);
+        if (!$param instanceof \ConfigTransformer202112108\PhpParser\Node\Param) {
             throw new \LogicException(\sprintf('Expected parameter node, got "%s"', $param->getType()));
         }
         $this->params[] = $param;
@@ -44,7 +44,7 @@ abstract class FunctionLike extends \ConfigTransformer202112105\PhpParser\Builde
      *
      * @return $this The builder instance (for fluid interface)
      */
-    public function addParams($params)
+    public function addParams(array $params)
     {
         foreach ($params as $param) {
             $this->addParam($param);
@@ -60,7 +60,7 @@ abstract class FunctionLike extends \ConfigTransformer202112105\PhpParser\Builde
      */
     public function setReturnType($type)
     {
-        $this->returnType = \ConfigTransformer202112105\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->returnType = \ConfigTransformer202112108\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
 }

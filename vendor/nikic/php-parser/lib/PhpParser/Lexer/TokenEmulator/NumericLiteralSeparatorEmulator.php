@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202112105\PhpParser\Lexer\Emulative;
-final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer202112108\PhpParser\Lexer\Emulative;
+final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     const BIN = '(?:0b[01]+(?:_[01]+)*)';
     const HEX = '(?:0x[0-9a-f]+(?:_[0-9a-f]+)*)';
@@ -15,20 +15,13 @@ final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202112105\
     const NUMBER = '~' . self::FLOAT . '|' . self::BIN . '|' . self::HEX . '|' . self::DEC . '~iA';
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202112105\PhpParser\Lexer\Emulative::PHP_7_4;
+        return \ConfigTransformer202112108\PhpParser\Lexer\Emulative::PHP_7_4;
     }
-    /**
-     * @param string $code
-     */
-    public function isEmulationNeeded($code) : bool
+    public function isEmulationNeeded(string $code) : bool
     {
         return \preg_match('~[0-9]_[0-9]~', $code) || \preg_match('~0x[0-9a-f]+_[0-9a-f]~i', $code);
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function emulate($code, $tokens) : array
+    public function emulate(string $code, array $tokens) : array
     {
         // We need to manually iterate and manage a count because we'll change
         // the tokens array on the way
@@ -87,11 +80,7 @@ final class NumericLiteralSeparatorEmulator extends \ConfigTransformer202112105\
         }
         return \is_float($num) ? \T_DNUMBER : \T_LNUMBER;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function reverseEmulate($code, $tokens) : array
+    public function reverseEmulate(string $code, array $tokens) : array
     {
         // Numeric separators were not legal code previously, don't bother.
         return $tokens;

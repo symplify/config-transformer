@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config;
+namespace ConfigTransformer202112108\Symfony\Component\Config;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202112108\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ResourceCheckers.
  *
@@ -29,16 +29,14 @@ interface ResourceCheckerInterface
      * resource or not.
      *
      * @return bool
-     * @param \Symfony\Component\Config\Resource\ResourceInterface $metadata
      */
-    public function supports($metadata);
+    public function supports(\ConfigTransformer202112108\Symfony\Component\Config\Resource\ResourceInterface $metadata);
     /**
      * Validates the resource.
      *
      * @param int $timestamp The timestamp at which the cache associated with this resource was created
      *
      * @return bool
-     * @param \Symfony\Component\Config\Resource\ResourceInterface $resource
      */
-    public function isFresh($resource, $timestamp);
+    public function isFresh(\ConfigTransformer202112108\Symfony\Component\Config\Resource\ResourceInterface $resource, int $timestamp);
 }

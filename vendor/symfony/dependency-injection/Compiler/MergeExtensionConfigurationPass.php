@@ -8,38 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\Extension;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 /**
  * Merges extension configs into the container builder.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class MergeExtensionConfigurationPass implements \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class MergeExtensionConfigurationPass implements \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $parameters = $container->getParameterBag()->all();
         $definitions = $container->getDefinitions();
         $aliases = $container->getAliases();
         $exprLangProviders = $container->getExpressionLanguageProviders();
-        $configAvailable = \class_exists(\ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode::class);
+        $configAvailable = \class_exists(\ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode::class);
         foreach ($container->getExtensions() as $extension) {
-            if ($extension instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface) {
+            if ($extension instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface) {
                 $extension->prepend($container);
             }
         }
@@ -49,19 +48,19 @@ class MergeExtensionConfigurationPass implements \ConfigTransformer202112105\Sym
                 continue;
             }
             $resolvingBag = $container->getParameterBag();
-            if ($resolvingBag instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag && $extension instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\Extension) {
+            if ($resolvingBag instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag && $extension instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\Extension) {
                 // create a dedicated bag so that we can track env vars per-extension
-                $resolvingBag = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag($resolvingBag);
+                $resolvingBag = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag($resolvingBag);
                 if ($configAvailable) {
-                    \ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode::setPlaceholderUniquePrefix($resolvingBag->getEnvPlaceholderUniquePrefix());
+                    \ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode::setPlaceholderUniquePrefix($resolvingBag->getEnvPlaceholderUniquePrefix());
                 }
             }
             $config = $resolvingBag->resolveValue($config);
             try {
-                $tmpContainer = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder($extension, $resolvingBag);
+                $tmpContainer = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder($extension, $resolvingBag);
                 $tmpContainer->setResourceTracking($container->isTrackingResources());
                 $tmpContainer->addObjectResource($extension);
-                if ($extension instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface && null !== ($configuration = $extension->getConfiguration($config, $tmpContainer))) {
+                if ($extension instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface && null !== ($configuration = $extension->getConfiguration($config, $tmpContainer))) {
                     $tmpContainer->addObjectResource($configuration);
                 }
                 foreach ($exprLangProviders as $provider) {
@@ -69,15 +68,15 @@ class MergeExtensionConfigurationPass implements \ConfigTransformer202112105\Sym
                 }
                 $extension->load($config, $tmpContainer);
             } catch (\Exception $e) {
-                if ($resolvingBag instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
+                if ($resolvingBag instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
                     $container->getParameterBag()->mergeEnvPlaceholders($resolvingBag);
                 }
                 if ($configAvailable) {
-                    \ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
+                    \ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
                 }
                 throw $e;
             }
-            if ($resolvingBag instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
+            if ($resolvingBag instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
                 // don't keep track of env vars that are *overridden* when configs are merged
                 $resolvingBag->freezeAfterProcessing($extension, $tmpContainer);
             }
@@ -85,7 +84,7 @@ class MergeExtensionConfigurationPass implements \ConfigTransformer202112105\Sym
             $container->getParameterBag()->add($parameters);
         }
         if ($configAvailable) {
-            \ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
+            \ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
         }
         $container->addDefinitions($definitions);
         $container->addAliases($aliases);
@@ -94,7 +93,7 @@ class MergeExtensionConfigurationPass implements \ConfigTransformer202112105\Sym
 /**
  * @internal
  */
-class MergeExtensionConfigurationParameterBag extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+class MergeExtensionConfigurationParameterBag extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
 {
     /**
      * @var mixed[]
@@ -105,11 +104,7 @@ class MergeExtensionConfigurationParameterBag extends \ConfigTransformer20211210
         parent::__construct($parameterBag->all());
         $this->mergeEnvPlaceholders($parameterBag);
     }
-    /**
-     * @param \Symfony\Component\DependencyInjection\Extension\Extension $extension
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function freezeAfterProcessing($extension, $container)
+    public function freezeAfterProcessing(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\Extension $extension, \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!($config = $extension->getProcessedConfigs())) {
             // Extension::processConfiguration() wasn't called, we cannot know how configs were merged
@@ -144,13 +139,13 @@ class MergeExtensionConfigurationParameterBag extends \ConfigTransformer20211210
  *
  * @internal
  */
-class MergeExtensionConfigurationContainerBuilder extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder
+class MergeExtensionConfigurationContainerBuilder extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder
 {
     /**
      * @var string
      */
     private $extensionClass;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension, \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension, \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
     {
         parent::__construct($parameterBag);
         $this->extensionClass = \get_class($extension);
@@ -158,45 +153,39 @@ class MergeExtensionConfigurationContainerBuilder extends \ConfigTransformer2021
     /**
      * {@inheritdoc}
      * @return $this
-     * @param \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
-     * @param string $type
-     * @param int $priority
      */
-    public function addCompilerPass($pass, $type = \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
+    public function addCompilerPass(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
     {
-        throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot add compiler pass "%s" from extension "%s". Compiler passes must be registered before the container is compiled.', \get_debug_type($pass), $this->extensionClass));
+        throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot add compiler pass "%s" from extension "%s". Compiler passes must be registered before the container is compiled.', \get_debug_type($pass), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
-     * @param \Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension
      */
-    public function registerExtension($extension)
+    public function registerExtension(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension)
     {
-        throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot register extension "%s" from "%s". Extensions must be registered before the container is compiled.', \get_debug_type($extension), $this->extensionClass));
+        throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot register extension "%s" from "%s". Extensions must be registered before the container is compiled.', \get_debug_type($extension), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
-     * @param bool $resolveEnvPlaceholders
      */
-    public function compile($resolveEnvPlaceholders = \false)
+    public function compile(bool $resolveEnvPlaceholders = \false)
     {
-        throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Cannot compile the container in extension "%s".', $this->extensionClass));
+        throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Cannot compile the container in extension "%s".', $this->extensionClass));
     }
     /**
      * {@inheritdoc}
      * @param bool|string $format
      * @param mixed $value
      * @return mixed
-     * @param mixed[]|null $usedEnvs
      */
-    public function resolveEnvPlaceholders($value, $format = null, &$usedEnvs = null)
+    public function resolveEnvPlaceholders($value, $format = null, array &$usedEnvs = null)
     {
         if (\true !== $format || !\is_string($value)) {
             return parent::resolveEnvPlaceholders($value, $format, $usedEnvs);
         }
         $bag = $this->getParameterBag();
         $value = $bag->resolveValue($value);
-        if (!$bag instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
+        if (!$bag instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
             return parent::resolveEnvPlaceholders($value, $format, $usedEnvs);
         }
         foreach ($bag->getEnvPlaceholders() as $env => $placeholders) {
@@ -205,7 +194,7 @@ class MergeExtensionConfigurationContainerBuilder extends \ConfigTransformer2021
             }
             foreach ($placeholders as $placeholder) {
                 if (\false !== \stripos($value, $placeholder)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Using a cast in "env(%s)" is incompatible with resolution at compile time in "%s". The logic in the extension should be moved to a compiler pass, or an env parameter with no cast should be used instead.', $env, $this->extensionClass));
+                    throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Using a cast in "env(%s)" is incompatible with resolution at compile time in "%s". The logic in the extension should be moved to a compiler pass, or an env parameter with no cast should be used instead.', $env, $this->extensionClass));
                 }
             }
         }

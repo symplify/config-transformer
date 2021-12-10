@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\Psr\Container;
+namespace ConfigTransformer202112108\Psr\Container;
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.
@@ -18,7 +18,7 @@ interface ContainerInterface
      *
      * @return mixed Entry.
      */
-    public function get($id);
+    public function get(string $id);
     /**
      * Returns true if the container can return an entry for the given identifier.
      * Returns false otherwise.
@@ -30,5 +30,5 @@ interface ContainerInterface
      *
      * @return bool
      */
-    public function has($id) : bool;
+    public function has(string $id) : bool;
 }

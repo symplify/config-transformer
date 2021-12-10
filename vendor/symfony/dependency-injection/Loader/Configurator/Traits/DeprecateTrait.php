@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DeprecateTrait
 {
     /**
@@ -24,7 +24,7 @@ trait DeprecateTrait
      *
      * @throws InvalidArgumentException when the message template is invalid
      */
-    public final function deprecate($package, $version, $message)
+    public final function deprecate(string $package, string $version, string $message)
     {
         $this->definition->setDeprecated($package, $version, $message);
         return $this;

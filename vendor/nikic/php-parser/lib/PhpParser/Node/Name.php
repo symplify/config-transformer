@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Node;
+namespace ConfigTransformer202112108\PhpParser\Node;
 
-use ConfigTransformer202112105\PhpParser\NodeAbstract;
-class Name extends \ConfigTransformer202112105\PhpParser\NodeAbstract
+use ConfigTransformer202112108\PhpParser\NodeAbstract;
+class Name extends \ConfigTransformer202112108\PhpParser\NodeAbstract
 {
     /** @var string[] Parts of the name */
     public $parts;
@@ -143,7 +143,7 @@ class Name extends \ConfigTransformer202112105\PhpParser\NodeAbstract
      *
      * @return static|null Sliced name
      */
-    public function slice($offset, $length = null)
+    public function slice(int $offset, int $length = null)
     {
         $numParts = \count($this->parts);
         $realOffset = $offset < 0 ? $offset + $numParts : $offset;
@@ -181,7 +181,7 @@ class Name extends \ConfigTransformer202112105\PhpParser\NodeAbstract
      *
      * @return static|null Concatenated name
      */
-    public static function concat($name1, $name2, $attributes = [])
+    public static function concat($name1, $name2, array $attributes = [])
     {
         if (null === $name1 && null === $name2) {
             return null;

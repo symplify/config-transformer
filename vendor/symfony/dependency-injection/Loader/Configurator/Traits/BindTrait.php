@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Reference;
 trait BindTrait
 {
     /**
@@ -29,15 +29,15 @@ trait BindTrait
      *
      * @return $this
      */
-    public final function bind($nameOrFqcn, $valueOrRef)
+    public final function bind(string $nameOrFqcn, $valueOrRef)
     {
         $valueOrRef = static::processValue($valueOrRef, \true);
-        if (!\preg_match('/^(?:(?:array|bool|float|int|string|iterable)[ \\t]*+)?\\$/', $nameOrFqcn) && !$valueOrRef instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Reference) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid binding for service "%s": named arguments must start with a "$", and FQCN must map to references. Neither applies to binding "%s".', $this->id, $nameOrFqcn));
+        if (!\preg_match('/^(?:(?:array|bool|float|int|string|iterable)[ \\t]*+)?\\$/', $nameOrFqcn) && !$valueOrRef instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Reference) {
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid binding for service "%s": named arguments must start with a "$", and FQCN must map to references. Neither applies to binding "%s".', $this->id, $nameOrFqcn));
         }
         $bindings = $this->definition->getBindings();
-        $type = $this instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
-        $bindings[$nameOrFqcn] = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
+        $type = $this instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
+        $bindings[$nameOrFqcn] = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
         $this->definition->setBindings($bindings);
         return $this;
     }

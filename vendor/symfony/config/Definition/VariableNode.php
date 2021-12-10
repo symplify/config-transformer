@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * This node represents a value of variable type in the config tree.
  *
@@ -19,7 +19,7 @@ use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\Inv
  *
  * @author Jeremy Mikola <jmikola@gmail.com>
  */
-class VariableNode extends \ConfigTransformer202112105\Symfony\Component\Config\Definition\BaseNode implements \ConfigTransformer202112105\Symfony\Component\Config\Definition\PrototypeNodeInterface
+class VariableNode extends \ConfigTransformer202112108\Symfony\Component\Config\Definition\BaseNode implements \ConfigTransformer202112108\Symfony\Component\Config\Definition\PrototypeNodeInterface
 {
     protected $defaultValueSet = \false;
     protected $defaultValue;
@@ -53,15 +53,14 @@ class VariableNode extends \ConfigTransformer202112105\Symfony\Component\Config\
      *
      * @param bool $boolean True if this entity will accept empty values
      */
-    public function setAllowEmptyValue($boolean)
+    public function setAllowEmptyValue(bool $boolean)
     {
         $this->allowEmptyValue = $boolean;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -82,7 +81,7 @@ class VariableNode extends \ConfigTransformer202112105\Symfony\Component\Config\
         // deny environment variables only when using custom validators
         // this avoids ever passing an empty value to final validation closures
         if (!$this->allowEmptyValue && $this->isHandlingPlaceholder() && $this->finalValidationClosures) {
-            $e = new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The path "%s" cannot contain an environment variable when empty values are not allowed by definition and are validated.', $this->getPath()));
+            $e = new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The path "%s" cannot contain an environment variable when empty values are not allowed by definition and are validated.', $this->getPath()));
             if ($hint = $this->getInfo()) {
                 $e->addHint($hint);
             }
@@ -90,7 +89,7 @@ class VariableNode extends \ConfigTransformer202112105\Symfony\Component\Config\
             throw $e;
         }
         if (!$this->allowEmptyValue && $this->isValueEmpty($value)) {
-            $ex = new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The path "%s" cannot contain an empty value, but got %s.', $this->getPath(), \json_encode($value)));
+            $ex = new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The path "%s" cannot contain an empty value, but got %s.', $this->getPath(), \json_encode($value)));
             if ($hint = $this->getInfo()) {
                 $ex->addHint($hint);
             }

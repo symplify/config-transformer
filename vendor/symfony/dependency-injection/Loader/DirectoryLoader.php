@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader;
 
 /**
  * DirectoryLoader is a recursive loader to go through directories.
  *
  * @author Sebastien Lavoie <seb@wemakecustom.com>
  */
-class DirectoryLoader extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\FileLoader
+class DirectoryLoader extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     /**
      * {@inheritdoc}
@@ -43,9 +43,8 @@ class DirectoryLoader extends \ConfigTransformer202112105\Symfony\Component\Depe
     /**
      * {@inheritdoc}
      * @param mixed $resource
-     * @param string|null $type
      */
-    public function supports($resource, $type = null) : bool
+    public function supports($resource, string $type = null) : bool
     {
         if ('directory' === $type) {
             return \true;

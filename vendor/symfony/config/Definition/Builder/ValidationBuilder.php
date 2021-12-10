@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class builds validation conditions.
@@ -19,7 +19,7 @@ class ValidationBuilder
 {
     protected $node;
     public $rules = [];
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -27,14 +27,13 @@ class ValidationBuilder
      * Registers a closure to run as normalization or an expression builder to build it if null is provided.
      *
      * @return $this|\Symfony\Component\Config\Definition\Builder\ExprBuilder
-     * @param \Closure|null $closure
      */
-    public function rule($closure = null)
+    public function rule(\Closure $closure = null)
     {
         if (null !== $closure) {
             $this->rules[] = $closure;
             return $this;
         }
-        return $this->rules[] = new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Builder\ExprBuilder($this->node);
+        return $this->rules[] = new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Builder\ExprBuilder($this->node);
     }
 }

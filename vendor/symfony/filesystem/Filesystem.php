@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Filesystem;
+namespace ConfigTransformer202112108\Symfony\Component\Filesystem;
 
-use ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * Provides basic utility to manipulate the file system.
  *
@@ -30,15 +30,12 @@ class Filesystem
      *
      * @throws FileNotFoundException When originFile doesn't exist
      * @throws IOException           When copy fails
-     * @param string $originFile
-     * @param string $targetFile
-     * @param bool $overwriteNewerFiles
      */
-    public function copy($originFile, $targetFile, $overwriteNewerFiles = \false)
+    public function copy(string $originFile, string $targetFile, bool $overwriteNewerFiles = \false)
     {
         $originIsLocal = \stream_is_local($originFile) || 0 === \stripos($originFile, 'file://');
         if ($originIsLocal && !\is_file($originFile)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\FileNotFoundException(\sprintf('Failed to copy "%s" because file does not exist.', $originFile), 0, null, $originFile);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\FileNotFoundException(\sprintf('Failed to copy "%s" because file does not exist.', $originFile), 0, null, $originFile);
         }
         $this->mkdir(\dirname($targetFile));
         $doCopy = \true;
@@ -48,24 +45,24 @@ class Filesystem
         if ($doCopy) {
             // https://bugs.php.net/64634
             if (!($source = self::box('fopen', $originFile, 'r'))) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s" because source file could not be opened for reading: ', $originFile, $targetFile) . self::$lastError, 0, null, $originFile);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s" because source file could not be opened for reading: ', $originFile, $targetFile) . self::$lastError, 0, null, $originFile);
             }
             // Stream context created to allow files overwrite when using FTP stream wrapper - disabled by default
             if (!($target = self::box('fopen', $targetFile, 'w', \false, \stream_context_create(['ftp' => ['overwrite' => \true]])))) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s" because target file could not be opened for writing: ', $originFile, $targetFile) . self::$lastError, 0, null, $originFile);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s" because target file could not be opened for writing: ', $originFile, $targetFile) . self::$lastError, 0, null, $originFile);
             }
             $bytesCopied = \stream_copy_to_stream($source, $target);
             \fclose($source);
             \fclose($target);
             unset($source, $target);
             if (!\is_file($targetFile)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s".', $originFile, $targetFile), 0, null, $originFile);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy "%s" to "%s".', $originFile, $targetFile), 0, null, $originFile);
             }
             if ($originIsLocal) {
                 // Like `cp`, preserve executable permission bits
                 self::box('chmod', $targetFile, \fileperms($targetFile) | \fileperms($originFile) & 0111);
                 if ($bytesCopied !== ($bytesOrigin = \filesize($originFile))) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy the whole content of "%s" to "%s" (%g of %g bytes copied).', $originFile, $targetFile, $bytesCopied, $bytesOrigin), 0, null, $originFile);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to copy the whole content of "%s" to "%s" (%g of %g bytes copied).', $originFile, $targetFile, $bytesCopied, $bytesOrigin), 0, null, $originFile);
                 }
             }
         }
@@ -75,16 +72,15 @@ class Filesystem
      *
      * @throws IOException On any directory creation failure
      * @param mixed[]|string $dirs
-     * @param int $mode
      */
-    public function mkdir($dirs, $mode = 0777)
+    public function mkdir($dirs, int $mode = 0777)
     {
         foreach ($this->toIterable($dirs) as $dir) {
             if (\is_dir($dir)) {
                 continue;
             }
             if (!self::box('mkdir', $dir, $mode, \true) && !\is_dir($dir)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to create "%s": ', $dir) . self::$lastError, 0, null, $dir);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to create "%s": ', $dir) . self::$lastError, 0, null, $dir);
             }
         }
     }
@@ -97,7 +93,7 @@ class Filesystem
         $maxPathLength = \PHP_MAXPATHLEN - 2;
         foreach ($this->toIterable($files) as $file) {
             if (\strlen($file) > $maxPathLength) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Could not check if file exist because path length exceeds %d characters.', $maxPathLength), 0, null, $file);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Could not check if file exist because path length exceeds %d characters.', $maxPathLength), 0, null, $file);
             }
             if (!\file_exists($file)) {
                 return \false;
@@ -114,11 +110,11 @@ class Filesystem
      * @throws IOException When touch fails
      * @param mixed[]|string $files
      */
-    public function touch($files, $time = null, $atime = null)
+    public function touch($files, int $time = null, int $atime = null)
     {
         foreach ($this->toIterable($files) as $file) {
             if (!($time ? self::box('touch', $file, $time, $atime) : self::box('touch', $file))) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to touch "%s": ', $file) . self::$lastError, 0, null, $file);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to touch "%s": ', $file) . self::$lastError, 0, null, $file);
             }
         }
     }
@@ -144,7 +140,7 @@ class Filesystem
             if (\is_link($file)) {
                 // See https://bugs.php.net/52176
                 if (!(self::box('unlink', $file) || '\\' !== \DIRECTORY_SEPARATOR || self::box('rmdir', $file)) && \file_exists($file)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove symlink "%s": ', $file) . self::$lastError);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove symlink "%s": ', $file) . self::$lastError);
                 }
             } elseif (\is_dir($file)) {
                 if (!$isRecursive) {
@@ -152,7 +148,7 @@ class Filesystem
                     if (\file_exists($tmpName)) {
                         try {
                             self::doRemove([$tmpName], \true);
-                        } catch (\ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException $e) {
+                        } catch (\ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException $e) {
                         }
                     }
                     if (!\file_exists($tmpName) && self::box('rename', $file, $tmpName)) {
@@ -169,10 +165,10 @@ class Filesystem
                     if (null !== $origFile && self::box('rename', $file, $origFile)) {
                         $file = $origFile;
                     }
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove directory "%s": ', $file) . $lastError);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove directory "%s": ', $file) . $lastError);
                 }
             } elseif (!self::box('unlink', $file) && (\strpos(self::$lastError, 'Permission denied') !== \false || \file_exists($file))) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove file "%s": ', $file) . self::$lastError);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to remove file "%s": ', $file) . self::$lastError);
             }
         }
     }
@@ -186,11 +182,11 @@ class Filesystem
      * @throws IOException When the change fails
      * @param mixed[]|string $files
      */
-    public function chmod($files, $mode, $umask = 00, $recursive = \false)
+    public function chmod($files, int $mode, int $umask = 00, bool $recursive = \false)
     {
         foreach ($this->toIterable($files) as $file) {
             if (\is_int($mode) && !self::box('chmod', $file, $mode & ~$umask)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chmod file "%s": ', $file) . self::$lastError, 0, null, $file);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chmod file "%s": ', $file) . self::$lastError, 0, null, $file);
             }
             if ($recursive && \is_dir($file) && !\is_link($file)) {
                 $this->chmod(new \FilesystemIterator($file), $mode, $umask, \true);
@@ -206,7 +202,7 @@ class Filesystem
      * @throws IOException When the change fails
      * @param mixed[]|string $files
      */
-    public function chown($files, $user, $recursive = \false)
+    public function chown($files, $user, bool $recursive = \false)
     {
         foreach ($this->toIterable($files) as $file) {
             if ($recursive && \is_dir($file) && !\is_link($file)) {
@@ -214,11 +210,11 @@ class Filesystem
             }
             if (\is_link($file) && \function_exists('lchown')) {
                 if (!self::box('lchown', $file, $user)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chown file "%s": ', $file) . self::$lastError, 0, null, $file);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chown file "%s": ', $file) . self::$lastError, 0, null, $file);
                 }
             } else {
                 if (!self::box('chown', $file, $user)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chown file "%s": ', $file) . self::$lastError, 0, null, $file);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chown file "%s": ', $file) . self::$lastError, 0, null, $file);
                 }
             }
         }
@@ -232,7 +228,7 @@ class Filesystem
      * @throws IOException When the change fails
      * @param mixed[]|string $files
      */
-    public function chgrp($files, $group, $recursive = \false)
+    public function chgrp($files, $group, bool $recursive = \false)
     {
         foreach ($this->toIterable($files) as $file) {
             if ($recursive && \is_dir($file) && !\is_link($file)) {
@@ -240,11 +236,11 @@ class Filesystem
             }
             if (\is_link($file) && \function_exists('lchgrp')) {
                 if (!self::box('lchgrp', $file, $group)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chgrp file "%s": ', $file) . self::$lastError, 0, null, $file);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chgrp file "%s": ', $file) . self::$lastError, 0, null, $file);
                 }
             } else {
                 if (!self::box('chgrp', $file, $group)) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chgrp file "%s": ', $file) . self::$lastError, 0, null, $file);
+                    throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to chgrp file "%s": ', $file) . self::$lastError, 0, null, $file);
                 }
             }
         }
@@ -254,15 +250,12 @@ class Filesystem
      *
      * @throws IOException When target file or directory already exists
      * @throws IOException When origin cannot be renamed
-     * @param string $origin
-     * @param string $target
-     * @param bool $overwrite
      */
-    public function rename($origin, $target, $overwrite = \false)
+    public function rename(string $origin, string $target, bool $overwrite = \false)
     {
         // we check that target does not exist
         if (!$overwrite && $this->isReadable($target)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot rename because the target "%s" already exists.', $target), 0, null, $target);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot rename because the target "%s" already exists.', $target), 0, null, $target);
         }
         if (!self::box('rename', $origin, $target)) {
             if (\is_dir($origin)) {
@@ -271,7 +264,7 @@ class Filesystem
                 $this->remove($origin);
                 return;
             }
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot rename "%s" to "%s": ', $origin, $target) . self::$lastError, 0, null, $target);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot rename "%s" to "%s": ', $origin, $target) . self::$lastError, 0, null, $target);
         }
     }
     /**
@@ -283,7 +276,7 @@ class Filesystem
     {
         $maxPathLength = \PHP_MAXPATHLEN - 2;
         if (\strlen($filename) > $maxPathLength) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Could not check if file is readable because path length exceeds %d characters.', $maxPathLength), 0, null, $filename);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Could not check if file is readable because path length exceeds %d characters.', $maxPathLength), 0, null, $filename);
         }
         return \is_readable($filename);
     }
@@ -291,11 +284,8 @@ class Filesystem
      * Creates a symbolic link or copy a directory.
      *
      * @throws IOException When symlink fails
-     * @param string $originDir
-     * @param string $targetDir
-     * @param bool $copyOnWindows
      */
-    public function symlink($originDir, $targetDir, $copyOnWindows = \false)
+    public function symlink(string $originDir, string $targetDir, bool $copyOnWindows = \false)
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $originDir = \strtr($originDir, '/', '\\');
@@ -323,15 +313,14 @@ class Filesystem
      *
      * @throws FileNotFoundException When original file is missing or not a file
      * @throws IOException           When link fails, including if link already exists
-     * @param string $originFile
      */
-    public function hardlink($originFile, $targetFiles)
+    public function hardlink(string $originFile, $targetFiles)
     {
         if (!$this->exists($originFile)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\FileNotFoundException(null, 0, null, $originFile);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\FileNotFoundException(null, 0, null, $originFile);
         }
         if (!\is_file($originFile)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\FileNotFoundException(\sprintf('Origin file "%s" is not a file.', $originFile));
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\FileNotFoundException(\sprintf('Origin file "%s" is not a file.', $originFile));
         }
         foreach ($this->toIterable($targetFiles) as $targetFile) {
             if (\is_file($targetFile)) {
@@ -352,10 +341,10 @@ class Filesystem
     {
         if (self::$lastError) {
             if ('\\' === \DIRECTORY_SEPARATOR && \strpos(self::$lastError, 'error code(1314)') !== \false) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Unable to create "%s" link due to error code 1314: \'A required privilege is not held by the client\'. Do you have the required Administrator-rights?', $linkType), 0, null, $target);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Unable to create "%s" link due to error code 1314: \'A required privilege is not held by the client\'. Do you have the required Administrator-rights?', $linkType), 0, null, $target);
             }
         }
-        throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to create "%s" link from "%s" to "%s": ', $linkType, $origin, $target) . self::$lastError, 0, null, $target);
+        throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to create "%s" link from "%s" to "%s": ', $linkType, $origin, $target) . self::$lastError, 0, null, $target);
     }
     /**
      * Resolves links in paths.
@@ -367,10 +356,8 @@ class Filesystem
      * With $canonicalize = true
      *      - if $path does not exist, returns null
      *      - if $path exists, returns its absolute fully resolved final version
-     * @param string $path
-     * @param bool $canonicalize
      */
-    public function readlink($path, $canonicalize = \false) : ?string
+    public function readlink(string $path, bool $canonicalize = \false) : ?string
     {
         if (!$canonicalize && !\is_link($path)) {
             return null;
@@ -385,16 +372,14 @@ class Filesystem
     }
     /**
      * Given an existing path, convert it to a path relative to a given starting path.
-     * @param string $endPath
-     * @param string $startPath
      */
-    public function makePathRelative($endPath, $startPath) : string
+    public function makePathRelative(string $endPath, string $startPath) : string
     {
         if (!$this->isAbsolutePath($startPath)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\InvalidArgumentException(\sprintf('The start path "%s" is not absolute.', $startPath));
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\InvalidArgumentException(\sprintf('The start path "%s" is not absolute.', $startPath));
         }
         if (!$this->isAbsolutePath($endPath)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\InvalidArgumentException(\sprintf('The end path "%s" is not absolute.', $endPath));
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\InvalidArgumentException(\sprintf('The end path "%s" is not absolute.', $endPath));
         }
         // Normalize separators on Windows
         if ('\\' === \DIRECTORY_SEPARATOR) {
@@ -457,16 +442,14 @@ class Filesystem
      *                                    - $options['delete'] Whether to delete files that are not in the source directory (defaults to false)
      *
      * @throws IOException When file type is unknown
-     * @param string $originDir
-     * @param string $targetDir
      */
-    public function mirror($originDir, $targetDir, $iterator = null, $options = [])
+    public function mirror(string $originDir, string $targetDir, \Traversable $iterator = null, array $options = [])
     {
         $targetDir = \rtrim($targetDir, '/\\');
         $originDir = \rtrim($originDir, '/\\');
         $originDirLen = \strlen($originDir);
         if (!$this->exists($originDir)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('The origin directory specified "%s" was not found.', $originDir), 0, null, $originDir);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('The origin directory specified "%s" was not found.', $originDir), 0, null, $originDir);
         }
         // Iterate in destination folder to remove obsolete entries
         if ($this->exists($targetDir) && isset($options['delete']) && $options['delete']) {
@@ -503,15 +486,14 @@ class Filesystem
             } elseif (\is_file($file)) {
                 $this->copy($file, $target, $options['override'] ?? \false);
             } else {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Unable to guess "%s" file type.', $file), 0, null, $file);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Unable to guess "%s" file type.', $file), 0, null, $file);
             }
         }
     }
     /**
      * Returns whether the file path is an absolute path.
-     * @param string $file
      */
-    public function isAbsolutePath($file) : bool
+    public function isAbsolutePath(string $file) : bool
     {
         return '' !== $file && (\strspn($file, '/\\', 0, 1) || \strlen($file) > 3 && \ctype_alpha($file[0]) && ':' === $file[1] && \strspn($file, '/\\', 2, 1) || null !== \parse_url($file, \PHP_URL_SCHEME));
     }
@@ -523,9 +505,8 @@ class Filesystem
      * @param string $suffix The suffix of the generated temporary filename
      *
      * @return string The new temporary filename (with path), or throw an exception on failure
-     * @param string $dir
      */
-    public function tempnam($dir, $prefix, $suffix = '') : string
+    public function tempnam(string $dir, string $prefix, string $suffix = '') : string
     {
         [$scheme, $hierarchy] = $this->getSchemeAndHierarchy($dir);
         // If no scheme or scheme is "file" or "gs" (Google Cloud) create temp file in local filesystem
@@ -537,7 +518,7 @@ class Filesystem
                 }
                 return $tmpFile;
             }
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException('A temporary file could not be created: ' . self::$lastError);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException('A temporary file could not be created: ' . self::$lastError);
         }
         // Loop until we create a valid temp file or have reached 10 attempts
         for ($i = 0; $i < 10; ++$i) {
@@ -552,7 +533,7 @@ class Filesystem
             self::box('fclose', $handle);
             return $tmpFile;
         }
-        throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException('A temporary file could not be created: ' . self::$lastError);
+        throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException('A temporary file could not be created: ' . self::$lastError);
     }
     /**
      * Atomically dumps content into a file.
@@ -560,9 +541,8 @@ class Filesystem
      * @param string|resource $content The data to write into the file
      *
      * @throws IOException if the file cannot be written to
-     * @param string $filename
      */
-    public function dumpFile($filename, $content)
+    public function dumpFile(string $filename, $content)
     {
         if (\is_array($content)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be string or resource, array given.', __METHOD__));
@@ -576,7 +556,7 @@ class Filesystem
         $tmpFile = $this->tempnam($dir, \basename($filename));
         try {
             if (\false === self::box('file_put_contents', $tmpFile, $content)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s": ', $filename) . self::$lastError, 0, null, $filename);
+                throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s": ', $filename) . self::$lastError, 0, null, $filename);
             }
             self::box('chmod', $tmpFile, \file_exists($filename) ? \fileperms($filename) : 0666 & ~\umask());
             $this->rename($tmpFile, $filename, \true);
@@ -593,9 +573,8 @@ class Filesystem
      * @param bool            $lock    Whether the file should be locked when writing to it
      *
      * @throws IOException If the file is not writable
-     * @param string $filename
      */
-    public function appendToFile($filename, $content)
+    public function appendToFile(string $filename, $content)
     {
         if (\is_array($content)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be string or resource, array given.', __METHOD__));
@@ -606,7 +585,7 @@ class Filesystem
         }
         $lock = \func_num_args() > 2 && \func_get_arg(2);
         if (\false === self::box('file_put_contents', $filename, $content, \FILE_APPEND | ($lock ? \LOCK_EX : 0))) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s": ', $filename) . self::$lastError, 0, null, $filename);
+            throw new \ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s": ', $filename) . self::$lastError, 0, null, $filename);
         }
     }
     /**
@@ -640,10 +619,8 @@ class Filesystem
     }
     /**
      * @internal
-     * @param int $type
-     * @param string $msg
      */
-    public static function handleError($type, $msg)
+    public static function handleError(int $type, string $msg)
     {
         self::$lastError = $msg;
     }

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * ParameterBagInterface is the interface implemented by objects that manage service container parameters.
  *
@@ -29,9 +29,8 @@ interface ParameterBagInterface
      * Adds parameters to the service container parameters.
      *
      * @throws LogicException if the parameter cannot be added
-     * @param mixed[] $parameters
      */
-    public function add($parameters);
+    public function add(array $parameters);
     /**
      * Gets the service container parameters.
      */
@@ -42,27 +41,23 @@ interface ParameterBagInterface
      * @return array|bool|string|int|float|null
      *
      * @throws ParameterNotFoundException if the parameter is not defined
-     * @param string $name
      */
-    public function get($name);
+    public function get(string $name);
     /**
      * Removes a parameter.
-     * @param string $name
      */
-    public function remove($name);
+    public function remove(string $name);
     /**
      * Sets a service container parameter.
      *
      * @throws LogicException if the parameter cannot be set
      * @param mixed[]|bool|float|int|string|null $value
-     * @param string $name
      */
-    public function set($name, $value);
+    public function set(string $name, $value);
     /**
      * Returns true if a parameter name is defined.
-     * @param string $name
      */
-    public function has($name) : bool;
+    public function has(string $name) : bool;
     /**
      * Replaces parameter placeholders (%name%) by their values for all parameters.
      */

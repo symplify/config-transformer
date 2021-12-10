@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+class ParameterBag implements \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
 {
     protected $parameters = [];
     protected $resolved = \false;
@@ -35,9 +35,8 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $parameters
      */
-    public function add($parameters)
+    public function add(array $parameters)
     {
         foreach ($parameters as $key => $value) {
             $this->set($key, $value);
@@ -53,13 +52,12 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
     /**
      * {@inheritdoc}
      * @return mixed[]|bool|float|int|string|null
-     * @param string $name
      */
-    public function get($name)
+    public function get(string $name)
     {
         if (!\array_key_exists($name, $this->parameters)) {
             if (!$name) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
             }
             $alternatives = [];
             foreach ($this->parameters as $key => $parameterValue) {
@@ -82,32 +80,29 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
                     $key = \substr($key, 0, -1 * (1 + \array_pop($namePartsLength)));
                 }
             }
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
         }
         return $this->parameters[$name];
     }
     /**
      * {@inheritdoc}
      * @param mixed[]|bool|float|int|string|null $value
-     * @param string $name
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         $this->parameters[$name] = $value;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name) : bool
+    public function has(string $name) : bool
     {
         return \array_key_exists($name, $this->parameters);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         unset($this->parameters[$name]);
     }
@@ -124,7 +119,7 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
             try {
                 $value = $this->resolveValue($value);
                 $parameters[$key] = $this->unescapeValue($value);
-            } catch (\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
                 $e->setSourceKey($key);
                 throw $e;
             }
@@ -143,7 +138,7 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
      * @param mixed $value
      * @return mixed
      */
-    public function resolveValue($value, $resolving = [])
+    public function resolveValue($value, array $resolving = [])
     {
         if (\is_array($value)) {
             $args = [];
@@ -166,9 +161,8 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
      * @throws ParameterCircularReferenceException if a circular reference if detected
      * @throws RuntimeException                    when a given parameter has a type problem
      * @return mixed
-     * @param string $value
      */
-    public function resolveString($value, $resolving = [])
+    public function resolveString(string $value, array $resolving = [])
     {
         // we do this to deal with non string values (Boolean, integer, ...)
         // as the preg_replace_callback throw an exception when trying
@@ -176,7 +170,7 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
         if (\preg_match('/^%([^%\\s]+)%$/', $value, $match)) {
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolving[$key] = \true;
             return $this->resolved ? $this->get($key) : $this->resolveValue($this->get($key), $resolving);
@@ -188,11 +182,11 @@ class ParameterBag implements \ConfigTransformer202112105\Symfony\Component\Depe
             }
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolved = $this->get($key);
             if (!\is_string($resolved) && !\is_numeric($resolved)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type "%s" inside string value "%s".', $key, \get_debug_type($resolved), $value));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type "%s" inside string value "%s".', $key, \get_debug_type($resolved), $value));
             }
             $resolved = (string) $resolved;
             $resolving[$key] = \true;

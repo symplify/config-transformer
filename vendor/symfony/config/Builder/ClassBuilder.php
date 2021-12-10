@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Builder;
 
 /**
  * Build PHP classes to generate config.
@@ -108,43 +108,25 @@ BODY
 ', ['NAMESPACE' => $this->namespace, 'REQUIRE' => $require, 'USE' => $use, 'CLASS' => $this->getName(), 'IMPLEMENTS' => $implements, 'BODY' => $body]);
         return $content;
     }
-    /**
-     * @param $this $class
-     */
-    public function addRequire($class) : void
+    public function addRequire(self $class) : void
     {
         $this->require[] = $class;
     }
-    /**
-     * @param string $class
-     */
-    public function addUse($class) : void
+    public function addUse(string $class) : void
     {
         $this->use[$class] = \true;
     }
-    /**
-     * @param string $interface
-     */
-    public function addImplements($interface) : void
+    public function addImplements(string $interface) : void
     {
         $this->implements[] = '\\' . \ltrim($interface, '\\');
     }
-    /**
-     * @param string $name
-     * @param string $body
-     * @param mixed[] $params
-     */
-    public function addMethod($name, $body, $params = []) : void
+    public function addMethod(string $name, string $body, array $params = []) : void
     {
-        $this->methods[] = new \ConfigTransformer202112105\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
+        $this->methods[] = new \ConfigTransformer202112108\Symfony\Component\Config\Builder\Method(\strtr($body, ['NAME' => $this->camelCase($name)] + $params));
     }
-    /**
-     * @param string $name
-     * @param string|null $classType
-     */
-    public function addProperty($name, $classType = null) : \ConfigTransformer202112105\Symfony\Component\Config\Builder\Property
+    public function addProperty(string $name, string $classType = null) : \ConfigTransformer202112108\Symfony\Component\Config\Builder\Property
     {
-        $property = new \ConfigTransformer202112105\Symfony\Component\Config\Builder\Property($name, '_' !== $name[0] ? $this->camelCase($name) : $name);
+        $property = new \ConfigTransformer202112108\Symfony\Component\Config\Builder\Property($name, '_' !== $name[0] ? $this->camelCase($name) : $name);
         if (null !== $classType) {
             $property->setType($classType);
         }
@@ -173,10 +155,7 @@ BODY
     {
         return '\\' . $this->namespace . '\\' . $this->name;
     }
-    /**
-     * @param bool $allowExtraKeys
-     */
-    public function setAllowExtraKeys($allowExtraKeys) : void
+    public function setAllowExtraKeys(bool $allowExtraKeys) : void
     {
         $this->allowExtraKeys = $allowExtraKeys;
     }

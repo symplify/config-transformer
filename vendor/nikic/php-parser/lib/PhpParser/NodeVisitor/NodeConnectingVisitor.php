@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\NodeVisitor;
+namespace ConfigTransformer202112108\PhpParser\NodeVisitor;
 
-use ConfigTransformer202112105\PhpParser\Node;
-use ConfigTransformer202112105\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202112108\PhpParser\Node;
+use ConfigTransformer202112108\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node
  * as well as its sibling nodes.
@@ -14,7 +14,7 @@ use ConfigTransformer202112105\PhpParser\NodeVisitorAbstract;
  * node can be accessed through <code>$node->getAttribute('previous')</code>,
  * and the next node can be accessed through <code>$node->getAttribute('next')</code>.
  */
-final class NodeConnectingVisitor extends \ConfigTransformer202112105\PhpParser\NodeVisitorAbstract
+final class NodeConnectingVisitor extends \ConfigTransformer202112108\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]
@@ -24,18 +24,12 @@ final class NodeConnectingVisitor extends \ConfigTransformer202112105\PhpParser\
      * @var ?Node
      */
     private $previous;
-    /**
-     * @param mixed[] $nodes
-     */
-    public function beforeTraverse($nodes)
+    public function beforeTraverse(array $nodes)
     {
         $this->stack = [];
         $this->previous = null;
     }
-    /**
-     * @param \PhpParser\Node $node
-     */
-    public function enterNode($node)
+    public function enterNode(\ConfigTransformer202112108\PhpParser\Node $node)
     {
         if (!empty($this->stack)) {
             $node->setAttribute('parent', $this->stack[\count($this->stack) - 1]);
@@ -46,10 +40,7 @@ final class NodeConnectingVisitor extends \ConfigTransformer202112105\PhpParser\
         }
         $this->stack[] = $node;
     }
-    /**
-     * @param \PhpParser\Node $node
-     */
-    public function leaveNode($node)
+    public function leaveNode(\ConfigTransformer202112108\PhpParser\Node $node)
     {
         $this->previous = $node;
         \array_pop($this->stack);

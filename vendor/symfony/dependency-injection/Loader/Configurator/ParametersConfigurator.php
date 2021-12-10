@@ -8,26 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ParametersConfigurator extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ParametersConfigurator extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'parameters';
     private $container;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
     }
     /**
      * @return $this
      * @param mixed $value
-     * @param string $name
      */
-    public final function set($name, $value)
+    public final function set(string $name, $value)
     {
         $this->container->setParameter($name, static::processValue($value, \true));
         return $this;

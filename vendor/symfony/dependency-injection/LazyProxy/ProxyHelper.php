@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\LazyProxy;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\LazyProxy;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
@@ -19,11 +19,8 @@ class ProxyHelper
 {
     /**
      * @return string|null The FQCN or builtin name of the type hint, or null when the type hint references an invalid self|parent context
-     * @param \ReflectionFunctionAbstract $r
-     * @param \ReflectionParameter|null $p
-     * @param bool $noBuiltin
      */
-    public static function getTypeHint($r, $p = null, $noBuiltin = \false) : ?string
+    public static function getTypeHint(\ReflectionFunctionAbstract $r, \ReflectionParameter $p = null, bool $noBuiltin = \false) : ?string
     {
         if ($p instanceof \ReflectionParameter) {
             $type = $p->getType();
@@ -37,7 +34,7 @@ class ProxyHelper
         $glue = '|';
         if ($type instanceof \ReflectionUnionType) {
             $reflectionTypes = $type->getTypes();
-        } elseif ($type instanceof \ConfigTransformer202112105\ReflectionIntersectionType) {
+        } elseif ($type instanceof \ConfigTransformer202112108\ReflectionIntersectionType) {
             $reflectionTypes = $type->getTypes();
             $glue = '&';
         } elseif ($type instanceof \ReflectionNamedType) {

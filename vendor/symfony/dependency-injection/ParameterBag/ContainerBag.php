@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerBag extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
+class ContainerBag extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Container $container)
     {
         $this->container = $container;
     }
@@ -32,17 +32,15 @@ class ContainerBag extends \ConfigTransformer202112105\Symfony\Component\Depende
      * {@inheritdoc}
      *
      * @return array|bool|string|int|float|null
-     * @param string $name
      */
-    public function get($name)
+    public function get(string $name)
     {
         return $this->container->getParameter($name);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name) : bool
+    public function has(string $name) : bool
     {
         return $this->container->hasParameter($name);
     }

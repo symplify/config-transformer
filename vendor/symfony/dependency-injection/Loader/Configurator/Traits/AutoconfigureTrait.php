@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait AutoconfigureTrait
 {
     /**
@@ -19,9 +19,8 @@ trait AutoconfigureTrait
      * @return $this
      *
      * @throws InvalidArgumentException when a parent is already set
-     * @param bool $autoconfigured
      */
-    public final function autoconfigure($autoconfigured = \true)
+    public final function autoconfigure(bool $autoconfigured = \true)
     {
         $this->definition->setAutoconfigured($autoconfigured);
         return $this;

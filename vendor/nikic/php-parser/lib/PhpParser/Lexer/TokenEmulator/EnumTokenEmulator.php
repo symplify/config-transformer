@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202112105\PhpParser\Lexer\Emulative;
-final class EnumTokenEmulator extends \ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator\KeywordEmulator
+use ConfigTransformer202112108\PhpParser\Lexer\Emulative;
+final class EnumTokenEmulator extends \ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator\KeywordEmulator
 {
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202112105\PhpParser\Lexer\Emulative::PHP_8_1;
+        return \ConfigTransformer202112108\PhpParser\Lexer\Emulative::PHP_8_1;
     }
     public function getKeywordString() : string
     {
@@ -18,11 +18,7 @@ final class EnumTokenEmulator extends \ConfigTransformer202112105\PhpParser\Lexe
     {
         return \T_ENUM;
     }
-    /**
-     * @param mixed[] $tokens
-     * @param int $pos
-     */
-    protected function isKeywordContext($tokens, $pos) : bool
+    protected function isKeywordContext(array $tokens, int $pos) : bool
     {
         return parent::isKeywordContext($tokens, $pos) && isset($tokens[$pos + 2]) && $tokens[$pos + 1][0] === \T_WHITESPACE && $tokens[$pos + 2][0] === \T_STRING;
     }

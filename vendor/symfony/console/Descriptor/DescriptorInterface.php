@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Descriptor interface.
  *
@@ -20,8 +20,6 @@ interface DescriptorInterface
 {
     /**
      * @param object $object
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param mixed[] $options
      */
-    public function describe($output, $object, $options = []);
+    public function describe(\ConfigTransformer202112108\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = []);
 }

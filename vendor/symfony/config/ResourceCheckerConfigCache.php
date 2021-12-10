@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config;
+namespace ConfigTransformer202112108\Symfony\Component\Config;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202112105\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202112108\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202112108\Symfony\Component\Filesystem\Filesystem;
 /**
  * ResourceCheckerConfigCache uses instances of ResourceCheckerInterface
  * to check whether cached data is still fresh.
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ResourceCheckerConfigCache implements \ConfigTransformer202112105\Symfony\Component\Config\ConfigCacheInterface
+class ResourceCheckerConfigCache implements \ConfigTransformer202112108\Symfony\Component\Config\ConfigCacheInterface
 {
     /**
      * @var string
@@ -100,22 +100,22 @@ class ResourceCheckerConfigCache implements \ConfigTransformer202112105\Symfony\
      *
      * @throws \RuntimeException When cache file can't be written
      */
-    public function write($content, $metadata = null)
+    public function write(string $content, array $metadata = null)
     {
         $mode = 0666;
         $umask = \umask();
-        $filesystem = new \ConfigTransformer202112105\Symfony\Component\Filesystem\Filesystem();
+        $filesystem = new \ConfigTransformer202112108\Symfony\Component\Filesystem\Filesystem();
         $filesystem->dumpFile($this->file, $content);
         try {
             $filesystem->chmod($this->file, $mode, $umask);
-        } catch (\ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException $e) {
+        } catch (\ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException $e) {
             // discard chmod failure (some filesystem may not support it)
         }
         if (null !== $metadata) {
             $filesystem->dumpFile($this->getMetaFile(), \serialize($metadata));
             try {
                 $filesystem->chmod($this->getMetaFile(), $mode, $umask);
-            } catch (\ConfigTransformer202112105\Symfony\Component\Filesystem\Exception\IOException $e) {
+            } catch (\ConfigTransformer202112108\Symfony\Component\Filesystem\Exception\IOException $e) {
                 // discard chmod failure (some filesystem may not support it)
             }
         }
@@ -156,9 +156,8 @@ class ResourceCheckerConfigCache implements \ConfigTransformer202112105\Symfony\
     }
     /**
      * @internal
-     * @param string $class
      */
-    public static function handleUnserializeCallback($class)
+    public static function handleUnserializeCallback(string $class)
     {
         \trigger_error('Class not found: ' . $class);
     }

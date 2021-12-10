@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\Exception;
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\Exception;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * The base node class.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component\Config\Definition\NodeInterface
+abstract class BaseNode implements \ConfigTransformer202112108\Symfony\Component\Config\Definition\NodeInterface
 {
     public const DEFAULT_PATH_SEPARATOR = '.';
     /**
@@ -48,7 +48,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     /**
      * @throws \InvalidArgumentException if the name contains a period
      */
-    public function __construct(?string $name, \ConfigTransformer202112105\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \ConfigTransformer202112108\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
     {
         if (\strpos($name = (string) $name, $pathSeparator) !== \false) {
             throw new \InvalidArgumentException('The name must not contain ".' . $pathSeparator . '".');
@@ -64,10 +64,8 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      * successfully processed the configuration value is returned as is, thus preserving the placeholder.
      *
      * @internal
-     * @param string $placeholder
-     * @param mixed[] $values
      */
-    public static function setPlaceholder($placeholder, $values) : void
+    public static function setPlaceholder(string $placeholder, array $values) : void
     {
         if (!$values) {
             throw new \InvalidArgumentException('At least one value must be provided.');
@@ -81,9 +79,8 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      * placeholder. An exact match provided by {@see setPlaceholder()} might take precedence.
      *
      * @internal
-     * @param string $prefix
      */
-    public static function setPlaceholderUniquePrefix($prefix) : void
+    public static function setPlaceholderUniquePrefix(string $prefix) : void
     {
         self::$placeholderUniquePrefixes[] = $prefix;
     }
@@ -99,25 +96,20 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     }
     /**
      * @param mixed $value
-     * @param string $key
      */
-    public function setAttribute($key, $value)
+    public function setAttribute(string $key, $value)
     {
         $this->attributes[$key] = $value;
     }
     /**
      * @param mixed $default
      * @return mixed
-     * @param string $key
      */
-    public function getAttribute($key, $default = null)
+    public function getAttribute(string $key, $default = null)
     {
         return $this->attributes[$key] ?? $default;
     }
-    /**
-     * @param string $key
-     */
-    public function hasAttribute($key) : bool
+    public function hasAttribute(string $key) : bool
     {
         return isset($this->attributes[$key]);
     }
@@ -125,25 +117,18 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     {
         return $this->attributes;
     }
-    /**
-     * @param mixed[] $attributes
-     */
-    public function setAttributes($attributes)
+    public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
     }
-    /**
-     * @param string $key
-     */
-    public function removeAttribute($key)
+    public function removeAttribute(string $key)
     {
         unset($this->attributes[$key]);
     }
     /**
      * Sets an info message.
-     * @param string $info
      */
-    public function setInfo($info)
+    public function setInfo(string $info)
     {
         $this->setAttribute('info', $info);
     }
@@ -181,9 +166,8 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     }
     /**
      * Set this node as required.
-     * @param bool $boolean
      */
-    public function setRequired($boolean)
+    public function setRequired(bool $boolean)
     {
         $this->required = $boolean;
     }
@@ -197,15 +181,14 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      * You can use %node% and %path% placeholders in your message to display,
      * respectively, the node name and its complete path
      */
-    public function setDeprecated($package, $version, $message = 'The child node "%node%" at path "%path%" is deprecated.')
+    public function setDeprecated(string $package, string $version, string $message = 'The child node "%node%" at path "%path%" is deprecated.')
     {
         $this->deprecation = ['package' => $package, 'version' => $version, 'message' => $message];
     }
     /**
      * Sets if this node can be overridden.
-     * @param bool $allow
      */
-    public function setAllowOverwrite($allow)
+    public function setAllowOverwrite(bool $allow)
     {
         $this->allowOverwrite = $allow;
     }
@@ -214,7 +197,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      *
      * @param \Closure[] $closures An array of Closures used for normalization
      */
-    public function setNormalizationClosures($closures)
+    public function setNormalizationClosures(array $closures)
     {
         $this->normalizationClosures = $closures;
     }
@@ -223,7 +206,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      *
      * @param \Closure[] $closures An array of Closures used for final validation
      */
-    public function setFinalValidationClosures($closures)
+    public function setFinalValidationClosures(array $closures)
     {
         $this->finalValidationClosures = $closures;
     }
@@ -245,7 +228,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
      * @param string $node The configuration node name
      * @param string $path The path of the node
      */
-    public function getDeprecation($node, $path) : array
+    public function getDeprecation(string $node, string $path) : array
     {
         return ['package' => $this->deprecation['package'], 'version' => $this->deprecation['version'], 'message' => \strtr($this->deprecation['message'], ['%node%' => $node, '%path%' => $path])];
     }
@@ -275,7 +258,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     public final function merge($leftSide, $rightSide)
     {
         if (!$this->allowOverwrite) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException(\sprintf('Configuration path "%s" cannot be overwritten. You have to define all options for this path, and any of its sub-paths in one configuration section.', $this->getPath()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException(\sprintf('Configuration path "%s" cannot be overwritten. You have to define all options for this path, and any of its sub-paths in one configuration section.', $this->getPath()));
         }
         if ($leftSide !== ($leftPlaceholders = self::resolvePlaceholderValue($leftSide))) {
             foreach ($leftPlaceholders as $leftPlaceholder) {
@@ -350,7 +333,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     /**
      * Returns parent node for this node.
      */
-    public function getParent() : ?\ConfigTransformer202112105\Symfony\Component\Config\Definition\NodeInterface
+    public function getParent() : ?\ConfigTransformer202112108\Symfony\Component\Config\Definition\NodeInterface
     {
         return $this->parent;
     }
@@ -379,13 +362,13 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
         foreach ($this->finalValidationClosures as $closure) {
             try {
                 $value = $closure($value);
-            } catch (\ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\Exception $e) {
-                if ($e instanceof \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\UnsetKeyException && null !== $this->handlingPlaceholder) {
+            } catch (\ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\Exception $e) {
+                if ($e instanceof \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\UnsetKeyException && null !== $this->handlingPlaceholder) {
                     continue;
                 }
                 throw $e;
             } catch (\Exception $e) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('Invalid configuration for path "%s": ', $this->getPath()) . $e->getMessage(), $e->getCode(), $e);
+                throw new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('Invalid configuration for path "%s": ', $this->getPath()) . $e->getMessage(), $e->getCode(), $e);
             }
         }
         return $value;
@@ -461,7 +444,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
     private function doValidateType($value) : void
     {
         if (null !== $this->handlingPlaceholder && !$this->allowPlaceholders()) {
-            $e = new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('A dynamic value is not compatible with a "%s" node type at path "%s".', static::class, $this->getPath()));
+            $e = new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('A dynamic value is not compatible with a "%s" node type at path "%s".', static::class, $this->getPath()));
             $e->setPath($this->getPath());
             throw $e;
         }
@@ -472,7 +455,7 @@ abstract class BaseNode implements \ConfigTransformer202112105\Symfony\Component
         $knownTypes = \array_keys(self::$placeholders[$this->handlingPlaceholder]);
         $validTypes = $this->getValidPlaceholderTypes();
         if ($validTypes && \array_diff($knownTypes, $validTypes)) {
-            $e = new \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected %s, but got %s.', $this->getPath(), 1 === \count($validTypes) ? '"' . \reset($validTypes) . '"' : 'one of "' . \implode('", "', $validTypes) . '"', 1 === \count($knownTypes) ? '"' . \reset($knownTypes) . '"' : 'one of "' . \implode('", "', $knownTypes) . '"'));
+            $e = new \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected %s, but got %s.', $this->getPath(), 1 === \count($validTypes) ? '"' . \reset($validTypes) . '"' : 'one of "' . \implode('", "', $validTypes) . '"', 1 === \count($knownTypes) ? '"' . \reset($knownTypes) . '"' : 'one of "' . \implode('", "', $knownTypes) . '"'));
             if ($hint = $this->getInfo()) {
                 $e->addHint($hint);
             }

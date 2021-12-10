@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202112105\PhpParser\Lexer\Emulative;
-final class FlexibleDocStringEmulator extends \ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer202112108\PhpParser\Lexer\Emulative;
+final class FlexibleDocStringEmulator extends \ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     const FLEXIBLE_DOC_STRING_REGEX = <<<'REGEX'
 /<<<[ \t]*(['"]?)([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)\1\r?\n
@@ -13,38 +13,23 @@ final class FlexibleDocStringEmulator extends \ConfigTransformer202112105\PhpPar
 REGEX;
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202112105\PhpParser\Lexer\Emulative::PHP_7_3;
+        return \ConfigTransformer202112108\PhpParser\Lexer\Emulative::PHP_7_3;
     }
-    /**
-     * @param string $code
-     */
-    public function isEmulationNeeded($code) : bool
+    public function isEmulationNeeded(string $code) : bool
     {
         return \strpos($code, '<<<') !== \false;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function emulate($code, $tokens) : array
+    public function emulate(string $code, array $tokens) : array
     {
         // Handled by preprocessing + fixup.
         return $tokens;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function reverseEmulate($code, $tokens) : array
+    public function reverseEmulate(string $code, array $tokens) : array
     {
         // Not supported.
         return $tokens;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $patches
-     */
-    public function preprocessCode($code, &$patches) : string
+    public function preprocessCode(string $code, array &$patches) : string
     {
         if (!\preg_match_all(self::FLEXIBLE_DOC_STRING_REGEX, $code, $matches, \PREG_SET_ORDER | \PREG_OFFSET_CAPTURE)) {
             // No heredoc/nowdoc found

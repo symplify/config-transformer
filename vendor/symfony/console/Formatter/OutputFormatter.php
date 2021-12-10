@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Formatter class for console output.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
+class OutputFormatter implements \ConfigTransformer202112108\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
 {
     /**
      * @var bool
@@ -37,9 +37,8 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
     }
     /**
      * Escapes "<" special char in given text.
-     * @param string $text
      */
-    public static function escape($text) : string
+    public static function escape(string $text) : string
     {
         $text = \preg_replace('/([^\\\\]?)</', '$1\\<', $text);
         return self::escapeTrailingBackslash($text);
@@ -48,9 +47,8 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
      * Escapes trailing "\" in given text.
      *
      * @internal
-     * @param string $text
      */
-    public static function escapeTrailingBackslash($text) : string
+    public static function escapeTrailingBackslash(string $text) : string
     {
         if (\substr_compare($text, '\\', -\strlen('\\')) === 0) {
             $len = \strlen($text);
@@ -68,20 +66,19 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
     public function __construct(bool $decorated = \false, array $styles = [])
     {
         $this->decorated = $decorated;
-        $this->setStyle('error', new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
-        $this->setStyle('info', new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
-        $this->setStyle('comment', new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
-        $this->setStyle('question', new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
+        $this->setStyle('error', new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
+        $this->setStyle('info', new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
+        $this->setStyle('comment', new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
+        $this->setStyle('question', new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
         foreach ($styles as $name => $style) {
             $this->setStyle($name, $style);
         }
-        $this->styleStack = new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
+        $this->styleStack = new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         $this->decorated = $decorated;
     }
@@ -94,46 +91,39 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
     }
     /**
      * {@inheritdoc}
-     * @param string $name
-     * @param \Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function setStyle($name, $style)
+    public function setStyle(string $name, \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
     {
         $this->styles[\strtolower($name)] = $style;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function hasStyle($name) : bool
+    public function hasStyle(string $name) : bool
     {
         return isset($this->styles[\strtolower($name)]);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function getStyle($name) : \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    public function getStyle(string $name) : \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (!$this->hasStyle($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Undefined style: "%s".', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Undefined style: "%s".', $name));
         }
         return $this->styles[\strtolower($name)];
     }
     /**
      * {@inheritdoc}
-     * @param string|null $message
      */
-    public function format($message) : ?string
+    public function format(?string $message) : ?string
     {
         return $this->formatAndWrap($message, 0);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $message
-     * @param int $width
      */
-    public function formatAndWrap($message, $width)
+    public function formatAndWrap(?string $message, int $width)
     {
         $offset = 0;
         $output = '';
@@ -172,14 +162,14 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
         }
         return \str_replace('\\<', '<', $output);
     }
-    public function getStyleStack() : \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleStack
+    public function getStyleStack() : \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleStack
     {
         return $this->styleStack;
     }
     /**
      * Tries to create new style instance from string.
      */
-    private function createStyleFromString(string $string) : ?\ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    private function createStyleFromString(string $string) : ?\ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (isset($this->styles[$string])) {
             return $this->styles[$string];
@@ -187,7 +177,7 @@ class OutputFormatter implements \ConfigTransformer202112105\Symfony\Component\C
         if (!\preg_match_all('/([^=]+)=([^;]+)(;|$)/', $string, $matches, \PREG_SET_ORDER)) {
             return null;
         }
-        $style = new \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $style = new \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         foreach ($matches as $match) {
             \array_shift($match);
             $match[0] = \strtolower($match[0]);

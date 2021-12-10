@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\String;
+namespace ConfigTransformer202112108\Symfony\Component\String;
 
-use ConfigTransformer202112105\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a binary-safe string of bytes.
  *
@@ -21,7 +21,7 @@ use ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeExcepti
  *
  * @throws ExceptionInterface
  */
-class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\AbstractString
+class ByteString extends \ConfigTransformer202112108\Symfony\Component\String\AbstractString
 {
     private const ALPHABET_ALPHANUMERIC = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     public function __construct(string $string = '')
@@ -37,20 +37,16 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
      *
      * Copyright (c) 2004-2020, Facebook, Inc. (https://www.facebook.com/)
      */
-    /**
-     * @param int $length
-     * @param string|null $alphabet
-     */
-    public static function fromRandom($length = 16, $alphabet = null) : self
+    public static function fromRandom(int $length = 16, string $alphabet = null) : self
     {
         if ($length <= 0) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('A strictly positive length is expected, "%d" given.', $length));
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('A strictly positive length is expected, "%d" given.', $length));
         }
         $alphabet = $alphabet ?? self::ALPHABET_ALPHANUMERIC;
         $alphabetSize = \strlen($alphabet);
         $bits = (int) \ceil(\log($alphabetSize, 2.0));
         if ($bits <= 0 || $bits > 56) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('The length of the alphabet must in the [2^1, 2^56] range.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('The length of the alphabet must in the [2^1, 2^56] range.');
         }
         $ret = '';
         while ($length > 0) {
@@ -79,19 +75,15 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
         }
         return new static($ret);
     }
-    /**
-     * @param int $offset
-     */
-    public function bytesAt($offset) : array
+    public function bytesAt(int $offset) : array
     {
         $str = $this->string[$offset] ?? '';
         return '' === $str ? [] : [\ord($str)];
     }
     /**
      * @return $this
-     * @param string ...$suffix
      */
-    public function append(...$suffix)
+    public function append(string ...$suffix)
     {
         $str = clone $this;
         $str->string .= 1 >= \count($suffix) ? $suffix[0] ?? '' : \implode('', $suffix);
@@ -106,13 +98,10 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
         $str->string = \lcfirst(\str_replace(' ', '', \ucwords(\preg_replace('/[^a-zA-Z0-9\\x7f-\\xff]++/', ' ', $this->string))));
         return $str;
     }
-    /**
-     * @param int $length
-     */
-    public function chunk($length = 1) : array
+    public function chunk(int $length = 1) : array
     {
         if (1 > $length) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('The chunk length must be greater than zero.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('The chunk length must be greater than zero.');
         }
         if ('' === $this->string) {
             return [];
@@ -130,7 +119,7 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
      */
     public function endsWith($suffix) : bool
     {
-        if ($suffix instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($suffix instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $suffix = $suffix->string;
         } elseif (!\is_string($suffix)) {
             return parent::endsWith($suffix);
@@ -142,7 +131,7 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
      */
     public function equalsTo($string) : bool
     {
-        if ($string instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($string instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $string = $string->string;
         } elseif (!\is_string($string)) {
             return parent::equalsTo($string);
@@ -163,11 +152,10 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @param mixed[]|string|\Symfony\Component\String\AbstractString $needle
-     * @param int $offset
      */
-    public function indexOf($needle, $offset = 0) : ?int
+    public function indexOf($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (!\is_string($needle)) {
             return parent::indexOf($needle, $offset);
@@ -180,11 +168,10 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @param mixed[]|string|\Symfony\Component\String\AbstractString $needle
-     * @param int $offset
      */
-    public function indexOfLast($needle, $offset = 0) : ?int
+    public function indexOfLast($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (!\is_string($needle)) {
             return parent::indexOfLast($needle, $offset);
@@ -201,10 +188,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param mixed[] $strings
-     * @param string|null $lastGlue
      */
-    public function join($strings, $lastGlue = null)
+    public function join(array $strings, string $lastGlue = null)
     {
         $str = clone $this;
         $tail = null !== $lastGlue && 1 < \count($strings) ? $lastGlue . \array_pop($strings) : '';
@@ -224,29 +209,24 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
         $str->string = \strtolower($str->string);
         return $str;
     }
-    /**
-     * @param string $regexp
-     * @param int $flags
-     * @param int $offset
-     */
-    public function match($regexp, $flags = 0, $offset = 0) : array
+    public function match(string $regexp, int $flags = 0, int $offset = 0) : array
     {
         $match = (\PREG_PATTERN_ORDER | \PREG_SET_ORDER) & $flags ? 'preg_match_all' : 'preg_match';
         if ($this->ignoreCase) {
             $regexp .= 'i';
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             if (\false === $match($regexp, $this->string, $matches, $flags, $offset)) {
                 $lastError = \preg_last_error();
                 foreach (\get_defined_constants(\true)['pcre'] as $k => $v) {
                     if ($lastError === $v && '_ERROR' === \substr($k, -6)) {
-                        throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
+                        throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
                     }
                 }
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
             }
             \array_walk_recursive($matches, function (&$value) {
                 if ($value === '') {
@@ -260,10 +240,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padBoth($length, $padStr = ' ')
+    public function padBoth(int $length, string $padStr = ' ')
     {
         $str = clone $this;
         $str->string = \str_pad($this->string, $length, $padStr, \STR_PAD_BOTH);
@@ -271,10 +249,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padEnd($length, $padStr = ' ')
+    public function padEnd(int $length, string $padStr = ' ')
     {
         $str = clone $this;
         $str->string = \str_pad($this->string, $length, $padStr, \STR_PAD_RIGHT);
@@ -282,10 +258,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public function padStart($length, $padStr = ' ')
+    public function padStart(int $length, string $padStr = ' ')
     {
         $str = clone $this;
         $str->string = \str_pad($this->string, $length, $padStr, \STR_PAD_LEFT);
@@ -293,9 +267,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param string ...$prefix
      */
-    public function prepend(...$prefix)
+    public function prepend(string ...$prefix)
     {
         $str = clone $this;
         $str->string = (1 >= \count($prefix) ? $prefix[0] ?? '' : \implode('', $prefix)) . $str->string;
@@ -303,10 +276,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param string $from
-     * @param string $to
      */
-    public function replace($from, $to)
+    public function replace(string $from, string $to)
     {
         $str = clone $this;
         if ('' !== $from) {
@@ -317,26 +288,25 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     /**
      * @param callable|string $to
      * @return $this
-     * @param string $fromRegexp
      */
-    public function replaceMatches($fromRegexp, $to)
+    public function replaceMatches(string $fromRegexp, $to)
     {
         if ($this->ignoreCase) {
             $fromRegexp .= 'i';
         }
         $replace = \is_array($to) || $to instanceof \Closure ? 'preg_replace_callback' : 'preg_replace';
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             if (null === ($string = $replace($fromRegexp, $to, $this->string))) {
                 $lastError = \preg_last_error();
                 foreach (\get_defined_constants(\true)['pcre'] as $k => $v) {
                     if ($lastError === $v && '_ERROR' === \substr($k, -6)) {
-                        throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
+                        throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with ' . $k . '.');
                     }
                 }
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Matching failed with unknown error code.');
             }
         } finally {
             \restore_error_handler();
@@ -356,10 +326,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param int $start
-     * @param int|null $length
      */
-    public function slice($start = 0, $length = null)
+    public function slice(int $start = 0, int $length = null)
     {
         $str = clone $this;
         $str->string = (string) \substr($this->string, $start, $length ?? \PHP_INT_MAX);
@@ -371,33 +339,25 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     public function snake()
     {
         $str = $this->camel()->title();
-        $str->string = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202112105\\1_\\2', $str->string));
+        $str->string = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202112108\\1_\\2', $str->string));
         return $str;
     }
     /**
      * @return $this
-     * @param string $replacement
-     * @param int $start
-     * @param int|null $length
      */
-    public function splice($replacement, $start = 0, $length = null)
+    public function splice(string $replacement, int $start = 0, int $length = null)
     {
         $str = clone $this;
         $str->string = \substr_replace($this->string, $replacement, $start, $length ?? \PHP_INT_MAX);
         return $str;
     }
-    /**
-     * @param string $delimiter
-     * @param int|null $limit
-     * @param int|null $flags
-     */
-    public function split($delimiter, $limit = null, $flags = null) : array
+    public function split(string $delimiter, int $limit = null, int $flags = null) : array
     {
         if (1 > ($limit = $limit ?? \PHP_INT_MAX)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Split limit must be a positive integer.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Split limit must be a positive integer.');
         }
         if ('' === $delimiter) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is empty.');
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException('Split delimiter is empty.');
         }
         if (null !== $flags) {
             return parent::split($delimiter, $limit, $flags);
@@ -415,7 +375,7 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
      */
     public function startsWith($prefix) : bool
     {
-        if ($prefix instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractString) {
+        if ($prefix instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractString) {
             $prefix = $prefix->string;
         } elseif (!\is_string($prefix)) {
             return parent::startsWith($prefix);
@@ -424,38 +384,31 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param bool $allWords
      */
-    public function title($allWords = \false)
+    public function title(bool $allWords = \false)
     {
         $str = clone $this;
         $str->string = $allWords ? \ucwords($str->string) : \ucfirst($str->string);
         return $str;
     }
-    /**
-     * @param string|null $fromEncoding
-     */
-    public function toUnicodeString($fromEncoding = null) : \ConfigTransformer202112105\Symfony\Component\String\UnicodeString
+    public function toUnicodeString(string $fromEncoding = null) : \ConfigTransformer202112108\Symfony\Component\String\UnicodeString
     {
-        return new \ConfigTransformer202112105\Symfony\Component\String\UnicodeString($this->toCodePointString($fromEncoding)->string);
+        return new \ConfigTransformer202112108\Symfony\Component\String\UnicodeString($this->toCodePointString($fromEncoding)->string);
     }
-    /**
-     * @param string|null $fromEncoding
-     */
-    public function toCodePointString($fromEncoding = null) : \ConfigTransformer202112105\Symfony\Component\String\CodePointString
+    public function toCodePointString(string $fromEncoding = null) : \ConfigTransformer202112108\Symfony\Component\String\CodePointString
     {
-        $u = new \ConfigTransformer202112105\Symfony\Component\String\CodePointString();
+        $u = new \ConfigTransformer202112108\Symfony\Component\String\CodePointString();
         if (\in_array($fromEncoding, [null, 'utf8', 'utf-8', 'UTF8', 'UTF-8'], \true) && \preg_match('//u', $this->string)) {
             $u->string = $this->string;
             return $u;
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             try {
                 $validEncoding = \false !== \mb_detect_encoding($this->string, $fromEncoding ?? 'Windows-1252', \true);
-            } catch (\ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException $e) {
+            } catch (\ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException $e) {
                 if (!\function_exists('iconv')) {
                     throw $e;
                 }
@@ -466,16 +419,15 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
             \restore_error_handler();
         }
         if (!$validEncoding) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Invalid "%s" string.', $fromEncoding ?? 'Windows-1252'));
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Invalid "%s" string.', $fromEncoding ?? 'Windows-1252'));
         }
         $u->string = \mb_convert_encoding($this->string, 'UTF-8', $fromEncoding ?? 'Windows-1252');
         return $u;
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trim($chars = " \t\n\r\0\v\f")
+    public function trim(string $chars = " \t\n\r\0\v\f")
     {
         $str = clone $this;
         $str->string = \trim($str->string, $chars);
@@ -483,9 +435,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trimEnd($chars = " \t\n\r\0\v\f")
+    public function trimEnd(string $chars = " \t\n\r\0\v\f")
     {
         $str = clone $this;
         $str->string = \rtrim($str->string, $chars);
@@ -493,9 +444,8 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public function trimStart($chars = " \t\n\r\0\v\f")
+    public function trimStart(string $chars = " \t\n\r\0\v\f")
     {
         $str = clone $this;
         $str->string = \ltrim($str->string, $chars);
@@ -510,12 +460,9 @@ class ByteString extends \ConfigTransformer202112105\Symfony\Component\String\Ab
         $str->string = \strtoupper($str->string);
         return $str;
     }
-    /**
-     * @param bool $ignoreAnsiDecoration
-     */
-    public function width($ignoreAnsiDecoration = \true) : int
+    public function width(bool $ignoreAnsiDecoration = \true) : int
     {
         $string = \preg_match('//u', $this->string) ? $this->string : \preg_replace('/[\\x80-\\xFF]/', '?', $this->string);
-        return (new \ConfigTransformer202112105\Symfony\Component\String\CodePointString($string))->width($ignoreAnsiDecoration);
+        return (new \ConfigTransformer202112108\Symfony\Component\String\CodePointString($string))->width($ignoreAnsiDecoration);
     }
 }

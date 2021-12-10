@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer202112105\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer202112108\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent parameter is used.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterNotFoundException extends \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202112105\Psr\Container\NotFoundExceptionInterface
+class ParameterNotFoundException extends \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \ConfigTransformer202112108\Psr\Container\NotFoundExceptionInterface
 {
     /**
      * @var string
@@ -88,18 +88,12 @@ class ParameterNotFoundException extends \ConfigTransformer202112105\Symfony\Com
     {
         return $this->sourceKey;
     }
-    /**
-     * @param string|null $sourceId
-     */
-    public function setSourceId($sourceId)
+    public function setSourceId(?string $sourceId)
     {
         $this->sourceId = $sourceId;
         $this->updateRepr();
     }
-    /**
-     * @param string|null $sourceKey
-     */
-    public function setSourceKey($sourceKey)
+    public function setSourceKey(?string $sourceKey)
     {
         $this->sourceKey = $sourceKey;
         $this->updateRepr();

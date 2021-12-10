@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * Definition represents a service definition.
  *
@@ -137,7 +137,7 @@ class Definition
      *
      * @return $this
      */
-    public function setChanges($changes)
+    public function setChanges(array $changes)
     {
         $this->changes = $changes;
         return $this;
@@ -154,7 +154,7 @@ class Definition
         $this->changes['factory'] = \true;
         if (\is_string($factory) && \strpos($factory, '::') !== \false) {
             $factory = \explode('::', $factory, 2);
-        } elseif ($factory instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($factory instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Reference) {
             $factory = [$factory, '__invoke'];
         }
         $this->factory = $factory;
@@ -178,20 +178,18 @@ class Definition
      * @return $this
      *
      * @throws InvalidArgumentException in case the decorated service id and the new decorated service id are equals
-     * @param int $priority
-     * @param int $invalidBehavior
      */
-    public function setDecoratedService($id, $renamedId = null, $priority = 0, $invalidBehavior = \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
+    public function setDecoratedService(?string $id, string $renamedId = null, int $priority = 0, int $invalidBehavior = \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
     {
         if ($renamedId && $id === $renamedId) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The decorated service inner name for "%s" must be different than the service name itself.', $id));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The decorated service inner name for "%s" must be different than the service name itself.', $id));
         }
         $this->changes['decorated_service'] = \true;
         if (null === $id) {
             $this->decoratedService = null;
         } else {
             $this->decoratedService = [$id, $renamedId, $priority];
-            if (\ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
+            if (\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
                 $this->decoratedService[] = $invalidBehavior;
             }
         }
@@ -210,9 +208,8 @@ class Definition
      * Sets the service class.
      *
      * @return $this
-     * @param string|null $class
      */
-    public function setClass($class)
+    public function setClass(?string $class)
     {
         $this->changes['class'] = \true;
         $this->class = $class;
@@ -229,9 +226,8 @@ class Definition
      * Sets the arguments to pass to the service constructor/factory method.
      *
      * @return $this
-     * @param mixed[] $arguments
      */
-    public function setArguments($arguments)
+    public function setArguments(array $arguments)
     {
         $this->arguments = $arguments;
         return $this;
@@ -240,9 +236,8 @@ class Definition
      * Sets the properties to define when creating the service.
      *
      * @return $this
-     * @param mixed[] $properties
      */
-    public function setProperties($properties)
+    public function setProperties(array $properties)
     {
         $this->properties = $properties;
         return $this;
@@ -259,9 +254,8 @@ class Definition
      *
      * @return $this
      * @param mixed $value
-     * @param string $name
      */
-    public function setProperty($name, $value)
+    public function setProperty(string $name, $value)
     {
         $this->properties[$name] = $value;
         return $this;
@@ -289,13 +283,13 @@ class Definition
     public function replaceArgument($index, $argument)
     {
         if (0 === \count($this->arguments)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('Cannot replace arguments for class "%s" if none have been configured yet.', $this->class));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('Cannot replace arguments for class "%s" if none have been configured yet.', $this->class));
         }
         if (\is_int($index) && ($index < 0 || $index > \count($this->arguments) - 1)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The index "%d" is not in the range [0, %d] of the arguments of class "%s".', $index, \count($this->arguments) - 1, $this->class));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The index "%d" is not in the range [0, %d] of the arguments of class "%s".', $index, \count($this->arguments) - 1, $this->class));
         }
         if (!\array_key_exists($index, $this->arguments)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The argument "%s" doesn\'t exist in class "%s".', $index, $this->class));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The argument "%s" doesn\'t exist in class "%s".', $index, $this->class));
         }
         $this->arguments[$index] = $argument;
         return $this;
@@ -329,7 +323,7 @@ class Definition
     public function getArgument($index)
     {
         if (!\array_key_exists($index, $this->arguments)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The argument "%s" doesn\'t exist in class "%s".', $index, $this->class));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException(\sprintf('The argument "%s" doesn\'t exist in class "%s".', $index, $this->class));
         }
         return $this->arguments[$index];
     }
@@ -337,9 +331,8 @@ class Definition
      * Sets the methods to call after service initialization.
      *
      * @return $this
-     * @param mixed[] $calls
      */
-    public function setMethodCalls($calls = [])
+    public function setMethodCalls(array $calls = [])
     {
         $this->calls = [];
         foreach ($calls as $call) {
@@ -358,10 +351,10 @@ class Definition
      *
      * @throws InvalidArgumentException on empty $method param
      */
-    public function addMethodCall($method, $arguments = [], $returnsClone = \false)
+    public function addMethodCall(string $method, array $arguments = [], bool $returnsClone = \false)
     {
         if (empty($method)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Method name cannot be empty.');
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Method name cannot be empty.');
         }
         $this->calls[] = $returnsClone ? [$method, $arguments, \true] : [$method, $arguments];
         return $this;
@@ -370,9 +363,8 @@ class Definition
      * Removes a method to call after service initialization.
      *
      * @return $this
-     * @param string $method
      */
-    public function removeMethodCall($method)
+    public function removeMethodCall(string $method)
     {
         foreach ($this->calls as $i => $call) {
             if ($call[0] === $method) {
@@ -383,9 +375,8 @@ class Definition
     }
     /**
      * Check if the current definition has a given method to call after service initialization.
-     * @param string $method
      */
-    public function hasMethodCall($method) : bool
+    public function hasMethodCall(string $method) : bool
     {
         foreach ($this->calls as $call) {
             if ($call[0] === $method) {
@@ -408,7 +399,7 @@ class Definition
      *
      * @return $this
      */
-    public function setInstanceofConditionals($instanceof)
+    public function setInstanceofConditionals(array $instanceof)
     {
         $this->instanceof = $instanceof;
         return $this;
@@ -426,9 +417,8 @@ class Definition
      * Sets whether or not instanceof conditionals should be prepended with a global set.
      *
      * @return $this
-     * @param bool $autoconfigured
      */
-    public function setAutoconfigured($autoconfigured)
+    public function setAutoconfigured(bool $autoconfigured)
     {
         $this->changes['autoconfigured'] = \true;
         $this->autoconfigured = $autoconfigured;
@@ -442,9 +432,8 @@ class Definition
      * Sets tags for this definition.
      *
      * @return $this
-     * @param mixed[] $tags
      */
-    public function setTags($tags)
+    public function setTags(array $tags)
     {
         $this->tags = $tags;
         return $this;
@@ -458,9 +447,8 @@ class Definition
     }
     /**
      * Gets a tag by name.
-     * @param string $name
      */
-    public function getTag($name) : array
+    public function getTag(string $name) : array
     {
         return $this->tags[$name] ?? [];
     }
@@ -468,19 +456,16 @@ class Definition
      * Adds a tag for this definition.
      *
      * @return $this
-     * @param string $name
-     * @param mixed[] $attributes
      */
-    public function addTag($name, $attributes = [])
+    public function addTag(string $name, array $attributes = [])
     {
         $this->tags[$name][] = $attributes;
         return $this;
     }
     /**
      * Whether this definition has a tag with the given name.
-     * @param string $name
      */
-    public function hasTag($name) : bool
+    public function hasTag(string $name) : bool
     {
         return isset($this->tags[$name]);
     }
@@ -488,9 +473,8 @@ class Definition
      * Clears all tags for a given name.
      *
      * @return $this
-     * @param string $name
      */
-    public function clearTag($name)
+    public function clearTag(string $name)
     {
         unset($this->tags[$name]);
         return $this;
@@ -509,9 +493,8 @@ class Definition
      * Sets a file to require before creating the service.
      *
      * @return $this
-     * @param string|null $file
      */
-    public function setFile($file)
+    public function setFile(?string $file)
     {
         $this->changes['file'] = \true;
         $this->file = $file;
@@ -528,9 +511,8 @@ class Definition
      * Sets if the service must be shared or not.
      *
      * @return $this
-     * @param bool $shared
      */
-    public function setShared($shared)
+    public function setShared(bool $shared)
     {
         $this->changes['shared'] = \true;
         $this->shared = $shared;
@@ -547,9 +529,8 @@ class Definition
      * Sets the visibility of this service.
      *
      * @return $this
-     * @param bool $boolean
      */
-    public function setPublic($boolean)
+    public function setPublic(bool $boolean)
     {
         $this->changes['public'] = \true;
         $this->public = $boolean;
@@ -573,9 +554,8 @@ class Definition
      * Sets the lazy flag of this service.
      *
      * @return $this
-     * @param bool $lazy
      */
-    public function setLazy($lazy)
+    public function setLazy(bool $lazy)
     {
         $this->changes['lazy'] = \true;
         $this->lazy = $lazy;
@@ -593,9 +573,8 @@ class Definition
      * container, but dynamically injected.
      *
      * @return $this
-     * @param bool $boolean
      */
-    public function setSynthetic($boolean)
+    public function setSynthetic(bool $boolean)
     {
         $this->synthetic = $boolean;
         if (!isset($this->changes['public'])) {
@@ -616,9 +595,8 @@ class Definition
      * template for other definitions.
      *
      * @return $this
-     * @param bool $boolean
      */
-    public function setAbstract($boolean)
+    public function setAbstract(bool $boolean)
     {
         $this->abstract = $boolean;
         return $this;
@@ -643,14 +621,14 @@ class Definition
      *
      * @throws InvalidArgumentException when the message template is invalid
      */
-    public function setDeprecated($package, $version, $message)
+    public function setDeprecated(string $package, string $version, string $message)
     {
         if ('' !== $message) {
             if (\preg_match('#[\\r\\n]|\\*/#', $message)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Invalid characters found in deprecation template.');
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('Invalid characters found in deprecation template.');
             }
             if (\strpos($message, '%service_id%') === \false) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The deprecation template must contain the "%service_id%" placeholder.');
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The deprecation template must contain the "%service_id%" placeholder.');
             }
         }
         $this->changes['deprecated'] = \true;
@@ -668,7 +646,7 @@ class Definition
     /**
      * @param string $id Service id relying on this definition
      */
-    public function getDeprecation($id) : array
+    public function getDeprecation(string $id) : array
     {
         return ['package' => $this->deprecation['package'], 'version' => $this->deprecation['version'], 'message' => \str_replace('%service_id%', $id, $this->deprecation['message'])];
     }
@@ -684,7 +662,7 @@ class Definition
         $this->changes['configurator'] = \true;
         if (\is_string($configurator) && \strpos($configurator, '::') !== \false) {
             $configurator = \explode('::', $configurator, 2);
-        } elseif ($configurator instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($configurator instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Reference) {
             $configurator = [$configurator, '__invoke'];
         }
         $this->configurator = $configurator;
@@ -710,9 +688,8 @@ class Definition
      * Enables/disables autowiring.
      *
      * @return $this
-     * @param bool $autowired
      */
-    public function setAutowired($autowired)
+    public function setAutowired(bool $autowired)
     {
         $this->changes['autowired'] = \true;
         $this->autowired = $autowired;
@@ -735,17 +712,16 @@ class Definition
      * called and of controller actions).
      *
      * @return $this
-     * @param mixed[] $bindings
      */
-    public function setBindings($bindings)
+    public function setBindings(array $bindings)
     {
         foreach ($bindings as $key => $binding) {
             if (0 < \strpos($key, '$') && $key !== ($k = \preg_replace('/[ \\t]*\\$/', ' $', $key))) {
                 unset($bindings[$key]);
                 $bindings[$key = $k] = $binding;
             }
-            if (!$binding instanceof \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument) {
-                $bindings[$key] = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\BoundArgument($binding);
+            if (!$binding instanceof \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument) {
+                $bindings[$key] = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\BoundArgument($binding);
             }
         }
         $this->bindings = $bindings;

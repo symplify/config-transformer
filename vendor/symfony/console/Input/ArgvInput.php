@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Input;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Input;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * ArgvInput represents an input coming from the CLI arguments.
  *
@@ -36,7 +36,7 @@ use ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeExcept
  * @see http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html
  * @see http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html#tag_12_02
  */
-class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\Input\Input
+class ArgvInput extends \ConfigTransformer202112108\Symfony\Component\Console\Input\Input
 {
     /**
      * @var mixed[]
@@ -46,7 +46,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
      * @var mixed[]
      */
     private $parsed;
-    public function __construct(array $argv = null, \ConfigTransformer202112105\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(array $argv = null, \ConfigTransformer202112108\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         $argv = $argv ?? $_SERVER['argv'] ?? [];
         // strip the application name
@@ -54,10 +54,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
         $this->tokens = $argv;
         parent::__construct($definition);
     }
-    /**
-     * @param mixed[] $tokens
-     */
-    protected function setTokens($tokens)
+    protected function setTokens(array $tokens)
     {
         $this->tokens = $tokens;
     }
@@ -72,11 +69,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
             $parseOptions = $this->parseToken($token, $parseOptions);
         }
     }
-    /**
-     * @param string $token
-     * @param bool $parseOptions
-     */
-    protected function parseToken($token, $parseOptions) : bool
+    protected function parseToken(string $token, bool $parseOptions) : bool
     {
         if ($parseOptions && '' == $token) {
             $this->parseArgument($token);
@@ -119,7 +112,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
         for ($i = 0; $i < $len; ++$i) {
             if (!$this->definition->hasShortcut($name[$i])) {
                 $encoding = \mb_detect_encoding($name, null, \true);
-                throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "-%s" option does not exist.', \false === $encoding ? $name[$i] : \mb_substr($name, $i, 1, $encoding)));
+                throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "-%s" option does not exist.', \false === $encoding ? $name[$i] : \mb_substr($name, $i, 1, $encoding)));
             }
             $option = $this->definition->getOptionForShortcut($name[$i]);
             if ($option->acceptValue()) {
@@ -181,7 +174,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
             } else {
                 $message = \sprintf('No arguments expected, got "%s".', $token);
             }
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException($message);
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException($message);
         }
     }
     /**
@@ -193,7 +186,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
     private function addShortOption(string $shortcut, $value)
     {
         if (!$this->definition->hasShortcut($shortcut)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "-%s" option does not exist.', $shortcut));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "-%s" option does not exist.', $shortcut));
         }
         $this->addLongOption($this->definition->getOptionForShortcut($shortcut)->getName(), $value);
     }
@@ -207,18 +200,18 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
     {
         if (!$this->definition->hasOption($name)) {
             if (!$this->definition->hasNegation($name)) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not exist.', $name));
+                throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not exist.', $name));
             }
             $optionName = $this->definition->negationToName($name);
             if (null !== $value) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not accept a value.', $name));
+                throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not accept a value.', $name));
             }
             $this->options[$optionName] = \false;
             return;
         }
         $option = $this->definition->getOption($name);
         if (null !== $value && !$option->acceptValue()) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not accept a value.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option does not accept a value.', $name));
         }
         if (\in_array($value, ['', null], \true) && $option->acceptValue() && \count($this->parsed)) {
             // if option accepts an optional or mandatory argument
@@ -232,7 +225,7 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
         }
         if (null === $value) {
             if ($option->isValueRequired()) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option requires a value.', $name));
+                throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\RuntimeException(\sprintf('The "--%s" option requires a value.', $name));
             }
             if (!$option->isArray() && !$option->isValueOptional()) {
                 $value = \true;
@@ -276,9 +269,8 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
     /**
      * {@inheritdoc}
      * @param mixed[]|string $values
-     * @param bool $onlyParams
      */
-    public function hasParameterOption($values, $onlyParams = \false) : bool
+    public function hasParameterOption($values, bool $onlyParams = \false) : bool
     {
         $values = (array) $values;
         foreach ($this->tokens as $token) {
@@ -302,9 +294,8 @@ class ArgvInput extends \ConfigTransformer202112105\Symfony\Component\Console\In
      * @param mixed[]|string $values
      * @param mixed[]|bool|float|int|string|null $default
      * @return mixed
-     * @param bool $onlyParams
      */
-    public function getParameterOption($values, $default = \false, $onlyParams = \false)
+    public function getParameterOption($values, $default = \false, bool $onlyParams = \false)
     {
         $values = (array) $values;
         $tokens = $this->tokens;

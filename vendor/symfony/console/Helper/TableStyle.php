@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException;
 /**
  * Defines the styles for a Table.
  *
@@ -121,12 +121,11 @@ class TableStyle
      * Sets padding character, used for cell padding.
      *
      * @return $this
-     * @param string $paddingChar
      */
-    public function setPaddingChar($paddingChar)
+    public function setPaddingChar(string $paddingChar)
     {
         if (!$paddingChar) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException('The padding char must not be empty.');
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException('The padding char must not be empty.');
         }
         $this->paddingChar = $paddingChar;
         return $this;
@@ -153,10 +152,8 @@ class TableStyle
      * </code>
      *
      * @return $this
-     * @param string $outside
-     * @param string|null $inside
      */
-    public function setHorizontalBorderChars($outside, $inside = null)
+    public function setHorizontalBorderChars(string $outside, string $inside = null)
     {
         $this->horizontalOutsideBorderChar = $outside;
         $this->horizontalInsideBorderChar = $inside ?? $outside;
@@ -178,10 +175,8 @@ class TableStyle
      * </code>
      *
      * @return $this
-     * @param string $outside
-     * @param string|null $inside
      */
-    public function setVerticalBorderChars($outside, $inside = null)
+    public function setVerticalBorderChars(string $outside, string $inside = null)
     {
         $this->verticalOutsideBorderChar = $outside;
         $this->verticalInsideBorderChar = $inside ?? $outside;
@@ -227,7 +222,7 @@ class TableStyle
      *
      * @return $this
      */
-    public function setCrossingChars($cross, $topLeft, $topMid, $topRight, $midRight, $bottomRight, $bottomMid, $bottomLeft, $midLeft, $topLeftBottom = null, $topMidBottom = null, $topRightBottom = null)
+    public function setCrossingChars(string $cross, string $topLeft, string $topMid, string $topRight, string $midRight, string $bottomRight, string $bottomMid, string $bottomLeft, string $midLeft, string $topLeftBottom = null, string $topMidBottom = null, string $topRightBottom = null)
     {
         $this->crossingChar = $cross;
         $this->crossingTopLeftChar = $topLeft;
@@ -247,9 +242,8 @@ class TableStyle
      * Sets default crossing character used for each cross.
      *
      * @see {@link setCrossingChars()} for setting each crossing individually.
-     * @param string $char
      */
-    public function setDefaultCrossingChar($char) : self
+    public function setDefaultCrossingChar(string $char) : self
     {
         return $this->setCrossingChars($char, $char, $char, $char, $char, $char, $char, $char, $char);
     }
@@ -273,9 +267,8 @@ class TableStyle
      * Sets header cell format.
      *
      * @return $this
-     * @param string $cellHeaderFormat
      */
-    public function setCellHeaderFormat($cellHeaderFormat)
+    public function setCellHeaderFormat(string $cellHeaderFormat)
     {
         $this->cellHeaderFormat = $cellHeaderFormat;
         return $this;
@@ -291,9 +284,8 @@ class TableStyle
      * Sets row cell format.
      *
      * @return $this
-     * @param string $cellRowFormat
      */
-    public function setCellRowFormat($cellRowFormat)
+    public function setCellRowFormat(string $cellRowFormat)
     {
         $this->cellRowFormat = $cellRowFormat;
         return $this;
@@ -309,9 +301,8 @@ class TableStyle
      * Sets row cell content format.
      *
      * @return $this
-     * @param string $cellRowContentFormat
      */
-    public function setCellRowContentFormat($cellRowContentFormat)
+    public function setCellRowContentFormat(string $cellRowContentFormat)
     {
         $this->cellRowContentFormat = $cellRowContentFormat;
         return $this;
@@ -327,9 +318,8 @@ class TableStyle
      * Sets table border format.
      *
      * @return $this
-     * @param string $borderFormat
      */
-    public function setBorderFormat($borderFormat)
+    public function setBorderFormat(string $borderFormat)
     {
         $this->borderFormat = $borderFormat;
         return $this;
@@ -345,12 +335,11 @@ class TableStyle
      * Sets cell padding type.
      *
      * @return $this
-     * @param int $padType
      */
-    public function setPadType($padType)
+    public function setPadType(int $padType)
     {
         if (!\in_array($padType, [\STR_PAD_LEFT, \STR_PAD_RIGHT, \STR_PAD_BOTH], \true)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException('Invalid padding type. Expected one of (STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH).');
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException('Invalid padding type. Expected one of (STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH).');
         }
         $this->padType = $padType;
         return $this;
@@ -368,9 +357,8 @@ class TableStyle
     }
     /**
      * @return $this
-     * @param string $format
      */
-    public function setHeaderTitleFormat($format)
+    public function setHeaderTitleFormat(string $format)
     {
         $this->headerTitleFormat = $format;
         return $this;
@@ -381,9 +369,8 @@ class TableStyle
     }
     /**
      * @return $this
-     * @param string $format
      */
-    public function setFooterTitleFormat($format)
+    public function setFooterTitleFormat(string $format)
     {
         $this->footerTitleFormat = $format;
         return $this;

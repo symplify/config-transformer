@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Color;
+use ConfigTransformer202112108\Symfony\Component\Console\Color;
 /**
  * Formatter style class for defining styles.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class OutputFormatterStyle implements \ConfigTransformer202112105\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+class OutputFormatterStyle implements \ConfigTransformer202112108\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     private $color;
     /**
@@ -47,65 +47,56 @@ class OutputFormatterStyle implements \ConfigTransformer202112105\Symfony\Compon
      */
     public function __construct(string $foreground = null, string $background = null, array $options = [])
     {
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground = $foreground ?: '', $this->background = $background ?: '', $this->options = $options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground = $foreground ?: '', $this->background = $background ?: '', $this->options = $options);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $color
      */
-    public function setForeground($color = null)
+    public function setForeground(string $color = null)
     {
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground = $color ?: '', $this->background, $this->options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground = $color ?: '', $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $color
      */
-    public function setBackground($color = null)
+    public function setBackground(string $color = null)
     {
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground, $this->background = $color ?: '', $this->options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground, $this->background = $color ?: '', $this->options);
     }
-    /**
-     * @param string $url
-     */
-    public function setHref($url) : void
+    public function setHref(string $url) : void
     {
         $this->href = $url;
     }
     /**
      * {@inheritdoc}
-     * @param string $option
      */
-    public function setOption($option)
+    public function setOption(string $option)
     {
         $this->options[] = $option;
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
-     * @param string $option
      */
-    public function unsetOption($option)
+    public function unsetOption(string $option)
     {
         $pos = \array_search($option, $this->options);
         if (\false !== $pos) {
             unset($this->options[$pos]);
         }
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options);
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $options
      */
-    public function setOptions($options)
+    public function setOptions(array $options)
     {
-        $this->color = new \ConfigTransformer202112105\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options = $options);
+        $this->color = new \ConfigTransformer202112108\Symfony\Component\Console\Color($this->foreground, $this->background, $this->options = $options);
     }
     /**
      * {@inheritdoc}
-     * @param string $text
      */
-    public function apply($text) : string
+    public function apply(string $text) : string
     {
         $this->handlesHrefGracefully = $this->handlesHrefGracefully ?? 'JetBrains-JediTerm' !== \getenv('TERMINAL_EMULATOR') && (!\getenv('KONSOLE_VERSION') || (int) \getenv('KONSOLE_VERSION') > 201100);
         if (null !== $this->href && $this->handlesHrefGracefully) {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class builds merge conditions.
@@ -20,7 +20,7 @@ class MergeBuilder
     protected $node;
     public $allowFalse = \false;
     public $allowOverwrite = \true;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -28,9 +28,8 @@ class MergeBuilder
      * Sets whether the node can be unset.
      *
      * @return $this
-     * @param bool $allow
      */
-    public function allowUnset($allow = \true)
+    public function allowUnset(bool $allow = \true)
     {
         $this->allowFalse = $allow;
         return $this;
@@ -39,9 +38,8 @@ class MergeBuilder
      * Sets whether the node can be overwritten.
      *
      * @return $this
-     * @param bool $deny
      */
-    public function denyOverwrite($deny = \true)
+    public function denyOverwrite(bool $deny = \true)
     {
         $this->allowOverwrite = !$deny;
         return $this;

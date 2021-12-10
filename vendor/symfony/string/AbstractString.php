@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\String;
+namespace ConfigTransformer202112108\Symfony\Component\String;
 
-use ConfigTransformer202112105\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract characters.
  *
@@ -42,9 +42,8 @@ abstract class AbstractString implements \JsonSerializable
      * Unwraps instances of AbstractString back to strings.
      *
      * @return string[]|array
-     * @param mixed[] $values
      */
-    public static function unwrap($values) : array
+    public static function unwrap(array $values) : array
     {
         foreach ($values as $k => $v) {
             if ($v instanceof self) {
@@ -59,9 +58,8 @@ abstract class AbstractString implements \JsonSerializable
      * Wraps (and normalizes) strings in instances of AbstractString.
      *
      * @return static[]|array
-     * @param mixed[] $values
      */
-    public static function wrap($values) : array
+    public static function wrap(array $values) : array
     {
         $i = 0;
         $keys = null;
@@ -82,10 +80,8 @@ abstract class AbstractString implements \JsonSerializable
     /**
      * @param string|string[] $needle
      * @return $this
-     * @param bool $includeNeedle
-     * @param int $offset
      */
-    public function after($needle, $includeNeedle = \false, $offset = 0)
+    public function after($needle, bool $includeNeedle = \false, int $offset = 0)
     {
         $str = clone $this;
         $i = \PHP_INT_MAX;
@@ -111,10 +107,8 @@ abstract class AbstractString implements \JsonSerializable
     /**
      * @param string|string[] $needle
      * @return $this
-     * @param bool $includeNeedle
-     * @param int $offset
      */
-    public function afterLast($needle, $includeNeedle = \false, $offset = 0)
+    public function afterLast($needle, bool $includeNeedle = \false, int $offset = 0)
     {
         $str = clone $this;
         $i = null;
@@ -139,16 +133,13 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param string ...$suffix
      */
-    public abstract function append(...$suffix);
+    public abstract function append(string ...$suffix);
     /**
      * @param string|string[] $needle
      * @return $this
-     * @param bool $includeNeedle
-     * @param int $offset
      */
-    public function before($needle, $includeNeedle = \false, $offset = 0)
+    public function before($needle, bool $includeNeedle = \false, int $offset = 0)
     {
         $str = clone $this;
         $i = \PHP_INT_MAX;
@@ -174,10 +165,8 @@ abstract class AbstractString implements \JsonSerializable
     /**
      * @param string|string[] $needle
      * @return $this
-     * @param bool $includeNeedle
-     * @param int $offset
      */
-    public function beforeLast($needle, $includeNeedle = \false, $offset = 0)
+    public function beforeLast($needle, bool $includeNeedle = \false, int $offset = 0)
     {
         $str = clone $this;
         $i = null;
@@ -202,9 +191,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return int[]
-     * @param int $offset
      */
-    public function bytesAt($offset) : array
+    public function bytesAt(int $offset) : array
     {
         $str = $this->slice($offset, 1);
         return '' === $str->string ? [] : \array_values(\unpack('C*', $str->string));
@@ -215,9 +203,8 @@ abstract class AbstractString implements \JsonSerializable
     public abstract function camel();
     /**
      * @return static[]
-     * @param int $length
      */
-    public abstract function chunk($length = 1) : array;
+    public abstract function chunk(int $length = 1) : array;
     /**
      * @return $this
      */
@@ -251,9 +238,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param string $suffix
      */
-    public function ensureEnd($suffix)
+    public function ensureEnd(string $suffix)
     {
         if (!$this->endsWith($suffix)) {
             return $this->append($suffix);
@@ -264,9 +250,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param string $prefix
      */
-    public function ensureStart($prefix)
+    public function ensureStart(string $prefix)
     {
         $prefix = new static($prefix);
         if (!$this->startsWith($prefix)) {
@@ -310,9 +295,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @param string|string[] $needle
-     * @param int $offset
      */
-    public function indexOf($needle, $offset = 0) : ?int
+    public function indexOf($needle, int $offset = 0) : ?int
     {
         if (\is_string($needle)) {
             throw new \TypeError(\sprintf('Method "%s()" must be overridden by class "%s" to deal with non-iterable values.', __FUNCTION__, static::class));
@@ -328,9 +312,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @param string|string[] $needle
-     * @param int $offset
      */
-    public function indexOfLast($needle, $offset = 0) : ?int
+    public function indexOfLast($needle, int $offset = 0) : ?int
     {
         if (\is_string($needle)) {
             throw new \TypeError(\sprintf('Method "%s()" must be overridden by class "%s" to deal with non-iterable values.', __FUNCTION__, static::class));
@@ -350,10 +333,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param mixed[] $strings
-     * @param string|null $lastGlue
      */
-    public abstract function join($strings, $lastGlue = null);
+    public abstract function join(array $strings, string $lastGlue = null);
     public function jsonSerialize() : string
     {
         return $this->string;
@@ -369,42 +350,31 @@ abstract class AbstractString implements \JsonSerializable
      * Pass PREG_PATTERN_ORDER or PREG_SET_ORDER as $flags to get all occurrences matching the regular expression.
      *
      * @return array All matches in a multi-dimensional array ordered according to flags
-     * @param string $regexp
-     * @param int $flags
-     * @param int $offset
      */
-    public abstract function match($regexp, $flags = 0, $offset = 0) : array;
+    public abstract function match(string $regexp, int $flags = 0, int $offset = 0) : array;
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public abstract function padBoth($length, $padStr = ' ');
+    public abstract function padBoth(int $length, string $padStr = ' ');
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public abstract function padEnd($length, $padStr = ' ');
+    public abstract function padEnd(int $length, string $padStr = ' ');
     /**
      * @return $this
-     * @param int $length
-     * @param string $padStr
      */
-    public abstract function padStart($length, $padStr = ' ');
+    public abstract function padStart(int $length, string $padStr = ' ');
     /**
      * @return $this
-     * @param string ...$prefix
      */
-    public abstract function prepend(...$prefix);
+    public abstract function prepend(string ...$prefix);
     /**
      * @return $this
-     * @param int $multiplier
      */
-    public function repeat($multiplier)
+    public function repeat(int $multiplier)
     {
         if (0 > $multiplier) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Multiplier must be positive, %d given.', $multiplier));
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException(\sprintf('Multiplier must be positive, %d given.', $multiplier));
         }
         $str = clone $this;
         $str->string = \str_repeat($str->string, $multiplier);
@@ -412,44 +382,33 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param string $from
-     * @param string $to
      */
-    public abstract function replace($from, $to);
+    public abstract function replace(string $from, string $to);
     /**
      * @param string|callable $to
      * @return $this
-     * @param string $fromRegexp
      */
-    public abstract function replaceMatches($fromRegexp, $to);
+    public abstract function replaceMatches(string $fromRegexp, $to);
     /**
      * @return $this
      */
     public abstract function reverse();
     /**
      * @return $this
-     * @param int $start
-     * @param int|null $length
      */
-    public abstract function slice($start = 0, $length = null);
+    public abstract function slice(int $start = 0, int $length = null);
     /**
      * @return $this
      */
     public abstract function snake();
     /**
      * @return $this
-     * @param string $replacement
-     * @param int $start
-     * @param int|null $length
      */
-    public abstract function splice($replacement, $start = 0, $length = null);
+    public abstract function splice(string $replacement, int $start = 0, int $length = null);
     /**
      * @return static[]
-     * @param string $delimiter
-     * @param int|null $limit
-     * @param int|null $flags
      */
-    public function split($delimiter, $limit = null, $flags = null) : array
+    public function split(string $delimiter, int $limit = null, int $flags = null) : array
     {
         if (null === $flags) {
             throw new \TypeError('Split behavior when $flags is null must be implemented by child classes.');
@@ -458,17 +417,17 @@ abstract class AbstractString implements \JsonSerializable
             $delimiter .= 'i';
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             if (\false === ($chunks = \preg_split($delimiter, $this->string, $limit, $flags))) {
                 $lastError = \preg_last_error();
                 foreach (\get_defined_constants(\true)['pcre'] as $k => $v) {
                     if ($lastError === $v && '_ERROR' === \substr($k, -6)) {
-                        throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Splitting failed with ' . $k . '.');
+                        throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Splitting failed with ' . $k . '.');
                     }
                 }
-                throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\RuntimeException('Splitting failed with unknown error code.');
+                throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\RuntimeException('Splitting failed with unknown error code.');
             }
         } finally {
             \restore_error_handler();
@@ -504,27 +463,23 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param bool $allWords
      */
-    public abstract function title($allWords = \false);
-    /**
-     * @param string|null $toEncoding
-     */
-    public function toByteString($toEncoding = null) : \ConfigTransformer202112105\Symfony\Component\String\ByteString
+    public abstract function title(bool $allWords = \false);
+    public function toByteString(string $toEncoding = null) : \ConfigTransformer202112108\Symfony\Component\String\ByteString
     {
-        $b = new \ConfigTransformer202112105\Symfony\Component\String\ByteString();
+        $b = new \ConfigTransformer202112108\Symfony\Component\String\ByteString();
         $toEncoding = \in_array($toEncoding, ['utf8', 'utf-8', 'UTF8'], \true) ? 'UTF-8' : $toEncoding;
-        if (null === $toEncoding || $toEncoding === ($fromEncoding = $this instanceof \ConfigTransformer202112105\Symfony\Component\String\AbstractUnicodeString || \preg_match('//u', $b->string) ? 'UTF-8' : 'Windows-1252')) {
+        if (null === $toEncoding || $toEncoding === ($fromEncoding = $this instanceof \ConfigTransformer202112108\Symfony\Component\String\AbstractUnicodeString || \preg_match('//u', $b->string) ? 'UTF-8' : 'Windows-1252')) {
             $b->string = $this->string;
             return $b;
         }
         \set_error_handler(static function ($t, $m) {
-            throw new \ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException($m);
+            throw new \ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException($m);
         });
         try {
             try {
                 $b->string = \mb_convert_encoding($this->string, $toEncoding, 'UTF-8');
-            } catch (\ConfigTransformer202112105\Symfony\Component\String\Exception\InvalidArgumentException $e) {
+            } catch (\ConfigTransformer202112108\Symfony\Component\String\Exception\InvalidArgumentException $e) {
                 if (!\function_exists('iconv')) {
                     throw $e;
                 }
@@ -535,28 +490,26 @@ abstract class AbstractString implements \JsonSerializable
         }
         return $b;
     }
-    public function toCodePointString() : \ConfigTransformer202112105\Symfony\Component\String\CodePointString
+    public function toCodePointString() : \ConfigTransformer202112108\Symfony\Component\String\CodePointString
     {
-        return new \ConfigTransformer202112105\Symfony\Component\String\CodePointString($this->string);
+        return new \ConfigTransformer202112108\Symfony\Component\String\CodePointString($this->string);
     }
     public function toString() : string
     {
         return $this->string;
     }
-    public function toUnicodeString() : \ConfigTransformer202112105\Symfony\Component\String\UnicodeString
+    public function toUnicodeString() : \ConfigTransformer202112108\Symfony\Component\String\UnicodeString
     {
-        return new \ConfigTransformer202112105\Symfony\Component\String\UnicodeString($this->string);
+        return new \ConfigTransformer202112108\Symfony\Component\String\UnicodeString($this->string);
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public abstract function trim($chars = " \t\n\r\0\v\f ﻿");
+    public abstract function trim(string $chars = " \t\n\r\0\v\f ﻿");
     /**
      * @return $this
-     * @param string $chars
      */
-    public abstract function trimEnd($chars = " \t\n\r\0\v\f ﻿");
+    public abstract function trimEnd(string $chars = " \t\n\r\0\v\f ﻿");
     /**
      * @param string|string[] $prefix
      * @return $this
@@ -585,9 +538,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param string $chars
      */
-    public abstract function trimStart($chars = " \t\n\r\0\v\f ﻿");
+    public abstract function trimStart(string $chars = " \t\n\r\0\v\f ﻿");
     /**
      * @param string|string[] $suffix
      * @return $this
@@ -616,11 +568,8 @@ abstract class AbstractString implements \JsonSerializable
     }
     /**
      * @return $this
-     * @param int $length
-     * @param string $ellipsis
-     * @param bool $cut
      */
-    public function truncate($length, $ellipsis = '', $cut = \true)
+    public function truncate(int $length, string $ellipsis = '', bool $cut = \true)
     {
         $stringLength = $this->length();
         if ($stringLength <= $length) {
@@ -645,16 +594,12 @@ abstract class AbstractString implements \JsonSerializable
     public abstract function upper();
     /**
      * Returns the printable length on a terminal.
-     * @param bool $ignoreAnsiDecoration
      */
-    public abstract function width($ignoreAnsiDecoration = \true) : int;
+    public abstract function width(bool $ignoreAnsiDecoration = \true) : int;
     /**
      * @return $this
-     * @param int $width
-     * @param string $break
-     * @param bool $cut
      */
-    public function wordwrap($width = 75, $break = "\n", $cut = \false)
+    public function wordwrap(int $width = 75, string $break = "\n", bool $cut = \false)
     {
         $lines = '' !== $break ? $this->split($break) : [clone $this];
         $chars = [];

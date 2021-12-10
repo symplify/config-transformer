@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser;
+namespace ConfigTransformer202112108\PhpParser;
 
 interface NodeTraverserInterface
 {
@@ -10,13 +10,13 @@ interface NodeTraverserInterface
      *
      * @param NodeVisitor $visitor Visitor to add
      */
-    public function addVisitor($visitor);
+    public function addVisitor(\ConfigTransformer202112108\PhpParser\NodeVisitor $visitor);
     /**
      * Removes an added visitor.
      *
      * @param NodeVisitor $visitor
      */
-    public function removeVisitor($visitor);
+    public function removeVisitor(\ConfigTransformer202112108\PhpParser\NodeVisitor $visitor);
     /**
      * Traverses an array of nodes using the registered visitors.
      *
@@ -24,5 +24,5 @@ interface NodeTraverserInterface
      *
      * @return Node[] Traversed array of nodes
      */
-    public function traverse($nodes) : array;
+    public function traverse(array $nodes) : array;
 }

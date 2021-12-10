@@ -5,11 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112105\Nette\Neon\Node;
+namespace ConfigTransformer202112108\Nette\Neon\Node;
 
-use ConfigTransformer202112105\Nette\Neon\Node;
+use ConfigTransformer202112108\Nette\Neon\Node;
 /** @internal */
-final class LiteralNode extends \ConfigTransformer202112105\Nette\Neon\Node
+final class LiteralNode extends \ConfigTransformer202112108\Nette\Neon\Node
 {
     private const SIMPLE_TYPES = ['true' => \true, 'True' => \true, 'TRUE' => \true, 'yes' => \true, 'Yes' => \true, 'YES' => \true, 'on' => \true, 'On' => \true, 'ON' => \true, 'false' => \false, 'False' => \false, 'FALSE' => \false, 'no' => \false, 'No' => \false, 'NO' => \false, 'off' => \false, 'Off' => \false, 'OFF' => \false, 'null' => null, 'Null' => null, 'NULL' => null];
     private const DEPRECATED_TYPES = ['on' => 1, 'On' => 1, 'ON' => 1, 'off' => 1, 'Off' => 1, 'OFF' => 1];
@@ -28,10 +28,8 @@ final class LiteralNode extends \ConfigTransformer202112105\Nette\Neon\Node
     {
         return $this->value;
     }
-    /** @return mixed
-     * @param string $value
-     * @param bool $isKey */
-    public static function parse($value, $isKey = \false)
+    /** @return mixed */
+    public static function parse(string $value, bool $isKey = \false)
     {
         if (!$isKey && \array_key_exists($value, self::SIMPLE_TYPES)) {
             if (isset(self::DEPRECATED_TYPES[$value])) {

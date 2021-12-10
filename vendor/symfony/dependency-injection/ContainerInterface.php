@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202112105\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202112108\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * ContainerInterface is the interface implemented by service container classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ContainerInterface extends \ConfigTransformer202112105\Psr\Container\ContainerInterface
+interface ContainerInterface extends \ConfigTransformer202112108\Psr\Container\ContainerInterface
 {
     public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
     public const EXCEPTION_ON_INVALID_REFERENCE = 1;
@@ -29,28 +29,21 @@ interface ContainerInterface extends \ConfigTransformer202112105\Psr\Container\C
     public const IGNORE_ON_UNINITIALIZED_REFERENCE = 4;
     /**
      * @param object|null $service
-     * @param string $id
      */
-    public function set($id, $service);
+    public function set(string $id, $service);
     /**
      * @throws ServiceCircularReferenceException When a circular reference is detected
      * @throws ServiceNotFoundException          When the service is not defined
      *
      * @see Reference
      * @return object|null
-     * @param string $id
-     * @param int $invalidBehavior
      */
-    public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE);
-    /**
-     * @param string $id
-     */
-    public function has($id) : bool;
+    public function get(string $id, int $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE);
+    public function has(string $id) : bool;
     /**
      * Check for whether or not a service has been initialized.
-     * @param string $id
      */
-    public function initialized($id) : bool;
+    public function initialized(string $id) : bool;
     /**
      * @return array|bool|string|int|float|null
      *

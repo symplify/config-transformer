@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait AbstractTrait
 {
@@ -17,9 +17,8 @@ trait AbstractTrait
      * template for other definitions.
      *
      * @return $this
-     * @param bool $abstract
      */
-    public final function abstract($abstract = \true)
+    public final function abstract(bool $abstract = \true)
     {
         $this->definition->setAbstract($abstract);
         return $this;

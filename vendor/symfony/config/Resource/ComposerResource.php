@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Resource;
 
 /**
  * ComposerResource tracks the PHP version and Composer dependencies.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202112105\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class ComposerResource implements \ConfigTransformer202112105\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ComposerResource implements \ConfigTransformer202112108\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var mixed[]
@@ -42,9 +42,8 @@ class ComposerResource implements \ConfigTransformer202112105\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     * @param int $timestamp
      */
-    public function isFresh($timestamp) : bool
+    public function isFresh(int $timestamp) : bool
     {
         self::refresh();
         return \array_values(self::$runtimeVendors) === \array_values($this->vendors);

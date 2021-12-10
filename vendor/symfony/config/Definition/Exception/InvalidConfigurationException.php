@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception;
+namespace ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception;
 
 /**
  * A very general exception which can be thrown whenever non of the more specific
@@ -16,7 +16,7 @@ namespace ConfigTransformer202112105\Symfony\Component\Config\Definition\Excepti
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InvalidConfigurationException extends \ConfigTransformer202112105\Symfony\Component\Config\Definition\Exception\Exception
+class InvalidConfigurationException extends \ConfigTransformer202112108\Symfony\Component\Config\Definition\Exception\Exception
 {
     /**
      * @var string|null
@@ -26,10 +26,7 @@ class InvalidConfigurationException extends \ConfigTransformer202112105\Symfony\
      * @var bool
      */
     private $containsHints = \false;
-    /**
-     * @param string $path
-     */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         $this->path = $path;
     }
@@ -39,9 +36,8 @@ class InvalidConfigurationException extends \ConfigTransformer202112105\Symfony\
     }
     /**
      * Adds extra information that is suffixed to the original exception message.
-     * @param string $hint
      */
-    public function addHint($hint)
+    public function addHint(string $hint)
     {
         if (!$this->containsHints) {
             $this->message .= "\nHint: " . $hint;

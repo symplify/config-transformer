@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Loader\ParamConfigurator;
-class EnvConfigurator extends \ConfigTransformer202112105\Symfony\Component\Config\Loader\ParamConfigurator
+use ConfigTransformer202112108\Symfony\Component\Config\Loader\ParamConfigurator;
+class EnvConfigurator extends \ConfigTransformer202112108\Symfony\Component\Config\Loader\ParamConfigurator
 {
     /**
      * @var string[]
@@ -30,15 +30,14 @@ class EnvConfigurator extends \ConfigTransformer202112105\Symfony\Component\Conf
      */
     public function __call(string $name, array $arguments)
     {
-        $processor = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202112105\\1_\\2', $name));
+        $processor = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], 'ConfigTransformer202112108\\1_\\2', $name));
         $this->custom($processor, ...$arguments);
         return $this;
     }
     /**
      * @return $this
-     * @param string $processor
      */
-    public function custom($processor, ...$args)
+    public function custom(string $processor, ...$args)
     {
         \array_unshift($this->stack, $processor, ...$args);
         return $this;
@@ -117,9 +116,8 @@ class EnvConfigurator extends \ConfigTransformer202112105\Symfony\Component\Conf
     }
     /**
      * @return $this
-     * @param string $key
      */
-    public function key($key)
+    public function key(string $key)
     {
         \array_unshift($this->stack, 'key', $key);
         return $this;
@@ -150,9 +148,8 @@ class EnvConfigurator extends \ConfigTransformer202112105\Symfony\Component\Conf
     }
     /**
      * @return $this
-     * @param string $fallbackParam
      */
-    public function default($fallbackParam)
+    public function default(string $fallbackParam)
     {
         \array_unshift($this->stack, 'default', $fallbackParam);
         return $this;

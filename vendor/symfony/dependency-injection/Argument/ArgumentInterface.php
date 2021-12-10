@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * Represents a complex argument containing nested values.
@@ -18,8 +18,5 @@ namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argum
 interface ArgumentInterface
 {
     public function getValues() : array;
-    /**
-     * @param mixed[] $values
-     */
-    public function setValues($values);
+    public function setValues(array $values);
 }

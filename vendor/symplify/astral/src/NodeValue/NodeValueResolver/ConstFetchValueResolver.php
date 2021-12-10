@@ -1,37 +1,36 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer202112108\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202112105\PhpParser\Node\Expr;
-use ConfigTransformer202112105\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202112105\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202112105\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202112108\PhpParser\Node\Expr;
+use ConfigTransformer202112108\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202112108\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202112108\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<ConstFetch>
  */
-final class ConstFetchValueResolver implements \ConfigTransformer202112105\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class ConstFetchValueResolver implements \ConfigTransformer202112108\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
     private $simpleNameResolver;
-    public function __construct(\ConfigTransformer202112105\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
+    public function __construct(\ConfigTransformer202112108\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
     {
         $this->simpleNameResolver = $simpleNameResolver;
     }
     public function getType() : string
     {
-        return \ConfigTransformer202112105\PhpParser\Node\Expr\ConstFetch::class;
+        return \ConfigTransformer202112108\PhpParser\Node\Expr\ConstFetch::class;
     }
     /**
-     * @param \PhpParser\Node\Expr $expr
+     * @param ConstFetch $expr
      * @return null|mixed
-     * @param string $currentFilePath
      */
-    public function resolve($expr, $currentFilePath)
+    public function resolve(\ConfigTransformer202112108\PhpParser\Node\Expr $expr, string $currentFilePath)
     {
         $constFetchName = $this->simpleNameResolver->getName($expr);
         if ($constFetchName === null) {

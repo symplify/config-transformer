@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentServiceLocator;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use ConfigTransformer202112105\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentServiceLocator;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use ConfigTransformer202112108\Symfony\Contracts\Service\ResetInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\RewindableGenerator::class);
-\class_exists(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\Argument\ServiceLocator::class);
+\class_exists(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\RewindableGenerator::class);
+\class_exists(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\Argument\ServiceLocator::class);
 /**
  * Container is a dependency injection container.
  *
@@ -42,7 +42,7 @@ use ConfigTransformer202112105\Symfony\Contracts\Service\ResetInterface;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class Container implements \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerInterface, \ConfigTransformer202112105\Symfony\Contracts\Service\ResetInterface
+class Container implements \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerInterface, \ConfigTransformer202112108\Symfony\Contracts\Service\ResetInterface
 {
     protected $parameterBag;
     protected $services = [];
@@ -66,9 +66,9 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
      * @var \Closure
      */
     private $getEnv;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
     {
-        $this->parameterBag = $parameterBag ?? new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag();
+        $this->parameterBag = $parameterBag ?? new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag();
     }
     /**
      * Compiles the container.
@@ -81,7 +81,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
     public function compile()
     {
         $this->parameterBag->resolve();
-        $this->parameterBag = new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag($this->parameterBag->all());
+        $this->parameterBag = new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag($this->parameterBag->all());
         $this->compiled = \true;
     }
     /**
@@ -94,7 +94,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
     /**
      * Gets the service container parameter bag.
      */
-    public function getParameterBag() : \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+    public function getParameterBag() : \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
     {
         return $this->parameterBag;
     }
@@ -126,9 +126,8 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
      * Setting a synthetic service to null resets it: has() returns false and get()
      * behaves in the same way as if the service was never created.
      * @param object|null $service
-     * @param string $id
      */
-    public function set($id, $service)
+    public function set(string $id, $service)
     {
         // Runs the internal initializer; used by the dumped container to include always-needed files
         if (isset($this->privates['service_container']) && $this->privates['service_container'] instanceof \Closure) {
@@ -137,18 +136,18 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
             $initialize();
         }
         if ('service_container' === $id) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('You cannot set service "service_container".');
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('You cannot set service "service_container".');
         }
         if (!(isset($this->fileMap[$id]) || isset($this->methodMap[$id]))) {
             if (isset($this->syntheticIds[$id]) || !isset($this->getRemovedIds()[$id])) {
                 // no-op
             } elseif (null === $service) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot unset it.', $id));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot unset it.', $id));
             } else {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot replace it.', $id));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot replace it.', $id));
             }
         } elseif (isset($this->services[$id])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is already initialized, you cannot replace it.', $id));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is already initialized, you cannot replace it.', $id));
         }
         if (isset($this->aliases[$id])) {
             unset($this->aliases[$id]);
@@ -159,10 +158,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
         }
         $this->services[$id] = $service;
     }
-    /**
-     * @param string $id
-     */
-    public function has($id) : bool
+    public function has(string $id) : bool
     {
         if (isset($this->aliases[$id])) {
             $id = $this->aliases[$id];
@@ -184,10 +180,8 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
      *
      * @see Reference
      * @return object|null
-     * @param string $id
-     * @param int $invalidBehavior
      */
-    public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
+    public function get(string $id, int $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
     {
         return $this->services[$id] ?? $this->services[$id = $this->aliases[$id] ?? $id] ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? [$this, 'make'])($id, $invalidBehavior));
     }
@@ -199,7 +193,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
     private function make(string $id, int $invalidBehavior)
     {
         if (isset($this->loading[$id])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($this->loading), [$id]));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($this->loading), [$id]));
         }
         $this->loading[$id] = \true;
         try {
@@ -216,13 +210,13 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
         }
         if (self::EXCEPTION_ON_INVALID_REFERENCE === $invalidBehavior) {
             if (!$id) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id);
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id);
             }
             if (isset($this->syntheticIds[$id])) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is synthetic, it needs to be set at boot time before it can be used.', $id));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is synthetic, it needs to be set at boot time before it can be used.', $id));
             }
             if (isset($this->getRemovedIds()[$id])) {
-                throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.', $id));
+                throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.', $id));
             }
             $alternatives = [];
             foreach ($this->getServiceIds() as $knownId) {
@@ -234,15 +228,14 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
                     $alternatives[] = $knownId;
                 }
             }
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, $alternatives);
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, $alternatives);
         }
         return null;
     }
     /**
      * Returns true if the given service has actually been initialized.
-     * @param string $id
      */
-    public function initialized($id) : bool
+    public function initialized(string $id) : bool
     {
         if (isset($this->aliases[$id])) {
             $id = $this->aliases[$id];
@@ -261,7 +254,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
         $this->services = $this->factories = $this->privates = [];
         foreach ($services as $service) {
             try {
-                if ($service instanceof \ConfigTransformer202112105\Symfony\Contracts\Service\ResetInterface) {
+                if ($service instanceof \ConfigTransformer202112108\Symfony\Contracts\Service\ResetInterface) {
                     $service->reset();
                 }
             } catch (\Throwable $e) {
@@ -287,25 +280,22 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
     }
     /**
      * Camelizes a string.
-     * @param string $id
      */
-    public static function camelize($id) : string
+    public static function camelize(string $id) : string
     {
         return \strtr(\ucwords(\strtr($id, ['_' => ' ', '.' => '_ ', '\\' => '_ '])), [' ' => '']);
     }
     /**
      * A string to underscore.
-     * @param string $id
      */
-    public static function underscore($id) : string
+    public static function underscore(string $id) : string
     {
         return \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], \str_replace('_', '.', $id)));
     }
     /**
      * Creates a service by requiring its factory file.
-     * @param string $file
      */
-    protected function load($file)
+    protected function load(string $file)
     {
         return require $file;
     }
@@ -314,18 +304,17 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
      *
      * @throws EnvNotFoundException When the environment variable is not found and has no default value
      * @return mixed
-     * @param string $name
      */
-    protected function getEnv($name)
+    protected function getEnv(string $name)
     {
         if (isset($this->resolving[$envName = "env({$name})"])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($this->resolving));
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($this->resolving));
         }
         if (isset($this->envCache[$name]) || \array_key_exists($name, $this->envCache)) {
             return $this->envCache[$name];
         }
         if (!$this->has($id = 'container.env_var_processors_locator')) {
-            $this->set($id, new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\ServiceLocator([]));
+            $this->set($id, new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\ServiceLocator([]));
         }
         $this->getEnv = $this->getEnv ?? \Closure::fromCallable([$this, 'getEnv']);
         $processors = $this->get($id);
@@ -336,7 +325,7 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
             $prefix = 'string';
             $localName = $name;
         }
-        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
+        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
         $this->resolving[$envName] = \true;
         try {
             return $this->envCache[$name] = $processor->getEnv($prefix, $localName, $this->getEnv);
@@ -349,16 +338,14 @@ class Container implements \ConfigTransformer202112105\Symfony\Component\Depende
      * @param bool|string $registry
      * @param bool|string $load
      * @return mixed
-     * @param string $id
-     * @param string|null $method
      */
-    protected final function getService($registry, $id, $method, $load)
+    protected final function getService($registry, string $id, ?string $method, $load)
     {
         if ('service_container' === $id) {
             return $this;
         }
         if (\is_string($load)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\DependencyInjection\Exception\RuntimeException($load);
+            throw new \ConfigTransformer202112108\Symfony\Component\DependencyInjection\Exception\RuntimeException($load);
         }
         if (null === $method) {
             return \false !== $registry ? $this->{$registry}[$id] ?? null : null;

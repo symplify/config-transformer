@@ -1,27 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202112105\PhpParser\Lexer\Emulative;
-final class CoaleseEqualTokenEmulator extends \ConfigTransformer202112105\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use ConfigTransformer202112108\PhpParser\Lexer\Emulative;
+final class CoaleseEqualTokenEmulator extends \ConfigTransformer202112108\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     public function getPhpVersion() : string
     {
-        return \ConfigTransformer202112105\PhpParser\Lexer\Emulative::PHP_7_4;
+        return \ConfigTransformer202112108\PhpParser\Lexer\Emulative::PHP_7_4;
     }
-    /**
-     * @param string $code
-     */
-    public function isEmulationNeeded($code) : bool
+    public function isEmulationNeeded(string $code) : bool
     {
         return \strpos($code, '??=') !== \false;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function emulate($code, $tokens) : array
+    public function emulate(string $code, array $tokens) : array
     {
         // We need to manually iterate and manage a count because we'll change
         // the tokens array on the way
@@ -40,11 +33,7 @@ final class CoaleseEqualTokenEmulator extends \ConfigTransformer202112105\PhpPar
         }
         return $tokens;
     }
-    /**
-     * @param string $code
-     * @param mixed[] $tokens
-     */
-    public function reverseEmulate($code, $tokens) : array
+    public function reverseEmulate(string $code, array $tokens) : array
     {
         // ??= was not valid code previously, don't bother.
         return $tokens;

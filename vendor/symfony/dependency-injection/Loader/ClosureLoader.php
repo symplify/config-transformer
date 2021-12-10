@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202112108\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer202112105\Symfony\Component\Config\Loader\Loader;
-use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112108\Symfony\Component\Config\Loader\Loader;
+use ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ClosureLoader loads service definitions from a PHP closure.
  *
@@ -19,10 +19,10 @@ use ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBu
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ClosureLoader extends \ConfigTransformer202112105\Symfony\Component\Config\Loader\Loader
+class ClosureLoader extends \ConfigTransformer202112108\Symfony\Component\Config\Loader\Loader
 {
     private $container;
-    public function __construct(\ConfigTransformer202112105\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $env = null)
+    public function __construct(\ConfigTransformer202112108\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $env = null)
     {
         $this->container = $container;
         parent::__construct($env);
@@ -40,9 +40,8 @@ class ClosureLoader extends \ConfigTransformer202112105\Symfony\Component\Config
     /**
      * {@inheritdoc}
      * @param mixed $resource
-     * @param string|null $type
      */
-    public function supports($resource, $type = null) : bool
+    public function supports($resource, string $type = null) : bool
     {
         return $resource instanceof \Closure;
     }

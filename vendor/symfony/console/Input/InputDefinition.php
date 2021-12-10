@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112105\Symfony\Component\Console\Input;
+namespace ConfigTransformer202112108\Symfony\Component\Console\Input;
 
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException;
 /**
  * A InputDefinition represents a set of valid command line arguments and options.
  *
@@ -57,14 +57,13 @@ class InputDefinition
     }
     /**
      * Sets the definition of the input.
-     * @param mixed[] $definition
      */
-    public function setDefinition($definition)
+    public function setDefinition(array $definition)
     {
         $arguments = [];
         $options = [];
         foreach ($definition as $item) {
-            if ($item instanceof \ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption) {
+            if ($item instanceof \ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption) {
                 $options[] = $item;
             } else {
                 $arguments[] = $item;
@@ -78,7 +77,7 @@ class InputDefinition
      *
      * @param InputArgument[] $arguments An array of InputArgument objects
      */
-    public function setArguments($arguments = [])
+    public function setArguments(array $arguments = [])
     {
         $this->arguments = [];
         $this->requiredCount = 0;
@@ -91,7 +90,7 @@ class InputDefinition
      *
      * @param InputArgument[] $arguments An array of InputArgument objects
      */
-    public function addArguments($arguments = [])
+    public function addArguments(?array $arguments = [])
     {
         if (null !== $arguments) {
             foreach ($arguments as $argument) {
@@ -101,18 +100,17 @@ class InputDefinition
     }
     /**
      * @throws LogicException When incorrect argument is given
-     * @param \Symfony\Component\Console\Input\InputArgument $argument
      */
-    public function addArgument($argument)
+    public function addArgument(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputArgument $argument)
     {
         if (isset($this->arguments[$argument->getName()])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('An argument with name "%s" already exists.', $argument->getName()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('An argument with name "%s" already exists.', $argument->getName()));
         }
         if (null !== $this->lastArrayArgument) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot add a required argument "%s" after an array argument "%s".', $argument->getName(), $this->lastArrayArgument->getName()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot add a required argument "%s" after an array argument "%s".', $argument->getName(), $this->lastArrayArgument->getName()));
         }
         if ($argument->isRequired() && null !== $this->lastOptionalArgument) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot add a required argument "%s" after an optional one "%s".', $argument->getName(), $this->lastOptionalArgument->getName()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('Cannot add a required argument "%s" after an optional one "%s".', $argument->getName(), $this->lastOptionalArgument->getName()));
         }
         if ($argument->isArray()) {
             $this->lastArrayArgument = $argument;
@@ -130,10 +128,10 @@ class InputDefinition
      * @throws InvalidArgumentException When argument given doesn't exist
      * @param int|string $name
      */
-    public function getArgument($name) : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputArgument
+    public function getArgument($name) : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputArgument
     {
         if (!$this->hasArgument($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
         }
         $arguments = \is_int($name) ? \array_values($this->arguments) : $this->arguments;
         return $arguments[$name];
@@ -186,7 +184,7 @@ class InputDefinition
      *
      * @param InputOption[] $options An array of InputOption objects
      */
-    public function setOptions($options = [])
+    public function setOptions(array $options = [])
     {
         $this->options = [];
         $this->shortcuts = [];
@@ -198,7 +196,7 @@ class InputDefinition
      *
      * @param InputOption[] $options An array of InputOption objects
      */
-    public function addOptions($options = [])
+    public function addOptions(array $options = [])
     {
         foreach ($options as $option) {
             $this->addOption($option);
@@ -206,20 +204,19 @@ class InputDefinition
     }
     /**
      * @throws LogicException When option given already exist
-     * @param \Symfony\Component\Console\Input\InputOption $option
      */
-    public function addOption($option)
+    public function addOption(\ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption $option)
     {
         if (isset($this->options[$option->getName()]) && !$option->equals($this->options[$option->getName()])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $option->getName()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $option->getName()));
         }
         if (isset($this->negations[$option->getName()])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $option->getName()));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $option->getName()));
         }
         if ($option->getShortcut()) {
             foreach (\explode('|', $option->getShortcut()) as $shortcut) {
                 if (isset($this->shortcuts[$shortcut]) && !$option->equals($this->options[$this->shortcuts[$shortcut]])) {
-                    throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('An option with shortcut "%s" already exists.', $shortcut));
+                    throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('An option with shortcut "%s" already exists.', $shortcut));
                 }
             }
         }
@@ -232,7 +229,7 @@ class InputDefinition
         if ($option->isNegatable()) {
             $negatedName = 'no-' . $option->getName();
             if (isset($this->options[$negatedName])) {
-                throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $negatedName));
+                throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\LogicException(\sprintf('An option named "%s" already exists.', $negatedName));
             }
             $this->negations[$negatedName] = $option->getName();
         }
@@ -241,12 +238,11 @@ class InputDefinition
      * Returns an InputOption by name.
      *
      * @throws InvalidArgumentException When option given doesn't exist
-     * @param string $name
      */
-    public function getOption($name) : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption
+    public function getOption(string $name) : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption
     {
         if (!$this->hasOption($name)) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "--%s" option does not exist.', $name));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "--%s" option does not exist.', $name));
         }
         return $this->options[$name];
     }
@@ -255,9 +251,8 @@ class InputDefinition
      *
      * This method can't be used to check if the user included the option when
      * executing the command (use getOption() instead).
-     * @param string $name
      */
-    public function hasOption($name) : bool
+    public function hasOption(string $name) : bool
     {
         return isset($this->options[$name]);
     }
@@ -272,25 +267,22 @@ class InputDefinition
     }
     /**
      * Returns true if an InputOption object exists by shortcut.
-     * @param string $name
      */
-    public function hasShortcut($name) : bool
+    public function hasShortcut(string $name) : bool
     {
         return isset($this->shortcuts[$name]);
     }
     /**
      * Returns true if an InputOption object exists by negated name.
-     * @param string $name
      */
-    public function hasNegation($name) : bool
+    public function hasNegation(string $name) : bool
     {
         return isset($this->negations[$name]);
     }
     /**
      * Gets an InputOption by shortcut.
-     * @param string $shortcut
      */
-    public function getOptionForShortcut($shortcut) : \ConfigTransformer202112105\Symfony\Component\Console\Input\InputOption
+    public function getOptionForShortcut(string $shortcut) : \ConfigTransformer202112108\Symfony\Component\Console\Input\InputOption
     {
         return $this->getOption($this->shortcutToName($shortcut));
     }
@@ -311,12 +303,11 @@ class InputDefinition
      * @throws InvalidArgumentException When option given does not exist
      *
      * @internal
-     * @param string $shortcut
      */
-    public function shortcutToName($shortcut) : string
+    public function shortcutToName(string $shortcut) : string
     {
         if (!isset($this->shortcuts[$shortcut])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "-%s" option does not exist.', $shortcut));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "-%s" option does not exist.', $shortcut));
         }
         return $this->shortcuts[$shortcut];
     }
@@ -326,20 +317,18 @@ class InputDefinition
      * @throws InvalidArgumentException When option given does not exist
      *
      * @internal
-     * @param string $negation
      */
-    public function negationToName($negation) : string
+    public function negationToName(string $negation) : string
     {
         if (!isset($this->negations[$negation])) {
-            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "--%s" option does not exist.', $negation));
+            throw new \ConfigTransformer202112108\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The "--%s" option does not exist.', $negation));
         }
         return $this->negations[$negation];
     }
     /**
      * Gets the synopsis.
-     * @param bool $short
      */
-    public function getSynopsis($short = \false) : string
+    public function getSynopsis(bool $short = \false) : string
     {
         $elements = [];
         if ($short && $this->getOptions()) {
