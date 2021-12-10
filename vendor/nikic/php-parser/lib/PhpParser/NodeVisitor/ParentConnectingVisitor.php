@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112107\PhpParser\NodeVisitor;
+namespace ConfigTransformer202112105\PhpParser\NodeVisitor;
 
 use function array_pop;
 use function count;
-use ConfigTransformer202112107\PhpParser\Node;
-use ConfigTransformer202112107\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202112105\PhpParser\Node;
+use ConfigTransformer202112105\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node.
  *
  * On the child node, the parent node can be accessed through
  * <code>$node->getAttribute('parent')</code>.
  */
-final class ParentConnectingVisitor extends \ConfigTransformer202112107\PhpParser\NodeVisitorAbstract
+final class ParentConnectingVisitor extends \ConfigTransformer202112105\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]

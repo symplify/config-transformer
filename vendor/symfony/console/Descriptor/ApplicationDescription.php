@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112107\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202112105\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202112107\Symfony\Component\Console\Application;
-use ConfigTransformer202112107\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202112107\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202112105\Symfony\Component\Console\Application;
+use ConfigTransformer202112105\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202112105\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
@@ -42,7 +42,7 @@ class ApplicationDescription
      * @var array<string, Command>
      */
     private $aliases = [];
-    public function __construct(\ConfigTransformer202112107\Symfony\Component\Console\Application $application, string $namespace = null, bool $showHidden = \false)
+    public function __construct(\ConfigTransformer202112105\Symfony\Component\Console\Application $application, string $namespace = null, bool $showHidden = \false)
     {
         $this->application = $application;
         $this->namespace = $namespace;
@@ -69,10 +69,10 @@ class ApplicationDescription
      * @throws CommandNotFoundException
      * @param string $name
      */
-    public function getCommand($name) : \ConfigTransformer202112107\Symfony\Component\Console\Command\Command
+    public function getCommand($name) : \ConfigTransformer202112105\Symfony\Component\Console\Command\Command
     {
         if (!isset($this->commands[$name]) && !isset($this->aliases[$name])) {
-            throw new \ConfigTransformer202112107\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202112105\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         return $this->commands[$name] ?? $this->aliases[$name];
     }
