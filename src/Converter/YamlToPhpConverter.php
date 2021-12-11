@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112118\Symplify\ConfigTransformer\Converter;
+namespace ConfigTransformer202112119\Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202112118\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202112118\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202112118\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
-use ConfigTransformer202112118\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use ConfigTransformer202112118\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
-use ConfigTransformer202112118\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
-use ConfigTransformer202112118\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+use ConfigTransformer202112119\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202112119\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202112119\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
+use ConfigTransformer202112119\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use ConfigTransformer202112119\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
+use ConfigTransformer202112119\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
+use ConfigTransformer202112119\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 /**
  * @api
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
@@ -46,7 +46,7 @@ final class YamlToPhpConverter
      * @var \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter
      */
     private $checkerServiceParametersShifter;
-    public function __construct(\ConfigTransformer202112118\Symfony\Component\Yaml\Parser $parser, \ConfigTransformer202112118\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \ConfigTransformer202112118\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, \ConfigTransformer202112118\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \ConfigTransformer202112118\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider $yamlContentProvider, \ConfigTransformer202112118\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
+    public function __construct(\ConfigTransformer202112119\Symfony\Component\Yaml\Parser $parser, \ConfigTransformer202112119\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \ConfigTransformer202112119\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, \ConfigTransformer202112119\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \ConfigTransformer202112119\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider $yamlContentProvider, \ConfigTransformer202112119\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
     {
         $this->parser = $parser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
@@ -59,7 +59,7 @@ final class YamlToPhpConverter
     {
         $this->yamlContentProvider->setContent($yaml);
         /** @var mixed[]|null $yamlArray */
-        $yamlArray = $this->parser->parse($yaml, \ConfigTransformer202112118\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \ConfigTransformer202112118\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
+        $yamlArray = $this->parser->parse($yaml, \ConfigTransformer202112119\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \ConfigTransformer202112119\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
         if ($yamlArray === null) {
             return '';
         }
