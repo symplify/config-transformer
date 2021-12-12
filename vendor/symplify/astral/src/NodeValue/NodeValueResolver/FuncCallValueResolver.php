@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112120\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer202112121\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202112120\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202112120\PhpParser\Node\Expr;
-use ConfigTransformer202112120\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202112120\PhpParser\Node\Name;
-use ConfigTransformer202112120\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202112120\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202112120\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202112121\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202112121\PhpParser\Node\Expr;
+use ConfigTransformer202112121\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202112121\PhpParser\Node\Name;
+use ConfigTransformer202112121\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202112121\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202112121\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<FuncCall>
  */
-final class FuncCallValueResolver implements \ConfigTransformer202112120\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class FuncCallValueResolver implements \ConfigTransformer202112121\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
@@ -25,20 +25,20 @@ final class FuncCallValueResolver implements \ConfigTransformer202112120\Symplif
      * @var \PhpParser\ConstExprEvaluator
      */
     private $constExprEvaluator;
-    public function __construct(\ConfigTransformer202112120\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202112120\PhpParser\ConstExprEvaluator $constExprEvaluator)
+    public function __construct(\ConfigTransformer202112121\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202112121\PhpParser\ConstExprEvaluator $constExprEvaluator)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->constExprEvaluator = $constExprEvaluator;
     }
     public function getType() : string
     {
-        return \ConfigTransformer202112120\PhpParser\Node\Expr\FuncCall::class;
+        return \ConfigTransformer202112121\PhpParser\Node\Expr\FuncCall::class;
     }
     /**
      * @param FuncCall $expr
      * @return mixed
      */
-    public function resolve(\ConfigTransformer202112120\PhpParser\Node\Expr $expr, string $currentFilePath)
+    public function resolve(\ConfigTransformer202112121\PhpParser\Node\Expr $expr, string $currentFilePath)
     {
         if ($this->simpleNameResolver->isName($expr, 'getcwd')) {
             return \dirname($currentFilePath);
@@ -48,12 +48,12 @@ final class FuncCallValueResolver implements \ConfigTransformer202112120\Symplif
         foreach ($args as $arg) {
             $arguments[] = $this->constExprEvaluator->evaluateDirectly($arg->value);
         }
-        if ($expr->name instanceof \ConfigTransformer202112120\PhpParser\Node\Name) {
+        if ($expr->name instanceof \ConfigTransformer202112121\PhpParser\Node\Name) {
             $functionName = (string) $expr->name;
             if (\function_exists($functionName) && \is_callable($functionName)) {
                 return \call_user_func_array($functionName, $arguments);
             }
-            throw new \ConfigTransformer202112120\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202112121\Symplify\Astral\Exception\ShouldNotHappenException();
         }
         return null;
     }

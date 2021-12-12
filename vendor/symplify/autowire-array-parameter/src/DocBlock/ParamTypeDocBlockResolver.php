@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112120\Symplify\AutowireArrayParameter\DocBlock;
+namespace ConfigTransformer202112121\Symplify\AutowireArrayParameter\DocBlock;
 
-use ConfigTransformer202112120\Nette\Utils\Strings;
+use ConfigTransformer202112121\Nette\Utils\Strings;
 /**
  * @see \Symplify\AutowireArrayParameter\Tests\DocBlock\ParamTypeDocBlockResolverTest
  */
@@ -38,7 +38,7 @@ final class ParamTypeDocBlockResolver
     {
         foreach (self::ARRAY_REGEXES as $arrayRegexWithPlaceholder) {
             $arrayRegex = \str_replace(self::NAME_PLACEHOLDER, $parameterName, $arrayRegexWithPlaceholder);
-            $result = \ConfigTransformer202112120\Nette\Utils\Strings::match($docBlock, $arrayRegex);
+            $result = \ConfigTransformer202112121\Nette\Utils\Strings::match($docBlock, $arrayRegex);
             if (isset($result[self::TYPE_PART])) {
                 return $result[self::TYPE_PART];
             }

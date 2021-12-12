@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112120\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202112121\Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202112120\Symplify\ConfigTransformer\Enum\Format;
+use ConfigTransformer202112121\Symplify\ConfigTransformer\Enum\Format;
 final class Configuration
 {
     /**
@@ -38,6 +38,6 @@ final class Configuration
      */
     public function getInputSuffixes() : array
     {
-        return [\ConfigTransformer202112120\Symplify\ConfigTransformer\Enum\Format::YAML, \ConfigTransformer202112120\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer202112120\Symplify\ConfigTransformer\Enum\Format::XML];
+        return [\ConfigTransformer202112121\Symplify\ConfigTransformer\Enum\Format::YAML, \ConfigTransformer202112121\Symplify\ConfigTransformer\Enum\Format::YML, \ConfigTransformer202112121\Symplify\ConfigTransformer\Enum\Format::XML];
     }
 }
