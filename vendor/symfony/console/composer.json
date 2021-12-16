@@ -53,7 +53,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112169\\Symfony\\Component\\Console\\": ""
+            "ConfigTransformer202112160\\Symfony\\Component\\Console\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

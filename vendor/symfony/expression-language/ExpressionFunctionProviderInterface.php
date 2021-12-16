@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112169\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202112160\Symfony\Component\ExpressionLanguage;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

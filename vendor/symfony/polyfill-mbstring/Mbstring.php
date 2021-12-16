@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112169\Symfony\Polyfill\Mbstring;
+namespace ConfigTransformer202112160\Symfony\Polyfill\Mbstring;
 
 /**
  * Partial mbstring implementation in PHP, iconv based, UTF-8 centric.
