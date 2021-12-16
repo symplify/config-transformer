@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112142\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202112169\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer202112142\PhpParser\Node\Expr\AssignOp;
-class BitwiseAnd extends \ConfigTransformer202112142\PhpParser\Node\Expr\AssignOp
+use ConfigTransformer202112169\PhpParser\Node\Expr\AssignOp;
+class BitwiseAnd extends \ConfigTransformer202112169\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {
