@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112166\\Symfony\\Polyfill\\Php81\\": ""
+            "ConfigTransformer202112195\\Symfony\\Polyfill\\Php81\\": ""
         },
         "files": [
             "bootstrap.php"

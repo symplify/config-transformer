@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112166\PhpParser\NodeVisitor;
+namespace ConfigTransformer202112195\PhpParser\NodeVisitor;
 
-use ConfigTransformer202112166\PhpParser\Node;
-use ConfigTransformer202112166\PhpParser\NodeTraverser;
-use ConfigTransformer202112166\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202112195\PhpParser\Node;
+use ConfigTransformer202112195\PhpParser\NodeTraverser;
+use ConfigTransformer202112195\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find the first node satisfying some criterion determined by
  * a filter callback.
  */
-class FirstFindingVisitor extends \ConfigTransformer202112166\PhpParser\NodeVisitorAbstract
+class FirstFindingVisitor extends \ConfigTransformer202112195\PhpParser\NodeVisitorAbstract
 {
     /** @var callable Filter callback */
     protected $filterCallback;
@@ -36,12 +36,12 @@ class FirstFindingVisitor extends \ConfigTransformer202112166\PhpParser\NodeVisi
         $this->foundNode = null;
         return null;
     }
-    public function enterNode(\ConfigTransformer202112166\PhpParser\Node $node)
+    public function enterNode(\ConfigTransformer202112195\PhpParser\Node $node)
     {
         $filterCallback = $this->filterCallback;
         if ($filterCallback($node)) {
             $this->foundNode = $node;
-            return \ConfigTransformer202112166\PhpParser\NodeTraverser::STOP_TRAVERSAL;
+            return \ConfigTransformer202112195\PhpParser\NodeTraverser::STOP_TRAVERSAL;
         }
         return null;
     }

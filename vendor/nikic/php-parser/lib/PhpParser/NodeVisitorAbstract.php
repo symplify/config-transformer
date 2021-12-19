@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112166\PhpParser;
+namespace ConfigTransformer202112195\PhpParser;
 
 /**
  * @codeCoverageIgnore
  */
-class NodeVisitorAbstract implements \ConfigTransformer202112166\PhpParser\NodeVisitor
+class NodeVisitorAbstract implements \ConfigTransformer202112195\PhpParser\NodeVisitor
 {
     public function beforeTraverse(array $nodes)
     {
         return null;
     }
-    public function enterNode(\ConfigTransformer202112166\PhpParser\Node $node)
+    public function enterNode(\ConfigTransformer202112195\PhpParser\Node $node)
     {
         return null;
     }
-    public function leaveNode(\ConfigTransformer202112166\PhpParser\Node $node)
+    public function leaveNode(\ConfigTransformer202112195\PhpParser\Node $node)
     {
         return null;
     }
