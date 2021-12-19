@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112191\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202112197\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer202112191\PhpParser\Node\Expr\AssignOp;
-class Coalesce extends \ConfigTransformer202112191\PhpParser\Node\Expr\AssignOp
+use ConfigTransformer202112197\PhpParser\Node\Expr\AssignOp;
+class Coalesce extends \ConfigTransformer202112197\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {
