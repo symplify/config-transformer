@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112197\PhpParser\NodeVisitor;
+namespace ConfigTransformer202112190\PhpParser\NodeVisitor;
 
-use ConfigTransformer202112197\PhpParser\Node;
-use ConfigTransformer202112197\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202112190\PhpParser\Node;
+use ConfigTransformer202112190\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor cloning all nodes and linking to the original nodes using an attribute.
  *
  * This visitor is required to perform format-preserving pretty prints.
  */
-class CloningVisitor extends \ConfigTransformer202112197\PhpParser\NodeVisitorAbstract
+class CloningVisitor extends \ConfigTransformer202112190\PhpParser\NodeVisitorAbstract
 {
-    public function enterNode(\ConfigTransformer202112197\PhpParser\Node $origNode)
+    public function enterNode(\ConfigTransformer202112190\PhpParser\Node $origNode)
     {
         $node = clone $origNode;
         $node->setAttribute('origNode', $origNode);

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112197\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202112190\Symfony\Component\Finder\Iterator;
 
 /**
  * SortableIterator applies a sort on a given Iterator.

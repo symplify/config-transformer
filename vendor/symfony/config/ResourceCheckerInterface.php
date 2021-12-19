@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112197\Symfony\Component\Config;
+namespace ConfigTransformer202112190\Symfony\Component\Config;
 
-use ConfigTransformer202112197\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202112190\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ResourceCheckers.
  *
@@ -30,7 +30,7 @@ interface ResourceCheckerInterface
      *
      * @return bool
      */
-    public function supports(\ConfigTransformer202112197\Symfony\Component\Config\Resource\ResourceInterface $metadata);
+    public function supports(\ConfigTransformer202112190\Symfony\Component\Config\Resource\ResourceInterface $metadata);
     /**
      * Validates the resource.
      *
@@ -38,5 +38,5 @@ interface ResourceCheckerInterface
      *
      * @return bool
      */
-    public function isFresh(\ConfigTransformer202112197\Symfony\Component\Config\Resource\ResourceInterface $resource, int $timestamp);
+    public function isFresh(\ConfigTransformer202112190\Symfony\Component\Config\Resource\ResourceInterface $resource, int $timestamp);
 }
