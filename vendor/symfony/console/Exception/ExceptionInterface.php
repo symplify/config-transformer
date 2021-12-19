@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112194\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202112191\Symfony\Component\Console\Exception;
 
 /**
  * ExceptionInterface.
