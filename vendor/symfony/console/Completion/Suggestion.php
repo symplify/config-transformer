@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112193\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202112190\Symfony\Component\Console\Completion;
 
 /**
  * Represents a single suggested value.
