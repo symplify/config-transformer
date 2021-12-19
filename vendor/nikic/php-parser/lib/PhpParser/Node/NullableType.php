@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112190\PhpParser\Node;
+namespace ConfigTransformer202112194\PhpParser\Node;
 
-class NullableType extends \ConfigTransformer202112190\PhpParser\Node\ComplexType
+class NullableType extends \ConfigTransformer202112194\PhpParser\Node\ComplexType
 {
     /** @var Identifier|Name Type */
     public $type;
@@ -16,7 +16,7 @@ class NullableType extends \ConfigTransformer202112190\PhpParser\Node\ComplexTyp
     public function __construct($type, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \ConfigTransformer202112190\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \ConfigTransformer202112194\PhpParser\Node\Identifier($type) : $type;
     }
     public function getSubNodeNames() : array
     {
