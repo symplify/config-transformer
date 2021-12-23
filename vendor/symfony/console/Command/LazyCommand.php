@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021122310\Symfony\Component\Console\Command;
+namespace ConfigTransformer202112237\Symfony\Component\Console\Command;
 
-use ConfigTransformer2021122310\Symfony\Component\Console\Application;
-use ConfigTransformer2021122310\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer2021122310\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer2021122310\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer2021122310\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer2021122310\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2021122310\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112237\Symfony\Component\Console\Application;
+use ConfigTransformer202112237\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202112237\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202112237\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer202112237\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202112237\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112237\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class LazyCommand extends \ConfigTransformer2021122310\Symfony\Component\Console\Command\Command
+final class LazyCommand extends \ConfigTransformer202112237\Symfony\Component\Console\Command\Command
 {
     private $command;
     /**
@@ -37,14 +37,14 @@ final class LazyCommand extends \ConfigTransformer2021122310\Symfony\Component\C
     {
         $this->getCommand()->ignoreValidationErrors();
     }
-    public function setApplication(\ConfigTransformer2021122310\Symfony\Component\Console\Application $application = null) : void
+    public function setApplication(\ConfigTransformer202112237\Symfony\Component\Console\Application $application = null) : void
     {
         if ($this->command instanceof parent) {
             $this->command->setApplication($application);
         }
         parent::setApplication($application);
     }
-    public function setHelperSet(\ConfigTransformer2021122310\Symfony\Component\Console\Helper\HelperSet $helperSet) : void
+    public function setHelperSet(\ConfigTransformer202112237\Symfony\Component\Console\Helper\HelperSet $helperSet) : void
     {
         if ($this->command instanceof parent) {
             $this->command->setHelperSet($helperSet);
@@ -55,11 +55,11 @@ final class LazyCommand extends \ConfigTransformer2021122310\Symfony\Component\C
     {
         return $this->isEnabled ?? $this->getCommand()->isEnabled();
     }
-    public function run(\ConfigTransformer2021122310\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2021122310\Symfony\Component\Console\Output\OutputInterface $output) : int
+    public function run(\ConfigTransformer202112237\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112237\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         return $this->getCommand()->run($input, $output);
     }
-    public function complete(\ConfigTransformer2021122310\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer2021122310\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
+    public function complete(\ConfigTransformer202112237\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer202112237\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
     {
         $this->getCommand()->complete($input, $suggestions);
     }
@@ -87,11 +87,11 @@ final class LazyCommand extends \ConfigTransformer2021122310\Symfony\Component\C
         $this->getCommand()->setDefinition($definition);
         return $this;
     }
-    public function getDefinition() : \ConfigTransformer2021122310\Symfony\Component\Console\Input\InputDefinition
+    public function getDefinition() : \ConfigTransformer202112237\Symfony\Component\Console\Input\InputDefinition
     {
         return $this->getCommand()->getDefinition();
     }
-    public function getNativeDefinition() : \ConfigTransformer2021122310\Symfony\Component\Console\Input\InputDefinition
+    public function getNativeDefinition() : \ConfigTransformer202112237\Symfony\Component\Console\Input\InputDefinition
     {
         return $this->getCommand()->getNativeDefinition();
     }
