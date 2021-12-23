@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202112233\\Symfony\\Component\\Finder\\": ""
+            "ConfigTransformer2021122310\\Symfony\\Component\\Finder\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

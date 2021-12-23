@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112233\PhpParser;
+namespace ConfigTransformer2021122310\PhpParser;
 
 interface NodeVisitor
 {
@@ -34,7 +34,7 @@ interface NodeVisitor
      *
      * @return null|int|Node Replacement node (or special return value)
      */
-    public function enterNode(\ConfigTransformer202112233\PhpParser\Node $node);
+    public function enterNode(\ConfigTransformer2021122310\PhpParser\Node $node);
     /**
      * Called when leaving a node.
      *
@@ -54,7 +54,7 @@ interface NodeVisitor
      *
      * @return null|int|Node|Node[] Replacement node (or special return value)
      */
-    public function leaveNode(\ConfigTransformer202112233\PhpParser\Node $node);
+    public function leaveNode(\ConfigTransformer2021122310\PhpParser\Node $node);
     /**
      * Called once after traversal.
      *
