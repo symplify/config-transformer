@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112237\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer2021122310\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202112237\PhpParser\Node\Expr;
-use ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst;
-use ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst\Dir;
-use ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst\File;
-use ConfigTransformer202112237\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer2021122310\PhpParser\Node\Expr;
+use ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst\Dir;
+use ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst\File;
+use ConfigTransformer2021122310\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<MagicConst>
  */
-final class MagicConstValueResolver implements \ConfigTransformer202112237\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class MagicConstValueResolver implements \ConfigTransformer2021122310\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     public function getType() : string
     {
-        return \ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst::class;
+        return \ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst::class;
     }
     /**
      * @param MagicConst $expr
      */
-    public function resolve(\ConfigTransformer202112237\PhpParser\Node\Expr $expr, string $currentFilePath) : ?string
+    public function resolve(\ConfigTransformer2021122310\PhpParser\Node\Expr $expr, string $currentFilePath) : ?string
     {
-        if ($expr instanceof \ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst\Dir) {
+        if ($expr instanceof \ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst\Dir) {
             return \dirname($currentFilePath);
         }
-        if ($expr instanceof \ConfigTransformer202112237\PhpParser\Node\Scalar\MagicConst\File) {
+        if ($expr instanceof \ConfigTransformer2021122310\PhpParser\Node\Scalar\MagicConst\File) {
             return $currentFilePath;
         }
         return null;
