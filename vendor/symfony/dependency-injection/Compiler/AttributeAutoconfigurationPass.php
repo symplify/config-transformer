@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112190\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202112238\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202112190\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202112190\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202112190\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202112190\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202112190\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202112238\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202112238\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202112238\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202112238\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202112238\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Alexander M. Turek <me@derrabus.de>
  */
-final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class AttributeAutoconfigurationPass extends \ConfigTransformer202112238\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $classAttributeConfigurators = [];
     private $methodAttributeConfigurators = [];
     private $propertyAttributeConfigurators = [];
     private $parameterAttributeConfigurators = [];
-    public function process(\ConfigTransformer202112190\Symfony\Component\DependencyInjection\ContainerBuilder $container) : void
+    public function process(\ConfigTransformer202112238\Symfony\Component\DependencyInjection\ContainerBuilder $container) : void
     {
         if (!$container->getAutoconfiguredAttributes()) {
             return;
@@ -45,14 +45,14 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
             } elseif ($parameterType instanceof \ReflectionNamedType) {
                 $types[] = $parameterType->getName();
             } else {
-                throw new \ConfigTransformer202112190\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Argument "$%s" of attribute autoconfigurator should have a type, use one or more of "\\ReflectionClass|\\ReflectionMethod|\\ReflectionProperty|\\ReflectionParameter|\\Reflector" in "%s" on line "%d".', $reflectorParameter->getName(), $callableReflector->getFileName(), $callableReflector->getStartLine()));
+                throw new \ConfigTransformer202112238\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Argument "$%s" of attribute autoconfigurator should have a type, use one or more of "\\ReflectionClass|\\ReflectionMethod|\\ReflectionProperty|\\ReflectionParameter|\\Reflector" in "%s" on line "%d".', $reflectorParameter->getName(), $callableReflector->getFileName(), $callableReflector->getStartLine()));
             }
             try {
                 $attributeReflector = new \ReflectionClass($attributeName);
             } catch (\ReflectionException $e) {
                 continue;
             }
-            $targets = [][0] ?? 0;
+            $targets = (\method_exists($attributeReflector, 'getAttributes') ? $attributeReflector->getAttributes(\Attribute::class) : [])[0] ?? 0;
             $targets = $targets ? $targets->getArguments()[0] ?? -1 : 0;
             foreach (['class', 'method', 'property', 'parameter'] as $symbol) {
                 if (['Reflector'] !== $types) {
@@ -60,7 +60,7 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
                         continue;
                     }
                     if (!($targets & \constant('Attribute::TARGET_' . \strtoupper($symbol)))) {
-                        throw new \ConfigTransformer202112190\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Invalid type "Reflection%s" on argument "$%s": attribute "%s" cannot target a ' . $symbol . ' in "%s" on line "%d".', \ucfirst($symbol), $reflectorParameter->getName(), $attributeName, $callableReflector->getFileName(), $callableReflector->getStartLine()));
+                        throw new \ConfigTransformer202112238\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Invalid type "Reflection%s" on argument "$%s": attribute "%s" cannot target a ' . $symbol . ' in "%s" on line "%d".', \ucfirst($symbol), $reflectorParameter->getName(), $attributeName, $callableReflector->getFileName(), $callableReflector->getStartLine()));
                     }
                 }
                 $this->{$symbol . 'AttributeConfigurators'}[$attributeName] = $callable;
@@ -74,13 +74,13 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer202112190\Symfony\Component\DependencyInjection\Definition || !$value->isAutoconfigured() || $value->isAbstract() || $value->hasTag('container.ignore_attributes') || !($classReflector = $this->container->getReflectionClass($value->getClass(), \false))) {
+        if (!$value instanceof \ConfigTransformer202112238\Symfony\Component\DependencyInjection\Definition || !$value->isAutoconfigured() || $value->isAbstract() || $value->hasTag('container.ignore_attributes') || !($classReflector = $this->container->getReflectionClass($value->getClass(), \false))) {
             return parent::processValue($value, $isRoot);
         }
         $instanceof = $value->getInstanceofConditionals();
-        $conditionals = $instanceof[$classReflector->getName()] ?? new \ConfigTransformer202112190\Symfony\Component\DependencyInjection\ChildDefinition('');
+        $conditionals = $instanceof[$classReflector->getName()] ?? new \ConfigTransformer202112238\Symfony\Component\DependencyInjection\ChildDefinition('');
         if ($this->classAttributeConfigurators) {
-            foreach ([] as $attribute) {
+            foreach (\method_exists($classReflector, 'getAttributes') ? $classReflector->getAttributes() : [] as $attribute) {
                 if ($configurator = $this->classAttributeConfigurators[$attribute->getName()] ?? null) {
                     $configurator($conditionals, $attribute->newInstance(), $classReflector);
                 }
@@ -89,12 +89,12 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
         if ($this->parameterAttributeConfigurators) {
             try {
                 $constructorReflector = $this->getConstructor($value, \false);
-            } catch (\ConfigTransformer202112190\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+            } catch (\ConfigTransformer202112238\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
                 $constructorReflector = null;
             }
             if ($constructorReflector) {
                 foreach ($constructorReflector->getParameters() as $parameterReflector) {
-                    foreach ([] as $attribute) {
+                    foreach (\method_exists($parameterReflector, 'getAttributes') ? $parameterReflector->getAttributes() : [] as $attribute) {
                         if ($configurator = $this->parameterAttributeConfigurators[$attribute->getName()] ?? null) {
                             $configurator($conditionals, $attribute->newInstance(), $parameterReflector);
                         }
@@ -108,7 +108,7 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
                     continue;
                 }
                 if ($this->methodAttributeConfigurators) {
-                    foreach ([] as $attribute) {
+                    foreach (\method_exists($methodReflector, 'getAttributes') ? $methodReflector->getAttributes() : [] as $attribute) {
                         if ($configurator = $this->methodAttributeConfigurators[$attribute->getName()] ?? null) {
                             $configurator($conditionals, $attribute->newInstance(), $methodReflector);
                         }
@@ -116,7 +116,7 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
                 }
                 if ($this->parameterAttributeConfigurators) {
                     foreach ($methodReflector->getParameters() as $parameterReflector) {
-                        foreach ([] as $attribute) {
+                        foreach (\method_exists($parameterReflector, 'getAttributes') ? $parameterReflector->getAttributes() : [] as $attribute) {
                             if ($configurator = $this->parameterAttributeConfigurators[$attribute->getName()] ?? null) {
                                 $configurator($conditionals, $attribute->newInstance(), $parameterReflector);
                             }
@@ -130,14 +130,14 @@ final class AttributeAutoconfigurationPass extends \ConfigTransformer202112190\S
                 if ($propertyReflector->isStatic()) {
                     continue;
                 }
-                foreach ([] as $attribute) {
+                foreach (\method_exists($propertyReflector, 'getAttributes') ? $propertyReflector->getAttributes() : [] as $attribute) {
                     if ($configurator = $this->propertyAttributeConfigurators[$attribute->getName()] ?? null) {
                         $configurator($conditionals, $attribute->newInstance(), $propertyReflector);
                     }
                 }
             }
         }
-        if (!isset($instanceof[$classReflector->getName()]) && new \ConfigTransformer202112190\Symfony\Component\DependencyInjection\ChildDefinition('') != $conditionals) {
+        if (!isset($instanceof[$classReflector->getName()]) && new \ConfigTransformer202112238\Symfony\Component\DependencyInjection\ChildDefinition('') != $conditionals) {
             $instanceof[$classReflector->getName()] = $conditionals;
             $value->setInstanceofConditionals($instanceof);
         }
