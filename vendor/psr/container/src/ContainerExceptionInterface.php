@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202112238\Psr\Container;
+namespace ConfigTransformer202112233\Psr\Container;
 
 use Throwable;
 /**

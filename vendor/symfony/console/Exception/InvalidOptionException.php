@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112238\Symfony\Component\Console\Exception;
+namespace ConfigTransformer202112233\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect option name typed in the console.
  *
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class InvalidOptionException extends \InvalidArgumentException implements \ConfigTransformer202112238\Symfony\Component\Console\Exception\ExceptionInterface
+class InvalidOptionException extends \InvalidArgumentException implements \ConfigTransformer202112233\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }

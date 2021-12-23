@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112238\PhpParser\Node\Scalar;
+namespace ConfigTransformer202112233\PhpParser\Node\Scalar;
 
-use ConfigTransformer202112238\PhpParser\Node\Scalar;
-class DNumber extends \ConfigTransformer202112238\PhpParser\Node\Scalar
+use ConfigTransformer202112233\PhpParser\Node\Scalar;
+class DNumber extends \ConfigTransformer202112233\PhpParser\Node\Scalar
 {
     /** @var float Number value */
     public $value;
