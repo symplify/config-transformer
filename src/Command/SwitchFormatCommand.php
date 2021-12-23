@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112238\Symplify\ConfigTransformer\Command;
+namespace ConfigTransformer202112232\Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer202112238\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202112238\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202112238\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202112238\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202112238\Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
-use ConfigTransformer202112238\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
-use ConfigTransformer202112238\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
-use ConfigTransformer202112238\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202112238\Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202112238\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer202112238\Symplify\PackageBuilder\Console\Command\CommandNaming;
-use ConfigTransformer202112238\Symplify\SmartFileSystem\SmartFileInfo;
-final class SwitchFormatCommand extends \ConfigTransformer202112238\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+use ConfigTransformer202112232\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202112232\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202112232\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202112232\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202112232\Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
+use ConfigTransformer202112232\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
+use ConfigTransformer202112232\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
+use ConfigTransformer202112232\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202112232\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202112232\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer202112232\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer202112232\Symplify\SmartFileSystem\SmartFileInfo;
+final class SwitchFormatCommand extends \ConfigTransformer202112232\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     /**
      * @var \Symplify\ConfigTransformer\Configuration\ConfigurationFactory
@@ -29,7 +29,7 @@ final class SwitchFormatCommand extends \ConfigTransformer202112238\Symplify\Pac
      * @var \Symplify\ConfigTransformer\Converter\ConvertedContentFactory
      */
     private $convertedContentFactory;
-    public function __construct(\ConfigTransformer202112238\Symplify\ConfigTransformer\Configuration\ConfigurationFactory $configurationFactory, \ConfigTransformer202112238\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202112238\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
+    public function __construct(\ConfigTransformer202112232\Symplify\ConfigTransformer\Configuration\ConfigurationFactory $configurationFactory, \ConfigTransformer202112232\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper $configFileDumper, \ConfigTransformer202112232\Symplify\ConfigTransformer\Converter\ConvertedContentFactory $convertedContentFactory)
     {
         $this->configurationFactory = $configurationFactory;
         $this->configFileDumper = $configFileDumper;
@@ -38,12 +38,12 @@ final class SwitchFormatCommand extends \ConfigTransformer202112238\Symplify\Pac
     }
     protected function configure() : void
     {
-        $this->setName(\ConfigTransformer202112238\Symplify\PackageBuilder\Console\Command\CommandNaming::classToName(self::class));
+        $this->setName(\ConfigTransformer202112232\Symplify\PackageBuilder\Console\Command\CommandNaming::classToName(self::class));
         $this->setDescription('Converts XML/YAML configs to PHP format');
-        $this->addArgument(\ConfigTransformer202112238\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202112238\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202112238\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
-        $this->addOption(\ConfigTransformer202112238\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202112238\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addArgument(\ConfigTransformer202112232\Symplify\ConfigTransformer\ValueObject\Option::SOURCES, \ConfigTransformer202112232\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202112232\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory with configs');
+        $this->addOption(\ConfigTransformer202112232\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN, null, \ConfigTransformer202112232\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
-    protected function execute(\ConfigTransformer202112238\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112238\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\ConfigTransformer202112232\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202112232\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $configuration = $this->configurationFactory->createFromInput($input);
         $suffixes = $configuration->getInputSuffixes();
@@ -61,7 +61,7 @@ final class SwitchFormatCommand extends \ConfigTransformer202112238\Symplify\Pac
     /**
      * @param SmartFileInfo[] $fileInfos
      */
-    private function removeFileInfos(\ConfigTransformer202112238\Symplify\ConfigTransformer\ValueObject\Configuration $configuration, array $fileInfos) : void
+    private function removeFileInfos(\ConfigTransformer202112232\Symplify\ConfigTransformer\ValueObject\Configuration $configuration, array $fileInfos) : void
     {
         if (!$configuration->isDryRun()) {
             $this->smartFileSystem->remove($fileInfos);

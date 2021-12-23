@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112238\Symfony\Contracts\Cache;
+namespace ConfigTransformer202112232\Symfony\Contracts\Cache;
 
-use ConfigTransformer202112238\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202112238\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202112238\Psr\Log\LoggerInterface;
+use ConfigTransformer202112232\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202112232\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202112232\Psr\Log\LoggerInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202112238\Psr\Cache\InvalidArgumentException::class);
+\class_exists(\ConfigTransformer202112232\Psr\Cache\InvalidArgumentException::class);
 /**
  * An implementation of CacheInterface for PSR-6 CacheItemPoolInterface classes.
  *
@@ -40,19 +40,19 @@ trait CacheTrait
     /**
      * @return mixed
      */
-    private function doGet(\ConfigTransformer202112238\Psr\Cache\CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, \ConfigTransformer202112238\Psr\Log\LoggerInterface $logger = null)
+    private function doGet(\ConfigTransformer202112232\Psr\Cache\CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, \ConfigTransformer202112232\Psr\Log\LoggerInterface $logger = null)
     {
         if (0 > ($beta = $beta ?? 1.0)) {
-            throw new class(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta)) extends \InvalidArgumentException implements \ConfigTransformer202112238\Psr\Cache\InvalidArgumentException
+            throw new class(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta)) extends \InvalidArgumentException implements \ConfigTransformer202112232\Psr\Cache\InvalidArgumentException
             {
             };
         }
         $item = $pool->getItem($key);
         $recompute = !$item->isHit() || \INF === $beta;
-        $metadata = $item instanceof \ConfigTransformer202112238\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
+        $metadata = $item instanceof \ConfigTransformer202112232\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
         if (!$recompute && $metadata) {
-            $expiry = $metadata[\ConfigTransformer202112238\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
-            $ctime = $metadata[\ConfigTransformer202112238\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
+            $expiry = $metadata[\ConfigTransformer202112232\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
+            $ctime = $metadata[\ConfigTransformer202112232\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
             if ($recompute = $ctime && $expiry && $expiry <= ($now = \microtime(\true)) - $ctime / 1000 * $beta * \log(\random_int(1, \PHP_INT_MAX) / \PHP_INT_MAX)) {
                 // force applying defaultLifetime to expiry
                 $item->expiresAt(null);

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112238\PhpParser\Node\Stmt;
+namespace ConfigTransformer202112232\PhpParser\Node\Stmt;
 
-use ConfigTransformer202112238\PhpParser\Node;
-class Global_ extends \ConfigTransformer202112238\PhpParser\Node\Stmt
+use ConfigTransformer202112232\PhpParser\Node;
+class Global_ extends \ConfigTransformer202112232\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Variables */
     public $vars;
