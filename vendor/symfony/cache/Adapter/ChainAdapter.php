@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112232\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202112236\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202112232\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202112232\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202112232\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202112232\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202112232\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202112232\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202112232\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202112232\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202112232\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202112236\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202112236\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202112236\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202112236\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202112236\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202112236\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202112236\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202112236\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202112236\Symfony\Contracts\Service\ResetInterface;
 /**
  * Chains several adapters together.
  *
@@ -27,7 +27,7 @@ use ConfigTransformer202112232\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202112232\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202112232\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202112232\Symfony\Component\Cache\ResettableInterface
+class ChainAdapter implements \ConfigTransformer202112236\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202112236\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202112236\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202112236\Symfony\Component\Cache\ResettableInterface
 {
     use ContractsTrait;
     private array $adapters = [];
@@ -41,20 +41,20 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     public function __construct(array $adapters, int $defaultLifetime = 0)
     {
         if (!$adapters) {
-            throw new \ConfigTransformer202112232\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one adapter must be specified.');
+            throw new \ConfigTransformer202112236\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one adapter must be specified.');
         }
         foreach ($adapters as $adapter) {
-            if (!$adapter instanceof \ConfigTransformer202112232\Psr\Cache\CacheItemPoolInterface) {
-                throw new \ConfigTransformer202112232\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_debug_type($adapter), \ConfigTransformer202112232\Psr\Cache\CacheItemPoolInterface::class));
+            if (!$adapter instanceof \ConfigTransformer202112236\Psr\Cache\CacheItemPoolInterface) {
+                throw new \ConfigTransformer202112236\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_debug_type($adapter), \ConfigTransformer202112236\Psr\Cache\CacheItemPoolInterface::class));
             }
-            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \ConfigTransformer202112232\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
+            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \ConfigTransformer202112236\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
                 continue;
                 // skip putting APCu in the chain when the backend is disabled
             }
-            if ($adapter instanceof \ConfigTransformer202112232\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($adapter instanceof \ConfigTransformer202112236\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $this->adapters[] = $adapter;
             } else {
-                $this->adapters[] = new \ConfigTransformer202112232\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
+                $this->adapters[] = new \ConfigTransformer202112236\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
             }
         }
         $this->adapterCount = \count($this->adapters);
@@ -62,17 +62,17 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
         self::$syncItem ?? (self::$syncItem = \Closure::bind(static function ($sourceItem, $item, $defaultLifetime, $sourceMetadata = null) {
             $sourceItem->isTaggable = \false;
             $sourceMetadata = $sourceMetadata ?? $sourceItem->metadata;
-            unset($sourceMetadata[\ConfigTransformer202112232\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+            unset($sourceMetadata[\ConfigTransformer202112236\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
             $item->value = $sourceItem->value;
             $item->isHit = $sourceItem->isHit;
             $item->metadata = $item->newMetadata = $sourceItem->metadata = $sourceMetadata;
-            if (isset($item->metadata[\ConfigTransformer202112232\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])) {
-                $item->expiresAt(\DateTime::createFromFormat('U.u', \sprintf('%.6F', $item->metadata[\ConfigTransformer202112232\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])));
+            if (isset($item->metadata[\ConfigTransformer202112236\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])) {
+                $item->expiresAt(\DateTime::createFromFormat('U.u', \sprintf('%.6F', $item->metadata[\ConfigTransformer202112236\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])));
             } elseif (0 < $defaultLifetime) {
                 $item->expiresAfter($defaultLifetime);
             }
             return $item;
-        }, null, \ConfigTransformer202112232\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202112236\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
@@ -81,13 +81,13 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     {
         $lastItem = null;
         $i = 0;
-        $wrap = function (\ConfigTransformer202112232\Symfony\Component\Cache\CacheItem $item = null) use($key, $callback, $beta, &$wrap, &$i, &$lastItem, &$metadata) {
+        $wrap = function (\ConfigTransformer202112236\Symfony\Component\Cache\CacheItem $item = null) use($key, $callback, $beta, &$wrap, &$i, &$lastItem, &$metadata) {
             $adapter = $this->adapters[$i];
             if (isset($this->adapters[++$i])) {
                 $callback = $wrap;
                 $beta = \INF === $beta ? \INF : 0;
             }
-            if ($adapter instanceof \ConfigTransformer202112232\Symfony\Contracts\Cache\CacheInterface) {
+            if ($adapter instanceof \ConfigTransformer202112236\Symfony\Contracts\Cache\CacheInterface) {
                 $value = $adapter->get($key, $callback, $beta, $metadata);
             } else {
                 $value = $this->doGet($adapter, $key, $callback, $beta, $metadata);
@@ -102,7 +102,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202112232\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : \ConfigTransformer202112236\Symfony\Component\Cache\CacheItem
     {
         $syncItem = self::$syncItem;
         $misses = [];
@@ -171,7 +171,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
         $cleared = \true;
         $i = $this->adapterCount;
         while ($i--) {
-            if ($this->adapters[$i] instanceof \ConfigTransformer202112232\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->adapters[$i] instanceof \ConfigTransformer202112236\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $cleared = $this->adapters[$i]->clear($prefix) && $cleared;
             } else {
                 $cleared = $this->adapters[$i]->clear() && $cleared;
@@ -206,7 +206,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202112232\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(\ConfigTransformer202112236\Psr\Cache\CacheItemInterface $item) : bool
     {
         $saved = \true;
         $i = $this->adapterCount;
@@ -218,7 +218,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202112232\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(\ConfigTransformer202112236\Psr\Cache\CacheItemInterface $item) : bool
     {
         $saved = \true;
         $i = $this->adapterCount;
@@ -246,7 +246,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     {
         $pruned = \true;
         foreach ($this->adapters as $adapter) {
-            if ($adapter instanceof \ConfigTransformer202112232\Symfony\Component\Cache\PruneableInterface) {
+            if ($adapter instanceof \ConfigTransformer202112236\Symfony\Component\Cache\PruneableInterface) {
                 $pruned = $adapter->prune() && $pruned;
             }
         }
@@ -258,7 +258,7 @@ class ChainAdapter implements \ConfigTransformer202112232\Symfony\Component\Cach
     public function reset()
     {
         foreach ($this->adapters as $adapter) {
-            if ($adapter instanceof \ConfigTransformer202112232\Symfony\Contracts\Service\ResetInterface) {
+            if ($adapter instanceof \ConfigTransformer202112236\Symfony\Contracts\Service\ResetInterface) {
                 $adapter->reset();
             }
         }
