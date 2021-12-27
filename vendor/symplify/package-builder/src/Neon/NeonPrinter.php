@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021122310\Symplify\PackageBuilder\Neon;
+namespace ConfigTransformer202112273\Symplify\PackageBuilder\Neon;
 
-use ConfigTransformer2021122310\Nette\Neon\Encoder;
-use ConfigTransformer2021122310\Nette\Neon\Neon;
-use ConfigTransformer2021122310\Nette\Utils\Strings;
+use ConfigTransformer202112273\Nette\Neon\Encoder;
+use ConfigTransformer202112273\Nette\Neon\Neon;
+use ConfigTransformer202112273\Nette\Utils\Strings;
 /**
  * @api
  */
@@ -26,7 +26,7 @@ final class NeonPrinter
      */
     public function printNeon(array $phpStanNeon) : string
     {
-        $neonContent = \ConfigTransformer2021122310\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer2021122310\Nette\Neon\Encoder::BLOCK, '    ');
+        $neonContent = \ConfigTransformer202112273\Nette\Neon\Neon::encode($phpStanNeon, \ConfigTransformer202112273\Nette\Neon\Encoder::BLOCK, '    ');
         // inline single tags, dummy
         $neonContent = $this->inlineSingleTags($neonContent);
         $neonContent = $this->fixDoubleSpaceInArguments($neonContent);
@@ -34,10 +34,10 @@ final class NeonPrinter
     }
     private function inlineSingleTags(string $neonContent) : string
     {
-        return \ConfigTransformer2021122310\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
+        return \ConfigTransformer202112273\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
     }
     private function fixDoubleSpaceInArguments(string $neonContent) : string
     {
-        return \ConfigTransformer2021122310\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
+        return \ConfigTransformer202112273\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
     }
 }
