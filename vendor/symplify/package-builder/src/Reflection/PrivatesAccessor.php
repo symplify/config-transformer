@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112303\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202112309\Symplify\PackageBuilder\Reflection;
 
 use ReflectionProperty;
-use ConfigTransformer202112303\Symplify\PHPStanRules\Exception\ShouldNotHappenException;
+use ConfigTransformer202112309\Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Reflection\PrivatesAccessorTest
@@ -25,7 +25,7 @@ final class PrivatesAccessor
         if ($value instanceof $valueClassName) {
             return $value;
         }
-        throw new \ConfigTransformer202112303\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+        throw new \ConfigTransformer202112309\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
     }
     /**
      * @return mixed
@@ -47,7 +47,7 @@ final class PrivatesAccessor
     public function setPrivatePropertyOfClass($object, string $propertyName, $value, string $valueClassName) : void
     {
         if (!$value instanceof $valueClassName) {
-            throw new \ConfigTransformer202112303\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202112309\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
         }
         $this->setPrivateProperty($object, $propertyName, $value);
     }
@@ -71,7 +71,8 @@ final class PrivatesAccessor
         }
         $parentClass = \get_parent_class($object);
         if ($parentClass === \false) {
-            throw new \ConfigTransformer202112303\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+            $errorMessage = \sprintf('Property "$%s" was not found in "%s" class', $propertyName, \get_class($object));
+            throw new \ConfigTransformer202112309\Symplify\PHPStanRules\Exception\ShouldNotHappenException($errorMessage);
         }
         return new \ReflectionProperty($parentClass, $propertyName);
     }

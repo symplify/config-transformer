@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112303\Nette\Neon;
+namespace ConfigTransformer202112309\Nette\Neon;
 
 /** @internal */
 final class Traverser
@@ -13,12 +13,12 @@ final class Traverser
     /** @var callable(Node): ?Node */
     private $callback;
     /** @param  callable(Node): ?Node  $callback */
-    public function traverse(\ConfigTransformer202112303\Nette\Neon\Node $node, callable $callback) : \ConfigTransformer202112303\Nette\Neon\Node
+    public function traverse(\ConfigTransformer202112309\Nette\Neon\Node $node, callable $callback) : \ConfigTransformer202112309\Nette\Neon\Node
     {
         $this->callback = $callback;
         return $this->traverseNode($node);
     }
-    private function traverseNode(\ConfigTransformer202112303\Nette\Neon\Node $node) : \ConfigTransformer202112303\Nette\Neon\Node
+    private function traverseNode(\ConfigTransformer202112309\Nette\Neon\Node $node) : \ConfigTransformer202112309\Nette\Neon\Node
     {
         $node = ($this->callback)($node) ?? $node;
         foreach ($node->getSubNodes() as &$subnode) {
