@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112273\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202112302\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202112273\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202112302\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerBag extends \ConfigTransformer202112273\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202112273\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
+class ContainerBag extends \ConfigTransformer202112302\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ConfigTransformer202112302\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202112273\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(\ConfigTransformer202112302\Symfony\Component\DependencyInjection\Container $container)
     {
         $this->container = $container;
     }
@@ -30,8 +30,7 @@ class ContainerBag extends \ConfigTransformer202112273\Symfony\Component\Depende
     }
     /**
      * {@inheritdoc}
-     *
-     * @return array|bool|string|int|float|null
+     * @return mixed[]|bool|float|int|string|null
      */
     public function get(string $name)
     {
