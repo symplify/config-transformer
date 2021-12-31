@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112316\Symfony\Component\Config;
+namespace ConfigTransformer2021123110\Symfony\Component\Config;
 
 /**
  * A ConfigCacheFactory implementation that validates the
@@ -16,7 +16,7 @@ namespace ConfigTransformer202112316\Symfony\Component\Config;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ResourceCheckerConfigCacheFactory implements \ConfigTransformer202112316\Symfony\Component\Config\ConfigCacheFactoryInterface
+class ResourceCheckerConfigCacheFactory implements \ConfigTransformer2021123110\Symfony\Component\Config\ConfigCacheFactoryInterface
 {
     /**
      * @var mixed[]
@@ -32,9 +32,9 @@ class ResourceCheckerConfigCacheFactory implements \ConfigTransformer202112316\S
     /**
      * {@inheritdoc}
      */
-    public function cache(string $file, callable $callable) : \ConfigTransformer202112316\Symfony\Component\Config\ConfigCacheInterface
+    public function cache(string $file, callable $callable) : \ConfigTransformer2021123110\Symfony\Component\Config\ConfigCacheInterface
     {
-        $cache = new \ConfigTransformer202112316\Symfony\Component\Config\ResourceCheckerConfigCache($file, $this->resourceCheckers);
+        $cache = new \ConfigTransformer2021123110\Symfony\Component\Config\ResourceCheckerConfigCache($file, $this->resourceCheckers);
         if (!$cache->isFresh()) {
             $callable($cache);
         }
