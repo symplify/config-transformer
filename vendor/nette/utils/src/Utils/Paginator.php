@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202112318\Nette\Utils;
+namespace ConfigTransformer202112316\Nette\Utils;
 
-use ConfigTransformer202112318\Nette;
+use ConfigTransformer202112316\Nette;
 /**
  * Paginating math.
  *
