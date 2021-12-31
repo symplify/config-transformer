@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202112319\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer2021123110\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202112319\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2021123110\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -29,7 +29,7 @@ trait FilesystemCommonTrait
         }
         if (isset($namespace[0])) {
             if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-                throw new \ConfigTransformer202112319\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+                throw new \ConfigTransformer2021123110\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
             }
             $directory .= \DIRECTORY_SEPARATOR . $namespace;
         } else {
@@ -41,7 +41,7 @@ trait FilesystemCommonTrait
         $directory .= \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
         if ('\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            throw new \ConfigTransformer202112319\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
+            throw new \ConfigTransformer2021123110\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
         }
         $this->directory = $directory;
     }
