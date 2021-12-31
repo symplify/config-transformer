@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2021123110\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202112319\Symfony\Component\DependencyInjection\Loader;
 
 /**
  * GlobFileLoader loads files from a glob pattern.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class GlobFileLoader extends \ConfigTransformer2021123110\Symfony\Component\DependencyInjection\Loader\FileLoader
+class GlobFileLoader extends \ConfigTransformer202112319\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     /**
      * {@inheritdoc}

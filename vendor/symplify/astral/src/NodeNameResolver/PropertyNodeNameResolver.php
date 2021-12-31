@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021123110\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202112319\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer2021123110\PhpParser\Node;
-use ConfigTransformer2021123110\PhpParser\Node\Stmt\Property;
-use ConfigTransformer2021123110\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class PropertyNodeNameResolver implements \ConfigTransformer2021123110\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202112319\PhpParser\Node;
+use ConfigTransformer202112319\PhpParser\Node\Stmt\Property;
+use ConfigTransformer202112319\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class PropertyNodeNameResolver implements \ConfigTransformer202112319\Symplify\Astral\Contract\NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer2021123110\PhpParser\Node $node) : bool
+    public function match(\ConfigTransformer202112319\PhpParser\Node $node) : bool
     {
-        return $node instanceof \ConfigTransformer2021123110\PhpParser\Node\Stmt\Property;
+        return $node instanceof \ConfigTransformer202112319\PhpParser\Node\Stmt\Property;
     }
     /**
      * @param Property $node
      */
-    public function resolve(\ConfigTransformer2021123110\PhpParser\Node $node) : ?string
+    public function resolve(\ConfigTransformer202112319\PhpParser\Node $node) : ?string
     {
         $propertyProperty = $node->props[0];
         return (string) $propertyProperty->name;
