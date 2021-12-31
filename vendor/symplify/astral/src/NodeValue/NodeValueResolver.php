@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2021123110\Symplify\Astral\NodeValue;
+namespace ConfigTransformer202112315\Symplify\Astral\NodeValue;
 
-use ConfigTransformer2021123110\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer2021123110\PhpParser\ConstExprEvaluator;
-use ConfigTransformer2021123110\PhpParser\Node\Expr;
-use ConfigTransformer2021123110\PhpParser\Node\Expr\Cast;
-use ConfigTransformer2021123110\PhpParser\Node\Expr\Instanceof_;
-use ConfigTransformer2021123110\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2021123110\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer2021123110\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2021123110\PHPStan\Analyser\Scope;
-use ConfigTransformer2021123110\PHPStan\Type\ConstantScalarType;
-use ConfigTransformer2021123110\PHPStan\Type\UnionType;
-use ConfigTransformer2021123110\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer2021123110\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer2021123110\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer2021123110\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
-use ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
-use ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
-use ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
-use ConfigTransformer2021123110\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202112315\PhpParser\ConstExprEvaluationException;
+use ConfigTransformer202112315\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202112315\PhpParser\Node\Expr;
+use ConfigTransformer202112315\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202112315\PhpParser\Node\Expr\Instanceof_;
+use ConfigTransformer202112315\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202112315\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer202112315\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202112315\PHPStan\Analyser\Scope;
+use ConfigTransformer202112315\PHPStan\Type\ConstantScalarType;
+use ConfigTransformer202112315\PHPStan\Type\UnionType;
+use ConfigTransformer202112315\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202112315\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202112315\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202112315\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
+use ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
+use ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
+use ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
+use ConfigTransformer202112315\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  */
@@ -52,34 +52,34 @@ final class NodeValueResolver
      * @var \Symplify\PackageBuilder\Php\TypeChecker
      */
     private $typeChecker;
-    public function __construct(\ConfigTransformer2021123110\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer2021123110\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer2021123110\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
+    public function __construct(\ConfigTransformer202112315\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202112315\Symplify\PackageBuilder\Php\TypeChecker $typeChecker, \ConfigTransformer202112315\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->typeChecker = $typeChecker;
-        $this->constExprEvaluator = new \ConfigTransformer2021123110\PhpParser\ConstExprEvaluator(function (\ConfigTransformer2021123110\PhpParser\Node\Expr $expr) {
+        $this->constExprEvaluator = new \ConfigTransformer202112315\PhpParser\ConstExprEvaluator(function (\ConfigTransformer202112315\PhpParser\Node\Expr $expr) {
             return $this->resolveByNode($expr);
         });
-        $this->unionTypeValueResolver = new \ConfigTransformer2021123110\Symplify\Astral\NodeValue\UnionTypeValueResolver();
-        $this->nodeValueResolvers[] = new \ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver($this->simpleNameResolver, $simpleNodeFinder);
-        $this->nodeValueResolvers[] = new \ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver($this->simpleNameResolver);
-        $this->nodeValueResolvers[] = new \ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver();
-        $this->nodeValueResolvers[] = new \ConfigTransformer2021123110\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver($this->simpleNameResolver, $this->constExprEvaluator);
+        $this->unionTypeValueResolver = new \ConfigTransformer202112315\Symplify\Astral\NodeValue\UnionTypeValueResolver();
+        $this->nodeValueResolvers[] = new \ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver($this->simpleNameResolver, $simpleNodeFinder);
+        $this->nodeValueResolvers[] = new \ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver($this->simpleNameResolver);
+        $this->nodeValueResolvers[] = new \ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver();
+        $this->nodeValueResolvers[] = new \ConfigTransformer202112315\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver($this->simpleNameResolver, $this->constExprEvaluator);
     }
     /**
      * @return array|bool|float|int|mixed|string|null
      */
-    public function resolveWithScope(\ConfigTransformer2021123110\PhpParser\Node\Expr $expr, \ConfigTransformer2021123110\PHPStan\Analyser\Scope $scope)
+    public function resolveWithScope(\ConfigTransformer202112315\PhpParser\Node\Expr $expr, \ConfigTransformer202112315\PHPStan\Analyser\Scope $scope)
     {
         $this->currentFilePath = $scope->getFile();
         try {
             return $this->constExprEvaluator->evaluateDirectly($expr);
-        } catch (\ConfigTransformer2021123110\PhpParser\ConstExprEvaluationException $exception) {
+        } catch (\ConfigTransformer202112315\PhpParser\ConstExprEvaluationException $exception) {
         }
         $exprType = $scope->getType($expr);
-        if ($exprType instanceof \ConfigTransformer2021123110\PHPStan\Type\ConstantScalarType) {
+        if ($exprType instanceof \ConfigTransformer202112315\PHPStan\Type\ConstantScalarType) {
             return $exprType->getValue();
         }
-        if ($exprType instanceof \ConfigTransformer2021123110\PHPStan\Type\UnionType) {
+        if ($exprType instanceof \ConfigTransformer202112315\PHPStan\Type\UnionType) {
             return $this->unionTypeValueResolver->resolveConstantTypes($exprType);
         }
         return null;
@@ -87,22 +87,22 @@ final class NodeValueResolver
     /**
      * @return array|bool|float|int|mixed|string|null
      */
-    public function resolve(\ConfigTransformer2021123110\PhpParser\Node\Expr $expr, string $filePath)
+    public function resolve(\ConfigTransformer202112315\PhpParser\Node\Expr $expr, string $filePath)
     {
         $this->currentFilePath = $filePath;
         try {
             return $this->constExprEvaluator->evaluateDirectly($expr);
-        } catch (\ConfigTransformer2021123110\PhpParser\ConstExprEvaluationException $exception) {
+        } catch (\ConfigTransformer202112315\PhpParser\ConstExprEvaluationException $exception) {
             return null;
         }
     }
     /**
      * @return mixed|string|int|bool|null
      */
-    private function resolveByNode(\ConfigTransformer2021123110\PhpParser\Node\Expr $expr)
+    private function resolveByNode(\ConfigTransformer202112315\PhpParser\Node\Expr $expr)
     {
         if ($this->currentFilePath === null) {
-            throw new \ConfigTransformer2021123110\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202112315\Symplify\Astral\Exception\ShouldNotHappenException();
         }
         foreach ($this->nodeValueResolvers as $nodeValueResolver) {
             if (\is_a($expr, $nodeValueResolver->getType(), \true)) {
@@ -110,8 +110,8 @@ final class NodeValueResolver
             }
         }
         // these values cannot be resolved in reliable way
-        if ($this->typeChecker->isInstanceOf($expr, [\ConfigTransformer2021123110\PhpParser\Node\Expr\Variable::class, \ConfigTransformer2021123110\PhpParser\Node\Expr\Cast::class, \ConfigTransformer2021123110\PhpParser\Node\Expr\MethodCall::class, \ConfigTransformer2021123110\PhpParser\Node\Expr\PropertyFetch::class, \ConfigTransformer2021123110\PhpParser\Node\Expr\Instanceof_::class])) {
-            throw new \ConfigTransformer2021123110\PhpParser\ConstExprEvaluationException();
+        if ($this->typeChecker->isInstanceOf($expr, [\ConfigTransformer202112315\PhpParser\Node\Expr\Variable::class, \ConfigTransformer202112315\PhpParser\Node\Expr\Cast::class, \ConfigTransformer202112315\PhpParser\Node\Expr\MethodCall::class, \ConfigTransformer202112315\PhpParser\Node\Expr\PropertyFetch::class, \ConfigTransformer202112315\PhpParser\Node\Expr\Instanceof_::class])) {
+            throw new \ConfigTransformer202112315\PhpParser\ConstExprEvaluationException();
         }
         return null;
     }
