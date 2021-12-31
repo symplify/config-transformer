@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112309\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202112319\Symplify\EasyTesting\ValueObject;
 
 final class InputAndExpected
 {
@@ -9,6 +9,9 @@ final class InputAndExpected
      * @var string
      */
     private $input;
+    /**
+     * @var mixed
+     */
     private $expected;
     /**
      * @param mixed $expected

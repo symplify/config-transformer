@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202112309\PhpParser\Node\Stmt;
+namespace ConfigTransformer202112319\PhpParser\Node\Stmt;
 
-use ConfigTransformer202112309\PhpParser\Node;
-class Do_ extends \ConfigTransformer202112309\PhpParser\Node\Stmt
+use ConfigTransformer202112319\PhpParser\Node;
+class Do_ extends \ConfigTransformer202112319\PhpParser\Node\Stmt
 {
     /** @var Node\Stmt[] Statements */
     public $stmts;
@@ -17,7 +17,7 @@ class Do_ extends \ConfigTransformer202112309\PhpParser\Node\Stmt
      * @param Node\Stmt[] $stmts      Statements
      * @param array       $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202112309\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202112319\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;
