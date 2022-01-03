@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201036\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer2022010310\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202201036\PhpParser\Node;
-use ConfigTransformer202201036\PhpParser\Node\Expr;
-use ConfigTransformer202201036\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202201036\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class FuncCallNodeNameResolver implements \ConfigTransformer202201036\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer2022010310\PhpParser\Node;
+use ConfigTransformer2022010310\PhpParser\Node\Expr;
+use ConfigTransformer2022010310\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer2022010310\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class FuncCallNodeNameResolver implements \ConfigTransformer2022010310\Symplify\Astral\Contract\NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer202201036\PhpParser\Node $node) : bool
+    public function match(\ConfigTransformer2022010310\PhpParser\Node $node) : bool
     {
-        return $node instanceof \ConfigTransformer202201036\PhpParser\Node\Expr\FuncCall;
+        return $node instanceof \ConfigTransformer2022010310\PhpParser\Node\Expr\FuncCall;
     }
     /**
      * @param FuncCall $node
      */
-    public function resolve(\ConfigTransformer202201036\PhpParser\Node $node) : ?string
+    public function resolve(\ConfigTransformer2022010310\PhpParser\Node $node) : ?string
     {
-        if ($node->name instanceof \ConfigTransformer202201036\PhpParser\Node\Expr) {
+        if ($node->name instanceof \ConfigTransformer2022010310\PhpParser\Node\Expr) {
             return null;
         }
         return (string) $node->name;

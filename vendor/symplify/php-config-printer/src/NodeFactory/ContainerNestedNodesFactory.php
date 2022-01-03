@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201036\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer2022010310\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202201036\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202201036\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter;
+use ConfigTransformer2022010310\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022010310\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter;
 final class ContainerNestedNodesFactory
 {
     /**
      * @var \Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter
      */
     private $instanceOfNestedCaseConverter;
-    public function __construct(\ConfigTransformer202201036\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter $instanceOfNestedCaseConverter)
+    public function __construct(\ConfigTransformer2022010310\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter $instanceOfNestedCaseConverter)
     {
         $this->instanceOfNestedCaseConverter = $instanceOfNestedCaseConverter;
     }

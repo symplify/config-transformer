@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201036\Symfony\Polyfill\Ctype;
+namespace ConfigTransformer2022010310\Symfony\Polyfill\Ctype;
 
 /**
  * Ctype implementation through regex.

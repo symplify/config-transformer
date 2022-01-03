@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201036;
+namespace ConfigTransformer2022010310;
 
-use ConfigTransformer202201036\Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
-use ConfigTransformer202201036\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use ConfigTransformer2022010310\Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
+use ConfigTransformer2022010310\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
     // monorepo
     __DIR__ . '/../../../vendor/autoload.php',
@@ -27,5 +27,5 @@ $codeSnifferAutoload = \getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.p
 if (\file_exists($codeSnifferAutoload)) {
     require_once $codeSnifferAutoload;
 }
-$kernelBootAndApplicationRun = new \ConfigTransformer202201036\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun(\ConfigTransformer202201036\Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel::class);
+$kernelBootAndApplicationRun = new \ConfigTransformer2022010310\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun(\ConfigTransformer2022010310\Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel::class);
 $kernelBootAndApplicationRun->run();

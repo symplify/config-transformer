@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201036\Symfony\Contracts\Service\Attribute;
+namespace ConfigTransformer2022010310\Symfony\Contracts\Service\Attribute;
 
-use ConfigTransformer202201036\Symfony\Contracts\Service\ServiceSubscriberTrait;
+use ConfigTransformer2022010310\Symfony\Contracts\Service\ServiceSubscriberTrait;
 /**
  * Use with {@see ServiceSubscriberTrait} to mark a method's return type
  * as a subscribed service.
