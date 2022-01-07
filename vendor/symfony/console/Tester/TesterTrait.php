@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022010310\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202201075\Symfony\Component\Console\Tester;
 
-use ConfigTransformer2022010310\PHPUnit\Framework\Assert;
-use ConfigTransformer2022010310\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2022010310\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer2022010310\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer2022010310\Symfony\Component\Console\Output\StreamOutput;
-use ConfigTransformer2022010310\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
+use ConfigTransformer202201075\PHPUnit\Framework\Assert;
+use ConfigTransformer202201075\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202201075\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202201075\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202201075\Symfony\Component\Console\Output\StreamOutput;
+use ConfigTransformer202201075\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>
  */
@@ -72,14 +72,14 @@ trait TesterTrait
     /**
      * Gets the input instance used by the last execution of the command or application.
      */
-    public function getInput() : \ConfigTransformer2022010310\Symfony\Component\Console\Input\InputInterface
+    public function getInput() : \ConfigTransformer202201075\Symfony\Component\Console\Input\InputInterface
     {
         return $this->input;
     }
     /**
      * Gets the output instance used by the last execution of the command or application.
      */
-    public function getOutput() : \ConfigTransformer2022010310\Symfony\Component\Console\Output\OutputInterface
+    public function getOutput() : \ConfigTransformer202201075\Symfony\Component\Console\Output\OutputInterface
     {
         return $this->output;
     }
@@ -97,7 +97,7 @@ trait TesterTrait
     }
     public function assertCommandIsSuccessful(string $message = '') : void
     {
-        \ConfigTransformer2022010310\PHPUnit\Framework\Assert::assertThat($this->statusCode, new \ConfigTransformer2022010310\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful(), $message);
+        \ConfigTransformer202201075\PHPUnit\Framework\Assert::assertThat($this->statusCode, new \ConfigTransformer202201075\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful(), $message);
     }
     /**
      * Sets the user inputs.
@@ -125,7 +125,7 @@ trait TesterTrait
     {
         $this->captureStreamsIndependently = \array_key_exists('capture_stderr_separately', $options) && $options['capture_stderr_separately'];
         if (!$this->captureStreamsIndependently) {
-            $this->output = new \ConfigTransformer2022010310\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202201075\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             if (isset($options['decorated'])) {
                 $this->output->setDecorated($options['decorated']);
             }
@@ -133,8 +133,8 @@ trait TesterTrait
                 $this->output->setVerbosity($options['verbosity']);
             }
         } else {
-            $this->output = new \ConfigTransformer2022010310\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer2022010310\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
-            $errorOutput = new \ConfigTransformer2022010310\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
+            $this->output = new \ConfigTransformer202201075\Symfony\Component\Console\Output\ConsoleOutput($options['verbosity'] ?? \ConfigTransformer202201075\Symfony\Component\Console\Output\ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
+            $errorOutput = new \ConfigTransformer202201075\Symfony\Component\Console\Output\StreamOutput(\fopen('php://memory', 'w', \false));
             $errorOutput->setFormatter($this->output->getFormatter());
             $errorOutput->setVerbosity($this->output->getVerbosity());
             $errorOutput->setDecorated($this->output->isDecorated());

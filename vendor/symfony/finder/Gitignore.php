@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022010310\Symfony\Component\Finder;
+namespace ConfigTransformer202201075\Symfony\Component\Finder;
 
 /**
  * Gitignore matches against text.

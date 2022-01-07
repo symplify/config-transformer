@@ -24,9 +24,12 @@
     "require": {
         "php": ">=7.1"
     },
+    "provide": {
+        "ext-mbstring": "*"
+    },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2022010310\\Symfony\\Polyfill\\Mbstring\\": ""
+            "ConfigTransformer202201075\\Symfony\\Polyfill\\Mbstring\\": ""
         },
         "files": [
             "bootstrap.php"

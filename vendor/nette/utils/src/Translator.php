@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2022010310\Nette\Localization;
+namespace ConfigTransformer202201075\Nette\Localization;
 
 /**
  * Translator adapter.
@@ -19,4 +19,4 @@ interface Translator
      */
     function translate($message, ...$parameters) : string;
 }
-\interface_exists(\ConfigTransformer2022010310\Nette\Localization\ITranslator::class);
+\interface_exists(\ConfigTransformer202201075\Nette\Localization\ITranslator::class);

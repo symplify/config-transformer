@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202201075\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * Resolves all parameter placeholders "%somevalue%" to their real values.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveParameterPlaceHoldersPass extends \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveParameterPlaceHoldersPass extends \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $bag;
     /**
@@ -39,7 +39,7 @@ class ResolveParameterPlaceHoldersPass extends \ConfigTransformer2022010310\Symf
      *
      * @throws ParameterNotFoundException
      */
-    public function process(\ConfigTransformer2022010310\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202201075\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->bag = $container->getParameterBag();
         try {
@@ -50,7 +50,7 @@ class ResolveParameterPlaceHoldersPass extends \ConfigTransformer2022010310\Symf
                 $aliases[$this->bag->resolveValue($name)] = $target;
             }
             $container->setAliases($aliases);
-        } catch (\ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+        } catch (\ConfigTransformer202201075\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
             $e->setSourceId($this->currentId);
             throw $e;
         }
@@ -66,7 +66,7 @@ class ResolveParameterPlaceHoldersPass extends \ConfigTransformer2022010310\Symf
         if (\is_string($value)) {
             try {
                 $v = $this->bag->resolveValue($value);
-            } catch (\ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\ConfigTransformer202201075\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
                 if ($this->throwOnResolveException) {
                     throw $e;
                 }
@@ -75,7 +75,7 @@ class ResolveParameterPlaceHoldersPass extends \ConfigTransformer2022010310\Symf
             }
             return $this->resolveArrays || !$v || !\is_array($v) ? $v : $value;
         }
-        if ($value instanceof \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Definition) {
             $value->setBindings($this->processValue($value->getBindings()));
             $changes = $value->getChanges();
             if (isset($changes['class'])) {

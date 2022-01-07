@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202201075\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202201075\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate "container.hot_path" tags to referenced services.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveHotPathPass extends \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveHotPathPass extends \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * @var mixed[]
@@ -28,7 +28,7 @@ class ResolveHotPathPass extends \ConfigTransformer2022010310\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer2022010310\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202201075\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         try {
             parent::process($container);
@@ -44,10 +44,10 @@ class ResolveHotPathPass extends \ConfigTransformer2022010310\Symfony\Component\
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        if ($value instanceof \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             return $value;
         }
-        if ($value instanceof \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Definition && $isRoot) {
+        if ($value instanceof \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Definition && $isRoot) {
             if ($value->isDeprecated()) {
                 return $value->clearTag('container.hot_path');
             }
@@ -56,7 +56,7 @@ class ResolveHotPathPass extends \ConfigTransformer2022010310\Symfony\Component\
                 return $value;
             }
         }
-        if ($value instanceof \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\Reference && \ConfigTransformer2022010310\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
+        if ($value instanceof \ConfigTransformer202201075\Symfony\Component\DependencyInjection\Reference && \ConfigTransformer202201075\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
             $definition = $this->container->getDefinition($id);
             if ($definition->isDeprecated() || $definition->hasTag('container.hot_path')) {
                 return $value;

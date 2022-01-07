@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022010310\Symfony\Component\Console\Tester\Constraint;
+namespace ConfigTransformer202201075\Symfony\Component\Console\Tester\Constraint;
 
-use ConfigTransformer2022010310\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer2022010310\Symfony\Component\Console\Command\Command;
-final class CommandIsSuccessful extends \ConfigTransformer2022010310\PHPUnit\Framework\Constraint\Constraint
+use ConfigTransformer202201075\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202201075\Symfony\Component\Console\Command\Command;
+final class CommandIsSuccessful extends \ConfigTransformer202201075\PHPUnit\Framework\Constraint\Constraint
 {
     /**
      * {@inheritdoc}
@@ -26,7 +26,7 @@ final class CommandIsSuccessful extends \ConfigTransformer2022010310\PHPUnit\Fra
      */
     protected function matches($other) : bool
     {
-        return \ConfigTransformer2022010310\Symfony\Component\Console\Command\Command::SUCCESS === $other;
+        return \ConfigTransformer202201075\Symfony\Component\Console\Command\Command::SUCCESS === $other;
     }
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ final class CommandIsSuccessful extends \ConfigTransformer2022010310\PHPUnit\Fra
      */
     protected function additionalFailureDescription($other) : string
     {
-        $mapping = [\ConfigTransformer2022010310\Symfony\Component\Console\Command\Command::FAILURE => 'Command failed.', \ConfigTransformer2022010310\Symfony\Component\Console\Command\Command::INVALID => 'Command was invalid.'];
+        $mapping = [\ConfigTransformer202201075\Symfony\Component\Console\Command\Command::FAILURE => 'Command failed.', \ConfigTransformer202201075\Symfony\Component\Console\Command\Command::INVALID => 'Command was invalid.'];
         return $mapping[$other] ?? \sprintf('Command returned exit status %d.', $other);
     }
 }
