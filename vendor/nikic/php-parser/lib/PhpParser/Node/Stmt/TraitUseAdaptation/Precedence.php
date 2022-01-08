@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201076\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace ConfigTransformer202201085\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use ConfigTransformer202201076\PhpParser\Node;
-class Precedence extends \ConfigTransformer202201076\PhpParser\Node\Stmt\TraitUseAdaptation
+use ConfigTransformer202201085\PhpParser\Node;
+class Precedence extends \ConfigTransformer202201085\PhpParser\Node\Stmt\TraitUseAdaptation
 {
     /** @var Node\Name[] Overwritten traits */
     public $insteadof;
@@ -16,11 +16,11 @@ class Precedence extends \ConfigTransformer202201076\PhpParser\Node\Stmt\TraitUs
      * @param Node\Name[]            $insteadof   Overwritten traits
      * @param array                  $attributes  Additional attributes
      */
-    public function __construct(\ConfigTransformer202201076\PhpParser\Node\Name $trait, $method, array $insteadof, array $attributes = [])
+    public function __construct(\ConfigTransformer202201085\PhpParser\Node\Name $trait, $method, array $insteadof, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->trait = $trait;
-        $this->method = \is_string($method) ? new \ConfigTransformer202201076\PhpParser\Node\Identifier($method) : $method;
+        $this->method = \is_string($method) ? new \ConfigTransformer202201085\PhpParser\Node\Identifier($method) : $method;
         $this->insteadof = $insteadof;
     }
     public function getSubNodeNames() : array
