@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201094\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer2022011110\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202201094\PhpParser\Node\Expr;
-use ConfigTransformer202201094\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202201094\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer2022011110\PhpParser\Node\Expr;
+use ConfigTransformer2022011110\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer2022011110\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedServiceResolver
 {
     /**
      * @var \Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver
      */
     private $serviceReferenceExprResolver;
-    public function __construct(\ConfigTransformer202201094\Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver $serviceReferenceExprResolver)
+    public function __construct(\ConfigTransformer2022011110\Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver $serviceReferenceExprResolver)
     {
         $this->serviceReferenceExprResolver = $serviceReferenceExprResolver;
     }
-    public function resolve(\ConfigTransformer202201094\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer202201094\PhpParser\Node\Expr
+    public function resolve(\ConfigTransformer2022011110\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer2022011110\PhpParser\Node\Expr
     {
         $serviceName = $taggedValue->getValue()['class'];
-        $functionName = \ConfigTransformer202201094\Symplify\PhpConfigPrinter\ValueObject\FunctionName::INLINE_SERVICE;
+        $functionName = \ConfigTransformer2022011110\Symplify\PhpConfigPrinter\ValueObject\FunctionName::INLINE_SERVICE;
         return $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, $functionName);
     }
 }

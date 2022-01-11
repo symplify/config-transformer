@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201094\PhpParser;
+namespace ConfigTransformer2022011110\PhpParser;
 
 class ParserFactory
 {
@@ -18,20 +18,20 @@ class ParserFactory
      *
      * @return Parser The parser instance
      */
-    public function create(int $kind, \ConfigTransformer202201094\PhpParser\Lexer $lexer = null, array $parserOptions = []) : \ConfigTransformer202201094\PhpParser\Parser
+    public function create(int $kind, \ConfigTransformer2022011110\PhpParser\Lexer $lexer = null, array $parserOptions = []) : \ConfigTransformer2022011110\PhpParser\Parser
     {
         if (null === $lexer) {
-            $lexer = new \ConfigTransformer202201094\PhpParser\Lexer\Emulative();
+            $lexer = new \ConfigTransformer2022011110\PhpParser\Lexer\Emulative();
         }
         switch ($kind) {
             case self::PREFER_PHP7:
-                return new \ConfigTransformer202201094\PhpParser\Parser\Multiple([new \ConfigTransformer202201094\PhpParser\Parser\Php7($lexer, $parserOptions), new \ConfigTransformer202201094\PhpParser\Parser\Php5($lexer, $parserOptions)]);
+                return new \ConfigTransformer2022011110\PhpParser\Parser\Multiple([new \ConfigTransformer2022011110\PhpParser\Parser\Php7($lexer, $parserOptions), new \ConfigTransformer2022011110\PhpParser\Parser\Php5($lexer, $parserOptions)]);
             case self::PREFER_PHP5:
-                return new \ConfigTransformer202201094\PhpParser\Parser\Multiple([new \ConfigTransformer202201094\PhpParser\Parser\Php5($lexer, $parserOptions), new \ConfigTransformer202201094\PhpParser\Parser\Php7($lexer, $parserOptions)]);
+                return new \ConfigTransformer2022011110\PhpParser\Parser\Multiple([new \ConfigTransformer2022011110\PhpParser\Parser\Php5($lexer, $parserOptions), new \ConfigTransformer2022011110\PhpParser\Parser\Php7($lexer, $parserOptions)]);
             case self::ONLY_PHP7:
-                return new \ConfigTransformer202201094\PhpParser\Parser\Php7($lexer, $parserOptions);
+                return new \ConfigTransformer2022011110\PhpParser\Parser\Php7($lexer, $parserOptions);
             case self::ONLY_PHP5:
-                return new \ConfigTransformer202201094\PhpParser\Parser\Php5($lexer, $parserOptions);
+                return new \ConfigTransformer2022011110\PhpParser\Parser\Php5($lexer, $parserOptions);
             default:
                 throw new \LogicException('Kind must be one of ::PREFER_PHP7, ::PREFER_PHP5, ::ONLY_PHP7 or ::ONLY_PHP5');
         }

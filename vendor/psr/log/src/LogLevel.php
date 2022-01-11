@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202201094\Psr\Log;
+namespace ConfigTransformer2022011110\Psr\Log;
 
 /**
  * Describes log levels.
