@@ -1,10 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022011110\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202201117\Symplify\PackageBuilder\Reflection;
 
 use ReflectionProperty;
-use ConfigTransformer2022011110\Symplify\PHPStanRules\Exception\ShouldNotHappenException;
+use ConfigTransformer202201117\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException;
+use ConfigTransformer202201117\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Reflection\PrivatesAccessorTest
@@ -24,7 +25,8 @@ final class PrivatesAccessor
         if ($value instanceof $valueClassName) {
             return $value;
         }
-        throw new \ConfigTransformer2022011110\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+        $errorMessage = \sprintf('The type "%s" is required, but "%s" type given', $valueClassName, \get_class($value));
+        throw new \ConfigTransformer202201117\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
     }
     /**
      * @return mixed
@@ -45,10 +47,12 @@ final class PrivatesAccessor
      */
     public function setPrivatePropertyOfClass($object, string $propertyName, $value, string $valueClassName) : void
     {
-        if (!$value instanceof $valueClassName) {
-            throw new \ConfigTransformer2022011110\Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+        if ($value instanceof $valueClassName) {
+            $this->setPrivateProperty($object, $propertyName, $value);
+            return;
         }
-        $this->setPrivateProperty($object, $propertyName, $value);
+        $errorMessage = \sprintf('The type "%s" is required, but "%s" type given', $valueClassName, \get_class($value));
+        throw new \ConfigTransformer202201117\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
     }
     /**
      * @param mixed $value
@@ -69,10 +73,10 @@ final class PrivatesAccessor
             return new \ReflectionProperty($object, $propertyName);
         }
         $parentClass = \get_parent_class($object);
-        if ($parentClass === \false) {
-            $errorMessage = \sprintf('Property "$%s" was not found in "%s" class', $propertyName, \get_class($object));
-            throw new \ConfigTransformer2022011110\Symplify\PHPStanRules\Exception\ShouldNotHappenException($errorMessage);
+        if ($parentClass !== \false) {
+            return new \ReflectionProperty($parentClass, $propertyName);
         }
-        return new \ReflectionProperty($parentClass, $propertyName);
+        $errorMessage = \sprintf('Property "$%s" was not found in "%s" class', $propertyName, \get_class($object));
+        throw new \ConfigTransformer202201117\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException($errorMessage);
     }
 }
