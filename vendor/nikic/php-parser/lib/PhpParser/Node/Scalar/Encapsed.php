@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201151\PhpParser\Node\Scalar;
+namespace ConfigTransformer202201152\PhpParser\Node\Scalar;
 
-use ConfigTransformer202201151\PhpParser\Node\Expr;
-use ConfigTransformer202201151\PhpParser\Node\Scalar;
-class Encapsed extends \ConfigTransformer202201151\PhpParser\Node\Scalar
+use ConfigTransformer202201152\PhpParser\Node\Expr;
+use ConfigTransformer202201152\PhpParser\Node\Scalar;
+class Encapsed extends \ConfigTransformer202201152\PhpParser\Node\Scalar
 {
     /** @var Expr[] list of string parts */
     public $parts;
