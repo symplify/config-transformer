@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202201156\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202201151\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202201156\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202201151\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {
