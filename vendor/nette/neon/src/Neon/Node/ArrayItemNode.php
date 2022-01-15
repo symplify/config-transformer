@@ -5,11 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201158\Nette\Neon\Node;
+namespace ConfigTransformer202201151\Nette\Neon\Node;
 
-use ConfigTransformer202201158\Nette\Neon\Node;
+use ConfigTransformer202201151\Nette\Neon\Node;
 /** @internal */
-final class ArrayItemNode extends \ConfigTransformer202201158\Nette\Neon\Node
+final class ArrayItemNode extends \ConfigTransformer202201151\Nette\Neon\Node
 {
     /** @var ?Node */
     public $key;
@@ -47,7 +47,7 @@ final class ArrayItemNode extends \ConfigTransformer202201158\Nette\Neon\Node
         $res = '';
         foreach ($items as $item) {
             $v = $item->value->toString();
-            $res .= ($item->key ? $item->key->toString() . ':' : '-') . ($item->value instanceof \ConfigTransformer202201158\Nette\Neon\Node\BlockArrayNode && $item->value->items ? "\n" . $v . (\substr($v, -2, 1) === "\n" ? '' : "\n") : ' ' . $v . "\n");
+            $res .= ($item->key ? $item->key->toString() . ':' : '-') . ($item->value instanceof \ConfigTransformer202201151\Nette\Neon\Node\BlockArrayNode && $item->value->items ? "\n" . $v . (\substr($v, -2, 1) === "\n" ? '' : "\n") : ' ' . $v . "\n");
         }
         return $res;
     }
