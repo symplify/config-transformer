@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201151\PhpParser\Node\Expr;
+namespace ConfigTransformer202201153\PhpParser\Node\Expr;
 
-use ConfigTransformer202201151\PhpParser\Node;
-use ConfigTransformer202201151\PhpParser\Node\Arg;
-use ConfigTransformer202201151\PhpParser\Node\Expr;
-use ConfigTransformer202201151\PhpParser\Node\VariadicPlaceholder;
-class New_ extends \ConfigTransformer202201151\PhpParser\Node\Expr\CallLike
+use ConfigTransformer202201153\PhpParser\Node;
+use ConfigTransformer202201153\PhpParser\Node\Arg;
+use ConfigTransformer202201153\PhpParser\Node\Expr;
+use ConfigTransformer202201153\PhpParser\Node\VariadicPlaceholder;
+class New_ extends \ConfigTransformer202201153\PhpParser\Node\Expr\CallLike
 {
     /** @var Node\Name|Expr|Node\Stmt\Class_ Class name */
     public $class;
