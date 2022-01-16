@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201163\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202201166\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202201163\Symfony\Component\Config\Definition\FloatNode;
+use ConfigTransformer202201166\Symfony\Component\Config\Definition\FloatNode;
 /**
  * This class provides a fluent interface for defining a float node.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class FloatNodeDefinition extends \ConfigTransformer202201163\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
+class FloatNodeDefinition extends \ConfigTransformer202201166\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
 {
     /**
      * Instantiates a Node.
      */
-    protected function instantiateNode() : \ConfigTransformer202201163\Symfony\Component\Config\Definition\ScalarNode
+    protected function instantiateNode() : \ConfigTransformer202201166\Symfony\Component\Config\Definition\ScalarNode
     {
-        return new \ConfigTransformer202201163\Symfony\Component\Config\Definition\FloatNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
+        return new \ConfigTransformer202201166\Symfony\Component\Config\Definition\FloatNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
     }
 }
