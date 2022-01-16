@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201160\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202201167\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202201160\PhpParser\Node;
-use ConfigTransformer202201160\PhpParser\Node\Expr;
-use ConfigTransformer202201160\PhpParser\Node\Param;
-use ConfigTransformer202201160\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class ParamNodeNameResolver implements \ConfigTransformer202201160\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202201167\PhpParser\Node;
+use ConfigTransformer202201167\PhpParser\Node\Expr;
+use ConfigTransformer202201167\PhpParser\Node\Param;
+use ConfigTransformer202201167\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class ParamNodeNameResolver implements \ConfigTransformer202201167\Symplify\Astral\Contract\NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer202201160\PhpParser\Node $node) : bool
+    public function match(\ConfigTransformer202201167\PhpParser\Node $node) : bool
     {
-        return $node instanceof \ConfigTransformer202201160\PhpParser\Node\Param;
+        return $node instanceof \ConfigTransformer202201167\PhpParser\Node\Param;
     }
     /**
      * @param Param $node
      */
-    public function resolve(\ConfigTransformer202201160\PhpParser\Node $node) : ?string
+    public function resolve(\ConfigTransformer202201167\PhpParser\Node $node) : ?string
     {
         $paramName = $node->var->name;
-        if ($paramName instanceof \ConfigTransformer202201160\PhpParser\Node\Expr) {
+        if ($paramName instanceof \ConfigTransformer202201167\PhpParser\Node\Expr) {
             return null;
         }
         return $paramName;
