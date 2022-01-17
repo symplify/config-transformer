@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201169\Symfony\Component\Console\Completion\Output;
+namespace ConfigTransformer202201177\Symfony\Component\Console\Completion\Output;
 
-use ConfigTransformer202201169\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202201169\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202201177\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202201177\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-class BashCompletionOutput implements \ConfigTransformer202201169\Symfony\Component\Console\Completion\Output\CompletionOutputInterface
+class BashCompletionOutput implements \ConfigTransformer202201177\Symfony\Component\Console\Completion\Output\CompletionOutputInterface
 {
-    public function write(\ConfigTransformer202201169\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions, \ConfigTransformer202201169\Symfony\Component\Console\Output\OutputInterface $output) : void
+    public function write(\ConfigTransformer202201177\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions, \ConfigTransformer202201177\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
         $values = $suggestions->getValueSuggestions();
         foreach ($suggestions->getOptionSuggestions() as $option) {
