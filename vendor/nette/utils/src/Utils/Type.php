@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201177\Nette\Utils;
+namespace ConfigTransformer202201175\Nette\Utils;
 
-use ConfigTransformer202201177\Nette;
+use ConfigTransformer202201175\Nette;
 /**
  * PHP type reflection.
  */
@@ -38,12 +38,12 @@ final class Type
         } elseif ($type instanceof \ReflectionNamedType) {
             $name = self::resolve($type->getName(), $reflection);
             return new self($type->allowsNull() && $type->getName() !== 'mixed' ? [$name, 'null'] : [$name]);
-        } elseif ($type instanceof \ReflectionUnionType || $type instanceof \ConfigTransformer202201177\ReflectionIntersectionType) {
+        } elseif ($type instanceof \ReflectionUnionType || $type instanceof \ConfigTransformer202201175\ReflectionIntersectionType) {
             return new self(\array_map(function ($t) use($reflection) {
                 return self::resolve($t->getName(), $reflection);
             }, $type->getTypes()), $type instanceof \ReflectionUnionType ? '|' : '&');
         } else {
-            throw new \ConfigTransformer202201177\Nette\InvalidStateException('Unexpected type of ' . \ConfigTransformer202201177\Nette\Utils\Reflection::toString($reflection));
+            throw new \ConfigTransformer202201175\Nette\InvalidStateException('Unexpected type of ' . \ConfigTransformer202201175\Nette\Utils\Reflection::toString($reflection));
         }
     }
     /**
@@ -55,7 +55,7 @@ final class Type
 			\\?([\\w\\\\]+)|
 			[\\w\\\\]+ (?: (&[\\w\\\\]+)* | (\\|[\\w\\\\]+)* )
 		)()$#xAD', $type, $m)) {
-            throw new \ConfigTransformer202201177\Nette\InvalidArgumentException("Invalid type '{$type}'.");
+            throw new \ConfigTransformer202201175\Nette\InvalidArgumentException("Invalid type '{$type}'.");
         }
         [, $nType, $iType] = $m;
         if ($nType) {
@@ -148,21 +148,21 @@ final class Type
      */
     public function isBuiltin() : bool
     {
-        return $this->single && \ConfigTransformer202201177\Nette\Utils\Reflection::isBuiltinType($this->types[0]);
+        return $this->single && \ConfigTransformer202201175\Nette\Utils\Reflection::isBuiltinType($this->types[0]);
     }
     /**
      * Returns true whether the type is both a single and a class name.
      */
     public function isClass() : bool
     {
-        return $this->single && !\ConfigTransformer202201177\Nette\Utils\Reflection::isBuiltinType($this->types[0]);
+        return $this->single && !\ConfigTransformer202201175\Nette\Utils\Reflection::isBuiltinType($this->types[0]);
     }
     /**
      * Determines if type is special class name self/parent/static.
      */
     public function isClassKeyword() : bool
     {
-        return $this->single && \ConfigTransformer202201177\Nette\Utils\Reflection::isClassKeyword($this->types[0]);
+        return $this->single && \ConfigTransformer202201175\Nette\Utils\Reflection::isClassKeyword($this->types[0]);
     }
     /**
      * Verifies type compatibility. For example, it checks if a value of a certain type could be passed as a parameter.
@@ -177,17 +177,17 @@ final class Type
             if (!$type->isIntersection()) {
                 return \false;
             }
-            return \ConfigTransformer202201177\Nette\Utils\Arrays::every($this->types, function ($currentType) use($type) {
-                $builtin = \ConfigTransformer202201177\Nette\Utils\Reflection::isBuiltinType($currentType);
-                return \ConfigTransformer202201177\Nette\Utils\Arrays::some($type->types, function ($testedType) use($currentType, $builtin) {
+            return \ConfigTransformer202201175\Nette\Utils\Arrays::every($this->types, function ($currentType) use($type) {
+                $builtin = \ConfigTransformer202201175\Nette\Utils\Reflection::isBuiltinType($currentType);
+                return \ConfigTransformer202201175\Nette\Utils\Arrays::some($type->types, function ($testedType) use($currentType, $builtin) {
                     return $builtin ? \strcasecmp($currentType, $testedType) === 0 : \is_a($testedType, $currentType, \true);
                 });
             });
         }
         $method = $type->isIntersection() ? 'some' : 'every';
-        return \ConfigTransformer202201177\Nette\Utils\Arrays::$method($type->types, function ($testedType) {
-            $builtin = \ConfigTransformer202201177\Nette\Utils\Reflection::isBuiltinType($testedType);
-            return \ConfigTransformer202201177\Nette\Utils\Arrays::some($this->types, function ($currentType) use($testedType, $builtin) {
+        return \ConfigTransformer202201175\Nette\Utils\Arrays::$method($type->types, function ($testedType) {
+            $builtin = \ConfigTransformer202201175\Nette\Utils\Reflection::isBuiltinType($testedType);
+            return \ConfigTransformer202201175\Nette\Utils\Arrays::some($this->types, function ($currentType) use($testedType, $builtin) {
                 return $builtin ? \strcasecmp($currentType, $testedType) === 0 : \is_a($testedType, $currentType, \true);
             });
         });

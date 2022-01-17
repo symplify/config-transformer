@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201177\PhpParser\Node\Expr;
+namespace ConfigTransformer202201175\PhpParser\Node\Expr;
 
-use ConfigTransformer202201177\PhpParser\Node\Expr;
-class Ternary extends \ConfigTransformer202201177\PhpParser\Node\Expr
+use ConfigTransformer202201175\PhpParser\Node\Expr;
+class Ternary extends \ConfigTransformer202201175\PhpParser\Node\Expr
 {
     /** @var Expr Condition */
     public $cond;
@@ -20,7 +20,7 @@ class Ternary extends \ConfigTransformer202201177\PhpParser\Node\Expr
      * @param Expr      $else       Expression for false
      * @param array                    $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202201177\PhpParser\Node\Expr $cond, $if, \ConfigTransformer202201177\PhpParser\Node\Expr $else, array $attributes = [])
+    public function __construct(\ConfigTransformer202201175\PhpParser\Node\Expr $cond, $if, \ConfigTransformer202201175\PhpParser\Node\Expr $else, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

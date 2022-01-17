@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201177\PhpParser\Node\Stmt;
+namespace ConfigTransformer202201175\PhpParser\Node\Stmt;
 
-use ConfigTransformer202201177\PhpParser\Node;
-class Enum_ extends \ConfigTransformer202201177\PhpParser\Node\Stmt\ClassLike
+use ConfigTransformer202201175\PhpParser\Node;
+class Enum_ extends \ConfigTransformer202201175\PhpParser\Node\Stmt\ClassLike
 {
     /** @var null|Node\Identifier Scalar Type */
     public $scalarType;
@@ -21,7 +21,7 @@ class Enum_ extends \ConfigTransformer202201177\PhpParser\Node\Stmt\ClassLike
      */
     public function __construct($name, array $subNodes = [], array $attributes = [])
     {
-        $this->name = \is_string($name) ? new \ConfigTransformer202201177\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202201175\PhpParser\Node\Identifier($name) : $name;
         $this->scalarType = $subNodes['scalarType'] ?? null;
         $this->implements = $subNodes['implements'] ?? [];
         $this->stmts = $subNodes['stmts'] ?? [];

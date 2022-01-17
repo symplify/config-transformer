@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201177\Symplify\PackageBuilder\Console\Style;
+namespace ConfigTransformer202201175\Symplify\PackageBuilder\Console\Style;
 
-use ConfigTransformer202201177\Symfony\Component\Console\Application;
-use ConfigTransformer202201177\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202201177\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202201177\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202201177\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202201177\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
-use ConfigTransformer202201177\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202201175\Symfony\Component\Console\Application;
+use ConfigTransformer202201175\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202201175\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202201175\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202201175\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202201175\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use ConfigTransformer202201175\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * @api
  */
@@ -21,26 +21,26 @@ final class SymfonyStyleFactory
     private $privatesCaller;
     public function __construct()
     {
-        $this->privatesCaller = new \ConfigTransformer202201177\Symplify\PackageBuilder\Reflection\PrivatesCaller();
+        $this->privatesCaller = new \ConfigTransformer202201175\Symplify\PackageBuilder\Reflection\PrivatesCaller();
     }
-    public function create() : \ConfigTransformer202201177\Symfony\Component\Console\Style\SymfonyStyle
+    public function create() : \ConfigTransformer202201175\Symfony\Component\Console\Style\SymfonyStyle
     {
         // to prevent missing argv indexes
         if (!isset($_SERVER['argv'])) {
             $_SERVER['argv'] = [];
         }
-        $argvInput = new \ConfigTransformer202201177\Symfony\Component\Console\Input\ArgvInput();
-        $consoleOutput = new \ConfigTransformer202201177\Symfony\Component\Console\Output\ConsoleOutput();
+        $argvInput = new \ConfigTransformer202201175\Symfony\Component\Console\Input\ArgvInput();
+        $consoleOutput = new \ConfigTransformer202201175\Symfony\Component\Console\Output\ConsoleOutput();
         // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
-        $this->privatesCaller->callPrivateMethod(new \ConfigTransformer202201177\Symfony\Component\Console\Application(), 'configureIO', [$argvInput, $consoleOutput]);
+        $this->privatesCaller->callPrivateMethod(new \ConfigTransformer202201175\Symfony\Component\Console\Application(), 'configureIO', [$argvInput, $consoleOutput]);
         // --debug is called
         if ($argvInput->hasParameterOption('--debug')) {
-            $consoleOutput->setVerbosity(\ConfigTransformer202201177\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
+            $consoleOutput->setVerbosity(\ConfigTransformer202201175\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
         }
         // disable output for tests
-        if (\ConfigTransformer202201177\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
-            $consoleOutput->setVerbosity(\ConfigTransformer202201177\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        if (\ConfigTransformer202201175\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
+            $consoleOutput->setVerbosity(\ConfigTransformer202201175\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         }
-        return new \ConfigTransformer202201177\Symfony\Component\Console\Style\SymfonyStyle($argvInput, $consoleOutput);
+        return new \ConfigTransformer202201175\Symfony\Component\Console\Style\SymfonyStyle($argvInput, $consoleOutput);
     }
 }
