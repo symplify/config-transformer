@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201207\Symplify\ConfigTransformer\Configuration;
+namespace ConfigTransformer202201209\Symplify\ConfigTransformer\Configuration;
 
-use ConfigTransformer202201207\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer202201209\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Configuration;
+use ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Option;
 final class ConfigurationFactory
 {
-    public function createFromInput(\ConfigTransformer202201207\Symfony\Component\Console\Input\InputInterface $input) : \ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Configuration
+    public function createFromInput(\ConfigTransformer202201209\Symfony\Component\Console\Input\InputInterface $input) : \ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Configuration
     {
-        $source = (array) $input->getArgument(\ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
-        $isDryRun = \boolval($input->getOption(\ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
-        return new \ConfigTransformer202201207\Symplify\ConfigTransformer\ValueObject\Configuration($source, $isDryRun);
+        $source = (array) $input->getArgument(\ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Option::SOURCES);
+        $isDryRun = \boolval($input->getOption(\ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Option::DRY_RUN));
+        return new \ConfigTransformer202201209\Symplify\ConfigTransformer\ValueObject\Configuration($source, $isDryRun);
     }
 }
