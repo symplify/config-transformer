@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201208\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202201202\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202201208\Symfony\Component\Console\Application;
-use ConfigTransformer202201208\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202201208\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202201208\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202201208\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202201202\Symfony\Component\Console\Application;
+use ConfigTransformer202201202\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202201202\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202201202\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202201202\Symfony\Component\Console\Input\InputOption;
 /**
  * XML descriptor.
  *
@@ -22,9 +22,9 @@ use ConfigTransformer202201208\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Console\Descriptor\Descriptor
+class XmlDescriptor extends \ConfigTransformer202201202\Symfony\Component\Console\Descriptor\Descriptor
 {
-    public function getInputDefinitionDocument(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputDefinition $definition) : \DOMDocument
+    public function getInputDefinitionDocument(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputDefinition $definition) : \DOMDocument
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($definitionXML = $dom->createElement('definition'));
@@ -38,7 +38,7 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
         }
         return $dom;
     }
-    public function getCommandDocument(\ConfigTransformer202201208\Symfony\Component\Console\Command\Command $command, bool $short = \false) : \DOMDocument
+    public function getCommandDocument(\ConfigTransformer202201202\Symfony\Component\Console\Command\Command $command, bool $short = \false) : \DOMDocument
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($commandXML = $dom->createElement('command'));
@@ -64,7 +64,7 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
         }
         return $dom;
     }
-    public function getApplicationDocument(\ConfigTransformer202201208\Symfony\Component\Console\Application $application, string $namespace = null, bool $short = \false) : \DOMDocument
+    public function getApplicationDocument(\ConfigTransformer202201202\Symfony\Component\Console\Application $application, string $namespace = null, bool $short = \false) : \DOMDocument
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($rootXml = $dom->createElement('symfony'));
@@ -75,7 +75,7 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
             }
         }
         $rootXml->appendChild($commandsXML = $dom->createElement('commands'));
-        $description = new \ConfigTransformer202201208\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
+        $description = new \ConfigTransformer202201202\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
         if ($namespace) {
             $commandsXML->setAttribute('namespace', $namespace);
         }
@@ -98,35 +98,35 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    protected function describeInputArgument(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
+    protected function describeInputArgument(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
     {
         $this->writeDocument($this->getInputArgumentDocument($argument));
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeInputOption(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputOption $option, array $options = [])
+    protected function describeInputOption(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputOption $option, array $options = [])
     {
         $this->writeDocument($this->getInputOptionDocument($option));
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeInputDefinition(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
+    protected function describeInputDefinition(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
     {
         $this->writeDocument($this->getInputDefinitionDocument($definition));
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeCommand(\ConfigTransformer202201208\Symfony\Component\Console\Command\Command $command, array $options = [])
+    protected function describeCommand(\ConfigTransformer202201202\Symfony\Component\Console\Command\Command $command, array $options = [])
     {
         $this->writeDocument($this->getCommandDocument($command, $options['short'] ?? \false));
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeApplication(\ConfigTransformer202201208\Symfony\Component\Console\Application $application, array $options = [])
+    protected function describeApplication(\ConfigTransformer202201202\Symfony\Component\Console\Application $application, array $options = [])
     {
         $this->writeDocument($this->getApplicationDocument($application, $options['namespace'] ?? null, $options['short'] ?? \false));
     }
@@ -147,7 +147,7 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
         $dom->formatOutput = \true;
         $this->write($dom->saveXML());
     }
-    private function getInputArgumentDocument(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputArgument $argument) : \DOMDocument
+    private function getInputArgumentDocument(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputArgument $argument) : \DOMDocument
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($objectXML = $dom->createElement('argument'));
@@ -164,7 +164,7 @@ class XmlDescriptor extends \ConfigTransformer202201208\Symfony\Component\Consol
         }
         return $dom;
     }
-    private function getInputOptionDocument(\ConfigTransformer202201208\Symfony\Component\Console\Input\InputOption $option) : \DOMDocument
+    private function getInputOptionDocument(\ConfigTransformer202201202\Symfony\Component\Console\Input\InputOption $option) : \DOMDocument
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($objectXML = $dom->createElement('option'));
