@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201173\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202201208\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202201173\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202201173\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202201173\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
-final class ConfigureServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202201173\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202201208\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202201208\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202201208\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
+final class ConfigureServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202201208\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory
      */
     private $singleServicePhpNodeFactory;
-    public function __construct(\ConfigTransformer202201173\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
+    public function __construct(\ConfigTransformer202201208\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
     {
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202201173\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202201173\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202201208\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202201208\PhpParser\Node\Expr\MethodCall
     {
         return $this->singleServicePhpNodeFactory->createCalls($methodCall, $yaml, \true);
     }
