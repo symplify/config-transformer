@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201209\PhpParser\Builder;
+namespace ConfigTransformer202201205\PhpParser\Builder;
 
-use ConfigTransformer202201209\PhpParser;
-use ConfigTransformer202201209\PhpParser\BuilderHelpers;
-use ConfigTransformer202201209\PhpParser\Node;
-use ConfigTransformer202201209\PhpParser\Node\Stmt;
-class Trait_ extends \ConfigTransformer202201209\PhpParser\Builder\Declaration
+use ConfigTransformer202201205\PhpParser;
+use ConfigTransformer202201205\PhpParser\BuilderHelpers;
+use ConfigTransformer202201205\PhpParser\Node;
+use ConfigTransformer202201205\PhpParser\Node\Stmt;
+class Trait_ extends \ConfigTransformer202201205\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $uses = [];
@@ -33,12 +33,12 @@ class Trait_ extends \ConfigTransformer202201209\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer202201209\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \ConfigTransformer202201209\PhpParser\Node\Stmt\Property) {
+        $stmt = \ConfigTransformer202201205\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \ConfigTransformer202201205\PhpParser\Node\Stmt\Property) {
             $this->properties[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer202201209\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \ConfigTransformer202201205\PhpParser\Node\Stmt\ClassMethod) {
             $this->methods[] = $stmt;
-        } elseif ($stmt instanceof \ConfigTransformer202201209\PhpParser\Node\Stmt\TraitUse) {
+        } elseif ($stmt instanceof \ConfigTransformer202201205\PhpParser\Node\Stmt\TraitUse) {
             $this->uses[] = $stmt;
         } else {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -54,7 +54,7 @@ class Trait_ extends \ConfigTransformer202201209\PhpParser\Builder\Declaration
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202201209\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202201205\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -62,8 +62,8 @@ class Trait_ extends \ConfigTransformer202201209\PhpParser\Builder\Declaration
      *
      * @return Stmt\Trait_ The built interface node
      */
-    public function getNode() : \ConfigTransformer202201209\PhpParser\Node
+    public function getNode() : \ConfigTransformer202201205\PhpParser\Node
     {
-        return new \ConfigTransformer202201209\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer202201205\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }
