@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201202\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202201207\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202201202\Psr\Container\ContainerInterface;
-use ConfigTransformer202201202\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202201202\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202201207\Psr\Container\ContainerInterface;
+use ConfigTransformer202201207\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202201207\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * Loads commands from a PSR-11 container.
  *
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class ContainerCommandLoader implements \ConfigTransformer202201202\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class ContainerCommandLoader implements \ConfigTransformer202201207\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $container;
     /**
@@ -28,7 +28,7 @@ class ContainerCommandLoader implements \ConfigTransformer202201202\Symfony\Comp
     /**
      * @param array $commandMap An array with command names as keys and service ids as values
      */
-    public function __construct(\ConfigTransformer202201202\Psr\Container\ContainerInterface $container, array $commandMap)
+    public function __construct(\ConfigTransformer202201207\Psr\Container\ContainerInterface $container, array $commandMap)
     {
         $this->container = $container;
         $this->commandMap = $commandMap;
@@ -36,10 +36,10 @@ class ContainerCommandLoader implements \ConfigTransformer202201202\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function get(string $name) : \ConfigTransformer202201202\Symfony\Component\Console\Command\Command
+    public function get(string $name) : \ConfigTransformer202201207\Symfony\Component\Console\Command\Command
     {
         if (!$this->has($name)) {
-            throw new \ConfigTransformer202201202\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202201207\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         return $this->container->get($this->commandMap[$name]);
     }
