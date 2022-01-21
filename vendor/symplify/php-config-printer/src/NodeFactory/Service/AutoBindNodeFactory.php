@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201209\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace ConfigTransformer202201211\Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202201209\PhpParser\Node\Arg;
-use ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202201209\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
-use ConfigTransformer202201209\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202201209\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202201211\PhpParser\Node\Arg;
+use ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202201211\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
+use ConfigTransformer202201211\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202201211\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class AutoBindNodeFactory
 {
     /**
@@ -31,7 +31,7 @@ final class AutoBindNodeFactory
      * @var \Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory
      */
     private $tagsServiceOptionKeyYamlToPhpFactory;
-    public function __construct(\ConfigTransformer202201209\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory $tagsServiceOptionKeyYamlToPhpFactory)
+    public function __construct(\ConfigTransformer202201211\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory $tagsServiceOptionKeyYamlToPhpFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
@@ -43,78 +43,78 @@ final class AutoBindNodeFactory
      * ->autoconfigure()
      * ->bind()
      */
-    public function createAutoBindCalls(array $yaml, \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall
+    public function createAutoBindCalls(array $yaml, \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall
     {
         foreach ($yaml as $key => $value) {
-            if ($key === \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE) {
+            if ($key === \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE) {
                 $methodCall = $this->createAutowire($value, $methodCall, $type);
             }
-            if ($key === \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE) {
+            if ($key === \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE) {
                 $methodCall = $this->createAutoconfigure($value, $methodCall, $type);
             }
-            if ($key === \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PUBLIC) {
+            if ($key === \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PUBLIC) {
                 $methodCall = $this->createPublicPrivate($value, $methodCall, $type);
             }
-            if ($key === \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND) {
-                $methodCall = $this->createBindMethodCall($methodCall, $yaml[\ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND]);
+            if ($key === \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND) {
+                $methodCall = $this->createBindMethodCall($methodCall, $yaml[\ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND]);
             }
-            if ($key === \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::TAGS) {
+            if ($key === \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::TAGS) {
                 $methodCall = $this->tagsServiceOptionKeyYamlToPhpFactory->decorateServiceMethodCall(null, $value, [], $methodCall);
             }
         }
         return $methodCall;
     }
-    private function createBindMethodCall(\ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall $methodCall, array $bindValues) : \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall
+    private function createBindMethodCall(\ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall $methodCall, array $bindValues) : \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall
     {
         foreach ($bindValues as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value]);
-            $methodCall = new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND, $args);
+            $methodCall = new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND, $args);
         }
         return $methodCall;
     }
     /**
      * @param mixed $value
      */
-    private function createAutowire($value, \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall
+    private function createAutowire($value, \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall
     {
         if ($value === \true) {
-            return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE);
+            return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE);
         }
         // skip default false
         if ($type === self::TYPE_DEFAULTS) {
             return $methodCall;
         }
-        $args = [new \ConfigTransformer202201209\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE, $args);
+        $args = [new \ConfigTransformer202201211\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE, $args);
     }
     /**
      * @param mixed $value
      */
-    private function createAutoconfigure($value, \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall
+    private function createAutoconfigure($value, \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall
     {
         if ($value === \true) {
-            return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE);
+            return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE);
         }
         // skip default false
         if ($type === self::TYPE_DEFAULTS) {
             return $methodCall;
         }
-        $args = [new \ConfigTransformer202201209\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201209\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE, $args);
+        $args = [new \ConfigTransformer202201211\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, \ConfigTransformer202201211\Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE, $args);
     }
     /**
      * @param mixed $value
      */
-    private function createPublicPrivate($value, \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall
+    private function createPublicPrivate($value, \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall
     {
         if ($value !== \false) {
-            return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
+            return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
         }
         // default value
         if ($type === self::TYPE_DEFAULTS) {
             return $methodCall;
         }
-        $args = [new \ConfigTransformer202201209\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \ConfigTransformer202201209\PhpParser\Node\Expr\MethodCall($methodCall, 'public', $args);
+        $args = [new \ConfigTransformer202201211\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \ConfigTransformer202201211\PhpParser\Node\Expr\MethodCall($methodCall, 'public', $args);
     }
 }
