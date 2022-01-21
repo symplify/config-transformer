@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201211\Symplify\Astral\PhpParser;
+namespace ConfigTransformer202201210\Symplify\Astral\PhpParser;
 
-use ConfigTransformer202201211\PhpParser\Node\Stmt;
-use ConfigTransformer202201211\PHPStan\Parser\Parser;
+use ConfigTransformer202201210\PhpParser\Node\Stmt;
+use ConfigTransformer202201210\PHPStan\Parser\Parser;
 /**
  * @see \Symplify\Astral\PhpParser\SmartPhpParserFactory
  */
@@ -14,7 +14,7 @@ final class SmartPhpParser
      * @var \PHPStan\Parser\Parser
      */
     private $parser;
-    public function __construct(\ConfigTransformer202201211\PHPStan\Parser\Parser $parser)
+    public function __construct(\ConfigTransformer202201210\PHPStan\Parser\Parser $parser)
     {
         $this->parser = $parser;
     }
