@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201210\Symplify\PhpConfigPrinter\Dummy;
+namespace ConfigTransformer202201236\Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer202201210\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202201236\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class YamlContentProvider
 {
     /**
@@ -17,7 +17,7 @@ final class YamlContentProvider
     public function getYamlContent() : string
     {
         if ($this->yamlContent === null) {
-            throw new \ConfigTransformer202201210\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202201236\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $this->yamlContent;
     }
