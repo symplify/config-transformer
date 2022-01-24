@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201249\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202201243\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202201249\Psr\Container\ContainerExceptionInterface;
-use ConfigTransformer202201249\Psr\Container\NotFoundExceptionInterface;
-use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202201249\Symfony\Contracts\Service\ServiceLocatorTrait;
-use ConfigTransformer202201249\Symfony\Contracts\Service\ServiceProviderInterface;
-use ConfigTransformer202201249\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202201243\Psr\Container\ContainerExceptionInterface;
+use ConfigTransformer202201243\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202201243\Symfony\Contracts\Service\ServiceLocatorTrait;
+use ConfigTransformer202201243\Symfony\Contracts\Service\ServiceProviderInterface;
+use ConfigTransformer202201243\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceLocator implements \ConfigTransformer202201249\Symfony\Contracts\Service\ServiceProviderInterface
+class ServiceLocator implements \ConfigTransformer202201243\Symfony\Contracts\Service\ServiceProviderInterface
 {
     use ServiceLocatorTrait {
         get as private doGet;
@@ -43,7 +43,7 @@ class ServiceLocator implements \ConfigTransformer202201249\Symfony\Contracts\Se
         }
         try {
             return $this->doGet($id);
-        } catch (\ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+        } catch (\ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
             $what = \sprintf('service "%s" required by "%s"', $id, $this->externalId);
             $message = \preg_replace('/service "\\.service_locator\\.[^"]++"/', $what, $e->getMessage());
             if ($e->getMessage() === $message) {
@@ -63,18 +63,18 @@ class ServiceLocator implements \ConfigTransformer202201249\Symfony\Contracts\Se
      * @internal
      * @return $this
      */
-    public function withContext(string $externalId, \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Container $container)
+    public function withContext(string $externalId, \ConfigTransformer202201243\Symfony\Component\DependencyInjection\Container $container)
     {
         $locator = clone $this;
         $locator->externalId = $externalId;
         $locator->container = $container;
         return $locator;
     }
-    private function createNotFoundException(string $id) : \ConfigTransformer202201249\Psr\Container\NotFoundExceptionInterface
+    private function createNotFoundException(string $id) : \ConfigTransformer202201243\Psr\Container\NotFoundExceptionInterface
     {
         if ($this->loading) {
             $msg = \sprintf('The service "%s" has a dependency on a non-existent service "%s". This locator %s', \end($this->loading), $id, $this->formatAlternatives());
-            return new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, \end($this->loading) ?: null, null, [], $msg);
+            return new \ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, \end($this->loading) ?: null, null, [], $msg);
         }
         $class = \debug_backtrace(\DEBUG_BACKTRACE_PROVIDE_OBJECT | \DEBUG_BACKTRACE_IGNORE_ARGS, 4);
         $class = isset($class[3]['object']) ? \get_class($class[3]['object']) : null;
@@ -89,7 +89,7 @@ class ServiceLocator implements \ConfigTransformer202201249\Symfony\Contracts\Se
             try {
                 $this->container->get($id);
                 $class = null;
-            } catch (\ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
+            } catch (\ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
                 if ($e->getAlternatives()) {
                     $msg[] = \sprintf('did you mean %s? Anyway,', $this->formatAlternatives($e->getAlternatives(), 'or'));
                 } else {
@@ -104,16 +104,16 @@ class ServiceLocator implements \ConfigTransformer202201249\Symfony\Contracts\Se
         }
         if (!$class) {
             // no-op
-        } elseif (\is_subclass_of($class, \ConfigTransformer202201249\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
+        } elseif (\is_subclass_of($class, \ConfigTransformer202201243\Symfony\Contracts\Service\ServiceSubscriberInterface::class)) {
             $msg[] = \sprintf('Unless you need extra laziness, try using dependency injection instead. Otherwise, you need to declare it using "%s::getSubscribedServices()".', \preg_replace('/([^\\\\]++\\\\)++/', '', $class));
         } else {
             $msg[] = 'Try using dependency injection instead.';
         }
-        return new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, \end($this->loading) ?: null, null, [], \implode(' ', $msg));
+        return new \ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, \end($this->loading) ?: null, null, [], \implode(' ', $msg));
     }
-    private function createCircularReferenceException(string $id, array $path) : \ConfigTransformer202201249\Psr\Container\ContainerExceptionInterface
+    private function createCircularReferenceException(string $id, array $path) : \ConfigTransformer202201243\Psr\Container\ContainerExceptionInterface
     {
-        return new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, $path);
+        return new \ConfigTransformer202201243\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, $path);
     }
     private function formatAlternatives(array $alternatives = null, string $separator = 'and') : string
     {
