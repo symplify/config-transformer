@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201248\PhpParser\Node\Expr\Cast;
+namespace ConfigTransformer202201245\PhpParser\Node\Expr\Cast;
 
-use ConfigTransformer202201248\PhpParser\Node\Expr\Cast;
-class Double extends \ConfigTransformer202201248\PhpParser\Node\Expr\Cast
+use ConfigTransformer202201245\PhpParser\Node\Expr\Cast;
+class Double extends \ConfigTransformer202201245\PhpParser\Node\Expr\Cast
 {
     // For use in "kind" attribute
     const KIND_DOUBLE = 1;

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201248\PhpParser\Node\Stmt;
+namespace ConfigTransformer202201245\PhpParser\Node\Stmt;
 
-use ConfigTransformer202201248\PhpParser\Node;
+use ConfigTransformer202201245\PhpParser\Node;
 /** Nop/empty statement (;). */
-class Nop extends \ConfigTransformer202201248\PhpParser\Node\Stmt
+class Nop extends \ConfigTransformer202201245\PhpParser\Node\Stmt
 {
     public function getSubNodeNames() : array
     {
