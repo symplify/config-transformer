@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201236\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202201249\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
-use ConfigTransformer202201236\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202201236\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202201236\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202201236\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202201249\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202201249\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inject a data collector to all the cache services to be able to get detailed statistics.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class CacheCollectorPass implements \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CacheCollectorPass implements \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202201236\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202201249\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition('data_collector.cache')) {
             return;
@@ -37,25 +37,25 @@ class CacheCollectorPass implements \ConfigTransformer202201236\Symfony\Componen
             $this->addToCollector($id, $poolName, $container);
         }
     }
-    private function addToCollector(string $id, string $name, \ConfigTransformer202201236\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    private function addToCollector(string $id, string $name, \ConfigTransformer202201249\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $definition = $container->getDefinition($id);
         if ($definition->isAbstract()) {
             return;
         }
         $collectorDefinition = $container->getDefinition('data_collector.cache');
-        $recorder = new \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Definition(\is_subclass_of($definition->getClass(), \ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class) ? \ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter::class : \ConfigTransformer202201236\Symfony\Component\Cache\Adapter\TraceableAdapter::class);
+        $recorder = new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Definition(\is_subclass_of($definition->getClass(), \ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class) ? \ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter::class : \ConfigTransformer202201249\Symfony\Component\Cache\Adapter\TraceableAdapter::class);
         $recorder->setTags($definition->getTags());
         if (!$definition->isPublic() || !$definition->isPrivate()) {
             $recorder->setPublic($definition->isPublic());
         }
-        $recorder->setArguments([new \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Reference($innerId = $id . '.recorder_inner')]);
+        $recorder->setArguments([new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Reference($innerId = $id . '.recorder_inner')]);
         foreach ($definition->getMethodCalls() as [$method, $args]) {
-            if ('setCallbackWrapper' !== $method || !$args[0] instanceof \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Definition || !($args[0]->getArguments()[2] ?? null) instanceof \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Definition) {
+            if ('setCallbackWrapper' !== $method || !$args[0] instanceof \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Definition || !($args[0]->getArguments()[2] ?? null) instanceof \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Definition) {
                 continue;
             }
-            if ([new \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Reference($id), 'setCallbackWrapper'] == $args[0]->getArguments()[2]->getFactory()) {
-                $args[0]->getArguments()[2]->setFactory([new \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Reference($innerId), 'setCallbackWrapper']);
+            if ([new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Reference($id), 'setCallbackWrapper'] == $args[0]->getArguments()[2]->getFactory()) {
+                $args[0]->getArguments()[2]->setFactory([new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Reference($innerId), 'setCallbackWrapper']);
             }
         }
         $definition->setTags([]);
@@ -63,7 +63,7 @@ class CacheCollectorPass implements \ConfigTransformer202201236\Symfony\Componen
         $container->setDefinition($innerId, $definition);
         $container->setDefinition($id, $recorder);
         // Tell the collector to add the new instance
-        $collectorDefinition->addMethodCall('addInstance', [$name, new \ConfigTransformer202201236\Symfony\Component\DependencyInjection\Reference($id)]);
+        $collectorDefinition->addMethodCall('addInstance', [$name, new \ConfigTransformer202201249\Symfony\Component\DependencyInjection\Reference($id)]);
         $collectorDefinition->setPublic(\false);
     }
 }
