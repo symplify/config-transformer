@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201243\PhpParser\Node\Expr\Cast;
+namespace ConfigTransformer202201249\PhpParser\Node\Expr\Cast;
 
-use ConfigTransformer202201243\PhpParser\Node\Expr\Cast;
-class Unset_ extends \ConfigTransformer202201243\PhpParser\Node\Expr\Cast
+use ConfigTransformer202201249\PhpParser\Node\Expr\Cast;
+class Unset_ extends \ConfigTransformer202201249\PhpParser\Node\Expr\Cast
 {
     public function getType() : string
     {
