@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette;
+namespace ConfigTransformer202201241\Nette;
 
-use ConfigTransformer202201249\Nette\Utils\ObjectHelpers;
+use ConfigTransformer202201241\Nette\Utils\ObjectHelpers;
 /**
  * Strict class for better experience.
  * - 'did you mean' hints
@@ -23,7 +23,7 @@ trait SmartObject
     public function __call(string $name, array $args)
     {
         $class = static::class;
-        if (\ConfigTransformer202201249\Nette\Utils\ObjectHelpers::hasProperty($class, $name) === 'event') {
+        if (\ConfigTransformer202201241\Nette\Utils\ObjectHelpers::hasProperty($class, $name) === 'event') {
             // calling event handlers
             $handlers = $this->{$name} ?? null;
             if (\is_iterable($handlers)) {
@@ -31,10 +31,10 @@ trait SmartObject
                     $handler(...$args);
                 }
             } elseif ($handlers !== null) {
-                throw new \ConfigTransformer202201249\Nette\UnexpectedValueException("Property {$class}::\${$name} must be iterable or null, " . \gettype($handlers) . ' given.');
+                throw new \ConfigTransformer202201241\Nette\UnexpectedValueException("Property {$class}::\${$name} must be iterable or null, " . \gettype($handlers) . ' given.');
             }
         } else {
-            \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::strictCall($class, $name);
+            \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::strictCall($class, $name);
         }
     }
     /**
@@ -42,7 +42,7 @@ trait SmartObject
      */
     public static function __callStatic(string $name, array $args)
     {
-        \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
+        \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
     }
     /**
      * @return mixed
@@ -51,12 +51,18 @@ trait SmartObject
     public function &__get(string $name)
     {
         $class = static::class;
-        if ($prop = \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
+        if ($prop = \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property getter
             if (!($prop & 0b1)) {
-                throw new \ConfigTransformer202201249\Nette\MemberAccessException("Cannot read a write-only property {$class}::\${$name}.");
+                throw new \ConfigTransformer202201241\Nette\MemberAccessException("Cannot read a write-only property {$class}::\${$name}.");
             }
-            $m = ($prop & 0b10 ? 'get' : 'is') . $name;
+            $m = ($prop & 0b10 ? 'get' : 'is') . \ucfirst($name);
+            if ($prop & 0b10000) {
+                $trace = \debug_backtrace(0, 1)[0];
+                // suppose this method is called from __call()
+                $loc = isset($trace['file'], $trace['line']) ? " in {$trace['file']} on line {$trace['line']}" : '';
+                \trigger_error("Property {$class}::\${$name} is deprecated, use {$class}::{$m}() method{$loc}.", \E_USER_DEPRECATED);
+            }
             if ($prop & 0b100) {
                 // return by reference
                 return $this->{$m}();
@@ -65,7 +71,7 @@ trait SmartObject
                 return $val;
             }
         } else {
-            \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::strictGet($class, $name);
+            \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::strictGet($class, $name);
         }
     }
     /**
@@ -76,17 +82,24 @@ trait SmartObject
     public function __set(string $name, $value)
     {
         $class = static::class;
-        if (\ConfigTransformer202201249\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
+        if (\ConfigTransformer202201241\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
             // unsetted property
             $this->{$name} = $value;
-        } elseif ($prop = \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
+        } elseif ($prop = \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property setter
             if (!($prop & 0b1000)) {
-                throw new \ConfigTransformer202201249\Nette\MemberAccessException("Cannot write to a read-only property {$class}::\${$name}.");
+                throw new \ConfigTransformer202201241\Nette\MemberAccessException("Cannot write to a read-only property {$class}::\${$name}.");
             }
-            $this->{'set' . $name}($value);
+            $m = 'set' . \ucfirst($name);
+            if ($prop & 0b10000) {
+                $trace = \debug_backtrace(0, 1)[0];
+                // suppose this method is called from __call()
+                $loc = isset($trace['file'], $trace['line']) ? " in {$trace['file']} on line {$trace['line']}" : '';
+                \trigger_error("Property {$class}::\${$name} is deprecated, use {$class}::{$m}() method{$loc}.", \E_USER_DEPRECATED);
+            }
+            $this->{$m}($value);
         } else {
-            \ConfigTransformer202201249\Nette\Utils\ObjectHelpers::strictSet($class, $name);
+            \ConfigTransformer202201241\Nette\Utils\ObjectHelpers::strictSet($class, $name);
         }
     }
     /**
@@ -96,12 +109,12 @@ trait SmartObject
     public function __unset(string $name)
     {
         $class = static::class;
-        if (!\ConfigTransformer202201249\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
-            throw new \ConfigTransformer202201249\Nette\MemberAccessException("Cannot unset the property {$class}::\${$name}.");
+        if (!\ConfigTransformer202201241\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
+            throw new \ConfigTransformer202201241\Nette\MemberAccessException("Cannot unset the property {$class}::\${$name}.");
         }
     }
     public function __isset(string $name) : bool
     {
-        return isset(\ConfigTransformer202201249\Nette\Utils\ObjectHelpers::getMagicProperties(static::class)[$name]);
+        return isset(\ConfigTransformer202201241\Nette\Utils\ObjectHelpers::getMagicProperties(static::class)[$name]);
     }
 }

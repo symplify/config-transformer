@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette\Utils;
+namespace ConfigTransformer202201241\Nette\Utils;
 
-use ConfigTransformer202201249\Nette;
+use ConfigTransformer202201241\Nette;
 use function is_array, is_object, strlen;
 /**
  * String tools library.
@@ -38,9 +38,9 @@ class Strings
     public static function chr(int $code) : string
     {
         if ($code < 0 || $code >= 0xd800 && $code <= 0xdfff || $code > 0x10ffff) {
-            throw new \ConfigTransformer202201249\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
+            throw new \ConfigTransformer202201241\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
         } elseif (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202201249\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
+            throw new \ConfigTransformer202201241\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
         }
         return \iconv('UTF-32BE', 'UTF-8//IGNORE', \pack('N', $code));
     }
@@ -69,13 +69,13 @@ class Strings
      * Returns a part of UTF-8 string specified by starting position and length. If start is negative,
      * the returned string will start at the start'th character from the end of string.
      */
-    public static function substring(string $s, int $start, int $length = null) : string
+    public static function substring(string $s, int $start, ?int $length = null) : string
     {
         if (\function_exists('mb_substr')) {
             return \mb_substr($s, $start, $length, 'UTF-8');
             // MB is much faster
         } elseif (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202201249\Nette\NotSupportedException(__METHOD__ . '() requires extension ICONV or MBSTRING, neither is loaded.');
+            throw new \ConfigTransformer202201241\Nette\NotSupportedException(__METHOD__ . '() requires extension ICONV or MBSTRING, neither is loaded.');
         } elseif ($length === null) {
             $length = self::length($s);
         } elseif ($start < 0 && $length < 0) {
@@ -175,7 +175,7 @@ class Strings
      * Modifies the UTF-8 string to the form used in the URL, ie removes diacritics and replaces all characters
      * except letters of the English alphabet and numbers with a hyphens.
      */
-    public static function webalize(string $s, string $charlist = null, bool $lower = \true) : string
+    public static function webalize(string $s, ?string $charlist = null, bool $lower = \true) : string
     {
         $s = self::toAscii($s);
         if ($lower) {
@@ -254,7 +254,7 @@ class Strings
      * if it is negative, the corresponding number of characters from the end of the strings is compared,
      * otherwise the appropriate number of characters from the beginning is compared.
      */
-    public static function compare(string $left, string $right, int $length = null) : bool
+    public static function compare(string $left, string $right, ?int $length = null) : bool
     {
         if (\class_exists('Normalizer', \false)) {
             $left = \Normalizer::normalize($left, \Normalizer::FORM_D);
@@ -330,7 +330,7 @@ class Strings
     public static function reverse(string $s) : string
     {
         if (!\extension_loaded('iconv')) {
-            throw new \ConfigTransformer202201249\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
+            throw new \ConfigTransformer202201241\Nette\NotSupportedException(__METHOD__ . '() requires ICONV extension that is not loaded.');
         }
         return \iconv('UTF-32LE', 'UTF-8', \strrev(\iconv('UTF-8', 'UTF-32BE', $s)));
     }
@@ -388,7 +388,7 @@ class Strings
                 $pos--;
             }
         }
-        return \ConfigTransformer202201249\Nette\Utils\Helpers::falseToNull($pos);
+        return \ConfigTransformer202201241\Nette\Utils\Helpers::falseToNull($pos);
     }
     /**
      * Splits a string into array by the regular expression. Parenthesized expression in the delimiter are captured.
@@ -430,7 +430,7 @@ class Strings
     {
         if (\is_object($replacement) || \is_array($replacement)) {
             if (!\is_callable($replacement, \false, $textual)) {
-                throw new \ConfigTransformer202201249\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
+                throw new \ConfigTransformer202201241\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
             }
             return self::pcre('preg_replace_callback', [$pattern, $replacement, $subject, $limit]);
         } elseif (\is_array($pattern) && \is_string(\key($pattern))) {
@@ -442,12 +442,12 @@ class Strings
     /** @internal */
     public static function pcre(string $func, array $args)
     {
-        $res = \ConfigTransformer202201249\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
+        $res = \ConfigTransformer202201241\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
             // compile-time error, not detectable by preg_last_error
-            throw new \ConfigTransformer202201249\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
+            throw new \ConfigTransformer202201241\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
         });
         if (($code = \preg_last_error()) && ($res === null || !\in_array($func, ['preg_filter', 'preg_replace_callback', 'preg_replace'], \true))) {
-            throw new \ConfigTransformer202201249\Nette\Utils\RegexpException((\ConfigTransformer202201249\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
+            throw new \ConfigTransformer202201241\Nette\Utils\RegexpException((\ConfigTransformer202201241\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
         }
         return $res;
     }

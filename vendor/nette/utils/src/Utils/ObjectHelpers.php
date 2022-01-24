@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette\Utils;
+namespace ConfigTransformer202201241\Nette\Utils;
 
-use ConfigTransformer202201249\Nette;
-use ConfigTransformer202201249\Nette\MemberAccessException;
+use ConfigTransformer202201241\Nette;
+use ConfigTransformer202201241\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */
@@ -25,7 +25,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-read)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \ConfigTransformer202201249\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \ConfigTransformer202201241\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @return never
@@ -37,7 +37,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-write)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \ConfigTransformer202201249\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \ConfigTransformer202201241\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @return never
@@ -56,10 +56,10 @@ final class ObjectHelpers
             // insufficient visibility
             $rm = new \ReflectionMethod($class, $method);
             $visibility = $rm->isPrivate() ? 'private ' : ($rm->isProtected() ? 'protected ' : '');
-            throw new \ConfigTransformer202201249\Nette\MemberAccessException("Call to {$visibility}method {$class}::{$method}() from " . ($context ? "scope {$context}." : 'global scope.'));
+            throw new \ConfigTransformer202201241\Nette\MemberAccessException("Call to {$visibility}method {$class}::{$method}() from " . ($context ? "scope {$context}." : 'global scope.'));
         } else {
             $hint = self::getSuggestion(\array_merge(\get_class_methods($class), self::parseFullDoc(new \ReflectionClass($class), '~^[ \\t*]*@method[ \\t]+(?:\\S+[ \\t]+)??(\\w+)\\(~m'), $additionalMethods), $method);
-            throw new \ConfigTransformer202201249\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+            throw new \ConfigTransformer202201241\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
         }
     }
     /**
@@ -79,12 +79,12 @@ final class ObjectHelpers
             // insufficient visibility
             $rm = new \ReflectionMethod($class, $method);
             $visibility = $rm->isPrivate() ? 'private ' : ($rm->isProtected() ? 'protected ' : '');
-            throw new \ConfigTransformer202201249\Nette\MemberAccessException("Call to {$visibility}method {$class}::{$method}() from " . ($context ? "scope {$context}." : 'global scope.'));
+            throw new \ConfigTransformer202201241\Nette\MemberAccessException("Call to {$visibility}method {$class}::{$method}() from " . ($context ? "scope {$context}." : 'global scope.'));
         } else {
             $hint = self::getSuggestion(\array_filter((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC), function ($m) {
                 return $m->isStatic();
             }), $method);
-            throw new \ConfigTransformer202201249\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+            throw new \ConfigTransformer202201241\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
         }
     }
     /**
@@ -100,14 +100,14 @@ final class ObjectHelpers
             return $props;
         }
         $rc = new \ReflectionClass($class);
-        \preg_match_all('~^  [ \\t*]*  @property(|-read|-write)  [ \\t]+  [^\\s$]+  [ \\t]+  \\$  (\\w+)  ()~mx', (string) $rc->getDocComment(), $matches, \PREG_SET_ORDER);
+        \preg_match_all('~^  [ \\t*]*  @property(|-read|-write|-deprecated)  [ \\t]+  [^\\s$]+  [ \\t]+  \\$  (\\w+)  ()~mx', (string) $rc->getDocComment(), $matches, \PREG_SET_ORDER);
         $props = [];
         foreach ($matches as [, $type, $name]) {
             $uname = \ucfirst($name);
             $write = $type !== '-read' && $rc->hasMethod($nm = 'set' . $uname) && ($rm = $rc->getMethod($nm))->name === $nm && !$rm->isPrivate() && !$rm->isStatic();
             $read = $type !== '-write' && ($rc->hasMethod($nm = 'get' . $uname) || $rc->hasMethod($nm = 'is' . $uname)) && ($rm = $rc->getMethod($nm))->name === $nm && !$rm->isPrivate() && !$rm->isStatic();
             if ($read || $write) {
-                $props[$name] = $read << 0 | ($nm[0] === 'g') << 1 | $rm->returnsReference() << 2 | $write << 3;
+                $props[$name] = $read << 0 | ($nm[0] === 'g') << 1 | $rm->returnsReference() << 2 | $write << 3 | ($type === '-deprecated') << 4;
             }
         }
         foreach ($rc->getTraits() as $trait) {

@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201249;
+namespace ConfigTransformer202201241;
 
-use ConfigTransformer202201249\PhpParser\BuilderFactory;
-use ConfigTransformer202201249\PhpParser\NodeFinder;
-use ConfigTransformer202201249\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202201241\PhpParser\BuilderFactory;
+use ConfigTransformer202201241\PhpParser\NodeFinder;
+use ConfigTransformer202201241\PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202201249\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202201249\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202201249\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202201249\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202201249\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
-use ConfigTransformer202201249\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202201249\Symplify\PackageBuilder\Php\TypeChecker;
-use ConfigTransformer202201249\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use function ConfigTransformer202201249\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202201241\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202201241\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202201241\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202201241\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202201241\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
+use ConfigTransformer202201241\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202201241\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202201241\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use function ConfigTransformer202201241\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202201249\Symplify\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/ValueObject']);
-    $services->set(\ConfigTransformer202201249\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer202201249\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer202201249\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer202201249\PhpParser\NodeVisitor\ParentConnectingVisitor::class);
-    $services->set(\ConfigTransformer202201249\Symplify\Astral\NodeFinder\SimpleNodeFinder::class);
-    $services->set(\ConfigTransformer202201249\Symplify\PackageBuilder\Php\TypeChecker::class);
-    $services->set(\ConfigTransformer202201249\Symplify\Astral\NodeValue\NodeValueResolver::class);
-    $services->set(\ConfigTransformer202201249\Symplify\Astral\Naming\SimpleNameResolver::class)->factory(\ConfigTransformer202201249\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::class . '::create');
-    $services->set(\ConfigTransformer202201249\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202201249\Symfony\Component\DependencyInjection\Loader\Configurator\service('service_container')]);
-    $services->set(\ConfigTransformer202201249\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->load('ConfigTransformer202201241\Symplify\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/ValueObject']);
+    $services->set(\ConfigTransformer202201241\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202201241\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202201241\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202201241\PhpParser\NodeVisitor\ParentConnectingVisitor::class);
+    $services->set(\ConfigTransformer202201241\Symplify\Astral\NodeFinder\SimpleNodeFinder::class);
+    $services->set(\ConfigTransformer202201241\Symplify\PackageBuilder\Php\TypeChecker::class);
+    $services->set(\ConfigTransformer202201241\Symplify\Astral\NodeValue\NodeValueResolver::class);
+    $services->set(\ConfigTransformer202201241\Symplify\Astral\Naming\SimpleNameResolver::class)->factory(\ConfigTransformer202201241\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::class . '::create');
+    $services->set(\ConfigTransformer202201241\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\ConfigTransformer202201241\Symfony\Component\DependencyInjection\Loader\Configurator\service('service_container')]);
+    $services->set(\ConfigTransformer202201241\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
 };

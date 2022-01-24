@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette\Utils;
+namespace ConfigTransformer202201241\Nette\Utils;
 
-use ConfigTransformer202201249\Nette;
+use ConfigTransformer202201241\Nette;
 /**
  * Paginating math.
  *
@@ -146,7 +146,7 @@ class Paginator
      * Sets the total number of items.
      * @return static
      */
-    public function setItemCount(int $itemCount = null)
+    public function setItemCount(?int $itemCount = null)
     {
         $this->itemCount = $itemCount === null ? null : \max(0, $itemCount);
         return $this;

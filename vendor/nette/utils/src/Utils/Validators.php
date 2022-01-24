@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette\Utils;
+namespace ConfigTransformer202201241\Nette\Utils;
 
-use ConfigTransformer202201249\Nette;
+use ConfigTransformer202201241\Nette;
 /**
  * Validation utilities.
  */
@@ -31,7 +31,7 @@ class Validators
         // pseudo-types
         'callable' => [self::class, 'isCallable'],
         'iterable' => 'is_iterable',
-        'list' => [\ConfigTransformer202201249\Nette\Utils\Arrays::class, 'isList'],
+        'list' => [\ConfigTransformer202201241\Nette\Utils\Arrays::class, 'isList'],
         'mixed' => [self::class, 'isMixed'],
         'none' => [self::class, 'isNone'],
         'number' => [self::class, 'isNumber'],
@@ -60,7 +60,7 @@ class Validators
         'type' => [self::class, 'isType'],
     ];
     /** @var array<string,callable> */
-    protected static $counters = ['string' => 'strlen', 'unicode' => [\ConfigTransformer202201249\Nette\Utils\Strings::class, 'length'], 'array' => 'count', 'list' => 'count', 'alnum' => 'strlen', 'alpha' => 'strlen', 'digit' => 'strlen', 'lower' => 'strlen', 'space' => 'strlen', 'upper' => 'strlen', 'xdigit' => 'strlen'];
+    protected static $counters = ['string' => 'strlen', 'unicode' => [\ConfigTransformer202201241\Nette\Utils\Strings::class, 'length'], 'array' => 'count', 'list' => 'count', 'alnum' => 'strlen', 'alpha' => 'strlen', 'digit' => 'strlen', 'lower' => 'strlen', 'space' => 'strlen', 'upper' => 'strlen', 'xdigit' => 'strlen'];
     /**
      * Verifies that the value is of expected types separated by pipe.
      * @param  mixed  $value
@@ -77,7 +77,7 @@ class Validators
             } elseif (\is_object($value)) {
                 $type .= ' ' . \get_class($value);
             }
-            throw new \ConfigTransformer202201249\Nette\Utils\AssertionException("The {$label} expects to be {$expected}, {$type} given.");
+            throw new \ConfigTransformer202201241\Nette\Utils\AssertionException("The {$label} expects to be {$expected}, {$type} given.");
         }
     }
     /**
@@ -86,10 +86,10 @@ class Validators
      * @param  int|string  $key
      * @throws AssertionException
      */
-    public static function assertField(array $array, $key, string $expected = null, string $label = "item '%' in array") : void
+    public static function assertField(array $array, $key, ?string $expected = null, string $label = "item '%' in array") : void
     {
         if (!\array_key_exists($key, $array)) {
-            throw new \ConfigTransformer202201249\Nette\Utils\AssertionException('Missing ' . \str_replace('%', $key, $label) . '.');
+            throw new \ConfigTransformer202201241\Nette\Utils\AssertionException('Missing ' . \str_replace('%', $key, $label) . '.');
         } elseif ($expected) {
             static::assert($array[$key], $expected, \str_replace('%', $key, $label));
         }
@@ -122,7 +122,7 @@ class Validators
                     continue;
                 }
             } elseif ($type === 'pattern') {
-                if (\ConfigTransformer202201249\Nette\Utils\Strings::match($value, '|^' . ($item[1] ?? '') . '$|D')) {
+                if (\ConfigTransformer202201241\Nette\Utils\Strings::match($value, '|^' . ($item[1] ?? '') . '$|D')) {
                     return \true;
                 }
                 continue;
@@ -181,7 +181,7 @@ class Validators
      */
     public static function isNumeric($value) : bool
     {
-        return \is_float($value) || \is_int($value) || \is_string($value) && \preg_match('#^[+-]?[0-9]*[.]?[0-9]+$#D', $value);
+        return \is_float($value) || \is_int($value) || \is_string($value) && \preg_match('#^[+-]?([0-9]++\\.?[0-9]*|\\.[0-9]+)$#D', $value);
     }
     /**
      * Checks if the value is a syntactically correct callback.
@@ -220,7 +220,7 @@ class Validators
      */
     public static function isList($value) : bool
     {
-        return \ConfigTransformer202201249\Nette\Utils\Arrays::isList($value);
+        return \ConfigTransformer202201241\Nette\Utils\Arrays::isList($value);
     }
     /**
      * Checks if the value is in the given range [min, max], where the upper or lower limit can be omitted (null).

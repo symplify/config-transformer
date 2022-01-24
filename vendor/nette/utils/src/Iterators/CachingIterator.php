@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201249\Nette\Iterators;
+namespace ConfigTransformer202201241\Nette\Iterators;
 
-use ConfigTransformer202201249\Nette;
+use ConfigTransformer202201241\Nette;
 /**
  * Smarter caching iterator.
  *
@@ -38,21 +38,21 @@ class CachingIterator extends \CachingIterator implements \Countable
         } elseif ($iterator instanceof \Traversable) {
             $iterator = new \IteratorIterator($iterator);
         } else {
-            throw new \ConfigTransformer202201249\Nette\InvalidArgumentException(\sprintf('Invalid argument passed to %s; array or Traversable expected, %s given.', self::class, \is_object($iterator) ? \get_class($iterator) : \gettype($iterator)));
+            throw new \ConfigTransformer202201241\Nette\InvalidArgumentException(\sprintf('Invalid argument passed to %s; array or Traversable expected, %s given.', self::class, \is_object($iterator) ? \get_class($iterator) : \gettype($iterator)));
         }
         parent::__construct($iterator, 0);
     }
     /**
      * Is the current element the first one?
      */
-    public function isFirst(int $gridWidth = null) : bool
+    public function isFirst(?int $gridWidth = null) : bool
     {
         return $this->counter === 1 || $gridWidth && $this->counter !== 0 && ($this->counter - 1) % $gridWidth === 0;
     }
     /**
      * Is the current element the last one?
      */
-    public function isLast(int $gridWidth = null) : bool
+    public function isLast(?int $gridWidth = null) : bool
     {
         return !$this->hasNext() || $gridWidth && $this->counter % $gridWidth === 0;
     }
@@ -93,7 +93,7 @@ class CachingIterator extends \CachingIterator implements \Countable
         if ($inner instanceof \Countable) {
             return $inner->count();
         } else {
-            throw new \ConfigTransformer202201249\Nette\NotSupportedException('Iterator is not countable.');
+            throw new \ConfigTransformer202201241\Nette\NotSupportedException('Iterator is not countable.');
         }
     }
     /**
