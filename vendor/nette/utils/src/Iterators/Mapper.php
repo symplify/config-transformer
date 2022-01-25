@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201258\Nette\Iterators;
+namespace ConfigTransformer202201259\Nette\Iterators;
 
 /**
  * Applies the callback to the elements of the inner iterator.
