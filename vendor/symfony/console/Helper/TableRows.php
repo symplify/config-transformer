@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201258\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202201253\Symfony\Component\Console\Helper;
 
 /**
  * @internal
