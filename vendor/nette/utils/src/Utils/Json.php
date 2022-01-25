@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202201254\Nette\Utils;
+namespace ConfigTransformer202201258\Nette\Utils;
 
-use ConfigTransformer202201254\Nette;
+use ConfigTransformer202201258\Nette;
 /**
  * JSON encoder and decoder.
  */
@@ -29,7 +29,7 @@ final class Json
         // since PHP 5.6.6 & PECL JSON-C 1.3.7
         $json = \json_encode($value, $flags);
         if ($error = \json_last_error()) {
-            throw new \ConfigTransformer202201254\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+            throw new \ConfigTransformer202201258\Nette\Utils\JsonException(\json_last_error_msg(), $error);
         }
         return $json;
     }
@@ -40,9 +40,9 @@ final class Json
      */
     public static function decode(string $json, int $flags = 0)
     {
-        $value = \json_decode($json, \false, 512, $flags | \JSON_BIGINT_AS_STRING);
+        $value = \json_decode($json, \true, 512, $flags | \JSON_BIGINT_AS_STRING);
         if ($error = \json_last_error()) {
-            throw new \ConfigTransformer202201254\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+            throw new \ConfigTransformer202201258\Nette\Utils\JsonException(\json_last_error_msg(), $error);
         }
         return $value;
     }
