@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201250\Symplify\PhpConfigPrinter\Naming;
+namespace ConfigTransformer2022012510\Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer202201250\Nette\Utils\Strings;
+use ConfigTransformer2022012510\Nette\Utils\Strings;
 final class ClassNaming
 {
     public function getShortName(string $class) : string
     {
         if (\strpos($class, '\\') !== \false) {
-            return (string) \ConfigTransformer202201250\Nette\Utils\Strings::after($class, '\\', -1);
+            return (string) \ConfigTransformer2022012510\Nette\Utils\Strings::after($class, '\\', -1);
         }
         return $class;
     }
