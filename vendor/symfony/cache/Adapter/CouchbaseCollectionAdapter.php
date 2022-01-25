@@ -8,36 +8,36 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201253\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2022012510\Symfony\Component\Cache\Adapter;
 
 use Couchbase\Bucket;
 use Couchbase\Cluster;
-use ConfigTransformer202201253\Couchbase\ClusterOptions;
-use ConfigTransformer202201253\Couchbase\Collection;
-use ConfigTransformer202201253\Couchbase\DocumentNotFoundException;
-use ConfigTransformer202201253\Couchbase\UpsertOptions;
-use ConfigTransformer202201253\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202201253\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202201253\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202201253\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer2022012510\Couchbase\ClusterOptions;
+use ConfigTransformer2022012510\Couchbase\Collection;
+use ConfigTransformer2022012510\Couchbase\DocumentNotFoundException;
+use ConfigTransformer2022012510\Couchbase\UpsertOptions;
+use ConfigTransformer2022012510\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2022012510\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2022012510\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer2022012510\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */
-class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Component\Cache\Adapter\AbstractAdapter
+class CouchbaseCollectionAdapter extends \ConfigTransformer2022012510\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private const MAX_KEY_LENGTH = 250;
     private $connection;
     private $marshaller;
-    public function __construct(\ConfigTransformer202201253\Couchbase\Collection $connection, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202201253\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(\ConfigTransformer2022012510\Couchbase\Collection $connection, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer2022012510\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202201253\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 3.0.0 < 4.0.0 is required.');
+            throw new \ConfigTransformer2022012510\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 3.0.0 < 4.0.0 is required.');
         }
         $this->maxIdLength = static::MAX_KEY_LENGTH;
         $this->connection = $connection;
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202201253\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer2022012510\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
     public static function createConnection(array|string $dsn, array $options = []) : Bucket|Collection
     {
@@ -45,7 +45,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
             $dsn = [$dsn];
         }
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202201253\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 3.0.0 < 4.0.0 is required.');
+            throw new \ConfigTransformer2022012510\Symfony\Component\Cache\Exception\CacheException('Couchbase >= 3.0.0 < 4.0.0 is required.');
         }
         \set_error_handler(function ($type, $msg, $file, $line) : bool {
             throw new \ErrorException($msg, 0, $type, $file, $line);
@@ -58,7 +58,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
             $password = $options['password'] ?? '';
             foreach ($dsn as $server) {
                 if (0 !== \strpos($server, 'couchbase:')) {
-                    throw new \ConfigTransformer202201253\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $server));
+                    throw new \ConfigTransformer2022012510\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $server));
                 }
                 \preg_match($dsnPattern, $server, $matches);
                 $username = $matches['username'] ?: $username;
@@ -74,7 +74,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
             }
             $option = isset($matches['options']) ? '?' . $matches['options'] : '';
             $connectionString = $protocol . '://' . \implode(',', $newServers) . $option;
-            $clusterOptions = new \ConfigTransformer202201253\Couchbase\ClusterOptions();
+            $clusterOptions = new \ConfigTransformer2022012510\Couchbase\ClusterOptions();
             $clusterOptions->credentials($username, $password);
             $client = new \Couchbase\Cluster($connectionString, $clusterOptions);
             $bucket = $client->bucket($matches['bucketName']);
@@ -111,7 +111,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
         foreach ($ids as $id) {
             try {
                 $resultCouchbase = $this->connection->get($id);
-            } catch (\ConfigTransformer202201253\Couchbase\DocumentNotFoundException $exception) {
+            } catch (\ConfigTransformer2022012510\Couchbase\DocumentNotFoundException $exception) {
                 continue;
             }
             $content = $resultCouchbase->value ?? $resultCouchbase->content();
@@ -145,7 +145,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
                 if (null === $result->mutationToken()) {
                     $idsErrors[] = $id;
                 }
-            } catch (\ConfigTransformer202201253\Couchbase\DocumentNotFoundException $exception) {
+            } catch (\ConfigTransformer2022012510\Couchbase\DocumentNotFoundException $exception) {
             }
         }
         return 0 === \count($idsErrors);
@@ -158,7 +158,7 @@ class CouchbaseCollectionAdapter extends \ConfigTransformer202201253\Symfony\Com
         if (!($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;
         }
-        $upsertOptions = new \ConfigTransformer202201253\Couchbase\UpsertOptions();
+        $upsertOptions = new \ConfigTransformer2022012510\Couchbase\UpsertOptions();
         $upsertOptions->expiry($lifetime);
         $ko = [];
         foreach ($values as $key => $value) {
