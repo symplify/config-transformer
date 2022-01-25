@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201259;
+namespace ConfigTransformer202201250;
 
-use ConfigTransformer202201259\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202201259\PhpParser\NodeFinder;
+use ConfigTransformer202201250\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202201250\PhpParser\NodeFinder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202201259\Symplify\Astral\PhpParser\SmartPhpParser;
-use ConfigTransformer202201259\Symplify\Astral\PhpParser\SmartPhpParserFactory;
-use ConfigTransformer202201259\Symplify\PackageBuilder\Php\TypeChecker;
-use function ConfigTransformer202201259\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202201250\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer202201250\Symplify\Astral\PhpParser\SmartPhpParserFactory;
+use ConfigTransformer202201250\Symplify\PackageBuilder\Php\TypeChecker;
+use function ConfigTransformer202201250\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
-    $services->load('ConfigTransformer202201259\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php']);
-    $services->set(\ConfigTransformer202201259\Symplify\Astral\PhpParser\SmartPhpParser::class)->factory([\ConfigTransformer202201259\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202201259\Symplify\Astral\PhpParser\SmartPhpParserFactory::class), 'create']);
-    $services->set(\ConfigTransformer202201259\PhpParser\ConstExprEvaluator::class);
-    $services->set(\ConfigTransformer202201259\Symplify\PackageBuilder\Php\TypeChecker::class);
-    $services->set(\ConfigTransformer202201259\PhpParser\NodeFinder::class);
+    $services->load('ConfigTransformer202201250\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php']);
+    $services->set(\ConfigTransformer202201250\Symplify\Astral\PhpParser\SmartPhpParser::class)->factory([\ConfigTransformer202201250\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202201250\Symplify\Astral\PhpParser\SmartPhpParserFactory::class), 'create']);
+    $services->set(\ConfigTransformer202201250\PhpParser\ConstExprEvaluator::class);
+    $services->set(\ConfigTransformer202201250\Symplify\PackageBuilder\Php\TypeChecker::class);
+    $services->set(\ConfigTransformer202201250\PhpParser\NodeFinder::class);
 };
