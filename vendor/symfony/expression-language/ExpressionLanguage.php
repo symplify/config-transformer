@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201245\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202201258\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202201245\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202201245\Symfony\Component\Cache\Adapter\ArrayAdapter;
+use ConfigTransformer202201258\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202201258\Symfony\Component\Cache\Adapter\ArrayAdapter;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ParsedExpression::class);
+\class_exists(\ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ParsedExpression::class);
 /**
  * Allows to compile and evaluate expressions written in your own DSL.
  *
@@ -32,9 +32,9 @@ class ExpressionLanguage
     /**
      * @param ExpressionFunctionProviderInterface[] $providers
      */
-    public function __construct(\ConfigTransformer202201245\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [])
+    public function __construct(\ConfigTransformer202201258\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [])
     {
-        $this->cache = $cache ?? new \ConfigTransformer202201245\Symfony\Component\Cache\Adapter\ArrayAdapter();
+        $this->cache = $cache ?? new \ConfigTransformer202201258\Symfony\Component\Cache\Adapter\ArrayAdapter();
         $this->registerFunctions();
         foreach ($providers as $provider) {
             $this->registerProvider($provider);
@@ -61,9 +61,9 @@ class ExpressionLanguage
      * Parses an expression.
      * @param string|\Symfony\Component\ExpressionLanguage\Expression $expression
      */
-    public function parse($expression, array $names) : \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ParsedExpression
+    public function parse($expression, array $names) : \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ParsedExpression
     {
-        if ($expression instanceof \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ParsedExpression) {
+        if ($expression instanceof \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ParsedExpression) {
             return $expression;
         }
         \asort($names);
@@ -74,7 +74,7 @@ class ExpressionLanguage
         $cacheItem = $this->cache->getItem(\rawurlencode($expression . '//' . \implode('|', $cacheKeyItems)));
         if (null === ($parsedExpression = $cacheItem->get())) {
             $nodes = $this->getParser()->parse($this->getLexer()->tokenize((string) $expression), $names);
-            $parsedExpression = new \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ParsedExpression((string) $expression, $nodes);
+            $parsedExpression = new \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ParsedExpression((string) $expression, $nodes);
             $cacheItem->set($parsedExpression);
             $this->cache->save($cacheItem);
         }
@@ -90,7 +90,7 @@ class ExpressionLanguage
      */
     public function lint($expression, ?array $names) : void
     {
-        if ($expression instanceof \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ParsedExpression) {
+        if ($expression instanceof \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ParsedExpression) {
             return;
         }
         $this->getParser()->lint($this->getLexer()->tokenize((string) $expression), $names);
@@ -112,11 +112,11 @@ class ExpressionLanguage
         }
         $this->functions[$name] = ['compiler' => $compiler, 'evaluator' => $evaluator];
     }
-    public function addFunction(\ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ExpressionFunction $function)
+    public function addFunction(\ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ExpressionFunction $function)
     {
         $this->register($function->getName(), $function->getCompiler(), $function->getEvaluator());
     }
-    public function registerProvider(\ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface $provider)
+    public function registerProvider(\ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface $provider)
     {
         foreach ($provider->getFunctions() as $function) {
             $this->addFunction($function);
@@ -124,19 +124,19 @@ class ExpressionLanguage
     }
     protected function registerFunctions()
     {
-        $this->addFunction(\ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\ExpressionFunction::fromPhp('constant'));
+        $this->addFunction(\ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\ExpressionFunction::fromPhp('constant'));
     }
-    private function getLexer() : \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Lexer
+    private function getLexer() : \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Lexer
     {
-        return $this->lexer = $this->lexer ?? new \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Lexer();
+        return $this->lexer = $this->lexer ?? new \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Lexer();
     }
-    private function getParser() : \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Parser
+    private function getParser() : \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Parser
     {
-        return $this->parser = $this->parser ?? new \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Parser($this->functions);
+        return $this->parser = $this->parser ?? new \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Parser($this->functions);
     }
-    private function getCompiler() : \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Compiler
+    private function getCompiler() : \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Compiler
     {
-        $this->compiler = $this->compiler ?? new \ConfigTransformer202201245\Symfony\Component\ExpressionLanguage\Compiler($this->functions);
+        $this->compiler = $this->compiler ?? new \ConfigTransformer202201258\Symfony\Component\ExpressionLanguage\Compiler($this->functions);
         return $this->compiler->reset();
     }
 }
