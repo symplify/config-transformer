@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022012610\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202201268\Symfony\Component\Console\Tester;
 
-use ConfigTransformer2022012610\Symfony\Component\Console\Application;
-use ConfigTransformer2022012610\Symfony\Component\Console\Input\ArrayInput;
+use ConfigTransformer202201268\Symfony\Component\Console\Application;
+use ConfigTransformer202201268\Symfony\Component\Console\Input\ArrayInput;
 /**
  * Eases the testing of console applications.
  *
@@ -26,7 +26,7 @@ class ApplicationTester
 {
     use TesterTrait;
     private $application;
-    public function __construct(\ConfigTransformer2022012610\Symfony\Component\Console\Application $application)
+    public function __construct(\ConfigTransformer202201268\Symfony\Component\Console\Application $application)
     {
         $this->application = $application;
     }
@@ -44,7 +44,7 @@ class ApplicationTester
      */
     public function run(array $input, array $options = []) : int
     {
-        $this->input = new \ConfigTransformer2022012610\Symfony\Component\Console\Input\ArrayInput($input);
+        $this->input = new \ConfigTransformer202201268\Symfony\Component\Console\Input\ArrayInput($input);
         if (isset($options['interactive'])) {
             $this->input->setInteractive($options['interactive']);
         }
