@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201260\PhpParser\Lexer;
+namespace ConfigTransformer2022012610\PhpParser\Lexer;
 
-use ConfigTransformer202201260\PhpParser\Error;
-use ConfigTransformer202201260\PhpParser\ErrorHandler;
-use ConfigTransformer202201260\PhpParser\Lexer;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
-use ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\TokenEmulator;
-class Emulative extends \ConfigTransformer202201260\PhpParser\Lexer
+use ConfigTransformer2022012610\PhpParser\Error;
+use ConfigTransformer2022012610\PhpParser\ErrorHandler;
+use ConfigTransformer2022012610\PhpParser\Lexer;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
+use ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\TokenEmulator;
+class Emulative extends \ConfigTransformer2022012610\PhpParser\Lexer
 {
     const PHP_7_3 = '7.3dev';
     const PHP_7_4 = '7.4dev';
@@ -37,10 +37,10 @@ class Emulative extends \ConfigTransformer202201260\PhpParser\Lexer
      */
     public function __construct(array $options = [])
     {
-        $this->targetPhpVersion = $options['phpVersion'] ?? \ConfigTransformer202201260\PhpParser\Lexer\Emulative::PHP_8_1;
+        $this->targetPhpVersion = $options['phpVersion'] ?? \ConfigTransformer2022012610\PhpParser\Lexer\Emulative::PHP_8_1;
         unset($options['phpVersion']);
         parent::__construct($options);
-        $emulators = [new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\FnTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\AttributeEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator(), new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator()];
+        $emulators = [new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\FnTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\AttributeEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator(), new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator()];
         // Collect emulators that are relevant for the PHP version we're running
         // and the PHP version we're targeting for emulation.
         foreach ($emulators as $emulator) {
@@ -49,12 +49,12 @@ class Emulative extends \ConfigTransformer202201260\PhpParser\Lexer
                 $this->emulators[] = $emulator;
             } else {
                 if ($this->isReverseEmulationNeeded($emulatorPhpVersion)) {
-                    $this->emulators[] = new \ConfigTransformer202201260\PhpParser\Lexer\TokenEmulator\ReverseEmulator($emulator);
+                    $this->emulators[] = new \ConfigTransformer2022012610\PhpParser\Lexer\TokenEmulator\ReverseEmulator($emulator);
                 }
             }
         }
     }
-    public function startLexing(string $code, \ConfigTransformer202201260\PhpParser\ErrorHandler $errorHandler = null)
+    public function startLexing(string $code, \ConfigTransformer2022012610\PhpParser\ErrorHandler $errorHandler = null)
     {
         $emulators = \array_filter($this->emulators, function ($emulator) use($code) {
             return $emulator->isEmulationNeeded($code);
@@ -68,7 +68,7 @@ class Emulative extends \ConfigTransformer202201260\PhpParser\Lexer
         foreach ($emulators as $emulator) {
             $code = $emulator->preprocessCode($code, $this->patches);
         }
-        $collector = new \ConfigTransformer202201260\PhpParser\ErrorHandler\Collecting();
+        $collector = new \ConfigTransformer2022012610\PhpParser\ErrorHandler\Collecting();
         parent::startLexing($code, $collector);
         $this->sortPatches();
         $this->fixupTokens();

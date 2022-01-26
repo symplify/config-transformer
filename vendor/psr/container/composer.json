@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202201260\\Psr\\Container\\": "src\/"
+            "ConfigTransformer2022012610\\Psr\\Container\\": "src\/"
         }
     },
     "extra": {
