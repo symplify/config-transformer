@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201253\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202201260\Symfony\Component\DependencyInjection\Dumper;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
@@ -97,7 +97,7 @@ final class Preloader
         if (!$t) {
             return;
         }
-        foreach ($t instanceof \ReflectionUnionType || $t instanceof \ConfigTransformer202201253\ReflectionIntersectionType ? $t->getTypes() : [$t] as $t) {
+        foreach ($t instanceof \ReflectionUnionType || $t instanceof \ConfigTransformer202201260\ReflectionIntersectionType ? $t->getTypes() : [$t] as $t) {
             if (!$t->isBuiltin()) {
                 self::doPreload($t instanceof \ReflectionNamedType ? $t->getName() : $t, $preloaded);
             }
