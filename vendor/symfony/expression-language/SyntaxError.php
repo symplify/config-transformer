@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022012610\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202201274\Symfony\Component\ExpressionLanguage;
 
 class SyntaxError extends \LogicException
 {

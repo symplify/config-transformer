@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022012610\PhpParser\Node;
+namespace ConfigTransformer202201274\PhpParser\Node;
 
-use ConfigTransformer2022012610\PhpParser\NodeAbstract;
-class IntersectionType extends \ConfigTransformer2022012610\PhpParser\Node\ComplexType
+use ConfigTransformer202201274\PhpParser\NodeAbstract;
+class IntersectionType extends \ConfigTransformer202201274\PhpParser\Node\ComplexType
 {
     /** @var (Identifier|Name)[] Types */
     public $types;

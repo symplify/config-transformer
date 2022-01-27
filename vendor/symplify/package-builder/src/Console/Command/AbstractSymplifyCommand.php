@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022012610\Symplify\PackageBuilder\Console\Command;
+namespace ConfigTransformer202201274\Symplify\PackageBuilder\Console\Command;
 
-use ConfigTransformer2022012610\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2022012610\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer2022012610\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer2022012610\Symfony\Contracts\Service\Attribute\Required;
-use ConfigTransformer2022012610\Symplify\PackageBuilder\ValueObject\Option;
-use ConfigTransformer2022012610\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer2022012610\Symplify\SmartFileSystem\Finder\SmartFinder;
-use ConfigTransformer2022012610\Symplify\SmartFileSystem\SmartFileSystem;
-abstract class AbstractSymplifyCommand extends \ConfigTransformer2022012610\Symfony\Component\Console\Command\Command
+use ConfigTransformer202201274\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202201274\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202201274\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202201274\Symfony\Contracts\Service\Attribute\Required;
+use ConfigTransformer202201274\Symplify\PackageBuilder\ValueObject\Option;
+use ConfigTransformer202201274\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer202201274\Symplify\SmartFileSystem\Finder\SmartFinder;
+use ConfigTransformer202201274\Symplify\SmartFileSystem\SmartFileSystem;
+abstract class AbstractSymplifyCommand extends \ConfigTransformer202201274\Symfony\Component\Console\Command\Command
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -32,12 +32,12 @@ abstract class AbstractSymplifyCommand extends \ConfigTransformer2022012610\Symf
     public function __construct()
     {
         parent::__construct();
-        $this->addOption(\ConfigTransformer2022012610\Symplify\PackageBuilder\ValueObject\Option::CONFIG, 'c', \ConfigTransformer2022012610\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to config file');
+        $this->addOption(\ConfigTransformer202201274\Symplify\PackageBuilder\ValueObject\Option::CONFIG, 'c', \ConfigTransformer202201274\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to config file');
     }
     /**
      * @required
      */
-    public function autowire(\ConfigTransformer2022012610\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer2022012610\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer2022012610\Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder, \ConfigTransformer2022012610\Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard) : void
+    public function autowire(\ConfigTransformer202201274\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202201274\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \ConfigTransformer202201274\Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder, \ConfigTransformer202201274\Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard) : void
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
