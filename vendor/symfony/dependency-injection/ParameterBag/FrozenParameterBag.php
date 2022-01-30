@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201308\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202201303\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202201308\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202201303\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Holds read-only parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FrozenParameterBag extends \ConfigTransformer202201308\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+class FrozenParameterBag extends \ConfigTransformer202201303\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
 {
     /**
      * For performance reasons, the constructor assumes that
@@ -36,14 +36,14 @@ class FrozenParameterBag extends \ConfigTransformer202201308\Symfony\Component\D
      */
     public function clear()
     {
-        throw new \ConfigTransformer202201308\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call clear() on a frozen ParameterBag.');
+        throw new \ConfigTransformer202201303\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call clear() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
      */
     public function add(array $parameters)
     {
-        throw new \ConfigTransformer202201308\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call add() on a frozen ParameterBag.');
+        throw new \ConfigTransformer202201303\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call add() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
@@ -51,13 +51,13 @@ class FrozenParameterBag extends \ConfigTransformer202201308\Symfony\Component\D
      */
     public function set(string $name, $value)
     {
-        throw new \ConfigTransformer202201308\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call set() on a frozen ParameterBag.');
+        throw new \ConfigTransformer202201303\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call set() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
      */
     public function remove(string $name)
     {
-        throw new \ConfigTransformer202201308\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call remove() on a frozen ParameterBag.');
+        throw new \ConfigTransformer202201303\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call remove() on a frozen ParameterBag.');
     }
 }
