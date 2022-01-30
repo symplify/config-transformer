@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201303\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202201306\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202201303\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202201303\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
-if (!\class_exists(\ConfigTransformer202201303\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
+use ConfigTransformer202201306\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202201306\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
+if (!\class_exists(\ConfigTransformer202201306\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
     return;
 }
 /**
@@ -22,15 +22,15 @@ if (!\class_exists(\ConfigTransformer202201303\Symfony\Component\ExpressionLangu
  *
  * @see ExpressionLanguageProvider
  */
-class ExpressionLanguage extends \ConfigTransformer202201303\Symfony\Component\ExpressionLanguage\ExpressionLanguage
+class ExpressionLanguage extends \ConfigTransformer202201306\Symfony\Component\ExpressionLanguage\ExpressionLanguage
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(\ConfigTransformer202201303\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [], callable $serviceCompiler = null)
+    public function __construct(\ConfigTransformer202201306\Psr\Cache\CacheItemPoolInterface $cache = null, array $providers = [], callable $serviceCompiler = null)
     {
         // prepend the default provider to let users override it easily
-        \array_unshift($providers, new \ConfigTransformer202201303\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
+        \array_unshift($providers, new \ConfigTransformer202201306\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
         parent::__construct($cache, $providers);
     }
 }
