@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201274\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202201308\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202201274\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer202201308\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * This class builds an if expression.
  *
@@ -22,7 +22,7 @@ class ExprBuilder
     protected $node;
     public $ifPart;
     public $thenPart;
-    public function __construct(\ConfigTransformer202201274\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\ConfigTransformer202201308\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -84,8 +84,10 @@ class ExprBuilder
     }
     /**
      * Tests if the value is empty.
+     *
+     * @return $this
      */
-    public function ifEmpty() : self
+    public function ifEmpty()
     {
         $this->ifPart = function ($v) {
             return empty($v);
@@ -191,7 +193,7 @@ class ExprBuilder
     public function thenUnset()
     {
         $this->thenPart = function () {
-            throw new \ConfigTransformer202201274\Symfony\Component\Config\Definition\Exception\UnsetKeyException('Unsetting key.');
+            throw new \ConfigTransformer202201308\Symfony\Component\Config\Definition\Exception\UnsetKeyException('Unsetting key.');
         };
         return $this;
     }
