@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201317\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202201310\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202201317\PhpParser\Node;
-use ConfigTransformer202201317\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202201317\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class ClassMethodNodeNameResolver implements \ConfigTransformer202201317\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202201310\PhpParser\Node;
+use ConfigTransformer202201310\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202201310\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class ClassMethodNodeNameResolver implements \ConfigTransformer202201310\Symplify\Astral\Contract\NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer202201317\PhpParser\Node $node) : bool
+    public function match(\ConfigTransformer202201310\PhpParser\Node $node) : bool
     {
-        return $node instanceof \ConfigTransformer202201317\PhpParser\Node\Stmt\ClassMethod;
+        return $node instanceof \ConfigTransformer202201310\PhpParser\Node\Stmt\ClassMethod;
     }
     /**
      * @param ClassMethod $node
      */
-    public function resolve(\ConfigTransformer202201317\PhpParser\Node $node) : ?string
+    public function resolve(\ConfigTransformer202201310\PhpParser\Node $node) : ?string
     {
         return $node->name->toString();
     }
