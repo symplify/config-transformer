@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201311\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202201317\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when a definition cannot be autowired.
  */
-class AutowiringFailedException extends \ConfigTransformer202201311\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class AutowiringFailedException extends \ConfigTransformer202201317\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     /**
      * @var string
