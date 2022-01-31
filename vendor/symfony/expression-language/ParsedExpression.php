@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202201309\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202201311\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202201309\Symfony\Component\ExpressionLanguage\Node\Node;
+use ConfigTransformer202201311\Symfony\Component\ExpressionLanguage\Node\Node;
 /**
  * Represents an already parsed expression.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParsedExpression extends \ConfigTransformer202201309\Symfony\Component\ExpressionLanguage\Expression
+class ParsedExpression extends \ConfigTransformer202201311\Symfony\Component\ExpressionLanguage\Expression
 {
     private $nodes;
-    public function __construct(string $expression, \ConfigTransformer202201309\Symfony\Component\ExpressionLanguage\Node\Node $nodes)
+    public function __construct(string $expression, \ConfigTransformer202201311\Symfony\Component\ExpressionLanguage\Node\Node $nodes)
     {
         parent::__construct($expression);
         $this->nodes = $nodes;
