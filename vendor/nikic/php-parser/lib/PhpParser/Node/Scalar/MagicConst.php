@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202024\PhpParser\Node\Scalar;
+namespace ConfigTransformer202202022\PhpParser\Node\Scalar;
 
-use ConfigTransformer202202024\PhpParser\Node\Scalar;
-abstract class MagicConst extends \ConfigTransformer202202024\PhpParser\Node\Scalar
+use ConfigTransformer202202022\PhpParser\Node\Scalar;
+abstract class MagicConst extends \ConfigTransformer202202022\PhpParser\Node\Scalar
 {
     /**
      * Constructs a magic constant node.

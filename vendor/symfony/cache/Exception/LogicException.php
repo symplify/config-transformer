@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202024\Symfony\Component\Cache\Exception;
+namespace ConfigTransformer202202022\Symfony\Component\Cache\Exception;
 
-use ConfigTransformer202202024\Psr\Cache\CacheException as Psr6CacheInterface;
-use ConfigTransformer202202024\Psr\SimpleCache\CacheException as SimpleCacheInterface;
-if (\interface_exists(\ConfigTransformer202202024\Psr\SimpleCache\CacheException::class)) {
-    class LogicException extends \LogicException implements \ConfigTransformer202202024\Psr\Cache\CacheException, \ConfigTransformer202202024\Psr\SimpleCache\CacheException
+use ConfigTransformer202202022\Psr\Cache\CacheException as Psr6CacheInterface;
+use ConfigTransformer202202022\Psr\SimpleCache\CacheException as SimpleCacheInterface;
+if (\interface_exists(\ConfigTransformer202202022\Psr\SimpleCache\CacheException::class)) {
+    class LogicException extends \LogicException implements \ConfigTransformer202202022\Psr\Cache\CacheException, \ConfigTransformer202202022\Psr\SimpleCache\CacheException
     {
     }
 } else {
-    class LogicException extends \LogicException implements \ConfigTransformer202202024\Psr\Cache\CacheException
+    class LogicException extends \LogicException implements \ConfigTransformer202202022\Psr\Cache\CacheException
     {
     }
 }
