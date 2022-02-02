@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202201310\Symplify\PackageBuilder\Exception;
+namespace ConfigTransformer202202029\Symplify\PackageBuilder\Exception;
 
 use Exception;
 final class InvalidPrivatePropertyTypeException extends \Exception
