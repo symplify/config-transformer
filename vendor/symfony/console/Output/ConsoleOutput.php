@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202022\Symfony\Component\Console\Output;
+namespace ConfigTransformer202202029\Symfony\Component\Console\Output;
 
-use ConfigTransformer202202022\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202202029\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * ConsoleOutput is the default class for all CLI output. It uses STDOUT and STDERR.
  *
@@ -25,7 +25,7 @@ use ConfigTransformer202202022\Symfony\Component\Console\Formatter\OutputFormatt
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ConsoleOutput extends \ConfigTransformer202202022\Symfony\Component\Console\Output\StreamOutput implements \ConfigTransformer202202022\Symfony\Component\Console\Output\ConsoleOutputInterface
+class ConsoleOutput extends \ConfigTransformer202202029\Symfony\Component\Console\Output\StreamOutput implements \ConfigTransformer202202029\Symfony\Component\Console\Output\ConsoleOutputInterface
 {
     private $stderr;
     /**
@@ -37,16 +37,16 @@ class ConsoleOutput extends \ConfigTransformer202202022\Symfony\Component\Consol
      * @param bool|null                     $decorated Whether to decorate messages (null for auto-guessing)
      * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
      */
-    public function __construct(int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, \ConfigTransformer202202022\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
+    public function __construct(int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, \ConfigTransformer202202029\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
     {
         parent::__construct($this->openOutputStream(), $verbosity, $decorated, $formatter);
         if (null === $formatter) {
             // for BC reasons, stdErr has it own Formatter only when user don't inject a specific formatter.
-            $this->stderr = new \ConfigTransformer202202022\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated);
+            $this->stderr = new \ConfigTransformer202202029\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated);
             return;
         }
         $actualDecorated = $this->isDecorated();
-        $this->stderr = new \ConfigTransformer202202022\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated, $this->getFormatter());
+        $this->stderr = new \ConfigTransformer202202029\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated, $this->getFormatter());
         if (null === $decorated) {
             $this->setDecorated($actualDecorated && $this->stderr->isDecorated());
         }
@@ -54,9 +54,9 @@ class ConsoleOutput extends \ConfigTransformer202202022\Symfony\Component\Consol
     /**
      * Creates a new output section.
      */
-    public function section() : \ConfigTransformer202202022\Symfony\Component\Console\Output\ConsoleSectionOutput
+    public function section() : \ConfigTransformer202202029\Symfony\Component\Console\Output\ConsoleSectionOutput
     {
-        return new \ConfigTransformer202202022\Symfony\Component\Console\Output\ConsoleSectionOutput($this->getStream(), $this->consoleSectionOutputs, $this->getVerbosity(), $this->isDecorated(), $this->getFormatter());
+        return new \ConfigTransformer202202029\Symfony\Component\Console\Output\ConsoleSectionOutput($this->getStream(), $this->consoleSectionOutputs, $this->getVerbosity(), $this->isDecorated(), $this->getFormatter());
     }
     /**
      * {@inheritdoc}
@@ -69,7 +69,7 @@ class ConsoleOutput extends \ConfigTransformer202202022\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\ConfigTransformer202202022\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\ConfigTransformer202202029\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         parent::setFormatter($formatter);
         $this->stderr->setFormatter($formatter);
@@ -85,14 +85,14 @@ class ConsoleOutput extends \ConfigTransformer202202022\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function getErrorOutput() : \ConfigTransformer202202022\Symfony\Component\Console\Output\OutputInterface
+    public function getErrorOutput() : \ConfigTransformer202202029\Symfony\Component\Console\Output\OutputInterface
     {
         return $this->stderr;
     }
     /**
      * {@inheritdoc}
      */
-    public function setErrorOutput(\ConfigTransformer202202022\Symfony\Component\Console\Output\OutputInterface $error)
+    public function setErrorOutput(\ConfigTransformer202202029\Symfony\Component\Console\Output\OutputInterface $error)
     {
         $this->stderr = $error;
     }
