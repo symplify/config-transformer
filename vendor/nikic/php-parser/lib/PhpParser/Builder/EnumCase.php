@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202040\PhpParser\Builder;
+namespace ConfigTransformer202202044\PhpParser\Builder;
 
-use ConfigTransformer202202040\PhpParser;
-use ConfigTransformer202202040\PhpParser\BuilderHelpers;
-use ConfigTransformer202202040\PhpParser\Node;
-use ConfigTransformer202202040\PhpParser\Node\Identifier;
-use ConfigTransformer202202040\PhpParser\Node\Stmt;
-class EnumCase implements \ConfigTransformer202202040\PhpParser\Builder
+use ConfigTransformer202202044\PhpParser;
+use ConfigTransformer202202044\PhpParser\BuilderHelpers;
+use ConfigTransformer202202044\PhpParser\Node;
+use ConfigTransformer202202044\PhpParser\Node\Identifier;
+use ConfigTransformer202202044\PhpParser\Node\Stmt;
+class EnumCase implements \ConfigTransformer202202044\PhpParser\Builder
 {
     protected $name;
     protected $value = null;
@@ -33,7 +33,7 @@ class EnumCase implements \ConfigTransformer202202040\PhpParser\Builder
      */
     public function setValue($value)
     {
-        $this->value = \ConfigTransformer202202040\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->value = \ConfigTransformer202202044\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -45,7 +45,7 @@ class EnumCase implements \ConfigTransformer202202040\PhpParser\Builder
      */
     public function setDocComment($docComment)
     {
-        $this->attributes = ['comments' => [\ConfigTransformer202202040\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
+        $this->attributes = ['comments' => [\ConfigTransformer202202044\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
         return $this;
     }
     /**
@@ -57,7 +57,7 @@ class EnumCase implements \ConfigTransformer202202040\PhpParser\Builder
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202202040\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202202044\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -65,8 +65,8 @@ class EnumCase implements \ConfigTransformer202202040\PhpParser\Builder
      *
      * @return Stmt\EnumCase The built constant node
      */
-    public function getNode() : \ConfigTransformer202202040\PhpParser\Node
+    public function getNode() : \ConfigTransformer202202044\PhpParser\Node
     {
-        return new \ConfigTransformer202202040\PhpParser\Node\Stmt\EnumCase($this->name, $this->value, $this->attributes, $this->attributeGroups);
+        return new \ConfigTransformer202202044\PhpParser\Node\Stmt\EnumCase($this->name, $this->value, $this->attributes, $this->attributeGroups);
     }
 }
