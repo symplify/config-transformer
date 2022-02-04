@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202029\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202202040\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202202029\Symfony\Component\Config\Definition\IntegerNode;
+use ConfigTransformer202202040\Symfony\Component\Config\Definition\IntegerNode;
 /**
  * This class provides a fluent interface for defining an integer node.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class IntegerNodeDefinition extends \ConfigTransformer202202029\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
+class IntegerNodeDefinition extends \ConfigTransformer202202040\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
 {
     /**
      * Instantiates a Node.
      */
-    protected function instantiateNode() : \ConfigTransformer202202029\Symfony\Component\Config\Definition\ScalarNode
+    protected function instantiateNode() : \ConfigTransformer202202040\Symfony\Component\Config\Definition\ScalarNode
     {
-        return new \ConfigTransformer202202029\Symfony\Component\Config\Definition\IntegerNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
+        return new \ConfigTransformer202202040\Symfony\Component\Config\Definition\IntegerNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
     }
 }
