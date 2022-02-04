@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202044\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer202202043\Symplify\PhpConfigPrinter\ValueObject;
 
 /**
  * @enum
