@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202043\Symplify\EasyTesting\Finder;
+namespace ConfigTransformer202202050\Symplify\EasyTesting\Finder;
 
-use ConfigTransformer202202043\Symfony\Component\Finder\Finder;
-use ConfigTransformer202202043\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer202202043\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202202050\Symfony\Component\Finder\Finder;
+use ConfigTransformer202202050\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer202202050\Symplify\SmartFileSystem\SmartFileInfo;
 final class FixtureFinder
 {
     /**
      * @var \Symplify\SmartFileSystem\Finder\FinderSanitizer
      */
     private $finderSanitizer;
-    public function __construct(\ConfigTransformer202202043\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer)
+    public function __construct(\ConfigTransformer202202050\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer)
     {
         $this->finderSanitizer = $finderSanitizer;
     }
@@ -21,7 +21,7 @@ final class FixtureFinder
      */
     public function find(array $sources) : array
     {
-        $finder = new \ConfigTransformer202202043\Symfony\Component\Finder\Finder();
+        $finder = new \ConfigTransformer202202050\Symfony\Component\Finder\Finder();
         $finder->files()->in($sources)->name('*.php.inc')->path('Fixture')->sortByName();
         return $this->finderSanitizer->sanitize($finder);
     }
