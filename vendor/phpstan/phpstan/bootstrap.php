@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202050\PHPStan;
+namespace ConfigTransformer2022020510\PHPStan;
 
-use ConfigTransformer202202050\Composer\Autoload\ClassLoader;
+use ConfigTransformer2022020510\Composer\Autoload\ClassLoader;
 final class PharAutoloader
 {
     /** @var ClassLoader */
@@ -49,4 +49,4 @@ final class PharAutoloader
         require $filepath;
     }
 }
-\spl_autoload_register([\ConfigTransformer202202050\PHPStan\PharAutoloader::class, 'loadClass']);
+\spl_autoload_register([\ConfigTransformer2022020510\PHPStan\PharAutoloader::class, 'loadClass']);

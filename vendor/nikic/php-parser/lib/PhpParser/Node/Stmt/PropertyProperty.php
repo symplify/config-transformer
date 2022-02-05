@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202050\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022020510\PhpParser\Node\Stmt;
 
-use ConfigTransformer202202050\PhpParser\Node;
-class PropertyProperty extends \ConfigTransformer202202050\PhpParser\Node\Stmt
+use ConfigTransformer2022020510\PhpParser\Node;
+class PropertyProperty extends \ConfigTransformer2022020510\PhpParser\Node\Stmt
 {
     /** @var Node\VarLikeIdentifier Name */
     public $name;
@@ -17,10 +17,10 @@ class PropertyProperty extends \ConfigTransformer202202050\PhpParser\Node\Stmt
      * @param null|Node\Expr                $default    Default value
      * @param array                         $attributes Additional attributes
      */
-    public function __construct($name, \ConfigTransformer202202050\PhpParser\Node\Expr $default = null, array $attributes = [])
+    public function __construct($name, \ConfigTransformer2022020510\PhpParser\Node\Expr $default = null, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer202202050\PhpParser\Node\VarLikeIdentifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer2022020510\PhpParser\Node\VarLikeIdentifier($name) : $name;
         $this->default = $default;
     }
     public function getSubNodeNames() : array

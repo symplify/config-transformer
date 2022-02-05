@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202050\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait ShareTrait
 {
