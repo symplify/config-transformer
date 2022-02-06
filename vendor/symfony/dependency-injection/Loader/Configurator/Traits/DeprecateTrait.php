@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202202064\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202202064\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DeprecateTrait
 {
     /**

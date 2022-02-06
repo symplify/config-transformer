@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022020510\Symfony\Component\Config\Loader;
+namespace ConfigTransformer202202064\Symfony\Component\Config\Loader;
 
-use ConfigTransformer2022020510\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer202202064\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Loader implements \ConfigTransformer2022020510\Symfony\Component\Config\Loader\LoaderInterface
+abstract class Loader implements \ConfigTransformer202202064\Symfony\Component\Config\Loader\LoaderInterface
 {
     protected $resolver;
     protected $env;
@@ -27,14 +27,14 @@ abstract class Loader implements \ConfigTransformer2022020510\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function getResolver() : \ConfigTransformer2022020510\Symfony\Component\Config\Loader\LoaderResolverInterface
+    public function getResolver() : \ConfigTransformer202202064\Symfony\Component\Config\Loader\LoaderResolverInterface
     {
         return $this->resolver;
     }
     /**
      * {@inheritdoc}
      */
-    public function setResolver(\ConfigTransformer2022020510\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
+    public function setResolver(\ConfigTransformer202202064\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
     {
         $this->resolver = $resolver;
     }
@@ -55,14 +55,14 @@ abstract class Loader implements \ConfigTransformer2022020510\Symfony\Component\
      * @throws LoaderLoadException If no loader is found
      * @param mixed $resource
      */
-    public function resolve($resource, string $type = null) : \ConfigTransformer2022020510\Symfony\Component\Config\Loader\LoaderInterface
+    public function resolve($resource, string $type = null) : \ConfigTransformer202202064\Symfony\Component\Config\Loader\LoaderInterface
     {
         if ($this->supports($resource, $type)) {
             return $this;
         }
         $loader = null === $this->resolver ? \false : $this->resolver->resolve($resource, $type);
         if (\false === $loader) {
-            throw new \ConfigTransformer2022020510\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
+            throw new \ConfigTransformer202202064\Symfony\Component\Config\Exception\LoaderLoadException($resource, null, 0, null, $type);
         }
         return $loader;
     }

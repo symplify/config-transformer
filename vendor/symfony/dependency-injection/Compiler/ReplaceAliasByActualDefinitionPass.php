@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202202064\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022020510\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202202064\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202202064\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202202064\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202202064\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer202202064\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * @var mixed[]
@@ -31,7 +31,7 @@ class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer2022020510\Sy
      *
      * @throws InvalidArgumentException if the service definition does not exist
      */
-    public function process(\ConfigTransformer2022020510\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202202064\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         // First collect all alias targets that need to be replaced
         $seenAliasTargets = [];
@@ -57,9 +57,9 @@ class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer2022020510\Sy
             $seenAliasTargets[$targetId] = \true;
             try {
                 $definition = $container->getDefinition($targetId);
-            } catch (\ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
+            } catch (\ConfigTransformer202202064\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
                 if ('' !== $e->getId() && '@' === $e->getId()[0]) {
-                    throw new \ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
+                    throw new \ConfigTransformer202202064\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
                 }
                 throw $e;
             }
@@ -86,10 +86,10 @@ class ReplaceAliasByActualDefinitionPass extends \ConfigTransformer2022020510\Sy
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
+        if ($value instanceof \ConfigTransformer202202064\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
             // Perform the replacement
             $newId = $this->replacements[$referenceId];
-            $value = new \ConfigTransformer2022020510\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
+            $value = new \ConfigTransformer202202064\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
             $this->container->log($this, \sprintf('Changed reference of service "%s" previously pointing to "%s" to "%s".', $this->currentId, $referenceId, $newId));
         }
         return parent::processValue($value, $isRoot);

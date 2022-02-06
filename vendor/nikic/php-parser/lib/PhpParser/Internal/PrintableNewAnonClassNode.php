@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022020510\PhpParser\Internal;
+namespace ConfigTransformer202202064\PhpParser\Internal;
 
-use ConfigTransformer2022020510\PhpParser\Node;
-use ConfigTransformer2022020510\PhpParser\Node\Expr;
+use ConfigTransformer202202064\PhpParser\Node;
+use ConfigTransformer202202064\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *
@@ -15,7 +15,7 @@ use ConfigTransformer2022020510\PhpParser\Node\Expr;
  *
  * @internal
  */
-class PrintableNewAnonClassNode extends \ConfigTransformer2022020510\PhpParser\Node\Expr
+class PrintableNewAnonClassNode extends \ConfigTransformer202202064\PhpParser\Node\Expr
 {
     /** @var Node\AttributeGroup[] PHP attribute groups */
     public $attrGroups;
@@ -27,7 +27,7 @@ class PrintableNewAnonClassNode extends \ConfigTransformer2022020510\PhpParser\N
     public $implements;
     /** @var Node\Stmt[] Statements */
     public $stmts;
-    public function __construct(array $attrGroups, array $args, \ConfigTransformer2022020510\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
+    public function __construct(array $attrGroups, array $args, \ConfigTransformer202202064\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
     {
         parent::__construct($attributes);
         $this->attrGroups = $attrGroups;
@@ -36,10 +36,10 @@ class PrintableNewAnonClassNode extends \ConfigTransformer2022020510\PhpParser\N
         $this->implements = $implements;
         $this->stmts = $stmts;
     }
-    public static function fromNewNode(\ConfigTransformer2022020510\PhpParser\Node\Expr\New_ $newNode)
+    public static function fromNewNode(\ConfigTransformer202202064\PhpParser\Node\Expr\New_ $newNode)
     {
         $class = $newNode->class;
-        \assert($class instanceof \ConfigTransformer2022020510\PhpParser\Node\Stmt\Class_);
+        \assert($class instanceof \ConfigTransformer202202064\PhpParser\Node\Stmt\Class_);
         // We don't assert that $class->name is null here, to allow consumers to assign unique names
         // to anonymous classes for their own purposes. We simplify ignore the name here.
         return new self($class->attrGroups, $newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());

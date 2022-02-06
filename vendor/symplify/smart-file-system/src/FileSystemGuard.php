@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022020510\Symplify\SmartFileSystem;
+namespace ConfigTransformer202202064\Symplify\SmartFileSystem;
 
-use ConfigTransformer2022020510\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
-use ConfigTransformer2022020510\Symplify\SmartFileSystem\Exception\FileNotFoundException;
+use ConfigTransformer202202064\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
+use ConfigTransformer202202064\Symplify\SmartFileSystem\Exception\FileNotFoundException;
 final class FileSystemGuard
 {
     public function ensureFileExists(string $file, string $location) : void
@@ -12,7 +12,7 @@ final class FileSystemGuard
         if (\file_exists($file)) {
             return;
         }
-        throw new \ConfigTransformer2022020510\Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File "%s" not found in "%s".', $file, $location));
+        throw new \ConfigTransformer202202064\Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File "%s" not found in "%s".', $file, $location));
     }
     public function ensureDirectoryExists(string $directory, string $extraMessage) : void
     {
@@ -23,6 +23,6 @@ final class FileSystemGuard
         if ($extraMessage !== '') {
             $message .= ' ' . $extraMessage;
         }
-        throw new \ConfigTransformer2022020510\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException($message);
+        throw new \ConfigTransformer202202064\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException($message);
     }
 }
