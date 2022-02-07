@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202064\PhpParser\Node;
+namespace ConfigTransformer202202076\PhpParser\Node;
 
-use ConfigTransformer202202064\PhpParser\Node;
-interface FunctionLike extends \ConfigTransformer202202064\PhpParser\Node
+use ConfigTransformer202202076\PhpParser\Node;
+interface FunctionLike extends \ConfigTransformer202202076\PhpParser\Node
 {
     /**
      * Whether to return by reference

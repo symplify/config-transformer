@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202202064\Psr\Log;
+namespace ConfigTransformer202202076\Psr\Log;
 
 /**
  * Describes a logger-aware instance.
@@ -14,5 +14,5 @@ interface LoggerAwareInterface
      *
      * @return void
      */
-    public function setLogger(\ConfigTransformer202202064\Psr\Log\LoggerInterface $logger) : void;
+    public function setLogger(\ConfigTransformer202202076\Psr\Log\LoggerInterface $logger) : void;
 }

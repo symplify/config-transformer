@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202202064;
+namespace ConfigTransformer202202076;
 
 require __DIR__ . '/phpyLang.php';
 $grammarFileToName = [__DIR__ . '/php5.y' => 'Php5', __DIR__ . '/php7.y' => 'Php7'];
@@ -27,18 +27,18 @@ foreach ($grammarFileToName as $grammarFile => $name) {
     echo "Building temporary {$name} grammar file.\n";
     $grammarCode = \file_get_contents($grammarFile);
     $grammarCode = \str_replace('%tokens', $tokens, $grammarCode);
-    $grammarCode = \ConfigTransformer202202064\preprocessGrammar($grammarCode);
+    $grammarCode = \ConfigTransformer202202076\preprocessGrammar($grammarCode);
     \file_put_contents($tmpGrammarFile, $grammarCode);
     $additionalArgs = $optionDebug ? '-t -v' : '';
     echo "Building {$name} parser.\n";
-    $output = \ConfigTransformer202202064\execCmd("{$kmyacc} {$additionalArgs} -m {$skeletonFile} -p {$name} {$tmpGrammarFile}");
+    $output = \ConfigTransformer202202076\execCmd("{$kmyacc} {$additionalArgs} -m {$skeletonFile} -p {$name} {$tmpGrammarFile}");
     $resultCode = \file_get_contents($tmpResultFile);
-    $resultCode = \ConfigTransformer202202064\removeTrailingWhitespace($resultCode);
-    \ConfigTransformer202202064\ensureDirExists($resultDir);
+    $resultCode = \ConfigTransformer202202076\removeTrailingWhitespace($resultCode);
+    \ConfigTransformer202202076\ensureDirExists($resultDir);
     \file_put_contents("{$resultDir}/{$name}.php", $resultCode);
     \unlink($tmpResultFile);
     echo "Building token definition.\n";
-    $output = \ConfigTransformer202202064\execCmd("{$kmyacc} -m {$tokensTemplate} {$tmpGrammarFile}");
+    $output = \ConfigTransformer202202076\execCmd("{$kmyacc} -m {$tokensTemplate} {$tmpGrammarFile}");
     \rename($tmpResultFile, $tokensResultsFile);
     if (!$optionKeepTmpGrammar) {
         \unlink($tmpGrammarFile);
