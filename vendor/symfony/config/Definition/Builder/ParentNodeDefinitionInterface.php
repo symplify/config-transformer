@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202076\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202202112\Symfony\Component\Config\Definition\Builder;
 
 /**
  * An interface that must be implemented by nodes which can have children.
  *
  * @author Victor Berchet <victor@suumit.com>
  */
-interface ParentNodeDefinitionInterface extends \ConfigTransformer202202076\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface
+interface ParentNodeDefinitionInterface extends \ConfigTransformer202202112\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface
 {
     /**
      * Returns a builder to add children nodes.
      */
-    public function children() : \ConfigTransformer202202076\Symfony\Component\Config\Definition\Builder\NodeBuilder;
+    public function children() : \ConfigTransformer202202112\Symfony\Component\Config\Definition\Builder\NodeBuilder;
     /**
      * Appends a node definition.
      *
@@ -36,7 +36,7 @@ interface ParentNodeDefinitionInterface extends \ConfigTransformer202202076\Symf
      *
      * @return $this
      */
-    public function append(\ConfigTransformer202202076\Symfony\Component\Config\Definition\Builder\NodeDefinition $node);
+    public function append(\ConfigTransformer202202112\Symfony\Component\Config\Definition\Builder\NodeDefinition $node);
     /**
      * Gets the child node definitions.
      *

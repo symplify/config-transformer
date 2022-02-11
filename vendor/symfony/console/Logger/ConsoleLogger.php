@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202076\Symfony\Component\Console\Logger;
+namespace ConfigTransformer202202112\Symfony\Component\Console\Logger;
 
-use ConfigTransformer202202076\Psr\Log\AbstractLogger;
-use ConfigTransformer202202076\Psr\Log\InvalidArgumentException;
-use ConfigTransformer202202076\Psr\Log\LogLevel;
-use ConfigTransformer202202076\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202202112\Psr\Log\AbstractLogger;
+use ConfigTransformer202202112\Psr\Log\InvalidArgumentException;
+use ConfigTransformer202202112\Psr\Log\LogLevel;
+use ConfigTransformer202202112\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  *
@@ -22,7 +22,7 @@ use ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface;
  *
  * @see https://www.php-fig.org/psr/psr-3/
  */
-class ConsoleLogger extends \ConfigTransformer202202076\Psr\Log\AbstractLogger
+class ConsoleLogger extends \ConfigTransformer202202112\Psr\Log\AbstractLogger
 {
     public const INFO = 'info';
     public const ERROR = 'error';
@@ -30,16 +30,16 @@ class ConsoleLogger extends \ConfigTransformer202202076\Psr\Log\AbstractLogger
     /**
      * @var mixed[]
      */
-    private $verbosityLevelMap = [\ConfigTransformer202202076\Psr\Log\LogLevel::EMERGENCY => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202076\Psr\Log\LogLevel::ALERT => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202076\Psr\Log\LogLevel::CRITICAL => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202076\Psr\Log\LogLevel::ERROR => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202076\Psr\Log\LogLevel::WARNING => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202076\Psr\Log\LogLevel::NOTICE => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \ConfigTransformer202202076\Psr\Log\LogLevel::INFO => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \ConfigTransformer202202076\Psr\Log\LogLevel::DEBUG => \ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
+    private $verbosityLevelMap = [\ConfigTransformer202202112\Psr\Log\LogLevel::EMERGENCY => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202112\Psr\Log\LogLevel::ALERT => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202112\Psr\Log\LogLevel::CRITICAL => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202112\Psr\Log\LogLevel::ERROR => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202112\Psr\Log\LogLevel::WARNING => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \ConfigTransformer202202112\Psr\Log\LogLevel::NOTICE => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \ConfigTransformer202202112\Psr\Log\LogLevel::INFO => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \ConfigTransformer202202112\Psr\Log\LogLevel::DEBUG => \ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
     /**
      * @var mixed[]
      */
-    private $formatLevelMap = [\ConfigTransformer202202076\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \ConfigTransformer202202076\Psr\Log\LogLevel::ALERT => self::ERROR, \ConfigTransformer202202076\Psr\Log\LogLevel::CRITICAL => self::ERROR, \ConfigTransformer202202076\Psr\Log\LogLevel::ERROR => self::ERROR, \ConfigTransformer202202076\Psr\Log\LogLevel::WARNING => self::INFO, \ConfigTransformer202202076\Psr\Log\LogLevel::NOTICE => self::INFO, \ConfigTransformer202202076\Psr\Log\LogLevel::INFO => self::INFO, \ConfigTransformer202202076\Psr\Log\LogLevel::DEBUG => self::INFO];
+    private $formatLevelMap = [\ConfigTransformer202202112\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \ConfigTransformer202202112\Psr\Log\LogLevel::ALERT => self::ERROR, \ConfigTransformer202202112\Psr\Log\LogLevel::CRITICAL => self::ERROR, \ConfigTransformer202202112\Psr\Log\LogLevel::ERROR => self::ERROR, \ConfigTransformer202202112\Psr\Log\LogLevel::WARNING => self::INFO, \ConfigTransformer202202112\Psr\Log\LogLevel::NOTICE => self::INFO, \ConfigTransformer202202112\Psr\Log\LogLevel::INFO => self::INFO, \ConfigTransformer202202112\Psr\Log\LogLevel::DEBUG => self::INFO];
     /**
      * @var bool
      */
     private $errored = \false;
-    public function __construct(\ConfigTransformer202202076\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
+    public function __construct(\ConfigTransformer202202112\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
     {
         $this->output = $output;
         $this->verbosityLevelMap = $verbosityLevelMap + $this->verbosityLevelMap;
@@ -51,12 +51,12 @@ class ConsoleLogger extends \ConfigTransformer202202076\Psr\Log\AbstractLogger
     public function log($level, $message, array $context = []) : void
     {
         if (!isset($this->verbosityLevelMap[$level])) {
-            throw new \ConfigTransformer202202076\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
+            throw new \ConfigTransformer202202112\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
         }
         $output = $this->output;
         // Write to the error output if necessary and available
         if (self::ERROR === $this->formatLevelMap[$level]) {
-            if ($this->output instanceof \ConfigTransformer202202076\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+            if ($this->output instanceof \ConfigTransformer202202112\Symfony\Component\Console\Output\ConsoleOutputInterface) {
                 $output = $output->getErrorOutput();
             }
             $this->errored = \true;
