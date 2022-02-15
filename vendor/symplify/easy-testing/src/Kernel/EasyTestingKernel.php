@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202134\Symplify\EasyTesting\Kernel;
+namespace ConfigTransformer202202152\Symplify\EasyTesting\Kernel;
 
-use ConfigTransformer202202134\Psr\Container\ContainerInterface;
-use ConfigTransformer202202134\Symplify\EasyTesting\ValueObject\EasyTestingConfig;
-use ConfigTransformer202202134\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class EasyTestingKernel extends \ConfigTransformer202202134\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+use ConfigTransformer202202152\Psr\Container\ContainerInterface;
+use ConfigTransformer202202152\Symplify\EasyTesting\ValueObject\EasyTestingConfig;
+use ConfigTransformer202202152\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+final class EasyTestingKernel extends \ConfigTransformer202202152\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
     /**
      * @param string[] $configFiles
      */
-    public function createFromConfigs(array $configFiles) : \ConfigTransformer202202134\Psr\Container\ContainerInterface
+    public function createFromConfigs(array $configFiles) : \ConfigTransformer202202152\Psr\Container\ContainerInterface
     {
-        $configFiles[] = \ConfigTransformer202202134\Symplify\EasyTesting\ValueObject\EasyTestingConfig::FILE_PATH;
+        $configFiles[] = \ConfigTransformer202202152\Symplify\EasyTesting\ValueObject\EasyTestingConfig::FILE_PATH;
         return $this->create($configFiles);
     }
 }
