@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202152\Symplify\SymplifyKernel\DependencyInjection;
+namespace ConfigTransformer202202162\Symplify\SymplifyKernel\DependencyInjection;
 
-use ConfigTransformer202202152\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
-use ConfigTransformer202202152\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202202162\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
+use ConfigTransformer202202162\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Mimics @see \Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass without dependency on
  * symfony/http-kernel
  */
-final class LoadExtensionConfigsCompilerPass extends \ConfigTransformer202202152\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+final class LoadExtensionConfigsCompilerPass extends \ConfigTransformer202202162\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
 {
-    public function process(\ConfigTransformer202202152\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\ConfigTransformer202202162\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $extensionNames = \array_keys($containerBuilder->getExtensions());
         foreach ($extensionNames as $extensionName) {
