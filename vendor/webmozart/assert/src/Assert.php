@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202191\Webmozart\Assert;
+namespace ConfigTransformer202202199\Webmozart\Assert;
 
 use ArrayAccess;
 use BadMethodCallException;
@@ -1588,7 +1588,7 @@ class Assert
      */
     protected static function reportInvalidArgument($message)
     {
-        throw new \ConfigTransformer202202191\Webmozart\Assert\InvalidArgumentException($message);
+        throw new \ConfigTransformer202202199\Webmozart\Assert\InvalidArgumentException($message);
     }
     private function __construct()
     {

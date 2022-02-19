@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202202191\\Symplify\\EasyTesting\\": "src"
+            "ConfigTransformer202202199\\Symplify\\EasyTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202202191\\Symplify\\EasyTesting\\Tests\\": "tests"
+            "ConfigTransformer202202199\\Symplify\\EasyTesting\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -43,7 +43,6 @@
         "symplify\/symfony-php-config": "<10.0.24",
         "symplify\/simple-php-doc-parser": "<10.0.24",
         "symplify\/php-config-printer": "<10.0.24",
-        "symplify\/console-color-diff": "<10.0.24",
         "symplify\/autowire-array-parameter": "<10.0.24",
         "symplify\/markdown-diff": "<10.0.24",
         "symplify\/amnesia": "<10.0.24",
