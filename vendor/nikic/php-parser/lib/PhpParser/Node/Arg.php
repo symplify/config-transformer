@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202199\PhpParser\Node;
+namespace ConfigTransformer202202194\PhpParser\Node;
 
-use ConfigTransformer202202199\PhpParser\Node\VariadicPlaceholder;
-use ConfigTransformer202202199\PhpParser\NodeAbstract;
-class Arg extends \ConfigTransformer202202199\PhpParser\NodeAbstract
+use ConfigTransformer202202194\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer202202194\PhpParser\NodeAbstract;
+class Arg extends \ConfigTransformer202202194\PhpParser\NodeAbstract
 {
     /** @var Identifier|null Parameter name (for named parameters) */
     public $name;
@@ -24,7 +24,7 @@ class Arg extends \ConfigTransformer202202199\PhpParser\NodeAbstract
      * @param array $attributes Additional attributes
      * @param Identifier|null $name Parameter name (for named parameters)
      */
-    public function __construct(\ConfigTransformer202202199\PhpParser\Node\Expr $value, bool $byRef = \false, bool $unpack = \false, array $attributes = [], \ConfigTransformer202202199\PhpParser\Node\Identifier $name = null)
+    public function __construct(\ConfigTransformer202202194\PhpParser\Node\Expr $value, bool $byRef = \false, bool $unpack = \false, array $attributes = [], \ConfigTransformer202202194\PhpParser\Node\Identifier $name = null)
     {
         $this->attributes = $attributes;
         $this->name = $name;
