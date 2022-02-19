@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202199\Symplify\PhpConfigPrinter\Reflection;
+namespace ConfigTransformer202202198\Symplify\PhpConfigPrinter\Reflection;
 
 use ReflectionClass;
 final class ConstantNameFromValueResolver

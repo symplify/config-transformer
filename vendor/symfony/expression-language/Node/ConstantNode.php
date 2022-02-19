@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202199\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202202198\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202202199\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202202198\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ConstantNode extends \ConfigTransformer202202199\Symfony\Component\ExpressionLanguage\Node\Node
+class ConstantNode extends \ConfigTransformer202202198\Symfony\Component\ExpressionLanguage\Node\Node
 {
     /**
      * @var bool
@@ -30,7 +30,7 @@ class ConstantNode extends \ConfigTransformer202202199\Symfony\Component\Express
         $this->isIdentifier = $isIdentifier;
         parent::__construct([], ['value' => $value]);
     }
-    public function compile(\ConfigTransformer202202199\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer202202198\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $compiler->repr($this->attributes['value']);
     }
