@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202209\Symplify\EasyTesting\Command;
+namespace ConfigTransformer202202207\Symplify\EasyTesting\Command;
 
-use ConfigTransformer202202209\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202202209\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202202209\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202202209\Symplify\EasyTesting\Finder\FixtureFinder;
-use ConfigTransformer202202209\Symplify\EasyTesting\MissplacedSkipPrefixResolver;
-use ConfigTransformer202202209\Symplify\EasyTesting\ValueObject\Option;
-use ConfigTransformer202202209\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-final class ValidateFixtureSkipNamingCommand extends \ConfigTransformer202202209\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+use ConfigTransformer202202207\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202202207\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202202207\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202202207\Symplify\EasyTesting\Finder\FixtureFinder;
+use ConfigTransformer202202207\Symplify\EasyTesting\MissplacedSkipPrefixResolver;
+use ConfigTransformer202202207\Symplify\EasyTesting\ValueObject\Option;
+use ConfigTransformer202202207\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+final class ValidateFixtureSkipNamingCommand extends \ConfigTransformer202202207\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     /**
      * @var \Symplify\EasyTesting\MissplacedSkipPrefixResolver
@@ -20,7 +20,7 @@ final class ValidateFixtureSkipNamingCommand extends \ConfigTransformer202202209
      * @var \Symplify\EasyTesting\Finder\FixtureFinder
      */
     private $fixtureFinder;
-    public function __construct(\ConfigTransformer202202209\Symplify\EasyTesting\MissplacedSkipPrefixResolver $missplacedSkipPrefixResolver, \ConfigTransformer202202209\Symplify\EasyTesting\Finder\FixtureFinder $fixtureFinder)
+    public function __construct(\ConfigTransformer202202207\Symplify\EasyTesting\MissplacedSkipPrefixResolver $missplacedSkipPrefixResolver, \ConfigTransformer202202207\Symplify\EasyTesting\Finder\FixtureFinder $fixtureFinder)
     {
         $this->missplacedSkipPrefixResolver = $missplacedSkipPrefixResolver;
         $this->fixtureFinder = $fixtureFinder;
@@ -29,12 +29,12 @@ final class ValidateFixtureSkipNamingCommand extends \ConfigTransformer202202209
     protected function configure() : void
     {
         $this->setName('validate-fixture-skip-naming');
-        $this->addArgument(\ConfigTransformer202202209\Symplify\EasyTesting\ValueObject\Option::SOURCE, \ConfigTransformer202202209\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202202209\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Paths to analyse');
+        $this->addArgument(\ConfigTransformer202202207\Symplify\EasyTesting\ValueObject\Option::SOURCE, \ConfigTransformer202202207\Symfony\Component\Console\Input\InputArgument::REQUIRED | \ConfigTransformer202202207\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Paths to analyse');
         $this->setDescription('Check that skipped fixture files (without `-----` separator) have a "skip" prefix');
     }
-    protected function execute(\ConfigTransformer202202209\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202202209\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\ConfigTransformer202202207\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202202207\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
-        $source = (array) $input->getArgument(\ConfigTransformer202202209\Symplify\EasyTesting\ValueObject\Option::SOURCE);
+        $source = (array) $input->getArgument(\ConfigTransformer202202207\Symplify\EasyTesting\ValueObject\Option::SOURCE);
         $fixtureFileInfos = $this->fixtureFinder->find($source);
         $missplacedFixtureFileInfos = $this->missplacedSkipPrefixResolver->resolve($fixtureFileInfos);
         if ($missplacedFixtureFileInfos === []) {
