@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202207\Symplify\PackageBuilder\Matcher;
+namespace ConfigTransformer202202209\Symplify\PackageBuilder\Matcher;
 
 /**
  * @api
