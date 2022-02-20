@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202204\Symfony\Polyfill\Php81;
+namespace ConfigTransformer202202203\Symfony\Polyfill\Php81;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
