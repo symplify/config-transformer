@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202209\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202202203\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202202209\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202202203\Psr\Cache\InvalidArgumentException;
 /**
  * Interface for invalidating cached items using tags.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TagAwareAdapterInterface extends \ConfigTransformer202202209\Symfony\Component\Cache\Adapter\AdapterInterface
+interface TagAwareAdapterInterface extends \ConfigTransformer202202203\Symfony\Component\Cache\Adapter\AdapterInterface
 {
     /**
      * Invalidates cached items using tags.
