@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202203\SebastianBergmann\Diff;
+namespace ConfigTransformer202202201\SebastianBergmann\Diff;
 
 final class Line
 {

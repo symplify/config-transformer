@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202203\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202202201\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * @internal
