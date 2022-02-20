@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202203\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202202206\Symfony\Component\Console\Completion;
 
-use ConfigTransformer202202203\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202202203\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202202203\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202202203\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202202206\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202202206\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202202206\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202202206\Symfony\Component\Console\Input\InputOption;
 /**
  * An input specialized for shell completion.
  *
@@ -22,7 +22,7 @@ use ConfigTransformer202202203\Symfony\Component\Console\Input\InputOption;
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class CompletionInput extends \ConfigTransformer202202203\Symfony\Component\Console\Input\ArgvInput
+final class CompletionInput extends \ConfigTransformer202202206\Symfony\Component\Console\Input\ArgvInput
 {
     public const TYPE_ARGUMENT_VALUE = 'argument_value';
     public const TYPE_OPTION_VALUE = 'option_value';
@@ -59,7 +59,7 @@ final class CompletionInput extends \ConfigTransformer202202203\Symfony\Componen
     /**
      * {@inheritdoc}
      */
-    public function bind(\ConfigTransformer202202203\Symfony\Component\Console\Input\InputDefinition $definition) : void
+    public function bind(\ConfigTransformer202202206\Symfony\Component\Console\Input\InputDefinition $definition) : void
     {
         parent::bind($definition);
         $relevantToken = $this->getRelevantToken();
@@ -159,12 +159,12 @@ final class CompletionInput extends \ConfigTransformer202202203\Symfony\Componen
     {
         try {
             return parent::parseToken($token, $parseOptions);
-        } catch (\ConfigTransformer202202203\Symfony\Component\Console\Exception\RuntimeException $e) {
+        } catch (\ConfigTransformer202202206\Symfony\Component\Console\Exception\RuntimeException $e) {
             // suppress errors, completed input is almost never valid
         }
         return $parseOptions;
     }
-    private function getOptionFromToken(string $optionToken) : ?\ConfigTransformer202202203\Symfony\Component\Console\Input\InputOption
+    private function getOptionFromToken(string $optionToken) : ?\ConfigTransformer202202206\Symfony\Component\Console\Input\InputOption
     {
         $optionName = \ltrim($optionToken, '-');
         if (!$optionName) {
