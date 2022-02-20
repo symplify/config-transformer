@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202202\SebastianBergmann\Diff;
+namespace ConfigTransformer202202200\SebastianBergmann\Diff;
 
 interface LongestCommonSubsequenceCalculator
 {
