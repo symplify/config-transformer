@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202199\Symplify\Astral\NodeVisitor;
+namespace ConfigTransformer202202204\Symplify\Astral\NodeVisitor;
 
-use ConfigTransformer202202199\PhpParser\Node;
-use ConfigTransformer202202199\PhpParser\Node\Expr;
-use ConfigTransformer202202199\PhpParser\Node\Stmt;
-use ConfigTransformer202202199\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202202199\PhpParser\NodeVisitorAbstract;
-final class CallableNodeVisitor extends \ConfigTransformer202202199\PhpParser\NodeVisitorAbstract
+use ConfigTransformer202202204\PhpParser\Node;
+use ConfigTransformer202202204\PhpParser\Node\Expr;
+use ConfigTransformer202202204\PhpParser\Node\Stmt;
+use ConfigTransformer202202204\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202202204\PhpParser\NodeVisitorAbstract;
+final class CallableNodeVisitor extends \ConfigTransformer202202204\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var callable(Node): (int|Node|null)
@@ -24,14 +24,14 @@ final class CallableNodeVisitor extends \ConfigTransformer202202199\PhpParser\No
     /**
      * @return int|Node|null
      */
-    public function enterNode(\ConfigTransformer202202199\PhpParser\Node $node)
+    public function enterNode(\ConfigTransformer202202204\PhpParser\Node $node)
     {
         $originalNode = $node;
         $callable = $this->callable;
         /** @var int|Node|null $newNode */
         $newNode = $callable($node);
-        if ($originalNode instanceof \ConfigTransformer202202199\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer202202199\PhpParser\Node\Expr) {
-            return new \ConfigTransformer202202199\PhpParser\Node\Stmt\Expression($newNode);
+        if ($originalNode instanceof \ConfigTransformer202202204\PhpParser\Node\Stmt && $newNode instanceof \ConfigTransformer202202204\PhpParser\Node\Expr) {
+            return new \ConfigTransformer202202204\PhpParser\Node\Stmt\Expression($newNode);
         }
         return $newNode;
     }

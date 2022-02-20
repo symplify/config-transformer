@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202199\Symfony\Component\Config;
+namespace ConfigTransformer202202204\Symfony\Component\Config;
 
-use ConfigTransformer202202199\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202202199\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202202199\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202202204\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202202204\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202202204\Symfony\Component\Filesystem\Filesystem;
 /**
  * ResourceCheckerConfigCache uses instances of ResourceCheckerInterface
  * to check whether cached data is still fresh.
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ResourceCheckerConfigCache implements \ConfigTransformer202202199\Symfony\Component\Config\ConfigCacheInterface
+class ResourceCheckerConfigCache implements \ConfigTransformer202202204\Symfony\Component\Config\ConfigCacheInterface
 {
     /**
      * @var string
@@ -104,18 +104,18 @@ class ResourceCheckerConfigCache implements \ConfigTransformer202202199\Symfony\
     {
         $mode = 0666;
         $umask = \umask();
-        $filesystem = new \ConfigTransformer202202199\Symfony\Component\Filesystem\Filesystem();
+        $filesystem = new \ConfigTransformer202202204\Symfony\Component\Filesystem\Filesystem();
         $filesystem->dumpFile($this->file, $content);
         try {
             $filesystem->chmod($this->file, $mode, $umask);
-        } catch (\ConfigTransformer202202199\Symfony\Component\Filesystem\Exception\IOException $e) {
+        } catch (\ConfigTransformer202202204\Symfony\Component\Filesystem\Exception\IOException $e) {
             // discard chmod failure (some filesystem may not support it)
         }
         if (null !== $metadata) {
             $filesystem->dumpFile($this->getMetaFile(), \serialize($metadata));
             try {
                 $filesystem->chmod($this->getMetaFile(), $mode, $umask);
-            } catch (\ConfigTransformer202202199\Symfony\Component\Filesystem\Exception\IOException $e) {
+            } catch (\ConfigTransformer202202204\Symfony\Component\Filesystem\Exception\IOException $e) {
                 // discard chmod failure (some filesystem may not support it)
             }
         }
