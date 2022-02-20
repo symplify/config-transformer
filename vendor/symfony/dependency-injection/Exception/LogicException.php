@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202206\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer202202202\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Base LogicException for Dependency Injection component.
  */
-class LogicException extends \LogicException implements \ConfigTransformer202202206\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+class LogicException extends \LogicException implements \ConfigTransformer202202202\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
 {
 }
