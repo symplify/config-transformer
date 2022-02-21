@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202213\Symfony\Component\Yaml\Exception;
+namespace ConfigTransformer202202210\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during parsing.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParseException extends \ConfigTransformer202202213\Symfony\Component\Yaml\Exception\RuntimeException
+class ParseException extends \ConfigTransformer202202210\Symfony\Component\Yaml\Exception\RuntimeException
 {
     /**
      * @var string|null
