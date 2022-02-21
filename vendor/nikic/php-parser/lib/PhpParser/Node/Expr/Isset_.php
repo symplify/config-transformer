@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202215\PhpParser\Node\Expr;
+namespace ConfigTransformer202202218\PhpParser\Node\Expr;
 
-use ConfigTransformer202202215\PhpParser\Node\Expr;
-class Isset_ extends \ConfigTransformer202202215\PhpParser\Node\Expr
+use ConfigTransformer202202218\PhpParser\Node\Expr;
+class Isset_ extends \ConfigTransformer202202218\PhpParser\Node\Expr
 {
     /** @var Expr[] Variables */
     public $vars;
