@@ -37,4 +37,5 @@ return array(
     'ConfigTransformer2022022110\\Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'ConfigTransformer2022022110\\Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'ConfigTransformer2022022110\\PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
 );

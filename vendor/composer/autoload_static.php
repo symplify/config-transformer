@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
+class ComposerStaticInita64d15e262f25a12569adf690537367a
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -51,6 +51,7 @@ class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
             'ConfigTransformer2022022110\\Psr\\Container\\' => 42,
             'ConfigTransformer2022022110\\Psr\\Cache\\' => 38,
             'ConfigTransformer2022022110\\PhpParser\\' => 38,
+            'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\' => 49,
         ),
     );
 
@@ -179,6 +180,10 @@ class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
+        ),
     );
 
     public static $classMap = array (
@@ -246,6 +251,59 @@ class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
         'ConfigTransformer2022022110\\Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
         'ConfigTransformer2022022110\\Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'ConfigTransformer2022022110\\Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayItemNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayItemNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprFalseNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprFalseNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprFloatNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprFloatNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprIntegerNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprIntegerNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprNullNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprNullNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprStringNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprStringNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprTrueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprTrueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstFetchNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstFetchNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Node' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Node.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\NodeAttributes' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/NodeAttributes.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\DeprecatedTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/DeprecatedTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\ExtendsTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/ExtendsTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\GenericTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/GenericTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\ImplementsTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/ImplementsTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\InvalidTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/InvalidTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\MethodTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/MethodTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\MethodTagValueParameterNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/MethodTagValueParameterNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\MixinTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/MixinTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\ParamTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/ParamTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PhpDocChildNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PhpDocChildNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PhpDocNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PhpDocNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PhpDocTagNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PhpDocTagNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PhpDocTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PhpDocTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PhpDocTextNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PhpDocTextNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\PropertyTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/PropertyTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\ReturnTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/ReturnTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\TemplateTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/TemplateTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\ThrowsTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/ThrowsTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\TypeAliasImportTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/TypeAliasImportTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\TypeAliasTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/TypeAliasTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\UsesTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/UsesTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\PhpDoc\\VarTagValueNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/PhpDoc/VarTagValueNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\ArrayShapeItemNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/ArrayShapeItemNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\ArrayShapeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/ArrayShapeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\ArrayTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/ArrayTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\CallableTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/CallableTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\CallableTypeParameterNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/CallableTypeParameterNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\ConstTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/ConstTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\GenericTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/GenericTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\IdentifierTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/IdentifierTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\IntersectionTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/IntersectionTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\NullableTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/NullableTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\ThisTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/ThisTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\TypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/TypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Ast\\Type\\UnionTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/UnionTypeNode.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Lexer\\Lexer' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Lexer/Lexer.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Parser\\ConstExprParser' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/ConstExprParser.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Parser\\ParserException' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/ParserException.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Parser\\PhpDocParser' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/PhpDocParser.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Parser\\TokenIterator' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/TokenIterator.php',
+        'ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\Parser\\TypeParser' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/TypeParser.php',
         'ConfigTransformer2022022110\\PhpParser\\Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Builder.php',
         'ConfigTransformer2022022110\\PhpParser\\BuilderFactory' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
         'ConfigTransformer2022022110\\PhpParser\\BuilderHelpers' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',
@@ -1064,6 +1122,17 @@ class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
         'ConfigTransformer2022022110\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\MagicConstValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/NodeValueResolver/MagicConstValueResolver.php',
         'ConfigTransformer2022022110\\Symplify\\Astral\\NodeValue\\UnionTypeValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/UnionTypeValueResolver.php',
         'ConfigTransformer2022022110\\Symplify\\Astral\\NodeVisitor\\CallableNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/NodeVisitor/CallableNodeVisitor.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\Contract\\PhpDocNodeVisitorInterface' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/Contract/PhpDocNodeVisitorInterface.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\Exception\\InvalidTraverseException' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/Exception/InvalidTraverseException.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\PhpDocNodeTraverser' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/PhpDocNodeTraverser.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\PhpDocNodeVisitor\\AbstractPhpDocNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/PhpDocNodeVisitor/AbstractPhpDocNodeVisitor.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\PhpDocNodeVisitor\\CallablePhpDocNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/PhpDocNodeVisitor/CallablePhpDocNodeVisitor.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\PhpDocNodeVisitor\\CloningPhpDocNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/PhpDocNodeVisitor/CloningPhpDocNodeVisitor.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\PhpDocNodeVisitor\\ParentConnectingPhpDocNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/PhpDocNodeVisitor/ParentConnectingPhpDocNodeVisitor.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\SimplePhpDocParser' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/SimplePhpDocParser.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\StaticFactory\\SimplePhpDocParserStaticFactory' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/StaticFactory/SimplePhpDocParserStaticFactory.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\ValueObject\\Ast\\PhpDoc\\SimplePhpDocNode' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/ValueObject/Ast/PhpDoc/SimplePhpDocNode.php',
+        'ConfigTransformer2022022110\\Symplify\\Astral\\PhpDocParser\\ValueObject\\PhpDocAttributeKey' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/ValueObject/PhpDocAttributeKey.php',
         'ConfigTransformer2022022110\\Symplify\\Astral\\PhpParser\\SmartPhpParser' => __DIR__ . '/..' . '/symplify/astral/src/PhpParser/SmartPhpParser.php',
         'ConfigTransformer2022022110\\Symplify\\Astral\\PhpParser\\SmartPhpParserFactory' => __DIR__ . '/..' . '/symplify/astral/src/PhpParser/SmartPhpParserFactory.php',
         'ConfigTransformer2022022110\\Symplify\\Astral\\Reflection\\MethodCallParser' => __DIR__ . '/..' . '/symplify/astral/src/Reflection/MethodCallParser.php',
@@ -1262,9 +1331,9 @@ class ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit81b536e5c3c4b177f73512f8a50c8eb6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita64d15e262f25a12569adf690537367a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita64d15e262f25a12569adf690537367a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita64d15e262f25a12569adf690537367a::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -219,6 +219,58 @@
             "install-path": "..\/nikic\/php-parser"
         },
         {
+            "name": "phpstan\/phpdoc-parser",
+            "version": "1.2.0",
+            "version_normalized": "1.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/phpstan\/phpdoc-parser.git",
+                "reference": "dbc093d7af60eff5cd575d2ed761b15ed40bd08e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/phpstan\/phpdoc-parser\/zipball\/dbc093d7af60eff5cd575d2ed761b15ed40bd08e",
+                "reference": "dbc093d7af60eff5cd575d2ed761b15ed40bd08e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "php-parallel-lint\/php-parallel-lint": "^1.2",
+                "phpstan\/extension-installer": "^1.0",
+                "phpstan\/phpstan": "^1.0",
+                "phpstan\/phpstan-strict-rules": "^1.0",
+                "phpunit\/phpunit": "^9.5",
+                "symfony\/process": "^5.2"
+            },
+            "time": "2021-09-16T20:46:02+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ConfigTransformer2022022110\\PHPStan\\PhpDocParser\\": [
+                        "src\/"
+                    ]
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https:\/\/github.com\/phpstan\/phpdoc-parser\/issues",
+                "source": "https:\/\/github.com\/phpstan\/phpdoc-parser\/tree\/1.2.0"
+            },
+            "install-path": "..\/phpstan\/phpdoc-parser"
+        },
+        {
             "name": "phpstan\/phpstan",
             "version": "1.4.6",
             "version_normalized": "1.4.6.0",
@@ -1985,13 +2037,15 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/astral",
-                "reference": "b4857ed4f75e87caea3a93c3a28923c12f673030"
+                "reference": "e9aa06e7c5189f886dbc86f51285e0dc19d8a9e6"
             },
             "require": {
                 "nette\/utils": "^3.2",
                 "nikic\/php-parser": "^4.13.2",
                 "php": ">=8.0",
+                "phpstan\/phpdoc-parser": "^1.2",
                 "phpstan\/phpstan": "^1.4.6",
+                "symfony\/config": "^5.4|^6.0",
                 "symfony\/dependency-injection": "^5.4|^6.0",
                 "symplify\/package-builder": "dev-main",
                 "symplify\/smart-file-system": "dev-main",
@@ -2018,7 +2072,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/smart-file-system": "<9.4.70",
                 "symplify\/symfony-static-dumper": "<10.0.25",
@@ -2069,7 +2122,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/autowire-array-parameter",
-                "reference": "3980db13567ecc595a8d83cadc08d15e6c2a3a7c"
+                "reference": "5d36498624b71174456ba8f203ec99897dd66079"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2098,7 +2151,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/smart-file-system": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
@@ -2143,7 +2195,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/composer-json-manipulator",
-                "reference": "46073c075f4e9c2e5a34a24998e4c1df06c6a758"
+                "reference": "5c57cae2c50350690229be6df56ffdfba9f11c0c"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2176,7 +2228,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
                 "symplify\/symplify-kernel": "<9.4.70",
@@ -2220,7 +2271,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/easy-testing",
-                "reference": "ee0f4ac4071b3a643884bc58d9f5e6032669380c"
+                "reference": "ea19008915a0fd17f115ba72df1f413b1790b70e"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2253,7 +2304,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
                 "symplify\/template-phpstan-compiler": "<10.0.25",
@@ -2299,7 +2349,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/package-builder",
-                "reference": "3ea824af0d451f3c74b4f58eaa1b5b15940581d1"
+                "reference": "ed58ed2b28b33deccd40fdbf94feaad6d3b417c3"
             },
             "require": {
                 "nette\/neon": "^3.3.2",
@@ -2334,7 +2384,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/smart-file-system": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
@@ -2378,7 +2427,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "19617f96f465f624a514aa168e7b3c14e5be35b4"
+                "reference": "ce85ba878357d72514d249448017c7267122deb5"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2409,7 +2458,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/smart-file-system": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
@@ -2458,7 +2506,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/smart-file-system",
-                "reference": "31840b87f52aa755c5d42480bcba2ccbdedf4554"
+                "reference": "61ac2a88542b3d582d304718a49b76d4037bd521"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2489,7 +2537,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
                 "symplify\/symplify-kernel": "<10.0.25",
@@ -2534,7 +2581,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/symplify-kernel",
-                "reference": "a3d39397edb9834f7f98142b5e16a890af249a33"
+                "reference": "e6ec250f0af70f6c9ee6d146b1d260b99dbfe642"
             },
             "require": {
                 "php": ">=8.0",
@@ -2566,7 +2613,6 @@
                 "symplify\/phpstan-rules": "<10.0.25",
                 "symplify\/rule-doc-generator": "<10.0.25",
                 "symplify\/rule-doc-generator-contracts": "<10.0.25",
-                "symplify\/simple-php-doc-parser": "<10.0.25",
                 "symplify\/skipper": "<10.0.25",
                 "symplify\/symfony-static-dumper": "<10.0.25",
                 "symplify\/template-phpstan-compiler": "<10.0.25",
