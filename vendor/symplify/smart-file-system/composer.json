@@ -14,17 +14,17 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202202218\\Symplify\\SmartFileSystem\\": "src"
+            "ConfigTransformer202202213\\Symplify\\SmartFileSystem\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202202218\\Symplify\\SmartFileSystem\\Tests\\": "tests"
+            "ConfigTransformer202202213\\Symplify\\SmartFileSystem\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.1-dev"
+            "dev-main": "10.2-dev"
         }
     },
     "conflict": {
