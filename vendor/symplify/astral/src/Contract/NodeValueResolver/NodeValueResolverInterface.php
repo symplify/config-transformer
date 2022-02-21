@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022022110\Symplify\Astral\Contract\NodeValueResolver;
+namespace ConfigTransformer202202215\Symplify\Astral\Contract\NodeValueResolver;
 
-use ConfigTransformer2022022110\PhpParser\Node\Expr;
+use ConfigTransformer202202215\PhpParser\Node\Expr;
 /**
  * @template TExpr as Expr
  */
@@ -17,5 +17,5 @@ interface NodeValueResolverInterface
      * @param TExpr $expr
      * @return mixed
      */
-    public function resolve(\ConfigTransformer2022022110\PhpParser\Node\Expr $expr, string $currentFilePath);
+    public function resolve(\ConfigTransformer202202215\PhpParser\Node\Expr $expr, string $currentFilePath);
 }

@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022022110\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202202215\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer2022022110\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class PhpDocTagNode implements \ConfigTransformer2022022110\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
+use ConfigTransformer202202215\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class PhpDocTagNode implements \ConfigTransformer202202215\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
 {
     use NodeAttributes;
     /** @var string */
     public $name;
     /** @var PhpDocTagValueNode */
     public $value;
-    public function __construct(string $name, \ConfigTransformer2022022110\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
+    public function __construct(string $name, \ConfigTransformer202202215\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
     {
         $this->name = $name;
         $this->value = $value;

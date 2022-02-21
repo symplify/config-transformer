@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022022110\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer202202215\PHPStan\PhpDocParser\Parser;
 
-use ConfigTransformer2022022110\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202202215\PHPStan\PhpDocParser\Lexer\Lexer;
 class ParserException extends \Exception
 {
     /** @var string */
@@ -22,7 +22,7 @@ class ParserException extends \Exception
         $this->expectedTokenType = $expectedTokenType;
         $json = \json_encode($currentTokenValue, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
         \assert($json !== \false);
-        parent::__construct(\sprintf('Unexpected token %s, expected %s at offset %d', $json, \ConfigTransformer2022022110\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $currentOffset));
+        parent::__construct(\sprintf('Unexpected token %s, expected %s at offset %d', $json, \ConfigTransformer202202215\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $currentOffset));
     }
     public function getCurrentTokenValue() : string
     {

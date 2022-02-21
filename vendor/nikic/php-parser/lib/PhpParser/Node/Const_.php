@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022022110\PhpParser\Node;
+namespace ConfigTransformer202202215\PhpParser\Node;
 
-use ConfigTransformer2022022110\PhpParser\NodeAbstract;
-class Const_ extends \ConfigTransformer2022022110\PhpParser\NodeAbstract
+use ConfigTransformer202202215\PhpParser\NodeAbstract;
+class Const_ extends \ConfigTransformer202202215\PhpParser\NodeAbstract
 {
     /** @var Identifier Name */
     public $name;
@@ -19,10 +19,10 @@ class Const_ extends \ConfigTransformer2022022110\PhpParser\NodeAbstract
      * @param Expr              $value      Value
      * @param array             $attributes Additional attributes
      */
-    public function __construct($name, \ConfigTransformer2022022110\PhpParser\Node\Expr $value, array $attributes = [])
+    public function __construct($name, \ConfigTransformer202202215\PhpParser\Node\Expr $value, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer2022022110\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202202215\PhpParser\Node\Identifier($name) : $name;
         $this->value = $value;
     }
     public function getSubNodeNames() : array
