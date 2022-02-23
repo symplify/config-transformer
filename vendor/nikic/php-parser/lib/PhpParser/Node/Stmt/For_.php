@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202210\PhpParser\Node\Stmt;
+namespace ConfigTransformer202202237\PhpParser\Node\Stmt;
 
-use ConfigTransformer202202210\PhpParser\Node;
-class For_ extends \ConfigTransformer202202210\PhpParser\Node\Stmt
+use ConfigTransformer202202237\PhpParser\Node;
+class For_ extends \ConfigTransformer202202237\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Init expressions */
     public $init;

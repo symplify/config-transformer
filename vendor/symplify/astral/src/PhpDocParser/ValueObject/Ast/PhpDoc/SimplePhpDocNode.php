@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202210\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc;
+namespace ConfigTransformer202202237\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc;
 
-use ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
-use ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
-use ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
+use ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
+use ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 /**
  * @noRector final on purpose, so it can be extended by 3rd party
  */
-class SimplePhpDocNode extends \ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode
+class SimplePhpDocNode extends \ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode
 {
-    public function getParam(string $desiredParamName) : ?\ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
+    public function getParam(string $desiredParamName) : ?\ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
     {
         $desiredParamNameWithDollar = '$' . \ltrim($desiredParamName, '$');
         foreach ($this->getParamTagValues() as $paramTagValueNode) {
@@ -22,10 +22,10 @@ class SimplePhpDocNode extends \ConfigTransformer202202210\PHPStan\PhpDocParser\
         }
         return null;
     }
-    public function getParamType(string $desiredParamName) : ?\ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getParamType(string $desiredParamName) : ?\ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $paramTagValueNode = $this->getParam($desiredParamName);
-        if (!$paramTagValueNode instanceof \ConfigTransformer202202210\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode) {
+        if (!$paramTagValueNode instanceof \ConfigTransformer202202237\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode) {
             return null;
         }
         return $paramTagValueNode->type;
