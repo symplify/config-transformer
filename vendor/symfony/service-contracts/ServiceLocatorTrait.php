@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202245\Symfony\Contracts\Service;
+namespace ConfigTransformer2022022410\Symfony\Contracts\Service;
 
-use ConfigTransformer202202245\Psr\Container\ContainerExceptionInterface;
-use ConfigTransformer202202245\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer2022022410\Psr\Container\ContainerExceptionInterface;
+use ConfigTransformer2022022410\Psr\Container\NotFoundExceptionInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202202245\Psr\Container\ContainerExceptionInterface::class);
-\class_exists(\ConfigTransformer202202245\Psr\Container\NotFoundExceptionInterface::class);
+\class_exists(\ConfigTransformer2022022410\Psr\Container\ContainerExceptionInterface::class);
+\class_exists(\ConfigTransformer2022022410\Psr\Container\NotFoundExceptionInterface::class);
 /**
  * A trait to help implement ServiceProviderInterface.
  *
@@ -89,7 +89,7 @@ trait ServiceLocatorTrait
         }
         return $this->providedTypes;
     }
-    private function createNotFoundException(string $id) : \ConfigTransformer202202245\Psr\Container\NotFoundExceptionInterface
+    private function createNotFoundException(string $id) : \ConfigTransformer2022022410\Psr\Container\NotFoundExceptionInterface
     {
         if (!($alternatives = \array_keys($this->factories))) {
             $message = 'is empty...';
@@ -106,13 +106,13 @@ trait ServiceLocatorTrait
         } else {
             $message = \sprintf('Service "%s" not found: the current service locator %s', $id, $message);
         }
-        return new class($message) extends \InvalidArgumentException implements \ConfigTransformer202202245\Psr\Container\NotFoundExceptionInterface
+        return new class($message) extends \InvalidArgumentException implements \ConfigTransformer2022022410\Psr\Container\NotFoundExceptionInterface
         {
         };
     }
-    private function createCircularReferenceException(string $id, array $path) : \ConfigTransformer202202245\Psr\Container\ContainerExceptionInterface
+    private function createCircularReferenceException(string $id, array $path) : \ConfigTransformer2022022410\Psr\Container\ContainerExceptionInterface
     {
-        return new class(\sprintf('Circular reference detected for service "%s", path: "%s".', $id, \implode(' -> ', $path))) extends \RuntimeException implements \ConfigTransformer202202245\Psr\Container\ContainerExceptionInterface
+        return new class(\sprintf('Circular reference detected for service "%s", path: "%s".', $id, \implode(' -> ', $path))) extends \RuntimeException implements \ConfigTransformer2022022410\Psr\Container\ContainerExceptionInterface
         {
         };
     }

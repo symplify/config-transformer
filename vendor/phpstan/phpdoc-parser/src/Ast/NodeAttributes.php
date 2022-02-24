@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202245\PHPStan\PhpDocParser\Ast;
+namespace ConfigTransformer2022022410\PHPStan\PhpDocParser\Ast;
 
 trait NodeAttributes
 {
