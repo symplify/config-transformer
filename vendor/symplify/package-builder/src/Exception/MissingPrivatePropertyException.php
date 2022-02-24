@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202242\Symplify\PackageBuilder\Exception;
+namespace ConfigTransformer202202245\Symplify\PackageBuilder\Exception;
 
 use Exception;
 final class MissingPrivatePropertyException extends \Exception
