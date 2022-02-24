@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202242\Symfony\Component\String\Inflector;
+namespace ConfigTransformer202202245\Symfony\Component\String\Inflector;
 
 interface InflectorInterface
 {
