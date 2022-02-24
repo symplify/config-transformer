@@ -31,13 +31,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202202248\\Webmozart\\Assert\\": "src\/"
+            "ConfigTransformer202202242\\Webmozart\\Assert\\": "src\/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202202248\\Webmozart\\Assert\\Tests\\": "tests\/",
-            "ConfigTransformer202202248\\Webmozart\\Assert\\Bin\\": "bin\/src"
+            "ConfigTransformer202202242\\Webmozart\\Assert\\Tests\\": "tests\/",
+            "ConfigTransformer202202242\\Webmozart\\Assert\\Bin\\": "bin\/src"
         }
     }
 }

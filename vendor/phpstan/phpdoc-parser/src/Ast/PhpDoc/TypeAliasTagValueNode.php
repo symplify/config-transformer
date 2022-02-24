@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202248\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202202242\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202202248\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202202248\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class TypeAliasTagValueNode implements \ConfigTransformer202202248\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use ConfigTransformer202202242\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202202242\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class TypeAliasTagValueNode implements \ConfigTransformer202202242\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string */
     public $alias;
     /** @var TypeNode */
     public $type;
-    public function __construct(string $alias, \ConfigTransformer202202248\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
+    public function __construct(string $alias, \ConfigTransformer202202242\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
     {
         $this->alias = $alias;
         $this->type = $type;
