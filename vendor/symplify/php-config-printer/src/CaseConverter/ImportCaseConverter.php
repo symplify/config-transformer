@@ -94,6 +94,7 @@ final class ImportCaseConverter implements \ConfigTransformer202202245\Symplify\
         return $args;
     }
     /**
+     * @param mixed[] $arguments
      * @param mixed $value
      */
     private function shouldSkipDefaultValue(string $name, $value, array $arguments) : bool

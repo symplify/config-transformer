@@ -42,6 +42,8 @@ final class AutoBindNodeFactory
      * ->autowire()
      * ->autoconfigure()
      * ->bind()
+     *
+     * @param mixed[] $yaml
      */
     public function createAutoBindCalls(array $yaml, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
@@ -64,6 +66,9 @@ final class AutoBindNodeFactory
         }
         return $methodCall;
     }
+    /**
+     * @param mixed[] $bindValues
+     */
     private function createBindMethodCall(\ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall, array $bindValues) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         foreach ($bindValues as $key => $value) {

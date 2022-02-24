@@ -18,6 +18,11 @@ final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \ConfigTrans
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
+    /**
+     * @param mixed $key
+     * @param mixed|mixed[] $yaml
+     * @param mixed $values
+     */
     public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         if ($key === 'public') {

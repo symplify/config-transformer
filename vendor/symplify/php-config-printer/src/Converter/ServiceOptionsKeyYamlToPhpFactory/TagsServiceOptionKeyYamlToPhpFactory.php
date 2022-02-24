@@ -24,6 +24,11 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer20
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
+    /**
+     * @param mixed $key
+     * @param mixed|mixed[] $yamlLines
+     * @param mixed $values
+     */
     public function decorateServiceMethodCall($key, $yamlLines, $values, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         if ($this->isSingleLineYamlLines($yamlLines)) {

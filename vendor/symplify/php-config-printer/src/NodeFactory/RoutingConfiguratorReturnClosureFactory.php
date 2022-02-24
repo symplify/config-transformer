@@ -28,6 +28,9 @@ final class RoutingConfiguratorReturnClosureFactory
         $this->containerConfiguratorClosureNodeFactory = $containerConfiguratorClosureNodeFactory;
         $this->routingCaseConverters = $routingCaseConverters;
     }
+    /**
+     * @param mixed[] $arrayData
+     */
     public function createFromArrayData(array $arrayData) : \ConfigTransformer202202245\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
@@ -35,6 +38,7 @@ final class RoutingConfiguratorReturnClosureFactory
         return new \ConfigTransformer202202245\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
+     * @param mixed[] $arrayData
      * @return mixed[]
      */
     private function createClosureStmts(array $arrayData) : array
@@ -43,6 +47,7 @@ final class RoutingConfiguratorReturnClosureFactory
         return $this->createNodesFromCaseConverters($arrayData);
     }
     /**
+     * @param mixed[] $yamlData
      * @return mixed[]
      */
     private function removeEmptyValues(array $yamlData) : array

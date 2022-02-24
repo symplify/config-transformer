@@ -16,6 +16,7 @@ final class ContainerNestedNodesFactory
         $this->instanceOfNestedCaseConverter = $instanceOfNestedCaseConverter;
     }
     /**
+     * @param mixed[] $nestedValues
      * @return Expression[]
      * @param int|string $nestedKey
      */

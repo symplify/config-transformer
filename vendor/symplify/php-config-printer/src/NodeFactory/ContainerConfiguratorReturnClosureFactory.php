@@ -47,6 +47,7 @@ final class ContainerConfiguratorReturnClosureFactory
         return new \ConfigTransformer202202245\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
+     * @param mixed[] $yamlData
      * @return Stmt[]
      */
     private function createClosureStmts(array $yamlData) : array
@@ -89,7 +90,8 @@ final class ContainerConfiguratorReturnClosureFactory
         return new \ConfigTransformer202202245\PhpParser\Node\Stmt\Expression($assign);
     }
     /**
-     * @return mixed[]
+     * @param Expression[] $nodes
+     * @return Expression[]
      */
     private function createInitializeNode(string $key, array $nodes) : array
     {

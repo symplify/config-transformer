@@ -5,6 +5,9 @@ namespace ConfigTransformer202202245\Symplify\PhpConfigPrinter\ServiceOptionAnal
 
 final class ServiceOptionAnalyzer
 {
+    /**
+     * @param array<string|int, mixed> $data
+     */
     public function hasNamedArguments(array $data) : bool
     {
         if ($data === []) {

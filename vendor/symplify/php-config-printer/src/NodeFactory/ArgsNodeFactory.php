@@ -127,6 +127,9 @@ final class ArgsNodeFactory
         }
         return \ConfigTransformer202202245\PhpParser\BuilderHelpers::normalizeValue($value);
     }
+    /**
+     * @param mixed[] $values
+     */
     private function resolveExprFromArray(array $values) : \ConfigTransformer202202245\PhpParser\Node\Expr\Array_
     {
         $arrayItems = [];

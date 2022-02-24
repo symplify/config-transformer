@@ -17,6 +17,11 @@ final class PropertiesServiceOptionKeyYamlToPhpFactory implements \ConfigTransfo
     {
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
+    /**
+     * @param mixed $key
+     * @param mixed|mixed[] $yaml
+     * @param mixed $values
+     */
     public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         return $this->singleServicePhpNodeFactory->createProperties($methodCall, $yaml);

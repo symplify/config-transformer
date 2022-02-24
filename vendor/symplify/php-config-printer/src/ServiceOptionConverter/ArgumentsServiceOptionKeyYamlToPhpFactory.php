@@ -23,6 +23,11 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
     }
+    /**
+     * @param mixed $key
+     * @param mixed|mixed[] $yaml
+     * @param mixed $values
+     */
     public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         if (!$this->serviceOptionAnalyzer->hasNamedArguments($yaml)) {

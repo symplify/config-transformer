@@ -22,6 +22,7 @@ final class SingleServicePhpNodeFactory
     }
     /**
      * @see https://symfony.com/doc/current/service_container/injection_types.html
+     * @param array<string, mixed> $properties
      */
     public function createProperties(\ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
@@ -91,6 +92,9 @@ final class SingleServicePhpNodeFactory
         }
         return new \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
     }
+    /**
+     * @param mixed[] $calls
+     */
     private function createConfigureMethodCall(array $calls, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         $args = [];

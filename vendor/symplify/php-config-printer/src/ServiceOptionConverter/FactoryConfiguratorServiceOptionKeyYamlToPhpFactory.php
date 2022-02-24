@@ -17,6 +17,11 @@ final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \Conf
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
+    /**
+     * @param mixed|mixed[] $yaml
+     * @param mixed $key
+     * @param mixed $values
+     */
     public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202202245\PhpParser\Node\Expr\MethodCall
     {
         $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);

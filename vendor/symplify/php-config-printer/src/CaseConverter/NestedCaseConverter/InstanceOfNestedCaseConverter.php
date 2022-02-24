@@ -27,6 +27,9 @@ final class InstanceOfNestedCaseConverter
         $this->commonNodeFactory = $commonNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
+    /**
+     * @param mixed[] $values
+     */
     public function convertToMethodCall(string $key, array $values) : \ConfigTransformer202202245\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
