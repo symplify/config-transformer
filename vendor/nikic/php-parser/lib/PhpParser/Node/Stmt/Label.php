@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202240\PhpParser\Node\Stmt;
+namespace ConfigTransformer202202247\PhpParser\Node\Stmt;
 
-use ConfigTransformer202202240\PhpParser\Node\Identifier;
-use ConfigTransformer202202240\PhpParser\Node\Stmt;
-class Label extends \ConfigTransformer202202240\PhpParser\Node\Stmt
+use ConfigTransformer202202247\PhpParser\Node\Identifier;
+use ConfigTransformer202202247\PhpParser\Node\Stmt;
+class Label extends \ConfigTransformer202202247\PhpParser\Node\Stmt
 {
     /** @var Identifier Name */
     public $name;
@@ -18,7 +18,7 @@ class Label extends \ConfigTransformer202202240\PhpParser\Node\Stmt
     public function __construct($name, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer202202240\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202202247\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {
