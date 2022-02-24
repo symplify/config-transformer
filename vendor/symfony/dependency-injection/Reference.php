@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202237\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202202249\Symfony\Component\DependencyInjection;
 
 /**
  * Reference represents a service reference.
@@ -25,7 +25,7 @@ class Reference
      * @var int
      */
     private $invalidBehavior;
-    public function __construct(string $id, int $invalidBehavior = \ConfigTransformer202202237\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
+    public function __construct(string $id, int $invalidBehavior = \ConfigTransformer202202249\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
     {
         $this->id = $id;
         $this->invalidBehavior = $invalidBehavior;

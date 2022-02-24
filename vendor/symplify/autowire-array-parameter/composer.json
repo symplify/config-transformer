@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202202237\\Symplify\\AutowireArrayParameter\\": "src"
+            "ConfigTransformer202202249\\Symplify\\AutowireArrayParameter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202202237\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
+            "ConfigTransformer202202249\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
         }
     },
     "extra": {

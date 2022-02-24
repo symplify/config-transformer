@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202237\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202202249\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202202237\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202202237\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202202249\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202202249\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -25,14 +25,14 @@ trait ProxyTrait
      */
     public function prune() : bool
     {
-        return $this->pool instanceof \ConfigTransformer202202237\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \ConfigTransformer202202249\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}
      */
     public function reset()
     {
-        if ($this->pool instanceof \ConfigTransformer202202237\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \ConfigTransformer202202249\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
     }
