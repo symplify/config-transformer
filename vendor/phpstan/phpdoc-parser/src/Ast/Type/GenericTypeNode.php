@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202249\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202202247\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202202249\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class GenericTypeNode implements \ConfigTransformer202202249\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202202247\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class GenericTypeNode implements \ConfigTransformer202202247\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var IdentifierTypeNode */
     public $type;
     /** @var TypeNode[] */
     public $genericTypes;
-    public function __construct(\ConfigTransformer202202249\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $type, array $genericTypes)
+    public function __construct(\ConfigTransformer202202247\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $type, array $genericTypes)
     {
         $this->type = $type;
         $this->genericTypes = $genericTypes;

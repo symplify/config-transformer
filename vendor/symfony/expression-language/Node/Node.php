@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202249\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202202247\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202202249\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202202247\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * Represents a node in the AST.
  *
@@ -48,7 +48,7 @@ class Node
         }
         return \implode("\n", $repr);
     }
-    public function compile(\ConfigTransformer202202249\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer202202247\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         foreach ($this->nodes as $node) {
             $node->compile($compiler);

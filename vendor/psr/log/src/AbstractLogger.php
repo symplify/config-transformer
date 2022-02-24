@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202202249\Psr\Log;
+namespace ConfigTransformer202202247\Psr\Log;
 
 /**
  * This is a simple Logger implementation that other Loggers can inherit from.
@@ -9,7 +9,7 @@ namespace ConfigTransformer202202249\Psr\Log;
  * reduce boilerplate code that a simple Logger that does the same thing with
  * messages regardless of the error level has to implement.
  */
-abstract class AbstractLogger implements \ConfigTransformer202202249\Psr\Log\LoggerInterface
+abstract class AbstractLogger implements \ConfigTransformer202202247\Psr\Log\LoggerInterface
 {
     use LoggerTrait;
 }
