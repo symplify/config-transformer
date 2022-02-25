@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202247\PhpParser\Node\Stmt;
+namespace ConfigTransformer202202253\PhpParser\Node\Stmt;
 
-use ConfigTransformer202202247\PhpParser\Node;
-class Interface_ extends \ConfigTransformer202202247\PhpParser\Node\Stmt\ClassLike
+use ConfigTransformer202202253\PhpParser\Node;
+class Interface_ extends \ConfigTransformer202202253\PhpParser\Node\Stmt\ClassLike
 {
     /** @var Node\Name[] Extended interfaces */
     public $extends;
@@ -21,7 +21,7 @@ class Interface_ extends \ConfigTransformer202202247\PhpParser\Node\Stmt\ClassLi
     public function __construct($name, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \ConfigTransformer202202247\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202202253\PhpParser\Node\Identifier($name) : $name;
         $this->extends = $subNodes['extends'] ?? [];
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
