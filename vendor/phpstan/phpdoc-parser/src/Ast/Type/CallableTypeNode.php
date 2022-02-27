@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202202253\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202202275\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202202253\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class CallableTypeNode implements \ConfigTransformer202202253\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202202275\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class CallableTypeNode implements \ConfigTransformer202202275\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var IdentifierTypeNode */
@@ -13,7 +13,7 @@ class CallableTypeNode implements \ConfigTransformer202202253\PHPStan\PhpDocPars
     public $parameters;
     /** @var TypeNode */
     public $returnType;
-    public function __construct(\ConfigTransformer202202253\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \ConfigTransformer202202253\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
+    public function __construct(\ConfigTransformer202202275\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \ConfigTransformer202202275\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
     {
         $this->identifier = $identifier;
         $this->parameters = $parameters;
