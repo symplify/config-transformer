@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202275\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202203029\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202202275\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202202275\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202203029\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202203029\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cache\Adapter\AbstractAdapter
+class MemcachedAdapter extends \ConfigTransformer202203029\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     /**
      * We are replacing characters that are illegal in Memcached keys with reserved characters from
@@ -42,15 +42,15 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
      *
      * Using a MemcachedAdapter as a pure items store is fine.
      */
-    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202202275\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \ConfigTransformer202203029\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException('Memcached >= 2.2.0 is required.');
+            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException('Memcached ' . (\PHP_VERSION_ID >= 80100 ? '> 3.1.5' : '>= 2.2.0') . ' is required.');
         }
         if ('Memcached' === \get_class($client)) {
             $opt = $client->getOption(\Memcached::OPT_SERIALIZER);
             if (\Memcached::SERIALIZER_PHP !== $opt && \Memcached::SERIALIZER_IGBINARY !== $opt) {
-                throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter: "serializer" option must be "php" or "igbinary".');
+                throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter: "serializer" option must be "php" or "igbinary".');
             }
             $this->maxIdLength -= \strlen($client->getOption(\Memcached::OPT_PREFIX_KEY));
             $this->client = $client;
@@ -59,11 +59,11 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
         }
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202202275\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202203029\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
     public static function isSupported()
     {
-        return \extension_loaded('memcached') && \version_compare(\phpversion('memcached'), '2.2.0', '>=');
+        return \extension_loaded('memcached') && \version_compare(\phpversion('memcached'), \PHP_VERSION_ID >= 80100 ? '3.1.6' : '2.2.0', '>=');
     }
     /**
      * Creates a Memcached instance.
@@ -75,7 +75,6 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
      * - [['localhost', 11211, 33]]
      *
      * @param array[]|string|string[] $servers An array of servers, a DSN, or an array of DSNs
-     * @param array                   $options An array of options
      *
      * @throws \ErrorException When invalid options or servers are provided
      */
@@ -84,10 +83,10 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
         if (\is_string($servers)) {
             $servers = [$servers];
         } elseif (!\is_array($servers)) {
-            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('MemcachedAdapter::createClient() expects array or string as first argument, "%s" given.', \get_debug_type($servers)));
+            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('MemcachedAdapter::createClient() expects array or string as first argument, "%s" given.', \get_debug_type($servers)));
         }
         if (!static::isSupported()) {
-            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException('Memcached >= 2.2.0 is required.');
+            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException('Memcached ' . (\PHP_VERSION_ID >= 80100 ? '> 3.1.5' : '>= 2.2.0') . ' is required.');
         }
         \set_error_handler(function ($type, $msg, $file, $line) {
             throw new \ErrorException($msg, 0, $type, $file, $line);
@@ -102,8 +101,8 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
                 if (\is_array($dsn)) {
                     continue;
                 }
-                if (0 !== \strpos($dsn, 'memcached:')) {
-                    throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s" does not start with "memcached:".', $dsn));
+                if (!\str_starts_with($dsn, 'memcached:')) {
+                    throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s" does not start with "memcached:".', $dsn));
                 }
                 $params = \preg_replace_callback('#^memcached:(//)?(?:([^@]*+)@)?#', function ($m) use(&$username, &$password) {
                     if (!empty($m[2])) {
@@ -112,14 +111,14 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
                     return 'file:' . ($m[1] ?? '');
                 }, $dsn);
                 if (\false === ($params = \parse_url($params))) {
-                    throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
+                    throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
                 }
                 $query = $hosts = [];
                 if (isset($params['query'])) {
                     \parse_str($params['query'], $query);
                     if (isset($query['host'])) {
                         if (!\is_array($hosts = $query['host'])) {
-                            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
+                            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
                         }
                         foreach ($hosts as $host => $weight) {
                             if (\false === ($port = \strrpos($host, ':'))) {
@@ -138,7 +137,7 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
                     }
                 }
                 if (!isset($params['host']) && !isset($params['path'])) {
-                    throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
+                    throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
                 }
                 if (isset($params['path']) && \preg_match('#/(\\d+)$#', $params['path'], $m)) {
                     $params['weight'] = $m[1];
@@ -232,7 +231,7 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
     protected function doFetch(array $ids) : iterable
     {
         try {
-            $encodedIds = \array_map('self::encodeKey', $ids);
+            $encodedIds = \array_map([__CLASS__, 'encodeKey'], $ids);
             $encodedResult = $this->checkResultCode($this->getClient()->getMulti($encodedIds));
             $result = [];
             foreach ($encodedResult as $key => $value) {
@@ -256,7 +255,7 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
     protected function doDelete(array $ids) : bool
     {
         $ok = \true;
-        $encodedIds = \array_map('self::encodeKey', $ids);
+        $encodedIds = \array_map([__CLASS__, 'encodeKey'], $ids);
         foreach ($this->checkResultCode($this->getClient()->deleteMulti($encodedIds)) as $result) {
             if (\Memcached::RES_SUCCESS !== $result && \Memcached::RES_NOTFOUND !== $result) {
                 $ok = \false;
@@ -277,7 +276,7 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
         if (\Memcached::RES_SUCCESS === $code || \Memcached::RES_NOTFOUND === $code) {
             return $result;
         }
-        throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter client error: ' . \strtolower($this->client->getResultMessage()));
+        throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter client error: ' . \strtolower($this->client->getResultMessage()));
     }
     private function getClient() : \Memcached
     {
@@ -286,10 +285,10 @@ class MemcachedAdapter extends \ConfigTransformer202202275\Symfony\Component\Cac
         }
         $opt = $this->lazyClient->getOption(\Memcached::OPT_SERIALIZER);
         if (\Memcached::SERIALIZER_PHP !== $opt && \Memcached::SERIALIZER_IGBINARY !== $opt) {
-            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter: "serializer" option must be "php" or "igbinary".');
+            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException('MemcachedAdapter: "serializer" option must be "php" or "igbinary".');
         }
         if ('' !== ($prefix = (string) $this->lazyClient->getOption(\Memcached::OPT_PREFIX_KEY))) {
-            throw new \ConfigTransformer202202275\Symfony\Component\Cache\Exception\CacheException(\sprintf('MemcachedAdapter: "prefix_key" option must be empty when using proxified connections, "%s" given.', $prefix));
+            throw new \ConfigTransformer202203029\Symfony\Component\Cache\Exception\CacheException(\sprintf('MemcachedAdapter: "prefix_key" option must be empty when using proxified connections, "%s" given.', $prefix));
         }
         return $this->client = $this->lazyClient;
     }

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202275\Symfony\Component\Console\Input;
+namespace ConfigTransformer202203029\Symfony\Component\Console\Input;
 
-use ConfigTransformer202202275\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202203029\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * StringInput represents an input provided as a string.
  *
@@ -20,9 +20,10 @@ use ConfigTransformer202202275\Symfony\Component\Console\Exception\InvalidArgume
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StringInput extends \ConfigTransformer202202275\Symfony\Component\Console\Input\ArgvInput
+class StringInput extends \ConfigTransformer202203029\Symfony\Component\Console\Input\ArgvInput
 {
-    public const REGEX_STRING = '([^\\s\\\\]+?)';
+    public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
+    public const REGEX_UNQUOTED_STRING = '([^\\s\\\\]+?)';
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
     /**
      * @param string $input A string representing the parameters from the CLI
@@ -58,11 +59,11 @@ class StringInput extends \ConfigTransformer202202275\Symfony\Component\Console\
                 $token .= $match[1] . $match[2] . \stripcslashes(\str_replace(['"\'', '\'"', '\'\'', '""'], '', \substr($match[3], 1, -1)));
             } elseif (\preg_match('/' . self::REGEX_QUOTED_STRING . '/A', $input, $match, 0, $cursor)) {
                 $token .= \stripcslashes(\substr($match[0], 1, -1));
-            } elseif (\preg_match('/' . self::REGEX_STRING . '/A', $input, $match, 0, $cursor)) {
+            } elseif (\preg_match('/' . self::REGEX_UNQUOTED_STRING . '/A', $input, $match, 0, $cursor)) {
                 $token .= $match[1];
             } else {
                 // should never happen
-                throw new \ConfigTransformer202202275\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
+                throw new \ConfigTransformer202203029\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
             }
             $cursor += \strlen($match[0]);
         }

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202202275\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202203029\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * Represents a collection of values to lazily iterate over.
  *
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class IteratorArgument implements \ConfigTransformer202202275\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+class IteratorArgument implements \ConfigTransformer202203029\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     use ReferenceSetArgumentTrait;
 }
