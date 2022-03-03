@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace ConfigTransformer202203038;
+namespace ConfigTransformer202203032;
 
 /*
  * This file is part of the Symfony package.
@@ -15,18 +15,18 @@ namespace ConfigTransformer202203038;
  *
  * @author Jan Schädlich <jan.schaedlich@sensiolabs.de>
  */
-use ConfigTransformer202203038\Symfony\Component\Console\Application;
-use ConfigTransformer202203038\Symfony\Component\Yaml\Command\LintCommand;
+use ConfigTransformer202203032\Symfony\Component\Console\Application;
+use ConfigTransformer202203032\Symfony\Component\Yaml\Command\LintCommand;
 function includeIfExists(string $file) : bool
 {
     return \file_exists($file) && (include $file);
 }
-if (!\ConfigTransformer202203038\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\ConfigTransformer202203038\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\ConfigTransformer202203038\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
+if (!\ConfigTransformer202203032\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\ConfigTransformer202203032\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\ConfigTransformer202203032\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
     \fwrite(\STDERR, 'Install dependencies using Composer.' . \PHP_EOL);
     exit(1);
 }
-if (!\class_exists(\ConfigTransformer202203038\Symfony\Component\Console\Application::class)) {
+if (!\class_exists(\ConfigTransformer202203032\Symfony\Component\Console\Application::class)) {
     \fwrite(\STDERR, 'You need the "symfony/console" component in order to run the Yaml linter.' . \PHP_EOL);
     exit(1);
 }
-(new \ConfigTransformer202203038\Symfony\Component\Console\Application())->add($command = new \ConfigTransformer202203038\Symfony\Component\Yaml\Command\LintCommand())->getApplication()->setDefaultCommand($command->getName(), \true)->run();
+(new \ConfigTransformer202203032\Symfony\Component\Console\Application())->add($command = new \ConfigTransformer202203032\Symfony\Component\Yaml\Command\LintCommand())->getApplication()->setDefaultCommand($command->getName(), \true)->run();

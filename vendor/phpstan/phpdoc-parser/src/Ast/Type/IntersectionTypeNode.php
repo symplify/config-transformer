@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203038\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202203032\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202203038\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class IntersectionTypeNode implements \ConfigTransformer202203038\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202203032\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class IntersectionTypeNode implements \ConfigTransformer202203032\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode[] */
