@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203029\Symplify\ConfigTransformer\DependencyInjection;
+namespace ConfigTransformer2022030310\Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer202203029\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202203029\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202203029\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
-use ConfigTransformer202203029\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022030310\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022030310\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer2022030310\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
+use ConfigTransformer2022030310\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * This fakes basic extensions, so loading of config is possible without loading real extensions and booting your whole
  * project
  */
 final class ExtensionFaker
 {
-    public function fakeInContainerBuilder(\ConfigTransformer202203029\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $yamlContent) : void
+    public function fakeInContainerBuilder(\ConfigTransformer2022030310\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $yamlContent) : void
     {
-        $yaml = \ConfigTransformer202203029\Symfony\Component\Yaml\Yaml::parse($yamlContent, \ConfigTransformer202203029\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
+        $yaml = \ConfigTransformer2022030310\Symfony\Component\Yaml\Yaml::parse($yamlContent, \ConfigTransformer2022030310\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS);
         // empty file
         if ($yaml === null) {
             return;
         }
         $rootKeys = \array_keys($yaml);
         /** @var string[] $extensionKeys */
-        $extensionKeys = \array_diff($rootKeys, \ConfigTransformer202203029\Symplify\PhpConfigPrinter\ValueObject\YamlKey::provideRootKeys());
+        $extensionKeys = \array_diff($rootKeys, \ConfigTransformer2022030310\Symplify\PhpConfigPrinter\ValueObject\YamlKey::provideRootKeys());
         if ($extensionKeys === []) {
             return;
         }
         foreach ($extensionKeys as $extensionKey) {
-            $aliasConfigurableExtension = new \ConfigTransformer202203029\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension($extensionKey);
+            $aliasConfigurableExtension = new \ConfigTransformer2022030310\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension($extensionKey);
             $containerBuilder->registerExtension($aliasConfigurableExtension);
         }
     }

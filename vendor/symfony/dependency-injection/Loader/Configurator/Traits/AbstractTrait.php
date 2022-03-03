@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203029\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer2022030310\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait AbstractTrait
 {
