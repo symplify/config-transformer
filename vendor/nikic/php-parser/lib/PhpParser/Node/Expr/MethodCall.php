@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203034\PhpParser\Node\Expr;
+namespace ConfigTransformer202203038\PhpParser\Node\Expr;
 
-use ConfigTransformer202203034\PhpParser\Node\Arg;
-use ConfigTransformer202203034\PhpParser\Node\Expr;
-use ConfigTransformer202203034\PhpParser\Node\Identifier;
-use ConfigTransformer202203034\PhpParser\Node\VariadicPlaceholder;
-class MethodCall extends \ConfigTransformer202203034\PhpParser\Node\Expr\CallLike
+use ConfigTransformer202203038\PhpParser\Node\Arg;
+use ConfigTransformer202203038\PhpParser\Node\Expr;
+use ConfigTransformer202203038\PhpParser\Node\Identifier;
+use ConfigTransformer202203038\PhpParser\Node\VariadicPlaceholder;
+class MethodCall extends \ConfigTransformer202203038\PhpParser\Node\Expr\CallLike
 {
     /** @var Expr Variable holding object */
     public $var;
@@ -23,11 +23,11 @@ class MethodCall extends \ConfigTransformer202203034\PhpParser\Node\Expr\CallLik
      * @param array<Arg|VariadicPlaceholder> $args       Arguments
      * @param array                          $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203034\PhpParser\Node\Expr $var, $name, array $args = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202203038\PhpParser\Node\Expr $var, $name, array $args = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
-        $this->name = \is_string($name) ? new \ConfigTransformer202203034\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202203038\PhpParser\Node\Identifier($name) : $name;
         $this->args = $args;
     }
     public function getSubNodeNames() : array
