@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer2022030310\Psr\Cache;
+namespace ConfigTransformer202203034\Psr\Cache;
 
 /**
  * Exception interface for invalid cache arguments.
@@ -8,6 +8,6 @@ namespace ConfigTransformer2022030310\Psr\Cache;
  * Any time an invalid argument is passed into a method it must throw an
  * exception class which implements Psr\Cache\InvalidArgumentException.
  */
-interface InvalidArgumentException extends \ConfigTransformer2022030310\Psr\Cache\CacheException
+interface InvalidArgumentException extends \ConfigTransformer202203034\Psr\Cache\CacheException
 {
 }

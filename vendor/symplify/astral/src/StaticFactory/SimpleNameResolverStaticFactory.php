@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030310\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer202203034\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer2022030310\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ArgNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\AttributeNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ClassLikeNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ClassMethodNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ConstFetchNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\FuncCallNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\IdentifierNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\NamespaceNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ParamNodeNameResolver;
-use ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\PropertyNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ArgNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\AttributeNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ClassLikeNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ClassMethodNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ConstFetchNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\FuncCallNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\IdentifierNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\NamespaceNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ParamNodeNameResolver;
+use ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\PropertyNodeNameResolver;
 /**
  * This would be normally handled by standard Symfony or Nette DI, but PHPStan does not use any of those, so we have to
  * make it manually.
  */
 final class SimpleNameResolverStaticFactory
 {
-    public static function create() : \ConfigTransformer2022030310\Symplify\Astral\Naming\SimpleNameResolver
+    public static function create() : \ConfigTransformer202203034\Symplify\Astral\Naming\SimpleNameResolver
     {
-        $nameResolvers = [new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ArgNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\AttributeNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ClassLikeNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ClassMethodNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ConstFetchNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\FuncCallNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\IdentifierNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\NamespaceNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\ParamNodeNameResolver(), new \ConfigTransformer2022030310\Symplify\Astral\NodeNameResolver\PropertyNodeNameResolver()];
-        return new \ConfigTransformer2022030310\Symplify\Astral\Naming\SimpleNameResolver($nameResolvers);
+        $nameResolvers = [new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ArgNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\AttributeNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ClassLikeNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ClassMethodNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ConstFetchNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\FuncCallNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\IdentifierNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\NamespaceNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\ParamNodeNameResolver(), new \ConfigTransformer202203034\Symplify\Astral\NodeNameResolver\PropertyNodeNameResolver()];
+        return new \ConfigTransformer202203034\Symplify\Astral\Naming\SimpleNameResolver($nameResolvers);
     }
 }

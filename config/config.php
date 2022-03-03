@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030310;
+namespace ConfigTransformer202203034;
 
-use ConfigTransformer2022030310\PhpParser\BuilderFactory;
-use ConfigTransformer2022030310\PhpParser\NodeFinder;
-use ConfigTransformer2022030310\Symfony\Component\Console\Application;
+use ConfigTransformer202203034\PhpParser\BuilderFactory;
+use ConfigTransformer202203034\PhpParser\NodeFinder;
+use ConfigTransformer202203034\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer2022030310\Symfony\Component\Yaml\Parser;
-use ConfigTransformer2022030310\Symplify\ConfigTransformer\Command\SwitchFormatCommand;
-use ConfigTransformer2022030310\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer2022030310\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer2022030310\Symplify\SmartFileSystem\FileSystemFilter;
-use function ConfigTransformer2022030310\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202203034\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202203034\Symplify\ConfigTransformer\Command\SwitchFormatCommand;
+use ConfigTransformer202203034\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202203034\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202203034\Symplify\SmartFileSystem\FileSystemFilter;
+use function ConfigTransformer202203034\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer2022030310\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202203034\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer2022030310\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer2022030310\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer2022030310\Symplify\ConfigTransformer\Command\SwitchFormatCommand::class)]);
-    $services->set(\ConfigTransformer2022030310\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer2022030310\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer2022030310\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer2022030310\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->set(\ConfigTransformer2022030310\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
-    $services->set(\ConfigTransformer2022030310\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
+    $services->set(\ConfigTransformer202203034\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202203034\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202203034\Symplify\ConfigTransformer\Command\SwitchFormatCommand::class)]);
+    $services->set(\ConfigTransformer202203034\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202203034\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202203034\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202203034\Symplify\SmartFileSystem\FileSystemFilter::class);
+    $services->set(\ConfigTransformer202203034\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->set(\ConfigTransformer202203034\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
 };

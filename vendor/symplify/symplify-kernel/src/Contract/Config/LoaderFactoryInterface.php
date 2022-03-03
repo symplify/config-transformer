@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030310\Symplify\SymplifyKernel\Contract\Config;
+namespace ConfigTransformer202203034\Symplify\SymplifyKernel\Contract\Config;
 
-use ConfigTransformer2022030310\Symfony\Component\Config\Loader\LoaderInterface;
-use ConfigTransformer2022030310\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202203034\Symfony\Component\Config\Loader\LoaderInterface;
+use ConfigTransformer202203034\Symfony\Component\DependencyInjection\ContainerBuilder;
 interface LoaderFactoryInterface
 {
-    public function create(\ConfigTransformer2022030310\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $currentWorkingDirectory) : \ConfigTransformer2022030310\Symfony\Component\Config\Loader\LoaderInterface;
+    public function create(\ConfigTransformer202203034\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $currentWorkingDirectory) : \ConfigTransformer202203034\Symfony\Component\Config\Loader\LoaderInterface;
 }
