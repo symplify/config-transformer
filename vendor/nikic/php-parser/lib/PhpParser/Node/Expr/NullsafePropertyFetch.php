@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203054\PhpParser\Node\Expr;
+namespace ConfigTransformer202203051\PhpParser\Node\Expr;
 
-use ConfigTransformer202203054\PhpParser\Node\Expr;
-use ConfigTransformer202203054\PhpParser\Node\Identifier;
-class NullsafePropertyFetch extends \ConfigTransformer202203054\PhpParser\Node\Expr
+use ConfigTransformer202203051\PhpParser\Node\Expr;
+use ConfigTransformer202203051\PhpParser\Node\Identifier;
+class NullsafePropertyFetch extends \ConfigTransformer202203051\PhpParser\Node\Expr
 {
     /** @var Expr Variable holding object */
     public $var;
@@ -18,11 +18,11 @@ class NullsafePropertyFetch extends \ConfigTransformer202203054\PhpParser\Node\E
      * @param string|Identifier|Expr $name       Property name
      * @param array                  $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203054\PhpParser\Node\Expr $var, $name, array $attributes = [])
+    public function __construct(\ConfigTransformer202203051\PhpParser\Node\Expr $var, $name, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
-        $this->name = \is_string($name) ? new \ConfigTransformer202203054\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202203051\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {
