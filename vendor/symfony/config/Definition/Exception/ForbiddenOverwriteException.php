@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203054\Symfony\Component\Config\Definition\Exception;
+namespace ConfigTransformer202203055\Symfony\Component\Config\Definition\Exception;
 
 /**
  * This exception is thrown when a configuration path is overwritten from a
@@ -16,6 +16,6 @@ namespace ConfigTransformer202203054\Symfony\Component\Config\Definition\Excepti
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ForbiddenOverwriteException extends \ConfigTransformer202203054\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+class ForbiddenOverwriteException extends \ConfigTransformer202203055\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 {
 }

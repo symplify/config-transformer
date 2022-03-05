@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203054\Symplify\ComposerJsonManipulator\Json;
+namespace ConfigTransformer202203055\Symplify\ComposerJsonManipulator\Json;
 
 final class JsonCleaner
 {
     /**
-     * @param mixed[] $data
-     * @return mixed[]
+     * @param array<int|string, mixed> $data
+     * @return array<int|string, mixed>
      */
     public function removeEmptyKeysFromJsonArray(array $data) : array
     {

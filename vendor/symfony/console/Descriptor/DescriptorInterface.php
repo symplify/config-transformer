@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203054\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202203055\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202203054\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202203055\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Descriptor interface.
  *
@@ -21,5 +21,5 @@ interface DescriptorInterface
     /**
      * @param object $object
      */
-    public function describe(\ConfigTransformer202203054\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = []);
+    public function describe(\ConfigTransformer202203055\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = []);
 }

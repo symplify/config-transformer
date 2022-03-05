@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203054\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202203055\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202203054\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202203054\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202203054\Symfony\Component\DependencyInjection\Reference;
-final class AliasDeprecatedPublicServicesPass extends \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+use ConfigTransformer202203055\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202203055\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202203055\Symfony\Component\DependencyInjection\Reference;
+final class AliasDeprecatedPublicServicesPass extends \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * @var mixed[]
@@ -26,22 +26,22 @@ final class AliasDeprecatedPublicServicesPass extends \ConfigTransformer20220305
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Reference && isset($this->aliases[$id = (string) $value])) {
-            return new \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Reference($this->aliases[$id], $value->getInvalidBehavior());
+        if ($value instanceof \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Reference && isset($this->aliases[$id = (string) $value])) {
+            return new \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Reference($this->aliases[$id], $value->getInvalidBehavior());
         }
         return parent::processValue($value, $isRoot);
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202203054\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202203055\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->findTaggedServiceIds('container.private') as $id => $tags) {
             if (null === ($package = $tags[0]['package'] ?? null)) {
-                throw new \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "package" attribute is mandatory for the "container.private" tag on the "%s" service.', $id));
+                throw new \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "package" attribute is mandatory for the "container.private" tag on the "%s" service.', $id));
             }
             if (null === ($version = $tags[0]['version'] ?? null)) {
-                throw new \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "version" attribute is mandatory for the "container.private" tag on the "%s" service.', $id));
+                throw new \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "version" attribute is mandatory for the "container.private" tag on the "%s" service.', $id));
             }
             $definition = $container->getDefinition($id);
             if (!$definition->isPublic() || $definition->isPrivate()) {

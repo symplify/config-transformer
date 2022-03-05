@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203054\Symplify\PackageBuilder\Parameter;
+namespace ConfigTransformer202203055\Symplify\PackageBuilder\Parameter;
 
-use ConfigTransformer202203054\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202203054\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202203054\Symfony\Component\HttpFoundation\ParameterBag;
+use ConfigTransformer202203055\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202203055\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202203055\Symfony\Component\HttpFoundation\ParameterBag;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Parameter\ParameterProviderTest
@@ -16,7 +16,7 @@ final class ParameterProvider
      * @var array<string, mixed>
      */
     private $parameters = [];
-    public function __construct(\ConfigTransformer202203054\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202203055\Symfony\Component\DependencyInjection\ContainerInterface $container)
     {
         /** @var ParameterBag $parameterBag */
         $parameterBag = $container->getParameterBag();
@@ -89,6 +89,6 @@ final class ParameterProvider
         if (\array_key_exists($name, $this->parameters)) {
             return;
         }
-        throw new \ConfigTransformer202203054\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
+        throw new \ConfigTransformer202203055\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
     }
 }
