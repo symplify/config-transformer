@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203051\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202203054\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202203051\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202203051\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202203051\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202203051\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
-use ConfigTransformer202203051\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202203051\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202203054\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202203054\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202203054\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202203054\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
+use ConfigTransformer202203054\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202203054\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
@@ -18,7 +18,7 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      * @var \Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer
      */
     private $serviceOptionAnalyzer;
-    public function __construct(\ConfigTransformer202203051\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202203051\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer $serviceOptionAnalyzer)
+    public function __construct(\ConfigTransformer202203054\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202203054\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer $serviceOptionAnalyzer)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
@@ -28,15 +28,15 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      * @param mixed|mixed[] $yaml
      * @param mixed $values
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202203051\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202203051\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202203054\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202203054\PhpParser\Node\Expr\MethodCall
     {
         if (!$this->serviceOptionAnalyzer->hasNamedArguments($yaml)) {
             $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-            return new \ConfigTransformer202203051\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
+            return new \ConfigTransformer202203054\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
         }
         foreach ($yaml as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value], \false, \true);
-            $methodCall = new \ConfigTransformer202203051\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
+            $methodCall = new \ConfigTransformer202203054\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
         }
         return $methodCall;
     }
@@ -46,6 +46,6 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      */
     public function isMatch($key, $values) : bool
     {
-        return $key === \ConfigTransformer202203051\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS;
+        return $key === \ConfigTransformer202203054\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS;
     }
 }

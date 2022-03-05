@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202203051\Nette\Neon\Node;
+namespace ConfigTransformer202203054\Nette\Neon\Node;
 
 /** @internal */
-final class BlockArrayNode extends \ConfigTransformer202203051\Nette\Neon\Node\ArrayNode
+final class BlockArrayNode extends \ConfigTransformer202203054\Nette\Neon\Node\ArrayNode
 {
     /** @var string */
     public $indentation;
@@ -22,7 +22,7 @@ final class BlockArrayNode extends \ConfigTransformer202203051\Nette\Neon\Node\A
         if (\count($this->items) === 0) {
             return '[]';
         }
-        $res = \ConfigTransformer202203051\Nette\Neon\Node\ArrayItemNode::itemsToBlockString($this->items);
+        $res = \ConfigTransformer202203054\Nette\Neon\Node\ArrayItemNode::itemsToBlockString($this->items);
         return \preg_replace('#^(?=.)#m', $this->indentation, $res);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203051\PhpParser\Node\Scalar\MagicConst;
+namespace ConfigTransformer202203054\PhpParser\Node\Scalar\MagicConst;
 
-use ConfigTransformer202203051\PhpParser\Node\Scalar\MagicConst;
-class Namespace_ extends \ConfigTransformer202203051\PhpParser\Node\Scalar\MagicConst
+use ConfigTransformer202203054\PhpParser\Node\Scalar\MagicConst;
+class Namespace_ extends \ConfigTransformer202203054\PhpParser\Node\Scalar\MagicConst
 {
     public function getName() : string
     {
