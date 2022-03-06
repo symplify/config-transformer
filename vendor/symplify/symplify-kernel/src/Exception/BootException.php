@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203064\Symplify\SymplifyKernel\Exception;
+namespace ConfigTransformer202203065\Symplify\SymplifyKernel\Exception;
 
 use Exception;
 final class BootException extends \Exception

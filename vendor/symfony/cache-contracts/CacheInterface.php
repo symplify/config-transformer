@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203064\Symfony\Contracts\Cache;
+namespace ConfigTransformer202203065\Symfony\Contracts\Cache;
 
-use ConfigTransformer202203064\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202203064\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202203065\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202203065\Psr\Cache\InvalidArgumentException;
 /**
  * Covers most simple to advanced caching needs.
  *
