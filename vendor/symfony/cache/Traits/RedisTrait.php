@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203058\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202203064\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202203058\Predis\Command\Redis\UNLINK;
-use ConfigTransformer202203058\Predis\Connection\Aggregate\ClusterInterface;
-use ConfigTransformer202203058\Predis\Connection\Aggregate\RedisCluster;
-use ConfigTransformer202203058\Predis\Connection\Aggregate\ReplicationInterface;
-use ConfigTransformer202203058\Predis\Response\ErrorInterface;
-use ConfigTransformer202203058\Predis\Response\Status;
-use ConfigTransformer202203058\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202203058\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202203058\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202203064\Predis\Command\Redis\UNLINK;
+use ConfigTransformer202203064\Predis\Connection\Aggregate\ClusterInterface;
+use ConfigTransformer202203064\Predis\Connection\Aggregate\RedisCluster;
+use ConfigTransformer202203064\Predis\Connection\Aggregate\ReplicationInterface;
+use ConfigTransformer202203064\Predis\Response\ErrorInterface;
+use ConfigTransformer202203064\Predis\Response\Status;
+use ConfigTransformer202203064\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202203064\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202203064\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Aurimas Niekis <aurimas@niekis.lt>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -31,13 +31,13 @@ trait RedisTrait
     private static array $defaultConnectionOptions = ['class' => null, 'persistent' => 0, 'persistent_id' => null, 'timeout' => 30, 'read_timeout' => 0, 'retry_interval' => 0, 'tcp_keepalive' => 0, 'lazy' => null, 'redis_cluster' => \false, 'redis_sentinel' => null, 'dbindex' => 0, 'failover' => 'none', 'ssl' => null];
     private $redis;
     private $marshaller;
-    private function init(\Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace, int $defaultLifetime, ?\ConfigTransformer202203058\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    private function init(\Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace, int $defaultLifetime, ?\ConfigTransformer202203064\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         parent::__construct($namespace, $defaultLifetime);
         if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('RedisAdapter namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('RedisAdapter namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
         }
-        if ($redis instanceof \ConfigTransformer202203058\Predis\ClientInterface && $redis->getOptions()->exceptions) {
+        if ($redis instanceof \ConfigTransformer202203064\Predis\ClientInterface && $redis->getOptions()->exceptions) {
             $options = clone $redis->getOptions();
             \Closure::bind(function () {
                 $this->options['exceptions'] = \false;
@@ -45,7 +45,7 @@ trait RedisTrait
             $redis = new $redis($redis->getConnection(), $options);
         }
         $this->redis = $redis;
-        $this->marshaller = $marshaller ?? new \ConfigTransformer202203058\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202203064\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
     /**
      * Creates a Redis connection using a DSN configuration.
@@ -68,10 +68,10 @@ trait RedisTrait
         } elseif (\str_starts_with($dsn, 'rediss:')) {
             $scheme = 'rediss';
         } else {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s" does not start with "redis:" or "rediss".', $dsn));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s" does not start with "redis:" or "rediss".', $dsn));
         }
-        if (!\extension_loaded('redis') && !\class_exists(\ConfigTransformer202203058\Predis\Client::class)) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cannot find the "redis" extension nor the "predis/predis" package: "%s".', $dsn));
+        if (!\extension_loaded('redis') && !\class_exists(\ConfigTransformer202203064\Predis\Client::class)) {
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cannot find the "redis" extension nor the "predis/predis" package: "%s".', $dsn));
         }
         $params = \preg_replace_callback('#^' . $scheme . ':(//)?(?:(?:[^:@]*+:)?([^@]*+)@)?#', function ($m) use(&$auth) {
             if (isset($m[2])) {
@@ -83,7 +83,7 @@ trait RedisTrait
             return 'file:' . ($m[1] ?? '');
         }, $dsn);
         if (\false === ($params = \parse_url($params))) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
         }
         $query = $hosts = [];
         $tls = 'rediss' === $scheme;
@@ -92,7 +92,7 @@ trait RedisTrait
             \parse_str($params['query'], $query);
             if (isset($query['host'])) {
                 if (!\is_array($hosts = $query['host'])) {
-                    throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
+                    throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
                 }
                 foreach ($hosts as $host => $parameters) {
                     if (\is_string($parameters)) {
@@ -115,7 +115,7 @@ trait RedisTrait
                     $params['dbindex'] = $m[1];
                     $params['path'] = \substr($params['path'], 0, -\strlen($m[0]));
                 } elseif (isset($params['host'])) {
-                    throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s", the "dbindex" parameter must be a number.', $dsn));
+                    throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s", the "dbindex" parameter must be a number.', $dsn));
                 }
             }
             if (isset($params['host'])) {
@@ -125,19 +125,19 @@ trait RedisTrait
             }
         }
         if (!$hosts) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
         }
         $params += $query + $options + self::$defaultConnectionOptions;
-        if (isset($params['redis_sentinel']) && !\class_exists(\ConfigTransformer202203058\Predis\Client::class) && !\class_exists(\RedisSentinel::class)) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\CacheException(\sprintf('Redis Sentinel support requires the "predis/predis" package or the "redis" extension v5.2 or higher: "%s".', $dsn));
+        if (isset($params['redis_sentinel']) && !\class_exists(\ConfigTransformer202203064\Predis\Client::class) && !\class_exists(\RedisSentinel::class)) {
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\CacheException(\sprintf('Redis Sentinel support requires the "predis/predis" package or the "redis" extension v5.2 or higher: "%s".', $dsn));
         }
         if ($params['redis_cluster'] && isset($params['redis_sentinel'])) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cannot use both "redis_cluster" and "redis_sentinel" at the same time: "%s".', $dsn));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cannot use both "redis_cluster" and "redis_sentinel" at the same time: "%s".', $dsn));
         }
         if (null === $params['class'] && \extension_loaded('redis')) {
             $class = $params['redis_cluster'] ? \RedisCluster::class : (1 < \count($hosts) ? \RedisArray::class : \Redis::class);
         } else {
-            $class = $params['class'] ?? \ConfigTransformer202203058\Predis\Client::class;
+            $class = $params['class'] ?? \ConfigTransformer202203064\Predis\Client::class;
         }
         if (\is_a($class, \Redis::class, \true)) {
             $connect = $params['persistent'] || $params['persistent_id'] ? 'pconnect' : 'connect';
@@ -151,7 +151,7 @@ trait RedisTrait
                 if (isset($params['redis_sentinel'])) {
                     $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
                     if (!($address = $sentinel->getMasterAddrByName($params['redis_sentinel']))) {
-                        throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to retrieve master information from master name "%s" and address "%s:%d".', $params['redis_sentinel'], $host, $port));
+                        throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to retrieve master information from master name "%s" and address "%s:%d".', $params['redis_sentinel'], $host, $port));
                     }
                     [$host, $port] = $address;
                 }
@@ -167,22 +167,22 @@ trait RedisTrait
                     }
                     if (!$isConnected) {
                         $error = \preg_match('/^Redis::p?connect\\(\\): (.*)/', $error, $error) ? \sprintf(' (%s)', $error[1]) : '';
-                        throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $error . '.');
+                        throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $error . '.');
                     }
                     if (null !== $auth && !$redis->auth($auth) || $params['dbindex'] && !$redis->select($params['dbindex'])) {
                         $e = \preg_replace('/^ERR /', '', $redis->getLastError());
-                        throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e . '.');
+                        throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e . '.');
                     }
                     if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
                         $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
                     }
                 } catch (\RedisException $e) {
-                    throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
+                    throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
                 }
                 return \true;
             };
             if ($params['lazy']) {
-                $redis = new \ConfigTransformer202203058\Symfony\Component\Cache\Traits\RedisProxy($redis, $initializer);
+                $redis = new \ConfigTransformer202203064\Symfony\Component\Cache\Traits\RedisProxy($redis, $initializer);
             } else {
                 $initializer($redis);
             }
@@ -204,7 +204,7 @@ trait RedisTrait
             try {
                 $redis = new $class($hosts, $params);
             } catch (\RedisClusterException $e) {
-                throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
+                throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
             }
             if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
                 $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
@@ -226,7 +226,7 @@ trait RedisTrait
                 try {
                     $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent'], $params['auth'] ?? '', ...\defined('Redis::SCAN_PREFIX') ? [$params['ssl'] ?? null] : []);
                 } catch (\RedisClusterException $e) {
-                    throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
+                    throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
                 }
                 if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
                     $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
@@ -244,8 +244,8 @@ trait RedisTrait
                 }
                 return $redis;
             };
-            $redis = $params['lazy'] ? new \ConfigTransformer202203058\Symfony\Component\Cache\Traits\RedisClusterProxy($initializer) : $initializer();
-        } elseif (\is_a($class, \ConfigTransformer202203058\Predis\ClientInterface::class, \true)) {
+            $redis = $params['lazy'] ? new \ConfigTransformer202203064\Symfony\Component\Cache\Traits\RedisClusterProxy($initializer) : $initializer();
+        } elseif (\is_a($class, \ConfigTransformer202203064\Predis\ClientInterface::class, \true)) {
             if ($params['redis_cluster']) {
                 $params['cluster'] = 'redis';
             } elseif (isset($params['redis_sentinel'])) {
@@ -272,9 +272,9 @@ trait RedisTrait
                 $redis->getConnection()->setSentinelTimeout($params['timeout']);
             }
         } elseif (\class_exists($class, \false)) {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" is not a subclass of "Redis", "RedisArray", "RedisCluster" nor "Predis\\ClientInterface".', $class));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" is not a subclass of "Redis", "RedisArray", "RedisCluster" nor "Predis\\ClientInterface".', $class));
         } else {
-            throw new \ConfigTransformer202203058\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Class "%s" does not exist.', $class));
+            throw new \ConfigTransformer202203064\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Class "%s" does not exist.', $class));
         }
         return $redis;
     }
@@ -287,7 +287,7 @@ trait RedisTrait
             return [];
         }
         $result = [];
-        if ($this->redis instanceof \ConfigTransformer202203058\Predis\ClientInterface && $this->redis->getConnection() instanceof \ConfigTransformer202203058\Predis\Connection\Aggregate\ClusterInterface) {
+        if ($this->redis instanceof \ConfigTransformer202203064\Predis\ClientInterface && $this->redis->getConnection() instanceof \ConfigTransformer202203064\Predis\Connection\Aggregate\ClusterInterface) {
             $values = $this->pipeline(function () use($ids) {
                 foreach ($ids as $id) {
                     (yield 'get' => [$id]);
@@ -319,14 +319,14 @@ trait RedisTrait
      */
     protected function doClear(string $namespace) : bool
     {
-        if ($this->redis instanceof \ConfigTransformer202203058\Predis\ClientInterface) {
+        if ($this->redis instanceof \ConfigTransformer202203064\Predis\ClientInterface) {
             $prefix = $this->redis->getOptions()->prefix ? $this->redis->getOptions()->prefix->getPrefix() : '';
             $prefixLen = \strlen($prefix);
         }
         $cleared = \true;
         $hosts = $this->getHosts();
         $host = \reset($hosts);
-        if ($host instanceof \ConfigTransformer202203058\Predis\Client && $host->getConnection() instanceof \ConfigTransformer202203058\Predis\Connection\Aggregate\ReplicationInterface) {
+        if ($host instanceof \ConfigTransformer202203064\Predis\Client && $host->getConnection() instanceof \ConfigTransformer202203064\Predis\Connection\Aggregate\ReplicationInterface) {
             // Predis supports info command only on the master in replication environments
             $hosts = [$host->getClientFor('master')];
         }
@@ -336,8 +336,8 @@ trait RedisTrait
                 continue;
             }
             $info = $host->info('Server');
-            $info = !$info instanceof \ConfigTransformer202203058\Predis\Response\ErrorInterface ? $info['Server'] ?? $info : ['redis_version' => '2.0'];
-            if (!$host instanceof \ConfigTransformer202203058\Predis\ClientInterface) {
+            $info = !$info instanceof \ConfigTransformer202203064\Predis\Response\ErrorInterface ? $info['Server'] ?? $info : ['redis_version' => '2.0'];
+            if (!$host instanceof \ConfigTransformer202203064\Predis\ClientInterface) {
                 $prefix = \defined('Redis::SCAN_PREFIX') && \Redis::SCAN_PREFIX & $host->getOption(\Redis::OPT_SCAN) ? '' : $host->getOption(\Redis::OPT_PREFIX);
                 $prefixLen = \strlen($host->getOption(\Redis::OPT_PREFIX) ?? '');
             }
@@ -347,13 +347,13 @@ trait RedisTrait
                 // can hang your server when it is executed against large databases (millions of items).
                 // Whenever you hit this scale, you should really consider upgrading to Redis 2.8 or above.
                 $unlink = \version_compare($info['redis_version'], '4.0', '>=') ? 'UNLINK' : 'DEL';
-                $args = $this->redis instanceof \ConfigTransformer202203058\Predis\ClientInterface ? [0, $pattern] : [[$pattern], 0];
+                $args = $this->redis instanceof \ConfigTransformer202203064\Predis\ClientInterface ? [0, $pattern] : [[$pattern], 0];
                 $cleared = $host->eval("local keys=redis.call('KEYS',ARGV[1]) for i=1,#keys,5000 do redis.call('{$unlink}',unpack(keys,i,math.min(i+4999,#keys))) end return 1", $args[0], $args[1]) && $cleared;
                 continue;
             }
             $cursor = null;
             do {
-                $keys = $host instanceof \ConfigTransformer202203058\Predis\ClientInterface ? $host->scan($cursor, 'MATCH', $pattern, 'COUNT', 1000) : $host->scan($cursor, $pattern, 1000);
+                $keys = $host instanceof \ConfigTransformer202203064\Predis\ClientInterface ? $host->scan($cursor, 'MATCH', $pattern, 'COUNT', 1000) : $host->scan($cursor, $pattern, 1000);
                 if (isset($keys[1]) && \is_array($keys[1])) {
                     $cursor = $keys[0];
                     $keys = $keys[1];
@@ -378,9 +378,9 @@ trait RedisTrait
         if (!$ids) {
             return \true;
         }
-        if ($this->redis instanceof \ConfigTransformer202203058\Predis\ClientInterface && $this->redis->getConnection() instanceof \ConfigTransformer202203058\Predis\Connection\Aggregate\ClusterInterface) {
+        if ($this->redis instanceof \ConfigTransformer202203064\Predis\ClientInterface && $this->redis->getConnection() instanceof \ConfigTransformer202203064\Predis\Connection\Aggregate\ClusterInterface) {
             static $del;
-            $del = $del ?? (\class_exists(\ConfigTransformer202203058\Predis\Command\Redis\UNLINK::class) ? 'unlink' : 'del');
+            $del = $del ?? (\class_exists(\ConfigTransformer202203064\Predis\Command\Redis\UNLINK::class) ? 'unlink' : 'del');
             $this->pipeline(function () use($ids, $del) {
                 foreach ($ids as $id) {
                     (yield $del => [$id]);
@@ -419,7 +419,7 @@ trait RedisTrait
             }
         });
         foreach ($results as $id => $result) {
-            if (\true !== $result && (!$result instanceof \ConfigTransformer202203058\Predis\Response\Status || \ConfigTransformer202203058\Predis\Response\Status::get('OK') !== $result)) {
+            if (\true !== $result && (!$result instanceof \ConfigTransformer202203064\Predis\Response\Status || \ConfigTransformer202203064\Predis\Response\Status::get('OK') !== $result)) {
                 $failed[] = $id;
             }
         }
@@ -429,16 +429,16 @@ trait RedisTrait
     {
         $ids = [];
         $redis = $redis ?? $this->redis;
-        if ($redis instanceof \ConfigTransformer202203058\Symfony\Component\Cache\Traits\RedisClusterProxy || $redis instanceof \RedisCluster || $redis instanceof \ConfigTransformer202203058\Predis\ClientInterface && $redis->getConnection() instanceof \ConfigTransformer202203058\Predis\Connection\Aggregate\RedisCluster) {
+        if ($redis instanceof \ConfigTransformer202203064\Symfony\Component\Cache\Traits\RedisClusterProxy || $redis instanceof \RedisCluster || $redis instanceof \ConfigTransformer202203064\Predis\ClientInterface && $redis->getConnection() instanceof \ConfigTransformer202203064\Predis\Connection\Aggregate\RedisCluster) {
             // phpredis & predis don't support pipelining with RedisCluster
             // see https://github.com/phpredis/phpredis/blob/develop/cluster.markdown#pipelining
             // see https://github.com/nrk/predis/issues/267#issuecomment-123781423
             $results = [];
             foreach ($generator() as $command => $args) {
                 $results[] = $redis->{$command}(...$args);
-                $ids[] = 'eval' === $command ? $redis instanceof \ConfigTransformer202203058\Predis\ClientInterface ? $args[2] : $args[1][0] : $args[0];
+                $ids[] = 'eval' === $command ? $redis instanceof \ConfigTransformer202203064\Predis\ClientInterface ? $args[2] : $args[1][0] : $args[0];
             }
-        } elseif ($redis instanceof \ConfigTransformer202203058\Predis\ClientInterface) {
+        } elseif ($redis instanceof \ConfigTransformer202203064\Predis\ClientInterface) {
             $results = $redis->pipeline(static function ($redis) use($generator, &$ids) {
                 foreach ($generator() as $command => $args) {
                     $redis->{$command}(...$args);
@@ -471,7 +471,7 @@ trait RedisTrait
             }
             $results = $redis->exec();
         }
-        if (!$redis instanceof \ConfigTransformer202203058\Predis\ClientInterface && 'eval' === $command && $redis->getLastError()) {
+        if (!$redis instanceof \ConfigTransformer202203064\Predis\ClientInterface && 'eval' === $command && $redis->getLastError()) {
             $e = new \RedisException($redis->getLastError());
             $results = \array_map(function ($v) use($e) {
                 return \false === $v ? $e : $v;
@@ -484,12 +484,12 @@ trait RedisTrait
     private function getHosts() : array
     {
         $hosts = [$this->redis];
-        if ($this->redis instanceof \ConfigTransformer202203058\Predis\ClientInterface) {
+        if ($this->redis instanceof \ConfigTransformer202203064\Predis\ClientInterface) {
             $connection = $this->redis->getConnection();
-            if ($connection instanceof \ConfigTransformer202203058\Predis\Connection\Aggregate\ClusterInterface && $connection instanceof \Traversable) {
+            if ($connection instanceof \ConfigTransformer202203064\Predis\Connection\Aggregate\ClusterInterface && $connection instanceof \Traversable) {
                 $hosts = [];
                 foreach ($connection as $c) {
-                    $hosts[] = new \ConfigTransformer202203058\Predis\Client($c);
+                    $hosts[] = new \ConfigTransformer202203064\Predis\Client($c);
                 }
             }
         } elseif ($this->redis instanceof \RedisArray) {
@@ -497,10 +497,10 @@ trait RedisTrait
             foreach ($this->redis->_hosts() as $host) {
                 $hosts[] = $this->redis->_instance($host);
             }
-        } elseif ($this->redis instanceof \ConfigTransformer202203058\Symfony\Component\Cache\Traits\RedisClusterProxy || $this->redis instanceof \RedisCluster) {
+        } elseif ($this->redis instanceof \ConfigTransformer202203064\Symfony\Component\Cache\Traits\RedisClusterProxy || $this->redis instanceof \RedisCluster) {
             $hosts = [];
             foreach ($this->redis->_masters() as $host) {
-                $hosts[] = new \ConfigTransformer202203058\Symfony\Component\Cache\Traits\RedisClusterNodeProxy($host, $this->redis);
+                $hosts[] = new \ConfigTransformer202203064\Symfony\Component\Cache\Traits\RedisClusterNodeProxy($host, $this->redis);
             }
         }
         return $hosts;

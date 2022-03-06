@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203058\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer202203064\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202203058\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use ConfigTransformer202203064\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -24,7 +24,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\ConfigTransformer202203058\Symfony\Component\VarExporter\Internal\Registry $registry, ?\ConfigTransformer202203058\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\ConfigTransformer202203064\Symfony\Component\VarExporter\Internal\Registry $registry, ?\ConfigTransformer202203064\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -48,39 +48,13 @@ class Hydrator
     }
     public static function getHydrator($class)
     {
-        if ('stdClass' === $class) {
-            return self::$hydrators[$class] = static function ($properties, $objects) {
-                foreach ($properties as $name => $values) {
-                    foreach ($values as $i => $v) {
-                        $objects[$i]->{$name} = $v;
-                    }
-                }
-            };
-        }
-        if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
-            throw new \ConfigTransformer202203058\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
-        }
-        $classReflector = new \ReflectionClass($class);
-        if (!$classReflector->isInternal()) {
-            return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, $class);
-        }
-        if ($classReflector->name !== $class) {
-            return self::$hydrators[$classReflector->name] ?? self::getHydrator($classReflector->name);
-        }
         switch ($class) {
-            case 'ArrayIterator':
-            case 'ArrayObject':
-                $constructor = \Closure::fromCallable([$classReflector->getConstructor(), 'invokeArgs']);
-                return self::$hydrators[$class] = static function ($properties, $objects) use($constructor) {
+            case 'stdClass':
+                return self::$hydrators[$class] = static function ($properties, $objects) {
                     foreach ($properties as $name => $values) {
-                        if ("\0" !== $name) {
-                            foreach ($values as $i => $v) {
-                                $objects[$i]->{$name} = $v;
-                            }
+                        foreach ($values as $i => $v) {
+                            $objects[$i]->{$name} = $v;
                         }
-                    }
-                    foreach ($properties["\0"] ?? [] as $i => $v) {
-                        $constructor($objects[$i], $v);
                     }
                 };
             case 'ErrorException':
@@ -107,6 +81,33 @@ class Hydrator
                         }
                     }
                 };
+        }
+        if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
+            throw new \ConfigTransformer202203064\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+        }
+        $classReflector = new \ReflectionClass($class);
+        switch ($class) {
+            case 'ArrayIterator':
+            case 'ArrayObject':
+                $constructor = \Closure::fromCallable([$classReflector->getConstructor(), 'invokeArgs']);
+                return self::$hydrators[$class] = static function ($properties, $objects) use($constructor) {
+                    foreach ($properties as $name => $values) {
+                        if ("\0" !== $name) {
+                            foreach ($values as $i => $v) {
+                                $objects[$i]->{$name} = $v;
+                            }
+                        }
+                    }
+                    foreach ($properties["\0"] ?? [] as $i => $v) {
+                        $constructor($objects[$i], $v);
+                    }
+                };
+        }
+        if (!$classReflector->isInternal()) {
+            return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, $class);
+        }
+        if ($classReflector->name !== $class) {
+            return self::$hydrators[$classReflector->name] ?? self::getHydrator($classReflector->name);
         }
         $propertySetters = [];
         foreach ($classReflector->getProperties() as $propertyReflector) {
