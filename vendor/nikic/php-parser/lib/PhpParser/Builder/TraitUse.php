@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203079\PhpParser\Builder;
+namespace ConfigTransformer2022030710\PhpParser\Builder;
 
-use ConfigTransformer202203079\PhpParser\Builder;
-use ConfigTransformer202203079\PhpParser\BuilderHelpers;
-use ConfigTransformer202203079\PhpParser\Node;
-use ConfigTransformer202203079\PhpParser\Node\Stmt;
-class TraitUse implements \ConfigTransformer202203079\PhpParser\Builder
+use ConfigTransformer2022030710\PhpParser\Builder;
+use ConfigTransformer2022030710\PhpParser\BuilderHelpers;
+use ConfigTransformer2022030710\PhpParser\Node;
+use ConfigTransformer2022030710\PhpParser\Node\Stmt;
+class TraitUse implements \ConfigTransformer2022030710\PhpParser\Builder
 {
     protected $traits = [];
     protected $adaptations = [];
@@ -31,7 +31,7 @@ class TraitUse implements \ConfigTransformer202203079\PhpParser\Builder
      */
     public function and($trait)
     {
-        $this->traits[] = \ConfigTransformer202203079\PhpParser\BuilderHelpers::normalizeName($trait);
+        $this->traits[] = \ConfigTransformer2022030710\PhpParser\BuilderHelpers::normalizeName($trait);
         return $this;
     }
     /**
@@ -43,8 +43,8 @@ class TraitUse implements \ConfigTransformer202203079\PhpParser\Builder
      */
     public function with($adaptation)
     {
-        $adaptation = \ConfigTransformer202203079\PhpParser\BuilderHelpers::normalizeNode($adaptation);
-        if (!$adaptation instanceof \ConfigTransformer202203079\PhpParser\Node\Stmt\TraitUseAdaptation) {
+        $adaptation = \ConfigTransformer2022030710\PhpParser\BuilderHelpers::normalizeNode($adaptation);
+        if (!$adaptation instanceof \ConfigTransformer2022030710\PhpParser\Node\Stmt\TraitUseAdaptation) {
             throw new \LogicException('Adaptation must have type TraitUseAdaptation');
         }
         $this->adaptations[] = $adaptation;
@@ -55,8 +55,8 @@ class TraitUse implements \ConfigTransformer202203079\PhpParser\Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \ConfigTransformer202203079\PhpParser\Node
+    public function getNode() : \ConfigTransformer2022030710\PhpParser\Node
     {
-        return new \ConfigTransformer202203079\PhpParser\Node\Stmt\TraitUse($this->traits, $this->adaptations);
+        return new \ConfigTransformer2022030710\PhpParser\Node\Stmt\TraitUse($this->traits, $this->adaptations);
     }
 }

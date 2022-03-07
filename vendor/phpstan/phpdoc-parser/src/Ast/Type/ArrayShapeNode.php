@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class ArrayShapeNode implements \ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class ArrayShapeNode implements \ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var ArrayShapeItemNode[] */
