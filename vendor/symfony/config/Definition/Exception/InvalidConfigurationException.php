@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203079\Symfony\Component\Config\Definition\Exception;
+namespace ConfigTransformer202203077\Symfony\Component\Config\Definition\Exception;
 
 /**
  * A very general exception which can be thrown whenever non of the more specific
@@ -16,7 +16,7 @@ namespace ConfigTransformer202203079\Symfony\Component\Config\Definition\Excepti
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InvalidConfigurationException extends \ConfigTransformer202203079\Symfony\Component\Config\Definition\Exception\Exception
+class InvalidConfigurationException extends \ConfigTransformer202203077\Symfony\Component\Config\Definition\Exception\Exception
 {
     /**
      * @var string|null
