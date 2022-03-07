@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203078\Symfony\Contracts\Cache;
+namespace ConfigTransformer202203075\Symfony\Contracts\Cache;
 
-use ConfigTransformer202203078\Psr\Cache\CacheException;
-use ConfigTransformer202203078\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202203078\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202203075\Psr\Cache\CacheException;
+use ConfigTransformer202203075\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202203075\Psr\Cache\InvalidArgumentException;
 /**
  * Augments PSR-6's CacheItemInterface with support for tags and metadata.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ItemInterface extends \ConfigTransformer202203078\Psr\Cache\CacheItemInterface
+interface ItemInterface extends \ConfigTransformer202203075\Psr\Cache\CacheItemInterface
 {
     /**
      * References the Unix timestamp stating when the item will expire.
