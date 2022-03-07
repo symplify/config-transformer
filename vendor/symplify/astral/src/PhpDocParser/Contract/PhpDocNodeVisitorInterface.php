@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203077\Symplify\Astral\PhpDocParser\Contract;
+namespace ConfigTransformer202203079\Symplify\Astral\PhpDocParser\Contract;
 
-use ConfigTransformer202203077\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Node;
 /**
  * Inspired by https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/NodeVisitor.php
  */
 interface PhpDocNodeVisitorInterface
 {
-    public function beforeTraverse(\ConfigTransformer202203077\PHPStan\PhpDocParser\Ast\Node $node) : void;
+    public function beforeTraverse(\ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Node $node) : void;
     /**
      * @return int|Node|null
      */
-    public function enterNode(\ConfigTransformer202203077\PHPStan\PhpDocParser\Ast\Node $node);
+    public function enterNode(\ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Node $node);
     /**
      * @return null|int|\PhpParser\Node|Node[] Replacement node (or special return)
      */
-    public function leaveNode(\ConfigTransformer202203077\PHPStan\PhpDocParser\Ast\Node $node);
-    public function afterTraverse(\ConfigTransformer202203077\PHPStan\PhpDocParser\Ast\Node $node) : void;
+    public function leaveNode(\ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Node $node);
+    public function afterTraverse(\ConfigTransformer202203079\PHPStan\PhpDocParser\Ast\Node $node) : void;
 }
