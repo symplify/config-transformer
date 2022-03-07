@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203063\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202203073\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202203063\PhpParser\Node;
-use ConfigTransformer202203063\PhpParser\Node\Stmt\Return_;
-use ConfigTransformer202203063\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use ConfigTransformer202203063\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use ConfigTransformer202203073\PhpParser\Node;
+use ConfigTransformer202203073\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202203073\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use ConfigTransformer202203073\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 /**
  * @api
  */
@@ -23,7 +23,7 @@ final class RoutingConfiguratorReturnClosureFactory
     /**
      * @param RoutingCaseConverterInterface[] $routingCaseConverters
      */
-    public function __construct(\ConfigTransformer202203063\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
+    public function __construct(\ConfigTransformer202203073\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
     {
         $this->containerConfiguratorClosureNodeFactory = $containerConfiguratorClosureNodeFactory;
         $this->routingCaseConverters = $routingCaseConverters;
@@ -31,11 +31,11 @@ final class RoutingConfiguratorReturnClosureFactory
     /**
      * @param mixed[] $arrayData
      */
-    public function createFromArrayData(array $arrayData) : \ConfigTransformer202203063\PhpParser\Node\Stmt\Return_
+    public function createFromArrayData(array $arrayData) : \ConfigTransformer202203073\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->containerConfiguratorClosureNodeFactory->createRoutingClosureFromStmts($stmts);
-        return new \ConfigTransformer202203063\PhpParser\Node\Stmt\Return_($closure);
+        return new \ConfigTransformer202203073\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @param mixed[] $arrayData

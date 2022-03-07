@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203063\Symplify\Astral\PhpDocParser\Exception;
+namespace ConfigTransformer202203073\Symplify\Astral\PhpDocParser\Exception;
 
 use Exception;
 final class InvalidTraverseException extends \Exception

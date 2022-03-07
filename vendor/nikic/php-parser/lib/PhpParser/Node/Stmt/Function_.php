@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203063\PhpParser\Node\Stmt;
+namespace ConfigTransformer202203073\PhpParser\Node\Stmt;
 
-use ConfigTransformer202203063\PhpParser\Node;
-use ConfigTransformer202203063\PhpParser\Node\FunctionLike;
-class Function_ extends \ConfigTransformer202203063\PhpParser\Node\Stmt implements \ConfigTransformer202203063\PhpParser\Node\FunctionLike
+use ConfigTransformer202203073\PhpParser\Node;
+use ConfigTransformer202203073\PhpParser\Node\FunctionLike;
+class Function_ extends \ConfigTransformer202203073\PhpParser\Node\Stmt implements \ConfigTransformer202203073\PhpParser\Node\FunctionLike
 {
     /** @var bool Whether function returns by reference */
     public $byRef;
@@ -37,10 +37,10 @@ class Function_ extends \ConfigTransformer202203063\PhpParser\Node\Stmt implemen
     {
         $this->attributes = $attributes;
         $this->byRef = $subNodes['byRef'] ?? \false;
-        $this->name = \is_string($name) ? new \ConfigTransformer202203063\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202203073\PhpParser\Node\Identifier($name) : $name;
         $this->params = $subNodes['params'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \ConfigTransformer202203063\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \ConfigTransformer202203073\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }
