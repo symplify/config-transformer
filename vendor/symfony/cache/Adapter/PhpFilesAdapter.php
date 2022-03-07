@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203075\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202203079\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202203075\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202203075\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202203075\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202203075\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
-use ConfigTransformer202203075\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer202203079\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202203079\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202203079\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202203079\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
+use ConfigTransformer202203079\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Piotr Stankowski <git@trakos.pl>
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
  */
-class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202203075\Symfony\Component\Cache\PruneableInterface
+class PhpFilesAdapter extends \ConfigTransformer202203079\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202203079\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemCommonTrait {
         doClear as private doCommonClear;
@@ -100,7 +100,7 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
                 $values[$id] = null;
             } elseif (!\is_object($value)) {
                 $values[$id] = $value;
-            } elseif (!$value instanceof \ConfigTransformer202203075\Symfony\Component\Cache\Adapter\LazyValue) {
+            } elseif (!$value instanceof \ConfigTransformer202203079\Symfony\Component\Cache\Adapter\LazyValue) {
                 $values[$id] = $value();
             } elseif (\false === ($values[$id] = (include $value->file))) {
                 unset($values[$id], $this->values[$id]);
@@ -127,7 +127,7 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
                         }
                         [$expiresAt, $this->values[$id]] = $expiresAt;
                     } elseif ($now < $expiresAt) {
-                        $this->values[$id] = new \ConfigTransformer202203075\Symfony\Component\Cache\Adapter\LazyValue($file);
+                        $this->values[$id] = new \ConfigTransformer202203079\Symfony\Component\Cache\Adapter\LazyValue($file);
                     }
                     if ($now >= $expiresAt) {
                         unset($this->values[$id], $missingIds[$k], self::$valuesCache[$file]);
@@ -163,7 +163,7 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
                 }
                 [$expiresAt, $value] = $expiresAt;
             } elseif ($this->appendOnly) {
-                $value = new \ConfigTransformer202203075\Symfony\Component\Cache\Adapter\LazyValue($file);
+                $value = new \ConfigTransformer202203079\Symfony\Component\Cache\Adapter\LazyValue($file);
             }
         } catch (\ErrorException $e) {
             return \false;
@@ -193,9 +193,9 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
                 $value = "'N;'";
             } elseif (\is_object($value) || \is_array($value)) {
                 try {
-                    $value = \ConfigTransformer202203075\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
+                    $value = \ConfigTransformer202203079\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
                 } catch (\Exception $e) {
-                    throw new \ConfigTransformer202203075\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
+                    throw new \ConfigTransformer202203079\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)), 0, $e);
                 }
             } elseif (\is_string($value)) {
                 // Wrap "N;" in a closure to not confuse it with an encoded `null`
@@ -204,7 +204,7 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
                 }
                 $value = \var_export($value, \true);
             } elseif (!\is_scalar($value)) {
-                throw new \ConfigTransformer202203075\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
+                throw new \ConfigTransformer202203079\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable "%s" value.', $key, \get_debug_type($value)));
             } else {
                 $value = \var_export($value, \true);
             }
@@ -228,7 +228,7 @@ class PhpFilesAdapter extends \ConfigTransformer202203075\Symfony\Component\Cach
             unset(self::$valuesCache[$file]);
         }
         if (!$ok && !\is_writable($this->directory)) {
-            throw new \ConfigTransformer202203075\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
+            throw new \ConfigTransformer202203079\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $ok;
     }
