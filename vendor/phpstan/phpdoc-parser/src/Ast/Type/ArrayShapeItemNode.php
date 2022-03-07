@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
-use ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
-use ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class ArrayShapeItemNode implements \ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
+use ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
+use ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class ArrayShapeItemNode implements \ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null */
@@ -18,7 +18,7 @@ class ArrayShapeItemNode implements \ConfigTransformer202203075\PHPStan\PhpDocPa
     /**
      * @param ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null $keyName
      */
-    public function __construct($keyName, bool $optional, \ConfigTransformer202203075\PHPStan\PhpDocParser\Ast\Type\TypeNode $valueType)
+    public function __construct($keyName, bool $optional, \ConfigTransformer202203076\PHPStan\PhpDocParser\Ast\Type\TypeNode $valueType)
     {
         $this->keyName = $keyName;
         $this->optional = $optional;
