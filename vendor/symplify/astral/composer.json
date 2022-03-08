@@ -6,11 +6,11 @@
     "require": {
         "php": ">=8.0",
         "nette\/utils": "^3.2",
-        "symfony\/dependency-injection": "^5.4|^6.0",
+        "symfony\/dependency-injection": "^6.0",
         "symplify\/smart-file-system": "dev-main",
         "phpstan\/phpstan": "^1.4.6",
         "phpstan\/phpdoc-parser": "^1.2",
-        "symfony\/config": "^5.4|^6.0",
+        "symfony\/config": "^6.0",
         "nikic\/php-parser": "^4.13.2",
         "symplify\/package-builder": "dev-main",
         "symplify\/symplify-kernel": "dev-main"
@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202203085\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202203082\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202203085\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202203082\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {

@@ -6,7 +6,7 @@
         "php": ">=8.0",
         "nette\/utils": "^3.2",
         "nikic\/php-parser": "^4.13.2",
-        "symfony\/yaml": "^5.4|^6.0",
+        "symfony\/yaml": "^6.0",
         "symplify\/astral": "dev-main",
         "symplify\/symplify-kernel": "dev-main"
     },
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202203085\\Symplify\\PhpConfigPrinter\\": "src"
+            "ConfigTransformer202203082\\Symplify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202203085\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+            "ConfigTransformer202203082\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
         },
         "files": [
             "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",

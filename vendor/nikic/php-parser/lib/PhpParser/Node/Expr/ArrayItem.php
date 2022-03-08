@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203085\PhpParser\Node\Expr;
+namespace ConfigTransformer202203082\PhpParser\Node\Expr;
 
-use ConfigTransformer202203085\PhpParser\Node\Expr;
-class ArrayItem extends \ConfigTransformer202203085\PhpParser\Node\Expr
+use ConfigTransformer202203082\PhpParser\Node\Expr;
+class ArrayItem extends \ConfigTransformer202203082\PhpParser\Node\Expr
 {
     /** @var null|Expr Key */
     public $key;
@@ -22,7 +22,7 @@ class ArrayItem extends \ConfigTransformer202203085\PhpParser\Node\Expr
      * @param bool      $byRef      Whether to assign by reference
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203085\PhpParser\Node\Expr $value, \ConfigTransformer202203085\PhpParser\Node\Expr $key = null, bool $byRef = \false, array $attributes = [], bool $unpack = \false)
+    public function __construct(\ConfigTransformer202203082\PhpParser\Node\Expr $value, \ConfigTransformer202203082\PhpParser\Node\Expr $key = null, bool $byRef = \false, array $attributes = [], bool $unpack = \false)
     {
         $this->attributes = $attributes;
         $this->key = $key;
