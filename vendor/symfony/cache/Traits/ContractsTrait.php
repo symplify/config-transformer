@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022030710\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202203085\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer2022030710\Psr\Log\LoggerInterface;
-use ConfigTransformer2022030710\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer2022030710\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer2022030710\Symfony\Component\Cache\LockRegistry;
-use ConfigTransformer2022030710\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer2022030710\Symfony\Contracts\Cache\CacheTrait;
-use ConfigTransformer2022030710\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202203085\Psr\Log\LoggerInterface;
+use ConfigTransformer202203085\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer202203085\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202203085\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202203085\Symfony\Component\Cache\LockRegistry;
+use ConfigTransformer202203085\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202203085\Symfony\Contracts\Cache\CacheTrait;
+use ConfigTransformer202203085\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -41,7 +41,7 @@ trait ContractsTrait
     public function setCallbackWrapper(?callable $callbackWrapper) : callable
     {
         if (!isset($this->callbackWrapper)) {
-            $this->callbackWrapper = [\ConfigTransformer2022030710\Symfony\Component\Cache\LockRegistry::class, 'compute'];
+            $this->callbackWrapper = [\ConfigTransformer202203085\Symfony\Component\Cache\LockRegistry::class, 'compute'];
             if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true)) {
                 $this->setCallbackWrapper(null);
             }
@@ -50,27 +50,27 @@ trait ContractsTrait
             $callbackWrapper = \Closure::fromCallable($callbackWrapper);
         }
         $previousWrapper = $this->callbackWrapper;
-        $this->callbackWrapper = $callbackWrapper ?? static function (callable $callback, \ConfigTransformer2022030710\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer2022030710\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata, ?\ConfigTransformer2022030710\Psr\Log\LoggerInterface $logger) {
+        $this->callbackWrapper = $callbackWrapper ?? static function (callable $callback, \ConfigTransformer202203085\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202203085\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata, ?\ConfigTransformer202203085\Psr\Log\LoggerInterface $logger) {
             return $callback($item, $save);
         };
         return $previousWrapper;
     }
-    private function doGet(\ConfigTransformer2022030710\Symfony\Component\Cache\Adapter\AdapterInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null)
+    private function doGet(\ConfigTransformer202203085\Symfony\Component\Cache\Adapter\AdapterInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null)
     {
         if (0 > ($beta = $beta ?? 1.0)) {
-            throw new \ConfigTransformer2022030710\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta));
+            throw new \ConfigTransformer202203085\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta));
         }
         static $setMetadata;
-        $setMetadata ?? ($setMetadata = \Closure::bind(static function (\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem $item, float $startTime, ?array &$metadata) {
+        $setMetadata ?? ($setMetadata = \Closure::bind(static function (\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem $item, float $startTime, ?array &$metadata) {
             if ($item->expiry > ($endTime = \microtime(\true))) {
-                $item->newMetadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $metadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
-                $item->newMetadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $metadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
+                $item->newMetadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $metadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
+                $item->newMetadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $metadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
             } else {
-                unset($metadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY], $metadata[\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::METADATA_CTIME]);
+                unset($metadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY], $metadata[\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::METADATA_CTIME]);
             }
-        }, null, \ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem::class));
-        $this->callbackWrapper ??= \Closure::fromCallable([\ConfigTransformer2022030710\Symfony\Component\Cache\LockRegistry::class, 'compute']);
-        return $this->contractsGet($pool, $key, function (\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem $item, bool &$save) use($pool, $callback, $setMetadata, &$metadata, $key) {
+        }, null, \ConfigTransformer202203085\Symfony\Component\Cache\CacheItem::class));
+        $this->callbackWrapper ??= \Closure::fromCallable([\ConfigTransformer202203085\Symfony\Component\Cache\LockRegistry::class, 'compute']);
+        return $this->contractsGet($pool, $key, function (\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem $item, bool &$save) use($pool, $callback, $setMetadata, &$metadata, $key) {
             // don't wrap nor save recursive calls
             if (isset($this->computing[$key])) {
                 $value = $callback($item, $save);
@@ -83,7 +83,7 @@ trait ContractsTrait
                 $this->setCallbackWrapper($this->setCallbackWrapper(null));
             }
             try {
-                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, function (\ConfigTransformer2022030710\Symfony\Component\Cache\CacheItem $item) use($setMetadata, $startTime, &$metadata) {
+                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, function (\ConfigTransformer202203085\Symfony\Component\Cache\CacheItem $item) use($setMetadata, $startTime, &$metadata) {
                     $setMetadata($item, $startTime, $metadata);
                 }, $this->logger ?? null);
                 $setMetadata($item, $startTime, $metadata);

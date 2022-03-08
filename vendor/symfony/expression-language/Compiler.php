@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022030710\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202203085\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer2022030710\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202203085\Symfony\Contracts\Service\ResetInterface;
 /**
  * Compiles a node to PHP code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Compiler implements \ConfigTransformer2022030710\Symfony\Contracts\Service\ResetInterface
+class Compiler implements \ConfigTransformer202203085\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * @var string
@@ -54,12 +54,12 @@ class Compiler implements \ConfigTransformer2022030710\Symfony\Contracts\Service
      *
      * @return $this
      */
-    public function compile(\ConfigTransformer2022030710\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function compile(\ConfigTransformer202203085\Symfony\Component\ExpressionLanguage\Node\Node $node)
     {
         $node->compile($this);
         return $this;
     }
-    public function subcompile(\ConfigTransformer2022030710\Symfony\Component\ExpressionLanguage\Node\Node $node)
+    public function subcompile(\ConfigTransformer202203085\Symfony\Component\ExpressionLanguage\Node\Node $node)
     {
         $current = $this->source;
         $this->source = '';

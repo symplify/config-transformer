@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022030710\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202203085\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022030710\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202203085\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 /**
  * Resolves all TaggedIteratorArgument arguments.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ResolveTaggedIteratorArgumentPass extends \ConfigTransformer2022030710\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveTaggedIteratorArgumentPass extends \ConfigTransformer202203085\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     use PriorityTaggedServiceTrait;
     /**
@@ -26,7 +26,7 @@ class ResolveTaggedIteratorArgumentPass extends \ConfigTransformer2022030710\Sym
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer2022030710\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+        if (!$value instanceof \ConfigTransformer202203085\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
             return parent::processValue($value, $isRoot);
         }
         $value->setValues($this->findAndSortTaggedServices($value, $this->container));

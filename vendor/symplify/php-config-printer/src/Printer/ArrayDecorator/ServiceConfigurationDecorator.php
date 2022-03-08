@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030710\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
+namespace ConfigTransformer202203085\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use ConfigTransformer2022030710\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use ConfigTransformer202203085\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
 final class ServiceConfigurationDecorator
 {
     /**
      * @var \Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver
      */
     private $constantNameFromValueResolver;
-    public function __construct(\ConfigTransformer2022030710\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
+    public function __construct(\ConfigTransformer202203085\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
     {
         $this->constantNameFromValueResolver = $constantNameFromValueResolver;
     }
     /**
-     * @param mixed|mixed[] $configuration
-     * @return mixed|mixed[]
+     * @param mixed $configuration
+     * @return mixed
      */
     public function decorate($configuration, string $class, bool $shouldUseConfigureMethod)
     {

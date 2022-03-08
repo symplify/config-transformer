@@ -1,21 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030710\Symplify\PhpConfigPrinter\RoutingCaseConverter;
+namespace ConfigTransformer202203085\Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use ConfigTransformer2022030710\locale;
-use ConfigTransformer2022030710\PhpParser\Node\Arg;
-use ConfigTransformer2022030710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022030710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2022030710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2022030710\Symplify\PackageBuilder\Strings\StringFormatConverter;
-use ConfigTransformer2022030710\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use ConfigTransformer2022030710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer2022030710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-final class ImportRoutingCaseConverter implements \ConfigTransformer2022030710\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
+use ConfigTransformer202203085\PhpParser\Node\Arg;
+use ConfigTransformer202203085\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202203085\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202203085\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202203085\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer202203085\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use ConfigTransformer202203085\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202203085\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+final class ImportRoutingCaseConverter implements \ConfigTransformer202203085\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
 {
     /**
-     * @var string[]|class-string<locale>[]
+     * @var string[]
      */
     private const NESTED_KEYS = ['name_prefix', 'defaults', 'requirements', 'options', 'utf8', 'condition', 'host', 'schemes', self::METHODS, 'controller', 'locale', 'format', 'stateless'];
     /**
@@ -58,13 +57,13 @@ final class ImportRoutingCaseConverter implements \ConfigTransformer2022030710\S
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer2022030710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\ConfigTransformer202203085\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
-        $this->stringFormatConverter = new \ConfigTransformer2022030710\Symplify\PackageBuilder\Strings\StringFormatConverter();
+        $this->stringFormatConverter = new \ConfigTransformer202203085\Symplify\PackageBuilder\Strings\StringFormatConverter();
     }
     /**
-     * @param mixed[] $values
+     * @param mixed $values
      */
     public function match(string $key, $values) : bool
     {
@@ -73,15 +72,15 @@ final class ImportRoutingCaseConverter implements \ConfigTransformer2022030710\S
     /**
      * @param mixed $values
      */
-    public function convertToMethodCall(string $key, $values) : \ConfigTransformer2022030710\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall(string $key, $values) : \ConfigTransformer202203085\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \ConfigTransformer2022030710\PhpParser\Node\Expr\Variable(\ConfigTransformer2022030710\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \ConfigTransformer202203085\PhpParser\Node\Expr\Variable(\ConfigTransformer202203085\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         $args = $this->createAddArgs(self::IMPORT_ARGS, $values);
-        $methodCall = new \ConfigTransformer2022030710\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
+        $methodCall = new \ConfigTransformer202203085\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
         // Handle prefix independently as it has specific args
         if (isset($values[self::PREFIX])) {
             $args = $this->createAddArgs(self::PREFIX_ARGS, $values);
-            $methodCall = new \ConfigTransformer2022030710\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
+            $methodCall = new \ConfigTransformer202203085\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
         }
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
@@ -94,14 +93,14 @@ final class ImportRoutingCaseConverter implements \ConfigTransformer2022030710\S
             }
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
             $name = $this->stringFormatConverter->underscoreAndHyphenToCamelCase($nestedKey);
-            $methodCall = new \ConfigTransformer2022030710\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
+            $methodCall = new \ConfigTransformer202203085\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
         }
-        return new \ConfigTransformer2022030710\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \ConfigTransformer202203085\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param string[] $argsNames
-     * @param mixed $values
      * @return Arg[]
+     * @param mixed $values
      */
     private function createAddArgs(array $argsNames, $values) : array
     {

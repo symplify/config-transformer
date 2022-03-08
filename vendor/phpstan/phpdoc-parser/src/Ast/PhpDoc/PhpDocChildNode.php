@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202203085\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\Node;
-interface PhpDocChildNode extends \ConfigTransformer2022030710\PHPStan\PhpDocParser\Ast\Node
+use ConfigTransformer202203085\PHPStan\PhpDocParser\Ast\Node;
+interface PhpDocChildNode extends \ConfigTransformer202203085\PHPStan\PhpDocParser\Ast\Node
 {
 }
