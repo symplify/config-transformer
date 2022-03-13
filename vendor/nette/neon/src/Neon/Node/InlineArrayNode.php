@@ -5,20 +5,19 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202203085\Nette\Neon\Node;
+namespace ConfigTransformer202203132\Nette\Neon\Node;
 
 /** @internal */
-final class InlineArrayNode extends \ConfigTransformer202203085\Nette\Neon\Node\ArrayNode
+final class InlineArrayNode extends \ConfigTransformer202203132\Nette\Neon\Node\ArrayNode
 {
     /** @var string */
     public $bracket;
-    public function __construct(string $bracket, int $pos = null)
+    public function __construct(string $bracket)
     {
         $this->bracket = $bracket;
-        $this->startPos = $this->endPos = $pos;
     }
     public function toString() : string
     {
-        return $this->bracket . \ConfigTransformer202203085\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->items) . ['[' => ']', '{' => '}', '(' => ')'][$this->bracket];
+        return $this->bracket . \ConfigTransformer202203132\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->items) . ['[' => ']', '{' => '}', '(' => ')'][$this->bracket];
     }
 }

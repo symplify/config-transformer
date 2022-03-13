@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203085\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202203132\Symfony\Component\Finder\Iterator;
 
 /**
  * @author Jérémy Derussé <jeremy@derusse.com>

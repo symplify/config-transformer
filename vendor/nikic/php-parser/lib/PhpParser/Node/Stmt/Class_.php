@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203085\PhpParser\Node\Stmt;
+namespace ConfigTransformer202203132\PhpParser\Node\Stmt;
 
-use ConfigTransformer202203085\PhpParser\Error;
-use ConfigTransformer202203085\PhpParser\Node;
-class Class_ extends \ConfigTransformer202203085\PhpParser\Node\Stmt\ClassLike
+use ConfigTransformer202203132\PhpParser\Error;
+use ConfigTransformer202203132\PhpParser\Node;
+class Class_ extends \ConfigTransformer202203132\PhpParser\Node\Stmt\ClassLike
 {
     const MODIFIER_PUBLIC = 1;
     const MODIFIER_PROTECTED = 2;
@@ -38,7 +38,7 @@ class Class_ extends \ConfigTransformer202203085\PhpParser\Node\Stmt\ClassLike
     {
         $this->attributes = $attributes;
         $this->flags = $subNodes['flags'] ?? $subNodes['type'] ?? 0;
-        $this->name = \is_string($name) ? new \ConfigTransformer202203085\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202203132\PhpParser\Node\Identifier($name) : $name;
         $this->extends = $subNodes['extends'] ?? null;
         $this->implements = $subNodes['implements'] ?? [];
         $this->stmts = $subNodes['stmts'] ?? [];
@@ -81,22 +81,22 @@ class Class_ extends \ConfigTransformer202203085\PhpParser\Node\Stmt\ClassLike
     public static function verifyModifier($a, $b)
     {
         if ($a & self::VISIBILITY_MODIFIER_MASK && $b & self::VISIBILITY_MODIFIER_MASK) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Multiple access type modifiers are not allowed');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Multiple access type modifiers are not allowed');
         }
         if ($a & self::MODIFIER_ABSTRACT && $b & self::MODIFIER_ABSTRACT) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Multiple abstract modifiers are not allowed');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Multiple abstract modifiers are not allowed');
         }
         if ($a & self::MODIFIER_STATIC && $b & self::MODIFIER_STATIC) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Multiple static modifiers are not allowed');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Multiple static modifiers are not allowed');
         }
         if ($a & self::MODIFIER_FINAL && $b & self::MODIFIER_FINAL) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Multiple final modifiers are not allowed');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Multiple final modifiers are not allowed');
         }
         if ($a & self::MODIFIER_READONLY && $b & self::MODIFIER_READONLY) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Multiple readonly modifiers are not allowed');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Multiple readonly modifiers are not allowed');
         }
         if ($a & 48 && $b & 48) {
-            throw new \ConfigTransformer202203085\PhpParser\Error('Cannot use the final modifier on an abstract class member');
+            throw new \ConfigTransformer202203132\PhpParser\Error('Cannot use the final modifier on an abstract class member');
         }
     }
     public function getType() : string
