@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203158\PhpParser\Node\Stmt;
+namespace ConfigTransformer202203157\PhpParser\Node\Stmt;
 
-use ConfigTransformer202203158\PhpParser\Node;
-use ConfigTransformer202203158\PhpParser\Node\Expr;
-class StaticVar extends \ConfigTransformer202203158\PhpParser\Node\Stmt
+use ConfigTransformer202203157\PhpParser\Node;
+use ConfigTransformer202203157\PhpParser\Node\Expr;
+class StaticVar extends \ConfigTransformer202203157\PhpParser\Node\Stmt
 {
     /** @var Expr\Variable Variable */
     public $var;
@@ -18,7 +18,7 @@ class StaticVar extends \ConfigTransformer202203158\PhpParser\Node\Stmt
      * @param null|Node\Expr $default    Default value
      * @param array          $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203158\PhpParser\Node\Expr\Variable $var, \ConfigTransformer202203158\PhpParser\Node\Expr $default = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202203157\PhpParser\Node\Expr\Variable $var, \ConfigTransformer202203157\PhpParser\Node\Expr $default = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
