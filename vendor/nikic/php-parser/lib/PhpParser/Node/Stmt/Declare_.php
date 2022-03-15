@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203157\PhpParser\Node\Stmt;
+namespace ConfigTransformer202203156\PhpParser\Node\Stmt;
 
-use ConfigTransformer202203157\PhpParser\Node;
-class Declare_ extends \ConfigTransformer202203157\PhpParser\Node\Stmt
+use ConfigTransformer202203156\PhpParser\Node;
+class Declare_ extends \ConfigTransformer202203156\PhpParser\Node\Stmt
 {
     /** @var DeclareDeclare[] List of declares */
     public $declares;

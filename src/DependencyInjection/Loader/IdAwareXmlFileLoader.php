@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203157\Symplify\ConfigTransformer\DependencyInjection\Loader;
+namespace ConfigTransformer202203156\Symplify\ConfigTransformer\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
@@ -9,24 +9,24 @@ use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use InvalidArgumentException;
-use ConfigTransformer202203157\Nette\Utils\Strings;
-use ConfigTransformer202203157\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202203157\Symfony\Component\Config\Util\Exception\XmlParsingException;
-use ConfigTransformer202203157\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer202203157\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202203157\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202203157\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use ConfigTransformer202203157\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202203157\Symplify\ConfigTransformer\Naming\UniqueNaming;
-use ConfigTransformer202203157\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
-use ConfigTransformer202203157\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202203156\Nette\Utils\Strings;
+use ConfigTransformer202203156\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202203156\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use ConfigTransformer202203156\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer202203156\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202203156\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202203156\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ConfigTransformer202203156\Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use ConfigTransformer202203156\Symplify\ConfigTransformer\Naming\UniqueNaming;
+use ConfigTransformer202203156\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
+use ConfigTransformer202203156\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * Mimics https://github.com/symfony/symfony/commit/b8c68da0107a4f433dd414a355ea5589da0da0e8 for Symfony 3.3-
  *
  * @property-read ContainerBuilder $container
  * @property-read FileLocatorInterface $locator
  */
-final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+final class IdAwareXmlFileLoader extends \ConfigTransformer202203156\Symfony\Component\DependencyInjection\Loader\XmlFileLoader
 {
     /**
      * @var string
@@ -48,12 +48,12 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
      * @var \Symplify\ConfigTransformer\Collector\XmlImportCollector
      */
     private $xmlImportCollector;
-    public function __construct(\ConfigTransformer202203157\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202203157\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202203157\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202203157\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
+    public function __construct(\ConfigTransformer202203156\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202203156\Symfony\Component\Config\FileLocatorInterface $fileLocator, \ConfigTransformer202203156\Symplify\ConfigTransformer\Naming\UniqueNaming $uniqueNaming, \ConfigTransformer202203156\Symplify\ConfigTransformer\Collector\XmlImportCollector $xmlImportCollector)
     {
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;
         parent::__construct($containerBuilder, $fileLocator);
-        $this->privatesCaller = new \ConfigTransformer202203157\Symplify\PackageBuilder\Reflection\PrivatesCaller();
+        $this->privatesCaller = new \ConfigTransformer202203156\Symplify\PackageBuilder\Reflection\PrivatesCaller();
     }
     /**
      * @param string|string[]|null $exclude
@@ -77,7 +77,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
     {
         $path = $this->locator->locate($resource);
         if (!\is_string($path)) {
-            throw new \ConfigTransformer202203157\Symfony\Component\Config\Util\Exception\XmlParsingException();
+            throw new \ConfigTransformer202203156\Symfony\Component\Config\Util\Exception\XmlParsingException();
         }
         // mostly mimics parseFileToDOM(), just without validation, that often breaks due to missing extension
         $domDocument = $this->parseFileToDOMWithoutValidation($path);
@@ -89,7 +89,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
         // parameters
         $this->privatesCaller->callPrivateMethod($this, 'parseParameters', [$domDocument, $path]);
         // faking extensions
-        $aliasAndNamespaceConfigurableExtension = new \ConfigTransformer202203157\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension('doctrine', 'http://symfony.com/schema/dic/doctrine');
+        $aliasAndNamespaceConfigurableExtension = new \ConfigTransformer202203156\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension('doctrine', 'http://symfony.com/schema/dic/doctrine');
         $this->container->registerExtension($aliasAndNamespaceConfigurableExtension);
         $this->privatesCaller->callPrivateMethod($this, 'loadFromExtensions', [$domDocument]);
         // services
@@ -126,7 +126,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
         \uksort($definitions, 'strnatcmp');
         $inversedDefinitions = \array_reverse($definitions);
         foreach ($inversedDefinitions as $id => [$domElement, $file]) {
-            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202203157\Symfony\Component\DependencyInjection\Definition()]);
+            $definition = $this->privatesCaller->callPrivateMethod($this, 'parseDefinition', [$domElement, $file, new \ConfigTransformer202203156\Symfony\Component\DependencyInjection\Definition()]);
             if ($definition !== null) {
                 $this->setDefinition($id, $definition);
             }
@@ -171,7 +171,7 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
     }
     private function createServiceNameFromClass(string $class) : string
     {
-        $serviceName = \ConfigTransformer202203157\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
+        $serviceName = \ConfigTransformer202203156\Nette\Utils\Strings::replace($class, '#\\\\#', '.');
         $serviceName = \strtolower($serviceName);
         return $this->uniqueNaming->uniquateName($serviceName);
     }
@@ -187,10 +187,10 @@ final class IdAwareXmlFileLoader extends \ConfigTransformer202203157\Symfony\Com
     private function parseFileToDOMWithoutValidation(string $path) : \DOMDocument
     {
         try {
-            return \ConfigTransformer202203157\Symfony\Component\Config\Util\XmlUtils::loadFile($path);
+            return \ConfigTransformer202203156\Symfony\Component\Config\Util\XmlUtils::loadFile($path);
         } catch (\InvalidArgumentException $invalidArgumentException) {
             $errorMessage = \sprintf('Unable to parse file "%s": %s', $path, $invalidArgumentException->getMessage());
-            throw new \ConfigTransformer202203157\Symfony\Component\Config\Util\Exception\XmlParsingException($errorMessage, $invalidArgumentException->getCode(), $invalidArgumentException);
+            throw new \ConfigTransformer202203156\Symfony\Component\Config\Util\Exception\XmlParsingException($errorMessage, $invalidArgumentException->getCode(), $invalidArgumentException);
         }
     }
 }
