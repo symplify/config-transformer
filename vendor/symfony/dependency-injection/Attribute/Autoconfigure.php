@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203164\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202203169\Symfony\Component\DependencyInjection\Attribute;
 
 /**
  * An attribute to tell how a base type should be autoconfigured.

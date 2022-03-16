@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203164\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202203169\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202203164\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202203169\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Formatter class for console output.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
+class OutputFormatter implements \ConfigTransformer202203169\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
 {
     /**
      * @var bool
@@ -66,14 +66,14 @@ class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\C
     public function __construct(bool $decorated = \false, array $styles = [])
     {
         $this->decorated = $decorated;
-        $this->setStyle('error', new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
-        $this->setStyle('info', new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
-        $this->setStyle('comment', new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
-        $this->setStyle('question', new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
+        $this->setStyle('error', new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
+        $this->setStyle('info', new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
+        $this->setStyle('comment', new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
+        $this->setStyle('question', new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
         foreach ($styles as $name => $style) {
             $this->setStyle($name, $style);
         }
-        $this->styleStack = new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
+        $this->styleStack = new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
     }
     /**
      * {@inheritdoc}
@@ -92,7 +92,7 @@ class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function setStyle(string $name, \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
+    public function setStyle(string $name, \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
     {
         $this->styles[\strtolower($name)] = $style;
     }
@@ -106,10 +106,10 @@ class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function getStyle(string $name) : \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    public function getStyle(string $name) : \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (!$this->hasStyle($name)) {
-            throw new \ConfigTransformer202203164\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Undefined style: "%s".', $name));
+            throw new \ConfigTransformer202203169\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Undefined style: "%s".', $name));
         }
         return $this->styles[\strtolower($name)];
     }
@@ -163,14 +163,14 @@ class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\C
         $output .= $this->applyCurrentStyle(\substr($message, $offset), $output, $width, $currentLineLength);
         return \strtr($output, ["\0" => '\\', '\\<' => '<', '\\>' => '>']);
     }
-    public function getStyleStack() : \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyleStack
+    public function getStyleStack() : \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyleStack
     {
         return $this->styleStack;
     }
     /**
      * Tries to create new style instance from string.
      */
-    private function createStyleFromString(string $string) : ?\ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    private function createStyleFromString(string $string) : ?\ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (isset($this->styles[$string])) {
             return $this->styles[$string];
@@ -178,7 +178,7 @@ class OutputFormatter implements \ConfigTransformer202203164\Symfony\Component\C
         if (!\preg_match_all('/([^=]+)=([^;]+)(;|$)/', $string, $matches, \PREG_SET_ORDER)) {
             return null;
         }
-        $style = new \ConfigTransformer202203164\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $style = new \ConfigTransformer202203169\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         foreach ($matches as $match) {
             \array_shift($match);
             $match[0] = \strtolower($match[0]);
