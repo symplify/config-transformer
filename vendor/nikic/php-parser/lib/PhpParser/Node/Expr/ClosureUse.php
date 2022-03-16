@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203162\PhpParser\Node\Expr;
+namespace ConfigTransformer202203164\PhpParser\Node\Expr;
 
-use ConfigTransformer202203162\PhpParser\Node\Expr;
-class ClosureUse extends \ConfigTransformer202203162\PhpParser\Node\Expr
+use ConfigTransformer202203164\PhpParser\Node\Expr;
+class ClosureUse extends \ConfigTransformer202203164\PhpParser\Node\Expr
 {
     /** @var Expr\Variable Variable to use */
     public $var;
@@ -17,7 +17,7 @@ class ClosureUse extends \ConfigTransformer202203162\PhpParser\Node\Expr
      * @param bool          $byRef      Whether to use by reference
      * @param array         $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203162\PhpParser\Node\Expr\Variable $var, bool $byRef = \false, array $attributes = [])
+    public function __construct(\ConfigTransformer202203164\PhpParser\Node\Expr\Variable $var, bool $byRef = \false, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
