@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203164\Symfony\Component\Finder\Comparator;
+namespace ConfigTransformer2022031610\Symfony\Component\Finder\Comparator;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

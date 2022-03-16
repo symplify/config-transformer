@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203164\PhpParser\Node\Expr;
+namespace ConfigTransformer2022031610\PhpParser\Node\Expr;
 
-use ConfigTransformer202203164\PhpParser\Node\Expr;
-use ConfigTransformer202203164\PhpParser\Node\Name;
-class Instanceof_ extends \ConfigTransformer202203164\PhpParser\Node\Expr
+use ConfigTransformer2022031610\PhpParser\Node\Expr;
+use ConfigTransformer2022031610\PhpParser\Node\Name;
+class Instanceof_ extends \ConfigTransformer2022031610\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -18,7 +18,7 @@ class Instanceof_ extends \ConfigTransformer202203164\PhpParser\Node\Expr
      * @param Name|Expr $class      Class name
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203164\PhpParser\Node\Expr $expr, $class, array $attributes = [])
+    public function __construct(\ConfigTransformer2022031610\PhpParser\Node\Expr $expr, $class, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

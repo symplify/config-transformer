@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203164\Symfony\Component\Console\Exception;
+namespace ConfigTransformer2022031610\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect namespace typed in the console.
  *
  * @author Pierre du Plessis <pdples@gmail.com>
  */
-class NamespaceNotFoundException extends \ConfigTransformer202203164\Symfony\Component\Console\Exception\CommandNotFoundException
+class NamespaceNotFoundException extends \ConfigTransformer2022031610\Symfony\Component\Console\Exception\CommandNotFoundException
 {
 }

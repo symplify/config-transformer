@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202203164\PhpParser\Parser;
+namespace ConfigTransformer2022031610\PhpParser\Parser;
 
 /* GENERATED file based on grammar/tokens.y */
 final class Tokens
