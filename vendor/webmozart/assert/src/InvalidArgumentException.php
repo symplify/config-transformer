@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203166\Webmozart\Assert;
+namespace ConfigTransformer202203160\Webmozart\Assert;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {
