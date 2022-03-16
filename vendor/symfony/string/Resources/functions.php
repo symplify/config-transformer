@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022031610\Symfony\Component\String;
+namespace ConfigTransformer202203162\Symfony\Component\String;
 
-if (!\function_exists(\ConfigTransformer2022031610\Symfony\Component\String\u::class)) {
-    function u(?string $string = '') : \ConfigTransformer2022031610\Symfony\Component\String\UnicodeString
+if (!\function_exists(\ConfigTransformer202203162\Symfony\Component\String\u::class)) {
+    function u(?string $string = '') : \ConfigTransformer202203162\Symfony\Component\String\UnicodeString
     {
-        return new \ConfigTransformer2022031610\Symfony\Component\String\UnicodeString($string ?? '');
+        return new \ConfigTransformer202203162\Symfony\Component\String\UnicodeString($string ?? '');
     }
 }
-if (!\function_exists(\ConfigTransformer2022031610\Symfony\Component\String\b::class)) {
-    function b(?string $string = '') : \ConfigTransformer2022031610\Symfony\Component\String\ByteString
+if (!\function_exists(\ConfigTransformer202203162\Symfony\Component\String\b::class)) {
+    function b(?string $string = '') : \ConfigTransformer202203162\Symfony\Component\String\ByteString
     {
-        return new \ConfigTransformer2022031610\Symfony\Component\String\ByteString($string ?? '');
+        return new \ConfigTransformer202203162\Symfony\Component\String\ByteString($string ?? '');
     }
 }
-if (!\function_exists(\ConfigTransformer2022031610\Symfony\Component\String\s::class)) {
+if (!\function_exists(\ConfigTransformer202203162\Symfony\Component\String\s::class)) {
     /**
      * @return UnicodeString|ByteString
      */
-    function s(?string $string = '') : \ConfigTransformer2022031610\Symfony\Component\String\AbstractString
+    function s(?string $string = '') : \ConfigTransformer202203162\Symfony\Component\String\AbstractString
     {
         $string = $string ?? '';
-        return \preg_match('//u', $string) ? new \ConfigTransformer2022031610\Symfony\Component\String\UnicodeString($string) : new \ConfigTransformer2022031610\Symfony\Component\String\ByteString($string);
+        return \preg_match('//u', $string) ? new \ConfigTransformer202203162\Symfony\Component\String\UnicodeString($string) : new \ConfigTransformer202203162\Symfony\Component\String\ByteString($string);
     }
 }
