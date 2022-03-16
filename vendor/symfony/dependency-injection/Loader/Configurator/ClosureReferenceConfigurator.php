@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203156\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202203164\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-class ClosureReferenceConfigurator extends \ConfigTransformer202203156\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
+class ClosureReferenceConfigurator extends \ConfigTransformer202203164\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
 {
 }
