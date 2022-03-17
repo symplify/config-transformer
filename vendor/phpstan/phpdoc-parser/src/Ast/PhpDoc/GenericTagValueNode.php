@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202203178\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class GenericTagValueNode implements \ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use ConfigTransformer202203178\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class GenericTagValueNode implements \ConfigTransformer202203178\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string (may be empty) */
