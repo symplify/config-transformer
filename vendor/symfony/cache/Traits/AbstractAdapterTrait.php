@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203164\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202203177\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202203164\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202203164\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202203164\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202203164\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202203177\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202203177\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202203177\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202203177\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -87,7 +87,7 @@ trait AbstractAdapterTrait
         try {
             return $this->doHave($id);
         } catch (\Exception $e) {
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to check if key "{key}" is cached: ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to check if key "{key}" is cached: ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
             return \false;
         }
     }
@@ -112,7 +112,7 @@ trait AbstractAdapterTrait
             if (\true !== $e && [] !== $e) {
                 $cleared = \false;
                 $message = 'Failed to save the new namespace' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
+                \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
             } else {
                 $this->namespaceVersion = $namespaceVersion;
                 $this->ids = [];
@@ -123,7 +123,7 @@ trait AbstractAdapterTrait
         try {
             return $this->doClear($namespaceToClear) || $cleared;
         } catch (\Exception $e) {
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to clear the cache: ' . $e->getMessage(), ['exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to clear the cache: ' . $e->getMessage(), ['exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
             return \false;
         }
     }
@@ -161,7 +161,7 @@ trait AbstractAdapterTrait
             } catch (\Exception $e) {
             }
             $message = 'Failed to delete key "{key}"' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
             $ok = \false;
         }
         return $ok;
@@ -169,7 +169,7 @@ trait AbstractAdapterTrait
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem
     {
         $id = $this->getId($key);
         if (isset($this->deferred[$key])) {
@@ -183,7 +183,7 @@ trait AbstractAdapterTrait
             }
             return (self::$createCacheItem)($key, $value, $isHit);
         } catch (\Exception $e) {
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
         }
         return (self::$createCacheItem)($key, null, \false);
     }
@@ -204,7 +204,7 @@ trait AbstractAdapterTrait
         try {
             $items = $this->doFetch($ids);
         } catch (\Exception $e) {
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
             $items = [];
         }
         $ids = \array_combine($ids, $keys);
@@ -213,9 +213,9 @@ trait AbstractAdapterTrait
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202203164\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(\ConfigTransformer202203177\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -224,9 +224,9 @@ trait AbstractAdapterTrait
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202203164\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(\ConfigTransformer202203177\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -281,14 +281,14 @@ trait AbstractAdapterTrait
         try {
             foreach ($items as $id => $value) {
                 if (!isset($keys[$id])) {
-                    throw new \ConfigTransformer202203164\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Could not match value id "%s" to keys "%s".', $id, \implode('", "', $keys)));
+                    throw new \ConfigTransformer202203177\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Could not match value id "%s" to keys "%s".', $id, \implode('", "', $keys)));
                 }
                 $key = $keys[$id];
                 unset($keys[$id]);
                 (yield $key => $f($key, $value, \true));
             }
         } catch (\Exception $e) {
-            \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
         }
         foreach ($keys as $key) {
             (yield $key => $f($key, null, \false));
@@ -312,13 +312,13 @@ trait AbstractAdapterTrait
             }
             if (\true !== $e && [] !== $e) {
                 $message = 'Failed to save the new namespace' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
+                \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
             }
         }
         if (\is_string($key) && isset($this->ids[$key])) {
             return $this->namespace . $this->namespaceVersion . $this->ids[$key];
         }
-        \assert('' !== \ConfigTransformer202203164\Symfony\Component\Cache\CacheItem::validateKey($key));
+        \assert('' !== \ConfigTransformer202203177\Symfony\Component\Cache\CacheItem::validateKey($key));
         $this->ids[$key] = $key;
         if (\count($this->ids) > 1000) {
             \array_splice($this->ids, 0, 500);

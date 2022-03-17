@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203164\Symplify\Astral\Exception;
+namespace ConfigTransformer202203177\Symplify\Astral\Exception;
 
 use Exception;
 final class ShouldNotHappenException extends \Exception

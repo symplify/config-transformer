@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203164\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202203164\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202203164\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class TemplateTagValueNode implements \ConfigTransformer202203164\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class TemplateTagValueNode implements \ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string */
@@ -14,7 +14,7 @@ class TemplateTagValueNode implements \ConfigTransformer202203164\PHPStan\PhpDoc
     public $bound;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(string $name, ?\ConfigTransformer202203164\PHPStan\PhpDocParser\Ast\Type\TypeNode $bound, string $description)
+    public function __construct(string $name, ?\ConfigTransformer202203177\PHPStan\PhpDocParser\Ast\Type\TypeNode $bound, string $description)
     {
         $this->name = $name;
         $this->bound = $bound;
