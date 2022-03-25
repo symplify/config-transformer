@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203250\PhpParser\Node\Stmt;
+namespace ConfigTransformer202203257\PhpParser\Node\Stmt;
 
-use ConfigTransformer202203250\PhpParser\Node\Name;
-use ConfigTransformer202203250\PhpParser\Node\Stmt;
-class GroupUse extends \ConfigTransformer202203250\PhpParser\Node\Stmt
+use ConfigTransformer202203257\PhpParser\Node\Name;
+use ConfigTransformer202203257\PhpParser\Node\Stmt;
+class GroupUse extends \ConfigTransformer202203257\PhpParser\Node\Stmt
 {
     /** @var int Type of group use */
     public $type;
@@ -21,7 +21,7 @@ class GroupUse extends \ConfigTransformer202203250\PhpParser\Node\Stmt
      * @param int      $type       Type of group use
      * @param array    $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202203250\PhpParser\Node\Name $prefix, array $uses, int $type = \ConfigTransformer202203250\PhpParser\Node\Stmt\Use_::TYPE_NORMAL, array $attributes = [])
+    public function __construct(\ConfigTransformer202203257\PhpParser\Node\Name $prefix, array $uses, int $type = \ConfigTransformer202203257\PhpParser\Node\Stmt\Use_::TYPE_NORMAL, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->type = $type;

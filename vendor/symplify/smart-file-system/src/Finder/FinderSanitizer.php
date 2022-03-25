@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203250\Symplify\SmartFileSystem\Finder;
+namespace ConfigTransformer202203257\Symplify\SmartFileSystem\Finder;
 
-use ConfigTransformer202203250\Nette\Utils\Finder as NetteFinder;
+use ConfigTransformer202203257\Nette\Utils\Finder as NetteFinder;
 use SplFileInfo;
-use ConfigTransformer202203250\Symfony\Component\Finder\Finder as SymfonyFinder;
-use ConfigTransformer202203250\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
-use ConfigTransformer202203250\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202203257\Symfony\Component\Finder\Finder as SymfonyFinder;
+use ConfigTransformer202203257\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use ConfigTransformer202203257\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer\FinderSanitizerTest
  */
 final class FinderSanitizer
 {
     /**
-     * @param NetteFinder|SymfonyFinder|SplFileInfo[]|SymfonySplFileInfo[]|string[] $files
+     * @param mixed[]|NetteFinder|SymfonyFinder $files
      * @return SmartFileInfo[]
      */
     public function sanitize($files) : array
@@ -27,7 +27,7 @@ final class FinderSanitizer
             }
             /** @var string $realPath */
             $realPath = $fileInfo->getRealPath();
-            $smartFileInfos[] = new \ConfigTransformer202203250\Symplify\SmartFileSystem\SmartFileInfo($realPath);
+            $smartFileInfos[] = new \ConfigTransformer202203257\Symplify\SmartFileSystem\SmartFileInfo($realPath);
         }
         return $smartFileInfos;
     }

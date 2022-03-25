@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203250\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202203257\Symfony\Component\DependencyInjection\Compiler;
 
 /**
  * Represents an edge in your service graph.
@@ -40,7 +40,7 @@ class ServiceReferenceGraphEdge
     /**
      * @param mixed $value
      */
-    public function __construct(\ConfigTransformer202203250\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $sourceNode, \ConfigTransformer202203250\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $destNode, $value = null, bool $lazy = \false, bool $weak = \false, bool $byConstructor = \false)
+    public function __construct(\ConfigTransformer202203257\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $sourceNode, \ConfigTransformer202203257\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $destNode, $value = null, bool $lazy = \false, bool $weak = \false, bool $byConstructor = \false)
     {
         $this->sourceNode = $sourceNode;
         $this->destNode = $destNode;
@@ -60,14 +60,14 @@ class ServiceReferenceGraphEdge
     /**
      * Returns the source node.
      */
-    public function getSourceNode() : \ConfigTransformer202203250\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
+    public function getSourceNode() : \ConfigTransformer202203257\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         return $this->sourceNode;
     }
     /**
      * Returns the destination node.
      */
-    public function getDestNode() : \ConfigTransformer202203250\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
+    public function getDestNode() : \ConfigTransformer202203257\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         return $this->destNode;
     }
