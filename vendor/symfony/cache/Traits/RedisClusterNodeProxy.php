@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203178\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202203250\Symfony\Component\Cache\Traits;
 
 /**
  * This file acts as a wrapper to the \RedisCluster implementation so it can accept the same type of calls as
