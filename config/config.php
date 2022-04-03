@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203257;
+namespace ConfigTransformer202204039;
 
-use ConfigTransformer202203257\PhpParser\BuilderFactory;
-use ConfigTransformer202203257\PhpParser\NodeFinder;
-use ConfigTransformer202203257\Symfony\Component\Console\Application;
+use ConfigTransformer202204039\PhpParser\BuilderFactory;
+use ConfigTransformer202204039\PhpParser\NodeFinder;
+use ConfigTransformer202204039\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202203257\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202203257\Symplify\ConfigTransformer\Command\SwitchFormatCommand;
-use ConfigTransformer202203257\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer202203257\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer202203257\Symplify\SmartFileSystem\FileSystemFilter;
-use function ConfigTransformer202203257\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202204039\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202204039\Symplify\ConfigTransformer\Command\SwitchFormatCommand;
+use ConfigTransformer202204039\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202204039\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202204039\Symplify\SmartFileSystem\FileSystemFilter;
+use function ConfigTransformer202204039\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202203257\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202204039\Symplify\ConfigTransformer\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/Kernel', __DIR__ . '/../src/DependencyInjection/Loader', __DIR__ . '/../src/Enum', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202203257\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202203257\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202203257\Symplify\ConfigTransformer\Command\SwitchFormatCommand::class)]);
-    $services->set(\ConfigTransformer202203257\PhpParser\BuilderFactory::class);
-    $services->set(\ConfigTransformer202203257\PhpParser\NodeFinder::class);
-    $services->set(\ConfigTransformer202203257\Symfony\Component\Yaml\Parser::class);
-    $services->set(\ConfigTransformer202203257\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->set(\ConfigTransformer202203257\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
-    $services->set(\ConfigTransformer202203257\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
+    $services->set(\ConfigTransformer202204039\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202204039\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202204039\Symplify\ConfigTransformer\Command\SwitchFormatCommand::class)]);
+    $services->set(\ConfigTransformer202204039\PhpParser\BuilderFactory::class);
+    $services->set(\ConfigTransformer202204039\PhpParser\NodeFinder::class);
+    $services->set(\ConfigTransformer202204039\Symfony\Component\Yaml\Parser::class);
+    $services->set(\ConfigTransformer202204039\Symplify\SmartFileSystem\FileSystemFilter::class);
+    $services->set(\ConfigTransformer202204039\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
+    $services->set(\ConfigTransformer202204039\Symplify\PackageBuilder\Yaml\ParametersMerger::class);
 };

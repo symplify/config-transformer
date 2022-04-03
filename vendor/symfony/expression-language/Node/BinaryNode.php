@@ -8,27 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\SyntaxError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class BinaryNode extends \ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Node\Node
+class BinaryNode extends \ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Node\Node
 {
     private const OPERATORS = ['~' => '.', 'and' => '&&', 'or' => '||'];
     private const FUNCTIONS = ['**' => 'pow', '..' => 'range', 'in' => 'in_array', 'not in' => '!in_array'];
-    public function __construct(string $operator, \ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Node\Node $right)
+    public function __construct(string $operator, \ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Node\Node $left, \ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Node\Node $right)
     {
         parent::__construct(['left' => $left, 'right' => $right], ['operator' => $operator]);
     }
-    public function compile(\ConfigTransformer202203257\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $operator = $this->attributes['operator'];
         if ('matches' == $operator) {
-            $compiler->raw('preg_match(')->compile($this->nodes['right'])->raw(', ')->compile($this->nodes['left'])->raw(')');
+            if ($this->nodes['right'] instanceof \ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\Node\ConstantNode) {
+                $this->evaluateMatches($this->nodes['right']->evaluate([], []), '');
+            }
+            $compiler->raw('(static function ($regexp, $str) { set_error_handler(function ($t, $m) use ($regexp, $str) { throw new \\Symfony\\Component\\ExpressionLanguage\\SyntaxError(sprintf(\'Regexp "%s" passed to "matches" is not valid\', $regexp).substr($m, 12)); }); try { return preg_match($regexp, $str); } finally { restore_error_handler(); } })(')->compile($this->nodes['right'])->raw(', ')->compile($this->nodes['left'])->raw(')');
             return;
         }
         if (isset(self::FUNCTIONS[$operator])) {
@@ -107,11 +111,22 @@ class BinaryNode extends \ConfigTransformer202203257\Symfony\Component\Expressio
                 }
                 return $left % $right;
             case 'matches':
-                return \preg_match($right, $left);
+                return $this->evaluateMatches($right, $left);
         }
     }
     public function toArray()
     {
         return ['(', $this->nodes['left'], ' ' . $this->attributes['operator'] . ' ', $this->nodes['right'], ')'];
+    }
+    private function evaluateMatches(string $regexp, string $str) : int
+    {
+        \set_error_handler(function ($t, $m) use($regexp) {
+            throw new \ConfigTransformer202204039\Symfony\Component\ExpressionLanguage\SyntaxError(\sprintf('Regexp "%s" passed to "matches" is not valid', $regexp) . \substr($m, 12));
+        });
+        try {
+            return \preg_match($regexp, $str);
+        } finally {
+            \restore_error_handler();
+        }
     }
 }

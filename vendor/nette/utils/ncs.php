@@ -5,7 +5,7 @@
  * https://github.com/nette/coding-standard
  */
 declare (strict_types=1);
-namespace ConfigTransformer202203257;
+namespace ConfigTransformer202204039;
 
 return [
     // use function in Arrays.php, Callback.php, Html.php, Strings.php

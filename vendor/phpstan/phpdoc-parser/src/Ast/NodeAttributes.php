@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203257\PHPStan\PhpDocParser\Ast;
+namespace ConfigTransformer202204039\PHPStan\PhpDocParser\Ast;
 
+use function array_key_exists;
 trait NodeAttributes
 {
     /** @var array<string, mixed> */
     private $attributes = [];
     /**
-     * @param string $key
      * @param mixed $value
      */
     public function setAttribute(string $key, $value) : void
@@ -20,7 +20,6 @@ trait NodeAttributes
         return \array_key_exists($key, $this->attributes);
     }
     /**
-     * @param string $key
      * @return mixed
      */
     public function getAttribute(string $key)

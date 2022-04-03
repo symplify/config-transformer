@@ -1,8 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202203257\PHPStan\PhpDocParser\Lexer;
+namespace ConfigTransformer202204039\PHPStan\PhpDocParser\Lexer;
 
+use function array_keys;
+use function assert;
+use function count;
+use function implode;
+use function preg_match_all;
+use const PREG_SET_ORDER;
 /**
  * Implementation based on Nette Tokenizer (New BSD License; https://github.com/nette/tokenizer)
  */
