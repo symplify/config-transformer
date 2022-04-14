@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202204039\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202204039\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use ConfigTransformer202204039\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202204146\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202204146\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202204146\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+abstract class NodeDefinition implements \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $name;
     protected $normalization;
@@ -32,10 +32,10 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
     protected $nullEquivalent;
     protected $trueEquivalent = \true;
     protected $falseEquivalent = \false;
-    protected $pathSeparator = \ConfigTransformer202204039\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
+    protected $pathSeparator = \ConfigTransformer202204146\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
     protected $parent;
     protected $attributes = [];
-    public function __construct(?string $name, \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         $this->parent = $parent;
         $this->name = $name;
@@ -45,7 +45,7 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
      *
      * @return $this
      */
-    public function setParent(\ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent)
+    public function setParent(\ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent)
     {
         $this->parent = $parent;
         return $this;
@@ -91,19 +91,19 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
     /**
      * Creates the node.
      */
-    public function getNode(bool $forceRootNode = \false) : \ConfigTransformer202204039\Symfony\Component\Config\Definition\NodeInterface
+    public function getNode(bool $forceRootNode = \false) : \ConfigTransformer202204146\Symfony\Component\Config\Definition\NodeInterface
     {
         if ($forceRootNode) {
             $this->parent = null;
         }
         if (null !== $this->normalization) {
-            $this->normalization->before = \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
+            $this->normalization->before = \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
         }
         if (null !== $this->validation) {
-            $this->validation->rules = \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
+            $this->validation->rules = \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
         }
         $node = $this->createNode();
-        if ($node instanceof \ConfigTransformer202204039\Symfony\Component\Config\Definition\BaseNode) {
+        if ($node instanceof \ConfigTransformer202204146\Symfony\Component\Config\Definition\BaseNode) {
             $node->setAttributes($this->attributes);
         }
         return $node;
@@ -210,7 +210,7 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
     /**
      * Sets an expression to run before the normalization.
      */
-    public function beforeNormalization() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ExprBuilder
+    public function beforeNormalization() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ExprBuilder
     {
         return $this->normalization()->before();
     }
@@ -231,7 +231,7 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
      * modify it.
      * An exception should be thrown when the node is not valid.
      */
-    public function validate() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ExprBuilder
+    public function validate() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ExprBuilder
     {
         return $this->validation()->rule();
     }
@@ -248,30 +248,30 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
     /**
      * Gets the builder for validation rules.
      */
-    protected function validation() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ValidationBuilder
+    protected function validation() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ValidationBuilder
     {
         if (null === $this->validation) {
-            $this->validation = new \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
+            $this->validation = new \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
         }
         return $this->validation;
     }
     /**
      * Gets the builder for merging rules.
      */
-    protected function merge() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\MergeBuilder
+    protected function merge() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\MergeBuilder
     {
         if (null === $this->merge) {
-            $this->merge = new \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
+            $this->merge = new \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
         }
         return $this->merge;
     }
     /**
      * Gets the builder for normalization rules.
      */
-    protected function normalization() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\NormalizationBuilder
+    protected function normalization() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\NormalizationBuilder
     {
         if (null === $this->normalization) {
-            $this->normalization = new \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
+            $this->normalization = new \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
         }
         return $this->normalization;
     }
@@ -280,7 +280,7 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
      *
      * @throws InvalidDefinitionException When the definition is invalid
      */
-    protected abstract function createNode() : \ConfigTransformer202204039\Symfony\Component\Config\Definition\NodeInterface;
+    protected abstract function createNode() : \ConfigTransformer202204146\Symfony\Component\Config\Definition\NodeInterface;
     /**
      * Set PathSeparator to use.
      *
@@ -288,7 +288,7 @@ abstract class NodeDefinition implements \ConfigTransformer202204039\Symfony\Com
      */
     public function setPathSeparator(string $separator)
     {
-        if ($this instanceof \ConfigTransformer202204039\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
+        if ($this instanceof \ConfigTransformer202204146\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
             foreach ($this->getChildNodeDefinitions() as $child) {
                 $child->setPathSeparator($separator);
             }

@@ -1,21 +1,35 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204039\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202204146\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202204039\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202204039\PHPStan\PhpDocParser\Parser\ParserException;
-class InvalidTagValueNode implements \ConfigTransformer202204039\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use ConfigTransformer202204146\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202204146\PHPStan\PhpDocParser\Parser\ParserException;
+use function sprintf;
+use function trigger_error;
+use const E_USER_WARNING;
+/**
+ * @property ParserException $exception
+ */
+class InvalidTagValueNode implements \ConfigTransformer202204146\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string (may be empty) */
     public $value;
-    /** @var ParserException */
-    public $exception;
-    public function __construct(string $value, \ConfigTransformer202204039\PHPStan\PhpDocParser\Parser\ParserException $exception)
+    /** @var mixed[] */
+    private $exceptionArgs;
+    public function __construct(string $value, \ConfigTransformer202204146\PHPStan\PhpDocParser\Parser\ParserException $exception)
     {
         $this->value = $value;
-        $this->exception = $exception;
+        $this->exceptionArgs = [$exception->getCurrentTokenValue(), $exception->getCurrentTokenType(), $exception->getCurrentOffset(), $exception->getExpectedTokenType(), $exception->getExpectedTokenValue()];
+    }
+    public function __get(string $name)
+    {
+        if ($name !== 'exception') {
+            \trigger_error(\sprintf('Undefined property: %s::$%s', self::class, $name), \E_USER_WARNING);
+            return null;
+        }
+        return new \ConfigTransformer202204146\PHPStan\PhpDocParser\Parser\ParserException(...$this->exceptionArgs);
     }
     public function __toString() : string
     {
