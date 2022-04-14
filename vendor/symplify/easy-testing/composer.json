@@ -21,17 +21,17 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202204142\\Symplify\\EasyTesting\\": "src"
+            "ConfigTransformer202204146\\Symplify\\EasyTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202204142\\Symplify\\EasyTesting\\Tests\\": "tests"
+            "ConfigTransformer202204146\\Symplify\\EasyTesting\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "10.2-dev"
+            "dev-main": "10.3-dev"
         }
     },
     "conflict": {
