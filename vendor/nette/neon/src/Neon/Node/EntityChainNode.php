@@ -5,12 +5,12 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202204146\Nette\Neon\Node;
+namespace ConfigTransformer202204142\Nette\Neon\Node;
 
-use ConfigTransformer202204146\Nette\Neon;
-use ConfigTransformer202204146\Nette\Neon\Node;
+use ConfigTransformer202204142\Nette\Neon;
+use ConfigTransformer202204142\Nette\Neon\Node;
 /** @internal */
-final class EntityChainNode extends \ConfigTransformer202204146\Nette\Neon\Node
+final class EntityChainNode extends \ConfigTransformer202204142\Nette\Neon\Node
 {
     /** @var EntityNode[] */
     public $chain = [];
@@ -18,13 +18,13 @@ final class EntityChainNode extends \ConfigTransformer202204146\Nette\Neon\Node
     {
         $this->chain = $chain;
     }
-    public function toValue() : \ConfigTransformer202204146\Nette\Neon\Entity
+    public function toValue() : \ConfigTransformer202204142\Nette\Neon\Entity
     {
         $entities = [];
         foreach ($this->chain as $item) {
             $entities[] = $item->toValue();
         }
-        return new \ConfigTransformer202204146\Nette\Neon\Entity(\ConfigTransformer202204146\Nette\Neon\Neon::Chain, $entities);
+        return new \ConfigTransformer202204142\Nette\Neon\Entity(\ConfigTransformer202204142\Nette\Neon\Neon::Chain, $entities);
     }
     public function toString() : string
     {
