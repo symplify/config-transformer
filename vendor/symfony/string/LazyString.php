@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022041410\Symfony\Component\String;
+namespace ConfigTransformer202204145\Symfony\Component\String;
 
 /**
  * A string whose value is computed lazily by a callback.

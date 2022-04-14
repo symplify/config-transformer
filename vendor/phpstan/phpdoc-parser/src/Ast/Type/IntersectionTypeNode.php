@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022041410\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202204145\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer2022041410\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202204145\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class IntersectionTypeNode implements \ConfigTransformer2022041410\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class IntersectionTypeNode implements \ConfigTransformer202204145\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode[] */

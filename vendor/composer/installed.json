@@ -195,7 +195,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\PhpParser\\": "lib\/PhpParser"
+                    "ConfigTransformer202204145\\PhpParser\\": "lib\/PhpParser"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -249,7 +249,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\PHPStan\\PhpDocParser\\": [
+                    "ConfigTransformer202204145\\PHPStan\\PhpDocParser\\": [
                         "src\/"
                     ]
                 }
@@ -355,7 +355,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Psr\\Cache\\": "src\/"
+                    "ConfigTransformer202204145\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -407,7 +407,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Psr\\Container\\": "src\/"
+                    "ConfigTransformer202204145\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -463,7 +463,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Psr\\Log\\": "src"
+                    "ConfigTransformer202204145\\Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -608,7 +608,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Cache\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -689,7 +689,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Contracts\\Cache\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -775,7 +775,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Config\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -867,7 +867,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Console\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -964,7 +964,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\DependencyInjection\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1100,7 +1100,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\ExpressionLanguage\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\ExpressionLanguage\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1166,7 +1166,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Filesystem\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1230,7 +1230,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Finder\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1312,7 +1312,7 @@
                     "bootstrap.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Polyfill\\Ctype\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Polyfill\\Ctype\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1394,7 +1394,7 @@
                     "bootstrap.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1478,7 +1478,7 @@
                     "bootstrap.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
                 },
                 "classmap": [
                     "Resources\/stubs"
@@ -1568,7 +1568,7 @@
                     "bootstrap.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Polyfill\\Mbstring\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Polyfill\\Mbstring\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1648,7 +1648,7 @@
                     "bootstrap.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Polyfill\\Php81\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Polyfill\\Php81\\": ""
                 },
                 "classmap": [
                     "Resources\/stubs"
@@ -1734,7 +1734,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Contracts\\Service\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1819,7 +1819,7 @@
                     "Resources\/functions.php"
                 ],
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\String\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\String\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1894,7 +1894,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\VarExporter\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1979,7 +1979,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symfony\\Component\\Yaml\\": ""
+                    "ConfigTransformer202204145\\Symfony\\Component\\Yaml\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2086,12 +2086,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\Astral\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\Astral\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\Astral\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\Astral\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2158,12 +2158,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\AutowireArrayParameter\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\AutowireArrayParameter\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\AutowireArrayParameter\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2233,12 +2233,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\ComposerJsonManipulator\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\ComposerJsonManipulator\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2310,12 +2310,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\EasyTesting\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\EasyTesting\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\EasyTesting\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\EasyTesting\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2387,12 +2387,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\PackageBuilder\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\PackageBuilder\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\PackageBuilder\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\PackageBuilder\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2461,12 +2461,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\PhpConfigPrinter\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\PhpConfigPrinter\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
                 },
                 "files": [
                     "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",
@@ -2539,12 +2539,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\SmartFileSystem\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\SmartFileSystem\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\SmartFileSystem\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\SmartFileSystem\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2612,12 +2612,12 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\SymplifyKernel\\": "src"
+                    "ConfigTransformer202204145\\Symplify\\SymplifyKernel\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Symplify\\SymplifyKernel\\Tests\\": "tests"
+                    "ConfigTransformer202204145\\Symplify\\SymplifyKernel\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2666,7 +2666,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ConfigTransformer2022041410\\Webmozart\\Assert\\": "src\/"
+                    "ConfigTransformer202204145\\Webmozart\\Assert\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
