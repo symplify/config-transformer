@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204146\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022041410\PhpParser\Node\Stmt;
 
-use ConfigTransformer202204146\PhpParser\Node;
-class TryCatch extends \ConfigTransformer202204146\PhpParser\Node\Stmt
+use ConfigTransformer2022041410\PhpParser\Node;
+class TryCatch extends \ConfigTransformer2022041410\PhpParser\Node\Stmt
 {
     /** @var Node\Stmt[] Statements */
     public $stmts;
@@ -20,7 +20,7 @@ class TryCatch extends \ConfigTransformer202204146\PhpParser\Node\Stmt
      * @param null|Finally_ $finally    Optional finally node
      * @param array         $attributes Additional attributes
      */
-    public function __construct(array $stmts, array $catches, \ConfigTransformer202204146\PhpParser\Node\Stmt\Finally_ $finally = null, array $attributes = [])
+    public function __construct(array $stmts, array $catches, \ConfigTransformer2022041410\PhpParser\Node\Stmt\Finally_ $finally = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->stmts = $stmts;

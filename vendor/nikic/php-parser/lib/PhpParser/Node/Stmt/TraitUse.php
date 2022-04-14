@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204146\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022041410\PhpParser\Node\Stmt;
 
-use ConfigTransformer202204146\PhpParser\Node;
-class TraitUse extends \ConfigTransformer202204146\PhpParser\Node\Stmt
+use ConfigTransformer2022041410\PhpParser\Node;
+class TraitUse extends \ConfigTransformer2022041410\PhpParser\Node\Stmt
 {
     /** @var Node\Name[] Traits */
     public $traits;

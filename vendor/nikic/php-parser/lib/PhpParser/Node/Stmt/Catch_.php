@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204146\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022041410\PhpParser\Node\Stmt;
 
-use ConfigTransformer202204146\PhpParser\Node;
-use ConfigTransformer202204146\PhpParser\Node\Expr;
-class Catch_ extends \ConfigTransformer202204146\PhpParser\Node\Stmt
+use ConfigTransformer2022041410\PhpParser\Node;
+use ConfigTransformer2022041410\PhpParser\Node\Expr;
+class Catch_ extends \ConfigTransformer2022041410\PhpParser\Node\Stmt
 {
     /** @var Node\Name[] Types of exceptions to catch */
     public $types;
@@ -21,7 +21,7 @@ class Catch_ extends \ConfigTransformer202204146\PhpParser\Node\Stmt
      * @param Node\Stmt[]           $stmts      Statements
      * @param array                 $attributes Additional attributes
      */
-    public function __construct(array $types, \ConfigTransformer202204146\PhpParser\Node\Expr\Variable $var = null, array $stmts = [], array $attributes = [])
+    public function __construct(array $types, \ConfigTransformer2022041410\PhpParser\Node\Expr\Variable $var = null, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->types = $types;
