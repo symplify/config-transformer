@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204152\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202204166\Symfony\Component\Config\Resource;
 
 /**
  * ClassExistenceResource represents a class existence.
@@ -20,7 +20,7 @@ namespace ConfigTransformer202204152\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class ClassExistenceResource implements \ConfigTransformer202204152\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ClassExistenceResource implements \ConfigTransformer202204166\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var string
