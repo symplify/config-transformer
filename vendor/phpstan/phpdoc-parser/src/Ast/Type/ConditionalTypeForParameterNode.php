@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function sprintf;
-class ConditionalTypeForParameterNode implements \ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ConditionalTypeForParameterNode implements \ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var string */
@@ -18,7 +18,7 @@ class ConditionalTypeForParameterNode implements \ConfigTransformer202204162\PHP
     public $else;
     /** @var bool */
     public $negated;
-    public function __construct(string $parameterName, \ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\Type\TypeNode $targetType, \ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\Type\TypeNode $if, \ConfigTransformer202204162\PHPStan\PhpDocParser\Ast\Type\TypeNode $else, bool $negated)
+    public function __construct(string $parameterName, \ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\Type\TypeNode $targetType, \ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\Type\TypeNode $if, \ConfigTransformer202204164\PHPStan\PhpDocParser\Ast\Type\TypeNode $else, bool $negated)
     {
         $this->parameterName = $parameterName;
         $this->targetType = $targetType;
