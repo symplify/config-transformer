@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202204166\\Symfony\\Contracts\\Service\\": ""
+            "ConfigTransformer202204161\\Symfony\\Contracts\\Service\\": ""
         }
     },
     "minimum-stability": "dev",

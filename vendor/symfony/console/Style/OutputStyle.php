@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204166\Symfony\Component\Console\Style;
+namespace ConfigTransformer202204161\Symfony\Component\Console\Style;
 
-use ConfigTransformer202204166\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer202204166\Symfony\Component\Console\Helper\ProgressBar;
-use ConfigTransformer202204166\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202204166\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202204161\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202204161\Symfony\Component\Console\Helper\ProgressBar;
+use ConfigTransformer202204161\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202204161\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class OutputStyle implements \ConfigTransformer202204166\Symfony\Component\Console\Output\OutputInterface, \ConfigTransformer202204166\Symfony\Component\Console\Style\StyleInterface
+abstract class OutputStyle implements \ConfigTransformer202204161\Symfony\Component\Console\Output\OutputInterface, \ConfigTransformer202204161\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
-    public function __construct(\ConfigTransformer202204166\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\ConfigTransformer202204161\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->output = $output;
     }
@@ -33,9 +33,9 @@ abstract class OutputStyle implements \ConfigTransformer202204166\Symfony\Compon
     {
         $this->output->write(\str_repeat(\PHP_EOL, $count));
     }
-    public function createProgressBar(int $max = 0) : \ConfigTransformer202204166\Symfony\Component\Console\Helper\ProgressBar
+    public function createProgressBar(int $max = 0) : \ConfigTransformer202204161\Symfony\Component\Console\Helper\ProgressBar
     {
-        return new \ConfigTransformer202204166\Symfony\Component\Console\Helper\ProgressBar($this->output, $max);
+        return new \ConfigTransformer202204161\Symfony\Component\Console\Helper\ProgressBar($this->output, $max);
     }
     /**
      * {@inheritdoc}
@@ -84,14 +84,14 @@ abstract class OutputStyle implements \ConfigTransformer202204166\Symfony\Compon
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\ConfigTransformer202204166\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\ConfigTransformer202204161\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         $this->output->setFormatter($formatter);
     }
     /**
      * {@inheritdoc}
      */
-    public function getFormatter() : \ConfigTransformer202204166\Symfony\Component\Console\Formatter\OutputFormatterInterface
+    public function getFormatter() : \ConfigTransformer202204161\Symfony\Component\Console\Formatter\OutputFormatterInterface
     {
         return $this->output->getFormatter();
     }
@@ -125,7 +125,7 @@ abstract class OutputStyle implements \ConfigTransformer202204166\Symfony\Compon
     }
     protected function getErrorOutput()
     {
-        if (!$this->output instanceof \ConfigTransformer202204166\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if (!$this->output instanceof \ConfigTransformer202204161\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             return $this->output;
         }
         return $this->output->getErrorOutput();

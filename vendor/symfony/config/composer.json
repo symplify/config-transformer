@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202204166\\Symfony\\Component\\Config\\": ""
+            "ConfigTransformer202204161\\Symfony\\Component\\Config\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
