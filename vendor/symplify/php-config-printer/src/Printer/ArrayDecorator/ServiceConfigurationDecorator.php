@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204164\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
+namespace ConfigTransformer202204178\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use ConfigTransformer202204164\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use ConfigTransformer202204178\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
 final class ServiceConfigurationDecorator
 {
     /**
      * @var \Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver
      */
     private $constantNameFromValueResolver;
-    public function __construct(\ConfigTransformer202204164\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
+    public function __construct(\ConfigTransformer202204178\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
     {
         $this->constantNameFromValueResolver = $constantNameFromValueResolver;
     }
@@ -29,7 +29,7 @@ final class ServiceConfigurationDecorator
      * @param array<string, mixed> $configuration
      * @return mixed[]
      */
-    private function decorateClassConstantKeys(array $configuration, string $class) : array
+    public function decorateClassConstantKeys(array $configuration, string $class) : array
     {
         foreach ($configuration as $key => $value) {
             $constantName = $this->constantNameFromValueResolver->resolveFromValueAndClass($key, $class);
