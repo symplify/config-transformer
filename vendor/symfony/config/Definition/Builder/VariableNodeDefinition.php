@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204171\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202204174\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202204171\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer202204171\Symfony\Component\Config\Definition\VariableNode;
+use ConfigTransformer202204174\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202204174\Symfony\Component\Config\Definition\VariableNode;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class VariableNodeDefinition extends \ConfigTransformer202204171\Symfony\Component\Config\Definition\Builder\NodeDefinition
+class VariableNodeDefinition extends \ConfigTransformer202204174\Symfony\Component\Config\Definition\Builder\NodeDefinition
 {
     /**
      * Instantiate a Node.
      */
-    protected function instantiateNode() : \ConfigTransformer202204171\Symfony\Component\Config\Definition\VariableNode
+    protected function instantiateNode() : \ConfigTransformer202204174\Symfony\Component\Config\Definition\VariableNode
     {
-        return new \ConfigTransformer202204171\Symfony\Component\Config\Definition\VariableNode($this->name, $this->parent, $this->pathSeparator);
+        return new \ConfigTransformer202204174\Symfony\Component\Config\Definition\VariableNode($this->name, $this->parent, $this->pathSeparator);
     }
     /**
      * {@inheritdoc}
      */
-    protected function createNode() : \ConfigTransformer202204171\Symfony\Component\Config\Definition\NodeInterface
+    protected function createNode() : \ConfigTransformer202204174\Symfony\Component\Config\Definition\NodeInterface
     {
         $node = $this->instantiateNode();
         if (null !== $this->normalization) {

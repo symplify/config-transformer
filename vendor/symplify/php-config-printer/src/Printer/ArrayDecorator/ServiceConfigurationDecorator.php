@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204171\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
+namespace ConfigTransformer202204174\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use ConfigTransformer202204171\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use ConfigTransformer202204174\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
 final class ServiceConfigurationDecorator
 {
     /**
      * @var \Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver
      */
     private $constantNameFromValueResolver;
-    public function __construct(\ConfigTransformer202204171\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
+    public function __construct(\ConfigTransformer202204174\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver)
     {
         $this->constantNameFromValueResolver = $constantNameFromValueResolver;
     }
