@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204179\Symfony\Component\String\Exception;
+namespace ConfigTransformer202204175\Symfony\Component\String\Exception;
 
 interface ExceptionInterface extends \Throwable
 {

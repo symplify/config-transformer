@@ -8,34 +8,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204179\Symfony\Component\Cache\DataCollector;
+namespace ConfigTransformer202204175\Symfony\Component\Cache\DataCollector;
 
-use ConfigTransformer202204179\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use ConfigTransformer202204179\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
-use ConfigTransformer202204179\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202204179\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202204179\Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use ConfigTransformer202204179\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use ConfigTransformer202204175\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ConfigTransformer202204175\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+use ConfigTransformer202204175\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer202204175\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer202204175\Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use ConfigTransformer202204175\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  *
  * @final
  */
-class CacheDataCollector extends \ConfigTransformer202204179\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202204179\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class CacheDataCollector extends \ConfigTransformer202204175\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \ConfigTransformer202204175\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     /**
      * @var TraceableAdapter[]
      */
     private array $instances = [];
-    public function addInstance(string $name, \ConfigTransformer202204179\Symfony\Component\Cache\Adapter\TraceableAdapter $instance)
+    public function addInstance(string $name, \ConfigTransformer202204175\Symfony\Component\Cache\Adapter\TraceableAdapter $instance)
     {
         $this->instances[$name] = $instance;
     }
     /**
      * {@inheritdoc}
      */
-    public function collect(\ConfigTransformer202204179\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202204179\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\ConfigTransformer202204175\Symfony\Component\HttpFoundation\Request $request, \ConfigTransformer202204175\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         $empty = ['calls' => [], 'config' => [], 'options' => [], 'statistics' => []];
         $this->data = ['instances' => $empty, 'total' => $empty];
