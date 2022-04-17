@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204178;
+namespace ConfigTransformer202204172;
 
-use ConfigTransformer202204178\SebastianBergmann\Diff\Differ;
+use ConfigTransformer202204172\SebastianBergmann\Diff\Differ;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202204178\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
-use ConfigTransformer202204178\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use ConfigTransformer202204178\Symplify\PackageBuilder\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory;
-use ConfigTransformer202204178\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202204172\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
+use ConfigTransformer202204172\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use ConfigTransformer202204172\Symplify\PackageBuilder\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory;
+use ConfigTransformer202204172\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->set(\ConfigTransformer202204178\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter::class);
-    $services->set(\ConfigTransformer202204178\Symplify\PackageBuilder\Console\Output\ConsoleDiffer::class);
-    $services->set(\ConfigTransformer202204178\Symplify\PackageBuilder\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory::class);
-    $services->set(\ConfigTransformer202204178\SebastianBergmann\Diff\Differ::class);
-    $services->set(\ConfigTransformer202204178\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
+    $services->set(\ConfigTransformer202204172\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter::class);
+    $services->set(\ConfigTransformer202204172\Symplify\PackageBuilder\Console\Output\ConsoleDiffer::class);
+    $services->set(\ConfigTransformer202204172\Symplify\PackageBuilder\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory::class);
+    $services->set(\ConfigTransformer202204172\SebastianBergmann\Diff\Differ::class);
+    $services->set(\ConfigTransformer202204172\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
 };

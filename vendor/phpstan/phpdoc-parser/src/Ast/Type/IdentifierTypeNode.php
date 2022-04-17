@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204178\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202204172\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202204178\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class IdentifierTypeNode implements \ConfigTransformer202204178\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202204172\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class IdentifierTypeNode implements \ConfigTransformer202204172\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var string */
