@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202204182\Psr\Log;
+namespace ConfigTransformer202204188\Psr\Log;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {

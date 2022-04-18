@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202204182\Nette\Neon;
+namespace ConfigTransformer202204188\Nette\Neon;
 
 /**
  * @implements \IteratorAggregate<Node>
