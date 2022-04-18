@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function sprintf;
-class ConditionalTypeNode implements \ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ConditionalTypeNode implements \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -18,7 +18,7 @@ class ConditionalTypeNode implements \ConfigTransformer202204188\PHPStan\PhpDocP
     public $else;
     /** @var bool */
     public $negated;
-    public function __construct(\ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type\TypeNode $subjectType, \ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type\TypeNode $targetType, \ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type\TypeNode $if, \ConfigTransformer202204188\PHPStan\PhpDocParser\Ast\Type\TypeNode $else, bool $negated)
+    public function __construct(\ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type\TypeNode $subjectType, \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type\TypeNode $targetType, \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type\TypeNode $if, \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Type\TypeNode $else, bool $negated)
     {
         $this->subjectType = $subjectType;
         $this->targetType = $targetType;
