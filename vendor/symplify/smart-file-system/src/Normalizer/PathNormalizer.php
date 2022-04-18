@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204171\Symplify\SmartFileSystem\Normalizer;
+namespace ConfigTransformer202204182\Symplify\SmartFileSystem\Normalizer;
 
-use ConfigTransformer202204171\Nette\Utils\Strings;
+use ConfigTransformer202204182\Nette\Utils\Strings;
 /**
  * @api
  *
@@ -32,7 +32,7 @@ final class PathNormalizer
     public function normalizePath(string $originalPath) : string
     {
         $directorySeparator = \DIRECTORY_SEPARATOR;
-        $matches = \ConfigTransformer202204171\Nette\Utils\Strings::match($originalPath, self::SCHEME_PATH_REGEX);
+        $matches = \ConfigTransformer202204182\Nette\Utils\Strings::match($originalPath, self::SCHEME_PATH_REGEX);
         if ($matches !== null) {
             [, $scheme, $path] = $matches;
         } else {
@@ -40,7 +40,7 @@ final class PathNormalizer
             $path = $originalPath;
         }
         $normalizedPath = \str_replace('\\', '/', $path);
-        $path = \ConfigTransformer202204171\Nette\Utils\Strings::replace($normalizedPath, self::TWO_AND_MORE_SLASHES_REGEX, '/');
+        $path = \ConfigTransformer202204182\Nette\Utils\Strings::replace($normalizedPath, self::TWO_AND_MORE_SLASHES_REGEX, '/');
         $pathRoot = \strncmp($path, '/', \strlen('/')) === 0 ? $directorySeparator : '';
         $pathParts = \explode('/', \trim($path, '/'));
         $normalizedPathParts = $this->normalizePathParts($pathParts, $scheme);

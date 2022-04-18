@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204171\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202204171\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function trim;
-class PhpDocTagNode implements \ConfigTransformer202204171\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
+class PhpDocTagNode implements \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
 {
     use NodeAttributes;
     /** @var string */
     public $name;
     /** @var PhpDocTagValueNode */
     public $value;
-    public function __construct(string $name, \ConfigTransformer202204171\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
+    public function __construct(string $name, \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
     {
         $this->name = $name;
         $this->value = $value;
