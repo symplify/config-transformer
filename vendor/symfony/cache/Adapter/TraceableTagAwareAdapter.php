@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204182\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202204298\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202204182\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer202204298\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class TraceableTagAwareAdapter extends \ConfigTransformer202204182\Symfony\Component\Cache\Adapter\TraceableAdapter implements \ConfigTransformer202204182\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202204182\Symfony\Contracts\Cache\TagAwareCacheInterface
+class TraceableTagAwareAdapter extends \ConfigTransformer202204298\Symfony\Component\Cache\Adapter\TraceableAdapter implements \ConfigTransformer202204298\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202204298\Symfony\Contracts\Cache\TagAwareCacheInterface
 {
-    public function __construct(\ConfigTransformer202204182\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool)
+    public function __construct(\ConfigTransformer202204298\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool)
     {
         parent::__construct($pool);
     }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204182\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer202204298\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202204182\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
+use ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202204298\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
 /**
  * @api
  *
@@ -12,29 +12,29 @@ use ConfigTransformer202204182\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAt
  *
  * @see \Symplify\Astral\Tests\PhpDocParser\PhpDocNodeVisitor\ParentConnectingPhpDocNodeVisitorTest
  */
-final class ParentConnectingPhpDocNodeVisitor extends \ConfigTransformer202204182\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
+final class ParentConnectingPhpDocNodeVisitor extends \ConfigTransformer202204298\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
 {
     /**
      * @var Node[]
      */
     private $stack = [];
-    public function beforeTraverse(\ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function beforeTraverse(\ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\Node $node) : void
     {
         $this->stack = [$node];
     }
-    public function enterNode(\ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Node
+    public function enterNode(\ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\Node
     {
         if ($this->stack !== []) {
             $parentNode = $this->stack[\count($this->stack) - 1];
-            $node->setAttribute(\ConfigTransformer202204182\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey::PARENT, $parentNode);
+            $node->setAttribute(\ConfigTransformer202204298\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey::PARENT, $parentNode);
         }
         $this->stack[] = $node;
         return $node;
     }
     /**
-     * @return mixed[]|int|\PhpParser\Node|null Replacement node (or special return
+     * @return int|\PhpParser\Node|mixed[]|null Replacement node (or special return
      */
-    public function leaveNode(\ConfigTransformer202204182\PHPStan\PhpDocParser\Ast\Node $node)
+    public function leaveNode(\ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\Node $node)
     {
         \array_pop($this->stack);
         return null;

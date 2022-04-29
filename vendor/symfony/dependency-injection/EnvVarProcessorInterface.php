@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204182\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202204298\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202204182\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202204298\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * The EnvVarProcessorInterface is implemented by objects that manage environment-like variables.
  *

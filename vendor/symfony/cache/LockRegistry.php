@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204182\Symfony\Component\Cache;
+namespace ConfigTransformer202204298\Symfony\Component\Cache;
 
-use ConfigTransformer202204182\Psr\Log\LoggerInterface;
-use ConfigTransformer202204182\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202204182\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202204298\Psr\Log\LoggerInterface;
+use ConfigTransformer202204298\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202204298\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *
@@ -26,6 +26,8 @@ final class LockRegistry
 {
     private static $openedFiles = [];
     private static $lockedFiles;
+    private static $signalingException;
+    private static $signalingCallback;
     /**
      * The number of items in this list controls the max number of concurrent processes.
      */
@@ -48,7 +50,7 @@ final class LockRegistry
         self::$openedFiles = self::$lockedFiles = [];
         return $previousFiles;
     }
-    public static function compute(callable $callback, \ConfigTransformer202204182\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202204182\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \ConfigTransformer202204182\Psr\Log\LoggerInterface $logger = null)
+    public static function compute(callable $callback, \ConfigTransformer202204298\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202204298\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \ConfigTransformer202204298\Psr\Log\LoggerInterface $logger = null)
     {
         if ('\\' === \DIRECTORY_SEPARATOR && null === self::$lockedFiles) {
             // disable locking on Windows by default
@@ -58,6 +60,10 @@ final class LockRegistry
         if ($key < 0 || self::$lockedFiles || !($lock = self::open($key))) {
             return $callback($item, $save);
         }
+        self::$signalingException ??= \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
+        self::$signalingCallback ??= function () {
+            throw self::$signalingException;
+        };
         while (\true) {
             try {
                 $locked = \false;
@@ -83,18 +89,13 @@ final class LockRegistry
                 \flock($lock, \LOCK_UN);
                 unset(self::$lockedFiles[$key]);
             }
-            static $signalingException, $signalingCallback;
-            $signalingException = $signalingException ?? \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
-            $signalingCallback = $signalingCallback ?? function () use($signalingException) {
-                throw $signalingException;
-            };
             try {
-                $value = $pool->get($item->getKey(), $signalingCallback, 0);
+                $value = $pool->get($item->getKey(), self::$signalingCallback, 0);
                 $logger && $logger->info('Item "{key}" retrieved after lock was released', ['key' => $item->getKey()]);
                 $save = \false;
                 return $value;
             } catch (\Exception $e) {
-                if ($signalingException !== $e) {
+                if (self::$signalingException !== $e) {
                     throw $e;
                 }
                 $logger && $logger->info('Item "{key}" not found while lock was released, now retrying', ['key' => $item->getKey()]);

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204182\PhpParser\Node\Name;
+namespace ConfigTransformer202204298\PhpParser\Node\Name;
 
-class Relative extends \ConfigTransformer202204182\PhpParser\Node\Name
+class Relative extends \ConfigTransformer202204298\PhpParser\Node\Name
 {
     /**
      * Checks whether the name is unqualified. (E.g. Name)

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204182\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202204298\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202204182\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202204298\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * Abstract class that contains common code of integer and float node definitions.
  *
  * @author David Jeanmonod <david.jeanmonod@gmail.com>
  */
-abstract class NumericNodeDefinition extends \ConfigTransformer202204182\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+abstract class NumericNodeDefinition extends \ConfigTransformer202204298\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     protected $min;
     protected $max;
@@ -26,7 +26,7 @@ abstract class NumericNodeDefinition extends \ConfigTransformer202204182\Symfony
      * @return $this
      *
      * @throws \InvalidArgumentException when the constraint is inconsistent
-     * @param float|int $max
+     * @param int|float $max
      */
     public function max($max)
     {
@@ -42,7 +42,7 @@ abstract class NumericNodeDefinition extends \ConfigTransformer202204182\Symfony
      * @return $this
      *
      * @throws \InvalidArgumentException when the constraint is inconsistent
-     * @param float|int $min
+     * @param int|float $min
      */
     public function min($min)
     {
@@ -60,6 +60,6 @@ abstract class NumericNodeDefinition extends \ConfigTransformer202204182\Symfony
      */
     public function cannotBeEmpty()
     {
-        throw new \ConfigTransformer202204182\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to NumericNodeDefinition.');
+        throw new \ConfigTransformer202204298\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to NumericNodeDefinition.');
     }
 }

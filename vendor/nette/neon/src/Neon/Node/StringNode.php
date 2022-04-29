@@ -5,12 +5,12 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202204182\Nette\Neon\Node;
+namespace ConfigTransformer202204298\Nette\Neon\Node;
 
-use ConfigTransformer202204182\Nette;
-use ConfigTransformer202204182\Nette\Neon\Node;
+use ConfigTransformer202204298\Nette;
+use ConfigTransformer202204298\Nette\Neon\Node;
 /** @internal */
-final class StringNode extends \ConfigTransformer202204182\Nette\Neon\Node
+final class StringNode extends \ConfigTransformer202204298\Nette\Neon\Node
 {
     private const EscapeSequences = ['t' => "\t", 'n' => "\n", 'r' => "\r", 'f' => "\f", 'b' => "\10", '"' => '"', '\\' => '\\', '/' => '/', '_' => " "];
     /** @var string */
@@ -47,12 +47,12 @@ final class StringNode extends \ConfigTransformer202204182\Nette\Neon\Node
                 if (($res = \json_decode('"' . $sq . '"')) !== null) {
                     return $res;
                 }
-                throw new \ConfigTransformer202204182\Nette\Neon\Exception("Invalid UTF-8 sequence {$sq}");
+                throw new \ConfigTransformer202204298\Nette\Neon\Exception("Invalid UTF-8 sequence {$sq}");
             } elseif ($sq[1] === 'x' && \strlen($sq) === 4) {
                 \trigger_error("Neon: '{$sq}' is deprecated, use '\\uXXXX' instead.", \E_USER_DEPRECATED);
                 return \chr(\hexdec(\substr($sq, 2)));
             } else {
-                throw new \ConfigTransformer202204182\Nette\Neon\Exception("Invalid escaping sequence {$sq}");
+                throw new \ConfigTransformer202204298\Nette\Neon\Exception("Invalid escaping sequence {$sq}");
             }
         }, $res);
     }

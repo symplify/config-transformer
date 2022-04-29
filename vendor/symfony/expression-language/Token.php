@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202204182\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202204298\Symfony\Component\ExpressionLanguage;
 
 /**
  * Represents a Token.
@@ -29,7 +29,7 @@ class Token
     /**
      * @param string $type   The type of the token (self::*_TYPE)
      * @param int    $cursor The cursor position in the source
-     * @param float|int|string|null $value
+     * @param string|int|float|null $value
      */
     public function __construct(string $type, $value, ?int $cursor)
     {
