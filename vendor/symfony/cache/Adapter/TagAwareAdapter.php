@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205010\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202205015\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202205010\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202205010\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202205010\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202205010\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202205010\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202205010\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202205010\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202205010\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202205010\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202205010\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer202205015\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202205015\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202205015\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202205015\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202205015\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202205015\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202205015\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202205015\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202205015\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202205015\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202205010\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer202205010\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202205010\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer202205010\Psr\Log\LoggerAwareInterface
+class TagAwareAdapter implements \ConfigTransformer202205015\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \ConfigTransformer202205015\Symfony\Contracts\Cache\TagAwareCacheInterface, \ConfigTransformer202205015\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202205015\Symfony\Component\Cache\ResettableInterface, \ConfigTransformer202205015\Psr\Log\LoggerAwareInterface
 {
     use ContractsTrait;
     use LoggerAwareTrait;
@@ -37,27 +37,27 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
     private static \Closure $setCacheItemTags;
     private static \Closure $getTagsByKey;
     private static \Closure $saveTags;
-    public function __construct(\ConfigTransformer202205010\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer202205010\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
+    public function __construct(\ConfigTransformer202205015\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ConfigTransformer202205015\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
         $this->tags = $tagsPool ?? $itemsPool;
         $this->knownTagVersionsTtl = $knownTagVersionsTtl;
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem $protoItem) {
-            $item = new \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem();
+        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem $protoItem) {
+            $item = new \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->expiry = $protoItem->expiry;
             $item->poolHash = $protoItem->poolHash;
             return $item;
-        }, null, \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::class));
-        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer202205010\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
+        }, null, \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::class));
+        self::$setCacheItemTags ?? (self::$setCacheItemTags = \Closure::bind(static function (\ConfigTransformer202205015\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
             $item->isTaggable = \true;
             if (!$item->isHit) {
                 return $item;
             }
             if (isset($itemTags[$key])) {
                 foreach ($itemTags[$key] as $tag => $version) {
-                    $item->metadata[\ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
+                    $item->metadata[\ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
                 }
                 unset($itemTags[$key]);
             } else {
@@ -65,23 +65,23 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
                 $item->isHit = \false;
             }
             return $item;
-        }, null, \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::class));
         self::$getTagsByKey ?? (self::$getTagsByKey = \Closure::bind(static function ($deferred) {
             $tagsByKey = [];
             foreach ($deferred as $key => $item) {
-                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
+                $tagsByKey[$key] = $item->newMetadata[\ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
                 $item->metadata = $item->newMetadata;
             }
             return $tagsByKey;
-        }, null, \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::class));
-        self::$saveTags ?? (self::$saveTags = \Closure::bind(static function (\ConfigTransformer202205010\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+        }, null, \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::class));
+        self::$saveTags ?? (self::$saveTags = \Closure::bind(static function (\ConfigTransformer202205015\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
             \ksort($tags);
             foreach ($tags as $v) {
                 $v->expiry = 0;
                 $tagsAdapter->saveDeferred($v);
             }
             return $tagsAdapter->commit();
-        }, null, \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
@@ -90,7 +90,7 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
     {
         $ids = [];
         foreach ($tags as $tag) {
-            \assert('' !== \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem::validateKey($tag));
+            \assert('' !== \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem::validateKey($tag));
             unset($this->knownTagVersions[$tag]);
             $ids[] = $tag . static::TAGS_PREFIX;
         }
@@ -124,7 +124,7 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem
     {
         foreach ($this->getItems([$key]) as $item) {
             return $item;
@@ -149,7 +149,7 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
         }
         try {
             $items = $this->pool->getItems($tagKeys + $keys);
-        } catch (\ConfigTransformer202205010\Psr\Cache\InvalidArgumentException $e) {
+        } catch (\ConfigTransformer202205015\Psr\Cache\InvalidArgumentException $e) {
             $this->pool->getItems($keys);
             // Should throw an exception
             throw $e;
@@ -170,7 +170,7 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
         } else {
             $this->deferred = [];
         }
-        if ($this->pool instanceof \ConfigTransformer202205010\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \ConfigTransformer202205015\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix);
         }
         return $this->pool->clear();
@@ -197,9 +197,9 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202205010\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(\ConfigTransformer202205015\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -208,9 +208,9 @@ class TagAwareAdapter implements \ConfigTransformer202205010\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202205010\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(\ConfigTransformer202205015\Psr\Cache\CacheItemInterface $item) : bool
     {
-        if (!$item instanceof \ConfigTransformer202205010\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \ConfigTransformer202205015\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
