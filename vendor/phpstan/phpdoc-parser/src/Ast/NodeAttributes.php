@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204298\PHPStan\PhpDocParser\Ast;
+namespace ConfigTransformer202205016\PHPStan\PhpDocParser\Ast;
 
 use function array_key_exists;
 trait NodeAttributes

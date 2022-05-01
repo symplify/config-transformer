@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205016\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205016\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function trim;
-class DeprecatedTagValueNode implements \ConfigTransformer202204298\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class DeprecatedTagValueNode implements \ConfigTransformer202205016\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string (may be empty) */
