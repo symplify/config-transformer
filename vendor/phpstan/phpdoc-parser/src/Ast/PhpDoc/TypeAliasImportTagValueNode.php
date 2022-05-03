@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205033\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202205033\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202205033\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use function trim;
-class TypeAliasImportTagValueNode implements \ConfigTransformer202205033\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class TypeAliasImportTagValueNode implements \ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string */
@@ -15,7 +15,7 @@ class TypeAliasImportTagValueNode implements \ConfigTransformer202205033\PHPStan
     public $importedFrom;
     /** @var string|null */
     public $importedAs;
-    public function __construct(string $importedAlias, \ConfigTransformer202205033\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $importedFrom, ?string $importedAs)
+    public function __construct(string $importedAlias, \ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $importedFrom, ?string $importedAs)
     {
         $this->importedAlias = $importedAlias;
         $this->importedFrom = $importedFrom;
