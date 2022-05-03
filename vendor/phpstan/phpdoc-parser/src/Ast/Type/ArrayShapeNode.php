@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202205035\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205035\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class ArrayShapeNode implements \ConfigTransformer202205038\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ArrayShapeNode implements \ConfigTransformer202205035\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var ArrayShapeItemNode[] */
