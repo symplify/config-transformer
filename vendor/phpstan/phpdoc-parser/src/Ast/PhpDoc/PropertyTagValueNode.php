@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205015\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205039\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202205015\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202205015\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202205039\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205039\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
-class PropertyTagValueNode implements \ConfigTransformer202205015\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class PropertyTagValueNode implements \ConfigTransformer202205039\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -15,7 +15,7 @@ class PropertyTagValueNode implements \ConfigTransformer202205015\PHPStan\PhpDoc
     public $propertyName;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\ConfigTransformer202205015\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $propertyName, string $description)
+    public function __construct(\ConfigTransformer202205039\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $propertyName, string $description)
     {
         $this->type = $type;
         $this->propertyName = $propertyName;
