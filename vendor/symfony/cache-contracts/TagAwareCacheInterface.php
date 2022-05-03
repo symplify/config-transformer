@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205035\Symfony\Contracts\Cache;
+namespace ConfigTransformer202205033\Symfony\Contracts\Cache;
 
-use ConfigTransformer202205035\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202205033\Psr\Cache\InvalidArgumentException;
 /**
  * Allows invalidating cached items using tags.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TagAwareCacheInterface extends \ConfigTransformer202205035\Symfony\Contracts\Cache\CacheInterface
+interface TagAwareCacheInterface extends \ConfigTransformer202205033\Symfony\Contracts\Cache\CacheInterface
 {
     /**
      * Invalidates cached items using tags.
