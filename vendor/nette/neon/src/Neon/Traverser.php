@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202205096\Nette\Neon;
+namespace ConfigTransformer2022051110\Nette\Neon;
 
 /** @internal */
 final class Traverser
@@ -22,19 +22,19 @@ final class Traverser
      * @param  callable(Node): (Node|int|null)|null  $enter
      * @param  callable(Node): (Node|int|null)|null  $leave
      */
-    public function traverse(\ConfigTransformer202205096\Nette\Neon\Node $node, ?callable $enter = null, ?callable $leave = null) : \ConfigTransformer202205096\Nette\Neon\Node
+    public function traverse(\ConfigTransformer2022051110\Nette\Neon\Node $node, ?callable $enter = null, ?callable $leave = null) : \ConfigTransformer2022051110\Nette\Neon\Node
     {
         $this->enter = $enter;
         $this->leave = $leave;
         $this->stop = \false;
         return $this->traverseNode($node);
     }
-    private function traverseNode(\ConfigTransformer202205096\Nette\Neon\Node $node) : \ConfigTransformer202205096\Nette\Neon\Node
+    private function traverseNode(\ConfigTransformer2022051110\Nette\Neon\Node $node) : \ConfigTransformer2022051110\Nette\Neon\Node
     {
         $children = \true;
         if ($this->enter) {
             $res = ($this->enter)($node);
-            if ($res instanceof \ConfigTransformer202205096\Nette\Neon\Node) {
+            if ($res instanceof \ConfigTransformer2022051110\Nette\Neon\Node) {
                 $node = $res;
             } elseif ($res === self::DontTraverseChildren) {
                 $children = \false;
@@ -53,7 +53,7 @@ final class Traverser
         }
         if (!$this->stop && $this->leave) {
             $res = ($this->leave)($node);
-            if ($res instanceof \ConfigTransformer202205096\Nette\Neon\Node) {
+            if ($res instanceof \ConfigTransformer2022051110\Nette\Neon\Node) {
                 $node = $res;
             } elseif ($res === self::StopTraversal) {
                 $this->stop = \true;

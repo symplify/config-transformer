@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205096\Symfony\Component\Console\Command;
+namespace ConfigTransformer2022051110\Symfony\Component\Console\Command;
 
 /**
  * Interface for command reacting to signal.
