@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205124\Symplify\Astral\PhpDocParser;
+namespace ConfigTransformer202205122\Symplify\Astral\PhpDocParser;
 
-use ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
-use ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException;
-use ConfigTransformer202205124\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor;
+use ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
+use ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException;
+use ConfigTransformer202205122\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor;
 /**
  * @api
  *
@@ -62,11 +62,11 @@ final class PhpDocNodeTraverser
      * @var PhpDocNodeVisitorInterface[]
      */
     private $phpDocNodeVisitors = [];
-    public function addPhpDocNodeVisitor(\ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface $phpDocNodeVisitor) : void
+    public function addPhpDocNodeVisitor(\ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface $phpDocNodeVisitor) : void
     {
         $this->phpDocNodeVisitors[] = $phpDocNodeVisitor;
     }
-    public function traverse(\ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function traverse(\ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node $node) : void
     {
         foreach ($this->phpDocNodeVisitors as $phpDocNodeVisitor) {
             $phpDocNodeVisitor->beforeTraverse($node);
@@ -79,9 +79,9 @@ final class PhpDocNodeTraverser
     /**
      * @param callable(Node $node): (int|null|Node) $callable
      */
-    public function traverseWithCallable(\ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node $node, string $docContent, callable $callable) : \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node
+    public function traverseWithCallable(\ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node $node, string $docContent, callable $callable) : \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node
     {
-        $callablePhpDocNodeVisitor = new \ConfigTransformer202205124\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor($callable, $docContent);
+        $callablePhpDocNodeVisitor = new \ConfigTransformer202205122\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor($callable, $docContent);
         $this->addPhpDocNodeVisitor($callablePhpDocNodeVisitor);
         $this->traverse($node);
         return $node;
@@ -91,20 +91,20 @@ final class PhpDocNodeTraverser
      * @param TNode $node
      * @return TNode
      */
-    private function traverseNode(\ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node
+    private function traverseNode(\ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node
     {
         $subNodeNames = \array_keys(\get_object_vars($node));
         foreach ($subNodeNames as $subNodeName) {
             $subNode =& $node->{$subNodeName};
             if (\is_array($subNode)) {
                 $subNode = $this->traverseArray($subNode);
-            } elseif ($subNode instanceof \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node) {
+            } elseif ($subNode instanceof \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node) {
                 $breakVisitorIndex = null;
                 $traverseChildren = \true;
                 foreach ($this->phpDocNodeVisitors as $visitorIndex => $phpDocNodeVisitor) {
                     $return = $phpDocNodeVisitor->enterNode($subNode);
                     if ($return !== null) {
-                        if ($return instanceof \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node) {
+                        if ($return instanceof \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node) {
                             $subNode = $return;
                         } elseif ($return === self::DONT_TRAVERSE_CHILDREN) {
                             $traverseChildren = \false;
@@ -118,7 +118,7 @@ final class PhpDocNodeTraverser
                             $subNode = null;
                             continue 2;
                         } else {
-                            throw new \ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('enterNode() returned invalid value of type ' . \gettype($return));
+                            throw new \ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('enterNode() returned invalid value of type ' . \gettype($return));
                         }
                     }
                 }
@@ -146,7 +146,7 @@ final class PhpDocNodeTraverser
     {
         foreach ($nodes as $key => &$node) {
             // can be string or something else
-            if (!$node instanceof \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node) {
+            if (!$node instanceof \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node) {
                 continue;
             }
             $traverseChildren = \true;
@@ -154,7 +154,7 @@ final class PhpDocNodeTraverser
             foreach ($this->phpDocNodeVisitors as $visitorIndex => $phpDocNodeVisitor) {
                 $return = $phpDocNodeVisitor->enterNode($node);
                 if ($return !== null) {
-                    if ($return instanceof \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node) {
+                    if ($return instanceof \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node) {
                         $node = $return;
                     } elseif ($return === self::DONT_TRAVERSE_CHILDREN) {
                         $traverseChildren = \false;
@@ -169,7 +169,7 @@ final class PhpDocNodeTraverser
                         unset($nodes[$key]);
                         continue 2;
                     } else {
-                        throw new \ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('enterNode() returned invalid value of type ' . \gettype($return));
+                        throw new \ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('enterNode() returned invalid value of type ' . \gettype($return));
                     }
                 }
             }
@@ -183,7 +183,7 @@ final class PhpDocNodeTraverser
             foreach ($this->phpDocNodeVisitors as $visitorIndex => $phpDocNodeVisitor) {
                 $return = $phpDocNodeVisitor->leaveNode($node);
                 if ($return !== null) {
-                    if ($return instanceof \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Node) {
+                    if ($return instanceof \ConfigTransformer202205122\PHPStan\PhpDocParser\Ast\Node) {
                         $node = $return;
                     } elseif (\is_array($return)) {
                         $doNodes[] = [$key, $return];
@@ -195,7 +195,7 @@ final class PhpDocNodeTraverser
                         $this->stopTraversal = \true;
                         break 2;
                     } else {
-                        throw new \ConfigTransformer202205124\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('leaveNode() returned invalid value of type ' . \gettype($return));
+                        throw new \ConfigTransformer202205122\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException('leaveNode() returned invalid value of type ' . \gettype($return));
                     }
                 }
                 if ($breakVisitorIndex === $visitorIndex) {

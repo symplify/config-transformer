@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205124\Symplify\Astral\NodeAnalyzer;
+namespace ConfigTransformer202205122\Symplify\Astral\NodeAnalyzer;
 
-use ConfigTransformer202205124\Nette\Application\UI\Template;
-use ConfigTransformer202205124\PhpParser\Node\Expr;
-use ConfigTransformer202205124\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer202205124\PHPStan\Analyser\Scope;
-use ConfigTransformer202205124\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202205124\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser;
+use ConfigTransformer202205122\Nette\Application\UI\Template;
+use ConfigTransformer202205122\PhpParser\Node\Expr;
+use ConfigTransformer202205122\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer202205122\PHPStan\Analyser\Scope;
+use ConfigTransformer202205122\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202205122\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser;
 /**
  * @api
  */
@@ -17,7 +17,7 @@ final class NetteTypeAnalyzer
     /**
      * @var array<class-string<Template>>
      */
-    private const TEMPLATE_TYPES = ['ConfigTransformer202205124\\Nette\\Application\\UI\\Template', 'ConfigTransformer202205124\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer202205124\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer202205124\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
+    private const TEMPLATE_TYPES = ['ConfigTransformer202205122\\Nette\\Application\\UI\\Template', 'ConfigTransformer202205122\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer202205122\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer202205122\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
@@ -26,7 +26,7 @@ final class NetteTypeAnalyzer
      * @var \Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser
      */
     private $containsTypeAnalyser;
-    public function __construct(\ConfigTransformer202205124\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202205124\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser $containsTypeAnalyser)
+    public function __construct(\ConfigTransformer202205122\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202205122\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser $containsTypeAnalyser)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->containsTypeAnalyser = $containsTypeAnalyser;
@@ -34,12 +34,12 @@ final class NetteTypeAnalyzer
     /**
      * E.g. $this->template->key
      */
-    public function isTemplateMagicPropertyType(\ConfigTransformer202205124\PhpParser\Node\Expr $expr, \ConfigTransformer202205124\PHPStan\Analyser\Scope $scope) : bool
+    public function isTemplateMagicPropertyType(\ConfigTransformer202205122\PhpParser\Node\Expr $expr, \ConfigTransformer202205122\PHPStan\Analyser\Scope $scope) : bool
     {
-        if (!$expr instanceof \ConfigTransformer202205124\PhpParser\Node\Expr\PropertyFetch) {
+        if (!$expr instanceof \ConfigTransformer202205122\PhpParser\Node\Expr\PropertyFetch) {
             return \false;
         }
-        if (!$expr->var instanceof \ConfigTransformer202205124\PhpParser\Node\Expr\PropertyFetch) {
+        if (!$expr->var instanceof \ConfigTransformer202205122\PhpParser\Node\Expr\PropertyFetch) {
             return \false;
         }
         return $this->isTemplateType($expr->var, $scope);
@@ -47,28 +47,28 @@ final class NetteTypeAnalyzer
     /**
      * E.g. $this->template
      */
-    public function isTemplateType(\ConfigTransformer202205124\PhpParser\Node\Expr $expr, \ConfigTransformer202205124\PHPStan\Analyser\Scope $scope) : bool
+    public function isTemplateType(\ConfigTransformer202205122\PhpParser\Node\Expr $expr, \ConfigTransformer202205122\PHPStan\Analyser\Scope $scope) : bool
     {
         return $this->containsTypeAnalyser->containsExprTypes($expr, $scope, self::TEMPLATE_TYPES);
     }
     /**
      * This type has getComponent() method
      */
-    public function isInsideComponentContainer(\ConfigTransformer202205124\PHPStan\Analyser\Scope $scope) : bool
+    public function isInsideComponentContainer(\ConfigTransformer202205122\PHPStan\Analyser\Scope $scope) : bool
     {
         $className = $this->simpleNameResolver->getClassNameFromScope($scope);
         if ($className === null) {
             return \false;
         }
         // this type has getComponent() method
-        return \is_a($className, 'ConfigTransformer202205124\\Nette\\ComponentModel\\Container', \true);
+        return \is_a($className, 'ConfigTransformer202205122\\Nette\\ComponentModel\\Container', \true);
     }
-    public function isInsideControl(\ConfigTransformer202205124\PHPStan\Analyser\Scope $scope) : bool
+    public function isInsideControl(\ConfigTransformer202205122\PHPStan\Analyser\Scope $scope) : bool
     {
         $className = $this->simpleNameResolver->getClassNameFromScope($scope);
         if ($className === null) {
             return \false;
         }
-        return \is_a($className, 'ConfigTransformer202205124\\Nette\\Application\\UI\\Control', \true);
+        return \is_a($className, 'ConfigTransformer202205122\\Nette\\Application\\UI\\Control', \true);
     }
 }
