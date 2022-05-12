@@ -1,13 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-declare (strict_types=1);
-namespace ConfigTransformer202205126\PhpParser\Node\Stmt;
+namespace PhpParser\Node\Stmt;
 
-use ConfigTransformer202205126\PhpParser\Node;
-use ConfigTransformer202205126\PhpParser\Node\ComplexType;
-use ConfigTransformer202205126\PhpParser\Node\Identifier;
-use ConfigTransformer202205126\PhpParser\Node\Name;
-class Property extends \ConfigTransformer202205126\PhpParser\Node\Stmt
+use PhpParser\Node;
+use PhpParser\Node\ComplexType;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name;
+
+class Property extends Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
@@ -17,6 +17,7 @@ class Property extends \ConfigTransformer202205126\PhpParser\Node\Stmt
     public $type;
     /** @var Node\AttributeGroup[] PHP attribute groups */
     public $attrGroups;
+
     /**
      * Constructs a class property list node.
      *
@@ -26,65 +27,65 @@ class Property extends \ConfigTransformer202205126\PhpParser\Node\Stmt
      * @param null|string|Identifier|Name|ComplexType $type       Type declaration
      * @param Node\AttributeGroup[]                   $attrGroups PHP attribute groups
      */
-    public function __construct(int $flags, array $props, array $attributes = [], $type = null, array $attrGroups = [])
-    {
+    public function __construct(int $flags, array $props, array $attributes = [], $type = null, array $attrGroups = []) {
         $this->attributes = $attributes;
         $this->flags = $flags;
         $this->props = $props;
-        $this->type = \is_string($type) ? new \ConfigTransformer202205126\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new Identifier($type) : $type;
         $this->attrGroups = $attrGroups;
     }
-    public function getSubNodeNames() : array
-    {
+
+    public function getSubNodeNames() : array {
         return ['attrGroups', 'flags', 'type', 'props'];
     }
+
     /**
      * Whether the property is explicitly or implicitly public.
      *
      * @return bool
      */
-    public function isPublic() : bool
-    {
-        return ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+    public function isPublic() : bool {
+        return ($this->flags & Class_::MODIFIER_PUBLIC) !== 0
+            || ($this->flags & Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
+
     /**
      * Whether the property is protected.
      *
      * @return bool
      */
-    public function isProtected() : bool
-    {
-        return (bool) ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+    public function isProtected() : bool {
+        return (bool) ($this->flags & Class_::MODIFIER_PROTECTED);
     }
+
     /**
      * Whether the property is private.
      *
      * @return bool
      */
-    public function isPrivate() : bool
-    {
-        return (bool) ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+    public function isPrivate() : bool {
+        return (bool) ($this->flags & Class_::MODIFIER_PRIVATE);
     }
+
     /**
      * Whether the property is static.
      *
      * @return bool
      */
-    public function isStatic() : bool
-    {
-        return (bool) ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+    public function isStatic() : bool {
+        return (bool) ($this->flags & Class_::MODIFIER_STATIC);
     }
+
     /**
      * Whether the property is readonly.
      *
      * @return bool
      */
-    public function isReadonly() : bool
-    {
-        return (bool) ($this->flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY);
+    public function isReadonly() : bool {
+        return (bool) ($this->flags & Class_::MODIFIER_READONLY);
     }
-    public function getType() : string
-    {
+
+    public function getType() : string {
         return 'Stmt_Property';
     }
 }

@@ -1,18 +1,19 @@
-<?php
+<?php declare(strict_types=1);
 
-declare (strict_types=1);
-namespace ConfigTransformer202205126\PhpParser;
+namespace PhpParser;
 
-use ConfigTransformer202205126\PhpParser\Node\Expr\Include_;
-use ConfigTransformer202205126\PhpParser\Node\Stmt\Class_;
-use ConfigTransformer202205126\PhpParser\Node\Stmt\GroupUse;
-use ConfigTransformer202205126\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer202205126\PhpParser\Node\Stmt\UseUse;
+use PhpParser\Node\Expr\Include_;
+use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\GroupUse;
+use PhpParser\Node\Stmt\Use_;
+use PhpParser\Node\Stmt\UseUse;
+
 class NodeDumper
 {
     private $dumpComments;
     private $dumpPositions;
     private $code;
+
     /**
      * Constructs a NodeDumper.
      *
@@ -23,11 +24,11 @@ class NodeDumper
      *
      * @param array $options Options (see description)
      */
-    public function __construct(array $options = [])
-    {
+    public function __construct(array $options = []) {
         $this->dumpComments = !empty($options['dumpComments']);
         $this->dumpPositions = !empty($options['dumpPositions']);
     }
+
     /**
      * Dumps a node or array.
      *
@@ -38,114 +39,134 @@ class NodeDumper
      *
      * @return string Dumped value
      */
-    public function dump($node, string $code = null) : string
-    {
+    public function dump($node, string $code = null) : string {
         $this->code = $code;
         return $this->dumpRecursive($node);
     }
-    protected function dumpRecursive($node)
-    {
-        if ($node instanceof \ConfigTransformer202205126\PhpParser\Node) {
+
+    protected function dumpRecursive($node) {
+        if ($node instanceof Node) {
             $r = $node->getType();
-            if ($this->dumpPositions && null !== ($p = $this->dumpPosition($node))) {
+            if ($this->dumpPositions && null !== $p = $this->dumpPosition($node)) {
                 $r .= $p;
             }
             $r .= '(';
+
             foreach ($node->getSubNodeNames() as $key) {
                 $r .= "\n    " . $key . ': ';
-                $value = $node->{$key};
+
+                $value = $node->$key;
                 if (null === $value) {
                     $r .= 'null';
-                } elseif (\false === $value) {
+                } elseif (false === $value) {
                     $r .= 'false';
-                } elseif (\true === $value) {
+                } elseif (true === $value) {
                     $r .= 'true';
-                } elseif (\is_scalar($value)) {
+                } elseif (is_scalar($value)) {
                     if ('flags' === $key || 'newModifier' === $key) {
                         $r .= $this->dumpFlags($value);
-                    } elseif ('type' === $key && $node instanceof \ConfigTransformer202205126\PhpParser\Node\Expr\Include_) {
+                    } elseif ('type' === $key && $node instanceof Include_) {
                         $r .= $this->dumpIncludeType($value);
-                    } elseif ('type' === $key && ($node instanceof \ConfigTransformer202205126\PhpParser\Node\Stmt\Use_ || $node instanceof \ConfigTransformer202205126\PhpParser\Node\Stmt\UseUse || $node instanceof \ConfigTransformer202205126\PhpParser\Node\Stmt\GroupUse)) {
+                    } elseif ('type' === $key
+                            && ($node instanceof Use_ || $node instanceof UseUse || $node instanceof GroupUse)) {
                         $r .= $this->dumpUseType($value);
                     } else {
                         $r .= $value;
                     }
                 } else {
-                    $r .= \str_replace("\n", "\n    ", $this->dumpRecursive($value));
+                    $r .= str_replace("\n", "\n    ", $this->dumpRecursive($value));
                 }
             }
-            if ($this->dumpComments && ($comments = $node->getComments())) {
-                $r .= "\n    comments: " . \str_replace("\n", "\n    ", $this->dumpRecursive($comments));
+
+            if ($this->dumpComments && $comments = $node->getComments()) {
+                $r .= "\n    comments: " . str_replace("\n", "\n    ", $this->dumpRecursive($comments));
             }
-        } elseif (\is_array($node)) {
+        } elseif (is_array($node)) {
             $r = 'array(';
+
             foreach ($node as $key => $value) {
                 $r .= "\n    " . $key . ': ';
+
                 if (null === $value) {
                     $r .= 'null';
-                } elseif (\false === $value) {
+                } elseif (false === $value) {
                     $r .= 'false';
-                } elseif (\true === $value) {
+                } elseif (true === $value) {
                     $r .= 'true';
-                } elseif (\is_scalar($value)) {
+                } elseif (is_scalar($value)) {
                     $r .= $value;
                 } else {
-                    $r .= \str_replace("\n", "\n    ", $this->dumpRecursive($value));
+                    $r .= str_replace("\n", "\n    ", $this->dumpRecursive($value));
                 }
             }
-        } elseif ($node instanceof \ConfigTransformer202205126\PhpParser\Comment) {
+        } elseif ($node instanceof Comment) {
             return $node->getReformattedText();
         } else {
             throw new \InvalidArgumentException('Can only dump nodes and arrays.');
         }
+
         return $r . "\n)";
     }
-    protected function dumpFlags($flags)
-    {
+
+    protected function dumpFlags($flags) {
         $strs = [];
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) {
+        if ($flags & Class_::MODIFIER_PUBLIC) {
             $strs[] = 'MODIFIER_PUBLIC';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED) {
+        if ($flags & Class_::MODIFIER_PROTECTED) {
             $strs[] = 'MODIFIER_PROTECTED';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE) {
+        if ($flags & Class_::MODIFIER_PRIVATE) {
             $strs[] = 'MODIFIER_PRIVATE';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT) {
+        if ($flags & Class_::MODIFIER_ABSTRACT) {
             $strs[] = 'MODIFIER_ABSTRACT';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC) {
+        if ($flags & Class_::MODIFIER_STATIC) {
             $strs[] = 'MODIFIER_STATIC';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL) {
+        if ($flags & Class_::MODIFIER_FINAL) {
             $strs[] = 'MODIFIER_FINAL';
         }
-        if ($flags & \ConfigTransformer202205126\PhpParser\Node\Stmt\Class_::MODIFIER_READONLY) {
+        if ($flags & Class_::MODIFIER_READONLY) {
             $strs[] = 'MODIFIER_READONLY';
         }
+
         if ($strs) {
-            return \implode(' | ', $strs) . ' (' . $flags . ')';
+            return implode(' | ', $strs) . ' (' . $flags . ')';
         } else {
             return $flags;
         }
     }
-    protected function dumpIncludeType($type)
-    {
-        $map = [\ConfigTransformer202205126\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'TYPE_INCLUDE', \ConfigTransformer202205126\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'TYPE_INCLUDE_ONCE', \ConfigTransformer202205126\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'TYPE_REQUIRE', \ConfigTransformer202205126\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'TYPE_REQUIRE_ONCE'];
+
+    protected function dumpIncludeType($type) {
+        $map = [
+            Include_::TYPE_INCLUDE      => 'TYPE_INCLUDE',
+            Include_::TYPE_INCLUDE_ONCE => 'TYPE_INCLUDE_ONCE',
+            Include_::TYPE_REQUIRE      => 'TYPE_REQUIRE',
+            Include_::TYPE_REQUIRE_ONCE => 'TYPE_REQUIRE_ONCE',
+        ];
+
         if (!isset($map[$type])) {
             return $type;
         }
         return $map[$type] . ' (' . $type . ')';
     }
-    protected function dumpUseType($type)
-    {
-        $map = [\ConfigTransformer202205126\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN => 'TYPE_UNKNOWN', \ConfigTransformer202205126\PhpParser\Node\Stmt\Use_::TYPE_NORMAL => 'TYPE_NORMAL', \ConfigTransformer202205126\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION => 'TYPE_FUNCTION', \ConfigTransformer202205126\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT => 'TYPE_CONSTANT'];
+
+    protected function dumpUseType($type) {
+        $map = [
+            Use_::TYPE_UNKNOWN  => 'TYPE_UNKNOWN',
+            Use_::TYPE_NORMAL   => 'TYPE_NORMAL',
+            Use_::TYPE_FUNCTION => 'TYPE_FUNCTION',
+            Use_::TYPE_CONSTANT => 'TYPE_CONSTANT',
+        ];
+
         if (!isset($map[$type])) {
             return $type;
         }
         return $map[$type] . ' (' . $type . ')';
     }
+
     /**
      * Dump node position, if possible.
      *
@@ -153,29 +174,33 @@ class NodeDumper
      *
      * @return string|null Dump of position, or null if position information not available
      */
-    protected function dumpPosition(\ConfigTransformer202205126\PhpParser\Node $node)
-    {
+    protected function dumpPosition(Node $node) {
         if (!$node->hasAttribute('startLine') || !$node->hasAttribute('endLine')) {
             return null;
         }
+
         $start = $node->getStartLine();
         $end = $node->getEndLine();
-        if ($node->hasAttribute('startFilePos') && $node->hasAttribute('endFilePos') && null !== $this->code) {
+        if ($node->hasAttribute('startFilePos') && $node->hasAttribute('endFilePos')
+            && null !== $this->code
+        ) {
             $start .= ':' . $this->toColumn($this->code, $node->getStartFilePos());
             $end .= ':' . $this->toColumn($this->code, $node->getEndFilePos());
         }
-        return "[{$start} - {$end}]";
+        return "[$start - $end]";
     }
+
     // Copied from Error class
-    private function toColumn($code, $pos)
-    {
-        if ($pos > \strlen($code)) {
+    private function toColumn($code, $pos) {
+        if ($pos > strlen($code)) {
             throw new \RuntimeException('Invalid position information');
         }
-        $lineStartPos = \strrpos($code, "\n", $pos - \strlen($code));
-        if (\false === $lineStartPos) {
+
+        $lineStartPos = strrpos($code, "\n", $pos - strlen($code));
+        if (false === $lineStartPos) {
             $lineStartPos = -1;
         }
+
         return $pos - $lineStartPos;
     }
 }

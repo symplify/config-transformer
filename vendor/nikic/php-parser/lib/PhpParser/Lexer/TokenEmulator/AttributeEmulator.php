@@ -1,45 +1,51 @@
-<?php
+<?php declare(strict_types=1);
 
-declare (strict_types=1);
-namespace ConfigTransformer202205126\PhpParser\Lexer\TokenEmulator;
+namespace PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202205126\PhpParser\Lexer\Emulative;
-final class AttributeEmulator extends \ConfigTransformer202205126\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use PhpParser\Lexer\Emulative;
+
+final class AttributeEmulator extends TokenEmulator
 {
-    public function getPhpVersion() : string
+    public function getPhpVersion(): string
     {
-        return \ConfigTransformer202205126\PhpParser\Lexer\Emulative::PHP_8_0;
+        return Emulative::PHP_8_0;
     }
+
     public function isEmulationNeeded(string $code) : bool
     {
-        return \strpos($code, '#[') !== \false;
+        return strpos($code, '#[') !== false;
     }
-    public function emulate(string $code, array $tokens) : array
+
+    public function emulate(string $code, array $tokens): array
     {
         // We need to manually iterate and manage a count because we'll change
         // the tokens array on the way.
         $line = 1;
-        for ($i = 0, $c = \count($tokens); $i < $c; ++$i) {
+        for ($i = 0, $c = count($tokens); $i < $c; ++$i) {
             if ($tokens[$i] === '#' && isset($tokens[$i + 1]) && $tokens[$i + 1] === '[') {
-                \array_splice($tokens, $i, 2, [[\T_ATTRIBUTE, '#[', $line]]);
+                array_splice($tokens, $i, 2, [
+                    [\T_ATTRIBUTE, '#[', $line]
+                ]);
                 $c--;
                 continue;
             }
             if (\is_array($tokens[$i])) {
-                $line += \substr_count($tokens[$i][1], "\n");
+                $line += substr_count($tokens[$i][1], "\n");
             }
         }
+
         return $tokens;
     }
-    public function reverseEmulate(string $code, array $tokens) : array
+
+    public function reverseEmulate(string $code, array $tokens): array
     {
         // TODO
         return $tokens;
     }
-    public function preprocessCode(string $code, array &$patches) : string
-    {
+
+    public function preprocessCode(string $code, array &$patches): string {
         $pos = 0;
-        while (\false !== ($pos = \strpos($code, '#[', $pos))) {
+        while (false !== $pos = strpos($code, '#[', $pos)) {
             // Replace #[ with %[
             $code[$pos] = '%';
             $patches[] = [$pos, 'replace', '#'];

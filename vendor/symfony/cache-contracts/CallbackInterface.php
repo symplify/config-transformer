@@ -8,9 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205126\Symfony\Contracts\Cache;
 
-use ConfigTransformer202205126\Psr\Cache\CacheItemInterface;
+namespace Symfony\Contracts\Cache;
+
+use Psr\Cache\CacheItemInterface;
+
 /**
  * Computes and returns the cached value of an item.
  *
@@ -24,5 +26,5 @@ interface CallbackInterface
      *
      * @return mixed The computed value for the passed item
      */
-    public function __invoke(\ConfigTransformer202205126\Psr\Cache\CacheItemInterface $item, bool &$save);
+    public function __invoke(CacheItemInterface $item, bool &$save);
 }

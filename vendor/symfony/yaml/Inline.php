@@ -8,11 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205126\Symfony\Component\Yaml;
 
-use ConfigTransformer202205126\Symfony\Component\Yaml\Exception\DumpException;
-use ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue;
+namespace Symfony\Component\Yaml;
+
+use Symfony\Component\Yaml\Exception\DumpException;
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Tag\TaggedValue;
+
 /**
  * Inline implements a YAML parser/dumper for the YAML inline syntax.
  *
@@ -23,6 +25,7 @@ use ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue;
 class Inline
 {
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*+(?:\\\\.[^"\\\\]*+)*+)"|\'([^\']*+(?:\'\'[^\']*+)*+)\')';
+
     /**
      * @var int
      */
@@ -31,33 +34,37 @@ class Inline
      * @var string|null
      */
     public static $parsedFilename;
+
     /**
      * @var bool
      */
-    private static $exceptionOnInvalidType = \false;
+    private static $exceptionOnInvalidType = false;
     /**
      * @var bool
      */
-    private static $objectSupport = \false;
+    private static $objectSupport = false;
     /**
      * @var bool
      */
-    private static $objectForMap = \false;
+    private static $objectForMap = false;
     /**
      * @var bool
      */
-    private static $constantSupport = \false;
+    private static $constantSupport = false;
+
     public static function initialize(int $flags, int $parsedLineNumber = null, string $parsedFilename = null)
     {
-        self::$exceptionOnInvalidType = (bool) (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE & $flags);
-        self::$objectSupport = (bool) (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_OBJECT & $flags);
-        self::$objectForMap = (bool) (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_OBJECT_FOR_MAP & $flags);
-        self::$constantSupport = (bool) (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT & $flags);
+        self::$exceptionOnInvalidType = (bool) (Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE & $flags);
+        self::$objectSupport = (bool) (Yaml::PARSE_OBJECT & $flags);
+        self::$objectForMap = (bool) (Yaml::PARSE_OBJECT_FOR_MAP & $flags);
+        self::$constantSupport = (bool) (Yaml::PARSE_CONSTANT & $flags);
         self::$parsedFilename = $parsedFilename;
+
         if (null !== $parsedLineNumber) {
             self::$parsedLineNumber = $parsedLineNumber;
         }
     }
+
     /**
      * Converts a YAML string to a PHP value.
      *
@@ -70,10 +77,13 @@ class Inline
     public static function parse(string $value = null, int $flags = 0, array &$references = [])
     {
         self::initialize($flags);
-        $value = \trim($value);
+
+        $value = trim($value);
+
         if ('' === $value) {
             return '';
         }
+
         $i = 0;
         $tag = self::parseTag($value, $i, $flags);
         switch ($value[$i]) {
@@ -88,15 +98,19 @@ class Inline
             default:
                 $result = self::parseScalar($value, $flags, null, $i, null === $tag, $references);
         }
+
         // some comments are allowed at the end
-        if (\preg_replace('/\\s*#.*$/A', '', \substr($value, $i))) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Unexpected characters near "%s".', \substr($value, $i)), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+        if (preg_replace('/\s*#.*$/A', '', substr($value, $i))) {
+            throw new ParseException(sprintf('Unexpected characters near "%s".', substr($value, $i)), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
+
         if (null !== $tag && '' !== $tag) {
-            return new \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue($tag, $result);
+            return new TaggedValue($tag, $result);
         }
+
         return $result;
     }
+
     /**
      * Dumps a given PHP variable to a YAML string.
      *
@@ -105,208 +119,240 @@ class Inline
      *
      * @throws DumpException When trying to dump PHP resource
      */
-    public static function dump($value, int $flags = 0) : string
+    public static function dump($value, int $flags = 0): string
     {
-        switch (\true) {
+        switch (true) {
             case \is_resource($value):
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE & $flags) {
-                    throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\DumpException(\sprintf('Unable to dump PHP resources in a YAML file ("%s").', \get_resource_type($value)));
+                if (Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE & $flags) {
+                    throw new DumpException(sprintf('Unable to dump PHP resources in a YAML file ("%s").', get_resource_type($value)));
                 }
+
                 return self::dumpNull($flags);
             case $value instanceof \DateTimeInterface:
                 return $value->format('c');
-            case $value instanceof \ConfigTransformer202205126\UnitEnum:
-                return \sprintf('!php/const %s::%s', \get_class($value), $value->name);
+            case $value instanceof \UnitEnum:
+                return sprintf('!php/const %s::%s', \get_class($value), $value->name);
             case \is_object($value):
-                if ($value instanceof \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue) {
-                    return '!' . $value->getTag() . ' ' . self::dump($value->getValue(), $flags);
+                if ($value instanceof TaggedValue) {
+                    return '!'.$value->getTag().' '.self::dump($value->getValue(), $flags);
                 }
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_OBJECT & $flags) {
-                    return '!php/object ' . self::dump(\serialize($value));
+
+                if (Yaml::DUMP_OBJECT & $flags) {
+                    return '!php/object '.self::dump(serialize($value));
                 }
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \stdClass || $value instanceof \ArrayObject)) {
+
+                if (Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \stdClass || $value instanceof \ArrayObject)) {
                     $output = [];
+
                     foreach ($value as $key => $val) {
-                        $output[] = \sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
+                        $output[] = sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
                     }
-                    return \sprintf('{ %s }', \implode(', ', $output));
+
+                    return sprintf('{ %s }', implode(', ', $output));
                 }
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE & $flags) {
-                    throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\DumpException('Object support when dumping a YAML file has been disabled.');
+
+                if (Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE & $flags) {
+                    throw new DumpException('Object support when dumping a YAML file has been disabled.');
                 }
+
                 return self::dumpNull($flags);
             case \is_array($value):
                 return self::dumpArray($value, $flags);
             case null === $value:
                 return self::dumpNull($flags);
-            case \true === $value:
+            case true === $value:
                 return 'true';
-            case \false === $value:
+            case false === $value:
                 return 'false';
             case \is_int($value):
                 return $value;
-            case \is_numeric($value) && \false === \strpbrk($value, "\f\n\r\t\v"):
-                $locale = \setlocale(\LC_NUMERIC, 0);
-                if (\false !== $locale) {
-                    \setlocale(\LC_NUMERIC, 'C');
+            case is_numeric($value) && false === strpbrk($value, "\f\n\r\t\v"):
+                $locale = setlocale(\LC_NUMERIC, 0);
+                if (false !== $locale) {
+                    setlocale(\LC_NUMERIC, 'C');
                 }
                 if (\is_float($value)) {
                     $repr = (string) $value;
-                    if (\is_infinite($value)) {
-                        $repr = \str_ireplace('INF', '.Inf', $repr);
-                    } elseif (\floor($value) == $value && $repr == $value) {
+                    if (is_infinite($value)) {
+                        $repr = str_ireplace('INF', '.Inf', $repr);
+                    } elseif (floor($value) == $value && $repr == $value) {
                         // Preserve float data type since storing a whole number will result in integer value.
-                        if (\false === \strpos($repr, 'E')) {
-                            $repr = $repr . '.0';
+                        if (false === strpos($repr, 'E')) {
+                            $repr = $repr.'.0';
                         }
                     }
                 } else {
-                    $repr = \is_string($value) ? "'{$value}'" : (string) $value;
+                    $repr = \is_string($value) ? "'$value'" : (string) $value;
                 }
-                if (\false !== $locale) {
-                    \setlocale(\LC_NUMERIC, $locale);
+                if (false !== $locale) {
+                    setlocale(\LC_NUMERIC, $locale);
                 }
+
                 return $repr;
             case '' == $value:
                 return "''";
             case self::isBinaryString($value):
-                return '!!binary ' . \base64_encode($value);
-            case \ConfigTransformer202205126\Symfony\Component\Yaml\Escaper::requiresDoubleQuoting($value):
-                return \ConfigTransformer202205126\Symfony\Component\Yaml\Escaper::escapeWithDoubleQuotes($value);
-            case \ConfigTransformer202205126\Symfony\Component\Yaml\Escaper::requiresSingleQuoting($value):
-            case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('{^[0-9]+[_0-9]*$}', $value):
-            case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(self::getHexRegex(), $value):
-            case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(self::getTimestampRegex(), $value):
-                return \ConfigTransformer202205126\Symfony\Component\Yaml\Escaper::escapeWithSingleQuotes($value);
+                return '!!binary '.base64_encode($value);
+            case Escaper::requiresDoubleQuoting($value):
+                return Escaper::escapeWithDoubleQuotes($value);
+            case Escaper::requiresSingleQuoting($value):
+            case Parser::preg_match('{^[0-9]+[_0-9]*$}', $value):
+            case Parser::preg_match(self::getHexRegex(), $value):
+            case Parser::preg_match(self::getTimestampRegex(), $value):
+                return Escaper::escapeWithSingleQuotes($value);
             default:
                 return $value;
         }
     }
+
     /**
      * Check if given array is hash or just normal indexed array.
      * @param mixed[]|\ArrayObject|\stdClass $value
      */
-    public static function isHash($value) : bool
+    public static function isHash($value): bool
     {
         if ($value instanceof \stdClass || $value instanceof \ArrayObject) {
-            return \true;
+            return true;
         }
+
         $expectedKey = 0;
+
         foreach ($value as $key => $val) {
             if ($key !== $expectedKey++) {
-                return \true;
+                return true;
             }
         }
-        return \false;
+
+        return false;
     }
+
     /**
      * Dumps a PHP array to a YAML string.
      *
      * @param array $value The PHP array to dump
      * @param int   $flags A bit field of Yaml::DUMP_* constants to customize the dumped YAML string
      */
-    private static function dumpArray(array $value, int $flags) : string
+    private static function dumpArray(array $value, int $flags): string
     {
         // array
-        if (($value || \ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE & $flags) && !self::isHash($value)) {
+        if (($value || Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE & $flags) && !self::isHash($value)) {
             $output = [];
             foreach ($value as $val) {
                 $output[] = self::dump($val, $flags);
             }
-            return \sprintf('[%s]', \implode(', ', $output));
+
+            return sprintf('[%s]', implode(', ', $output));
         }
+
         // hash
         $output = [];
         foreach ($value as $key => $val) {
-            $output[] = \sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
+            $output[] = sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
         }
-        return \sprintf('{ %s }', \implode(', ', $output));
+
+        return sprintf('{ %s }', implode(', ', $output));
     }
-    private static function dumpNull(int $flags) : string
+
+    private static function dumpNull(int $flags): string
     {
-        if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::DUMP_NULL_AS_TILDE & $flags) {
+        if (Yaml::DUMP_NULL_AS_TILDE & $flags) {
             return '~';
         }
+
         return 'null';
     }
+
     /**
      * Parses a YAML scalar.
      *
      * @throws ParseException When malformed inline YAML string is parsed
      * @return mixed
      */
-    public static function parseScalar(string $scalar, int $flags = 0, array $delimiters = null, int &$i = 0, bool $evaluate = \true, array &$references = [], bool &$isQuoted = null)
+    public static function parseScalar(string $scalar, int $flags = 0, array $delimiters = null, int &$i = 0, bool $evaluate = true, array &$references = [], bool &$isQuoted = null)
     {
-        if (\in_array($scalar[$i], ['"', "'"], \true)) {
+        if (\in_array($scalar[$i], ['"', "'"], true)) {
             // quoted scalar
-            $isQuoted = \true;
+            $isQuoted = true;
             $output = self::parseQuotedScalar($scalar, $i);
+
             if (null !== $delimiters) {
-                $tmp = \ltrim(\substr($scalar, $i), " \n");
+                $tmp = ltrim(substr($scalar, $i), " \n");
                 if ('' === $tmp) {
-                    throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Unexpected end of line, expected one of "%s".', \implode('', $delimiters)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                    throw new ParseException(sprintf('Unexpected end of line, expected one of "%s".', implode('', $delimiters)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                 }
                 if (!\in_array($tmp[0], $delimiters)) {
-                    throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Unexpected characters (%s).', \substr($scalar, $i)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                    throw new ParseException(sprintf('Unexpected characters (%s).', substr($scalar, $i)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                 }
             }
         } else {
             // "normal" string
-            $isQuoted = \false;
+            $isQuoted = false;
+
             if (!$delimiters) {
-                $output = \substr($scalar, $i);
+                $output = substr($scalar, $i);
                 $i += \strlen($output);
+
                 // remove comments
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('/[ \\t]+#/', $output, $match, \PREG_OFFSET_CAPTURE)) {
-                    $output = \substr($output, 0, $match[0][1]);
+                if (Parser::preg_match('/[ \t]+#/', $output, $match, \PREG_OFFSET_CAPTURE)) {
+                    $output = substr($output, 0, $match[0][1]);
                 }
-            } elseif (\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('/^(.*?)(' . \implode('|', $delimiters) . ')/', \substr($scalar, $i), $match)) {
+            } elseif (Parser::preg_match('/^(.*?)('.implode('|', $delimiters).')/', substr($scalar, $i), $match)) {
                 $output = $match[1];
                 $i += \strlen($output);
-                $output = \trim($output);
+                $output = trim($output);
             } else {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Malformed inline YAML string: "%s".', $scalar), self::$parsedLineNumber + 1, null, self::$parsedFilename);
+                throw new ParseException(sprintf('Malformed inline YAML string: "%s".', $scalar), self::$parsedLineNumber + 1, null, self::$parsedFilename);
             }
+
             // a non-quoted string cannot start with @ or ` (reserved) nor with a scalar indicator (| or >)
             if ($output && ('@' === $output[0] || '`' === $output[0] || '|' === $output[0] || '>' === $output[0] || '%' === $output[0])) {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The reserved indicator "%s" cannot start a plain scalar; you need to quote the scalar.', $output[0]), self::$parsedLineNumber + 1, $output, self::$parsedFilename);
+                throw new ParseException(sprintf('The reserved indicator "%s" cannot start a plain scalar; you need to quote the scalar.', $output[0]), self::$parsedLineNumber + 1, $output, self::$parsedFilename);
             }
+
             if ($evaluate) {
                 $output = self::evaluateScalar($output, $flags, $references, $isQuoted);
             }
         }
+
         return $output;
     }
+
     /**
      * Parses a YAML quoted scalar.
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseQuotedScalar(string $scalar, int &$i = 0) : string
+    private static function parseQuotedScalar(string $scalar, int &$i = 0): string
     {
-        if (!\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('/' . self::REGEX_QUOTED_STRING . '/Au', \substr($scalar, $i), $match)) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Malformed inline YAML string: "%s".', \substr($scalar, $i)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+        if (!Parser::preg_match('/'.self::REGEX_QUOTED_STRING.'/Au', substr($scalar, $i), $match)) {
+            throw new ParseException(sprintf('Malformed inline YAML string: "%s".', substr($scalar, $i)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
         }
-        $output = \substr($match[0], 1, -1);
-        $unescaper = new \ConfigTransformer202205126\Symfony\Component\Yaml\Unescaper();
+
+        $output = substr($match[0], 1, -1);
+
+        $unescaper = new Unescaper();
         if ('"' == $scalar[$i]) {
             $output = $unescaper->unescapeDoubleQuotedString($output);
         } else {
             $output = $unescaper->unescapeSingleQuotedString($output);
         }
+
         $i += \strlen($match[0]);
+
         return $output;
     }
+
     /**
      * Parses a YAML sequence.
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseSequence(string $sequence, int $flags, int &$i = 0, array &$references = []) : array
+    private static function parseSequence(string $sequence, int $flags, int &$i = 0, array &$references = []): array
     {
         $output = [];
         $len = \strlen($sequence);
         ++$i;
+
         // [foo, bar, ...]
         while ($i < $len) {
             if (']' === $sequence[$i]) {
@@ -314,8 +360,10 @@ class Inline
             }
             if (',' === $sequence[$i] || ' ' === $sequence[$i]) {
                 ++$i;
+
                 continue;
             }
+
             $tag = self::parseTag($sequence, $i, $flags);
             switch ($sequence[$i]) {
                 case '[':
@@ -328,30 +376,38 @@ class Inline
                     break;
                 default:
                     $value = self::parseScalar($sequence, $flags, [',', ']'], $i, null === $tag, $references, $isQuoted);
+
                     // the value can be an array if a reference has been resolved to an array var
-                    if (\is_string($value) && !$isQuoted && \false !== \strpos($value, ': ')) {
+                    if (\is_string($value) && !$isQuoted && false !== strpos($value, ': ')) {
                         // embedded mapping?
                         try {
                             $pos = 0;
-                            $value = self::parseMapping('{' . $value . '}', $flags, $pos, $references);
+                            $value = self::parseMapping('{'.$value.'}', $flags, $pos, $references);
                         } catch (\InvalidArgumentException $e) {
                             // no, it's not
                         }
                     }
-                    if (!$isQuoted && \is_string($value) && '' !== $value && '&' === $value[0] && \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::REFERENCE_PATTERN, $value, $matches)) {
+
+                    if (!$isQuoted && \is_string($value) && '' !== $value && '&' === $value[0] && Parser::preg_match(Parser::REFERENCE_PATTERN, $value, $matches)) {
                         $references[$matches['ref']] = $matches['value'];
                         $value = $matches['value'];
                     }
+
                     --$i;
             }
+
             if (null !== $tag && '' !== $tag) {
-                $value = new \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue($tag, $value);
+                $value = new TaggedValue($tag, $value);
             }
+
             $output[] = $value;
+
             ++$i;
         }
-        throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Malformed inline YAML string: "%s".', $sequence), self::$parsedLineNumber + 1, null, self::$parsedFilename);
+
+        throw new ParseException(sprintf('Malformed inline YAML string: "%s".', $sequence), self::$parsedLineNumber + 1, null, self::$parsedFilename);
     }
+
     /**
      * Parses a YAML mapping.
      *
@@ -363,7 +419,8 @@ class Inline
         $output = [];
         $len = \strlen($mapping);
         ++$i;
-        $allowOverwrite = \false;
+        $allowOverwrite = false;
+
         // {foo: bar, bar:foo, ...}
         while ($i < $len) {
             switch ($mapping[$i]) {
@@ -376,39 +433,51 @@ class Inline
                     if (self::$objectForMap) {
                         return (object) $output;
                     }
+
                     return $output;
             }
+
             // key
             $offsetBeforeKeyParsing = $i;
-            $isKeyQuoted = \in_array($mapping[$i], ['"', "'"], \true);
-            $key = self::parseScalar($mapping, $flags, [':', ' '], $i, \false);
+            $isKeyQuoted = \in_array($mapping[$i], ['"', "'"], true);
+            $key = self::parseScalar($mapping, $flags, [':', ' '], $i, false);
+
             if ($offsetBeforeKeyParsing === $i) {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Missing mapping key.', self::$parsedLineNumber + 1, $mapping);
+                throw new ParseException('Missing mapping key.', self::$parsedLineNumber + 1, $mapping);
             }
+
             if ('!php/const' === $key) {
-                $key .= ' ' . self::parseScalar($mapping, $flags, [':'], $i, \false);
+                $key .= ' '.self::parseScalar($mapping, $flags, [':'], $i, false);
                 $key = self::evaluateScalar($key, $flags);
             }
-            if (\false === ($i = \strpos($mapping, ':', $i))) {
+
+            if (false === $i = strpos($mapping, ':', $i)) {
                 break;
             }
+
             if (!$isKeyQuoted) {
                 $evaluatedKey = self::evaluateScalar($key, $flags, $references);
+
                 if ('' !== $key && $evaluatedKey !== $key && !\is_string($evaluatedKey) && !\is_int($evaluatedKey)) {
-                    throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Implicit casting of incompatible mapping keys to strings is not supported. Quote your evaluable mapping keys instead.', self::$parsedLineNumber + 1, $mapping);
+                    throw new ParseException('Implicit casting of incompatible mapping keys to strings is not supported. Quote your evaluable mapping keys instead.', self::$parsedLineNumber + 1, $mapping);
                 }
             }
-            if (!$isKeyQuoted && (!isset($mapping[$i + 1]) || !\in_array($mapping[$i + 1], [' ', ',', '[', ']', '{', '}', "\n"], \true))) {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Colons must be followed by a space or an indication character (i.e. " ", ",", "[", "]", "{", "}").', self::$parsedLineNumber + 1, $mapping);
+
+            if (!$isKeyQuoted && (!isset($mapping[$i + 1]) || !\in_array($mapping[$i + 1], [' ', ',', '[', ']', '{', '}', "\n"], true))) {
+                throw new ParseException('Colons must be followed by a space or an indication character (i.e. " ", ",", "[", "]", "{", "}").', self::$parsedLineNumber + 1, $mapping);
             }
+
             if ('<<' === $key) {
-                $allowOverwrite = \true;
+                $allowOverwrite = true;
             }
+
             while ($i < $len) {
                 if (':' === $mapping[$i] || ' ' === $mapping[$i] || "\n" === $mapping[$i]) {
                     ++$i;
+
                     continue;
                 }
+
                 $tag = self::parseTag($mapping, $i, $flags);
                 switch ($mapping[$i]) {
                     case '[':
@@ -424,12 +493,12 @@ class Inline
                             }
                         } elseif ($allowOverwrite || !isset($output[$key])) {
                             if (null !== $tag) {
-                                $output[$key] = new \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue($tag, $value);
+                                $output[$key] = new TaggedValue($tag, $value);
                             } else {
                                 $output[$key] = $value;
                             }
                         } elseif (isset($output[$key])) {
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
+                            throw new ParseException(sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
                         }
                         break;
                     case '{':
@@ -443,12 +512,12 @@ class Inline
                             $output += $value;
                         } elseif ($allowOverwrite || !isset($output[$key])) {
                             if (null !== $tag) {
-                                $output[$key] = new \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue($tag, $value);
+                                $output[$key] = new TaggedValue($tag, $value);
                             } else {
                                 $output[$key] = $value;
                             }
                         } elseif (isset($output[$key])) {
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
+                            throw new ParseException(sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
                         }
                         break;
                     default:
@@ -460,26 +529,30 @@ class Inline
                         if ('<<' === $key) {
                             $output += $value;
                         } elseif ($allowOverwrite || !isset($output[$key])) {
-                            if (!$isValueQuoted && \is_string($value) && '' !== $value && '&' === $value[0] && \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::REFERENCE_PATTERN, $value, $matches)) {
+                            if (!$isValueQuoted && \is_string($value) && '' !== $value && '&' === $value[0] && Parser::preg_match(Parser::REFERENCE_PATTERN, $value, $matches)) {
                                 $references[$matches['ref']] = $matches['value'];
                                 $value = $matches['value'];
                             }
+
                             if (null !== $tag) {
-                                $output[$key] = new \ConfigTransformer202205126\Symfony\Component\Yaml\Tag\TaggedValue($tag, $value);
+                                $output[$key] = new TaggedValue($tag, $value);
                             } else {
                                 $output[$key] = $value;
                             }
                         } elseif (isset($output[$key])) {
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
+                            throw new ParseException(sprintf('Duplicate key "%s" detected.', $key), self::$parsedLineNumber + 1, $mapping);
                         }
                         --$i;
                 }
                 ++$i;
+
                 continue 2;
             }
         }
-        throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Malformed inline YAML string: "%s".', $mapping), self::$parsedLineNumber + 1, null, self::$parsedFilename);
+
+        throw new ParseException(sprintf('Malformed inline YAML string: "%s".', $mapping), self::$parsedLineNumber + 1, null, self::$parsedFilename);
     }
+
     /**
      * Evaluates scalars and replaces magic values.
      *
@@ -488,172 +561,212 @@ class Inline
      */
     private static function evaluateScalar(string $scalar, int $flags, array &$references = [], bool &$isQuotedString = null)
     {
-        $isQuotedString = \false;
-        $scalar = \trim($scalar);
-        if (0 === \strpos($scalar, '*')) {
-            if (\false !== ($pos = \strpos($scalar, '#'))) {
-                $value = \substr($scalar, 1, $pos - 2);
+        $isQuotedString = false;
+        $scalar = trim($scalar);
+
+        if (0 === strpos($scalar, '*')) {
+            if (false !== $pos = strpos($scalar, '#')) {
+                $value = substr($scalar, 1, $pos - 2);
             } else {
-                $value = \substr($scalar, 1);
+                $value = substr($scalar, 1);
             }
+
             // an unquoted *
-            if (\false === $value || '' === $value) {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('A reference must contain at least one character.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+            if (false === $value || '' === $value) {
+                throw new ParseException('A reference must contain at least one character.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
             }
+
             if (!\array_key_exists($value, $references)) {
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Reference "%s" does not exist.', $value), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+                throw new ParseException(sprintf('Reference "%s" does not exist.', $value), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
             }
+
             return $references[$value];
         }
-        $scalarLower = \strtolower($scalar);
-        switch (\true) {
+
+        $scalarLower = strtolower($scalar);
+
+        switch (true) {
             case 'null' === $scalarLower:
             case '' === $scalar:
             case '~' === $scalar:
                 return null;
             case 'true' === $scalarLower:
-                return \true;
+                return true;
             case 'false' === $scalarLower:
-                return \false;
+                return false;
             case '!' === $scalar[0]:
-                switch (\true) {
-                    case 0 === \strpos($scalar, '!!str '):
-                        $s = (string) \substr($scalar, 6);
-                        if (\in_array($s[0] ?? '', ['"', "'"], \true)) {
-                            $isQuotedString = \true;
+                switch (true) {
+                    case 0 === strpos($scalar, '!!str '):
+                        $s = (string) substr($scalar, 6);
+
+                        if (\in_array($s[0] ?? '', ['"', "'"], true)) {
+                            $isQuotedString = true;
                             $s = self::parseQuotedScalar($s);
                         }
+
                         return $s;
-                    case 0 === \strpos($scalar, '! '):
-                        return \substr($scalar, 2);
-                    case 0 === \strpos($scalar, '!php/object'):
+                    case 0 === strpos($scalar, '! '):
+                        return substr($scalar, 2);
+                    case 0 === strpos($scalar, '!php/object'):
                         if (self::$objectSupport) {
                             if (!isset($scalar[12])) {
-                                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Missing value for tag "!php/object".', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                                throw new ParseException('Missing value for tag "!php/object".', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                             }
-                            return \unserialize(self::parseScalar(\substr($scalar, 12)));
+
+                            return unserialize(self::parseScalar(substr($scalar, 12)));
                         }
+
                         if (self::$exceptionOnInvalidType) {
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Object support when parsing a YAML file has been disabled.', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            throw new ParseException('Object support when parsing a YAML file has been disabled.', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
+
                         return null;
-                    case 0 === \strpos($scalar, '!php/const'):
+                    case 0 === strpos($scalar, '!php/const'):
                         if (self::$constantSupport) {
                             if (!isset($scalar[11])) {
-                                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Missing value for tag "!php/const".', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                                throw new ParseException('Missing value for tag "!php/const".', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                             }
+
                             $i = 0;
-                            if (\defined($const = self::parseScalar(\substr($scalar, 11), 0, null, $i, \false))) {
+                            if (\defined($const = self::parseScalar(substr($scalar, 11), 0, null, $i, false))) {
                                 return \constant($const);
                             }
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The constant "%s" is not defined.', $const), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+
+                            throw new ParseException(sprintf('The constant "%s" is not defined.', $const), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
                         if (self::$exceptionOnInvalidType) {
-                            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The string "%s" could not be parsed as a constant. Did you forget to pass the "Yaml::PARSE_CONSTANT" flag to the parser?', $scalar), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            throw new ParseException(sprintf('The string "%s" could not be parsed as a constant. Did you forget to pass the "Yaml::PARSE_CONSTANT" flag to the parser?', $scalar), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
+
                         return null;
-                    case 0 === \strpos($scalar, '!!float '):
-                        return (float) \substr($scalar, 8);
-                    case 0 === \strpos($scalar, '!!binary '):
-                        return self::evaluateBinaryScalar(\substr($scalar, 9));
+                    case 0 === strpos($scalar, '!!float '):
+                        return (float) substr($scalar, 8);
+                    case 0 === strpos($scalar, '!!binary '):
+                        return self::evaluateBinaryScalar(substr($scalar, 9));
                 }
-                throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The string "%s" could not be parsed as it uses an unsupported built-in tag.', $scalar), self::$parsedLineNumber, $scalar, self::$parsedFilename);
-            case \preg_match('/^(?:\\+|-)?0o(?P<value>[0-7_]++)$/', $scalar, $matches):
-                $value = \str_replace('_', '', $matches['value']);
+
+                throw new ParseException(sprintf('The string "%s" could not be parsed as it uses an unsupported built-in tag.', $scalar), self::$parsedLineNumber, $scalar, self::$parsedFilename);
+            case preg_match('/^(?:\+|-)?0o(?P<value>[0-7_]++)$/', $scalar, $matches):
+                $value = str_replace('_', '', $matches['value']);
+
                 if ('-' === $scalar[0]) {
-                    return -\octdec($value);
+                    return -octdec($value);
                 }
-                return \octdec($value);
+
+                return octdec($value);
             // Optimize for returning strings.
-            case \in_array($scalar[0], ['+', '-', '.'], \true) || \is_numeric($scalar[0]):
-                if (\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('{^[+-]?[0-9][0-9_]*$}', $scalar)) {
-                    $scalar = \str_replace('_', '', $scalar);
+            case \in_array($scalar[0], ['+', '-', '.'], true) || is_numeric($scalar[0]):
+                if (Parser::preg_match('{^[+-]?[0-9][0-9_]*$}', $scalar)) {
+                    $scalar = str_replace('_', '', $scalar);
                 }
-                switch (\true) {
-                    case \ctype_digit($scalar):
-                    case '-' === $scalar[0] && \ctype_digit(\substr($scalar, 1)):
+
+                switch (true) {
+                    case ctype_digit($scalar):
+                    case '-' === $scalar[0] && ctype_digit(substr($scalar, 1)):
                         $cast = (int) $scalar;
-                        return $scalar === (string) $cast ? $cast : $scalar;
-                    case \is_numeric($scalar):
-                    case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(self::getHexRegex(), $scalar):
-                        $scalar = \str_replace('_', '', $scalar);
-                        return '0x' === $scalar[0] . $scalar[1] ? \hexdec($scalar) : (float) $scalar;
+
+                        return ($scalar === (string) $cast) ? $cast : $scalar;
+                    case is_numeric($scalar):
+                    case Parser::preg_match(self::getHexRegex(), $scalar):
+                        $scalar = str_replace('_', '', $scalar);
+
+                        return '0x' === $scalar[0].$scalar[1] ? hexdec($scalar) : (float) $scalar;
                     case '.inf' === $scalarLower:
                     case '.nan' === $scalarLower:
-                        return -\log(0);
+                        return -log(0);
                     case '-.inf' === $scalarLower:
-                        return \log(0);
-                    case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('/^(-|\\+)?[0-9][0-9_]*(\\.[0-9_]+)?$/', $scalar):
-                        return (float) \str_replace('_', '', $scalar);
-                    case \ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match(self::getTimestampRegex(), $scalar):
+                        return log(0);
+                    case Parser::preg_match('/^(-|\+)?[0-9][0-9_]*(\.[0-9_]+)?$/', $scalar):
+                        return (float) str_replace('_', '', $scalar);
+                    case Parser::preg_match(self::getTimestampRegex(), $scalar):
                         // When no timezone is provided in the parsed date, YAML spec says we must assume UTC.
                         $time = new \DateTime($scalar, new \DateTimeZone('UTC'));
-                        if (\ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_DATETIME & $flags) {
+
+                        if (Yaml::PARSE_DATETIME & $flags) {
                             return $time;
                         }
+
                         try {
-                            if (\false !== ($scalar = $time->getTimestamp())) {
+                            if (false !== $scalar = $time->getTimestamp()) {
                                 return $scalar;
                             }
                         } catch (\ValueError $e) {
                             // no-op
                         }
+
                         return $time->format('U');
                 }
         }
+
         return (string) $scalar;
     }
-    private static function parseTag(string $value, int &$i, int $flags) : ?string
+
+    private static function parseTag(string $value, int &$i, int $flags): ?string
     {
         if ('!' !== $value[$i]) {
             return null;
         }
-        $tagLength = \strcspn($value, " \t\n[]{},", $i + 1);
-        $tag = \substr($value, $i + 1, $tagLength);
+
+        $tagLength = strcspn($value, " \t\n[]{},", $i + 1);
+        $tag = substr($value, $i + 1, $tagLength);
+
         $nextOffset = $i + $tagLength + 1;
-        $nextOffset += \strspn($value, ' ', $nextOffset);
-        if ('' === $tag && (!isset($value[$nextOffset]) || \in_array($value[$nextOffset], [']', '}', ','], \true))) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException('Using the unquoted scalar value "!" is not supported. You must quote it.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+        $nextOffset += strspn($value, ' ', $nextOffset);
+
+        if ('' === $tag && (!isset($value[$nextOffset]) || \in_array($value[$nextOffset], [']', '}', ','], true))) {
+            throw new ParseException('Using the unquoted scalar value "!" is not supported. You must quote it.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
+
         // Is followed by a scalar and is a built-in tag
-        if ('' !== $tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], ['[', '{'], \true)) && ('!' === $tag[0] || 'str' === $tag || 'php/const' === $tag || 'php/object' === $tag)) {
+        if ('' !== $tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], ['[', '{'], true)) && ('!' === $tag[0] || 'str' === $tag || 'php/const' === $tag || 'php/object' === $tag)) {
             // Manage in {@link self::evaluateScalar()}
             return null;
         }
+
         $i = $nextOffset;
+
         // Built-in tags
         if ('' !== $tag && '!' === $tag[0]) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The built-in tag "!%s" is not implemented.', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+            throw new ParseException(sprintf('The built-in tag "!%s" is not implemented.', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
+
         if ('' !== $tag && !isset($value[$i])) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Missing value for tag "%s".', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+            throw new ParseException(sprintf('Missing value for tag "%s".', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
-        if ('' === $tag || \ConfigTransformer202205126\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS & $flags) {
+
+        if ('' === $tag || Yaml::PARSE_CUSTOM_TAGS & $flags) {
             return $tag;
         }
-        throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Tags support is not enabled. Enable the "Yaml::PARSE_CUSTOM_TAGS" flag to use "!%s".', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+
+        throw new ParseException(sprintf('Tags support is not enabled. Enable the "Yaml::PARSE_CUSTOM_TAGS" flag to use "!%s".', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
     }
-    public static function evaluateBinaryScalar(string $scalar) : string
+
+    public static function evaluateBinaryScalar(string $scalar): string
     {
-        $parsedBinaryData = self::parseScalar(\preg_replace('/\\s/', '', $scalar));
-        if (0 !== \strlen($parsedBinaryData) % 4) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The normalized base64 encoded data (data without whitespace characters) length must be a multiple of four (%d bytes given).', \strlen($parsedBinaryData)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+        $parsedBinaryData = self::parseScalar(preg_replace('/\s/', '', $scalar));
+
+        if (0 !== (\strlen($parsedBinaryData) % 4)) {
+            throw new ParseException(sprintf('The normalized base64 encoded data (data without whitespace characters) length must be a multiple of four (%d bytes given).', \strlen($parsedBinaryData)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
         }
-        if (!\ConfigTransformer202205126\Symfony\Component\Yaml\Parser::preg_match('#^[A-Z0-9+/]+={0,2}$#i', $parsedBinaryData)) {
-            throw new \ConfigTransformer202205126\Symfony\Component\Yaml\Exception\ParseException(\sprintf('The base64 encoded data (%s) contains invalid characters.', $parsedBinaryData), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+
+        if (!Parser::preg_match('#^[A-Z0-9+/]+={0,2}$#i', $parsedBinaryData)) {
+            throw new ParseException(sprintf('The base64 encoded data (%s) contains invalid characters.', $parsedBinaryData), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
         }
-        return \base64_decode($parsedBinaryData, \true);
+
+        return base64_decode($parsedBinaryData, true);
     }
-    private static function isBinaryString(string $value) : bool
+
+    private static function isBinaryString(string $value): bool
     {
-        return !\preg_match('//u', $value) || \preg_match('/[^\\x00\\x07-\\x0d\\x1B\\x20-\\xff]/', $value);
+        return !preg_match('//u', $value) || preg_match('/[^\x00\x07-\x0d\x1B\x20-\xff]/', $value);
     }
+
     /**
      * Gets a regex that matches a YAML date.
      *
      * @see http://www.yaml.org/spec/1.2/spec.html#id2761573
      */
-    private static function getTimestampRegex() : string
+    private static function getTimestampRegex(): string
     {
         return <<<EOF
         ~^
@@ -664,16 +777,17 @@ class Inline
         (?P<hour>[0-9][0-9]?)
         :(?P<minute>[0-9][0-9])
         :(?P<second>[0-9][0-9])
-        (?:\\.(?P<fraction>[0-9]*))?
+        (?:\.(?P<fraction>[0-9]*))?
         (?:[ \t]*(?P<tz>Z|(?P<tz_sign>[-+])(?P<tz_hour>[0-9][0-9]?)
         (?::(?P<tz_minute>[0-9][0-9]))?))?)?
-        \$~x
+        $~x
 EOF;
     }
+
     /**
      * Gets a regex that matches a YAML number in hexadecimal notation.
      */
-    private static function getHexRegex() : string
+    private static function getHexRegex(): string
     {
         return '~^0x[0-9a-f_]++$~i';
     }
