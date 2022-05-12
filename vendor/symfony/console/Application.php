@@ -8,49 +8,49 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022051110\Symfony\Component\Console;
+namespace ConfigTransformer202205124\Symfony\Component\Console;
 
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\CompleteCommand;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\DumpCompletionCommand;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\HelpCommand;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\LazyCommand;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\ListCommand;
-use ConfigTransformer2022051110\Symfony\Component\Console\Command\SignalableCommandInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException;
-use ConfigTransformer2022051110\Symfony\Component\Console\Exception\ExceptionInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer2022051110\Symfony\Component\Console\Exception\NamespaceNotFoundException;
-use ConfigTransformer2022051110\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer2022051110\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\DebugFormatterHelper;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\FormatterHelper;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\ProcessHelper;
-use ConfigTransformer2022051110\Symfony\Component\Console\Helper\QuestionHelper;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\ArrayInput;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\InputAwareInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer2022051110\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer2022051110\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer2022051110\Symfony\Component\Console\SignalRegistry\SignalRegistry;
-use ConfigTransformer2022051110\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer2022051110\Symfony\Component\ErrorHandler\ErrorHandler;
-use ConfigTransformer2022051110\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ConfigTransformer2022051110\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\CompleteCommand;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\DumpCompletionCommand;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\HelpCommand;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\LazyCommand;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\ListCommand;
+use ConfigTransformer202205124\Symfony\Component\Console\Command\SignalableCommandInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202205124\Symfony\Component\Console\Exception\ExceptionInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202205124\Symfony\Component\Console\Exception\NamespaceNotFoundException;
+use ConfigTransformer202205124\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202205124\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\DebugFormatterHelper;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\FormatterHelper;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\ProcessHelper;
+use ConfigTransformer202205124\Symfony\Component\Console\Helper\QuestionHelper;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\ArrayInput;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\InputAwareInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202205124\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202205124\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202205124\Symfony\Component\Console\SignalRegistry\SignalRegistry;
+use ConfigTransformer202205124\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202205124\Symfony\Component\ErrorHandler\ErrorHandler;
+use ConfigTransformer202205124\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use ConfigTransformer202205124\Symfony\Contracts\Service\ResetInterface;
 /**
  * An Application is the container for a collection of commands.
  *
@@ -66,7 +66,7 @@ use ConfigTransformer2022051110\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Service\ResetInterface
+class Application implements \ConfigTransformer202205124\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * @var mixed[]
@@ -119,28 +119,28 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     {
         $this->name = $name;
         $this->version = $version;
-        $this->terminal = new \ConfigTransformer2022051110\Symfony\Component\Console\Terminal();
+        $this->terminal = new \ConfigTransformer202205124\Symfony\Component\Console\Terminal();
         $this->defaultCommand = 'list';
-        if (\defined('SIGINT') && \ConfigTransformer2022051110\Symfony\Component\Console\SignalRegistry\SignalRegistry::isSupported()) {
-            $this->signalRegistry = new \ConfigTransformer2022051110\Symfony\Component\Console\SignalRegistry\SignalRegistry();
+        if (\defined('SIGINT') && \ConfigTransformer202205124\Symfony\Component\Console\SignalRegistry\SignalRegistry::isSupported()) {
+            $this->signalRegistry = new \ConfigTransformer202205124\Symfony\Component\Console\SignalRegistry\SignalRegistry();
             $this->signalsToDispatchEvent = [\SIGINT, \SIGTERM, \SIGUSR1, \SIGUSR2];
         }
     }
     /**
      * @final
      */
-    public function setDispatcher(\ConfigTransformer2022051110\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher)
+    public function setDispatcher(\ConfigTransformer202205124\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
-    public function setCommandLoader(\ConfigTransformer2022051110\Symfony\Component\Console\CommandLoader\CommandLoaderInterface $commandLoader)
+    public function setCommandLoader(\ConfigTransformer202205124\Symfony\Component\Console\CommandLoader\CommandLoaderInterface $commandLoader)
     {
         $this->commandLoader = $commandLoader;
     }
-    public function getSignalRegistry() : \ConfigTransformer2022051110\Symfony\Component\Console\SignalRegistry\SignalRegistry
+    public function getSignalRegistry() : \ConfigTransformer202205124\Symfony\Component\Console\SignalRegistry\SignalRegistry
     {
         if (!$this->signalRegistry) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\RuntimeException('Signals are not supported. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\RuntimeException('Signals are not supported. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
         }
         return $this->signalRegistry;
     }
@@ -155,20 +155,20 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
      *
      * @throws \Exception When running fails. Bypass this when {@link setCatchExceptions()}.
      */
-    public function run(\ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface $input = null, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output = null) : int
+    public function run(\ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface $input = null, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output = null) : int
     {
         if (\function_exists('putenv')) {
             @\putenv('LINES=' . $this->terminal->getHeight());
             @\putenv('COLUMNS=' . $this->terminal->getWidth());
         }
         if (null === $input) {
-            $input = new \ConfigTransformer2022051110\Symfony\Component\Console\Input\ArgvInput();
+            $input = new \ConfigTransformer202205124\Symfony\Component\Console\Input\ArgvInput();
         }
         if (null === $output) {
-            $output = new \ConfigTransformer2022051110\Symfony\Component\Console\Output\ConsoleOutput();
+            $output = new \ConfigTransformer202205124\Symfony\Component\Console\Output\ConsoleOutput();
         }
         $renderException = function (\Throwable $e) use($output) {
-            if ($output instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+            if ($output instanceof \ConfigTransformer202205124\Symfony\Component\Console\Output\ConsoleOutputInterface) {
                 $this->renderThrowable($e, $output->getErrorOutput());
             } else {
                 $this->renderThrowable($e, $output);
@@ -176,7 +176,7 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         };
         if ($phpHandler = \set_exception_handler($renderException)) {
             \restore_exception_handler();
-            if (!\is_array($phpHandler) || !$phpHandler[0] instanceof \ConfigTransformer2022051110\Symfony\Component\ErrorHandler\ErrorHandler) {
+            if (!\is_array($phpHandler) || !$phpHandler[0] instanceof \ConfigTransformer202205124\Symfony\Component\ErrorHandler\ErrorHandler) {
                 $errorHandler = \true;
             } elseif ($errorHandler = $phpHandler[0]->setExceptionHandler($renderException)) {
                 $phpHandler[0]->setExceptionHandler($errorHandler);
@@ -227,7 +227,7 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
      *
      * @return int 0 if everything went fine, or an error code
      */
-    public function doRun(\ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output)
+    public function doRun(\ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output)
     {
         if (\true === $input->hasParameterOption(['--version', '-V'], \true)) {
             $output->writeln($this->getLongVersion());
@@ -236,14 +236,14 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         try {
             // Makes ArgvInput::getFirstArgument() able to distinguish an option from an argument.
             $input->bind($this->getDefinition());
-        } catch (\ConfigTransformer2022051110\Symfony\Component\Console\Exception\ExceptionInterface $e) {
+        } catch (\ConfigTransformer202205124\Symfony\Component\Console\Exception\ExceptionInterface $e) {
             // Errors must be ignored, full binding/validation happens later when the command is known.
         }
         $name = $this->getCommandName($input);
         if (\true === $input->hasParameterOption(['--help', '-h'], \true)) {
             if (!$name) {
                 $name = 'help';
-                $input = new \ConfigTransformer2022051110\Symfony\Component\Console\Input\ArrayInput(['command_name' => $this->defaultCommand]);
+                $input = new \ConfigTransformer202205124\Symfony\Component\Console\Input\ArrayInput(['command_name' => $this->defaultCommand]);
             } else {
                 $this->wantHelps = \true;
             }
@@ -251,17 +251,17 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         if (!$name) {
             $name = $this->defaultCommand;
             $definition = $this->getDefinition();
-            $definition->setArguments(\array_merge($definition->getArguments(), ['command' => new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputArgument('command', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputArgument::OPTIONAL, $definition->getArgument('command')->getDescription(), $name)]));
+            $definition->setArguments(\array_merge($definition->getArguments(), ['command' => new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputArgument('command', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputArgument::OPTIONAL, $definition->getArgument('command')->getDescription(), $name)]));
         }
         try {
             $this->runningCommand = null;
             // the command name MUST be the first element of the input
             $command = $this->find($name);
         } catch (\Throwable $e) {
-            if (!($e instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException && !$e instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Exception\NamespaceNotFoundException) || 1 !== \count($alternatives = $e->getAlternatives()) || !$input->isInteractive()) {
+            if (!($e instanceof \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException && !$e instanceof \ConfigTransformer202205124\Symfony\Component\Console\Exception\NamespaceNotFoundException) || 1 !== \count($alternatives = $e->getAlternatives()) || !$input->isInteractive()) {
                 if (null !== $this->dispatcher) {
-                    $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::ERROR);
+                    $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e);
+                    $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::ERROR);
                     if (0 === $event->getExitCode()) {
                         return 0;
                     }
@@ -270,19 +270,19 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
                 throw $e;
             }
             $alternative = $alternatives[0];
-            $style = new \ConfigTransformer2022051110\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+            $style = new \ConfigTransformer202205124\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
             $style->block(\sprintf("\nCommand \"%s\" is not defined.\n", $name), null, 'error');
             if (!$style->confirm(\sprintf('Do you want to run "%s" instead? ', $alternative), \false)) {
                 if (null !== $this->dispatcher) {
-                    $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::ERROR);
+                    $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e);
+                    $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::ERROR);
                     return $event->getExitCode();
                 }
                 return 1;
             }
             $command = $this->find($alternative);
         }
-        if ($command instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Command\LazyCommand) {
+        if ($command instanceof \ConfigTransformer202205124\Symfony\Component\Console\Command\LazyCommand) {
             $command = $command->getCommand();
         }
         $this->runningCommand = $command;
@@ -296,25 +296,25 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     public function reset()
     {
     }
-    public function setHelperSet(\ConfigTransformer2022051110\Symfony\Component\Console\Helper\HelperSet $helperSet)
+    public function setHelperSet(\ConfigTransformer202205124\Symfony\Component\Console\Helper\HelperSet $helperSet)
     {
         $this->helperSet = $helperSet;
     }
     /**
      * Get the helper set associated with the command.
      */
-    public function getHelperSet() : \ConfigTransformer2022051110\Symfony\Component\Console\Helper\HelperSet
+    public function getHelperSet() : \ConfigTransformer202205124\Symfony\Component\Console\Helper\HelperSet
     {
         return $this->helperSet = $this->helperSet ?? $this->getDefaultHelperSet();
     }
-    public function setDefinition(\ConfigTransformer2022051110\Symfony\Component\Console\Input\InputDefinition $definition)
+    public function setDefinition(\ConfigTransformer202205124\Symfony\Component\Console\Input\InputDefinition $definition)
     {
         $this->definition = $definition;
     }
     /**
      * Gets the InputDefinition related to this Application.
      */
-    public function getDefinition() : \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputDefinition
+    public function getDefinition() : \ConfigTransformer202205124\Symfony\Component\Console\Input\InputDefinition
     {
         $this->definition = $this->definition ?? $this->getDefaultInputDefinition();
         if ($this->singleCommand) {
@@ -327,15 +327,15 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     /**
      * Adds suggestions to $suggestions for the current completion input (e.g. option or argument).
      */
-    public function complete(\ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
+    public function complete(\ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
     {
-        if (\ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionInput::TYPE_ARGUMENT_VALUE === $input->getCompletionType() && 'command' === $input->getCompletionName()) {
-            $suggestions->suggestValues(\array_filter(\array_map(function (\ConfigTransformer2022051110\Symfony\Component\Console\Command\Command $command) {
+        if (\ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionInput::TYPE_ARGUMENT_VALUE === $input->getCompletionType() && 'command' === $input->getCompletionName()) {
+            $suggestions->suggestValues(\array_filter(\array_map(function (\ConfigTransformer202205124\Symfony\Component\Console\Command\Command $command) {
                 return $command->isHidden() ? null : $command->getName();
             }, $this->all())));
             return;
         }
-        if (\ConfigTransformer2022051110\Symfony\Component\Console\Completion\CompletionInput::TYPE_OPTION_NAME === $input->getCompletionType()) {
+        if (\ConfigTransformer202205124\Symfony\Component\Console\Completion\CompletionInput::TYPE_OPTION_NAME === $input->getCompletionType()) {
             $suggestions->suggestOptions($this->getDefinition()->getOptions());
             return;
         }
@@ -421,9 +421,9 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     /**
      * Registers a new command.
      */
-    public function register(string $name) : \ConfigTransformer2022051110\Symfony\Component\Console\Command\Command
+    public function register(string $name) : \ConfigTransformer202205124\Symfony\Component\Console\Command\Command
     {
-        return $this->add(new \ConfigTransformer2022051110\Symfony\Component\Console\Command\Command($name));
+        return $this->add(new \ConfigTransformer202205124\Symfony\Component\Console\Command\Command($name));
     }
     /**
      * Adds an array of command objects.
@@ -446,7 +446,7 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
      *
      * @return Command|null
      */
-    public function add(\ConfigTransformer2022051110\Symfony\Component\Console\Command\Command $command)
+    public function add(\ConfigTransformer202205124\Symfony\Component\Console\Command\Command $command)
     {
         $this->init();
         $command->setApplication($this);
@@ -454,12 +454,12 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
             $command->setApplication(null);
             return null;
         }
-        if (!$command instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Command\LazyCommand) {
+        if (!$command instanceof \ConfigTransformer202205124\Symfony\Component\Console\Command\LazyCommand) {
             // Will throw if the command is not correctly initialized.
             $command->getDefinition();
         }
         if (!$command->getName()) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\LogicException(\sprintf('The command defined in "%s" cannot have an empty name.', \get_debug_type($command)));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\LogicException(\sprintf('The command defined in "%s" cannot have an empty name.', \get_debug_type($command)));
         }
         $this->commands[$command->getName()] = $command;
         foreach ($command->getAliases() as $alias) {
@@ -478,11 +478,11 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     {
         $this->init();
         if (!$this->has($name)) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The command "%s" does not exist.', $name));
         }
         // When the command has a different name than the one used at the command loader level
         if (!isset($this->commands[$name])) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The "%s" command cannot be found because it is registered under multiple names. Make sure you don\'t set a different name via constructor or "setName()".', $name));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The "%s" command cannot be found because it is registered under multiple names. Make sure you don\'t set a different name via constructor or "setName()".', $name));
         }
         $command = $this->commands[$name];
         if ($this->wantHelps) {
@@ -542,11 +542,11 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
                 }
                 $message .= \implode("\n    ", $alternatives);
             }
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\NamespaceNotFoundException($message, $alternatives);
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\NamespaceNotFoundException($message, $alternatives);
         }
         $exact = \in_array($namespace, $namespaces, \true);
         if (\count($namespaces) > 1 && !$exact) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\NamespaceNotFoundException(\sprintf("The namespace \"%s\" is ambiguous.\nDid you mean one of these?\n%s.", $namespace, $this->getAbbreviationSuggestions(\array_values($namespaces))), \array_values($namespaces));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\NamespaceNotFoundException(\sprintf("The namespace \"%s\" is ambiguous.\nDid you mean one of these?\n%s.", $namespace, $this->getAbbreviationSuggestions(\array_values($namespaces))), \array_values($namespaces));
         }
         return $exact ? $namespace : \reset($namespaces);
     }
@@ -599,13 +599,13 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
                 }
                 $message .= \implode("\n    ", $alternatives);
             }
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException($message, \array_values($alternatives));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException($message, \array_values($alternatives));
         }
         // filter out aliases for commands which are already on the list
         if (\count($commands) > 1) {
             $commandList = $this->commandLoader ? \array_merge(\array_flip($this->commandLoader->getNames()), $this->commands) : $this->commands;
             $commands = \array_unique(\array_filter($commands, function ($nameOrAlias) use(&$commandList, $commands, &$aliases) {
-                if (!$commandList[$nameOrAlias] instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Command\Command) {
+                if (!$commandList[$nameOrAlias] instanceof \ConfigTransformer202205124\Symfony\Component\Console\Command\Command) {
                     $commandList[$nameOrAlias] = $this->commandLoader->get($nameOrAlias);
                 }
                 $commandName = $commandList[$nameOrAlias]->getName();
@@ -618,7 +618,7 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
             $abbrevs = \array_values($commands);
             $maxLen = 0;
             foreach ($abbrevs as $abbrev) {
-                $maxLen = \max(\ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::width($abbrev), $maxLen);
+                $maxLen = \max(\ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::width($abbrev), $maxLen);
             }
             $abbrevs = \array_map(function ($cmd) use($commandList, $usableWidth, $maxLen, &$commands) {
                 if ($commandList[$cmd]->isHidden()) {
@@ -626,16 +626,16 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
                     return \false;
                 }
                 $abbrev = \str_pad($cmd, $maxLen, ' ') . ' ' . $commandList[$cmd]->getDescription();
-                return \ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::width($abbrev) > $usableWidth ? \ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::substr($abbrev, 0, $usableWidth - 3) . '...' : $abbrev;
+                return \ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::width($abbrev) > $usableWidth ? \ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::substr($abbrev, 0, $usableWidth - 3) . '...' : $abbrev;
             }, \array_values($commands));
             if (\count($commands) > 1) {
                 $suggestions = $this->getAbbreviationSuggestions(\array_filter($abbrevs));
-                throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf("Command \"%s\" is ambiguous.\nDid you mean one of these?\n%s.", $name, $suggestions), \array_values($commands));
+                throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf("Command \"%s\" is ambiguous.\nDid you mean one of these?\n%s.", $name, $suggestions), \array_values($commands));
             }
         }
         $command = $this->get(\reset($commands));
         if ($command->isHidden()) {
-            throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The command "%s" does not exist.', $name));
+            throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('The command "%s" does not exist.', $name));
         }
         return $command;
     }
@@ -692,23 +692,23 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         }
         return $abbrevs;
     }
-    public function renderThrowable(\Throwable $e, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output) : void
+    public function renderThrowable(\Throwable $e, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
-        $output->writeln('', \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $output->writeln('', \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         $this->doRenderThrowable($e, $output);
         if (null !== $this->runningCommand) {
-            $output->writeln(\sprintf('<info>%s</info>', \ConfigTransformer2022051110\Symfony\Component\Console\Formatter\OutputFormatter::escape(\sprintf($this->runningCommand->getSynopsis(), $this->getName()))), \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
-            $output->writeln('', \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+            $output->writeln(\sprintf('<info>%s</info>', \ConfigTransformer202205124\Symfony\Component\Console\Formatter\OutputFormatter::escape(\sprintf($this->runningCommand->getSynopsis(), $this->getName()))), \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+            $output->writeln('', \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         }
     }
-    protected function doRenderThrowable(\Throwable $e, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output) : void
+    protected function doRenderThrowable(\Throwable $e, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
         do {
             $message = \trim($e->getMessage());
-            if ('' === $message || \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
+            if ('' === $message || \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
                 $class = \get_debug_type($e);
                 $title = \sprintf('  [%s%s]  ', $class, 0 !== ($code = $e->getCode()) ? ' (' . $code . ')' : '');
-                $len = \ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::width($title);
+                $len = \ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::width($title);
             } else {
                 $len = 0;
             }
@@ -722,27 +722,27 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
             foreach ('' !== $message ? \preg_split('/\\r?\\n/', $message) : [] as $line) {
                 foreach ($this->splitStringByWidth($line, $width - 4) as $line) {
                     // pre-format lines to get the right string length
-                    $lineLength = \ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::width($line) + 4;
+                    $lineLength = \ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::width($line) + 4;
                     $lines[] = [$line, $lineLength];
                     $len = \max($lineLength, $len);
                 }
             }
             $messages = [];
-            if (!$e instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Exception\ExceptionInterface || \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
-                $messages[] = \sprintf('<comment>%s</comment>', \ConfigTransformer2022051110\Symfony\Component\Console\Formatter\OutputFormatter::escape(\sprintf('In %s line %s:', \basename($e->getFile()) ?: 'n/a', $e->getLine() ?: 'n/a')));
+            if (!$e instanceof \ConfigTransformer202205124\Symfony\Component\Console\Exception\ExceptionInterface || \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
+                $messages[] = \sprintf('<comment>%s</comment>', \ConfigTransformer202205124\Symfony\Component\Console\Formatter\OutputFormatter::escape(\sprintf('In %s line %s:', \basename($e->getFile()) ?: 'n/a', $e->getLine() ?: 'n/a')));
             }
             $messages[] = $emptyLine = \sprintf('<error>%s</error>', \str_repeat(' ', $len));
-            if ('' === $message || \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
-                $messages[] = \sprintf('<error>%s%s</error>', $title, \str_repeat(' ', \max(0, $len - \ConfigTransformer2022051110\Symfony\Component\Console\Helper\Helper::width($title))));
+            if ('' === $message || \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
+                $messages[] = \sprintf('<error>%s%s</error>', $title, \str_repeat(' ', \max(0, $len - \ConfigTransformer202205124\Symfony\Component\Console\Helper\Helper::width($title))));
             }
             foreach ($lines as $line) {
-                $messages[] = \sprintf('<error>  %s  %s</error>', \ConfigTransformer2022051110\Symfony\Component\Console\Formatter\OutputFormatter::escape($line[0]), \str_repeat(' ', $len - $line[1]));
+                $messages[] = \sprintf('<error>  %s  %s</error>', \ConfigTransformer202205124\Symfony\Component\Console\Formatter\OutputFormatter::escape($line[0]), \str_repeat(' ', $len - $line[1]));
             }
             $messages[] = $emptyLine;
             $messages[] = '';
-            $output->writeln($messages, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
-            if (\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
-                $output->writeln('<comment>Exception trace:</comment>', \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+            $output->writeln($messages, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+            if (\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
+                $output->writeln('<comment>Exception trace:</comment>', \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
                 // exception related properties
                 $trace = $e->getTrace();
                 \array_unshift($trace, ['function' => '', 'file' => $e->getFile() ?: 'n/a', 'line' => $e->getLine() ?: 'n/a', 'args' => []]);
@@ -752,16 +752,16 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
                     $function = $trace[$i]['function'] ?? '';
                     $file = $trace[$i]['file'] ?? 'n/a';
                     $line = $trace[$i]['line'] ?? 'n/a';
-                    $output->writeln(\sprintf(' %s%s at <info>%s:%s</info>', $class, $function ? $type . $function . '()' : '', $file, $line), \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+                    $output->writeln(\sprintf(' %s%s at <info>%s:%s</info>', $class, $function ? $type . $function . '()' : '', $file, $line), \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
                 }
-                $output->writeln('', \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+                $output->writeln('', \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
             }
         } while ($e = $e->getPrevious());
     }
     /**
      * Configures the input and output instances based on the user arguments and options.
      */
-    protected function configureIO(\ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function configureIO(\ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output)
     {
         if (\true === $input->hasParameterOption(['--ansi'], \true)) {
             $output->setDecorated(\true);
@@ -773,33 +773,33 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         }
         switch ($shellVerbosity = (int) \getenv('SHELL_VERBOSITY')) {
             case -1:
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
                 break;
             case 1:
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE);
                 break;
             case 2:
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
                 break;
             case 3:
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
                 break;
             default:
                 $shellVerbosity = 0;
                 break;
         }
         if (\true === $input->hasParameterOption(['--quiet', '-q'], \true)) {
-            $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+            $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
             $shellVerbosity = -1;
         } else {
             if ($input->hasParameterOption('-vvv', \true) || $input->hasParameterOption('--verbose=3', \true) || 3 === $input->getParameterOption('--verbose', \false, \true)) {
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
                 $shellVerbosity = 3;
             } elseif ($input->hasParameterOption('-vv', \true) || $input->hasParameterOption('--verbose=2', \true) || 2 === $input->getParameterOption('--verbose', \false, \true)) {
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE);
                 $shellVerbosity = 2;
             } elseif ($input->hasParameterOption('-v', \true) || $input->hasParameterOption('--verbose=1', \true) || $input->hasParameterOption('--verbose', \true) || $input->getParameterOption('--verbose', \false, \true)) {
-                $output->setVerbosity(\ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE);
+                $output->setVerbosity(\ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE);
                 $shellVerbosity = 1;
             }
         }
@@ -820,18 +820,18 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
      *
      * @return int 0 if everything went fine, or an error code
      */
-    protected function doRunCommand(\ConfigTransformer2022051110\Symfony\Component\Console\Command\Command $command, \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer2022051110\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function doRunCommand(\ConfigTransformer202205124\Symfony\Component\Console\Command\Command $command, \ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202205124\Symfony\Component\Console\Output\OutputInterface $output)
     {
         foreach ($command->getHelperSet() as $helper) {
-            if ($helper instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputAwareInterface) {
+            if ($helper instanceof \ConfigTransformer202205124\Symfony\Component\Console\Input\InputAwareInterface) {
                 $helper->setInput($input);
             }
         }
-        if ($command instanceof \ConfigTransformer2022051110\Symfony\Component\Console\Command\SignalableCommandInterface && ($this->signalsToDispatchEvent || $command->getSubscribedSignals())) {
+        if ($command instanceof \ConfigTransformer202205124\Symfony\Component\Console\Command\SignalableCommandInterface && ($this->signalsToDispatchEvent || $command->getSubscribedSignals())) {
             if (!$this->signalRegistry) {
-                throw new \ConfigTransformer2022051110\Symfony\Component\Console\Exception\RuntimeException('Unable to subscribe to signal events. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
+                throw new \ConfigTransformer202205124\Symfony\Component\Console\Exception\RuntimeException('Unable to subscribe to signal events. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
             }
-            if (\ConfigTransformer2022051110\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+            if (\ConfigTransformer202205124\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
                 $sttyMode = \shell_exec('stty -g');
                 foreach ([\SIGINT, \SIGTERM] as $signal) {
                     $this->signalRegistry->register($signal, static function () use($sttyMode) {
@@ -841,9 +841,9 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
             }
             if ($this->dispatcher) {
                 foreach ($this->signalsToDispatchEvent as $signal) {
-                    $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleSignalEvent($command, $input, $output, $signal);
+                    $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleSignalEvent($command, $input, $output, $signal);
                     $this->signalRegistry->register($signal, function ($signal, $hasNext) use($event) {
-                        $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::SIGNAL);
+                        $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::SIGNAL);
                         // No more handlers, we try to simulate PHP default behavior
                         if (!$hasNext) {
                             if (!\in_array($signal, [\SIGUSR1, \SIGUSR2], \true)) {
@@ -864,28 +864,28 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
         try {
             $command->mergeApplicationDefinition();
             $input->bind($command->getDefinition());
-        } catch (\ConfigTransformer2022051110\Symfony\Component\Console\Exception\ExceptionInterface $e) {
+        } catch (\ConfigTransformer202205124\Symfony\Component\Console\Exception\ExceptionInterface $e) {
             // ignore invalid options/arguments for now, to allow the event listeners to customize the InputDefinition
         }
-        $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleCommandEvent($command, $input, $output);
+        $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleCommandEvent($command, $input, $output);
         $e = null;
         try {
-            $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::COMMAND);
+            $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::COMMAND);
             if ($event->commandShouldRun()) {
                 $exitCode = $command->run($input, $output);
             } else {
-                $exitCode = \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleCommandEvent::RETURN_CODE_DISABLED;
+                $exitCode = \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleCommandEvent::RETURN_CODE_DISABLED;
             }
         } catch (\Throwable $e) {
-            $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e, $command);
-            $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::ERROR);
+            $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleErrorEvent($input, $output, $e, $command);
+            $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::ERROR);
             $e = $event->getError();
             if (0 === ($exitCode = $event->getExitCode())) {
                 $e = null;
             }
         }
-        $event = new \ConfigTransformer2022051110\Symfony\Component\Console\Event\ConsoleTerminateEvent($command, $input, $output, $exitCode);
-        $this->dispatcher->dispatch($event, \ConfigTransformer2022051110\Symfony\Component\Console\ConsoleEvents::TERMINATE);
+        $event = new \ConfigTransformer202205124\Symfony\Component\Console\Event\ConsoleTerminateEvent($command, $input, $output, $exitCode);
+        $this->dispatcher->dispatch($event, \ConfigTransformer202205124\Symfony\Component\Console\ConsoleEvents::TERMINATE);
         if (null !== $e) {
             throw $e;
         }
@@ -894,16 +894,16 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
     /**
      * Gets the name of the command based on input.
      */
-    protected function getCommandName(\ConfigTransformer2022051110\Symfony\Component\Console\Input\InputInterface $input) : ?string
+    protected function getCommandName(\ConfigTransformer202205124\Symfony\Component\Console\Input\InputInterface $input) : ?string
     {
         return $this->singleCommand ? $this->defaultCommand : $input->getFirstArgument();
     }
     /**
      * Gets the default input definition.
      */
-    protected function getDefaultInputDefinition() : \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputDefinition
+    protected function getDefaultInputDefinition() : \ConfigTransformer202205124\Symfony\Component\Console\Input\InputDefinition
     {
-        return new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputDefinition([new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputArgument('command', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'The command to execute'), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--help', '-h', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Display help for the given command. When no command is given display help for the <info>' . $this->defaultCommand . '</info> command'), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--quiet', '-q', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Do not output any message'), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--verbose', '-v|vv|vvv', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug'), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--version', '-V', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Display this application version'), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--ansi', '', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NEGATABLE, 'Force (or disable --no-ansi) ANSI output', null), new \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption('--no-interaction', '-n', \ConfigTransformer2022051110\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Do not ask any interactive question')]);
+        return new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputDefinition([new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputArgument('command', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'The command to execute'), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--help', '-h', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Display help for the given command. When no command is given display help for the <info>' . $this->defaultCommand . '</info> command'), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--quiet', '-q', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Do not output any message'), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--verbose', '-v|vv|vvv', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug'), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--version', '-V', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Display this application version'), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--ansi', '', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NEGATABLE, 'Force (or disable --no-ansi) ANSI output', null), new \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption('--no-interaction', '-n', \ConfigTransformer202205124\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Do not ask any interactive question')]);
     }
     /**
      * Gets the default commands that should always be available.
@@ -912,14 +912,14 @@ class Application implements \ConfigTransformer2022051110\Symfony\Contracts\Serv
      */
     protected function getDefaultCommands() : array
     {
-        return [new \ConfigTransformer2022051110\Symfony\Component\Console\Command\HelpCommand(), new \ConfigTransformer2022051110\Symfony\Component\Console\Command\ListCommand(), new \ConfigTransformer2022051110\Symfony\Component\Console\Command\CompleteCommand(), new \ConfigTransformer2022051110\Symfony\Component\Console\Command\DumpCompletionCommand()];
+        return [new \ConfigTransformer202205124\Symfony\Component\Console\Command\HelpCommand(), new \ConfigTransformer202205124\Symfony\Component\Console\Command\ListCommand(), new \ConfigTransformer202205124\Symfony\Component\Console\Command\CompleteCommand(), new \ConfigTransformer202205124\Symfony\Component\Console\Command\DumpCompletionCommand()];
     }
     /**
      * Gets the default helper set with the helpers that should always be available.
      */
-    protected function getDefaultHelperSet() : \ConfigTransformer2022051110\Symfony\Component\Console\Helper\HelperSet
+    protected function getDefaultHelperSet() : \ConfigTransformer202205124\Symfony\Component\Console\Helper\HelperSet
     {
-        return new \ConfigTransformer2022051110\Symfony\Component\Console\Helper\HelperSet([new \ConfigTransformer2022051110\Symfony\Component\Console\Helper\FormatterHelper(), new \ConfigTransformer2022051110\Symfony\Component\Console\Helper\DebugFormatterHelper(), new \ConfigTransformer2022051110\Symfony\Component\Console\Helper\ProcessHelper(), new \ConfigTransformer2022051110\Symfony\Component\Console\Helper\QuestionHelper()]);
+        return new \ConfigTransformer202205124\Symfony\Component\Console\Helper\HelperSet([new \ConfigTransformer202205124\Symfony\Component\Console\Helper\FormatterHelper(), new \ConfigTransformer202205124\Symfony\Component\Console\Helper\DebugFormatterHelper(), new \ConfigTransformer202205124\Symfony\Component\Console\Helper\ProcessHelper(), new \ConfigTransformer202205124\Symfony\Component\Console\Helper\QuestionHelper()]);
     }
     /**
      * Returns abbreviated suggestions in string format.

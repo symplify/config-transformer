@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022051110\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer2022051110\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer2022051110\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function implode;
-class MethodTagValueNode implements \ConfigTransformer2022051110\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class MethodTagValueNode implements \ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var bool */
@@ -19,7 +19,7 @@ class MethodTagValueNode implements \ConfigTransformer2022051110\PHPStan\PhpDocP
     public $parameters;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(bool $isStatic, ?\ConfigTransformer2022051110\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType, string $methodName, array $parameters, string $description)
+    public function __construct(bool $isStatic, ?\ConfigTransformer202205124\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType, string $methodName, array $parameters, string $description)
     {
         $this->isStatic = $isStatic;
         $this->returnType = $returnType;
