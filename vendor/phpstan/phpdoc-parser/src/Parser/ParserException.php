@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205121\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer202205128\PHPStan\PhpDocParser\Parser;
 
 use Exception;
-use ConfigTransformer202205121\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202205128\PHPStan\PhpDocParser\Lexer\Lexer;
 use function assert;
 use function json_encode;
 use function sprintf;
@@ -29,7 +29,7 @@ class ParserException extends \Exception
         $this->currentOffset = $currentOffset;
         $this->expectedTokenType = $expectedTokenType;
         $this->expectedTokenValue = $expectedTokenValue;
-        parent::__construct(\sprintf('Unexpected token %s, expected %s%s at offset %d', $this->formatValue($currentTokenValue), \ConfigTransformer202205121\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $expectedTokenValue !== null ? \sprintf(' (%s)', $this->formatValue($expectedTokenValue)) : '', $currentOffset));
+        parent::__construct(\sprintf('Unexpected token %s, expected %s%s at offset %d', $this->formatValue($currentTokenValue), \ConfigTransformer202205128\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $expectedTokenValue !== null ? \sprintf(' (%s)', $this->formatValue($expectedTokenValue)) : '', $currentOffset));
     }
     public function getCurrentTokenValue() : string
     {

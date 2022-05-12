@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205121\Symplify\Astral\TypeAnalyzer;
+namespace ConfigTransformer202205128\Symplify\Astral\TypeAnalyzer;
 
-use ConfigTransformer202205121\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202205121\PHPStan\Analyser\Scope;
-use ConfigTransformer202205121\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer202205121\PHPStan\Reflection\FunctionVariant;
-use ConfigTransformer202205121\PHPStan\Reflection\ParametersAcceptorSelector;
-use ConfigTransformer202205121\PHPStan\Type\MixedType;
-use ConfigTransformer202205121\PHPStan\Type\Type;
-use ConfigTransformer202205121\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202205121\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202205128\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202205128\PHPStan\Analyser\Scope;
+use ConfigTransformer202205128\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer202205128\PHPStan\Reflection\FunctionVariant;
+use ConfigTransformer202205128\PHPStan\Reflection\ParametersAcceptorSelector;
+use ConfigTransformer202205128\PHPStan\Type\MixedType;
+use ConfigTransformer202205128\PHPStan\Type\Type;
+use ConfigTransformer202205128\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202205128\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @api
  */
@@ -21,24 +21,24 @@ final class ClassMethodReturnTypeResolver
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
     private $simpleNameResolver;
-    public function __construct(\ConfigTransformer202205121\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
+    public function __construct(\ConfigTransformer202205128\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver)
     {
         $this->simpleNameResolver = $simpleNameResolver;
     }
-    public function resolve(\ConfigTransformer202205121\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer202205121\PHPStan\Analyser\Scope $scope) : \ConfigTransformer202205121\PHPStan\Type\Type
+    public function resolve(\ConfigTransformer202205128\PhpParser\Node\Stmt\ClassMethod $classMethod, \ConfigTransformer202205128\PHPStan\Analyser\Scope $scope) : \ConfigTransformer202205128\PHPStan\Type\Type
     {
         $methodName = $this->simpleNameResolver->getName($classMethod);
         if (!\is_string($methodName)) {
-            throw new \ConfigTransformer202205121\Symplify\Astral\Exception\ShouldNotHappenException();
+            throw new \ConfigTransformer202205128\Symplify\Astral\Exception\ShouldNotHappenException();
         }
         $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof \ConfigTransformer202205121\PHPStan\Reflection\ClassReflection) {
-            return new \ConfigTransformer202205121\PHPStan\Type\MixedType();
+        if (!$classReflection instanceof \ConfigTransformer202205128\PHPStan\Reflection\ClassReflection) {
+            return new \ConfigTransformer202205128\PHPStan\Type\MixedType();
         }
         $methodReflection = $classReflection->getMethod($methodName, $scope);
-        $functionVariant = \ConfigTransformer202205121\PHPStan\Reflection\ParametersAcceptorSelector::selectSingle($methodReflection->getVariants());
-        if (!$functionVariant instanceof \ConfigTransformer202205121\PHPStan\Reflection\FunctionVariant) {
-            return new \ConfigTransformer202205121\PHPStan\Type\MixedType();
+        $functionVariant = \ConfigTransformer202205128\PHPStan\Reflection\ParametersAcceptorSelector::selectSingle($methodReflection->getVariants());
+        if (!$functionVariant instanceof \ConfigTransformer202205128\PHPStan\Reflection\FunctionVariant) {
+            return new \ConfigTransformer202205128\PHPStan\Type\MixedType();
         }
         return $functionVariant->getReturnType();
     }
