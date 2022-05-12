@@ -1,17 +1,15 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace ConfigTransformer202205120\Symplify\PhpConfigPrinter\NodeFactory;
 
-namespace Symplify\PhpConfigPrinter\NodeFactory;
-
-use Nette\Utils\Strings;
-use PhpParser\Node\Expr;
-use PhpParser\Node\Expr\ClassConstFetch;
-use PhpParser\Node\Expr\ConstFetch;
-use PhpParser\Node\Name;
-use PhpParser\Node\Name\FullyQualified;
-use Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
-
+use ConfigTransformer202205120\Nette\Utils\Strings;
+use ConfigTransformer202205120\PhpParser\Node\Expr;
+use ConfigTransformer202205120\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202205120\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202205120\PhpParser\Node\Name;
+use ConfigTransformer202205120\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202205120\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 /**
  * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:
  * https://github.com/symfony/symfony/blob/ba4d57bb5fc0e9a1b4f63ced66156296dea3687e/src/Symfony/Component/Yaml/Inline.php#L617
@@ -26,59 +24,46 @@ final class ConstantNodeFactory
      * @var \Symplify\PhpConfigPrinter\Dummy\YamlContentProvider
      */
     private $yamlContentProvider;
-    public function __construct(YamlContentProvider $yamlContentProvider)
+    public function __construct(\ConfigTransformer202205120\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider $yamlContentProvider)
     {
         $this->yamlContentProvider = $yamlContentProvider;
     }
-
     /**
      * @return ConstFetch|ClassConstFetch|null
      */
-    public function createConstantIfValue(string $value): ?Expr
+    public function createConstantIfValue(string $value) : ?\ConfigTransformer202205120\PhpParser\Node\Expr
     {
-        if (strpos($value, '::') !== false) {
-            [$class, $constant] = explode('::', $value);
-
+        if (\strpos($value, '::') !== \false) {
+            [$class, $constant] = \explode('::', $value);
             // not uppercase → probably not a constant
-            if (strtoupper($constant) !== $constant) {
+            if (\strtoupper($constant) !== $constant) {
                 return null;
             }
-
-            return new ClassConstFetch(new FullyQualified($class), $constant);
+            return new \ConfigTransformer202205120\PhpParser\Node\Expr\ClassConstFetch(new \ConfigTransformer202205120\PhpParser\Node\Name\FullyQualified($class), $constant);
         }
-
-        $definedConstants = get_defined_constants();
-
-        foreach (array_keys($definedConstants) as $constantName) {
+        $definedConstants = \get_defined_constants();
+        foreach (\array_keys($definedConstants) as $constantName) {
             $constantValue = $this->getConstantValueIgnoringDeprecationWarnings($constantName);
             if ($value !== $constantValue) {
                 continue;
             }
-
             $yamlContent = $this->yamlContentProvider->getYamlContent();
-            $constantDefinitionPattern = '#' . preg_quote('!php/const', '#') . '(\s)+' . $constantName . '#';
-
-            if (! Strings::match($yamlContent, $constantDefinitionPattern)) {
+            $constantDefinitionPattern = '#' . \preg_quote('!php/const', '#') . '(\\s)+' . $constantName . '#';
+            if (!\ConfigTransformer202205120\Nette\Utils\Strings::match($yamlContent, $constantDefinitionPattern)) {
                 continue;
             }
-
-            return new ConstFetch(new Name($constantName));
+            return new \ConfigTransformer202205120\PhpParser\Node\Expr\ConstFetch(new \ConfigTransformer202205120\PhpParser\Node\Name($constantName));
         }
-
         return null;
     }
-
     /**
      * @return mixed
      */
     private function getConstantValueIgnoringDeprecationWarnings(string $constant)
     {
-        $previousLevel = error_reporting(E_ALL & ~E_DEPRECATED);
-
-        $value = constant($constant);
-
-        error_reporting($previousLevel);
-
+        $previousLevel = \error_reporting(\E_ALL & ~\E_DEPRECATED);
+        $value = \constant($constant);
+        \error_reporting($previousLevel);
         return $value;
     }
 }

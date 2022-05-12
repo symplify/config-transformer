@@ -8,15 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace ConfigTransformer202205120\Symfony\Component\VarExporter;
 
-namespace Symfony\Component\VarExporter;
-
-use Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use Symfony\Component\VarExporter\Internal\Exporter;
-use Symfony\Component\VarExporter\Internal\Hydrator;
-use Symfony\Component\VarExporter\Internal\Registry;
-use Symfony\Component\VarExporter\Internal\Values;
-
+use ConfigTransformer202205120\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Exporter;
+use ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *
@@ -37,20 +35,17 @@ final class VarExporter
      *
      * @throws ExceptionInterface When the provided value cannot be serialized
      */
-    public static function export(mixed $value, bool &$isStaticValue = null, array &$foundClasses = []): string
+    public static function export(mixed $value, bool &$isStaticValue = null, array &$foundClasses = []) : string
     {
-        $isStaticValue = true;
-
-        if (!\is_object($value) && !(\is_array($value) && $value) && !\is_resource($value) || $value instanceof \UnitEnum) {
-            return Exporter::export($value);
+        $isStaticValue = \true;
+        if (!\is_object($value) && !(\is_array($value) && $value) && !\is_resource($value) || $value instanceof \ConfigTransformer202205120\UnitEnum) {
+            return \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
-
         $objectsPool = new \SplObjectStorage();
         $refsPool = [];
         $objectsCount = 0;
-
         try {
-            $value = Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
+            $value = \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
         } finally {
             $references = [];
             foreach ($refsPool as $i => $v) {
@@ -60,27 +55,23 @@ final class VarExporter
                 $v[0] = $v[1];
             }
         }
-
         if ($isStaticValue) {
-            return Exporter::export($value);
+            return \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
-
         $classes = [];
         $values = [];
         $states = [];
         foreach ($objectsPool as $i => $v) {
             [, $class, $values[], $wakeup] = $objectsPool[$v];
             $foundClasses[$class] = $classes[] = $class;
-
             if (0 < $wakeup) {
                 $states[$wakeup] = $i;
             } elseif (0 > $wakeup) {
-                $states[-$wakeup] = [$i, array_pop($values)];
+                $states[-$wakeup] = [$i, \array_pop($values)];
                 $values[] = [];
             }
         }
-        ksort($states);
-
+        \ksort($states);
         $wakeups = [null];
         foreach ($states as $k => $v) {
             if (\is_array($v)) {
@@ -89,11 +80,9 @@ final class VarExporter
                 $wakeups[] = $v;
             }
         }
-
         if (null === $wakeups[0]) {
             unset($wakeups[0]);
         }
-
         $properties = [];
         foreach ($values as $i => $vars) {
             foreach ($vars as $class => $values) {
@@ -102,13 +91,11 @@ final class VarExporter
                 }
             }
         }
-
         if ($classes || $references) {
-            $value = new Hydrator(new Registry($classes), $references ? new Values($references) : null, $properties, $value, $wakeups);
+            $value = new \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Hydrator(new \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Registry($classes), $references ? new \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Values($references) : null, $properties, $value, $wakeups);
         } else {
-            $isStaticValue = true;
+            $isStaticValue = \true;
         }
-
-        return Exporter::export($value);
+        return \ConfigTransformer202205120\Symfony\Component\VarExporter\Internal\Exporter::export($value);
     }
 }

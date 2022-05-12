@@ -8,8 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202205120\Symfony\Component\Cache\Marshaller;
 
 /**
  * Serializes/unserializes PHP values.
@@ -27,12 +26,11 @@ interface MarshallerInterface
      * When serialization fails for a specific value, no exception should be
      * thrown. Instead, its key should be listed in $failed.
      */
-    public function marshall(array $values, ?array &$failed): array;
-
+    public function marshall(array $values, ?array &$failed) : array;
     /**
      * Unserializes a single value and throws an exception if anything goes wrong.
      *
      * @throws \Exception Whenever unserialization fails
      */
-    public function unmarshall(string $value): mixed;
+    public function unmarshall(string $value) : mixed;
 }

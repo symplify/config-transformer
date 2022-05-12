@@ -8,12 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace ConfigTransformer202205120\Symfony\Contracts\Cache;
 
-namespace Symfony\Contracts\Cache;
-
-use Psr\Cache\CacheItemInterface;
-use Psr\Cache\InvalidArgumentException;
-
+use ConfigTransformer202205120\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202205120\Psr\Cache\InvalidArgumentException;
 /**
  * Covers most simple to advanced caching needs.
  *
@@ -42,7 +40,6 @@ interface CacheInterface
      * @return mixed
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null);
-
     /**
      * Removes an item from the pool.
      *
@@ -52,5 +49,5 @@ interface CacheInterface
      *
      * @return bool True if the item was successfully removed, false if there was any error
      */
-    public function delete(string $key): bool;
+    public function delete(string $key) : bool;
 }

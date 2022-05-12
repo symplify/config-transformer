@@ -8,16 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace ConfigTransformer202205120\Symfony\Contracts\Cache;
 
-namespace Symfony\Contracts\Cache;
-
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\Cache\InvalidArgumentException;
-use Psr\Log\LoggerInterface;
-
+use ConfigTransformer202205120\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202205120\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202205120\Psr\Log\LoggerInterface;
 // Help opcache.preload discover always-needed symbols
-class_exists(InvalidArgumentException::class);
-
+\class_exists(\ConfigTransformer202205120\Psr\Cache\InvalidArgumentException::class);
 /**
  * An implementation of CacheInterface for PSR-6 CacheItemPoolInterface classes.
  *
@@ -33,50 +30,42 @@ trait CacheTrait
     {
         return $this->doGet($this, $key, $callback, $beta, $metadata);
     }
-
     /**
      * {@inheritdoc}
      */
-    public function delete(string $key): bool
+    public function delete(string $key) : bool
     {
         return $this->deleteItem($key);
     }
-
     /**
      * @return mixed
      */
-    private function doGet(CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, LoggerInterface $logger = null)
+    private function doGet(\ConfigTransformer202205120\Psr\Cache\CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, \ConfigTransformer202205120\Psr\Log\LoggerInterface $logger = null)
     {
-        if (0 > $beta = $beta ?? 1.0) {
-            throw new class(sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta)) extends \InvalidArgumentException implements InvalidArgumentException { };
+        if (0 > ($beta = $beta ?? 1.0)) {
+            throw new class(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta)) extends \InvalidArgumentException implements \ConfigTransformer202205120\Psr\Cache\InvalidArgumentException
+            {
+            };
         }
-
         $item = $pool->getItem($key);
         $recompute = !$item->isHit() || \INF === $beta;
-        $metadata = $item instanceof ItemInterface ? $item->getMetadata() : [];
-
+        $metadata = $item instanceof \ConfigTransformer202205120\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
         if (!$recompute && $metadata) {
-            $expiry = $metadata[ItemInterface::METADATA_EXPIRY] ?? false;
-            $ctime = $metadata[ItemInterface::METADATA_CTIME] ?? false;
-
-            if ($recompute = $ctime && $expiry && $expiry <= ($now = microtime(true)) - $ctime / 1000 * $beta * log(random_int(1, \PHP_INT_MAX) / \PHP_INT_MAX)) {
+            $expiry = $metadata[\ConfigTransformer202205120\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
+            $ctime = $metadata[\ConfigTransformer202205120\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
+            if ($recompute = $ctime && $expiry && $expiry <= ($now = \microtime(\true)) - $ctime / 1000 * $beta * \log(\random_int(1, \PHP_INT_MAX) / \PHP_INT_MAX)) {
                 // force applying defaultLifetime to expiry
                 $item->expiresAt(null);
-                $logger && $logger->info('Item "{key}" elected for early recomputation {delta}s before its expiration', [
-                    'key' => $key,
-                    'delta' => sprintf('%.1f', $expiry - $now),
-                ]);
+                $logger && $logger->info('Item "{key}" elected for early recomputation {delta}s before its expiration', ['key' => $key, 'delta' => \sprintf('%.1f', $expiry - $now)]);
             }
         }
-
         if ($recompute) {
-            $save = true;
+            $save = \true;
             $item->set($callback($item, $save));
             if ($save) {
                 $pool->save($item);
             }
         }
-
         return $item->get();
     }
 }

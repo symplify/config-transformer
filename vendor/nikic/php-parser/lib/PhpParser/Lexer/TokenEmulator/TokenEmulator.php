@@ -1,25 +1,23 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace PhpParser\Lexer\TokenEmulator;
+declare (strict_types=1);
+namespace ConfigTransformer202205120\PhpParser\Lexer\TokenEmulator;
 
 /** @internal */
 abstract class TokenEmulator
 {
-    abstract public function getPhpVersion(): string;
-
-    abstract public function isEmulationNeeded(string $code): bool;
-
+    public abstract function getPhpVersion() : string;
+    public abstract function isEmulationNeeded(string $code) : bool;
     /**
      * @return array Modified Tokens
      */
-    abstract public function emulate(string $code, array $tokens): array;
-
+    public abstract function emulate(string $code, array $tokens) : array;
     /**
      * @return array Modified Tokens
      */
-    abstract public function reverseEmulate(string $code, array $tokens): array;
-
-    public function preprocessCode(string $code, array &$patches): string {
+    public abstract function reverseEmulate(string $code, array $tokens) : array;
+    public function preprocessCode(string $code, array &$patches) : string
+    {
         return $code;
     }
 }

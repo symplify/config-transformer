@@ -8,25 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace ConfigTransformer202205120\Symfony\Component\Yaml\Command;
 
-namespace Symfony\Component\Yaml\Command;
-
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\CI\GithubActionReporter;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Completion\CompletionInput;
-use Symfony\Component\Console\Completion\CompletionSuggestions;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Yaml\Exception\ParseException;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Yaml;
-
+use ConfigTransformer202205120\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer202205120\Symfony\Component\Console\CI\GithubActionReporter;
+use ConfigTransformer202205120\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202205120\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202205120\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202205120\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202205120\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202205120\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202205120\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202205120\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202205120\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202205120\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202205120\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202205120\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202205120\Symfony\Component\Yaml\Yaml;
 /**
  * Validates YAML files syntax and outputs encountered errors.
  *
@@ -34,7 +32,7 @@ use Symfony\Component\Yaml\Yaml;
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
 #[AsCommand(name: 'lint:yaml', description: 'Lint a YAML file and outputs encountered errors')]
-class LintCommand extends Command
+class LintCommand extends \ConfigTransformer202205120\Symfony\Component\Console\Command\Command
 {
     private $parser;
     /**
@@ -53,26 +51,18 @@ class LintCommand extends Command
      * @var \Closure|null
      */
     private $isReadableProvider;
-
     public function __construct(string $name = null, callable $directoryIteratorProvider = null, callable $isReadableProvider = null)
     {
         parent::__construct($name);
-
         $this->directoryIteratorProvider = null === $directoryIteratorProvider || $directoryIteratorProvider instanceof \Closure ? $directoryIteratorProvider : \Closure::fromCallable($directoryIteratorProvider);
         $this->isReadableProvider = null === $isReadableProvider || $isReadableProvider instanceof \Closure ? $isReadableProvider : \Closure::fromCallable($isReadableProvider);
     }
-
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this
-            ->addArgument('filename', InputArgument::IS_ARRAY, 'A file, a directory or "-" for reading from STDIN')
-            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format')
-            ->addOption('exclude', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Path(s) to exclude')
-            ->addOption('parse-tags', null, InputOption::VALUE_NEGATABLE, 'Parse custom tags', null)
-            ->setHelp(<<<EOF
+        $this->addArgument('filename', \ConfigTransformer202205120\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'A file, a directory or "-" for reading from STDIN')->addOption('format', null, \ConfigTransformer202205120\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The output format')->addOption('exclude', null, \ConfigTransformer202205120\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED | \ConfigTransformer202205120\Symfony\Component\Console\Input\InputOption::VALUE_IS_ARRAY, 'Path(s) to exclude')->addOption('parse-tags', null, \ConfigTransformer202205120\Symfony\Component\Console\Input\InputOption::VALUE_NEGATABLE, 'Parse custom tags', null)->setHelp(<<<EOF
 The <info>%command.name%</info> command lints a YAML file and outputs to STDOUT
 the first encountered syntax error.
 
@@ -94,77 +84,61 @@ You can also exclude one or more specific files:
   <info>php %command.full_name% dirname --exclude="dirname/foo.yaml" --exclude="dirname/bar.yaml"</info>
 
 EOF
-            )
-        ;
+);
     }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(\ConfigTransformer202205120\Symfony\Component\Console\Input\InputInterface $input, \ConfigTransformer202205120\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
-        $io = new SymfonyStyle($input, $output);
+        $io = new \ConfigTransformer202205120\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
         $filenames = (array) $input->getArgument('filename');
         $excludes = $input->getOption('exclude');
         $this->format = $input->getOption('format');
         $flags = $input->getOption('parse-tags');
-
-        if ('github' === $this->format && !class_exists(GithubActionReporter::class)) {
+        if ('github' === $this->format && !\class_exists(\ConfigTransformer202205120\Symfony\Component\Console\CI\GithubActionReporter::class)) {
             throw new \InvalidArgumentException('The "github" format is only available since "symfony/console" >= 5.3.');
         }
-
         if (null === $this->format) {
             // Autodetect format according to CI environment
-            $this->format = class_exists(GithubActionReporter::class) && GithubActionReporter::isGithubActionEnvironment() ? 'github' : 'txt';
+            $this->format = \class_exists(\ConfigTransformer202205120\Symfony\Component\Console\CI\GithubActionReporter::class) && \ConfigTransformer202205120\Symfony\Component\Console\CI\GithubActionReporter::isGithubActionEnvironment() ? 'github' : 'txt';
         }
-
-        $flags = $flags ? Yaml::PARSE_CUSTOM_TAGS : 0;
-
+        $flags = $flags ? \ConfigTransformer202205120\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS : 0;
         $this->displayCorrectFiles = $output->isVerbose();
-
         if (['-'] === $filenames) {
-            return $this->display($io, [$this->validate(file_get_contents('php://stdin'), $flags)]);
+            return $this->display($io, [$this->validate(\file_get_contents('php://stdin'), $flags)]);
         }
-
         if (!$filenames) {
-            throw new RuntimeException('Please provide a filename or pipe file content to STDIN.');
+            throw new \ConfigTransformer202205120\Symfony\Component\Console\Exception\RuntimeException('Please provide a filename or pipe file content to STDIN.');
         }
-
         $filesInfo = [];
         foreach ($filenames as $filename) {
             if (!$this->isReadable($filename)) {
-                throw new RuntimeException(sprintf('File or directory "%s" is not readable.', $filename));
+                throw new \ConfigTransformer202205120\Symfony\Component\Console\Exception\RuntimeException(\sprintf('File or directory "%s" is not readable.', $filename));
             }
-
             foreach ($this->getFiles($filename) as $file) {
-                if (!\in_array($file->getPathname(), $excludes, true)) {
-                    $filesInfo[] = $this->validate(file_get_contents($file), $flags, $file);
+                if (!\in_array($file->getPathname(), $excludes, \true)) {
+                    $filesInfo[] = $this->validate(\file_get_contents($file), $flags, $file);
                 }
             }
         }
-
         return $this->display($io, $filesInfo);
     }
-
     private function validate(string $content, int $flags, string $file = null)
     {
-        $prevErrorHandler = set_error_handler(function ($level, $message, $file, $line) use (&$prevErrorHandler) {
+        $prevErrorHandler = \set_error_handler(function ($level, $message, $file, $line) use(&$prevErrorHandler) {
             if (\E_USER_DEPRECATED === $level) {
-                throw new ParseException($message, $this->getParser()->getRealCurrentLineNb() + 1);
+                throw new \ConfigTransformer202205120\Symfony\Component\Yaml\Exception\ParseException($message, $this->getParser()->getRealCurrentLineNb() + 1);
             }
-
-            return $prevErrorHandler ? $prevErrorHandler($level, $message, $file, $line) : false;
+            return $prevErrorHandler ? $prevErrorHandler($level, $message, $file, $line) : \false;
         });
-
         try {
-            $this->getParser()->parse($content, Yaml::PARSE_CONSTANT | $flags);
-        } catch (ParseException $e) {
-            return ['file' => $file, 'line' => $e->getParsedLine(), 'valid' => false, 'message' => $e->getMessage()];
+            $this->getParser()->parse($content, \ConfigTransformer202205120\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT | $flags);
+        } catch (\ConfigTransformer202205120\Symfony\Component\Yaml\Exception\ParseException $e) {
+            return ['file' => $file, 'line' => $e->getParsedLine(), 'valid' => \false, 'message' => $e->getMessage()];
         } finally {
-            restore_error_handler();
+            \restore_error_handler();
         }
-
-        return ['file' => $file, 'valid' => true];
+        return ['file' => $file, 'valid' => \true];
     }
-
-    private function display(SymfonyStyle $io, array $files): int
+    private function display(\ConfigTransformer202205120\Symfony\Component\Console\Style\SymfonyStyle $io, array $files) : int
     {
         switch ($this->format) {
             case 'txt':
@@ -172,121 +146,94 @@ EOF
             case 'json':
                 return $this->displayJson($io, $files);
             case 'github':
-                return $this->displayTxt($io, $files, true);
+                return $this->displayTxt($io, $files, \true);
             default:
-                throw new InvalidArgumentException(sprintf('The format "%s" is not supported.', $this->format));
+                throw new \ConfigTransformer202205120\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('The format "%s" is not supported.', $this->format));
         }
     }
-
-    private function displayTxt(SymfonyStyle $io, array $filesInfo, bool $errorAsGithubAnnotations = false): int
+    private function displayTxt(\ConfigTransformer202205120\Symfony\Component\Console\Style\SymfonyStyle $io, array $filesInfo, bool $errorAsGithubAnnotations = \false) : int
     {
         $countFiles = \count($filesInfo);
         $erroredFiles = 0;
-        $suggestTagOption = false;
-
+        $suggestTagOption = \false;
         if ($errorAsGithubAnnotations) {
-            $githubReporter = new GithubActionReporter($io);
+            $githubReporter = new \ConfigTransformer202205120\Symfony\Component\Console\CI\GithubActionReporter($io);
         }
-
         foreach ($filesInfo as $info) {
             if ($info['valid'] && $this->displayCorrectFiles) {
-                $io->comment('<info>OK</info>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
+                $io->comment('<info>OK</info>' . ($info['file'] ? \sprintf(' in %s', $info['file']) : ''));
             } elseif (!$info['valid']) {
                 ++$erroredFiles;
-                $io->text('<error> ERROR </error>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
-                $io->text(sprintf('<error> >> %s</error>', $info['message']));
-
-                if (false !== strpos($info['message'], 'PARSE_CUSTOM_TAGS')) {
-                    $suggestTagOption = true;
+                $io->text('<error> ERROR </error>' . ($info['file'] ? \sprintf(' in %s', $info['file']) : ''));
+                $io->text(\sprintf('<error> >> %s</error>', $info['message']));
+                if (\false !== \strpos($info['message'], 'PARSE_CUSTOM_TAGS')) {
+                    $suggestTagOption = \true;
                 }
-
                 if ($errorAsGithubAnnotations) {
                     $githubReporter->error($info['message'], $info['file'] ?? 'php://stdin', $info['line']);
                 }
             }
         }
-
         if (0 === $erroredFiles) {
-            $io->success(sprintf('All %d YAML files contain valid syntax.', $countFiles));
+            $io->success(\sprintf('All %d YAML files contain valid syntax.', $countFiles));
         } else {
-            $io->warning(sprintf('%d YAML files have valid syntax and %d contain errors.%s', $countFiles - $erroredFiles, $erroredFiles, $suggestTagOption ? ' Use the --parse-tags option if you want parse custom tags.' : ''));
+            $io->warning(\sprintf('%d YAML files have valid syntax and %d contain errors.%s', $countFiles - $erroredFiles, $erroredFiles, $suggestTagOption ? ' Use the --parse-tags option if you want parse custom tags.' : ''));
         }
-
-        return min($erroredFiles, 1);
+        return \min($erroredFiles, 1);
     }
-
-    private function displayJson(SymfonyStyle $io, array $filesInfo): int
+    private function displayJson(\ConfigTransformer202205120\Symfony\Component\Console\Style\SymfonyStyle $io, array $filesInfo) : int
     {
         $errors = 0;
-
-        array_walk($filesInfo, function (&$v) use (&$errors) {
+        \array_walk($filesInfo, function (&$v) use(&$errors) {
             $v['file'] = (string) $v['file'];
             if (!$v['valid']) {
                 ++$errors;
             }
-
-            if (isset($v['message']) && false !== strpos($v['message'], 'PARSE_CUSTOM_TAGS')) {
+            if (isset($v['message']) && \false !== \strpos($v['message'], 'PARSE_CUSTOM_TAGS')) {
                 $v['message'] .= ' Use the --parse-tags option if you want parse custom tags.';
             }
         });
-
-        $io->writeln(json_encode($filesInfo, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES));
-
-        return min($errors, 1);
+        $io->writeln(\json_encode($filesInfo, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES));
+        return \min($errors, 1);
     }
-
-    private function getFiles(string $fileOrDirectory): iterable
+    private function getFiles(string $fileOrDirectory) : iterable
     {
-        if (is_file($fileOrDirectory)) {
-            yield new \SplFileInfo($fileOrDirectory);
-
+        if (\is_file($fileOrDirectory)) {
+            (yield new \SplFileInfo($fileOrDirectory));
             return;
         }
-
         foreach ($this->getDirectoryIterator($fileOrDirectory) as $file) {
             if (!\in_array($file->getExtension(), ['yml', 'yaml'])) {
                 continue;
             }
-
-            yield $file;
+            (yield $file);
         }
     }
-
-    private function getParser(): Parser
+    private function getParser() : \ConfigTransformer202205120\Symfony\Component\Yaml\Parser
     {
-        return $this->parser = $this->parser ?? new Parser();
+        return $this->parser = $this->parser ?? new \ConfigTransformer202205120\Symfony\Component\Yaml\Parser();
     }
-
-    private function getDirectoryIterator(string $directory): iterable
+    private function getDirectoryIterator(string $directory) : iterable
     {
         $default = function ($directory) {
-            return new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($directory, \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS),
-                \RecursiveIteratorIterator::LEAVES_ONLY
-            );
+            return new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory, \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS), \RecursiveIteratorIterator::LEAVES_ONLY);
         };
-
         if (null !== $this->directoryIteratorProvider) {
             return ($this->directoryIteratorProvider)($directory, $default);
         }
-
         return $default($directory);
     }
-
-    private function isReadable(string $fileOrDirectory): bool
+    private function isReadable(string $fileOrDirectory) : bool
     {
         $default = function ($fileOrDirectory) {
-            return is_readable($fileOrDirectory);
+            return \is_readable($fileOrDirectory);
         };
-
         if (null !== $this->isReadableProvider) {
             return ($this->isReadableProvider)($fileOrDirectory, $default);
         }
-
         return $default($fileOrDirectory);
     }
-
-    public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void
+    public function complete(\ConfigTransformer202205120\Symfony\Component\Console\Completion\CompletionInput $input, \ConfigTransformer202205120\Symfony\Component\Console\Completion\CompletionSuggestions $suggestions) : void
     {
         if ($input->mustSuggestOptionValuesFor('format')) {
             $suggestions->suggestValues(['txt', 'json', 'github']);
