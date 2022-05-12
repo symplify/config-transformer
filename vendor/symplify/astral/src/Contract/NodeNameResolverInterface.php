@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205120\Symplify\Astral\Contract;
+namespace ConfigTransformer202205129\Symplify\Astral\Contract;
 
-use ConfigTransformer202205120\PhpParser\Node;
+use ConfigTransformer202205129\PhpParser\Node;
 interface NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer202205120\PhpParser\Node $node) : bool;
-    public function resolve(\ConfigTransformer202205120\PhpParser\Node $node) : ?string;
+    public function match(\ConfigTransformer202205129\PhpParser\Node $node) : bool;
+    public function resolve(\ConfigTransformer202205129\PhpParser\Node $node) : ?string;
 }
