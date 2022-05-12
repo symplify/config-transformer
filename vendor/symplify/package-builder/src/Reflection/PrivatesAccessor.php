@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205124\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202205128\Symplify\PackageBuilder\Reflection;
 
 use ReflectionProperty;
-use ConfigTransformer202205124\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException;
-use ConfigTransformer202205124\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException;
+use ConfigTransformer202205128\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException;
+use ConfigTransformer202205128\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Reflection\PrivatesAccessorTest
@@ -16,23 +16,21 @@ final class PrivatesAccessor
      * @template T of object
      *
      * @param class-string<T> $valueClassName
-     * @return object
-     * @param object $object
+     * @return T
      */
-    public function getPrivatePropertyOfClass($object, string $propertyName, string $valueClassName)
+    public function getPrivatePropertyOfClass(object $object, string $propertyName, string $valueClassName) : object
     {
         $value = $this->getPrivateProperty($object, $propertyName);
         if ($value instanceof $valueClassName) {
             return $value;
         }
         $errorMessage = \sprintf('The type "%s" is required, but "%s" type given', $valueClassName, \get_class($value));
-        throw new \ConfigTransformer202205124\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
+        throw new \ConfigTransformer202205128\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
     }
     /**
      * @return mixed
-     * @param object $object
      */
-    public function getPrivateProperty($object, string $propertyName)
+    public function getPrivateProperty(object $object, string $propertyName)
     {
         $propertyReflection = $this->resolvePropertyReflection($object, $propertyName);
         $propertyReflection->setAccessible(\true);
@@ -43,31 +41,26 @@ final class PrivatesAccessor
      *
      * @param class-string<T> $valueClassName
      * @param mixed $value
-     * @param object $object
      */
-    public function setPrivatePropertyOfClass($object, string $propertyName, $value, string $valueClassName) : void
+    public function setPrivatePropertyOfClass(object $object, string $propertyName, $value, string $valueClassName) : void
     {
         if ($value instanceof $valueClassName) {
             $this->setPrivateProperty($object, $propertyName, $value);
             return;
         }
         $errorMessage = \sprintf('The type "%s" is required, but "%s" type given', $valueClassName, \get_class($value));
-        throw new \ConfigTransformer202205124\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
+        throw new \ConfigTransformer202205128\Symplify\PackageBuilder\Exception\InvalidPrivatePropertyTypeException($errorMessage);
     }
     /**
      * @param mixed $value
-     * @param object $object
      */
-    public function setPrivateProperty($object, string $propertyName, $value) : void
+    public function setPrivateProperty(object $object, string $propertyName, $value) : void
     {
         $propertyReflection = $this->resolvePropertyReflection($object, $propertyName);
         $propertyReflection->setAccessible(\true);
         $propertyReflection->setValue($object, $value);
     }
-    /**
-     * @param object $object
-     */
-    private function resolvePropertyReflection($object, string $propertyName) : \ReflectionProperty
+    private function resolvePropertyReflection(object $object, string $propertyName) : \ReflectionProperty
     {
         if (\property_exists($object, $propertyName)) {
             return new \ReflectionProperty($object, $propertyName);
@@ -77,6 +70,6 @@ final class PrivatesAccessor
             return new \ReflectionProperty($parentClass, $propertyName);
         }
         $errorMessage = \sprintf('Property "$%s" was not found in "%s" class', $propertyName, \get_class($object));
-        throw new \ConfigTransformer202205124\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException($errorMessage);
+        throw new \ConfigTransformer202205128\Symplify\PackageBuilder\Exception\MissingPrivatePropertyException($errorMessage);
     }
 }
