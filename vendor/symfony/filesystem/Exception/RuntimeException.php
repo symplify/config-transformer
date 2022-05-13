@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022051310\Symfony\Component\Filesystem\Exception;
+namespace ConfigTransformer202205135\Symfony\Component\Filesystem\Exception;
 
 /**
  * @author Théo Fidry <theo.fidry@gmail.com>
  */
-class RuntimeException extends \RuntimeException implements \ConfigTransformer2022051310\Symfony\Component\Filesystem\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \ConfigTransformer202205135\Symfony\Component\Filesystem\Exception\ExceptionInterface
 {
 }

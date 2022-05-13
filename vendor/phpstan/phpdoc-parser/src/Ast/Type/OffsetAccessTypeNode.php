@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202205135\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class OffsetAccessTypeNode implements \ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202205135\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class OffsetAccessTypeNode implements \ConfigTransformer202205135\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode */
     public $type;
     /** @var TypeNode */
     public $offset;
-    public function __construct(\ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, \ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type\TypeNode $offset)
+    public function __construct(\ConfigTransformer202205135\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, \ConfigTransformer202205135\PHPStan\PhpDocParser\Ast\Type\TypeNode $offset)
     {
         $this->type = $type;
         $this->offset = $offset;

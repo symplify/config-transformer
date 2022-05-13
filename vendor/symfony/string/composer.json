@@ -40,7 +40,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2022051310\\Symfony\\Component\\String\\": ""
+            "ConfigTransformer202205135\\Symfony\\Component\\String\\": ""
         },
         "files": [
             "Resources\/functions.php"

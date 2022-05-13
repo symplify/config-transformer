@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2022051310\Nette\Neon;
+namespace ConfigTransformer202205135\Nette\Neon;
 
 /**
  * Simple parser & generator for Nette Object Notation.
@@ -13,7 +13,7 @@ namespace ConfigTransformer2022051310\Nette\Neon;
  */
 final class Neon
 {
-    public const BLOCK = \ConfigTransformer2022051310\Nette\Neon\Encoder::BLOCK;
+    public const BLOCK = \ConfigTransformer202205135\Nette\Neon\Encoder::BLOCK;
     public const Chain = '!!chain';
     public const CHAIN = self::Chain;
     /**
@@ -21,7 +21,7 @@ final class Neon
      */
     public static function encode($value, bool $blockMode = \false, string $indentation = "\t") : string
     {
-        $encoder = new \ConfigTransformer2022051310\Nette\Neon\Encoder();
+        $encoder = new \ConfigTransformer202205135\Nette\Neon\Encoder();
         $encoder->blockMode = $blockMode;
         $encoder->indentation = $indentation;
         return $encoder->encode($value);
@@ -32,7 +32,7 @@ final class Neon
      */
     public static function decode(string $input)
     {
-        $decoder = new \ConfigTransformer2022051310\Nette\Neon\Decoder();
+        $decoder = new \ConfigTransformer202205135\Nette\Neon\Decoder();
         return $decoder->decode($input);
     }
     /**
@@ -42,7 +42,7 @@ final class Neon
     public static function decodeFile(string $file)
     {
         if (!\is_file($file)) {
-            throw new \ConfigTransformer2022051310\Nette\Neon\Exception("File '{$file}' does not exist.");
+            throw new \ConfigTransformer202205135\Nette\Neon\Exception("File '{$file}' does not exist.");
         }
         $input = \file_get_contents($file);
         if (\substr($input, 0, 3) === "﻿") {

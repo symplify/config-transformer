@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022051310\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202205135\Symfony\Component\Config\Builder;
 
-use ConfigTransformer2022051310\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202205135\Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Generates ConfigBuilders to help create valid config.
  *
@@ -21,5 +21,5 @@ interface ConfigBuilderGeneratorInterface
     /**
      * @return \Closure that will return the root config class
      */
-    public function build(\ConfigTransformer2022051310\Symfony\Component\Config\Definition\ConfigurationInterface $configuration) : \Closure;
+    public function build(\ConfigTransformer202205135\Symfony\Component\Config\Definition\ConfigurationInterface $configuration) : \Closure;
 }
