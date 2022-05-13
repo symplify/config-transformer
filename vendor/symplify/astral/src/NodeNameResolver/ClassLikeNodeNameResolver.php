@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205123\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202205131\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202205123\PhpParser\Node;
-use ConfigTransformer202205123\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer202205123\Symplify\Astral\Contract\NodeNameResolverInterface;
-final class ClassLikeNodeNameResolver implements \ConfigTransformer202205123\Symplify\Astral\Contract\NodeNameResolverInterface
+use ConfigTransformer202205131\PhpParser\Node;
+use ConfigTransformer202205131\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer202205131\Symplify\Astral\Contract\NodeNameResolverInterface;
+final class ClassLikeNodeNameResolver implements \ConfigTransformer202205131\Symplify\Astral\Contract\NodeNameResolverInterface
 {
-    public function match(\ConfigTransformer202205123\PhpParser\Node $node) : bool
+    public function match(\ConfigTransformer202205131\PhpParser\Node $node) : bool
     {
-        return $node instanceof \ConfigTransformer202205123\PhpParser\Node\Stmt\ClassLike;
+        return $node instanceof \ConfigTransformer202205131\PhpParser\Node\Stmt\ClassLike;
     }
     /**
      * @param ClassLike $node
      */
-    public function resolve(\ConfigTransformer202205123\PhpParser\Node $node) : ?string
+    public function resolve(\ConfigTransformer202205131\PhpParser\Node $node) : ?string
     {
         if (\property_exists($node, 'namespacedName')) {
             return (string) $node->namespacedName;
