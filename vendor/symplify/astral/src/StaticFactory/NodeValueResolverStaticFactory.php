@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205131\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer2022051310\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer202205131\PhpParser\NodeFinder;
-use ConfigTransformer202205131\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202205131\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202205131\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer2022051310\PhpParser\NodeFinder;
+use ConfigTransformer2022051310\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer2022051310\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer2022051310\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @api
  */
 final class NodeValueResolverStaticFactory
 {
-    public static function create() : \ConfigTransformer202205131\Symplify\Astral\NodeValue\NodeValueResolver
+    public static function create() : \ConfigTransformer2022051310\Symplify\Astral\NodeValue\NodeValueResolver
     {
-        $simpleNameResolver = \ConfigTransformer202205131\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
-        $simpleNodeFinder = new \ConfigTransformer202205131\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202205131\PhpParser\NodeFinder());
-        return new \ConfigTransformer202205131\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202205131\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
+        $simpleNameResolver = \ConfigTransformer2022051310\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
+        $simpleNodeFinder = new \ConfigTransformer2022051310\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer2022051310\PhpParser\NodeFinder());
+        return new \ConfigTransformer2022051310\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer2022051310\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
     }
 }

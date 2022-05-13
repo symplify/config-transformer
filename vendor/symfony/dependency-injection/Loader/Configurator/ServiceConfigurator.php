@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205131\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer2022051310\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202205131\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202205131\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2022051310\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022051310\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \ConfigTransformer202205131\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \ConfigTransformer2022051310\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
@@ -54,7 +54,7 @@ class ServiceConfigurator extends \ConfigTransformer202205131\Symfony\Component\
      * @var bool
      */
     private $destructed = \false;
-    public function __construct(\ConfigTransformer202205131\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer202205131\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202205131\Symfony\Component\DependencyInjection\Definition $definition, ?string $id, array $defaultTags, string $path = null)
+    public function __construct(\ConfigTransformer2022051310\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \ConfigTransformer2022051310\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer2022051310\Symfony\Component\DependencyInjection\Definition $definition, ?string $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;

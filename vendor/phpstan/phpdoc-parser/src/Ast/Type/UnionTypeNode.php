@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205131\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202205131\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class UnionTypeNode implements \ConfigTransformer202205131\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class UnionTypeNode implements \ConfigTransformer2022051310\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode[] */

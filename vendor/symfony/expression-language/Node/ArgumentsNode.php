@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205131\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer2022051310\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202205131\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer2022051310\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ArgumentsNode extends \ConfigTransformer202205131\Symfony\Component\ExpressionLanguage\Node\ArrayNode
+class ArgumentsNode extends \ConfigTransformer2022051310\Symfony\Component\ExpressionLanguage\Node\ArrayNode
 {
-    public function compile(\ConfigTransformer202205131\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(\ConfigTransformer2022051310\Symfony\Component\ExpressionLanguage\Compiler $compiler)
     {
         $this->compileArguments($compiler, \false);
     }
