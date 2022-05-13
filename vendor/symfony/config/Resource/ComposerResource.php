@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205135\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202205134\Symfony\Component\Config\Resource;
 
 /**
  * ComposerResource tracks the PHP version and Composer dependencies.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202205135\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class ComposerResource implements \ConfigTransformer202205135\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ComposerResource implements \ConfigTransformer202205134\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var mixed[]
