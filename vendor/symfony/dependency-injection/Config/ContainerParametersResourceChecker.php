@@ -8,32 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205147\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer202205143\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202205147\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202205147\Symfony\Component\Config\ResourceCheckerInterface;
-use ConfigTransformer202205147\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202205143\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202205143\Symfony\Component\Config\ResourceCheckerInterface;
+use ConfigTransformer202205143\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ContainerParametersResourceChecker implements \ConfigTransformer202205147\Symfony\Component\Config\ResourceCheckerInterface
+class ContainerParametersResourceChecker implements \ConfigTransformer202205143\Symfony\Component\Config\ResourceCheckerInterface
 {
     private $container;
-    public function __construct(\ConfigTransformer202205147\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    public function __construct(\ConfigTransformer202205143\Symfony\Component\DependencyInjection\ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
      */
-    public function supports(\ConfigTransformer202205147\Symfony\Component\Config\Resource\ResourceInterface $metadata) : bool
+    public function supports(\ConfigTransformer202205143\Symfony\Component\Config\Resource\ResourceInterface $metadata) : bool
     {
-        return $metadata instanceof \ConfigTransformer202205147\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
+        return $metadata instanceof \ConfigTransformer202205143\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
     }
     /**
      * {@inheritdoc}
      */
-    public function isFresh(\ConfigTransformer202205147\Symfony\Component\Config\Resource\ResourceInterface $resource, int $timestamp) : bool
+    public function isFresh(\ConfigTransformer202205143\Symfony\Component\Config\Resource\ResourceInterface $resource, int $timestamp) : bool
     {
         foreach ($resource->getParameters() as $key => $value) {
             if (!$this->container->hasParameter($key) || $this->container->getParameter($key) !== $value) {

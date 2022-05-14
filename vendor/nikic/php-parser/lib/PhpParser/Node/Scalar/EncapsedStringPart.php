@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205147\PhpParser\Node\Scalar;
+namespace ConfigTransformer202205143\PhpParser\Node\Scalar;
 
-use ConfigTransformer202205147\PhpParser\Node\Scalar;
-class EncapsedStringPart extends \ConfigTransformer202205147\PhpParser\Node\Scalar
+use ConfigTransformer202205143\PhpParser\Node\Scalar;
+class EncapsedStringPart extends \ConfigTransformer202205143\PhpParser\Node\Scalar
 {
     /** @var string String value */
     public $value;

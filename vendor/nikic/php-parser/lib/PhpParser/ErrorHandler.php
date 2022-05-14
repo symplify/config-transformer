@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205147\PhpParser;
+namespace ConfigTransformer202205143\PhpParser;
 
 interface ErrorHandler
 {
@@ -10,5 +10,5 @@ interface ErrorHandler
      *
      * @param Error $error The error that needs to be handled
      */
-    public function handleError(\ConfigTransformer202205147\PhpParser\Error $error);
+    public function handleError(\ConfigTransformer202205143\PhpParser\Error $error);
 }

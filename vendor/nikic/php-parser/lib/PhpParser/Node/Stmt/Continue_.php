@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205147\PhpParser\Node\Stmt;
+namespace ConfigTransformer202205143\PhpParser\Node\Stmt;
 
-use ConfigTransformer202205147\PhpParser\Node;
-class Continue_ extends \ConfigTransformer202205147\PhpParser\Node\Stmt
+use ConfigTransformer202205143\PhpParser\Node;
+class Continue_ extends \ConfigTransformer202205143\PhpParser\Node\Stmt
 {
     /** @var null|Node\Expr Number of loops to continue */
     public $num;
@@ -14,7 +14,7 @@ class Continue_ extends \ConfigTransformer202205147\PhpParser\Node\Stmt
      * @param null|Node\Expr $num        Number of loops to continue
      * @param array          $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202205147\PhpParser\Node\Expr $num = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202205143\PhpParser\Node\Expr $num = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->num = $num;
