@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php 
 declare (strict_types=1);
-namespace ConfigTransformer202205143;
+namespace ConfigTransformer202205147;
 
 \Phar::loadPhar(__DIR__ . '/phpstan.phar', 'phpstan.phar');
 require 'phar://phpstan.phar/bin/phpstan';
