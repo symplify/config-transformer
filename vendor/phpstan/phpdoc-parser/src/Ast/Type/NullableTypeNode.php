@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205141\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202205143\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202205141\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class NullableTypeNode implements \ConfigTransformer202205141\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202205143\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class NullableTypeNode implements \ConfigTransformer202205143\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode */
     public $type;
-    public function __construct(\ConfigTransformer202205141\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
+    public function __construct(\ConfigTransformer202205143\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
     {
         $this->type = $type;
     }

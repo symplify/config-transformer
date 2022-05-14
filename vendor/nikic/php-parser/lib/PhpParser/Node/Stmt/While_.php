@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205141\PhpParser\Node\Stmt;
+namespace ConfigTransformer202205143\PhpParser\Node\Stmt;
 
-use ConfigTransformer202205141\PhpParser\Node;
-class While_ extends \ConfigTransformer202205141\PhpParser\Node\Stmt
+use ConfigTransformer202205143\PhpParser\Node;
+class While_ extends \ConfigTransformer202205143\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Condition */
     public $cond;
@@ -17,7 +17,7 @@ class While_ extends \ConfigTransformer202205141\PhpParser\Node\Stmt
      * @param Node\Stmt[] $stmts      Statements
      * @param array       $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202205141\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
+    public function __construct(\ConfigTransformer202205143\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

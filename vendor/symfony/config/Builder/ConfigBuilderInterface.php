@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205141\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202205143\Symfony\Component\Config\Builder;
 
 /**
  * A ConfigBuilder provides helper methods to build a large complex array.
