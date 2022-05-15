@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202205148\Nette\Neon\Node;
+namespace ConfigTransformer202205150\Nette\Neon\Node;
 
 /** @internal */
-final class InlineArrayNode extends \ConfigTransformer202205148\Nette\Neon\Node\ArrayNode
+final class InlineArrayNode extends \ConfigTransformer202205150\Nette\Neon\Node\ArrayNode
 {
     /** @var string */
     public $bracket;
@@ -18,6 +18,6 @@ final class InlineArrayNode extends \ConfigTransformer202205148\Nette\Neon\Node\
     }
     public function toString() : string
     {
-        return $this->bracket . \ConfigTransformer202205148\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->items) . ['[' => ']', '{' => '}', '(' => ')'][$this->bracket];
+        return $this->bracket . \ConfigTransformer202205150\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->items) . ['[' => ']', '{' => '}', '(' => ')'][$this->bracket];
     }
 }

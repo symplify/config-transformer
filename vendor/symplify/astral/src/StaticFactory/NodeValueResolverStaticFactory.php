@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205148\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer202205150\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer202205148\PhpParser\NodeFinder;
-use ConfigTransformer202205148\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202205148\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202205148\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202205150\PhpParser\NodeFinder;
+use ConfigTransformer202205150\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202205150\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202205150\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @api
  */
 final class NodeValueResolverStaticFactory
 {
-    public static function create() : \ConfigTransformer202205148\Symplify\Astral\NodeValue\NodeValueResolver
+    public static function create() : \ConfigTransformer202205150\Symplify\Astral\NodeValue\NodeValueResolver
     {
-        $simpleNameResolver = \ConfigTransformer202205148\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
-        $simpleNodeFinder = new \ConfigTransformer202205148\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202205148\PhpParser\NodeFinder());
-        return new \ConfigTransformer202205148\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202205148\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
+        $simpleNameResolver = \ConfigTransformer202205150\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory::create();
+        $simpleNodeFinder = new \ConfigTransformer202205150\Symplify\Astral\NodeFinder\SimpleNodeFinder(new \ConfigTransformer202205150\PhpParser\NodeFinder());
+        return new \ConfigTransformer202205150\Symplify\Astral\NodeValue\NodeValueResolver($simpleNameResolver, new \ConfigTransformer202205150\Symplify\PackageBuilder\Php\TypeChecker(), $simpleNodeFinder);
     }
 }
