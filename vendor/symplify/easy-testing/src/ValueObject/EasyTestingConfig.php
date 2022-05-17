@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022051710\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202205170\Symplify\EasyTesting\ValueObject;
 
 /**
  * @api

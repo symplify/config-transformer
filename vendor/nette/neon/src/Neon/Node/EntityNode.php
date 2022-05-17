@@ -5,29 +5,29 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2022051710\Nette\Neon\Node;
+namespace ConfigTransformer202205170\Nette\Neon\Node;
 
-use ConfigTransformer2022051710\Nette\Neon\Entity;
-use ConfigTransformer2022051710\Nette\Neon\Node;
+use ConfigTransformer202205170\Nette\Neon\Entity;
+use ConfigTransformer202205170\Nette\Neon\Node;
 /** @internal */
-final class EntityNode extends \ConfigTransformer2022051710\Nette\Neon\Node
+final class EntityNode extends \ConfigTransformer202205170\Nette\Neon\Node
 {
     /** @var Node */
     public $value;
     /** @var ArrayItemNode[] */
     public $attributes;
-    public function __construct(\ConfigTransformer2022051710\Nette\Neon\Node $value, array $attributes = [])
+    public function __construct(\ConfigTransformer202205170\Nette\Neon\Node $value, array $attributes = [])
     {
         $this->value = $value;
         $this->attributes = $attributes;
     }
-    public function toValue() : \ConfigTransformer2022051710\Nette\Neon\Entity
+    public function toValue() : \ConfigTransformer202205170\Nette\Neon\Entity
     {
-        return new \ConfigTransformer2022051710\Nette\Neon\Entity($this->value->toValue(), \ConfigTransformer2022051710\Nette\Neon\Node\ArrayItemNode::itemsToArray($this->attributes));
+        return new \ConfigTransformer202205170\Nette\Neon\Entity($this->value->toValue(), \ConfigTransformer202205170\Nette\Neon\Node\ArrayItemNode::itemsToArray($this->attributes));
     }
     public function toString() : string
     {
-        return $this->value->toString() . '(' . ($this->attributes ? \ConfigTransformer2022051710\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->attributes) : '') . ')';
+        return $this->value->toString() . '(' . ($this->attributes ? \ConfigTransformer202205170\Nette\Neon\Node\ArrayItemNode::itemsToInlineString($this->attributes) : '') . ')';
     }
     public function &getIterator() : \Generator
     {
