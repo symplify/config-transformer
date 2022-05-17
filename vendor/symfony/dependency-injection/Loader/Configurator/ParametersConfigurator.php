@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205170\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202205170\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202205170\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202205170\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer2022051710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022051710\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ParametersConfigurator extends \ConfigTransformer202205170\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ParametersConfigurator extends \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'parameters';
     private $container;
-    public function __construct(\ConfigTransformer202205170\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function __construct(\ConfigTransformer2022051710\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
     }
@@ -30,8 +30,8 @@ class ParametersConfigurator extends \ConfigTransformer202205170\Symfony\Compone
      */
     public final function set(string $name, $value)
     {
-        if ($value instanceof \ConfigTransformer202205170\Symfony\Component\ExpressionLanguage\Expression) {
-            throw new \ConfigTransformer202205170\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Using an expression in parameter "%s" is not allowed.', $name));
+        if ($value instanceof \ConfigTransformer2022051710\Symfony\Component\ExpressionLanguage\Expression) {
+            throw new \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Using an expression in parameter "%s" is not allowed.', $name));
         }
         $this->container->setParameter($name, static::processValue($value, \true));
         return $this;

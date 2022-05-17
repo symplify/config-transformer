@@ -10,20 +10,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer202205170\Symfony\Polyfill\Php81 as p;
+use ConfigTransformer2022051710\Symfony\Polyfill\Php81 as p;
 if (\PHP_VERSION_ID >= 80100) {
     return;
 }
 if (\defined('MYSQLI_REFRESH_SLAVE') && !\defined('MYSQLI_REFRESH_REPLICA')) {
     \define('MYSQLI_REFRESH_REPLICA', 64);
 }
-if (!\function_exists('ConfigTransformer202205170\\array_is_list')) {
+if (!\function_exists('ConfigTransformer2022051710\\array_is_list')) {
     function array_is_list(array $array) : bool
     {
-        return \ConfigTransformer202205170\Symfony\Polyfill\Php81\Php81::array_is_list($array);
+        return \ConfigTransformer2022051710\Symfony\Polyfill\Php81\Php81::array_is_list($array);
     }
 }
-if (!\function_exists('ConfigTransformer202205170\\enum_exists')) {
+if (!\function_exists('ConfigTransformer2022051710\\enum_exists')) {
     function enum_exists(string $enum, bool $autoload = \true) : bool
     {
         return $autoload && \class_exists($enum) && \false;

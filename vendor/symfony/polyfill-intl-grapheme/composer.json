@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202205170\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+            "ConfigTransformer2022051710\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
         },
         "files": [
             "bootstrap.php"

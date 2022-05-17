@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205170\PhpParser\Node\Expr;
+namespace ConfigTransformer2022051710\PhpParser\Node\Expr;
 
-use ConfigTransformer202205170\PhpParser\Node\Expr;
-use ConfigTransformer202205170\PhpParser\Node\Identifier;
-use ConfigTransformer202205170\PhpParser\Node\Name;
-class ClassConstFetch extends \ConfigTransformer202205170\PhpParser\Node\Expr
+use ConfigTransformer2022051710\PhpParser\Node\Expr;
+use ConfigTransformer2022051710\PhpParser\Node\Identifier;
+use ConfigTransformer2022051710\PhpParser\Node\Name;
+class ClassConstFetch extends \ConfigTransformer2022051710\PhpParser\Node\Expr
 {
     /** @var Name|Expr Class name */
     public $class;
@@ -23,7 +23,7 @@ class ClassConstFetch extends \ConfigTransformer202205170\PhpParser\Node\Expr
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \ConfigTransformer202205170\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer2022051710\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

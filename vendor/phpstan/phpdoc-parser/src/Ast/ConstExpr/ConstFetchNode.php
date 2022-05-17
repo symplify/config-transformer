@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205170\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace ConfigTransformer2022051710\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use ConfigTransformer202205170\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class ConstFetchNode implements \ConfigTransformer202205170\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+use ConfigTransformer2022051710\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class ConstFetchNode implements \ConfigTransformer2022051710\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     use NodeAttributes;
     /** @var string class name for class constants or empty string for non-class constants */
