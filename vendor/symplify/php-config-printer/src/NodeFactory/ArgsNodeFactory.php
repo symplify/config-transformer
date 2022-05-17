@@ -73,20 +73,35 @@ final class ArgsNodeFactory
         return [new \ConfigTransformer202205170\PhpParser\Node\Arg($array)];
     }
     /**
+     * @param Arg[] $args
      * @return Arg[]
+     * @param mixed $key
+     */
+    private function resolveArgs(array $args, $key, \ConfigTransformer202205170\PhpParser\Node\Expr $expr, bool $isForConfig) : array
+    {
+        if (\is_string($key) && $isForConfig) {
+            $key = $this->resolveExpr($key);
+            $args[] = new \ConfigTransformer202205170\PhpParser\Node\Arg(new \ConfigTransformer202205170\PhpParser\Node\Expr\ArrayItem($expr, $key));
+            return $args;
+        }
+        if (!\is_int($key) && $this->isPhpNamedArguments) {
+            $args[] = new \ConfigTransformer202205170\PhpParser\Node\Arg($expr, \false, \false, [], new \ConfigTransformer202205170\PhpParser\Node\Identifier($key));
+            return $args;
+        }
+        $args[] = new \ConfigTransformer202205170\PhpParser\Node\Arg($expr);
+        return $args;
+    }
+    /**
+     * @return mixed[]|Arg[]
      * @param mixed $values
      */
-    public function createFromValues($values, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : array
+    public function createFromValues($values, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false, bool $isForConfig = \false) : array
     {
         if (\is_array($values)) {
             $args = [];
             foreach ($values as $key => $value) {
                 $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
-                if (!\is_int($key) && $this->isPhpNamedArguments) {
-                    $args[] = new \ConfigTransformer202205170\PhpParser\Node\Arg($expr, \false, \false, [], new \ConfigTransformer202205170\PhpParser\Node\Identifier($key));
-                } else {
-                    $args[] = new \ConfigTransformer202205170\PhpParser\Node\Arg($expr);
-                }
+                $args = $this->resolveArgs($args, $key, $expr, $isForConfig);
             }
             return $args;
         }
