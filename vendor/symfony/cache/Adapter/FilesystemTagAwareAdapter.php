@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205168\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2022051710\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202205168\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202205168\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer202205168\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202205168\Symfony\Component\Cache\Traits\FilesystemTrait;
+use ConfigTransformer2022051710\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer2022051710\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer2022051710\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2022051710\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \ConfigTransformer202205168\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer202205168\Symfony\Component\Cache\PruneableInterface
+class FilesystemTagAwareAdapter extends \ConfigTransformer2022051710\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \ConfigTransformer2022051710\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -30,9 +30,9 @@ class FilesystemTagAwareAdapter extends \ConfigTransformer202205168\Symfony\Comp
      * Folder used for tag symlinks.
      */
     private const TAG_FOLDER = 'tags';
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer202205168\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer2022051710\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = new \ConfigTransformer202205168\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
+        $this->marshaller = new \ConfigTransformer2022051710\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }

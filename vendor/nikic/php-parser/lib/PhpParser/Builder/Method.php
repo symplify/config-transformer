@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205168\PhpParser\Builder;
+namespace ConfigTransformer2022051710\PhpParser\Builder;
 
-use ConfigTransformer202205168\PhpParser;
-use ConfigTransformer202205168\PhpParser\BuilderHelpers;
-use ConfigTransformer202205168\PhpParser\Node;
-use ConfigTransformer202205168\PhpParser\Node\Stmt;
-class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
+use ConfigTransformer2022051710\PhpParser;
+use ConfigTransformer2022051710\PhpParser\BuilderHelpers;
+use ConfigTransformer2022051710\PhpParser\Node;
+use ConfigTransformer2022051710\PhpParser\Node\Stmt;
+class Method extends \ConfigTransformer2022051710\PhpParser\Builder\FunctionLike
 {
     protected $name;
     protected $flags = 0;
@@ -31,7 +31,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function makePublic()
     {
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -41,7 +41,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function makeProtected()
     {
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -51,7 +51,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function makePrivate()
     {
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -61,7 +61,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function makeStatic()
     {
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
         return $this;
     }
     /**
@@ -74,7 +74,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
         if (!empty($this->stmts)) {
             throw new \LogicException('Cannot make method with statements abstract');
         }
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
         $this->stmts = null;
         // abstract methods don't have statements
         return $this;
@@ -86,7 +86,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function makeFinal()
     {
-        $this->flags = \ConfigTransformer202205168\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer202205168\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
+        $this->flags = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::addModifier($this->flags, \ConfigTransformer2022051710\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
         return $this;
     }
     /**
@@ -101,7 +101,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
         if (null === $this->stmts) {
             throw new \LogicException('Cannot add statements to an abstract method');
         }
-        $this->stmts[] = \ConfigTransformer202205168\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -113,7 +113,7 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202205168\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer2022051710\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -121,8 +121,8 @@ class Method extends \ConfigTransformer202205168\PhpParser\Builder\FunctionLike
      *
      * @return Stmt\ClassMethod The built method node
      */
-    public function getNode() : \ConfigTransformer202205168\PhpParser\Node
+    public function getNode() : \ConfigTransformer2022051710\PhpParser\Node
     {
-        return new \ConfigTransformer202205168\PhpParser\Node\Stmt\ClassMethod($this->name, ['flags' => $this->flags, 'byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts, 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer2022051710\PhpParser\Node\Stmt\ClassMethod($this->name, ['flags' => $this->flags, 'byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts, 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

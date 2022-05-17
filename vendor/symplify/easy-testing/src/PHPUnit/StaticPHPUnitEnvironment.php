@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205168\Symplify\EasyTesting\PHPUnit;
+namespace ConfigTransformer2022051710\Symplify\EasyTesting\PHPUnit;
 
 /**
  * @api

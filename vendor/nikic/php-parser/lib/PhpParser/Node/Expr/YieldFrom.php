@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205168\PhpParser\Node\Expr;
+namespace ConfigTransformer2022051710\PhpParser\Node\Expr;
 
-use ConfigTransformer202205168\PhpParser\Node\Expr;
-class YieldFrom extends \ConfigTransformer202205168\PhpParser\Node\Expr
+use ConfigTransformer2022051710\PhpParser\Node\Expr;
+class YieldFrom extends \ConfigTransformer2022051710\PhpParser\Node\Expr
 {
     /** @var Expr Expression to yield from */
     public $expr;
@@ -14,7 +14,7 @@ class YieldFrom extends \ConfigTransformer202205168\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202205168\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\ConfigTransformer2022051710\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205168\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202205168\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202205168\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use ConfigTransformer202205168\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
 trait BindTrait
 {
     /**
@@ -31,8 +31,8 @@ trait BindTrait
     {
         $valueOrRef = static::processValue($valueOrRef, \true);
         $bindings = $this->definition->getBindings();
-        $type = $this instanceof \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
-        $bindings[$nameOrFqcn] = new \ConfigTransformer202205168\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
+        $type = $this instanceof \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
+        $bindings[$nameOrFqcn] = new \ConfigTransformer2022051710\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
         $this->definition->setBindings($bindings);
         return $this;
     }
