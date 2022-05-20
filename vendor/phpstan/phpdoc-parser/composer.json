@@ -24,14 +24,14 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2022051710\\PHPStan\\PhpDocParser\\": [
+            "ConfigTransformer202205205\\PHPStan\\PhpDocParser\\": [
                 "src\/"
             ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer2022051710\\PHPStan\\PhpDocParser\\": [
+            "ConfigTransformer202205205\\PHPStan\\PhpDocParser\\": [
                 "tests\/PHPStan"
             ]
         }

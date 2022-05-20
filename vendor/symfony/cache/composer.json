@@ -51,7 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2022051710\\Symfony\\Component\\Cache\\": ""
+            "ConfigTransformer202205205\\Symfony\\Component\\Cache\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
