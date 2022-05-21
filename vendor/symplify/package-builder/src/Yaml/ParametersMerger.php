@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205205\Symplify\PackageBuilder\Yaml;
+namespace ConfigTransformer202205215\Symplify\PackageBuilder\Yaml;
 
 final class ParametersMerger
 {
