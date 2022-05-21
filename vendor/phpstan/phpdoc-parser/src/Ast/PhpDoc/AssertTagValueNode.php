@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205212\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205218\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202205212\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202205212\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202205218\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205218\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
-class AssertTagValueNode implements \ConfigTransformer202205212\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class AssertTagValueNode implements \ConfigTransformer202205218\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -17,7 +17,7 @@ class AssertTagValueNode implements \ConfigTransformer202205212\PHPStan\PhpDocPa
     public $isNegated;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\ConfigTransformer202205212\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $parameter, bool $isNegated, string $description)
+    public function __construct(\ConfigTransformer202205218\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $parameter, bool $isNegated, string $description)
     {
         $this->type = $type;
         $this->parameter = $parameter;
