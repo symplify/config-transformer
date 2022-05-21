@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205214\PhpParser\Node;
+namespace ConfigTransformer202205212\PhpParser\Node;
 
-use ConfigTransformer202205214\PhpParser\NodeAbstract;
+use ConfigTransformer202205212\PhpParser\NodeAbstract;
 /**
  * Represents a non-namespaced name. Namespaced names are represented using Name nodes.
  */
-class Identifier extends \ConfigTransformer202205214\PhpParser\NodeAbstract
+class Identifier extends \ConfigTransformer202205212\PhpParser\NodeAbstract
 {
     /** @var string Identifier as string */
     public $name;
