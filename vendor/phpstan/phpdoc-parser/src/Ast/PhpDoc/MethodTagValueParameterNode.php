@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-use ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class MethodTagValueParameterNode implements \ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\Node
+use ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+use ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class MethodTagValueParameterNode implements \ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\Node
 {
     use NodeAttributes;
     /** @var TypeNode|null */
@@ -20,7 +20,7 @@ class MethodTagValueParameterNode implements \ConfigTransformer202205215\PHPStan
     public $parameterName;
     /** @var ConstExprNode|null */
     public $defaultValue;
-    public function __construct(?\ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, ?\ConfigTransformer202205215\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $defaultValue)
+    public function __construct(?\ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, ?\ConfigTransformer202205214\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $defaultValue)
     {
         $this->type = $type;
         $this->isReference = $isReference;

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205215\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202205214\Symfony\Component\Console\Helper;
 
 /**
  * Helps outputting debug information when running an external program from a command.
@@ -17,7 +17,7 @@ namespace ConfigTransformer202205215\Symfony\Component\Console\Helper;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DebugFormatterHelper extends \ConfigTransformer202205215\Symfony\Component\Console\Helper\Helper
+class DebugFormatterHelper extends \ConfigTransformer202205214\Symfony\Component\Console\Helper\Helper
 {
     private const COLORS = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'default'];
     /**
