@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205211\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer2022052210\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202205211\Psr\Container\ContainerInterface;
-use ConfigTransformer202205211\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer2022052210\Psr\Container\ContainerInterface;
+use ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * ContainerBagInterface is the interface implemented by objects that manage service container parameters.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ContainerBagInterface extends \ConfigTransformer202205211\Psr\Container\ContainerInterface
+interface ContainerBagInterface extends \ConfigTransformer2022052210\Psr\Container\ContainerInterface
 {
     /**
      * Gets the service container parameters.

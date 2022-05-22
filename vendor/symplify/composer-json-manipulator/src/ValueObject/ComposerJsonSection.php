@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205211\Symplify\ComposerJsonManipulator\ValueObject;
+namespace ConfigTransformer2022052210\Symplify\ComposerJsonManipulator\ValueObject;
 
 /**
  * @api
@@ -91,7 +91,7 @@ final class ComposerJsonSection
     /**
      * @var string
      */
-    public const PROVIDES = 'provides';
+    public const PROVIDE = 'provide';
     /**
      * @var string
      * @see https://getcomposer.org/doc/articles/scripts.md#custom-descriptions-
