@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022052210\Symplify\PackageBuilder\Diff\Output;
+namespace ConfigTransformer202205235\Symplify\PackageBuilder\Diff\Output;
 
-use ConfigTransformer2022052210\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
-use ConfigTransformer2022052210\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202205235\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use ConfigTransformer202205235\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * @api
  * Creates @see UnifiedDiffOutputBuilder with "$contextLines = 1000;"
@@ -15,16 +15,16 @@ final class CompleteUnifiedDiffOutputBuilderFactory
      * @var \Symplify\PackageBuilder\Reflection\PrivatesAccessor
      */
     private $privatesAccessor;
-    public function __construct(\ConfigTransformer2022052210\Symplify\PackageBuilder\Reflection\PrivatesAccessor $privatesAccessor)
+    public function __construct(\ConfigTransformer202205235\Symplify\PackageBuilder\Reflection\PrivatesAccessor $privatesAccessor)
     {
         $this->privatesAccessor = $privatesAccessor;
     }
     /**
      * @api
      */
-    public function create() : \ConfigTransformer2022052210\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
+    public function create() : \ConfigTransformer202205235\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
     {
-        $unifiedDiffOutputBuilder = new \ConfigTransformer2022052210\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
+        $unifiedDiffOutputBuilder = new \ConfigTransformer202205235\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
         $this->privatesAccessor->setPrivateProperty($unifiedDiffOutputBuilder, 'contextLines', 10000);
         return $unifiedDiffOutputBuilder;
     }

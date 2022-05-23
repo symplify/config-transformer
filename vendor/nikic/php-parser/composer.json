@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer2022052210\\PhpParser\\": "lib\/PhpParser"
+            "ConfigTransformer202205235\\PhpParser\\": "lib\/PhpParser"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer2022052210\\PhpParser\\": "test\/PhpParser\/"
+            "ConfigTransformer202205235\\PhpParser\\": "test\/PhpParser\/"
         }
     },
     "bin": [

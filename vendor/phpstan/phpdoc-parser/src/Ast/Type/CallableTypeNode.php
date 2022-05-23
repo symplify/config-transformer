@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class CallableTypeNode implements \ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class CallableTypeNode implements \ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var IdentifierTypeNode */
@@ -14,7 +14,7 @@ class CallableTypeNode implements \ConfigTransformer2022052210\PHPStan\PhpDocPar
     public $parameters;
     /** @var TypeNode */
     public $returnType;
-    public function __construct(\ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
+    public function __construct(\ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
     {
         $this->identifier = $identifier;
         $this->parameters = $parameters;

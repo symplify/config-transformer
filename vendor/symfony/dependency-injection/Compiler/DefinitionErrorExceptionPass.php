@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202205235\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022052210\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202205235\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202205235\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202205235\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202205235\Symfony\Component\DependencyInjection\Reference;
 /**
  * Throws an exception for any Definitions that have errors and still exist.
  *
  * @author Ryan Weaver <ryan@knpuniversity.com>
  */
-class DefinitionErrorExceptionPass extends \ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class DefinitionErrorExceptionPass extends \ConfigTransformer202205235\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
@@ -28,14 +28,14 @@ class DefinitionErrorExceptionPass extends \ConfigTransformer2022052210\Symfony\
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Definition || !$value->hasErrors()) {
+        if (!$value instanceof \ConfigTransformer202205235\Symfony\Component\DependencyInjection\Definition || !$value->hasErrors()) {
             return parent::processValue($value, $isRoot);
         }
         if ($isRoot && !$value->isPublic()) {
             $graph = $this->container->getCompiler()->getServiceReferenceGraph();
             $runtimeException = \false;
             foreach ($graph->getNode($this->currentId)->getInEdges() as $edge) {
-                if (!$edge->getValue() instanceof \ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Reference || \ConfigTransformer2022052210\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE !== $edge->getValue()->getInvalidBehavior()) {
+                if (!$edge->getValue() instanceof \ConfigTransformer202205235\Symfony\Component\DependencyInjection\Reference || \ConfigTransformer202205235\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE !== $edge->getValue()->getInvalidBehavior()) {
                     $runtimeException = \false;
                     break;
                 }
@@ -48,6 +48,6 @@ class DefinitionErrorExceptionPass extends \ConfigTransformer2022052210\Symfony\
         // only show the first error so the user can focus on it
         $errors = $value->getErrors();
         $message = \reset($errors);
-        throw new \ConfigTransformer2022052210\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
+        throw new \ConfigTransformer202205235\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
     }
 }

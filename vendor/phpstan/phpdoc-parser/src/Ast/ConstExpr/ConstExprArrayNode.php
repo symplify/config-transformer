@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class ConstExprArrayNode implements \ConfigTransformer2022052210\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstExprArrayNode implements \ConfigTransformer202205235\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     use NodeAttributes;
     /** @var ConstExprArrayItemNode[] */
