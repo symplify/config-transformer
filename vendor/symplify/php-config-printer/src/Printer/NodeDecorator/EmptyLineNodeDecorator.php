@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205235\Symplify\PhpConfigPrinter\Printer\NodeDecorator;
+namespace ConfigTransformer2022052410\Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use ConfigTransformer202205235\PhpParser\Node;
-use ConfigTransformer202205235\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202205235\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202205235\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202205235\PhpParser\Node\Stmt;
-use ConfigTransformer202205235\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202205235\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202205235\PhpParser\NodeFinder;
-use ConfigTransformer202205235\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer2022052410\PhpParser\Node;
+use ConfigTransformer2022052410\PhpParser\Node\Expr\Assign;
+use ConfigTransformer2022052410\PhpParser\Node\Expr\Closure;
+use ConfigTransformer2022052410\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2022052410\PhpParser\Node\Stmt;
+use ConfigTransformer2022052410\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022052410\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer2022052410\PhpParser\NodeFinder;
+use ConfigTransformer2022052410\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\ConfigTransformer202205235\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\ConfigTransformer2022052410\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -27,32 +27,32 @@ final class EmptyLineNodeDecorator
      */
     public function decorate(array $stmts) : void
     {
-        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, \ConfigTransformer202205235\PhpParser\Node\Expr\Closure::class);
-        if (!$closure instanceof \ConfigTransformer202205235\PhpParser\Node\Expr\Closure) {
-            throw new \ConfigTransformer202205235\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, \ConfigTransformer2022052410\PhpParser\Node\Expr\Closure::class);
+        if (!$closure instanceof \ConfigTransformer2022052410\PhpParser\Node\Expr\Closure) {
+            throw new \ConfigTransformer2022052410\Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         $newStmts = [];
         foreach ($closure->stmts as $key => $closureStmt) {
             if ($this->shouldAddEmptyLineBeforeStatement($key, $closureStmt)) {
-                $newStmts[] = new \ConfigTransformer202205235\PhpParser\Node\Stmt\Nop();
+                $newStmts[] = new \ConfigTransformer2022052410\PhpParser\Node\Stmt\Nop();
             }
             $newStmts[] = $closureStmt;
         }
         $closure->stmts = $newStmts;
     }
-    private function shouldAddEmptyLineBeforeStatement(int $key, \ConfigTransformer202205235\PhpParser\Node\Stmt $stmt) : bool
+    private function shouldAddEmptyLineBeforeStatement(int $key, \ConfigTransformer2022052410\PhpParser\Node\Stmt $stmt) : bool
     {
         // do not add space before first item
         if ($key === 0) {
             return \false;
         }
-        if (!$stmt instanceof \ConfigTransformer202205235\PhpParser\Node\Stmt\Expression) {
+        if (!$stmt instanceof \ConfigTransformer2022052410\PhpParser\Node\Stmt\Expression) {
             return \false;
         }
         $expr = $stmt->expr;
-        if ($expr instanceof \ConfigTransformer202205235\PhpParser\Node\Expr\Assign) {
+        if ($expr instanceof \ConfigTransformer2022052410\PhpParser\Node\Expr\Assign) {
             return \true;
         }
-        return $expr instanceof \ConfigTransformer202205235\PhpParser\Node\Expr\MethodCall;
+        return $expr instanceof \ConfigTransformer2022052410\PhpParser\Node\Expr\MethodCall;
     }
 }

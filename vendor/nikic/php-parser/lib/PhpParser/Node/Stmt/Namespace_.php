@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205235\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022052410\PhpParser\Node\Stmt;
 
-use ConfigTransformer202205235\PhpParser\Node;
-class Namespace_ extends \ConfigTransformer202205235\PhpParser\Node\Stmt
+use ConfigTransformer2022052410\PhpParser\Node;
+class Namespace_ extends \ConfigTransformer2022052410\PhpParser\Node\Stmt
 {
     /* For use in the "kind" attribute */
     const KIND_SEMICOLON = 1;
@@ -20,7 +20,7 @@ class Namespace_ extends \ConfigTransformer202205235\PhpParser\Node\Stmt
      * @param null|Node\Stmt[] $stmts      Statements
      * @param array            $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202205235\PhpParser\Node\Name $name = null, $stmts = [], array $attributes = [])
+    public function __construct(\ConfigTransformer2022052410\PhpParser\Node\Name $name = null, $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->name = $name;

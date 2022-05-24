@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205235\Symplify\Astral\PhpDocParser\StaticFactory;
+namespace ConfigTransformer2022052410\Symplify\Astral\PhpDocParser\StaticFactory;
 
-use ConfigTransformer202205235\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\ConstExprParser;
-use ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\TypeParser;
-use ConfigTransformer202205235\Symplify\Astral\PhpDocParser\SimplePhpDocParser;
+use ConfigTransformer2022052410\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\ConstExprParser;
+use ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\TypeParser;
+use ConfigTransformer2022052410\Symplify\Astral\PhpDocParser\SimplePhpDocParser;
 /**
  * @api
  */
 final class SimplePhpDocParserStaticFactory
 {
-    public static function create() : \ConfigTransformer202205235\Symplify\Astral\PhpDocParser\SimplePhpDocParser
+    public static function create() : \ConfigTransformer2022052410\Symplify\Astral\PhpDocParser\SimplePhpDocParser
     {
-        $phpDocParser = new \ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\PhpDocParser(new \ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\TypeParser(), new \ConfigTransformer202205235\PHPStan\PhpDocParser\Parser\ConstExprParser());
-        return new \ConfigTransformer202205235\Symplify\Astral\PhpDocParser\SimplePhpDocParser($phpDocParser, new \ConfigTransformer202205235\PHPStan\PhpDocParser\Lexer\Lexer());
+        $phpDocParser = new \ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\PhpDocParser(new \ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\TypeParser(), new \ConfigTransformer2022052410\PHPStan\PhpDocParser\Parser\ConstExprParser());
+        return new \ConfigTransformer2022052410\Symplify\Astral\PhpDocParser\SimplePhpDocParser($phpDocParser, new \ConfigTransformer2022052410\PHPStan\PhpDocParser\Lexer\Lexer());
     }
 }
