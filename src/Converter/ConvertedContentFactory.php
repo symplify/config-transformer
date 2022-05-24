@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022052410\Symplify\ConfigTransformer\Converter;
+namespace ConfigTransformer202205249\Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer2022052410\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer2022052410\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer2022052410\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202205249\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202205249\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202205249\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContentFactory
 {
     /**
@@ -16,7 +16,7 @@ final class ConvertedContentFactory
      * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
     private $configFormatConverter;
-    public function __construct(\ConfigTransformer2022052410\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer2022052410\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
+    public function __construct(\ConfigTransformer202205249\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \ConfigTransformer202205249\Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;
@@ -32,7 +32,7 @@ final class ConvertedContentFactory
             $message = \sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
             $this->symfonyStyle->note($message);
             $convertedContent = $this->configFormatConverter->convert($fileInfo);
-            $convertedContentFromFileInfo[] = new \ConfigTransformer2022052410\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
+            $convertedContentFromFileInfo[] = new \ConfigTransformer202205249\Symplify\ConfigTransformer\ValueObject\ConvertedContent($convertedContent, $fileInfo);
         }
         return $convertedContentFromFileInfo;
     }

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022052410\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202205249\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer2022052410\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer2022052410\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer2022052410\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer2022052410\Symfony\Component\Cache\Traits\FilesystemTrait;
-class FilesystemAdapter extends \ConfigTransformer2022052410\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer2022052410\Symfony\Component\Cache\PruneableInterface
+use ConfigTransformer202205249\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202205249\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202205249\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202205249\Symfony\Component\Cache\Traits\FilesystemTrait;
+class FilesystemAdapter extends \ConfigTransformer202205249\Symfony\Component\Cache\Adapter\AbstractAdapter implements \ConfigTransformer202205249\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait;
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer2022052410\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \ConfigTransformer202205249\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = $marshaller ?? new \ConfigTransformer2022052410\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ConfigTransformer202205249\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }
