@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205249\SebastianBergmann\Diff;
+namespace ConfigTransformer202205256\SebastianBergmann\Diff;
 
 final class Chunk
 {
@@ -70,8 +70,8 @@ final class Chunk
     public function setLines(array $lines) : void
     {
         foreach ($lines as $line) {
-            if (!$line instanceof \ConfigTransformer202205249\SebastianBergmann\Diff\Line) {
-                throw new \ConfigTransformer202205249\SebastianBergmann\Diff\InvalidArgumentException();
+            if (!$line instanceof \ConfigTransformer202205256\SebastianBergmann\Diff\Line) {
+                throw new \ConfigTransformer202205256\SebastianBergmann\Diff\InvalidArgumentException();
             }
         }
         $this->lines = $lines;

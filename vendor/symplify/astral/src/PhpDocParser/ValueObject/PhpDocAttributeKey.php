@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205249\Symplify\Astral\PhpDocParser\ValueObject;
+namespace ConfigTransformer202205256\Symplify\Astral\PhpDocParser\ValueObject;
 
 final class PhpDocAttributeKey
 {

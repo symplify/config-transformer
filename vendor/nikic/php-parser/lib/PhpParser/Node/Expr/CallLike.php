@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205249\PhpParser\Node\Expr;
+namespace ConfigTransformer202205256\PhpParser\Node\Expr;
 
-use ConfigTransformer202205249\PhpParser\Node\Arg;
-use ConfigTransformer202205249\PhpParser\Node\Expr;
-use ConfigTransformer202205249\PhpParser\Node\VariadicPlaceholder;
-abstract class CallLike extends \ConfigTransformer202205249\PhpParser\Node\Expr
+use ConfigTransformer202205256\PhpParser\Node\Arg;
+use ConfigTransformer202205256\PhpParser\Node\Expr;
+use ConfigTransformer202205256\PhpParser\Node\VariadicPlaceholder;
+abstract class CallLike extends \ConfigTransformer202205256\PhpParser\Node\Expr
 {
     /**
      * Return raw arguments, which may be actual Args, or VariadicPlaceholders for first-class
@@ -21,7 +21,7 @@ abstract class CallLike extends \ConfigTransformer202205249\PhpParser\Node\Expr
     public function isFirstClassCallable() : bool
     {
         foreach ($this->getRawArgs() as $arg) {
-            if ($arg instanceof \ConfigTransformer202205249\PhpParser\Node\VariadicPlaceholder) {
+            if ($arg instanceof \ConfigTransformer202205256\PhpParser\Node\VariadicPlaceholder) {
                 return \true;
             }
         }

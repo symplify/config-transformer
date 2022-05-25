@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205249\PhpParser\Parser;
+namespace ConfigTransformer202205256\PhpParser\Parser;
 
-use ConfigTransformer202205249\PhpParser\Error;
-use ConfigTransformer202205249\PhpParser\ErrorHandler;
-use ConfigTransformer202205249\PhpParser\Parser;
-class Multiple implements \ConfigTransformer202205249\PhpParser\Parser
+use ConfigTransformer202205256\PhpParser\Error;
+use ConfigTransformer202205256\PhpParser\ErrorHandler;
+use ConfigTransformer202205256\PhpParser\Parser;
+class Multiple implements \ConfigTransformer202205256\PhpParser\Parser
 {
     /** @var Parser[] List of parsers to try, in order of preference */
     private $parsers;
@@ -23,10 +23,10 @@ class Multiple implements \ConfigTransformer202205249\PhpParser\Parser
     {
         $this->parsers = $parsers;
     }
-    public function parse(string $code, \ConfigTransformer202205249\PhpParser\ErrorHandler $errorHandler = null)
+    public function parse(string $code, \ConfigTransformer202205256\PhpParser\ErrorHandler $errorHandler = null)
     {
         if (null === $errorHandler) {
-            $errorHandler = new \ConfigTransformer202205249\PhpParser\ErrorHandler\Throwing();
+            $errorHandler = new \ConfigTransformer202205256\PhpParser\ErrorHandler\Throwing();
         }
         list($firstStmts, $firstError) = $this->tryParse($this->parsers[0], $errorHandler, $code);
         if ($firstError === null) {
@@ -40,13 +40,13 @@ class Multiple implements \ConfigTransformer202205249\PhpParser\Parser
         }
         throw $firstError;
     }
-    private function tryParse(\ConfigTransformer202205249\PhpParser\Parser $parser, \ConfigTransformer202205249\PhpParser\ErrorHandler $errorHandler, $code)
+    private function tryParse(\ConfigTransformer202205256\PhpParser\Parser $parser, \ConfigTransformer202205256\PhpParser\ErrorHandler $errorHandler, $code)
     {
         $stmts = null;
         $error = null;
         try {
             $stmts = $parser->parse($code, $errorHandler);
-        } catch (\ConfigTransformer202205249\PhpParser\Error $error) {
+        } catch (\ConfigTransformer202205256\PhpParser\Error $error) {
         }
         return [$stmts, $error];
     }
