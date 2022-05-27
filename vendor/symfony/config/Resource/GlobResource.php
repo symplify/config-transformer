@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205256\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202205275\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202205256\Symfony\Component\Finder\Finder;
-use ConfigTransformer202205256\Symfony\Component\Finder\Glob;
+use ConfigTransformer202205275\Symfony\Component\Finder\Finder;
+use ConfigTransformer202205275\Symfony\Component\Finder\Glob;
 /**
  * GlobResource represents a set of resources stored on the filesystem.
  *
@@ -23,7 +23,7 @@ use ConfigTransformer202205256\Symfony\Component\Finder\Glob;
  *
  * @implements \IteratorAggregate<string, \SplFileInfo>
  */
-class GlobResource implements \IteratorAggregate, \ConfigTransformer202205256\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class GlobResource implements \IteratorAggregate, \ConfigTransformer202205275\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     /**
      * @var string
@@ -113,7 +113,9 @@ class GlobResource implements \IteratorAggregate, \ConfigTransformer202205256\Sy
         }
         $prefix = \str_replace('\\', '/', $this->prefix);
         $paths = null;
-        if (\strncmp($this->prefix, 'phar://', \strlen('phar://')) !== 0 && \strpos($this->pattern, '/**/') === \false) {
+        if ('' === $this->pattern && \is_file($prefix)) {
+            $paths = [$this->prefix];
+        } elseif (\strncmp($this->prefix, 'phar://', \strlen('phar://')) !== 0 && \strpos($this->pattern, '/**/') === \false) {
             if ($this->globBrace || \strpos($this->pattern, '{') === \false) {
                 $paths = \glob($this->prefix . $this->pattern, \GLOB_NOSORT | $this->globBrace);
             } elseif (\strpos($this->pattern, '\\') === \false || !\preg_match('/\\\\[,{}]/', $this->pattern)) {
@@ -159,16 +161,22 @@ class GlobResource implements \IteratorAggregate, \ConfigTransformer202205256\Sy
             }
             return;
         }
-        if (!\class_exists(\ConfigTransformer202205256\Symfony\Component\Finder\Finder::class)) {
+        if (!\class_exists(\ConfigTransformer202205275\Symfony\Component\Finder\Finder::class)) {
             throw new \LogicException(\sprintf('Extended glob pattern "%s" cannot be used as the Finder component is not installed.', $this->pattern));
         }
-        $finder = new \ConfigTransformer202205256\Symfony\Component\Finder\Finder();
-        $regex = \ConfigTransformer202205256\Symfony\Component\Finder\Glob::toRegex($this->pattern);
+        if (\is_file($prefix = $this->prefix)) {
+            $prefix = \dirname($prefix);
+            $pattern = \basename($prefix) . $this->pattern;
+        } else {
+            $pattern = $this->pattern;
+        }
+        $finder = new \ConfigTransformer202205275\Symfony\Component\Finder\Finder();
+        $regex = \ConfigTransformer202205275\Symfony\Component\Finder\Glob::toRegex($pattern);
         if ($this->recursive) {
             $regex = \substr_replace($regex, '(/|$)', -2, 1);
         }
-        $prefixLen = \strlen($this->prefix);
-        foreach ($finder->followLinks()->sortByName()->in($this->prefix) as $path => $info) {
+        $prefixLen = \strlen($prefix);
+        foreach ($finder->followLinks()->sortByName()->in($prefix) as $path => $info) {
             $normalizedPath = \str_replace('\\', '/', $path);
             if (!\preg_match($regex, \substr($normalizedPath, $prefixLen)) || !$info->isFile()) {
                 continue;

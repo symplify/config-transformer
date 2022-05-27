@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202205256\\Symplify\\SymplifyKernel\\": "src"
+            "ConfigTransformer202205275\\Symplify\\SymplifyKernel\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202205256\\Symplify\\SymplifyKernel\\Tests\\": "tests"
+            "ConfigTransformer202205275\\Symplify\\SymplifyKernel\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -37,7 +37,6 @@
         "symplify\/easy-testing": "<10.2.7",
         "symplify\/rule-doc-generator-contracts": "<10.2.7",
         "symplify\/php-config-printer": "<10.2.7",
-        "symplify\/amnesia": "<10.2.7",
         "symplify\/phpstan-extensions": "<10.2.7",
         "symplify\/rule-doc-generator": "<10.2.7",
         "symplify\/vendor-patches": "<10.2.7",

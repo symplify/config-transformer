@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202205256\\Symplify\\PhpConfigPrinter\\": "src"
+            "ConfigTransformer202205275\\Symplify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202205256\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+            "ConfigTransformer202205275\\Symplify\\PhpConfigPrinter\\Tests\\": "tests"
         },
         "files": [
             "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",
@@ -41,7 +41,6 @@
         "symplify\/rule-doc-generator-contracts": "<10.2.7",
         "symplify\/autowire-array-parameter": "<10.2.7",
         "symplify\/package-builder": "<10.2.7",
-        "symplify\/amnesia": "<10.2.7",
         "symplify\/phpstan-extensions": "<10.2.7",
         "symplify\/rule-doc-generator": "<10.2.7",
         "symplify\/vendor-patches": "<10.2.7",
