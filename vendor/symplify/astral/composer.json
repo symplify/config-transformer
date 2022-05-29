@@ -8,7 +8,7 @@
         "nette\/utils": "^3.2",
         "symfony\/dependency-injection": "^6.0",
         "symplify\/smart-file-system": "dev-main",
-        "phpstan\/phpstan": "^1.7.1",
+        "phpstan\/phpstan": "^1.7.3",
         "phpstan\/phpdoc-parser": "^1.5.1",
         "symfony\/config": "^6.0",
         "nikic\/php-parser": "^4.13.2",
@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202205275\\Symplify\\Astral\\": "src"
+            "ConfigTransformer202205290\\Symplify\\Astral\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202205275\\Symplify\\Astral\\Tests\\": "tests"
+            "ConfigTransformer202205290\\Symplify\\Astral\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -53,15 +53,11 @@
         "symplify\/skipper": "<10.2.7",
         "symplify\/smart-file-system": "<9.4.70",
         "symplify\/symfony-static-dumper": "<10.2.7",
-        "symplify\/git-wrapper": "<10.2.7",
         "symplify\/symplify-kernel": "<9.4.70",
         "symplify\/monorepo-builder": "<10.2.7",
         "symplify\/config-transformer": "<10.2.7",
         "symplify\/easy-ci": "<10.2.7",
         "symplify\/coding-standard": "<10.2.7",
-        "symplify\/latte-phpstan-compiler": "<10.2.2",
-        "symplify\/template-phpstan-compiler": "<10.2.2",
-        "symplify\/phpstan-latte-rules": "<10.2.2",
         "symplify\/autowire-array-parameter": "<10.2.7",
         "symplify\/easy-parallel": "<10.2.7",
         "symplify\/neon-config-dumper": "<10.2.7"
