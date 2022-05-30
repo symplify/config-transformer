@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205308\PhpParser;
+namespace ConfigTransformer202205304\PhpParser;
 
 class Error extends \RuntimeException
 {

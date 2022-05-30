@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202205308\Nette;
+namespace ConfigTransformer202205304\Nette;
 
 interface HtmlStringable
 {
@@ -14,4 +14,4 @@ interface HtmlStringable
      */
     function __toString() : string;
 }
-\interface_exists(\ConfigTransformer202205308\Nette\Utils\IHtmlString::class);
+\interface_exists(\ConfigTransformer202205304\Nette\Utils\IHtmlString::class);

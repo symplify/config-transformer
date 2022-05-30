@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205308\Symplify\SymplifyKernel\Config\Loader;
+namespace ConfigTransformer202205304\Symplify\SymplifyKernel\Config\Loader;
 
-use ConfigTransformer202205308\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202205308\Symfony\Component\Config\Loader\DelegatingLoader;
-use ConfigTransformer202205308\Symfony\Component\Config\Loader\GlobFileLoader;
-use ConfigTransformer202205308\Symfony\Component\Config\Loader\LoaderResolver;
-use ConfigTransformer202205308\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202205308\Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
-use ConfigTransformer202205308\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface;
-final class ParameterMergingLoaderFactory implements \ConfigTransformer202205308\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface
+use ConfigTransformer202205304\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202205304\Symfony\Component\Config\Loader\DelegatingLoader;
+use ConfigTransformer202205304\Symfony\Component\Config\Loader\GlobFileLoader;
+use ConfigTransformer202205304\Symfony\Component\Config\Loader\LoaderResolver;
+use ConfigTransformer202205304\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202205304\Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
+use ConfigTransformer202205304\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface;
+final class ParameterMergingLoaderFactory implements \ConfigTransformer202205304\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface
 {
-    public function create(\ConfigTransformer202205308\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $currentWorkingDirectory) : \ConfigTransformer202205308\Symfony\Component\Config\Loader\LoaderInterface
+    public function create(\ConfigTransformer202205304\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $currentWorkingDirectory) : \ConfigTransformer202205304\Symfony\Component\Config\Loader\LoaderInterface
     {
-        $fileLocator = new \ConfigTransformer202205308\Symfony\Component\Config\FileLocator([$currentWorkingDirectory]);
-        $loaders = [new \ConfigTransformer202205308\Symfony\Component\Config\Loader\GlobFileLoader($fileLocator), new \ConfigTransformer202205308\Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $fileLocator)];
-        $loaderResolver = new \ConfigTransformer202205308\Symfony\Component\Config\Loader\LoaderResolver($loaders);
-        return new \ConfigTransformer202205308\Symfony\Component\Config\Loader\DelegatingLoader($loaderResolver);
+        $fileLocator = new \ConfigTransformer202205304\Symfony\Component\Config\FileLocator([$currentWorkingDirectory]);
+        $loaders = [new \ConfigTransformer202205304\Symfony\Component\Config\Loader\GlobFileLoader($fileLocator), new \ConfigTransformer202205304\Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $fileLocator)];
+        $loaderResolver = new \ConfigTransformer202205304\Symfony\Component\Config\Loader\LoaderResolver($loaders);
+        return new \ConfigTransformer202205304\Symfony\Component\Config\Loader\DelegatingLoader($loaderResolver);
     }
 }
