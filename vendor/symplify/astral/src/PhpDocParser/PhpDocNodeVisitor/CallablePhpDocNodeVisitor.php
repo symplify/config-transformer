@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205302\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer202205306\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Node;
-final class CallablePhpDocNodeVisitor extends \ConfigTransformer202205302\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
+use ConfigTransformer202205306\PHPStan\PhpDocParser\Ast\Node;
+final class CallablePhpDocNodeVisitor extends \ConfigTransformer202205306\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
 {
     /**
      * @var callable(Node, string|null): (int|null|Node)
@@ -25,7 +25,7 @@ final class CallablePhpDocNodeVisitor extends \ConfigTransformer202205302\Sympli
     /**
      * @return int|\PHPStan\PhpDocParser\Ast\Node|null
      */
-    public function enterNode(\ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Node $node)
+    public function enterNode(\ConfigTransformer202205306\PHPStan\PhpDocParser\Ast\Node $node)
     {
         $callable = $this->callable;
         return $callable($node, $this->docContent);
