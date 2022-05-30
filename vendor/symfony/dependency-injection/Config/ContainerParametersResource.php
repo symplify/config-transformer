@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205304\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202205304\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer2022053010\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *
@@ -18,7 +18,7 @@ use ConfigTransformer202205304\Symfony\Component\Config\Resource\ResourceInterfa
  *
  * @final
  */
-class ContainerParametersResource implements \ConfigTransformer202205304\Symfony\Component\Config\Resource\ResourceInterface
+class ContainerParametersResource implements \ConfigTransformer2022053010\Symfony\Component\Config\Resource\ResourceInterface
 {
     /**
      * @var mixed[]

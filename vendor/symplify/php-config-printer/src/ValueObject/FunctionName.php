@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205304\Symplify\PhpConfigPrinter\ValueObject;
+namespace ConfigTransformer2022053010\Symplify\PhpConfigPrinter\ValueObject;
 
 final class FunctionName
 {
     /**
      * @var string
      */
-    public const INLINE_SERVICE = 'ConfigTransformer202205304\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
+    public const INLINE_SERVICE = 'ConfigTransformer2022053010\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
     /**
      * @var string
      */
-    public const SERVICE = 'ConfigTransformer202205304\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
+    public const SERVICE = 'ConfigTransformer2022053010\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
     /**
      * @var string
      */
-    public const EXPR = 'ConfigTransformer202205304\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
+    public const EXPR = 'ConfigTransformer2022053010\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
     /**
      * @var string
      */
-    public const TAGGED_ITERATOR = 'ConfigTransformer202205304\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_iterator';
+    public const TAGGED_ITERATOR = 'ConfigTransformer2022053010\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_iterator';
     /**
      * @var string
      */
-    public const TAGGED_LOCATOR = 'ConfigTransformer202205304\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_locator';
+    public const TAGGED_LOCATOR = 'ConfigTransformer2022053010\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_locator';
 }
