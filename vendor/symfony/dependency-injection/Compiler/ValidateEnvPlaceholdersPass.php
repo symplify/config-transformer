@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205305\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202205306\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202205305\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202205305\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202205305\Symfony\Component\Config\Definition\Processor;
-use ConfigTransformer202205305\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202205305\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer202205305\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202205305\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ConfigTransformer202205306\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202205306\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202205306\Symfony\Component\Config\Definition\Processor;
+use ConfigTransformer202205306\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer202205306\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202205306\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ValidateEnvPlaceholdersPass implements \ConfigTransformer202205305\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ValidateEnvPlaceholdersPass implements \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private const TYPE_FIXTURES = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
     /**
@@ -32,17 +32,17 @@ class ValidateEnvPlaceholdersPass implements \ConfigTransformer202205305\Symfony
     /**
      * {@inheritdoc}
      */
-    public function process(\ConfigTransformer202205305\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202205306\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->extensionConfig = [];
-        if (!\class_exists(\ConfigTransformer202205305\Symfony\Component\Config\Definition\BaseNode::class) || !($extensions = $container->getExtensions())) {
+        if (!\class_exists(\ConfigTransformer202205306\Symfony\Component\Config\Definition\BaseNode::class) || !($extensions = $container->getExtensions())) {
             return;
         }
         $resolvingBag = $container->getParameterBag();
-        if (!$resolvingBag instanceof \ConfigTransformer202205305\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
+        if (!$resolvingBag instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
             return;
         }
-        $defaultBag = new \ConfigTransformer202205305\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($resolvingBag->all());
+        $defaultBag = new \ConfigTransformer202205306\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($resolvingBag->all());
         $envTypes = $resolvingBag->getProvidedTypes();
         foreach ($resolvingBag->getEnvPlaceholders() + $resolvingBag->getUnusedEnvPlaceholders() as $env => $placeholders) {
             $values = [];
@@ -57,17 +57,17 @@ class ValidateEnvPlaceholdersPass implements \ConfigTransformer202205305\Symfony
                 }
             }
             foreach ($placeholders as $placeholder) {
-                \ConfigTransformer202205305\Symfony\Component\Config\Definition\BaseNode::setPlaceholder($placeholder, $values);
+                \ConfigTransformer202205306\Symfony\Component\Config\Definition\BaseNode::setPlaceholder($placeholder, $values);
             }
         }
-        $processor = new \ConfigTransformer202205305\Symfony\Component\Config\Definition\Processor();
+        $processor = new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Processor();
         foreach ($extensions as $name => $extension) {
-            if (!($extension instanceof \ConfigTransformer202205305\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface || $extension instanceof \ConfigTransformer202205305\Symfony\Component\Config\Definition\ConfigurationInterface) || !($config = \array_filter($container->getExtensionConfig($name)))) {
+            if (!($extension instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface || $extension instanceof \ConfigTransformer202205306\Symfony\Component\Config\Definition\ConfigurationInterface) || !($config = \array_filter($container->getExtensionConfig($name)))) {
                 // this extension has no semantic configuration or was not called
                 continue;
             }
             $config = $resolvingBag->resolveValue($config);
-            if ($extension instanceof \ConfigTransformer202205305\Symfony\Component\Config\Definition\ConfigurationInterface) {
+            if ($extension instanceof \ConfigTransformer202205306\Symfony\Component\Config\Definition\ConfigurationInterface) {
                 $configuration = $extension;
             } elseif (null === ($configuration = $extension->getConfiguration($config, $container))) {
                 continue;
