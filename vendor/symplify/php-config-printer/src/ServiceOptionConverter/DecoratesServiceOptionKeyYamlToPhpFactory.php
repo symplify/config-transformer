@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205306\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202205301\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202205306\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202205306\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202205306\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202205306\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202205306\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
-use ConfigTransformer202205306\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202205306\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202205301\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202205301\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202205301\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202205301\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202205301\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
+use ConfigTransformer202205301\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202205301\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var string
@@ -36,7 +36,7 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\ConfigTransformer202205306\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202205306\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \ConfigTransformer202205306\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\ConfigTransformer202205301\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \ConfigTransformer202205301\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \ConfigTransformer202205301\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->yamlArgumentSorter = $yamlArgumentSorter;
@@ -47,11 +47,11 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      * @param mixed $yaml
      * @param mixed $values
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202205306\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202205306\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202205301\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202205301\PhpParser\Node\Expr\MethodCall
     {
         $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [self::DECORATION_INNER_NAME => null, self::DECORATION_PRIORITY => 0, self::DECORATION_ON_INVALID => null]);
         if (isset($arguments[self::DECORATION_ON_INVALID])) {
-            $arguments[self::DECORATION_ON_INVALID] = $arguments[self::DECORATION_ON_INVALID] === 'exception' ? $this->commonNodeFactory->createConstFetch(\ConfigTransformer202205306\Symfony\Component\DependencyInjection\ContainerInterface::class, 'EXCEPTION_ON_INVALID_REFERENCE') : $this->commonNodeFactory->createConstFetch(\ConfigTransformer202205306\Symfony\Component\DependencyInjection\ContainerInterface::class, 'IGNORE_ON_INVALID_REFERENCE');
+            $arguments[self::DECORATION_ON_INVALID] = $arguments[self::DECORATION_ON_INVALID] === 'exception' ? $this->commonNodeFactory->createConstFetch(\ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface::class, 'EXCEPTION_ON_INVALID_REFERENCE') : $this->commonNodeFactory->createConstFetch(\ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface::class, 'IGNORE_ON_INVALID_REFERENCE');
         }
         // Don't write the next arguments if they are null.
         if ($arguments[self::DECORATION_ON_INVALID] === null && $arguments[self::DECORATION_PRIORITY] === 0) {
@@ -62,7 +62,7 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
         }
         \array_unshift($arguments, $values['decorates']);
         $args = $this->argsNodeFactory->createFromValues($arguments);
-        return new \ConfigTransformer202205306\PhpParser\Node\Expr\MethodCall($methodCall, 'decorate', $args);
+        return new \ConfigTransformer202205301\PhpParser\Node\Expr\MethodCall($methodCall, 'decorate', $args);
     }
     /**
      * @param mixed $key
@@ -70,6 +70,6 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \ConfigTransfor
      */
     public function isMatch($key, $values) : bool
     {
-        return $key === \ConfigTransformer202205306\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::DECORATES;
+        return $key === \ConfigTransformer202205301\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::DECORATES;
     }
 }

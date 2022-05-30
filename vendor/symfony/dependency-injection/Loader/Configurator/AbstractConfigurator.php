@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205306\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202205301\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202205306\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202205306\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202205306\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202205301\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202205301\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';
@@ -62,35 +62,35 @@ abstract class AbstractConfigurator
         if (self::$valuePreProcessor) {
             $value = (self::$valuePreProcessor)($value, $allowServices);
         }
-        if ($value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
-            $reference = new \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Reference($value->id, $value->invalidBehavior);
-            return $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator ? new \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument($reference) : $reference;
+        if ($value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
+            $reference = new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference($value->id, $value->invalidBehavior);
+            return $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Loader\Configurator\ClosureReferenceConfigurator ? new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument($reference) : $reference;
         }
-        if ($value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
+        if ($value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
             $def = $value->definition;
             $value->definition = null;
             return $def;
         }
-        if ($value instanceof \ConfigTransformer202205306\Symfony\Component\Config\Loader\ParamConfigurator) {
+        if ($value instanceof \ConfigTransformer202205301\Symfony\Component\Config\Loader\ParamConfigurator) {
             return (string) $value;
         }
         if ($value instanceof self) {
-            throw new \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s()" can be used only at the root of service configuration files.', $value::FACTORY));
+            throw new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s()" can be used only at the root of service configuration files.', $value::FACTORY));
         }
         switch (\true) {
             case null === $value:
             case \is_scalar($value):
                 return $value;
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\ArgumentInterface:
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Definition:
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\ExpressionLanguage\Expression:
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Parameter:
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Argument\AbstractArgument:
-            case $value instanceof \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Reference:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\ArgumentInterface:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Definition:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\ExpressionLanguage\Expression:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Parameter:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Argument\AbstractArgument:
+            case $value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference:
                 if ($allowServices) {
                     return $value;
                 }
         }
-        throw new \ConfigTransformer202205306\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Cannot use values of type "%s" in service configuration files.', \get_debug_type($value)));
+        throw new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Cannot use values of type "%s" in service configuration files.', \get_debug_type($value)));
     }
 }

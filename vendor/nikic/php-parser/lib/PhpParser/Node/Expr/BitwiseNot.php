@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205306\PhpParser\Node\Expr;
+namespace ConfigTransformer202205301\PhpParser\Node\Expr;
 
-use ConfigTransformer202205306\PhpParser\Node\Expr;
-class BitwiseNot extends \ConfigTransformer202205306\PhpParser\Node\Expr
+use ConfigTransformer202205301\PhpParser\Node\Expr;
+class BitwiseNot extends \ConfigTransformer202205301\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ class BitwiseNot extends \ConfigTransformer202205306\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202205306\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\ConfigTransformer202205301\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;
