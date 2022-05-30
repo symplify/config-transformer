@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202205306\\Symplify\\SymplifyKernel\\": "src"
+            "ConfigTransformer202205307\\Symplify\\SymplifyKernel\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConfigTransformer202205306\\Symplify\\SymplifyKernel\\Tests\\": "tests"
+            "ConfigTransformer202205307\\Symplify\\SymplifyKernel\\Tests\\": "tests"
         }
     },
     "extra": {

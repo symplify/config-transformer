@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202205306\Symfony\Component\Config\Definition\ArrayNode;
-use ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use ConfigTransformer202205306\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer202205306\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use ConfigTransformer202205307\Symfony\Component\Config\Definition\ArrayNode;
+use ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202205307\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202205307\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * This class provides a fluent interface for defining an array node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeDefinition implements \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface
+class ArrayNodeDefinition extends \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeDefinition implements \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface
 {
     protected $performDeepMerging = \true;
     protected $ignoreExtraKeys = \false;
@@ -37,7 +37,7 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $name, \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = [];
@@ -46,41 +46,41 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function setBuilder(\ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder)
+    public function setBuilder(\ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder)
     {
         $this->nodeBuilder = $builder;
     }
     /**
      * {@inheritdoc}
      */
-    public function children() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeBuilder
+    public function children() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeBuilder
     {
         return $this->getNodeBuilder();
     }
     /**
      * Sets a prototype for child nodes.
      */
-    public function prototype(string $type) : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeDefinition
+    public function prototype(string $type) : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         return $this->prototype = $this->getNodeBuilder()->node(null, $type)->setParent($this);
     }
-    public function variablePrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition
+    public function variablePrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition
     {
         return $this->prototype('variable');
     }
-    public function scalarPrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+    public function scalarPrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
     {
         return $this->prototype('scalar');
     }
-    public function booleanPrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition
+    public function booleanPrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition
     {
         return $this->prototype('boolean');
     }
-    public function integerPrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition
+    public function integerPrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition
     {
         return $this->prototype('integer');
     }
-    public function floatPrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition
+    public function floatPrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition
     {
         return $this->prototype('float');
     }
@@ -88,7 +88,7 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
     {
         return $this->prototype('array');
     }
-    public function enumPrototype() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition
+    public function enumPrototype() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition
     {
         return $this->prototype('enum');
     }
@@ -279,7 +279,7 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
      * {@inheritdoc}
      * @return $this
      */
-    public function append(\ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function append(\ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->children[$node->name] = $node->setParent($this);
         return $this;
@@ -287,20 +287,20 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
     /**
      * Returns a node builder to be used to add children and prototype.
      */
-    protected function getNodeBuilder() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeBuilder
+    protected function getNodeBuilder() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeBuilder
     {
         if (null === $this->nodeBuilder) {
-            $this->nodeBuilder = new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeBuilder();
+            $this->nodeBuilder = new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeBuilder();
         }
         return $this->nodeBuilder->setParent($this);
     }
     /**
      * {@inheritdoc}
      */
-    protected function createNode() : \ConfigTransformer202205306\Symfony\Component\Config\Definition\NodeInterface
+    protected function createNode() : \ConfigTransformer202205307\Symfony\Component\Config\Definition\NodeInterface
     {
         if (null === $this->prototype) {
-            $node = new \ConfigTransformer202205306\Symfony\Component\Config\Definition\ArrayNode($this->name, $this->parent, $this->pathSeparator);
+            $node = new \ConfigTransformer202205307\Symfony\Component\Config\Definition\ArrayNode($this->name, $this->parent, $this->pathSeparator);
             $this->validateConcreteNode($node);
             $node->setAddIfNotSet($this->addDefaults);
             foreach ($this->children as $child) {
@@ -308,7 +308,7 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
                 $node->addChild($child->getNode());
             }
         } else {
-            $node = new \ConfigTransformer202205306\Symfony\Component\Config\Definition\PrototypedArrayNode($this->name, $this->parent, $this->pathSeparator);
+            $node = new \ConfigTransformer202205307\Symfony\Component\Config\Definition\PrototypedArrayNode($this->name, $this->parent, $this->pathSeparator);
             $this->validatePrototypeNode($node);
             if (null !== $this->key) {
                 $node->setKeyAttribute($this->key, $this->removeKeyItem);
@@ -360,23 +360,23 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
      *
      * @throws InvalidDefinitionException
      */
-    protected function validateConcreteNode(\ConfigTransformer202205306\Symfony\Component\Config\Definition\ArrayNode $node)
+    protected function validateConcreteNode(\ConfigTransformer202205307\Symfony\Component\Config\Definition\ArrayNode $node)
     {
         $path = $node->getPath();
         if (null !== $this->key) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->useAttributeAsKey() is not applicable to concrete nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->useAttributeAsKey() is not applicable to concrete nodes at path "%s".', $path));
         }
         if (\false === $this->allowEmptyValue) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->cannotBeEmpty() is not applicable to concrete nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->cannotBeEmpty() is not applicable to concrete nodes at path "%s".', $path));
         }
         if (\true === $this->atLeastOne) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->requiresAtLeastOneElement() is not applicable to concrete nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->requiresAtLeastOneElement() is not applicable to concrete nodes at path "%s".', $path));
         }
         if ($this->default) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->defaultValue() is not applicable to concrete nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->defaultValue() is not applicable to concrete nodes at path "%s".', $path));
         }
         if (\false !== $this->addDefaultChildren) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() is not applicable to concrete nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() is not applicable to concrete nodes at path "%s".', $path));
         }
     }
     /**
@@ -384,21 +384,21 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
      *
      * @throws InvalidDefinitionException
      */
-    protected function validatePrototypeNode(\ConfigTransformer202205306\Symfony\Component\Config\Definition\PrototypedArrayNode $node)
+    protected function validatePrototypeNode(\ConfigTransformer202205307\Symfony\Component\Config\Definition\PrototypedArrayNode $node)
     {
         $path = $node->getPath();
         if ($this->addDefaults) {
-            throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultsIfNotSet() is not applicable to prototype nodes at path "%s".', $path));
+            throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultsIfNotSet() is not applicable to prototype nodes at path "%s".', $path));
         }
         if (\false !== $this->addDefaultChildren) {
             if ($this->default) {
-                throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('A default value and default children might not be used together at path "%s".', $path));
+                throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('A default value and default children might not be used together at path "%s".', $path));
             }
             if (null !== $this->key && (null === $this->addDefaultChildren || \is_int($this->addDefaultChildren) && $this->addDefaultChildren > 0)) {
-                throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() should set default children names as ->useAttributeAsKey() is used at path "%s".', $path));
+                throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() should set default children names as ->useAttributeAsKey() is used at path "%s".', $path));
             }
             if (null === $this->key && (\is_string($this->addDefaultChildren) || \is_array($this->addDefaultChildren))) {
-                throw new \ConfigTransformer202205306\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() might not set default children names as ->useAttributeAsKey() is not used at path "%s".', $path));
+                throw new \ConfigTransformer202205307\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException(\sprintf('->addDefaultChildrenIfNoneSet() might not set default children names as ->useAttributeAsKey() is not used at path "%s".', $path));
             }
         }
     }
@@ -414,7 +414,7 @@ class ArrayNodeDefinition extends \ConfigTransformer202205306\Symfony\Component\
      *
      * @param string $nodePath The path of the node to find. e.g "doctrine.orm.mappings"
      */
-    public function find(string $nodePath) : \ConfigTransformer202205306\Symfony\Component\Config\Definition\Builder\NodeDefinition
+    public function find(string $nodePath) : \ConfigTransformer202205307\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         $firstPathSegment = \false === ($pathSeparatorPos = \strpos($nodePath, $this->pathSeparator)) ? $nodePath : \substr($nodePath, 0, $pathSeparatorPos);
         if (null === ($node = $this->children[$firstPathSegment] ?? null)) {
