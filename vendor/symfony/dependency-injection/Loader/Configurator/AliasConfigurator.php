@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205305\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202205307\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202205305\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202205307\Symfony\Component\DependencyInjection\Alias;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AliasConfigurator extends \ConfigTransformer202205305\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class AliasConfigurator extends \ConfigTransformer202205307\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     use Traits\DeprecateTrait;
     use Traits\PublicTrait;
     public const FACTORY = 'alias';
-    public function __construct(\ConfigTransformer202205305\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202205305\Symfony\Component\DependencyInjection\Alias $alias)
+    public function __construct(\ConfigTransformer202205307\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \ConfigTransformer202205307\Symfony\Component\DependencyInjection\Alias $alias)
     {
         $this->parent = $parent;
         $this->definition = $alias;
