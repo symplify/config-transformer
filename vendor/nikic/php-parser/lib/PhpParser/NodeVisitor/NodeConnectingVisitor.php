@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205300\PhpParser\NodeVisitor;
+namespace ConfigTransformer202205305\PhpParser\NodeVisitor;
 
-use ConfigTransformer202205300\PhpParser\Node;
-use ConfigTransformer202205300\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202205305\PhpParser\Node;
+use ConfigTransformer202205305\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node
  * as well as its sibling nodes.
@@ -14,7 +14,7 @@ use ConfigTransformer202205300\PhpParser\NodeVisitorAbstract;
  * node can be accessed through <code>$node->getAttribute('previous')</code>,
  * and the next node can be accessed through <code>$node->getAttribute('next')</code>.
  */
-final class NodeConnectingVisitor extends \ConfigTransformer202205300\PhpParser\NodeVisitorAbstract
+final class NodeConnectingVisitor extends \ConfigTransformer202205305\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]
@@ -29,7 +29,7 @@ final class NodeConnectingVisitor extends \ConfigTransformer202205300\PhpParser\
         $this->stack = [];
         $this->previous = null;
     }
-    public function enterNode(\ConfigTransformer202205300\PhpParser\Node $node)
+    public function enterNode(\ConfigTransformer202205305\PhpParser\Node $node)
     {
         if (!empty($this->stack)) {
             $node->setAttribute('parent', $this->stack[\count($this->stack) - 1]);
@@ -40,7 +40,7 @@ final class NodeConnectingVisitor extends \ConfigTransformer202205300\PhpParser\
         }
         $this->stack[] = $node;
     }
-    public function leaveNode(\ConfigTransformer202205300\PhpParser\Node $node)
+    public function leaveNode(\ConfigTransformer202205305\PhpParser\Node $node)
     {
         $this->previous = $node;
         \array_pop($this->stack);

@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205300\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202205305\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202205300\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202205300\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202205300\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
-use ConfigTransformer202205300\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-final class CallsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202205300\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use ConfigTransformer202205305\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202205305\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202205305\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
+use ConfigTransformer202205305\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+final class CallsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer202205305\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory
      */
     private $singleServicePhpNodeFactory;
-    public function __construct(\ConfigTransformer202205300\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
+    public function __construct(\ConfigTransformer202205305\Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
     {
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
@@ -22,7 +22,7 @@ final class CallsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer2
      * @param mixed $yaml
      * @param mixed $values
      */
-    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202205300\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202205300\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \ConfigTransformer202205305\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202205305\PhpParser\Node\Expr\MethodCall
     {
         return $this->singleServicePhpNodeFactory->createCalls($methodCall, $yaml);
     }
@@ -32,6 +32,6 @@ final class CallsServiceOptionKeyYamlToPhpFactory implements \ConfigTransformer2
      */
     public function isMatch($key, $values) : bool
     {
-        return $key === \ConfigTransformer202205300\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::CALLS;
+        return $key === \ConfigTransformer202205305\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::CALLS;
     }
 }
