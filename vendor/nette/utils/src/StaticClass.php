@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202205307\Nette;
+namespace ConfigTransformer202205300\Nette;
 
 /**
  * Static class.
@@ -27,6 +27,6 @@ trait StaticClass
      */
     public static function __callStatic(string $name, array $args)
     {
-        \ConfigTransformer202205307\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
+        \ConfigTransformer202205300\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
     }
 }
