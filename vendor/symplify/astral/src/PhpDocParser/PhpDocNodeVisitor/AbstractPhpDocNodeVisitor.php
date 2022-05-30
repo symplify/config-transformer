@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205300\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer202205308\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202205300\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202205300\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
+use ConfigTransformer202205308\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202205308\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
 /**
  * Inspired by https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/NodeVisitorAbstract.php
  */
-abstract class AbstractPhpDocNodeVisitor implements \ConfigTransformer202205300\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface
+abstract class AbstractPhpDocNodeVisitor implements \ConfigTransformer202205308\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface
 {
-    public function beforeTraverse(\ConfigTransformer202205300\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function beforeTraverse(\ConfigTransformer202205308\PHPStan\PhpDocParser\Ast\Node $node) : void
     {
     }
     /**
      * @return int|\PHPStan\PhpDocParser\Ast\Node|null
      */
-    public function enterNode(\ConfigTransformer202205300\PHPStan\PhpDocParser\Ast\Node $node)
+    public function enterNode(\ConfigTransformer202205308\PHPStan\PhpDocParser\Ast\Node $node)
     {
         return null;
     }
     /**
      * @return int|\PhpParser\Node|mixed[]|null Replacement node (or special return)
      */
-    public function leaveNode(\ConfigTransformer202205300\PHPStan\PhpDocParser\Ast\Node $node)
+    public function leaveNode(\ConfigTransformer202205308\PHPStan\PhpDocParser\Ast\Node $node)
     {
         return null;
     }
-    public function afterTraverse(\ConfigTransformer202205300\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function afterTraverse(\ConfigTransformer202205308\PHPStan\PhpDocParser\Ast\Node $node) : void
     {
     }
 }

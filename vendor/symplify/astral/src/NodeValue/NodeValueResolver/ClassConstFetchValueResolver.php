@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205300\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer202205308\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer202205300\PhpParser\Node\Expr;
-use ConfigTransformer202205300\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202205300\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer202205308\PhpParser\Node\Expr;
+use ConfigTransformer202205308\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202205308\PhpParser\Node\Stmt\ClassLike;
 use ReflectionClassConstant;
-use ConfigTransformer202205300\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202205300\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202205300\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202205308\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202205308\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202205308\Symplify\Astral\NodeFinder\SimpleNodeFinder;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
  * @implements NodeValueResolverInterface<ClassConstFetch>
  */
-final class ClassConstFetchValueResolver implements \ConfigTransformer202205300\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
+final class ClassConstFetchValueResolver implements \ConfigTransformer202205308\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface
 {
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
@@ -25,25 +25,25 @@ final class ClassConstFetchValueResolver implements \ConfigTransformer202205300\
      * @var \Symplify\Astral\NodeFinder\SimpleNodeFinder
      */
     private $simpleNodeFinder;
-    public function __construct(\ConfigTransformer202205300\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202205300\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
+    public function __construct(\ConfigTransformer202205308\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202205308\Symplify\Astral\NodeFinder\SimpleNodeFinder $simpleNodeFinder)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->simpleNodeFinder = $simpleNodeFinder;
     }
     public function getType() : string
     {
-        return \ConfigTransformer202205300\PhpParser\Node\Expr\ClassConstFetch::class;
+        return \ConfigTransformer202205308\PhpParser\Node\Expr\ClassConstFetch::class;
     }
     /**
      * @param ClassConstFetch $expr
      * @return mixed
      */
-    public function resolve(\ConfigTransformer202205300\PhpParser\Node\Expr $expr, string $currentFilePath)
+    public function resolve(\ConfigTransformer202205308\PhpParser\Node\Expr $expr, string $currentFilePath)
     {
         $className = $this->simpleNameResolver->getName($expr->class);
         if ($className === 'self') {
-            $classLike = $this->simpleNodeFinder->findFirstParentByType($expr, \ConfigTransformer202205300\PhpParser\Node\Stmt\ClassLike::class);
-            if (!$classLike instanceof \ConfigTransformer202205300\PhpParser\Node\Stmt\ClassLike) {
+            $classLike = $this->simpleNodeFinder->findFirstParentByType($expr, \ConfigTransformer202205308\PhpParser\Node\Stmt\ClassLike::class);
+            if (!$classLike instanceof \ConfigTransformer202205308\PhpParser\Node\Stmt\ClassLike) {
                 return null;
             }
             $className = $this->simpleNameResolver->getName($classLike);
