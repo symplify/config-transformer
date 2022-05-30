@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022053010\Symfony\Component\Console;
+namespace ConfigTransformer202205301\Symfony\Component\Console;
 
-use ConfigTransformer2022053010\Symfony\Component\Console\Command\Command;
-use ConfigTransformer2022053010\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2022053010\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202205301\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202205301\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202205301\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class SingleCommandApplication extends \ConfigTransformer2022053010\Symfony\Component\Console\Command\Command
+class SingleCommandApplication extends \ConfigTransformer202205301\Symfony\Component\Console\Command\Command
 {
     /**
      * @var string
@@ -48,13 +48,13 @@ class SingleCommandApplication extends \ConfigTransformer2022053010\Symfony\Comp
         $this->autoExit = $autoExit;
         return $this;
     }
-    public function run(\ConfigTransformer2022053010\Symfony\Component\Console\Input\InputInterface $input = null, \ConfigTransformer2022053010\Symfony\Component\Console\Output\OutputInterface $output = null) : int
+    public function run(\ConfigTransformer202205301\Symfony\Component\Console\Input\InputInterface $input = null, \ConfigTransformer202205301\Symfony\Component\Console\Output\OutputInterface $output = null) : int
     {
         if ($this->running) {
             return parent::run($input, $output);
         }
         // We use the command name as the application name
-        $application = new \ConfigTransformer2022053010\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
+        $application = new \ConfigTransformer202205301\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
         $application->setAutoExit($this->autoExit);
         // Fix the usage of the command displayed with "--help"
         $this->setName($_SERVER['argv'][0]);

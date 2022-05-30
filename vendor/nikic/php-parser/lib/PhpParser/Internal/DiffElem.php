@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022053010\PhpParser\Internal;
+namespace ConfigTransformer202205301\PhpParser\Internal;
 
 /**
  * @internal

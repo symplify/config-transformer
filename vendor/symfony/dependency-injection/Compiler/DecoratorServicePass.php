@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202205301\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference;
 /**
  * Overwrites a service but keeps the overridden one.
  *
@@ -23,9 +23,9 @@ use ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Reference;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Diego Saint Esteben <diego@saintesteben.me>
  */
-class DecoratorServicePass extends \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class DecoratorServicePass extends \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
-    public function process(\ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $definitions = new \SplPriorityQueue();
         $order = \PHP_INT_MAX;
@@ -40,7 +40,7 @@ class DecoratorServicePass extends \ConfigTransformer2022053010\Symfony\Componen
         foreach ($definitions as [$id, $definition]) {
             $decoratedService = $definition->getDecoratedService();
             [$inner, $renamedId] = $decoratedService;
-            $invalidBehavior = $decoratedService[3] ?? \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            $invalidBehavior = $decoratedService[3] ?? \ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
             $definition->setDecoratedService(null);
             if (!$renamedId) {
                 $renamedId = $id . '.inner';
@@ -54,7 +54,7 @@ class DecoratorServicePass extends \ConfigTransformer2022053010\Symfony\Componen
             if ($container->hasAlias($inner)) {
                 $alias = $container->getAlias($inner);
                 $public = $alias->isPublic();
-                $container->setAlias($renamedId, new \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Alias((string) $alias, \false));
+                $container->setAlias($renamedId, new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Alias((string) $alias, \false));
                 $decoratedDefinition = $container->findDefinition($alias);
             } elseif ($container->hasDefinition($inner)) {
                 $decoratedDefinition = $container->getDefinition($inner);
@@ -62,17 +62,17 @@ class DecoratorServicePass extends \ConfigTransformer2022053010\Symfony\Componen
                 $decoratedDefinition->setPublic(\false);
                 $container->setDefinition($renamedId, $decoratedDefinition);
                 $decoratingDefinitions[$inner] = $decoratedDefinition;
-            } elseif (\ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE === $invalidBehavior) {
+            } elseif (\ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE === $invalidBehavior) {
                 $container->removeDefinition($id);
                 continue;
-            } elseif (\ConfigTransformer2022053010\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $invalidBehavior) {
+            } elseif (\ConfigTransformer202205301\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $invalidBehavior) {
                 $public = $definition->isPublic();
                 $decoratedDefinition = null;
             } else {
-                throw new \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($inner, $id);
+                throw new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($inner, $id);
             }
             if ($decoratedDefinition && $decoratedDefinition->isSynthetic()) {
-                throw new \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A synthetic service cannot be decorated: service "%s" cannot decorate "%s".', $id, $inner));
+                throw new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A synthetic service cannot be decorated: service "%s" cannot decorate "%s".', $id, $inner));
             }
             if (isset($decoratingDefinitions[$inner])) {
                 $decoratingDefinition = $decoratingDefinitions[$inner];
@@ -98,8 +98,8 @@ class DecoratorServicePass extends \ConfigTransformer2022053010\Symfony\Componen
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Reference && '.inner' === (string) $value) {
-            return new \ConfigTransformer2022053010\Symfony\Component\DependencyInjection\Reference($this->currentId, $value->getInvalidBehavior());
+        if ($value instanceof \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference && '.inner' === (string) $value) {
+            return new \ConfigTransformer202205301\Symfony\Component\DependencyInjection\Reference($this->currentId, $value->getInvalidBehavior());
         }
         return parent::processValue($value, $isRoot);
     }
