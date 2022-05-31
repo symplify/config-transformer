@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205313\PhpParser\Node\Scalar;
+namespace ConfigTransformer202205317\PhpParser\Node\Scalar;
 
-use ConfigTransformer202205313\PhpParser\Error;
-use ConfigTransformer202205313\PhpParser\Node\Scalar;
-class String_ extends \ConfigTransformer202205313\PhpParser\Node\Scalar
+use ConfigTransformer202205317\PhpParser\Error;
+use ConfigTransformer202205317\PhpParser\Node\Scalar;
+class String_ extends \ConfigTransformer202205317\PhpParser\Node\Scalar
 {
     /* For use in "kind" attribute */
     const KIND_SINGLE_QUOTED = 1;
@@ -29,6 +29,16 @@ class String_ extends \ConfigTransformer202205313\PhpParser\Node\Scalar
     public function getSubNodeNames() : array
     {
         return ['value'];
+    }
+    /**
+     * @param bool $parseUnicodeEscape Whether to parse PHP 7 \u escapes
+     */
+    public static function fromString(string $str, array $attributes = [], bool $parseUnicodeEscape = \true) : self
+    {
+        $attributes['kind'] = $str[0] === "'" || $str[1] === "'" && ($str[0] === 'b' || $str[0] === 'B') ? \ConfigTransformer202205317\PhpParser\Node\Scalar\String_::KIND_SINGLE_QUOTED : \ConfigTransformer202205317\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED;
+        $attributes['rawValue'] = $str;
+        $string = self::parse($str, $parseUnicodeEscape);
+        return new self($string, $attributes);
     }
     /**
      * @internal
@@ -106,7 +116,7 @@ class String_ extends \ConfigTransformer202205313\PhpParser\Node\Scalar
         if ($num <= 0x1fffff) {
             return \chr(($num >> 18) + 0xf0) . \chr(($num >> 12 & 0x3f) + 0x80) . \chr(($num >> 6 & 0x3f) + 0x80) . \chr(($num & 0x3f) + 0x80);
         }
-        throw new \ConfigTransformer202205313\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
+        throw new \ConfigTransformer202205317\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
     }
     public function getType() : string
     {

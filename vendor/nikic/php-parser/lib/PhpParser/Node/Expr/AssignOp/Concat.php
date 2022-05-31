@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205313\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202205317\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer202205313\PhpParser\Node\Expr\AssignOp;
-class Concat extends \ConfigTransformer202205313\PhpParser\Node\Expr\AssignOp
+use ConfigTransformer202205317\PhpParser\Node\Expr\AssignOp;
+class Concat extends \ConfigTransformer202205317\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

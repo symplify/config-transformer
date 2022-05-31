@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202205313\Symfony\Component\String\Inflector;
+namespace ConfigTransformer202205317\Symfony\Component\String\Inflector;
 
 /**
  * French inflector.
  *
  * This class does only inflect nouns; not adjectives nor composed words like "soixante-dix".
  */
-final class FrenchInflector implements \ConfigTransformer202205313\Symfony\Component\String\Inflector\InflectorInterface
+final class FrenchInflector implements \ConfigTransformer202205317\Symfony\Component\String\Inflector\InflectorInterface
 {
     /**
      * A list of all rules for pluralise.
@@ -50,8 +50,8 @@ final class FrenchInflector implements \ConfigTransformer202205313\Symfony\Compo
         // Invariable words
         ['/^(cinquante|soixante|mille)$/i', '\\1'],
         // French titles
-        ['/^(mon|ma)(sieur|dame|demoiselle|seigneur)$/', 'ConfigTransformer202205313\\mes\\2s'],
-        ['/^(Mon|Ma)(sieur|dame|demoiselle|seigneur)$/', 'ConfigTransformer202205313\\Mes\\2s'],
+        ['/^(mon|ma)(sieur|dame|demoiselle|seigneur)$/', 'ConfigTransformer202205317\\mes\\2s'],
+        ['/^(Mon|Ma)(sieur|dame|demoiselle|seigneur)$/', 'ConfigTransformer202205317\\Mes\\2s'],
     ];
     /**
      * A list of all rules for singularize.
@@ -77,10 +77,10 @@ final class FrenchInflector implements \ConfigTransformer202205313\Symfony\Compo
         // Les mots finissant par "ou" prennent un "s" sauf bijou, caillou, chou, genou, hibou, joujou, pou
         ['/(bij|caill|ch|gen|hib|jouj|p)oux$/i', '\\1ou'],
         // French titles
-        ['/^mes(dame|demoiselle)s$/', 'ConfigTransformer202205313\\ma\\1'],
-        ['/^Mes(dame|demoiselle)s$/', 'ConfigTransformer202205313\\Ma\\1'],
-        ['/^mes(sieur|seigneur)s$/', 'ConfigTransformer202205313\\mon\\1'],
-        ['/^Mes(sieur|seigneur)s$/', 'ConfigTransformer202205313\\Mon\\1'],
+        ['/^mes(dame|demoiselle)s$/', 'ConfigTransformer202205317\\ma\\1'],
+        ['/^Mes(dame|demoiselle)s$/', 'ConfigTransformer202205317\\Ma\\1'],
+        ['/^mes(sieur|seigneur)s$/', 'ConfigTransformer202205317\\mon\\1'],
+        ['/^Mes(sieur|seigneur)s$/', 'ConfigTransformer202205317\\Mon\\1'],
         //Default rule
         ['/s$/i', ''],
     ];

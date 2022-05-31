@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205313\PhpParser\Node\Scalar;
+namespace ConfigTransformer202205317\PhpParser\Node\Scalar;
 
-use ConfigTransformer202205313\PhpParser\Node\Scalar;
-class DNumber extends \ConfigTransformer202205313\PhpParser\Node\Scalar
+use ConfigTransformer202205317\PhpParser\Node\Scalar;
+class DNumber extends \ConfigTransformer202205317\PhpParser\Node\Scalar
 {
     /** @var float Number value */
     public $value;
@@ -22,6 +22,15 @@ class DNumber extends \ConfigTransformer202205313\PhpParser\Node\Scalar
     public function getSubNodeNames() : array
     {
         return ['value'];
+    }
+    /**
+     * @param mixed[] $attributes
+     */
+    public static function fromString(string $str, array $attributes = []) : \ConfigTransformer202205317\PhpParser\Node\Scalar\DNumber
+    {
+        $attributes['rawValue'] = $str;
+        $float = self::parse($str);
+        return new \ConfigTransformer202205317\PhpParser\Node\Scalar\DNumber($float, $attributes);
     }
     /**
      * @internal
