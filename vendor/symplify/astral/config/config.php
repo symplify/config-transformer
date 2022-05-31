@@ -1,30 +1,30 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205319;
+namespace ConfigTransformer202205316;
 
-use ConfigTransformer202205319\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202205319\PhpParser\NodeFinder;
-use ConfigTransformer202205319\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\ConstExprParser;
-use ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\TypeParser;
+use ConfigTransformer202205316\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202205316\PhpParser\NodeFinder;
+use ConfigTransformer202205316\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\ConstExprParser;
+use ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\TypeParser;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202205319\Symplify\Astral\PhpParser\SmartPhpParser;
-use ConfigTransformer202205319\Symplify\Astral\PhpParser\SmartPhpParserFactory;
-use ConfigTransformer202205319\Symplify\PackageBuilder\Php\TypeChecker;
-use function ConfigTransformer202205319\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202205316\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer202205316\Symplify\Astral\PhpParser\SmartPhpParserFactory;
+use ConfigTransformer202205316\Symplify\PackageBuilder\Php\TypeChecker;
+use function ConfigTransformer202205316\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
-    $services->load('ConfigTransformer202205319\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php', __DIR__ . '/../src/PhpDocParser/PhpDocNodeVisitor/CallablePhpDocNodeVisitor.php']);
-    $services->set(\ConfigTransformer202205319\Symplify\Astral\PhpParser\SmartPhpParser::class)->factory([\ConfigTransformer202205319\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202205319\Symplify\Astral\PhpParser\SmartPhpParserFactory::class), 'create']);
-    $services->set(\ConfigTransformer202205319\PhpParser\ConstExprEvaluator::class);
-    $services->set(\ConfigTransformer202205319\Symplify\PackageBuilder\Php\TypeChecker::class);
-    $services->set(\ConfigTransformer202205319\PhpParser\NodeFinder::class);
+    $services->load('ConfigTransformer202205316\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php', __DIR__ . '/../src/PhpDocParser/PhpDocNodeVisitor/CallablePhpDocNodeVisitor.php']);
+    $services->set(\ConfigTransformer202205316\Symplify\Astral\PhpParser\SmartPhpParser::class)->factory([\ConfigTransformer202205316\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202205316\Symplify\Astral\PhpParser\SmartPhpParserFactory::class), 'create']);
+    $services->set(\ConfigTransformer202205316\PhpParser\ConstExprEvaluator::class);
+    $services->set(\ConfigTransformer202205316\Symplify\PackageBuilder\Php\TypeChecker::class);
+    $services->set(\ConfigTransformer202205316\PhpParser\NodeFinder::class);
     // phpdoc parser
-    $services->set(\ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\PhpDocParser::class);
-    $services->set(\ConfigTransformer202205319\PHPStan\PhpDocParser\Lexer\Lexer::class);
-    $services->set(\ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\TypeParser::class);
-    $services->set(\ConfigTransformer202205319\PHPStan\PhpDocParser\Parser\ConstExprParser::class);
+    $services->set(\ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\PhpDocParser::class);
+    $services->set(\ConfigTransformer202205316\PHPStan\PhpDocParser\Lexer\Lexer::class);
+    $services->set(\ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\TypeParser::class);
+    $services->set(\ConfigTransformer202205316\PHPStan\PhpDocParser\Parser\ConstExprParser::class);
 };
