@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202205319\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class CallableTypeParameterNode implements \ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Node
+use ConfigTransformer202205319\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202205319\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class CallableTypeParameterNode implements \ConfigTransformer202205319\PHPStan\PhpDocParser\Ast\Node
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -18,7 +18,7 @@ class CallableTypeParameterNode implements \ConfigTransformer202205302\PHPStan\P
     public $parameterName;
     /** @var bool */
     public $isOptional;
-    public function __construct(\ConfigTransformer202205302\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, bool $isOptional)
+    public function __construct(\ConfigTransformer202205319\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, bool $isOptional)
     {
         $this->type = $type;
         $this->isReference = $isReference;

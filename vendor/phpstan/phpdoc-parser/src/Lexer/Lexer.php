@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202205302\PHPStan\PhpDocParser\Lexer;
+namespace ConfigTransformer202205319\PHPStan\PhpDocParser\Lexer;
 
 use function array_keys;
 use function assert;
