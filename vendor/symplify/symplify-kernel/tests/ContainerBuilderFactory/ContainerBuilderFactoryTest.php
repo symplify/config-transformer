@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206013\Symplify\SymplifyKernel\Tests\ContainerBuilderFactory;
+namespace ConfigTransformer202206012\Symplify\SymplifyKernel\Tests\ContainerBuilderFactory;
 
-use ConfigTransformer202206013\PHPUnit\Framework\TestCase;
-use ConfigTransformer202206013\Symplify\SmartFileSystem\SmartFileSystem;
-use ConfigTransformer202206013\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
-use ConfigTransformer202206013\Symplify\SymplifyKernel\ContainerBuilderFactory;
-final class ContainerBuilderFactoryTest extends \ConfigTransformer202206013\PHPUnit\Framework\TestCase
+use ConfigTransformer202206012\PHPUnit\Framework\TestCase;
+use ConfigTransformer202206012\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202206012\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
+use ConfigTransformer202206012\Symplify\SymplifyKernel\ContainerBuilderFactory;
+final class ContainerBuilderFactoryTest extends \ConfigTransformer202206012\PHPUnit\Framework\TestCase
 {
     public function test() : void
     {
-        $containerBuilderFactory = new \ConfigTransformer202206013\Symplify\SymplifyKernel\ContainerBuilderFactory(new \ConfigTransformer202206013\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory());
+        $containerBuilderFactory = new \ConfigTransformer202206012\Symplify\SymplifyKernel\ContainerBuilderFactory(new \ConfigTransformer202206012\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory());
         $containerBuilder = $containerBuilderFactory->create([__DIR__ . '/config/some_services.php'], [], []);
-        $hasSmartFileSystemService = $containerBuilder->has(\ConfigTransformer202206013\Symplify\SmartFileSystem\SmartFileSystem::class);
+        $hasSmartFileSystemService = $containerBuilder->has(\ConfigTransformer202206012\Symplify\SmartFileSystem\SmartFileSystem::class);
         $this->assertTrue($hasSmartFileSystemService);
     }
 }
