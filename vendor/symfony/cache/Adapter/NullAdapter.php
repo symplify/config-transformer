@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206010\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206011\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206010\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202206010\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202206010\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202206011\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202206011\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202206011\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \ConfigTransformer202206010\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202206010\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements \ConfigTransformer202206011\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202206011\Symfony\Contracts\Cache\CacheInterface
 {
     private static $createCacheItem;
     public function __construct()
     {
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key) {
-            $item = new \ConfigTransformer202206010\Symfony\Component\Cache\CacheItem();
+            $item = new \ConfigTransformer202206011\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, null, \ConfigTransformer202206010\Symfony\Component\Cache\CacheItem::class));
+        }, null, \ConfigTransformer202206011\Symfony\Component\Cache\CacheItem::class));
     }
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class NullAdapter implements \ConfigTransformer202206010\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202206010\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : \ConfigTransformer202206011\Symfony\Component\Cache\CacheItem
     {
         return (self::$createCacheItem)($key);
     }
@@ -81,14 +81,14 @@ class NullAdapter implements \ConfigTransformer202206010\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202206010\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(\ConfigTransformer202206011\Psr\Cache\CacheItemInterface $item) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202206010\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(\ConfigTransformer202206011\Psr\Cache\CacheItemInterface $item) : bool
     {
         return \true;
     }

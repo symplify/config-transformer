@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206010;
+namespace ConfigTransformer202206011;
 
-use ConfigTransformer202206010\Symfony\Component\Console\Application;
+use ConfigTransformer202206011\Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206010\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand;
-use function ConfigTransformer202206010\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202206011\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand;
+use function ConfigTransformer202206011\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
-    $services->load('ConfigTransformer202206010\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/Kernel', __DIR__ . '/../src/ValueObject']);
+    $services->load('ConfigTransformer202206011\Symplify\EasyTesting\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/DataProvider', __DIR__ . '/../src/Kernel', __DIR__ . '/../src/ValueObject']);
     // console
-    $services->set(\ConfigTransformer202206010\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202206010\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202206010\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand::class)]);
+    $services->set(\ConfigTransformer202206011\Symfony\Component\Console\Application::class)->call('add', [\ConfigTransformer202206011\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202206011\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand::class)]);
 };

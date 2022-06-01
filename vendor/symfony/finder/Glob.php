@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206010\Symfony\Component\Finder;
+namespace ConfigTransformer202206011\Symfony\Component\Finder;
 
 /**
  * Glob matches globbing patterns against text.
