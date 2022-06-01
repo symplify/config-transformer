@@ -83,6 +83,9 @@ final class ContainerConfiguratorReturnClosureFactory
         }
         return $nodes;
     }
+    /**
+     * @param VariableMethodName::* $variableMethodName
+     */
     private function createInitializeAssign(string $variableMethodName) : \ConfigTransformer202206013\PhpParser\Node\Stmt\Expression
     {
         $servicesVariable = new \ConfigTransformer202206013\PhpParser\Node\Expr\Variable($variableMethodName);

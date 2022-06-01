@@ -19,7 +19,6 @@ final class TaggedServiceResolver
     public function resolve(\ConfigTransformer202206013\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \ConfigTransformer202206013\PhpParser\Node\Expr
     {
         $serviceName = $taggedValue->getValue()['class'];
-        $functionName = \ConfigTransformer202206013\Symplify\PhpConfigPrinter\ValueObject\FunctionName::INLINE_SERVICE;
-        return $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, $functionName);
+        return $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, \ConfigTransformer202206013\Symplify\PhpConfigPrinter\ValueObject\FunctionName::INLINE_SERVICE);
     }
 }

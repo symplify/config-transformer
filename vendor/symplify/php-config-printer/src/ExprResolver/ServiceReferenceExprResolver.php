@@ -7,6 +7,7 @@ use ConfigTransformer202206013\PhpParser\Node\Arg;
 use ConfigTransformer202206013\PhpParser\Node\Expr;
 use ConfigTransformer202206013\PhpParser\Node\Expr\FuncCall;
 use ConfigTransformer202206013\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206013\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ServiceReferenceExprResolver
 {
     /**
@@ -17,6 +18,9 @@ final class ServiceReferenceExprResolver
     {
         $this->stringExprResolver = $stringExprResolver;
     }
+    /**
+     * @param FunctionName::* $functionName
+     */
     public function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \ConfigTransformer202206013\PhpParser\Node\Expr
     {
         $value = \ltrim($value, '@');
