@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206014\Symplify\EasyTesting\FixtureSplitter;
+namespace ConfigTransformer202206019\Symplify\EasyTesting\FixtureSplitter;
 
-use ConfigTransformer202206014\Nette\Utils\Strings;
-use ConfigTransformer202206014\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent;
-use ConfigTransformer202206014\Symplify\EasyTesting\ValueObject\SplitLine;
-use ConfigTransformer202206014\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202206014\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202206019\Nette\Utils\Strings;
+use ConfigTransformer202206019\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent;
+use ConfigTransformer202206019\Symplify\EasyTesting\ValueObject\SplitLine;
+use ConfigTransformer202206019\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202206019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * @api
  */
 final class TrioFixtureSplitter
 {
-    public function splitFileInfo(\ConfigTransformer202206014\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \ConfigTransformer202206014\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent
+    public function splitFileInfo(\ConfigTransformer202206019\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \ConfigTransformer202206019\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent
     {
-        $parts = \ConfigTransformer202206014\Nette\Utils\Strings::split($smartFileInfo->getContents(), \ConfigTransformer202206014\Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
+        $parts = \ConfigTransformer202206019\Nette\Utils\Strings::split($smartFileInfo->getContents(), \ConfigTransformer202206019\Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
         $this->ensureHasThreeParts($parts, $smartFileInfo);
-        return new \ConfigTransformer202206014\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent($parts[0], $parts[1], $parts[2]);
+        return new \ConfigTransformer202206019\Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent($parts[0], $parts[1], $parts[2]);
     }
     /**
      * @param mixed[] $parts
      */
-    private function ensureHasThreeParts(array $parts, \ConfigTransformer202206014\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void
+    private function ensureHasThreeParts(array $parts, \ConfigTransformer202206019\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void
     {
         if (\count($parts) === 3) {
             return;
         }
         $message = \sprintf('The fixture "%s" should have 3 parts. %d found', $smartFileInfo->getRelativeFilePathFromCwd(), \count($parts));
-        throw new \ConfigTransformer202206014\Symplify\SymplifyKernel\Exception\ShouldNotHappenException($message);
+        throw new \ConfigTransformer202206019\Symplify\SymplifyKernel\Exception\ShouldNotHappenException($message);
     }
 }

@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202206014\\Symfony\\Contracts\\Cache\\": ""
+            "ConfigTransformer202206019\\Symfony\\Contracts\\Cache\\": ""
         }
     },
     "minimum-stability": "dev",
