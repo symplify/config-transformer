@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206012\PhpParser\Node\Expr;
+namespace ConfigTransformer202206021\PhpParser\Node\Expr;
 
-use ConfigTransformer202206012\PhpParser\Node\Expr;
-class Array_ extends \ConfigTransformer202206012\PhpParser\Node\Expr
+use ConfigTransformer202206021\PhpParser\Node\Expr;
+class Array_ extends \ConfigTransformer202206021\PhpParser\Node\Expr
 {
     // For use in "kind" attribute
     const KIND_LONG = 1;

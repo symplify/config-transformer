@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206012\Symfony\Polyfill\Mbstring;
+namespace ConfigTransformer202206021\Symfony\Polyfill\Mbstring;
 
 /**
  * Partial mbstring implementation in PHP, iconv based, UTF-8 centric.
@@ -464,7 +464,7 @@ final class Mbstring
                 $split_length -= 65535;
             }
             $rx .= '.{' . $split_length . '})/us';
-            return \preg_split($rx, $string, null, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
+            return \preg_split($rx, $string, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
         }
         $result = [];
         $length = \mb_strlen($string, $encoding);

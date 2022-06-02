@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206012\Symplify\PhpConfigPrinter\NodeTraverser;
+namespace ConfigTransformer202206021\Symplify\PhpConfigPrinter\NodeTraverser;
 
-use ConfigTransformer202206012\PhpParser\BuilderFactory;
-use ConfigTransformer202206012\PhpParser\Node;
-use ConfigTransformer202206012\PhpParser\Node\Name;
-use ConfigTransformer202206012\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202206012\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer202206012\PhpParser\NodeTraverser;
-use ConfigTransformer202206012\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer202206012\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
-use ConfigTransformer202206012\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter;
-use ConfigTransformer202206012\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer202206012\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+use ConfigTransformer202206021\PhpParser\BuilderFactory;
+use ConfigTransformer202206021\PhpParser\Node;
+use ConfigTransformer202206021\PhpParser\Node\Name;
+use ConfigTransformer202206021\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202206021\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202206021\PhpParser\NodeTraverser;
+use ConfigTransformer202206021\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202206021\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use ConfigTransformer202206021\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter;
+use ConfigTransformer202206021\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202206021\Symplify\PhpConfigPrinter\ValueObject\ImportType;
 final class ImportFullyQualifiedNamesNodeTraverser
 {
     /**
@@ -32,7 +32,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      * @var \PhpParser\BuilderFactory
      */
     private $builderFactory;
-    public function __construct(\ConfigTransformer202206012\PhpParser\NodeVisitor\ParentConnectingVisitor $parentConnectingVisitor, \ConfigTransformer202206012\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \ConfigTransformer202206012\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter $fullyQualifiedImportSorter, \ConfigTransformer202206012\PhpParser\BuilderFactory $builderFactory)
+    public function __construct(\ConfigTransformer202206021\PhpParser\NodeVisitor\ParentConnectingVisitor $parentConnectingVisitor, \ConfigTransformer202206021\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \ConfigTransformer202206021\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter $fullyQualifiedImportSorter, \ConfigTransformer202206021\PhpParser\BuilderFactory $builderFactory)
     {
         $this->parentConnectingVisitor = $parentConnectingVisitor;
         $this->importFullyQualifiedNamesNodeVisitor = $importFullyQualifiedNamesNodeVisitor;
@@ -61,14 +61,14 @@ final class ImportFullyQualifiedNamesNodeTraverser
         }
         $imports = $this->fullyQualifiedImportSorter->sortImports($imports);
         $useImports = $this->createUses($imports);
-        return \array_merge($useImports, [new \ConfigTransformer202206012\PhpParser\Node\Stmt\Nop()], $nodes);
+        return \array_merge($useImports, [new \ConfigTransformer202206021\PhpParser\Node\Stmt\Nop()], $nodes);
     }
     /**
      * @param Node[] $nodes
      */
     private function collectNameImportsFromNodes(array $nodes) : void
     {
-        $nodeTraverser = new \ConfigTransformer202206012\PhpParser\NodeTraverser();
+        $nodeTraverser = new \ConfigTransformer202206021\PhpParser\NodeTraverser();
         $nodeTraverser->addVisitor($this->parentConnectingVisitor);
         $nodeTraverser->addVisitor($this->importFullyQualifiedNamesNodeVisitor);
         $nodeTraverser->traverse($nodes);
@@ -81,12 +81,12 @@ final class ImportFullyQualifiedNamesNodeTraverser
     {
         $useImports = [];
         foreach ($imports as $import) {
-            $name = new \ConfigTransformer202206012\PhpParser\Node\Name($import->getFullyQualified());
+            $name = new \ConfigTransformer202206021\PhpParser\Node\Name($import->getFullyQualified());
             switch ($import->getType()) {
-                case \ConfigTransformer202206012\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE:
+                case \ConfigTransformer202206021\Symplify\PhpConfigPrinter\ValueObject\ImportType::FUNCTION_TYPE:
                     $useBuilder = $this->builderFactory->useFunction($name);
                     break;
-                case \ConfigTransformer202206012\Symplify\PhpConfigPrinter\ValueObject\ImportType::CONSTANT_TYPE:
+                case \ConfigTransformer202206021\Symplify\PhpConfigPrinter\ValueObject\ImportType::CONSTANT_TYPE:
                     $useBuilder = $this->builderFactory->useConst($name);
                     break;
                 default:

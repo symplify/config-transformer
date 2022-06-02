@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206012\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer202206021\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202206012\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202206012\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
+use ConfigTransformer202206021\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202206021\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
 /**
  * @api
  *
  * Mirrors
  * https://github.com/nikic/PHP-Parser/blob/d520bc9e1d6203c35a1ba20675b79a051c821a9e/lib/PhpParser/NodeVisitor/CloningVisitor.php
  */
-final class CloningPhpDocNodeVisitor extends \ConfigTransformer202206012\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
+final class CloningPhpDocNodeVisitor extends \ConfigTransformer202206021\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisitor
 {
-    public function enterNode(\ConfigTransformer202206012\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202206012\PHPStan\PhpDocParser\Ast\Node
+    public function enterNode(\ConfigTransformer202206021\PHPStan\PhpDocParser\Ast\Node $node) : \ConfigTransformer202206021\PHPStan\PhpDocParser\Ast\Node
     {
         $clonedNode = clone $node;
-        $clonedNode->setAttribute(\ConfigTransformer202206012\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey::ORIG_NODE, $node);
+        $clonedNode->setAttribute(\ConfigTransformer202206021\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey::ORIG_NODE, $node);
         return $clonedNode;
     }
 }

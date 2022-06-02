@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202206012\\Symfony\\Polyfill\\Ctype\\": ""
+            "ConfigTransformer202206021\\Symfony\\Polyfill\\Ctype\\": ""
         },
         "files": [
             "bootstrap.php"
@@ -40,7 +40,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-main": "1.23-dev"
+            "dev-main": "1.26-dev"
         },
         "thanks": {
             "name": "symfony\/polyfill",

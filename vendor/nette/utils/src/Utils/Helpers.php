@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202206012\Nette\Utils;
+namespace ConfigTransformer202206021\Nette\Utils;
 
-use ConfigTransformer202206012\Nette;
+use ConfigTransformer202206021\Nette;
 class Helpers
 {
     /**
@@ -32,7 +32,7 @@ class Helpers
     public static function getLastError() : string
     {
         $message = \error_get_last()['message'] ?? '';
-        $message = \ini_get('html_errors') ? \ConfigTransformer202206012\Nette\Utils\Html::htmlToText($message) : $message;
+        $message = \ini_get('html_errors') ? \ConfigTransformer202206021\Nette\Utils\Html::htmlToText($message) : $message;
         $message = \preg_replace('#^\\w+\\(.*?\\): #', '', $message);
         return $message;
     }
@@ -55,7 +55,7 @@ class Helpers
     public static function clamp($value, $min, $max)
     {
         if ($min > $max) {
-            throw new \ConfigTransformer202206012\Nette\InvalidArgumentException("Minimum ({$min}) is not less than maximum ({$max}).");
+            throw new \ConfigTransformer202206021\Nette\InvalidArgumentException("Minimum ({$min}) is not less than maximum ({$max}).");
         }
         return \min(\max($value, $min), $max);
     }
