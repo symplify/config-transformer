@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206021\Symplify\Astral\Reflection;
+namespace ConfigTransformer202206044\Symplify\Astral\Reflection;
 
-use ConfigTransformer202206021\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206021\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202206021\PHPStan\Analyser\Scope;
-use ConfigTransformer202206021\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer202206021\PHPStan\Type\ObjectType;
-use ConfigTransformer202206021\PHPStan\Type\ThisType;
-use ConfigTransformer202206021\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202206044\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206044\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202206044\PHPStan\Analyser\Scope;
+use ConfigTransformer202206044\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer202206044\PHPStan\Type\ObjectType;
+use ConfigTransformer202206044\PHPStan\Type\ThisType;
+use ConfigTransformer202206044\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @api
  */
@@ -23,7 +23,7 @@ final class MethodCallParser
      * @var \Symplify\Astral\Reflection\ReflectionParser
      */
     private $reflectionParser;
-    public function __construct(\ConfigTransformer202206021\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202206021\Symplify\Astral\Reflection\ReflectionParser $reflectionParser)
+    public function __construct(\ConfigTransformer202206044\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202206044\Symplify\Astral\Reflection\ReflectionParser $reflectionParser)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->reflectionParser = $reflectionParser;
@@ -31,17 +31,17 @@ final class MethodCallParser
     /**
      * @return \PhpParser\Node\Stmt\ClassMethod|null
      */
-    public function parseMethodCall(\ConfigTransformer202206021\PhpParser\Node\Expr\MethodCall $methodCall, \ConfigTransformer202206021\PHPStan\Analyser\Scope $scope)
+    public function parseMethodCall(\ConfigTransformer202206044\PhpParser\Node\Expr\MethodCall $methodCall, \ConfigTransformer202206044\PHPStan\Analyser\Scope $scope)
     {
         $callerType = $scope->getType($methodCall->var);
-        if ($callerType instanceof \ConfigTransformer202206021\PHPStan\Type\ThisType) {
+        if ($callerType instanceof \ConfigTransformer202206044\PHPStan\Type\ThisType) {
             $callerType = $callerType->getStaticObjectType();
         }
-        if (!$callerType instanceof \ConfigTransformer202206021\PHPStan\Type\ObjectType) {
+        if (!$callerType instanceof \ConfigTransformer202206044\PHPStan\Type\ObjectType) {
             return null;
         }
         $classReflection = $callerType->getClassReflection();
-        if (!$classReflection instanceof \ConfigTransformer202206021\PHPStan\Reflection\ClassReflection) {
+        if (!$classReflection instanceof \ConfigTransformer202206044\PHPStan\Reflection\ClassReflection) {
             return null;
         }
         $methodName = $this->simpleNameResolver->getName($methodCall->name);

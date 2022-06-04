@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206021\Symfony\Component\Filesystem\Exception;
+namespace ConfigTransformer202206044\Symfony\Component\Filesystem\Exception;
 
 /**
  * @author Christian Flothmann <christian.flothmann@sensiolabs.de>
  */
-class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202206021\Symfony\Component\Filesystem\Exception\ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements \ConfigTransformer202206044\Symfony\Component\Filesystem\Exception\ExceptionInterface
 {
 }
