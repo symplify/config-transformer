@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206041\Symplify\ConfigTransformer\ValueObject;
+namespace ConfigTransformer202206048\Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202206041\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206048\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class ContainerBuilderAndFileContent
 {
     /**
@@ -14,12 +14,12 @@ final class ContainerBuilderAndFileContent
      * @var string
      */
     private $fileContent;
-    public function __construct(\ConfigTransformer202206041\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $fileContent)
+    public function __construct(\ConfigTransformer202206048\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $fileContent)
     {
         $this->containerBuilder = $containerBuilder;
         $this->fileContent = $fileContent;
     }
-    public function getContainerBuilder() : \ConfigTransformer202206041\Symfony\Component\DependencyInjection\ContainerBuilder
+    public function getContainerBuilder() : \ConfigTransformer202206048\Symfony\Component\DependencyInjection\ContainerBuilder
     {
         return $this->containerBuilder;
     }
