@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202206048\\Symfony\\Component\\Yaml\\": ""
+            "ConfigTransformer202206046\\Symfony\\Component\\Yaml\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

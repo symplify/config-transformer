@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206048\PhpParser\Node\Expr;
+namespace ConfigTransformer202206046\PhpParser\Node\Expr;
 
-use ConfigTransformer202206048\PhpParser\Node\Expr;
-use ConfigTransformer202206048\PhpParser\Node\Name;
-use ConfigTransformer202206048\PhpParser\Node\VarLikeIdentifier;
-class StaticPropertyFetch extends \ConfigTransformer202206048\PhpParser\Node\Expr
+use ConfigTransformer202206046\PhpParser\Node\Expr;
+use ConfigTransformer202206046\PhpParser\Node\Name;
+use ConfigTransformer202206046\PhpParser\Node\VarLikeIdentifier;
+class StaticPropertyFetch extends \ConfigTransformer202206046\PhpParser\Node\Expr
 {
     /** @var Name|Expr Class name */
     public $class;
@@ -23,7 +23,7 @@ class StaticPropertyFetch extends \ConfigTransformer202206048\PhpParser\Node\Exp
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \ConfigTransformer202206048\PhpParser\Node\VarLikeIdentifier($name) : $name;
+        $this->name = \is_string($name) ? new \ConfigTransformer202206046\PhpParser\Node\VarLikeIdentifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206048\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer;
+namespace ConfigTransformer202206046\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer;
 
 final class ServiceOptionAnalyzer
 {
