@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206045\PhpParser\Node\Scalar;
+namespace ConfigTransformer202206044\PhpParser\Node\Scalar;
 
-use ConfigTransformer202206045\PhpParser\Node\Scalar;
-class DNumber extends \ConfigTransformer202206045\PhpParser\Node\Scalar
+use ConfigTransformer202206044\PhpParser\Node\Scalar;
+class DNumber extends \ConfigTransformer202206044\PhpParser\Node\Scalar
 {
     /** @var float Number value */
     public $value;
@@ -26,11 +26,11 @@ class DNumber extends \ConfigTransformer202206045\PhpParser\Node\Scalar
     /**
      * @param mixed[] $attributes
      */
-    public static function fromString(string $str, array $attributes = []) : \ConfigTransformer202206045\PhpParser\Node\Scalar\DNumber
+    public static function fromString(string $str, array $attributes = []) : \ConfigTransformer202206044\PhpParser\Node\Scalar\DNumber
     {
         $attributes['rawValue'] = $str;
         $float = self::parse($str);
-        return new \ConfigTransformer202206045\PhpParser\Node\Scalar\DNumber($float, $attributes);
+        return new \ConfigTransformer202206044\PhpParser\Node\Scalar\DNumber($float, $attributes);
     }
     /**
      * @internal
