@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206044\Symplify\Astral\Reflection;
+namespace ConfigTransformer202206041\Symplify\Astral\Reflection;
 
-use ConfigTransformer202206044\PhpParser\Node;
-use ConfigTransformer202206044\PhpParser\Node\Stmt\Class_;
-use ConfigTransformer202206044\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202206044\PhpParser\Node\Stmt\Property;
-use ConfigTransformer202206044\PhpParser\NodeFinder;
-use ConfigTransformer202206044\PHPStan\Reflection\MethodReflection;
+use ConfigTransformer202206041\PhpParser\Node;
+use ConfigTransformer202206041\PhpParser\Node\Stmt\Class_;
+use ConfigTransformer202206041\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202206041\PhpParser\Node\Stmt\Property;
+use ConfigTransformer202206041\PhpParser\NodeFinder;
+use ConfigTransformer202206041\PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
-use ConfigTransformer202206044\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer202206041\Symplify\Astral\PhpParser\SmartPhpParser;
 use Throwable;
 /**
  * @api
@@ -27,12 +27,12 @@ final class ReflectionParser
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\ConfigTransformer202206044\Symplify\Astral\PhpParser\SmartPhpParser $smartPhpParser, \ConfigTransformer202206044\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\ConfigTransformer202206041\Symplify\Astral\PhpParser\SmartPhpParser $smartPhpParser, \ConfigTransformer202206041\PhpParser\NodeFinder $nodeFinder)
     {
         $this->smartPhpParser = $smartPhpParser;
         $this->nodeFinder = $nodeFinder;
     }
-    public function parsePHPStanMethodReflection(\ConfigTransformer202206044\PHPStan\Reflection\MethodReflection $methodReflection) : ?\ConfigTransformer202206044\PhpParser\Node\Stmt\ClassMethod
+    public function parsePHPStanMethodReflection(\ConfigTransformer202206041\PHPStan\Reflection\MethodReflection $methodReflection) : ?\ConfigTransformer202206041\PhpParser\Node\Stmt\ClassMethod
     {
         $classReflection = $methodReflection->getDeclaringClass();
         $fileName = $classReflection->getFileName();
@@ -40,28 +40,28 @@ final class ReflectionParser
             return null;
         }
         $class = $this->parseFilenameToClass($fileName);
-        if (!$class instanceof \ConfigTransformer202206044\PhpParser\Node) {
+        if (!$class instanceof \ConfigTransformer202206041\PhpParser\Node) {
             return null;
         }
         return $class->getMethod($methodReflection->getName());
     }
-    public function parseMethodReflection(\ReflectionMethod $reflectionMethod) : ?\ConfigTransformer202206044\PhpParser\Node\Stmt\ClassMethod
+    public function parseMethodReflection(\ReflectionMethod $reflectionMethod) : ?\ConfigTransformer202206041\PhpParser\Node\Stmt\ClassMethod
     {
         $class = $this->parseNativeClassReflection($reflectionMethod->getDeclaringClass());
-        if (!$class instanceof \ConfigTransformer202206044\PhpParser\Node\Stmt\Class_) {
+        if (!$class instanceof \ConfigTransformer202206041\PhpParser\Node\Stmt\Class_) {
             return null;
         }
         return $class->getMethod($reflectionMethod->getName());
     }
-    public function parsePropertyReflection(\ReflectionProperty $reflectionProperty) : ?\ConfigTransformer202206044\PhpParser\Node\Stmt\Property
+    public function parsePropertyReflection(\ReflectionProperty $reflectionProperty) : ?\ConfigTransformer202206041\PhpParser\Node\Stmt\Property
     {
         $class = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
-        if (!$class instanceof \ConfigTransformer202206044\PhpParser\Node\Stmt\Class_) {
+        if (!$class instanceof \ConfigTransformer202206041\PhpParser\Node\Stmt\Class_) {
             return null;
         }
         return $class->getProperty($reflectionProperty->getName());
     }
-    private function parseNativeClassReflection(\ReflectionClass $reflectionClass) : ?\ConfigTransformer202206044\PhpParser\Node\Stmt\Class_
+    private function parseNativeClassReflection(\ReflectionClass $reflectionClass) : ?\ConfigTransformer202206041\PhpParser\Node\Stmt\Class_
     {
         $fileName = $reflectionClass->getFileName();
         if ($fileName === \false) {
@@ -80,8 +80,8 @@ final class ReflectionParser
             // not reachable
             return null;
         }
-        $class = $this->nodeFinder->findFirstInstanceOf($stmts, \ConfigTransformer202206044\PhpParser\Node\Stmt\Class_::class);
-        if (!$class instanceof \ConfigTransformer202206044\PhpParser\Node\Stmt\Class_) {
+        $class = $this->nodeFinder->findFirstInstanceOf($stmts, \ConfigTransformer202206041\PhpParser\Node\Stmt\Class_::class);
+        if (!$class instanceof \ConfigTransformer202206041\PhpParser\Node\Stmt\Class_) {
             return null;
         }
         return $class;

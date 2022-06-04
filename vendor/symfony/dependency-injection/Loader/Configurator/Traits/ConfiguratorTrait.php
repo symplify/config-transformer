@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206044\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202206041\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202206044\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+use ConfigTransformer202206041\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 trait ConfiguratorTrait
 {
     /**
