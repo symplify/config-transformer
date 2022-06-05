@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206055\Symplify\PackageBuilder\DependencyInjection\FileLoader;
+namespace ConfigTransformer202206052\Symplify\PackageBuilder\DependencyInjection\FileLoader;
 
-use ConfigTransformer202206055\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202206055\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206055\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202206055\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202206052\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202206052\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206052\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202206052\Symplify\PackageBuilder\Yaml\ParametersMerger;
 /**
  * @api
  *
@@ -16,15 +16,15 @@ use ConfigTransformer202206055\Symplify\PackageBuilder\Yaml\ParametersMerger;
  *
  * @property ContainerBuilder $container
  */
-final class ParameterMergingPhpFileLoader extends \ConfigTransformer202206055\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+final class ParameterMergingPhpFileLoader extends \ConfigTransformer202206052\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
 {
     /**
      * @var \Symplify\PackageBuilder\Yaml\ParametersMerger
      */
     private $parametersMerger;
-    public function __construct(\ConfigTransformer202206055\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202206055\Symfony\Component\Config\FileLocatorInterface $fileLocator)
+    public function __construct(\ConfigTransformer202206052\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \ConfigTransformer202206052\Symfony\Component\Config\FileLocatorInterface $fileLocator)
     {
-        $this->parametersMerger = new \ConfigTransformer202206055\Symplify\PackageBuilder\Yaml\ParametersMerger();
+        $this->parametersMerger = new \ConfigTransformer202206052\Symplify\PackageBuilder\Yaml\ParametersMerger();
         parent::__construct($containerBuilder, $fileLocator);
     }
     /**

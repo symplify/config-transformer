@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202206055\Nette\Utils;
+namespace ConfigTransformer202206052\Nette\Utils;
 
-use ConfigTransformer202206055\Nette;
+use ConfigTransformer202206052\Nette;
 /**
  * Secure random string generator.
  */
@@ -25,9 +25,9 @@ final class Random
         }, $charlist), 3);
         $chLen = \strlen($charlist);
         if ($length < 1) {
-            throw new \ConfigTransformer202206055\Nette\InvalidArgumentException('Length must be greater than zero.');
+            throw new \ConfigTransformer202206052\Nette\InvalidArgumentException('Length must be greater than zero.');
         } elseif ($chLen < 2) {
-            throw new \ConfigTransformer202206055\Nette\InvalidArgumentException('Character list must contain at least two chars.');
+            throw new \ConfigTransformer202206052\Nette\InvalidArgumentException('Character list must contain at least two chars.');
         }
         $res = '';
         for ($i = 0; $i < $length; $i++) {

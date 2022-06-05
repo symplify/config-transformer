@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202206055\Nette\Utils;
+namespace ConfigTransformer202206052\Nette\Utils;
 
 /**
  * The exception that is thrown when an image error occurs.
@@ -16,7 +16,7 @@ class ImageException extends \Exception
 /**
  * The exception that indicates invalid image file.
  */
-class UnknownImageFileException extends \ConfigTransformer202206055\Nette\Utils\ImageException
+class UnknownImageFileException extends \ConfigTransformer202206052\Nette\Utils\ImageException
 {
 }
 /**
