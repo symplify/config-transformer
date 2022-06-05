@@ -18,7 +18,7 @@ use ConfigTransformer202206056\Symplify\PackageBuilder\Reflection\ClassLikeExist
 use function ConfigTransformer202206056\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->defaults()->public()->autowire()->autoconfigure();
+    $services->defaults()->public()->autowire();
     $services->load('ConfigTransformer202206056\Symplify\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/ValueObject']);
     $services->set(\ConfigTransformer202206056\PhpParser\NodeFinder::class);
     $services->set(\ConfigTransformer202206056\Symfony\Component\Yaml\Parser::class);

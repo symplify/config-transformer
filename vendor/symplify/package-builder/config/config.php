@@ -11,7 +11,7 @@ use ConfigTransformer202206056\Symplify\PackageBuilder\Diff\Output\CompleteUnifi
 use ConfigTransformer202206056\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->defaults()->public()->autowire()->autoconfigure();
+    $services->defaults()->public()->autowire();
     $services->set(\ConfigTransformer202206056\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter::class);
     $services->set(\ConfigTransformer202206056\Symplify\PackageBuilder\Console\Output\ConsoleDiffer::class);
     $services->set(\ConfigTransformer202206056\Symplify\PackageBuilder\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory::class);

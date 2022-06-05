@@ -16,7 +16,7 @@ use ConfigTransformer202206056\Symplify\PackageBuilder\Php\TypeChecker;
 use function ConfigTransformer202206056\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->defaults()->autowire()->autoconfigure()->public();
+    $services->defaults()->autowire()->public();
     $services->load('ConfigTransformer202206056\Symplify\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php', __DIR__ . '/../src/PhpDocParser/PhpDocNodeVisitor/CallablePhpDocNodeVisitor.php']);
     $services->set(\ConfigTransformer202206056\Symplify\Astral\PhpParser\SmartPhpParser::class)->factory([\ConfigTransformer202206056\Symfony\Component\DependencyInjection\Loader\Configurator\service(\ConfigTransformer202206056\Symplify\Astral\PhpParser\SmartPhpParserFactory::class), 'create']);
     $services->set(\ConfigTransformer202206056\PhpParser\ConstExprEvaluator::class);
