@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206052\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202206056\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202206052\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202206056\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -85,7 +85,7 @@ trait FilesystemTrait
             }
         }
         if ($failed && !\is_writable($this->directory)) {
-            throw new \ConfigTransformer202206052\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
+            throw new \ConfigTransformer202206056\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $failed;
     }

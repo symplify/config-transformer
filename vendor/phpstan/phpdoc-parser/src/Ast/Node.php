@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206052\PHPStan\PhpDocParser\Ast;
+namespace ConfigTransformer202206056\PHPStan\PhpDocParser\Ast;
 
 interface Node
 {

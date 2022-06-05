@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-use ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class ConstTypeNode implements \ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+use ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class ConstTypeNode implements \ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     use NodeAttributes;
     /** @var ConstExprNode */
     public $constExpr;
-    public function __construct(\ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $constExpr)
+    public function __construct(\ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $constExpr)
     {
         $this->constExpr = $constExpr;
     }

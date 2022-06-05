@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
-class ParamTagValueNode implements \ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class ParamTagValueNode implements \ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -19,7 +19,7 @@ class ParamTagValueNode implements \ConfigTransformer202206052\PHPStan\PhpDocPar
     public $parameterName;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\ConfigTransformer202206052\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isVariadic, string $parameterName, string $description, bool $isReference = \false)
+    public function __construct(\ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isVariadic, string $parameterName, string $description, bool $isReference = \false)
     {
         $this->type = $type;
         $this->isReference = $isReference;

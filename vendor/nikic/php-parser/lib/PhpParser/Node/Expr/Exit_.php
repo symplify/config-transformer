@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206052\PhpParser\Node\Expr;
+namespace ConfigTransformer202206056\PhpParser\Node\Expr;
 
-use ConfigTransformer202206052\PhpParser\Node\Expr;
-class Exit_ extends \ConfigTransformer202206052\PhpParser\Node\Expr
+use ConfigTransformer202206056\PhpParser\Node\Expr;
+class Exit_ extends \ConfigTransformer202206056\PhpParser\Node\Expr
 {
     /* For use in "kind" attribute */
     const KIND_EXIT = 1;
@@ -17,7 +17,7 @@ class Exit_ extends \ConfigTransformer202206052\PhpParser\Node\Expr
      * @param null|Expr $expr       Expression
      * @param array                    $attributes Additional attributes
      */
-    public function __construct(\ConfigTransformer202206052\PhpParser\Node\Expr $expr = null, array $attributes = [])
+    public function __construct(\ConfigTransformer202206056\PhpParser\Node\Expr $expr = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;
