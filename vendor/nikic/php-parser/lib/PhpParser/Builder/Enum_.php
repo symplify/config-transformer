@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206056\PhpParser\Builder;
+namespace ConfigTransformer202206065\PhpParser\Builder;
 
-use ConfigTransformer202206056\PhpParser;
-use ConfigTransformer202206056\PhpParser\BuilderHelpers;
-use ConfigTransformer202206056\PhpParser\Node;
-use ConfigTransformer202206056\PhpParser\Node\Identifier;
-use ConfigTransformer202206056\PhpParser\Node\Name;
-use ConfigTransformer202206056\PhpParser\Node\Stmt;
-class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
+use ConfigTransformer202206065\PhpParser;
+use ConfigTransformer202206065\PhpParser\BuilderHelpers;
+use ConfigTransformer202206065\PhpParser\Node;
+use ConfigTransformer202206065\PhpParser\Node\Identifier;
+use ConfigTransformer202206065\PhpParser\Node\Name;
+use ConfigTransformer202206065\PhpParser\Node\Stmt;
+class Enum_ extends \ConfigTransformer202206065\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $scalarType = null;
@@ -38,7 +38,7 @@ class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
      */
     public function setScalarType($scalarType)
     {
-        $this->scalarType = \ConfigTransformer202206056\PhpParser\BuilderHelpers::normalizeType($scalarType);
+        $this->scalarType = \ConfigTransformer202206065\PhpParser\BuilderHelpers::normalizeType($scalarType);
         return $this;
     }
     /**
@@ -51,7 +51,7 @@ class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
     public function implement(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->implements[] = \ConfigTransformer202206056\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->implements[] = \ConfigTransformer202206065\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -64,8 +64,8 @@ class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \ConfigTransformer202206056\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        $targets = [\ConfigTransformer202206056\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \ConfigTransformer202206056\PhpParser\Node\Stmt\EnumCase::class => &$this->enumCases, \ConfigTransformer202206056\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \ConfigTransformer202206056\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
+        $stmt = \ConfigTransformer202206065\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        $targets = [\ConfigTransformer202206065\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \ConfigTransformer202206065\PhpParser\Node\Stmt\EnumCase::class => &$this->enumCases, \ConfigTransformer202206065\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \ConfigTransformer202206065\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
         $class = \get_class($stmt);
         if (!isset($targets[$class])) {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -82,7 +82,7 @@ class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
      */
     public function addAttribute($attribute)
     {
-        $this->attributeGroups[] = \ConfigTransformer202206056\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
+        $this->attributeGroups[] = \ConfigTransformer202206065\PhpParser\BuilderHelpers::normalizeAttribute($attribute);
         return $this;
     }
     /**
@@ -90,8 +90,8 @@ class Enum_ extends \ConfigTransformer202206056\PhpParser\Builder\Declaration
      *
      * @return Stmt\Enum_ The built enum node
      */
-    public function getNode() : \ConfigTransformer202206056\PhpParser\Node
+    public function getNode() : \ConfigTransformer202206065\PhpParser\Node
     {
-        return new \ConfigTransformer202206056\PhpParser\Node\Stmt\Enum_($this->name, ['scalarType' => $this->scalarType, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->enumCases, $this->constants, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
+        return new \ConfigTransformer202206065\PhpParser\Node\Stmt\Enum_($this->name, ['scalarType' => $this->scalarType, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->enumCases, $this->constants, $this->methods), 'attrGroups' => $this->attributeGroups], $this->attributes);
     }
 }

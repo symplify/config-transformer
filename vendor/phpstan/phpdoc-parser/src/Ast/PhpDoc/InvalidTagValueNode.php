@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202206065\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202206056\PHPStan\PhpDocParser\Parser\ParserException;
+use ConfigTransformer202206065\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206065\PHPStan\PhpDocParser\Parser\ParserException;
 use function sprintf;
 use function trigger_error;
 use const E_USER_WARNING;
 /**
  * @property ParserException $exception
  */
-class InvalidTagValueNode implements \ConfigTransformer202206056\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class InvalidTagValueNode implements \ConfigTransformer202206065\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string (may be empty) */
     public $value;
     /** @var mixed[] */
     private $exceptionArgs;
-    public function __construct(string $value, \ConfigTransformer202206056\PHPStan\PhpDocParser\Parser\ParserException $exception)
+    public function __construct(string $value, \ConfigTransformer202206065\PHPStan\PhpDocParser\Parser\ParserException $exception)
     {
         $this->value = $value;
         $this->exceptionArgs = [$exception->getCurrentTokenValue(), $exception->getCurrentTokenType(), $exception->getCurrentOffset(), $exception->getExpectedTokenType(), $exception->getExpectedTokenValue()];
@@ -29,7 +29,7 @@ class InvalidTagValueNode implements \ConfigTransformer202206056\PHPStan\PhpDocP
             \trigger_error(\sprintf('Undefined property: %s::$%s', self::class, $name), \E_USER_WARNING);
             return null;
         }
-        return new \ConfigTransformer202206056\PHPStan\PhpDocParser\Parser\ParserException(...$this->exceptionArgs);
+        return new \ConfigTransformer202206065\PHPStan\PhpDocParser\Parser\ParserException(...$this->exceptionArgs);
     }
     public function __toString() : string
     {
