@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206065\Symfony\Component\Console\Output;
+namespace ConfigTransformer202206069\Symfony\Component\Console\Output;
 
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class BufferedOutput extends \ConfigTransformer202206065\Symfony\Component\Console\Output\Output
+class BufferedOutput extends \ConfigTransformer202206069\Symfony\Component\Console\Output\Output
 {
     /**
      * @var string
