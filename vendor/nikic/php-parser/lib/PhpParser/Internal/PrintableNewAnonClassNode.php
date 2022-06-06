@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206063\PhpParser\Internal;
+namespace ConfigTransformer202206069\PhpParser\Internal;
 
-use ConfigTransformer202206063\PhpParser\Node;
-use ConfigTransformer202206063\PhpParser\Node\Expr;
+use ConfigTransformer202206069\PhpParser\Node;
+use ConfigTransformer202206069\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *
@@ -15,7 +15,7 @@ use ConfigTransformer202206063\PhpParser\Node\Expr;
  *
  * @internal
  */
-class PrintableNewAnonClassNode extends \ConfigTransformer202206063\PhpParser\Node\Expr
+class PrintableNewAnonClassNode extends \ConfigTransformer202206069\PhpParser\Node\Expr
 {
     /** @var Node\AttributeGroup[] PHP attribute groups */
     public $attrGroups;
@@ -27,7 +27,7 @@ class PrintableNewAnonClassNode extends \ConfigTransformer202206063\PhpParser\No
     public $implements;
     /** @var Node\Stmt[] Statements */
     public $stmts;
-    public function __construct(array $attrGroups, array $args, \ConfigTransformer202206063\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
+    public function __construct(array $attrGroups, array $args, \ConfigTransformer202206069\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
     {
         parent::__construct($attributes);
         $this->attrGroups = $attrGroups;
@@ -36,10 +36,10 @@ class PrintableNewAnonClassNode extends \ConfigTransformer202206063\PhpParser\No
         $this->implements = $implements;
         $this->stmts = $stmts;
     }
-    public static function fromNewNode(\ConfigTransformer202206063\PhpParser\Node\Expr\New_ $newNode)
+    public static function fromNewNode(\ConfigTransformer202206069\PhpParser\Node\Expr\New_ $newNode)
     {
         $class = $newNode->class;
-        \assert($class instanceof \ConfigTransformer202206063\PhpParser\Node\Stmt\Class_);
+        \assert($class instanceof \ConfigTransformer202206069\PhpParser\Node\Stmt\Class_);
         // We don't assert that $class->name is null here, to allow consumers to assign unique names
         // to anonymous classes for their own purposes. We simplify ignore the name here.
         return new self($class->attrGroups, $newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());
