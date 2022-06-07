@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\NodeVisitor;
+namespace ConfigTransformer202206072\PhpParser\NodeVisitor;
 
-use ConfigTransformer2022060710\PhpParser\ErrorHandler;
-use ConfigTransformer2022060710\PhpParser\NameContext;
-use ConfigTransformer2022060710\PhpParser\Node;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Name;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt;
-use ConfigTransformer2022060710\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202206072\PhpParser\ErrorHandler;
+use ConfigTransformer202206072\PhpParser\NameContext;
+use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Name;
+use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206072\PhpParser\NodeVisitorAbstract;
 class NameResolver extends NodeVisitorAbstract
 {
     /** @var NameContext Naming context */

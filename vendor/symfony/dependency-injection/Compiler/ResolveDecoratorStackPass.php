@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

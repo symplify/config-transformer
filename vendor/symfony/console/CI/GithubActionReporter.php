@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\Console\CI;
+namespace ConfigTransformer202206072\Symfony\Component\Console\CI;
 
-use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202206072\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Utility class for Github actions.
  *

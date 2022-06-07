@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\RoutingCaseConverter;
+namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use ConfigTransformer2022060710\PhpParser\Node\Arg;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2022060710\Symplify\PackageBuilder\Strings\StringFormatConverter;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206072\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer202206072\Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
 {
     /**

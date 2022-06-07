@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer2022060710;
+namespace ConfigTransformer202206072;
 
 if (\PHP_VERSION_ID < 80100) {
     #[\Attribute(\Attribute::TARGET_METHOD)]

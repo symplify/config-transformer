@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Sorter;
+namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\Sorter;
 
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\ImportType;
 final class FullyQualifiedImportSorter
 {
     /**

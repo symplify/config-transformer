@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202206072\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer2022060710\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer202206072\PhpParser\Node\Expr\AssignOp;
 class Coalesce extends AssignOp
 {
     public function getType() : string

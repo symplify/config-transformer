@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\AutowireArrayParameter\TypeResolver;
+namespace ConfigTransformer202206072\Symplify\AutowireArrayParameter\TypeResolver;
 
-use ConfigTransformer2022060710\Nette\Utils\Reflection;
+use ConfigTransformer202206072\Nette\Utils\Reflection;
 use ReflectionMethod;
-use ConfigTransformer2022060710\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
+use ConfigTransformer202206072\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 final class ParameterTypeResolver
 {
     /**

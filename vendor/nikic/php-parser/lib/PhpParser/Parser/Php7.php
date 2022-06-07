@@ -1,20 +1,20 @@
 <?php
 
-namespace ConfigTransformer2022060710\PhpParser\Parser;
+namespace ConfigTransformer202206072\PhpParser\Parser;
 
-use ConfigTransformer2022060710\PhpParser\Error;
-use ConfigTransformer2022060710\PhpParser\Node;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Name;
-use ConfigTransformer2022060710\PhpParser\Node\Scalar;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt;
+use ConfigTransformer202206072\PhpParser\Error;
+use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Name;
+use ConfigTransformer202206072\PhpParser\Node\Scalar;
+use ConfigTransformer202206072\PhpParser\Node\Stmt;
 /* This is an automatically GENERATED file, which should not be manually edited.
  * Instead edit one of the following:
  *  * the grammar files grammar/php5.y or grammar/php7.y
  *  * the skeleton file grammar/parser.template
  *  * the preprocessing script grammar/rebuildParsers.php
  */
-class Php7 extends \ConfigTransformer2022060710\PhpParser\ParserAbstract
+class Php7 extends \ConfigTransformer202206072\PhpParser\ParserAbstract
 {
     protected $tokenToSymbolMapSize = 396;
     protected $actionTableSize = 1189;

@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\Config\Builder;
+namespace ConfigTransformer202206072\Symfony\Component\Config\Builder;
 
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\ArrayNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\BooleanNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\EnumNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\FloatNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\IntegerNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\ScalarNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\VariableNode;
-use ConfigTransformer2022060710\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\ArrayNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\BooleanNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\EnumNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\FloatNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\IntegerNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\ScalarNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Definition\VariableNode;
+use ConfigTransformer202206072\Symfony\Component\Config\Loader\ParamConfigurator;
 /**
  * Generate ConfigBuilders to help create valid config.
  *
@@ -48,7 +48,7 @@ class ConfigBuilderGenerator implements ConfigBuilderGeneratorInterface
     {
         $this->classes = [];
         $rootNode = $configuration->getConfigTreeBuilder()->buildTree();
-        $rootClass = new ClassBuilder('ConfigTransformer2022060710\\Symfony\\Config', $rootNode->getName());
+        $rootClass = new ClassBuilder('ConfigTransformer202206072\\Symfony\\Config', $rootNode->getName());
         $path = $this->getFullPath($rootClass);
         if (!\is_file($path)) {
             // Generate the class if the file not exists

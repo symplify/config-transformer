@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206072\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer2022060710\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer2022060710\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer2022060710\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer2022060710\Symfony\Component\Cache\Traits\FilesystemTrait;
+use ConfigTransformer202206072\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202206072\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer202206072\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202206072\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *

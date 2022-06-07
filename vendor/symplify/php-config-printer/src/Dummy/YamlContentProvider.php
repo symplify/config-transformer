@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Dummy;
+namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer2022060710\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202206072\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class YamlContentProvider
 {
     /**

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * Definition represents a service definition.
  *

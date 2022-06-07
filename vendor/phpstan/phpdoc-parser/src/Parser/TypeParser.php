@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer202206072\PHPStan\PhpDocParser\Parser;
 
 use LogicException;
-use ConfigTransformer2022060710\PHPStan\PhpDocParser\Ast;
-use ConfigTransformer2022060710\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202206072\PHPStan\PhpDocParser\Ast;
+use ConfigTransformer202206072\PHPStan\PhpDocParser\Lexer\Lexer;
 use function strpos;
 use function trim;
 class TypeParser

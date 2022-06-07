@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer2022060710\Psr\Cache;
+namespace ConfigTransformer202206072\Psr\Cache;
 
 /**
  * Exception interface for invalid cache arguments.

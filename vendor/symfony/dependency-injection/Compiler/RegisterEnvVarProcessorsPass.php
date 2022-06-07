@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\EnvVarProcessor;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\EnvVarProcessor;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Reference;
 /**
  * Creates the container.env_var_processors_locator service.
  *

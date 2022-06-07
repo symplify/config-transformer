@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202206072\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class builds normalization conditions.
