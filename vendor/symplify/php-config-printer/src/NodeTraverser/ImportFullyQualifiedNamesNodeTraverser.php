@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeTraverser;
+namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeTraverser;
 
-use ConfigTransformer202206072\PhpParser\BuilderFactory;
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\Node\Name;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer202206072\PhpParser\NodeTraverser;
-use ConfigTransformer202206072\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+use ConfigTransformer202206079\PhpParser\BuilderFactory;
+use ConfigTransformer202206079\PhpParser\Node;
+use ConfigTransformer202206079\PhpParser\Node\Name;
+use ConfigTransformer202206079\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202206079\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202206079\PhpParser\NodeTraverser;
+use ConfigTransformer202206079\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\ImportType;
 final class ImportFullyQualifiedNamesNodeTraverser
 {
     /**

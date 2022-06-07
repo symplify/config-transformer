@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\EasyTesting\Finder;
+namespace ConfigTransformer202206079\Symplify\EasyTesting\Finder;
 
-use ConfigTransformer202206072\Symfony\Component\Finder\Finder;
-use ConfigTransformer202206072\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer202206072\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202206079\Symfony\Component\Finder\Finder;
+use ConfigTransformer202206079\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileInfo;
 final class FixtureFinder
 {
     /**

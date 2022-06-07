@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202206072;
+namespace ConfigTransformer202206079;
 
 class Normalizer extends Symfony\Polyfill\Intl\Normalizer\Normalizer
 {

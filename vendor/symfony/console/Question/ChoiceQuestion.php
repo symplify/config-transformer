@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\Question;
+namespace ConfigTransformer202206079\Symfony\Component\Console\Question;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Represents a choice question.
  *

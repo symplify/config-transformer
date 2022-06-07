@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206079\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206072\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202206072\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202206072\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202206072\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
-use ConfigTransformer202206072\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer202206079\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202206079\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202206079\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202206079\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
+use ConfigTransformer202206079\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Piotr Stankowski <git@trakos.pl>
  * @author Nicolas Grekas <p@tchwork.com>

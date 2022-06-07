@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206072\Nette\Utils\Strings;
-use ConfigTransformer202206072\PhpParser\BuilderHelpers;
-use ConfigTransformer202206072\PhpParser\Node\Arg;
-use ConfigTransformer202206072\PhpParser\Node\Expr;
-use ConfigTransformer202206072\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202206072\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206072\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206072\Symplify\Astral\ValueObject\AttributeKey;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206079\Nette\Utils\Strings;
+use ConfigTransformer202206079\PhpParser\BuilderHelpers;
+use ConfigTransformer202206079\PhpParser\Node\Arg;
+use ConfigTransformer202206079\PhpParser\Node\Expr;
+use ConfigTransformer202206079\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206079\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206079\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206079\Symplify\Astral\ValueObject\AttributeKey;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class StringExprResolver
 {
     /**

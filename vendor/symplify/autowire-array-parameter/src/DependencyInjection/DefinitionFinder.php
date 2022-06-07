@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\AutowireArrayParameter\DependencyInjection;
+namespace ConfigTransformer202206079\Symplify\AutowireArrayParameter\DependencyInjection;
 
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206072\Symplify\AutowireArrayParameter\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206079\Symplify\AutowireArrayParameter\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 use Throwable;
 /**
  * @api

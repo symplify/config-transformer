@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Contracts\Cache;
+namespace ConfigTransformer202206079\Symfony\Contracts\Cache;
 
-use ConfigTransformer202206072\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202206072\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202206072\Psr\Log\LoggerInterface;
+use ConfigTransformer202206079\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202206079\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202206079\Psr\Log\LoggerInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(InvalidArgumentException::class);
 /**

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072;
+namespace ConfigTransformer202206079;
 
-use ConfigTransformer202206072\Symplify\EasyTesting\Kernel\EasyTestingKernel;
-use ConfigTransformer202206072\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use ConfigTransformer202206079\Symplify\EasyTesting\Kernel\EasyTestingKernel;
+use ConfigTransformer202206079\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
     // dependency
     __DIR__ . '/../../../autoload.php',

@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Builder;
+namespace ConfigTransformer202206079\PhpParser\Builder;
 
-use ConfigTransformer202206072\PhpParser\Builder;
-use ConfigTransformer202206072\PhpParser\BuilderHelpers;
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206079\PhpParser\Builder;
+use ConfigTransformer202206079\PhpParser\BuilderHelpers;
+use ConfigTransformer202206079\PhpParser\Node;
+use ConfigTransformer202206079\PhpParser\Node\Stmt;
 class TraitUseAdaptation implements Builder
 {
     const TYPE_UNDEFINED = 0;

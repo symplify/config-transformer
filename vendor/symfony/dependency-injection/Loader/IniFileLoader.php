@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer202206072\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206079\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * IniFileLoader loads parameters from INI files.
  *

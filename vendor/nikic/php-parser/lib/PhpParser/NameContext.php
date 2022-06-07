@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser;
+namespace ConfigTransformer202206079\PhpParser;
 
-use ConfigTransformer202206072\PhpParser\Node\Name;
-use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206079\PhpParser\Node\Name;
+use ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206079\PhpParser\Node\Stmt;
 class NameContext
 {
     /** @var null|Name Current namespace */

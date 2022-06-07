@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser;
+namespace ConfigTransformer202206079\PhpParser;
 
-use ConfigTransformer202206072\PhpParser\NodeVisitor\FindingVisitor;
-use ConfigTransformer202206072\PhpParser\NodeVisitor\FirstFindingVisitor;
+use ConfigTransformer202206079\PhpParser\NodeVisitor\FindingVisitor;
+use ConfigTransformer202206079\PhpParser\NodeVisitor\FirstFindingVisitor;
 class NodeFinder
 {
     /**

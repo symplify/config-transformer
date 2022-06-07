@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser;
+namespace ConfigTransformer202206079\PhpParser;
 
-use ConfigTransformer202206072\PhpParser\Node\Arg;
-use ConfigTransformer202206072\PhpParser\Node\Expr;
-use ConfigTransformer202206072\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer202206072\PhpParser\Node\Identifier;
-use ConfigTransformer202206072\PhpParser\Node\Name;
-use ConfigTransformer202206072\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202206079\PhpParser\Node\Arg;
+use ConfigTransformer202206079\PhpParser\Node\Expr;
+use ConfigTransformer202206079\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202206079\PhpParser\Node\Identifier;
+use ConfigTransformer202206079\PhpParser\Node\Name;
+use ConfigTransformer202206079\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206079\PhpParser\Node\Stmt\Use_;
 class BuilderFactory
 {
     /**

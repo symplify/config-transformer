@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Contracts\Cache;
+namespace ConfigTransformer202206079\Symfony\Contracts\Cache;
 
-use ConfigTransformer202206072\Psr\Cache\CacheException;
-use ConfigTransformer202206072\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202206072\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202206079\Psr\Cache\CacheException;
+use ConfigTransformer202206079\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202206079\Psr\Cache\InvalidArgumentException;
 /**
  * Augments PSR-6's CacheItemInterface with support for tags and metadata.
  *

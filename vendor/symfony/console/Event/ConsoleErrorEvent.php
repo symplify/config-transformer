@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\Event;
+namespace ConfigTransformer202206079\Symfony\Component\Console\Event;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202206072\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206072\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202206079\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202206079\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202206079\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to handle throwables thrown while running a command.
  *

@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206072\MyCLabs\Enum\Enum;
-use ConfigTransformer202206072\PhpParser\BuilderHelpers;
-use ConfigTransformer202206072\PhpParser\Node\Arg;
-use ConfigTransformer202206072\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206072\PhpParser\Node\Expr\New_;
-use ConfigTransformer202206072\PhpParser\Node\Expr\StaticCall;
-use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206079\MyCLabs\Enum\Enum;
+use ConfigTransformer202206079\PhpParser\BuilderHelpers;
+use ConfigTransformer202206079\PhpParser\Node\Arg;
+use ConfigTransformer202206079\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206079\PhpParser\Node\Expr\New_;
+use ConfigTransformer202206079\PhpParser\Node\Expr\StaticCall;
+use ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified;
 use ReflectionClass;
 final class NewValueObjectFactory
 {

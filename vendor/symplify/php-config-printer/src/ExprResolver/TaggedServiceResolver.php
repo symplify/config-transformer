@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206072\PhpParser\Node\Expr;
-use ConfigTransformer202206072\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202206072\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206079\PhpParser\Node\Expr;
+use ConfigTransformer202206079\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedServiceResolver
 {
     /**

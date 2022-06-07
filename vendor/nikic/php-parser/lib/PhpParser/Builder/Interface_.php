@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Builder;
+namespace ConfigTransformer202206079\PhpParser\Builder;
 
-use ConfigTransformer202206072\PhpParser;
-use ConfigTransformer202206072\PhpParser\BuilderHelpers;
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\Node\Name;
-use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206079\PhpParser;
+use ConfigTransformer202206079\PhpParser\BuilderHelpers;
+use ConfigTransformer202206079\PhpParser\Node;
+use ConfigTransformer202206079\PhpParser\Node\Name;
+use ConfigTransformer202206079\PhpParser\Node\Stmt;
 class Interface_ extends Declaration
 {
     protected $name;

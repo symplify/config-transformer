@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Nette\Utils;
+namespace ConfigTransformer202206079\Nette\Utils;
 
-use ConfigTransformer202206072\Nette;
+use ConfigTransformer202206079\Nette;
 /**
  * Validation utilities.
  */

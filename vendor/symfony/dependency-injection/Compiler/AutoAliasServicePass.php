@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Sets a service to be an alias of another one, given a format pattern.
  */

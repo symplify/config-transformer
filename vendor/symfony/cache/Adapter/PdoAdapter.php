@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206079\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206072\Doctrine\DBAL\Connection;
-use ConfigTransformer202206072\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202206072\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202206072\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202206072\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202206079\Doctrine\DBAL\Connection;
+use ConfigTransformer202206079\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202206079\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202206079\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202206079\Symfony\Component\Cache\PruneableInterface;
 class PdoAdapter extends AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;

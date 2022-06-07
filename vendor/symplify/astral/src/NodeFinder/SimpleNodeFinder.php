@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\Astral\NodeFinder;
+namespace ConfigTransformer202206079\Symplify\Astral\NodeFinder;
 
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\NodeFinder;
-use ConfigTransformer202206072\Symplify\Astral\ValueObject\AttributeKey;
+use ConfigTransformer202206079\PhpParser\Node;
+use ConfigTransformer202206079\PhpParser\NodeFinder;
+use ConfigTransformer202206079\Symplify\Astral\ValueObject\AttributeKey;
 final class SimpleNodeFinder
 {
     /**

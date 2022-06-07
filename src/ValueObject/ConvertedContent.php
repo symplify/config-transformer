@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202206072\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
     /**

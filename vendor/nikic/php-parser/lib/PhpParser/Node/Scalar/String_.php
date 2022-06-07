@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Node\Scalar;
+namespace ConfigTransformer202206079\PhpParser\Node\Scalar;
 
-use ConfigTransformer202206072\PhpParser\Error;
-use ConfigTransformer202206072\PhpParser\Node\Scalar;
+use ConfigTransformer202206079\PhpParser\Error;
+use ConfigTransformer202206079\PhpParser\Node\Scalar;
 class String_ extends Scalar
 {
     /* For use in "kind" attribute */

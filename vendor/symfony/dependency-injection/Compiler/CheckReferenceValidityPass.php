@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Reference;
 /**
  * Checks the validity of references.
  *
