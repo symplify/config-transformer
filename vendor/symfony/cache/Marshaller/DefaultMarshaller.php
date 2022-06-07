@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202206075\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *

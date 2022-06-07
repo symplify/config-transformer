@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Compiler Pass Configuration.
  *

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202206075\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer2022060710\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *

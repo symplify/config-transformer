@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Collector;
+namespace Symplify\ConfigTransformer\Collector;
 
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class XmlImportCollector
 {
     /**

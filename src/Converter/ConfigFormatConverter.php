@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Converter;
+namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
-use ConfigTransformer202206075\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ConfigLoader;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Enum\Format;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Exception\NotImplementedYetException;
-use ConfigTransformer202206075\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use ConfigTransformer202206075\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use ConfigTransformer202206075\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202206075\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\ConfigLoader;
+use Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
+use Symplify\ConfigTransformer\Enum\Format;
+use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ConfigFormatConverter
 {
     /**
@@ -46,7 +46,7 @@ final class ConfigFormatConverter
      * @var \Symplify\PackageBuilder\Yaml\ParametersMerger
      */
     private $parametersMerger;
-    public function __construct(ConfigLoader $configLoader, YamlToPhpConverter $yamlToPhpConverter, CurrentFilePathProvider $currentFilePathProvider, XmlImportCollector $xmlImportCollector, ContainerBuilderCleaner $containerBuilderCleaner, PrivatesAccessor $privatesAccessor, ParametersMerger $parametersMerger)
+    public function __construct(ConfigLoader $configLoader, \Symplify\ConfigTransformer\Converter\YamlToPhpConverter $yamlToPhpConverter, CurrentFilePathProvider $currentFilePathProvider, XmlImportCollector $xmlImportCollector, ContainerBuilderCleaner $containerBuilderCleaner, PrivatesAccessor $privatesAccessor, ParametersMerger $parametersMerger)
     {
         $this->configLoader = $configLoader;
         $this->yamlToPhpConverter = $yamlToPhpConverter;

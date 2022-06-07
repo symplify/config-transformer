@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206075\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter\InstanceOfNestedCaseConverter;
 final class ContainerNestedNodesFactory
 {
     /**

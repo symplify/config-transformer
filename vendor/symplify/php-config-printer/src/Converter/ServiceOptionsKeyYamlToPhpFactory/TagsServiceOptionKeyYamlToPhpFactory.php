@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 
-use ConfigTransformer202206075\Nette\Utils\Arrays;
-use ConfigTransformer202206075\PhpParser\BuilderHelpers;
-use ConfigTransformer202206075\PhpParser\Node\Arg;
-use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206075\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use ConfigTransformer2022060710\Nette\Utils\Arrays;
+use ConfigTransformer2022060710\PhpParser\BuilderHelpers;
+use ConfigTransformer2022060710\PhpParser\Node\Arg;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2022060710\PhpParser\Node\Scalar\String_;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**

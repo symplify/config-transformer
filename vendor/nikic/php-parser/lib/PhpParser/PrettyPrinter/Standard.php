@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\PhpParser\PrettyPrinter;
+namespace ConfigTransformer2022060710\PhpParser\PrettyPrinter;
 
-use ConfigTransformer202206075\PhpParser\Node;
-use ConfigTransformer202206075\PhpParser\Node\Expr;
-use ConfigTransformer202206075\PhpParser\Node\Expr\AssignOp;
-use ConfigTransformer202206075\PhpParser\Node\Expr\BinaryOp;
-use ConfigTransformer202206075\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202206075\PhpParser\Node\Name;
-use ConfigTransformer202206075\PhpParser\Node\Scalar;
-use ConfigTransformer202206075\PhpParser\Node\Scalar\MagicConst;
-use ConfigTransformer202206075\PhpParser\Node\Stmt;
-use ConfigTransformer202206075\PhpParser\PrettyPrinterAbstract;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\Cast;
+use ConfigTransformer2022060710\PhpParser\Node\Name;
+use ConfigTransformer2022060710\PhpParser\Node\Scalar;
+use ConfigTransformer2022060710\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt;
+use ConfigTransformer2022060710\PhpParser\PrettyPrinterAbstract;
 class Standard extends PrettyPrinterAbstract
 {
     // Special nodes

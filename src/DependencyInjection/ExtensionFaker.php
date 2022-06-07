@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection;
+namespace Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206075\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * This fakes basic extensions, so loading of config is possible without loading real extensions and booting your whole
  * project

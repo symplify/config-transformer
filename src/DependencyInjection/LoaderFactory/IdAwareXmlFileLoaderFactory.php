@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
+namespace Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
 
-use ConfigTransformer202206075\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Naming\UniqueNaming;
+use ConfigTransformer2022060710\Symfony\Component\Config\FileLocator;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
+use Symplify\ConfigTransformer\Naming\UniqueNaming;
 final class IdAwareXmlFileLoaderFactory
 {
     /**

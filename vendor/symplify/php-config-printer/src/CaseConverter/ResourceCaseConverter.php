@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202206075\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class ResourceCaseConverter implements CaseConverterInterface
 {
     /**

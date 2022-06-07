@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Configuration;
+namespace Symplify\ConfigTransformer\Configuration;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
+use Symplify\ConfigTransformer\ValueObject\Configuration;
+use Symplify\ConfigTransformer\ValueObject\Option;
 final class ConfigurationFactory
 {
     public function createFromInput(InputInterface $input) : Configuration

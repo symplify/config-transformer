@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Console;
+namespace ConfigTransformer2022060710\Symfony\Component\Console;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

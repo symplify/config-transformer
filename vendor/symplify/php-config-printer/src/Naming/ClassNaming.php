@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Naming;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer202206075\Nette\Utils\Strings;
+use ConfigTransformer2022060710\Nette\Utils\Strings;
 final class ClassNaming
 {
     public function getShortName(string $class) : string

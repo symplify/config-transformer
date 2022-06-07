@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\FileSystem;
+namespace Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202206075\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer2022060710\Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\ConfigTransformer\ValueObject\Configuration;
+use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     /**

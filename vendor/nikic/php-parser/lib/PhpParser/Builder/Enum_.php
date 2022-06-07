@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\PhpParser\Builder;
+namespace ConfigTransformer2022060710\PhpParser\Builder;
 
-use ConfigTransformer202206075\PhpParser;
-use ConfigTransformer202206075\PhpParser\BuilderHelpers;
-use ConfigTransformer202206075\PhpParser\Node;
-use ConfigTransformer202206075\PhpParser\Node\Identifier;
-use ConfigTransformer202206075\PhpParser\Node\Name;
-use ConfigTransformer202206075\PhpParser\Node\Stmt;
+use ConfigTransformer2022060710\PhpParser;
+use ConfigTransformer2022060710\PhpParser\BuilderHelpers;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Identifier;
+use ConfigTransformer2022060710\PhpParser\Node\Name;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt;
 class Enum_ extends Declaration
 {
     protected $name;

@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Printer\NodeDecorator;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use ConfigTransformer202206075\PhpParser\Node;
-use ConfigTransformer202206075\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202206075\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206075\PhpParser\Node\Stmt;
-use ConfigTransformer202206075\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206075\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202206075\PhpParser\NodeFinder;
-use ConfigTransformer202206075\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\Assign;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\Closure;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer2022060710\PhpParser\NodeFinder;
+use ConfigTransformer2022060710\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Console\Input;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Input;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206075\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line option.
  *

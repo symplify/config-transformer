@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Console\Helper;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202206075\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use ConfigTransformer202206075\Symfony\Component\VarDumper\Cloner\VarCloner;
-use ConfigTransformer202206075\Symfony\Component\VarDumper\Dumper\CliDumper;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use ConfigTransformer2022060710\Symfony\Component\VarDumper\Cloner\VarCloner;
+use ConfigTransformer2022060710\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
  */

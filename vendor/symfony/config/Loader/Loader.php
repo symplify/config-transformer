@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Config\Loader;
+namespace ConfigTransformer2022060710\Symfony\Component\Config\Loader;
 
-use ConfigTransformer202206075\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *

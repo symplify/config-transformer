@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Cache\DataCollector;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\DataCollector;
 
-use ConfigTransformer202206075\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use ConfigTransformer202206075\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
-use ConfigTransformer202206075\Symfony\Component\HttpFoundation\Request;
-use ConfigTransformer202206075\Symfony\Component\HttpFoundation\Response;
-use ConfigTransformer202206075\Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use ConfigTransformer202206075\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+use ConfigTransformer2022060710\Symfony\Component\HttpFoundation\Request;
+use ConfigTransformer2022060710\Symfony\Component\HttpFoundation\Response;
+use ConfigTransformer2022060710\Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use ConfigTransformer2022060710\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>

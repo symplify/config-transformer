@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Converter;
+namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202206075\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202206075\Symfony\Component\Yaml\Yaml;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Parser;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 /**
  * @api
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php

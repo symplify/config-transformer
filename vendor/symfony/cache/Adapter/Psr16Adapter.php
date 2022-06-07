@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206075\Psr\SimpleCache\CacheInterface;
-use ConfigTransformer202206075\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202206075\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202206075\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer2022060710\Psr\SimpleCache\CacheInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-16 cache into a PSR-6 one.
  *

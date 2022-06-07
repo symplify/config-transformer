@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202206075\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2022060710\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  */

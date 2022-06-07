@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206075\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202206075\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202206075\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202206075\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202206075\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use ConfigTransformer202206075\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202206075\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer2022060710\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer2022060710\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Abstract for native TagAware adapters.
  *

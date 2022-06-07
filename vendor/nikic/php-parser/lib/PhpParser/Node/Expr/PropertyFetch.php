@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\PhpParser\Node\Expr;
+namespace ConfigTransformer2022060710\PhpParser\Node\Expr;
 
-use ConfigTransformer202206075\PhpParser\Node\Expr;
-use ConfigTransformer202206075\PhpParser\Node\Identifier;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Identifier;
 class PropertyFetch extends Expr
 {
     /** @var Expr Variable holding object */

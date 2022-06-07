@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Command;
+namespace Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202206075\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206075\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202206075\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202206075\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer202206075\Symplify\PackageBuilder\Console\Command\CommandNaming;
-use ConfigTransformer202206075\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
+use Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
+use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
+use Symplify\ConfigTransformer\ValueObject\Configuration;
+use Symplify\ConfigTransformer\ValueObject\Option;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
 final class SwitchFormatCommand extends AbstractSymplifyCommand
 {
     /**

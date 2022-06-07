@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\Astral\NodeAnalyzer;
+namespace ConfigTransformer2022060710\Symplify\Astral\NodeAnalyzer;
 
-use ConfigTransformer202206075\Nette\Application\UI\Template;
-use ConfigTransformer202206075\PhpParser\Node\Expr;
-use ConfigTransformer202206075\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer202206075\PHPStan\Analyser\Scope;
-use ConfigTransformer202206075\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202206075\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser;
+use ConfigTransformer2022060710\Nette\Application\UI\Template;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer2022060710\PHPStan\Analyser\Scope;
+use ConfigTransformer2022060710\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer2022060710\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser;
 /**
  * @api
  */
@@ -17,7 +17,7 @@ final class NetteTypeAnalyzer
     /**
      * @var array<class-string<Template>>
      */
-    private const TEMPLATE_TYPES = ['ConfigTransformer202206075\\Nette\\Application\\UI\\Template', 'ConfigTransformer202206075\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer202206075\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer202206075\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
+    private const TEMPLATE_TYPES = ['ConfigTransformer2022060710\\Nette\\Application\\UI\\Template', 'ConfigTransformer2022060710\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer2022060710\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer2022060710\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
@@ -61,7 +61,7 @@ final class NetteTypeAnalyzer
             return \false;
         }
         // this type has getComponent() method
-        return \is_a($className, 'ConfigTransformer202206075\\Nette\\ComponentModel\\Container', \true);
+        return \is_a($className, 'ConfigTransformer2022060710\\Nette\\ComponentModel\\Container', \true);
     }
     public function isInsideControl(Scope $scope) : bool
     {
@@ -69,6 +69,6 @@ final class NetteTypeAnalyzer
         if ($className === null) {
             return \false;
         }
-        return \is_a($className, 'ConfigTransformer202206075\\Nette\\Application\\UI\\Control', \true);
+        return \is_a($className, 'ConfigTransformer2022060710\\Nette\\Application\\UI\\Control', \true);
     }
 }

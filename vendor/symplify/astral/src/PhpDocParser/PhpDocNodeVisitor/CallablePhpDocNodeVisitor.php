@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer2022060710\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Ast\Node;
 final class CallablePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
 {
     /**

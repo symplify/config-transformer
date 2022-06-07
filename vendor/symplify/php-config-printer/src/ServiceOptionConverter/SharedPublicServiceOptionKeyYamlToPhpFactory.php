@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202206075\PhpParser\Node\Arg;
-use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer2022060710\PhpParser\Node\Arg;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 final class SharedPublicServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject;
+namespace Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Enum\Format;
+use Symplify\ConfigTransformer\Enum\Format;
 final class Configuration
 {
     /**

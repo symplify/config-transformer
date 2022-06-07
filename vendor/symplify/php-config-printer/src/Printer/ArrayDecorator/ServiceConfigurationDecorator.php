@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
 final class ServiceConfigurationDecorator
 {
     /**

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\Converter;
+namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202206075\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContentFactory
 {
     /**
@@ -16,7 +16,7 @@ final class ConvertedContentFactory
      * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
     private $configFormatConverter;
-    public function __construct(SymfonyStyle $symfonyStyle, ConfigFormatConverter $configFormatConverter)
+    public function __construct(SymfonyStyle $symfonyStyle, \Symplify\ConfigTransformer\Converter\ConfigFormatConverter $configFormatConverter)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->configFormatConverter = $configFormatConverter;

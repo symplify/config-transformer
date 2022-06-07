@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Printer;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Printer;
 
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
-use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * @api
  * @see \Symplify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\SmartPhpConfigPrinterTest

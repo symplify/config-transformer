@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206075\Symfony\Component\Console\Event;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Event;
 
-use ConfigTransformer202206075\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202206075\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206075\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202206075\Symfony\Contracts\EventDispatcher\Event;
+use ConfigTransformer2022060710\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Allows to inspect input and output of a command.
  *

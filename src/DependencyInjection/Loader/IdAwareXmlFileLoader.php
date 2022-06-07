@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection\Loader;
+namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
 use DOMDocument;
 use DOMElement;
@@ -9,17 +9,17 @@ use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use InvalidArgumentException;
-use ConfigTransformer202206075\Nette\Utils\Strings;
-use ConfigTransformer202206075\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202206075\Symfony\Component\Config\Util\Exception\XmlParsingException;
-use ConfigTransformer202206075\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Collector\XmlImportCollector;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\Naming\UniqueNaming;
-use ConfigTransformer202206075\Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
-use ConfigTransformer202206075\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer2022060710\Nette\Utils\Strings;
+use ConfigTransformer2022060710\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer2022060710\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symplify\ConfigTransformer\Naming\UniqueNaming;
+use Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * Mimics https://github.com/symfony/symfony/commit/b8c68da0107a4f433dd414a355ea5589da0da0e8 for Symfony 3.3-
  *
