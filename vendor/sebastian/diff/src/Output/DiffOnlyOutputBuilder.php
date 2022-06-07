@@ -9,14 +9,14 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\SebastianBergmann\Diff\Output;
+namespace ConfigTransformer202206077\SebastianBergmann\Diff\Output;
 
 use function fclose;
 use function fopen;
 use function fwrite;
 use function stream_get_contents;
 use function substr;
-use ConfigTransformer2022060710\SebastianBergmann\Diff\Differ;
+use ConfigTransformer202206077\SebastianBergmann\Diff\Differ;
 /**
  * Builds a diff string representation in a loose unified diff format
  * listing only changes lines. Does not include line numbers.

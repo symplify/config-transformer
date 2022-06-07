@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206077\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022060710\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\Extension;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use ConfigTransformer202206077\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 /**
  * Merges extension configs into the container builder.
  *

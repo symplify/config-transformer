@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer2022060710;
+namespace ConfigTransformer202206077;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace ConfigTransformer2022060710;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer2022060710\Symfony\Polyfill\Php81 as p;
+use ConfigTransformer202206077\Symfony\Polyfill\Php81 as p;
 if (\PHP_VERSION_ID >= 80100) {
     return;
 }

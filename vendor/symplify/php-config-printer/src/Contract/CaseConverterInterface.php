@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
 interface CaseConverterInterface
 {
     /**

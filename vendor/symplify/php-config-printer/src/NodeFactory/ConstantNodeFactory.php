@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer2022060710\Nette\Utils\Strings;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer2022060710\PhpParser\Node\Name;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
+use ConfigTransformer202206077\Nette\Utils\Strings;
+use ConfigTransformer202206077\PhpParser\Node\Expr;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202206077\PhpParser\Node\Name;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 /**
  * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:
  * https://github.com/symfony/symfony/blob/ba4d57bb5fc0e9a1b4f63ced66156296dea3687e/src/Symfony/Component/Yaml/Inline.php#L617

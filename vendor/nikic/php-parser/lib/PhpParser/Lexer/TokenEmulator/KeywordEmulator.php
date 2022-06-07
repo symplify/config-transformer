@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202206077\PhpParser\Lexer\TokenEmulator;
 
 abstract class KeywordEmulator extends TokenEmulator
 {

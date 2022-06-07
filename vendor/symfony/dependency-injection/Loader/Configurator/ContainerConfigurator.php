@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202206077\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer2022060710\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer2022060710\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202206077\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202206077\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -105,7 +105,7 @@ class ContainerConfigurator extends AbstractConfigurator
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-\class_alias('ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', \false);
+\class_alias('ConfigTransformer202206077\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator', \false);
 /**
  * Creates a parameter.
  */

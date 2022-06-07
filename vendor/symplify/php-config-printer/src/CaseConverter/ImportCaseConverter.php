@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer2022060710\Nette\Utils\Strings;
-use ConfigTransformer2022060710\PhpParser\BuilderHelpers;
-use ConfigTransformer2022060710\PhpParser\Node\Arg;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\PhpParser\Node\Scalar\String_;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206077\Nette\Utils\Strings;
+use ConfigTransformer202206077\PhpParser\BuilderHelpers;
+use ConfigTransformer202206077\PhpParser\Node\Arg;
+use ConfigTransformer202206077\PhpParser\Node\Expr;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * Handles this part:
  *

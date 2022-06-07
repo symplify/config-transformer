@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Collector;
 
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class XmlImportCollector
 {
     /**

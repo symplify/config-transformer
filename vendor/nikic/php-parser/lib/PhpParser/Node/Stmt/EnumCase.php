@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206077\PhpParser\Node\Stmt;
 
-use ConfigTransformer2022060710\PhpParser\Node;
-use ConfigTransformer2022060710\PhpParser\Node\AttributeGroup;
+use ConfigTransformer202206077\PhpParser\Node;
+use ConfigTransformer202206077\PhpParser\Node\AttributeGroup;
 class EnumCase extends Node\Stmt
 {
     /** @var Node\Identifier Enum case name */

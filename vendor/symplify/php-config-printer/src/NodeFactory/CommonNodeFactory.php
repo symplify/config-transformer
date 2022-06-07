@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer2022060710\PhpParser\BuilderHelpers;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer2022060710\PhpParser\Node\Name;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\PhpParser\Node\Scalar\MagicConst\Dir;
-use ConfigTransformer2022060710\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206077\PhpParser\BuilderHelpers;
+use ConfigTransformer202206077\PhpParser\Node\Expr;
+use ConfigTransformer202206077\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202206077\PhpParser\Node\Name;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\PhpParser\Node\Scalar\MagicConst\Dir;
+use ConfigTransformer202206077\PhpParser\Node\Scalar\String_;
 final class CommonNodeFactory
 {
     /**

@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\Console\Command;
+namespace ConfigTransformer202206077\Symfony\Component\Console\Command;
 
-use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\ApplicationDescription;
-use ConfigTransformer2022060710\Symfony\Component\Console\Helper\DescriptorHelper;
-use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202206077\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202206077\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202206077\Symfony\Component\Console\Descriptor\ApplicationDescription;
+use ConfigTransformer202206077\Symfony\Component\Console\Helper\DescriptorHelper;
+use ConfigTransformer202206077\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202206077\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202206077\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202206077\Symfony\Component\Console\Output\OutputInterface;
 /**
  * HelpCommand displays the help for a given command.
  *

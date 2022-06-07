@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ServiceOptionConverter;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 final class ArgumentsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**

@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
+namespace ConfigTransformer202206077\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
 
-use ConfigTransformer2022060710\Nette\Utils\Strings;
+use ConfigTransformer202206077\Nette\Utils\Strings;
 use ReflectionClass;
 use ReflectionMethod;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer2022060710\Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder;
-use ConfigTransformer2022060710\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
-use ConfigTransformer2022060710\Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
-use ConfigTransformer2022060710\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
-use ConfigTransformer2022060710\Symplify\PackageBuilder\ValueObject\MethodName;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206077\Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder;
+use ConfigTransformer202206077\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
+use ConfigTransformer202206077\Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
+use ConfigTransformer202206077\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
+use ConfigTransformer202206077\Symplify\PackageBuilder\ValueObject\MethodName;
 /**
  * @inspiration https://github.com/nette/di/pull/178
  * @see \Symplify\AutowireArrayParameter\Tests\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPassTest
@@ -33,7 +33,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      * @var string[]
      * @noRector
      */
-    private $excludedFatalClasses = ['ConfigTransformer2022060710\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer2022060710\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer2022060710\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer2022060710\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer2022060710\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer2022060710\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer2022060710\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer2022060710\\Sonata\\Twig\\Extension\\TemplateExtension', 'ConfigTransformer2022060710\\Symfony\\Component\\HttpKernel\\KernelInterface'];
+    private $excludedFatalClasses = ['ConfigTransformer202206077\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202206077\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202206077\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202206077\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202206077\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202206077\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202206077\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202206077\\Sonata\\Twig\\Extension\\TemplateExtension', 'ConfigTransformer202206077\\Symfony\\Component\\HttpKernel\\KernelInterface'];
     /**
      * @var \Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder
      */

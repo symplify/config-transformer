@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\EasyTesting\PHPUnit;
+namespace ConfigTransformer202206077\Symplify\EasyTesting\PHPUnit;
 
 /**
  * @api
@@ -13,6 +13,6 @@ final class StaticPHPUnitEnvironment
      */
     public static function isPHPUnitRun() : bool
     {
-        return \defined('ConfigTransformer2022060710\\PHPUNIT_COMPOSER_INSTALL') || \defined('ConfigTransformer2022060710\\__PHPUNIT_PHAR__');
+        return \defined('ConfigTransformer202206077\\PHPUNIT_COMPOSER_INSTALL') || \defined('ConfigTransformer202206077\\__PHPUNIT_PHAR__');
     }
 }

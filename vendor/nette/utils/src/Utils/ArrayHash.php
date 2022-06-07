@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Nette\Utils;
+namespace ConfigTransformer202206077\Nette\Utils;
 
-use ConfigTransformer2022060710\Nette;
+use ConfigTransformer202206077\Nette;
 /**
  * Provides objects to work as array.
  * @template T

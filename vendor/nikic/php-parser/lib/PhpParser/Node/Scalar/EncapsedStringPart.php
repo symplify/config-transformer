@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\Node\Scalar;
+namespace ConfigTransformer202206077\PhpParser\Node\Scalar;
 
-use ConfigTransformer2022060710\PhpParser\Node\Scalar;
+use ConfigTransformer202206077\PhpParser\Node\Scalar;
 class EncapsedStringPart extends Scalar
 {
     /** @var string String value */

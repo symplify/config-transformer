@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
 
-use ConfigTransformer2022060710\PhpParser\Node\Arg;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Array_;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Closure;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2022060710\PhpParser\Node\Identifier;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\PhpParser\Node\Param;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2022060710\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer2022060710\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer2022060710\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206077\PhpParser\Node\Arg;
+use ConfigTransformer202206077\PhpParser\Node\Expr;
+use ConfigTransformer202206077\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206077\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202206077\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206077\PhpParser\Node\Identifier;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\PhpParser\Node\Param;
+use ConfigTransformer202206077\PhpParser\Node\Stmt;
+use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206077\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202206077\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
 {
     /**
@@ -67,7 +67,7 @@ final class ConfiguratorClosureNodeFactory
     {
         $containerConfiguratorVariable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         // @note must be string to avoid prefixing class
-        $classNameFullyQualified = new FullyQualified('ConfigTransformer2022060710\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
+        $classNameFullyQualified = new FullyQualified('ConfigTransformer202206077\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
         return new Param($containerConfiguratorVariable, null, $classNameFullyQualified);
     }
     /**

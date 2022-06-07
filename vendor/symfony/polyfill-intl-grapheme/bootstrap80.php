@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer2022060710;
+namespace ConfigTransformer202206077;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace ConfigTransformer2022060710;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer2022060710\Symfony\Polyfill\Intl\Grapheme as p;
+use ConfigTransformer202206077\Symfony\Polyfill\Intl\Grapheme as p;
 if (!\defined('GRAPHEME_EXTR_COUNT')) {
     \define('GRAPHEME_EXTR_COUNT', 0);
 }

@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeVisitor;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeVisitor;
 
-use ConfigTransformer2022060710\PhpParser\Node;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer2022060710\PhpParser\Node\Name;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\PhpParser\NodeVisitorAbstract;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Naming\ClassNaming;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\AttributeKey;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\ImportType;
+use ConfigTransformer202206077\PhpParser\Node;
+use ConfigTransformer202206077\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202206077\PhpParser\Node\Name;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Naming\ClassNaming;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\AttributeKey;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\ImportType;
 final class ImportFullyQualifiedNamesNodeVisitor extends NodeVisitorAbstract
 {
     /**

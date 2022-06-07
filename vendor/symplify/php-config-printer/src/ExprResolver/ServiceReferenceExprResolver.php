@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ExprResolver;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer2022060710\PhpParser\Node\Arg;
-use ConfigTransformer2022060710\PhpParser\Node\Expr;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206077\PhpParser\Node\Arg;
+use ConfigTransformer202206077\PhpParser\Node\Expr;
+use ConfigTransformer202206077\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ServiceReferenceExprResolver
 {
     /**

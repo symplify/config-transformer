@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206077\PhpParser\Node\Stmt;
 
-use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer202206077\PhpParser\Node;
 class Case_ extends Node\Stmt
 {
     /** @var null|Node\Expr Condition (null for default) */

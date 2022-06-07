@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\Astral\StaticFactory;
+namespace ConfigTransformer202206077\Symplify\Astral\StaticFactory;
 
-use ConfigTransformer2022060710\PhpParser\NodeFinder;
-use ConfigTransformer2022060710\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer2022060710\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer2022060710\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202206077\PhpParser\NodeFinder;
+use ConfigTransformer202206077\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202206077\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @api
  */

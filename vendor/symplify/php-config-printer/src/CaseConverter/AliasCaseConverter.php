@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\CaseConverter;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer2022060710\Nette\Utils\Strings;
-use ConfigTransformer2022060710\PhpParser\Node\Arg;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer2022060710\PhpParser\Node\Expr\Variable;
-use ConfigTransformer2022060710\PhpParser\Node\Scalar\String_;
-use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer2022060710\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-use ConfigTransformer2022060710\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202206077\Nette\Utils\Strings;
+use ConfigTransformer202206077\PhpParser\Node\Arg;
+use ConfigTransformer202206077\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206077\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206077\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206077\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class AliasCaseConverter implements CaseConverterInterface
 {
     /**

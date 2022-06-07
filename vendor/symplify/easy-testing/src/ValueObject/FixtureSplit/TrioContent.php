@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\EasyTesting\ValueObject\FixtureSplit;
+namespace ConfigTransformer202206077\Symplify\EasyTesting\ValueObject\FixtureSplit;
 
 final class TrioContent
 {

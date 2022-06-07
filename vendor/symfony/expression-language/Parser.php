@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202206077\Symfony\Component\ExpressionLanguage;
 
 /**
  * Parsers a token stream.

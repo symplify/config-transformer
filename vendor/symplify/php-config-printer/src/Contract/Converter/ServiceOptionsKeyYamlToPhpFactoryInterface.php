@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Contract\Converter;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\Converter;
 
-use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
 interface ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**

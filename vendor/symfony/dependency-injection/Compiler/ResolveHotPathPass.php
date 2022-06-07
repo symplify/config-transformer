@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206077\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate "container.hot_path" tags to referenced services.
  *

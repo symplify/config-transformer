@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Naming;
+namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer2022060710\Nette\Utils\Strings;
+use ConfigTransformer202206077\Nette\Utils\Strings;
 final class VariableNameResolver
 {
     public function resolveFromType(string $classType) : string
