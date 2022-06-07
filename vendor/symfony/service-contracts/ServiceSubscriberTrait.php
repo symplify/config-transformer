@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Contracts\Service;
+namespace ConfigTransformer2022060710\Symfony\Contracts\Service;
 
-use ConfigTransformer202206079\Psr\Container\ContainerInterface;
-use ConfigTransformer202206079\Symfony\Contracts\Service\Attribute\SubscribedService;
+use ConfigTransformer2022060710\Psr\Container\ContainerInterface;
+use ConfigTransformer2022060710\Symfony\Contracts\Service\Attribute\SubscribedService;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
  * method return types. Service ids are available as "ClassName::methodName".

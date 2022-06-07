@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079;
+namespace ConfigTransformer2022060710;
 
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileSystem;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(SmartFileSystem::class);

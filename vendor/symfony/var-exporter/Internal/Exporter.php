@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer2022060710\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer2022060710\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

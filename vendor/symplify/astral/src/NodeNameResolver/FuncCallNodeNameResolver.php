@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer2022060710\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\Node\Expr;
-use ConfigTransformer202206079\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206079\Symplify\Astral\Contract\NodeNameResolverInterface;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer2022060710\Symplify\Astral\Contract\NodeNameResolverInterface;
 final class FuncCallNodeNameResolver implements NodeNameResolverInterface
 {
     public function match(Node $node) : bool

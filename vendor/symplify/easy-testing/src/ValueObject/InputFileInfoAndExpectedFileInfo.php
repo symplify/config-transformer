@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer2022060710\Symplify\EasyTesting\ValueObject;
 
-use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
 final class InputFileInfoAndExpectedFileInfo
 {
     /**

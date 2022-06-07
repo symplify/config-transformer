@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\Astral\PhpDocParser\StaticFactory;
+namespace ConfigTransformer2022060710\Symplify\Astral\PhpDocParser\StaticFactory;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\ConstExprParser;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\TypeParser;
-use ConfigTransformer202206079\Symplify\Astral\PhpDocParser\SimplePhpDocParser;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Parser\ConstExprParser;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Parser\TypeParser;
+use ConfigTransformer2022060710\Symplify\Astral\PhpDocParser\SimplePhpDocParser;
 /**
  * @api
  */

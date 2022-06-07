@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\Node;
+namespace ConfigTransformer2022060710\PhpParser\Node;
 
 /**
  * Represents a name that is written in source code with a leading dollar,

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Config\Definition;
+namespace ConfigTransformer2022060710\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\Exception\Exception;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\Exception;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * Represents a prototyped Array node in the config tree.
  *

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022060710\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\Node\Identifier;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Identifier;
 class UseUse extends Node\Stmt
 {
     /** @var int One of the Stmt\Use_::TYPE_* constants. Will only differ from TYPE_UNKNOWN for mixed group uses */

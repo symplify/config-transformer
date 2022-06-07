@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\NodeVisitor;
+namespace ConfigTransformer2022060710\PhpParser\NodeVisitor;
 
 use function array_pop;
 use function count;
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node.
  *

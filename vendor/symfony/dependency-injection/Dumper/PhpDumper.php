@@ -8,40 +8,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Dumper;
 
-use ConfigTransformer202206079\Composer\Autoload\ClassLoader;
-use ConfigTransformer202206079\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader\FileLoader;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\TypedReference;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Variable;
-use ConfigTransformer202206079\Symfony\Component\ErrorHandler\DebugClassLoader;
-use ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer202206079\Symfony\Component\HttpKernel\Kernel;
+use ConfigTransformer2022060710\Composer\Autoload\ClassLoader;
+use ConfigTransformer2022060710\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\FileLoader;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Variable;
+use ConfigTransformer2022060710\Symfony\Component\ErrorHandler\DebugClassLoader;
+use ConfigTransformer2022060710\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer2022060710\Symfony\Component\HttpKernel\Kernel;
 /**
  * PhpDumper dumps a service container as a PHP class.
  *
@@ -262,8 +262,8 @@ class PhpDumper extends Dumper
             $fileTemplate = <<<EOF
 <?php
 
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
 
 /*{$this->docStar}
  * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
@@ -332,7 +332,7 @@ EOF;
 // This file has been auto-generated by the Symfony Dependency Injection Component
 // You can reference it in the "opcache.preload" php.ini setting on PHP >= 7.4 when preloading is desired
 
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
 
 if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
     return;
@@ -1048,14 +1048,14 @@ EOTXT
         $code = <<<EOF
 <?php
 {$namespaceLine}
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Container;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
-use ConfigTransformer202206079\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Container;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
+use ConfigTransformer2022060710\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
 
 /*{$this->docStar}
  * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
@@ -1794,7 +1794,7 @@ EOF;
     private function getExpressionLanguage() : ExpressionLanguage
     {
         if (!isset($this->expressionLanguage)) {
-            if (!\class_exists(\ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
+            if (!\class_exists(\ConfigTransformer2022060710\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
                 throw new LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
             }
             $providers = $this->container->getExpressionLanguageProviders();

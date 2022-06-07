@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079;
+namespace ConfigTransformer2022060710;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Application;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206079\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand;
-use function ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer2022060710\Symfony\Component\Console\Application;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer2022060710\Symplify\EasyTesting\Command\ValidateFixtureSkipNamingCommand;
+use function ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

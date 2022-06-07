@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer2022060710\PHPStan\PhpDocParser\Parser;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Lexer\Lexer;
 use function array_pop;
 use function assert;
 use function count;

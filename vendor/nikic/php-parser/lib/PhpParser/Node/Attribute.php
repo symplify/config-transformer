@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\Node;
+namespace ConfigTransformer2022060710\PhpParser\Node;
 
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\NodeAbstract;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\NodeAbstract;
 class Attribute extends NodeAbstract
 {
     /** @var Name Attribute name */

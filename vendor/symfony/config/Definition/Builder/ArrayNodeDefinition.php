@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2022060710\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\ArrayNode;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\ArrayNode;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * This class provides a fluent interface for defining an array node.
  *

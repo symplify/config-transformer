@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Console\Tester;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202206079\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202206079\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer2022060710\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionSuggestions;
 /**
  * Eases the testing of command completion.
  *

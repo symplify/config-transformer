@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer2022060710\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202206079\Symfony\Component\Cache\Adapter\AbstractAdapter;
-use ConfigTransformer202206079\Symfony\Component\Cache\Adapter\ArrayAdapter;
-use ConfigTransformer202206079\Symfony\Component\Cache\Adapter\ChainAdapter;
-use ConfigTransformer202206079\Symfony\Component\Cache\Adapter\NullAdapter;
-use ConfigTransformer202206079\Symfony\Component\Cache\Adapter\ParameterNormalizer;
-use ConfigTransformer202206079\Symfony\Component\Cache\Messenger\EarlyExpirationDispatcher;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\AbstractAdapter;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\ArrayAdapter;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\ChainAdapter;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\NullAdapter;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Adapter\ParameterNormalizer;
+use ConfigTransformer2022060710\Symfony\Component\Cache\Messenger\EarlyExpirationDispatcher;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

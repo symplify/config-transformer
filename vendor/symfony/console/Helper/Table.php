@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Console\Helper;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202206079\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use ConfigTransformer202206079\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer2022060710\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Provides helpers to display a table.
  *

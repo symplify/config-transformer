@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\CaseConverter\NestedCaseConverter;
 
-use ConfigTransformer202206079\PhpParser\Node\Arg;
-use ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206079\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\MethodName;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer2022060710\PhpParser\Node\Arg;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\Variable;
+use ConfigTransformer2022060710\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\MethodName;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class InstanceOfNestedCaseConverter
 {
     /**

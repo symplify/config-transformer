@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Yaml\Command;
+namespace ConfigTransformer2022060710\Symfony\Component\Yaml\Command;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Attribute\AsCommand;
-use ConfigTransformer202206079\Symfony\Component\Console\CI\GithubActionReporter;
-use ConfigTransformer202206079\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202206079\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202206079\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202206079\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202206079\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202206079\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202206079\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer2022060710\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer2022060710\Symfony\Component\Console\CI\GithubActionReporter;
+use ConfigTransformer2022060710\Symfony\Component\Console\Command\Command;
+use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer2022060710\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Parser;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Yaml;
 /**
  * Validates YAML files syntax and outputs encountered errors.
  *

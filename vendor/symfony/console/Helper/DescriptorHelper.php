@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Console\Helper;
+namespace ConfigTransformer2022060710\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Descriptor\DescriptorInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Descriptor\JsonDescriptor;
-use ConfigTransformer202206079\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use ConfigTransformer202206079\Symfony\Component\Console\Descriptor\TextDescriptor;
-use ConfigTransformer202206079\Symfony\Component\Console\Descriptor\XmlDescriptor;
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\DescriptorInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\JsonDescriptor;
+use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\TextDescriptor;
+use ConfigTransformer2022060710\Symfony\Component\Console\Descriptor\XmlDescriptor;
+use ConfigTransformer2022060710\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class adds helper method to describe objects in various formats.
  *

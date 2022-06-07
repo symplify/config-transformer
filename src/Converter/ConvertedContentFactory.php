@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer2022060710\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContentFactory
 {
     /**

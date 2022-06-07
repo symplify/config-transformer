@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\VarExporter;
+namespace ConfigTransformer2022060710\Symfony\Component\VarExporter;
 
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer2022060710\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer2022060710\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer2022060710\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer2022060710\Symfony\Component\VarExporter\Internal\Registry;
 /**
  * A utility class to create objects without calling their constructor.
  *

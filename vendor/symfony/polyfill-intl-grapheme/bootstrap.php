@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202206079;
+namespace ConfigTransformer2022060710;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace ConfigTransformer202206079;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer202206079\Symfony\Polyfill\Intl\Grapheme as p;
+use ConfigTransformer2022060710\Symfony\Polyfill\Intl\Grapheme as p;
 if (\extension_loaded('intl')) {
     return;
 }

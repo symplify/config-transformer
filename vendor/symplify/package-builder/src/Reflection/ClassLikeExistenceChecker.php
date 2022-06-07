@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer2022060710\Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
 /**

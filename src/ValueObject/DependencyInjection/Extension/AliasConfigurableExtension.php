@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension;
 
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Extension\Extension;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\Extension;
 final class AliasConfigurableExtension extends Extension
 {
     /**

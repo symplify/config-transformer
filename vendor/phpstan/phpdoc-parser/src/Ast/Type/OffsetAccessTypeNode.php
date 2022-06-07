@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer2022060710\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer2022060710\PHPStan\PhpDocParser\Ast\NodeAttributes;
 class OffsetAccessTypeNode implements TypeNode
 {
     use NodeAttributes;

@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer202206079\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer2022060710\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer2022060710\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer2022060710\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * XmlFileLoader loads XML files service definitions.
  *

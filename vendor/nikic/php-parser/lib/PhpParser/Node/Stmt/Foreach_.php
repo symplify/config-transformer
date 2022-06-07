@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\Node\Stmt;
+namespace ConfigTransformer2022060710\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206079\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node;
 class Foreach_ extends Node\Stmt
 {
     /** @var Node\Expr Expression to iterate */

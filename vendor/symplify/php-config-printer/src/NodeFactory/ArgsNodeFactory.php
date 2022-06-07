@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer2022060710\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206079\PhpParser\BuilderHelpers;
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\Node\Arg;
-use ConfigTransformer202206079\PhpParser\Node\Expr;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206079\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206079\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206079\PhpParser\Node\Identifier;
-use ConfigTransformer202206079\PhpParser\Node\Name;
-use ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206079\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer2022060710\PhpParser\BuilderHelpers;
+use ConfigTransformer2022060710\PhpParser\Node;
+use ConfigTransformer2022060710\PhpParser\Node\Arg;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\Array_;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer2022060710\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer2022060710\PhpParser\Node\Identifier;
+use ConfigTransformer2022060710\PhpParser\Node\Name;
+use ConfigTransformer2022060710\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer2022060710\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
+use ConfigTransformer2022060710\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ArgsNodeFactory
 {
     /**

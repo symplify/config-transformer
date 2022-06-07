@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202206079\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer2022060710\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer2022060710\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer202206079\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer202206079\Symplify\PackageBuilder\Console\Command\CommandNaming;
-use ConfigTransformer202206079\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer2022060710\Symplify\PackageBuilder\Console\Command\CommandNaming;
+use ConfigTransformer2022060710\Symplify\SmartFileSystem\SmartFileInfo;
 final class SwitchFormatCommand extends AbstractSymplifyCommand
 {
     /**

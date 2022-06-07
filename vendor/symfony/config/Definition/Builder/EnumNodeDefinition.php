@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer2022060710\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202206079\Symfony\Component\Config\Definition\EnumNode;
+use ConfigTransformer2022060710\Symfony\Component\Config\Definition\EnumNode;
 /**
  * Enum Node Definition.
  *
@@ -39,7 +39,7 @@ class EnumNodeDefinition extends ScalarNodeDefinition
      *
      * @throws \RuntimeException
      */
-    protected function instantiateNode() : \ConfigTransformer202206079\Symfony\Component\Config\Definition\ScalarNode
+    protected function instantiateNode() : \ConfigTransformer2022060710\Symfony\Component\Config\Definition\ScalarNode
     {
         if (!isset($this->values)) {
             throw new \RuntimeException('You must call ->values() on enum nodes.');

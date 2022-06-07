@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\Node\Expr;
+namespace ConfigTransformer2022060710\PhpParser\Node\Expr;
 
-use ConfigTransformer202206079\PhpParser\Node\Expr;
+use ConfigTransformer2022060710\PhpParser\Node\Expr;
 abstract class AssignOp extends Expr
 {
     /** @var Expr Variable */
