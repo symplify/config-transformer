@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\NodeAttributes;
-class ConstExprArrayItemNode implements \ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
+class ConstExprArrayItemNode implements \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     use NodeAttributes;
     /** @var ConstExprNode|null */
     public $key;
     /** @var ConstExprNode */
     public $value;
-    public function __construct(?\ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $key, \ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $value)
+    public function __construct(?\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $key, \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $value)
     {
         $this->key = $key;
         $this->value = $value;

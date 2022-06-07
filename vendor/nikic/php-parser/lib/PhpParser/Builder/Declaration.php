@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\PhpParser\Builder;
+namespace ConfigTransformer202206079\PhpParser\Builder;
 
-use ConfigTransformer202206075\PhpParser;
-use ConfigTransformer202206075\PhpParser\BuilderHelpers;
-abstract class Declaration implements \ConfigTransformer202206075\PhpParser\Builder
+use ConfigTransformer202206079\PhpParser;
+use ConfigTransformer202206079\PhpParser\BuilderHelpers;
+abstract class Declaration implements \ConfigTransformer202206079\PhpParser\Builder
 {
     protected $attributes = [];
     public abstract function addStmt($stmt);
@@ -32,7 +32,7 @@ abstract class Declaration implements \ConfigTransformer202206075\PhpParser\Buil
      */
     public function setDocComment($docComment)
     {
-        $this->attributes['comments'] = [\ConfigTransformer202206075\PhpParser\BuilderHelpers::normalizeDocComment($docComment)];
+        $this->attributes['comments'] = [\ConfigTransformer202206079\PhpParser\BuilderHelpers::normalizeDocComment($docComment)];
         return $this;
     }
 }

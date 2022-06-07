@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Naming;
+namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer202206075\Nette\Utils\Strings;
+use ConfigTransformer202206079\Nette\Utils\Strings;
 final class VariableNameResolver
 {
     public function resolveFromType(string $classType) : string
     {
-        $shortClassName = \ConfigTransformer202206075\Nette\Utils\Strings::after($classType, '\\', -1);
+        $shortClassName = \ConfigTransformer202206079\Nette\Utils\Strings::after($classType, '\\', -1);
         if (!\is_string($shortClassName)) {
             $shortClassName = $classType;
         }
