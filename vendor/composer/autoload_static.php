@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
+class ComposerStaticInit15c99af0e9178b98382116f36a1625e5
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -22,6 +22,11 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         array (
             'Symplify\\PhpConfigPrinter\\' => 26,
             'Symplify\\ConfigTransformer\\' => 27,
+            'Symfony\\Polyfill\\Php81\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
         'C' => 
         array (
@@ -33,11 +38,6 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
             'ConfigTransformer20220607\\Symplify\\ComposerJsonManipulator\\' => 59,
             'ConfigTransformer20220607\\Symplify\\AutowireArrayParameter\\' => 58,
             'ConfigTransformer20220607\\Symplify\\Astral\\' => 42,
-            'ConfigTransformer20220607\\Symfony\\Polyfill\\Php81\\' => 49,
-            'ConfigTransformer20220607\\Symfony\\Polyfill\\Mbstring\\' => 52,
-            'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Normalizer\\' => 59,
-            'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Grapheme\\' => 57,
-            'ConfigTransformer20220607\\Symfony\\Polyfill\\Ctype\\' => 49,
             'ConfigTransformer20220607\\Symfony\\Contracts\\Service\\' => 52,
             'ConfigTransformer20220607\\Symfony\\Contracts\\Cache\\' => 50,
             'ConfigTransformer20220607\\Symfony\\Component\\Yaml\\' => 49,
@@ -66,6 +66,26 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'Symplify\\ConfigTransformer\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Symfony\\Polyfill\\Php81\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'ConfigTransformer20220607\\Webmozart\\Assert\\' => 
         array (
@@ -98,26 +118,6 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'ConfigTransformer20220607\\Symplify\\Astral\\' => 
         array (
             0 => __DIR__ . '/..' . '/symplify/astral/src',
-        ),
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Php81\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
-        ),
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Normalizer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
-        ),
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Grapheme\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
-        ),
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Ctype\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'ConfigTransformer20220607\\Symfony\\Contracts\\Service\\' => 
         array (
@@ -235,7 +235,6 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'ConfigTransformer20220607\\Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
         'ConfigTransformer20220607\\Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'ConfigTransformer20220607\\Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
-        'ConfigTransformer20220607\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'ConfigTransformer20220607\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayItemNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayItemNode.php',
         'ConfigTransformer20220607\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayNode.php',
         'ConfigTransformer20220607\\PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprFalseNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprFalseNode.php',
@@ -557,7 +556,6 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'ConfigTransformer20220607\\Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerInterface.php',
         'ConfigTransformer20220607\\Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerTrait.php',
         'ConfigTransformer20220607\\Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/src/NullLogger.php',
-        'ConfigTransformer20220607\\ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'ConfigTransformer20220607\\SebastianBergmann\\Diff\\Chunk' => __DIR__ . '/..' . '/sebastian/diff/src/Chunk.php',
         'ConfigTransformer20220607\\SebastianBergmann\\Diff\\ConfigurationException' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/ConfigurationException.php',
         'ConfigTransformer20220607\\SebastianBergmann\\Diff\\Diff' => __DIR__ . '/..' . '/sebastian/diff/src/Diff.php',
@@ -1083,11 +1081,6 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'ConfigTransformer20220607\\Symfony\\Contracts\\Service\\ServiceSubscriberInterface' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceSubscriberInterface.php',
         'ConfigTransformer20220607\\Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceSubscriberTrait.php',
         'ConfigTransformer20220607\\Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Grapheme\\Grapheme' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/Grapheme.php',
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Normalizer.php',
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'ConfigTransformer20220607\\Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'ConfigTransformer20220607\\Symplify\\Astral\\Contract\\NodeNameResolverInterface' => __DIR__ . '/..' . '/symplify/astral/src/Contract/NodeNameResolverInterface.php',
         'ConfigTransformer20220607\\Symplify\\Astral\\Contract\\NodeValueResolver\\NodeValueResolverInterface' => __DIR__ . '/..' . '/symplify/astral/src/Contract/NodeValueResolver/NodeValueResolverInterface.php',
         'ConfigTransformer20220607\\Symplify\\Astral\\Exception\\ShouldNotHappenException' => __DIR__ . '/..' . '/symplify/astral/src/Exception/ShouldNotHappenException.php',
@@ -1224,6 +1217,13 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
         'ConfigTransformer20220607\\Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'ConfigTransformer20220607\\Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'ConfigTransformer20220607\\Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
+        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
+        'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
+        'Symfony\\Polyfill\\Intl\\Grapheme\\Grapheme' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/Grapheme.php',
+        'Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Normalizer.php',
+        'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'Symplify\\ConfigTransformer\\Collector\\XmlImportCollector' => __DIR__ . '/../..' . '/src/Collector/XmlImportCollector.php',
         'Symplify\\ConfigTransformer\\Command\\SwitchFormatCommand' => __DIR__ . '/../..' . '/src/Command/SwitchFormatCommand.php',
         'Symplify\\ConfigTransformer\\ConfigLoader' => __DIR__ . '/../..' . '/src/ConfigLoader.php',
@@ -1319,9 +1319,9 @@ class ComposerStaticInitb7345fc7b294da24374e6ed8892922ea
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb7345fc7b294da24374e6ed8892922ea::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb7345fc7b294da24374e6ed8892922ea::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb7345fc7b294da24374e6ed8892922ea::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit15c99af0e9178b98382116f36a1625e5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit15c99af0e9178b98382116f36a1625e5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit15c99af0e9178b98382116f36a1625e5::$classMap;
 
         }, null, ClassLoader::class);
     }

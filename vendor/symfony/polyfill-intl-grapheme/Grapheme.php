@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Polyfill\Intl\Grapheme;
+namespace Symfony\Polyfill\Intl\Grapheme;
 
-\define('ConfigTransformer20220607\\SYMFONY_GRAPHEME_CLUSTER_RX', ((float) \PCRE_VERSION < 10 ? (float) \PCRE_VERSION >= 8.32 : (float) \PCRE_VERSION >= 10.39) ? '\\X' : Grapheme::GRAPHEME_CLUSTER_RX);
+\define('SYMFONY_GRAPHEME_CLUSTER_RX', ((float) \PCRE_VERSION < 10 ? (float) \PCRE_VERSION >= 8.32 : (float) \PCRE_VERSION >= 10.39) ? '\\X' : \Symfony\Polyfill\Intl\Grapheme\Grapheme::GRAPHEME_CLUSTER_RX);
 /**
  * Partial intl implementation in pure PHP.
  *
@@ -72,7 +72,7 @@ final class Grapheme
             return '';
         }
         $next = $start;
-        $s = \preg_split('/(' . SYMFONY_GRAPHEME_CLUSTER_RX . ')/u', "\r\n" . $s, $size + 1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE);
+        $s = \preg_split('/(' . \SYMFONY_GRAPHEME_CLUSTER_RX . ')/u', "\r\n" . $s, $size + 1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE);
         if (!isset($s[1])) {
             return \false;
         }
@@ -95,7 +95,7 @@ final class Grapheme
     }
     public static function grapheme_strlen($s)
     {
-        \preg_replace('/' . SYMFONY_GRAPHEME_CLUSTER_RX . '/u', '', $s, -1, $len);
+        \preg_replace('/' . \SYMFONY_GRAPHEME_CLUSTER_RX . '/u', '', $s, -1, $len);
         return 0 === $len && '' !== $s ? null : $len;
     }
     public static function grapheme_substr($s, $start, $len = null)
@@ -103,7 +103,7 @@ final class Grapheme
         if (null === $len) {
             $len = 2147483647;
         }
-        \preg_match_all('/' . SYMFONY_GRAPHEME_CLUSTER_RX . '/u', $s, $s);
+        \preg_match_all('/' . \SYMFONY_GRAPHEME_CLUSTER_RX . '/u', $s, $s);
         $slen = \count($s[0]);
         $start = (int) $start;
         if (0 > $start) {

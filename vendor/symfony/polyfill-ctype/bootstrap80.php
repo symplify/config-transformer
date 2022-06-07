@@ -1,7 +1,5 @@
 <?php
 
-namespace ConfigTransformer20220607;
-
 /*
  * This file is part of the Symfony package.
  *
@@ -10,103 +8,72 @@ namespace ConfigTransformer20220607;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use ConfigTransformer20220607\Symfony\Polyfill\Ctype as p;
-if (!\function_exists('ctype_alnum')) {
+
+use Symfony\Polyfill\Ctype as p;
+
+if (!function_exists('ctype_alnum')) {
     /**
      * @param mixed $text
      */
-    function ctype_alnum($text) : bool
-    {
-        return p\Ctype::ctype_alnum($text);
-    }
+    function ctype_alnum($text): bool { return p\Ctype::ctype_alnum($text); }
 }
-if (!\function_exists('ctype_alpha')) {
+if (!function_exists('ctype_alpha')) {
     /**
      * @param mixed $text
      */
-    function ctype_alpha($text) : bool
-    {
-        return p\Ctype::ctype_alpha($text);
-    }
+    function ctype_alpha($text): bool { return p\Ctype::ctype_alpha($text); }
 }
-if (!\function_exists('ctype_cntrl')) {
+if (!function_exists('ctype_cntrl')) {
     /**
      * @param mixed $text
      */
-    function ctype_cntrl($text) : bool
-    {
-        return p\Ctype::ctype_cntrl($text);
-    }
+    function ctype_cntrl($text): bool { return p\Ctype::ctype_cntrl($text); }
 }
-if (!\function_exists('ctype_digit')) {
+if (!function_exists('ctype_digit')) {
     /**
      * @param mixed $text
      */
-    function ctype_digit($text) : bool
-    {
-        return p\Ctype::ctype_digit($text);
-    }
+    function ctype_digit($text): bool { return p\Ctype::ctype_digit($text); }
 }
-if (!\function_exists('ctype_graph')) {
+if (!function_exists('ctype_graph')) {
     /**
      * @param mixed $text
      */
-    function ctype_graph($text) : bool
-    {
-        return p\Ctype::ctype_graph($text);
-    }
+    function ctype_graph($text): bool { return p\Ctype::ctype_graph($text); }
 }
-if (!\function_exists('ctype_lower')) {
+if (!function_exists('ctype_lower')) {
     /**
      * @param mixed $text
      */
-    function ctype_lower($text) : bool
-    {
-        return p\Ctype::ctype_lower($text);
-    }
+    function ctype_lower($text): bool { return p\Ctype::ctype_lower($text); }
 }
-if (!\function_exists('ctype_print')) {
+if (!function_exists('ctype_print')) {
     /**
      * @param mixed $text
      */
-    function ctype_print($text) : bool
-    {
-        return p\Ctype::ctype_print($text);
-    }
+    function ctype_print($text): bool { return p\Ctype::ctype_print($text); }
 }
-if (!\function_exists('ctype_punct')) {
+if (!function_exists('ctype_punct')) {
     /**
      * @param mixed $text
      */
-    function ctype_punct($text) : bool
-    {
-        return p\Ctype::ctype_punct($text);
-    }
+    function ctype_punct($text): bool { return p\Ctype::ctype_punct($text); }
 }
-if (!\function_exists('ctype_space')) {
+if (!function_exists('ctype_space')) {
     /**
      * @param mixed $text
      */
-    function ctype_space($text) : bool
-    {
-        return p\Ctype::ctype_space($text);
-    }
+    function ctype_space($text): bool { return p\Ctype::ctype_space($text); }
 }
-if (!\function_exists('ctype_upper')) {
+if (!function_exists('ctype_upper')) {
     /**
      * @param mixed $text
      */
-    function ctype_upper($text) : bool
-    {
-        return p\Ctype::ctype_upper($text);
-    }
+    function ctype_upper($text): bool { return p\Ctype::ctype_upper($text); }
 }
-if (!\function_exists('ctype_xdigit')) {
+if (!function_exists('ctype_xdigit')) {
     /**
      * @param mixed $text
      */
-    function ctype_xdigit($text) : bool
-    {
-        return p\Ctype::ctype_xdigit($text);
-    }
+    function ctype_xdigit($text): bool { return p\Ctype::ctype_xdigit($text); }
 }
