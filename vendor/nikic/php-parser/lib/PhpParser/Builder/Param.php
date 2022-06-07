@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Builder;
+namespace ConfigTransformer20220607\PhpParser\Builder;
 
-use ConfigTransformer202206072\PhpParser;
-use ConfigTransformer202206072\PhpParser\BuilderHelpers;
-use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer20220607\PhpParser;
+use ConfigTransformer20220607\PhpParser\BuilderHelpers;
+use ConfigTransformer20220607\PhpParser\Node;
 class Param implements PhpParser\Builder
 {
     protected $name;

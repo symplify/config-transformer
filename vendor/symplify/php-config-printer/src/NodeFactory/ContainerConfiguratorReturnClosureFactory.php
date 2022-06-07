@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206072\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206072\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206072\PhpParser\Node\Stmt;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Return_;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer20220607\PhpParser\Node\Expr\Assign;
+use ConfigTransformer20220607\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220607\PhpParser\Node\Expr\Variable;
+use ConfigTransformer20220607\PhpParser\Node\Stmt;
+use ConfigTransformer20220607\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220607\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;

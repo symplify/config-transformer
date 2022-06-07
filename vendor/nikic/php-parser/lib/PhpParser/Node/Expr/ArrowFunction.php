@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Node\Expr;
+namespace ConfigTransformer20220607\PhpParser\Node\Expr;
 
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\Node\Expr;
-use ConfigTransformer202206072\PhpParser\Node\FunctionLike;
+use ConfigTransformer20220607\PhpParser\Node;
+use ConfigTransformer20220607\PhpParser\Node\Expr;
+use ConfigTransformer20220607\PhpParser\Node\FunctionLike;
 class ArrowFunction extends Expr implements FunctionLike
 {
     /** @var bool */

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220607\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer20220607\PhpParser\Node;
 class Finally_ extends Node\Stmt
 {
     /** @var Node\Stmt[] Statements */

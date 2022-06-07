@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer20220607\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202206072\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer20220607\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *

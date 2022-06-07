@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console;
+namespace ConfigTransformer20220607\Symfony\Component\Console;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 /**
  * Contains all events dispatched by an Application.
  *

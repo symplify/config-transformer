@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeTraverser;
 
-use ConfigTransformer202206072\PhpParser\BuilderFactory;
-use ConfigTransformer202206072\PhpParser\Node;
-use ConfigTransformer202206072\PhpParser\Node\Name;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202206072\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer202206072\PhpParser\NodeTraverser;
-use ConfigTransformer202206072\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer20220607\PhpParser\BuilderFactory;
+use ConfigTransformer20220607\PhpParser\Node;
+use ConfigTransformer20220607\PhpParser\Node\Name;
+use ConfigTransformer20220607\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer20220607\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer20220607\PhpParser\NodeTraverser;
+use ConfigTransformer20220607\PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Symplify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
 use Symplify\PhpConfigPrinter\Sorter\FullyQualifiedImportSorter;
 use Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;

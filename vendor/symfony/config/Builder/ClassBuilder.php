@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Config\Builder;
+namespace ConfigTransformer20220607\Symfony\Component\Config\Builder;
 
 /**
  * Build PHP classes to generate config.

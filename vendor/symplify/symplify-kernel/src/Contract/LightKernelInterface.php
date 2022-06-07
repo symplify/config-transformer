@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\SymplifyKernel\Contract;
+namespace ConfigTransformer20220607\Symplify\SymplifyKernel\Contract;
 
-use ConfigTransformer202206072\Psr\Container\ContainerInterface;
+use ConfigTransformer20220607\Psr\Container\ContainerInterface;
 /**
  * @api
  */

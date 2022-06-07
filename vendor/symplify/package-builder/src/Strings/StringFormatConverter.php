@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PackageBuilder\Strings;
+namespace ConfigTransformer20220607\Symplify\PackageBuilder\Strings;
 
-use ConfigTransformer202206072\Nette\Utils\Strings;
+use ConfigTransformer20220607\Nette\Utils\Strings;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Strings\StringFormatConverterTest

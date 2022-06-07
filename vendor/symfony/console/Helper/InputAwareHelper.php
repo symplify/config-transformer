@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\Helper;
+namespace ConfigTransformer20220607\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Input\InputAwareInterface;
-use ConfigTransformer202206072\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Input\InputAwareInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Input\InputInterface;
 /**
  * An implementation of InputAwareInterface for Helpers.
  *

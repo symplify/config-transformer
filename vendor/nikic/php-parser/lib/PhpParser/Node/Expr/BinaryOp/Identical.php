@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Node\Expr\BinaryOp;
+namespace ConfigTransformer20220607\PhpParser\Node\Expr\BinaryOp;
 
-use ConfigTransformer202206072\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer20220607\PhpParser\Node\Expr\BinaryOp;
 class Identical extends BinaryOp
 {
     public function getOperatorSigil() : string

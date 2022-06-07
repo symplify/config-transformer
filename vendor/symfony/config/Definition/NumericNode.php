@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Config\Definition;
+namespace ConfigTransformer20220607\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202206072\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer20220607\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * This node represents a numeric value in the config tree.
  *

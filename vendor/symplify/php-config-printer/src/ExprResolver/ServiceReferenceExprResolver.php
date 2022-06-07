@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206072\PhpParser\Node\Arg;
-use ConfigTransformer202206072\PhpParser\Node\Expr;
-use ConfigTransformer202206072\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer20220607\PhpParser\Node\Arg;
+use ConfigTransformer20220607\PhpParser\Node\Expr;
+use ConfigTransformer20220607\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer20220607\PhpParser\Node\Name\FullyQualified;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ServiceReferenceExprResolver
 {

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202206072\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202206072\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer20220607\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220607\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';

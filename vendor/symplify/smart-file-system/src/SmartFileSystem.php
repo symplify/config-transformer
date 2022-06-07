@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\SmartFileSystem;
+namespace ConfigTransformer20220607\Symplify\SmartFileSystem;
 
-use ConfigTransformer202206072\Nette\Utils\Strings;
-use ConfigTransformer202206072\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202206072\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer20220607\Nette\Utils\Strings;
+use ConfigTransformer20220607\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer20220607\Symfony\Component\Filesystem\Filesystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
  */

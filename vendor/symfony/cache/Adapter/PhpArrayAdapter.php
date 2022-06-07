@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220607\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206072\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202206072\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202206072\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202206072\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202206072\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202206072\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202206072\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202206072\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202206072\Symfony\Component\VarExporter\VarExporter;
-use ConfigTransformer202206072\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer20220607\Psr\Cache\CacheItemInterface;
+use ConfigTransformer20220607\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer20220607\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220607\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220607\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer20220607\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer20220607\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer20220607\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer20220607\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer20220607\Symfony\Contracts\Cache\CacheInterface;
 /**
  * Caches items at warm up time using a PHP array that is stored in shared memory by OPCache since PHP 7.0.
  * Warmed up items are read-only and run-time discovered items are cached using a fallback adapter.

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\PackageBuilder\Parameter;
+namespace ConfigTransformer20220607\Symplify\PackageBuilder\Parameter;
 
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202206072\Symfony\Component\HttpFoundation\ParameterBag;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer20220607\Symfony\Component\HttpFoundation\ParameterBag;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Parameter\ParameterProviderTest

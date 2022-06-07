@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer20220607\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202206072\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer20220607\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This is the entry class for building a config tree.
  *

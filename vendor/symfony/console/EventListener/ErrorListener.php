@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\EventListener;
+namespace ConfigTransformer20220607\Symfony\Component\Console\EventListener;
 
-use ConfigTransformer202206072\Psr\Log\LoggerInterface;
-use ConfigTransformer202206072\Symfony\Component\Console\ConsoleEvents;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleEvent;
-use ConfigTransformer202206072\Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use ConfigTransformer202206072\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer20220607\Psr\Log\LoggerInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\ConsoleEvents;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleEvent;
+use ConfigTransformer20220607\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use ConfigTransformer20220607\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @author James Halsall <james.t.halsall@googlemail.com>
  * @author Robin Chalas <robin.chalas@gmail.com>

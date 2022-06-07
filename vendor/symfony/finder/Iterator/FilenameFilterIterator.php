@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer20220607\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202206072\Symfony\Component\Finder\Glob;
+use ConfigTransformer20220607\Symfony\Component\Finder\Glob;
 /**
  * FilenameFilterIterator filters files by patterns (a regexp, a glob, or a string).
  *

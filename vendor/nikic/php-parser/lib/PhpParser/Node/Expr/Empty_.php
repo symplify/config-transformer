@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\PhpParser\Node\Expr;
+namespace ConfigTransformer20220607\PhpParser\Node\Expr;
 
-use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer20220607\PhpParser\Node\Expr;
 class Empty_ extends Expr
 {
     /** @var Expr Expression */

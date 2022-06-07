@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202206072\Psr\Container\ContainerExceptionInterface;
-use ConfigTransformer202206072\Psr\Container\NotFoundExceptionInterface;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202206072\Symfony\Contracts\Service\ServiceLocatorTrait;
-use ConfigTransformer202206072\Symfony\Contracts\Service\ServiceProviderInterface;
-use ConfigTransformer202206072\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer20220607\Psr\Container\ContainerExceptionInterface;
+use ConfigTransformer20220607\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer20220607\Symfony\Contracts\Service\ServiceLocatorTrait;
+use ConfigTransformer20220607\Symfony\Contracts\Service\ServiceProviderInterface;
+use ConfigTransformer20220607\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>

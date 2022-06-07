@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206072\Symplify\Astral\PhpParser;
+namespace ConfigTransformer20220607\Symplify\Astral\PhpParser;
 
-use ConfigTransformer202206072\PhpParser\Node\Stmt;
-use ConfigTransformer202206072\PHPStan\Parser\Parser;
+use ConfigTransformer20220607\PhpParser\Node\Stmt;
+use ConfigTransformer20220607\PHPStan\Parser\Parser;
 /**
  * @see \Symplify\Astral\PhpParser\SmartPhpParserFactory
  */

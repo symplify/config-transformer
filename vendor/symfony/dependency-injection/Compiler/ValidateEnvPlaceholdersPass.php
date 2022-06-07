@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202206072\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202206072\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202206072\Symfony\Component\Config\Definition\Processor;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202206072\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ConfigTransformer20220607\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer20220607\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer20220607\Symfony\Component\Config\Definition\Processor;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *

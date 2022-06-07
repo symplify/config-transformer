@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\Style;
+namespace ConfigTransformer20220607\Symfony\Component\Console\Style;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer202206072\Symfony\Component\Console\Helper\ProgressBar;
-use ConfigTransformer202206072\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202206072\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Helper\ProgressBar;
+use ConfigTransformer20220607\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *

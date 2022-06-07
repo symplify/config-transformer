@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206072\Symfony\Component\Console\Output;
+namespace ConfigTransformer20220607\Symfony\Component\Console\Output;
 
-use ConfigTransformer202206072\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202206072\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer20220607\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer20220607\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * Base class for output classes.
  *

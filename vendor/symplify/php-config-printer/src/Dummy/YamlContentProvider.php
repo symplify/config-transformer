@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Dummy;
 
-use ConfigTransformer202206072\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer20220607\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class YamlContentProvider
 {
     /**
