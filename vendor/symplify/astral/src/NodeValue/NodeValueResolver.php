@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\Astral\NodeValue;
+namespace ConfigTransformer202206072\Symplify\Astral\NodeValue;
 
-use ConfigTransformer202206077\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer202206077\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202206077\PhpParser\Node\Expr;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Instanceof_;
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206077\PHPStan\Analyser\Scope;
-use ConfigTransformer202206077\PHPStan\Type\ConstantScalarType;
-use ConfigTransformer202206077\PHPStan\Type\UnionType;
-use ConfigTransformer202206077\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202206077\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202206077\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202206077\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
-use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
-use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
-use ConfigTransformer202206077\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
-use ConfigTransformer202206077\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202206072\PhpParser\ConstExprEvaluationException;
+use ConfigTransformer202206072\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Instanceof_;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206072\PHPStan\Analyser\Scope;
+use ConfigTransformer202206072\PHPStan\Type\ConstantScalarType;
+use ConfigTransformer202206072\PHPStan\Type\UnionType;
+use ConfigTransformer202206072\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202206072\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202206072\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202206072\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer202206072\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
+use ConfigTransformer202206072\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
+use ConfigTransformer202206072\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
+use ConfigTransformer202206072\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
+use ConfigTransformer202206072\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  */

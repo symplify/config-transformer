@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Yaml;
+namespace Symplify\PhpConfigPrinter\Yaml;
 
-use ConfigTransformer202206077\Nette\Utils\Strings;
-use ConfigTransformer202206077\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer202206072\Nette\Utils\Strings;
+use ConfigTransformer202206072\Symplify\PackageBuilder\Strings\StringFormatConverter;
 /**
  * @api
  * @copy of https://github.com/symplify/symplify/blob/d4beda1b1af847599aa035ead755e03db81c7247/packages/easy-coding-standard/src/Yaml/CheckerServiceParametersShifter.php

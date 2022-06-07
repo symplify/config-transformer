@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\PHPStan;
+namespace ConfigTransformer202206072\PHPStan;
 
-use ConfigTransformer202206077\Composer\Autoload\ClassLoader;
+use ConfigTransformer202206072\Composer\Autoload\ClassLoader;
 final class PharAutoloader
 {
     /** @var ClassLoader */
     private static $composerAutoloader;
     public static final function loadClass(string $class) : void
     {
-        if (!\extension_loaded('phar') || \defined('ConfigTransformer202206077\\__PHPSTAN_RUNNING__')) {
+        if (!\extension_loaded('phar') || \defined('ConfigTransformer202206072\\__PHPSTAN_RUNNING__')) {
             return;
         }
         if (\strpos($class, '_PHPStan_') === 0) {

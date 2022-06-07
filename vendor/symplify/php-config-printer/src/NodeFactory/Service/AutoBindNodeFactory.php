@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202206077\PhpParser\Node\Arg;
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
+use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class AutoBindNodeFactory
 {
     /**

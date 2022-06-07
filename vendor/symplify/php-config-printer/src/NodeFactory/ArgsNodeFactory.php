@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory;
+namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206077\PhpParser\BuilderHelpers;
-use ConfigTransformer202206077\PhpParser\Node;
-use ConfigTransformer202206077\PhpParser\Node\Arg;
-use ConfigTransformer202206077\PhpParser\Node\Expr;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206077\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206077\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206077\PhpParser\Node\Identifier;
-use ConfigTransformer202206077\PhpParser\Node\Name;
-use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206077\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206072\PhpParser\BuilderHelpers;
+use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206072\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202206072\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202206072\PhpParser\Node\Identifier;
+use ConfigTransformer202206072\PhpParser\Node\Name;
+use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206072\Symfony\Component\Yaml\Tag\TaggedValue;
+use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver;
+use Symplify\PhpConfigPrinter\ExprResolver\TaggedReturnsCloneResolver;
+use Symplify\PhpConfigPrinter\ExprResolver\TaggedServiceResolver;
+use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ArgsNodeFactory
 {
     /**
@@ -49,7 +49,7 @@ final class ArgsNodeFactory
      * @var \Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory
      */
     private $newValueObjectFactory;
-    public function __construct(StringExprResolver $stringExprResolver, TaggedReturnsCloneResolver $taggedReturnsCloneResolver, TaggedServiceResolver $taggedServiceResolver, NewValueObjectFactory $newValueObjectFactory)
+    public function __construct(StringExprResolver $stringExprResolver, TaggedReturnsCloneResolver $taggedReturnsCloneResolver, TaggedServiceResolver $taggedServiceResolver, \Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory $newValueObjectFactory)
     {
         $this->stringExprResolver = $stringExprResolver;
         $this->taggedReturnsCloneResolver = $taggedReturnsCloneResolver;

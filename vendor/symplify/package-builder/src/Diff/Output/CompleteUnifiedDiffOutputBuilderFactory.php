@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PackageBuilder\Diff\Output;
+namespace ConfigTransformer202206072\Symplify\PackageBuilder\Diff\Output;
 
-use ConfigTransformer202206077\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
-use ConfigTransformer202206077\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202206072\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use ConfigTransformer202206072\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * @api
  * Creates @see UnifiedDiffOutputBuilder with "$contextLines = 1000;"

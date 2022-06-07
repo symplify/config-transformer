@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206077\Symfony\Contracts\Service;
+namespace ConfigTransformer202206072\Symfony\Contracts\Service;
 
-use ConfigTransformer202206077\Psr\Container\ContainerInterface;
+use ConfigTransformer202206072\Psr\Container\ContainerInterface;
 /**
  * A ServiceProviderInterface exposes the identifiers and the types of services provided by a container.
  *

@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver;
+namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206077\PhpParser\Node\Arg;
-use ConfigTransformer202206077\PhpParser\Node\Expr;
-use ConfigTransformer202206077\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class ServiceReferenceExprResolver
 {
     /**
      * @var \Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver
      */
     private $stringExprResolver;
-    public function __construct(StringExprResolver $stringExprResolver)
+    public function __construct(\Symplify\PhpConfigPrinter\ExprResolver\StringExprResolver $stringExprResolver)
     {
         $this->stringExprResolver = $stringExprResolver;
     }

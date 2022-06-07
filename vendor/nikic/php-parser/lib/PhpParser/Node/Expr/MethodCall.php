@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\PhpParser\Node\Expr;
+namespace ConfigTransformer202206072\PhpParser\Node\Expr;
 
-use ConfigTransformer202206077\PhpParser\Node\Arg;
-use ConfigTransformer202206077\PhpParser\Node\Expr;
-use ConfigTransformer202206077\PhpParser\Node\Identifier;
-use ConfigTransformer202206077\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Identifier;
+use ConfigTransformer202206072\PhpParser\Node\VariadicPlaceholder;
 class MethodCall extends CallLike
 {
     /** @var Expr Variable holding object */

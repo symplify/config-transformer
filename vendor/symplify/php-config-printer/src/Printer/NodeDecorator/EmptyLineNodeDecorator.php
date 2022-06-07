@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Printer\NodeDecorator;
+namespace Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use ConfigTransformer202206077\PhpParser\Node;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\PhpParser\Node\Stmt;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202206077\PhpParser\NodeFinder;
-use ConfigTransformer202206077\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Assign;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202206072\PhpParser\NodeFinder;
+use ConfigTransformer202206072\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\Printer;
+namespace Symplify\PhpConfigPrinter\Printer;
 
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * @api
  * @see \Symplify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\SmartPhpConfigPrinterTest
@@ -24,7 +24,7 @@ final class SmartPhpConfigPrinter
      * @var \Symplify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator
      */
     private $serviceConfigurationDecorator;
-    public function __construct(ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ServiceConfigurationDecorator $serviceConfigurationDecorator)
+    public function __construct(ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, \Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ServiceConfigurationDecorator $serviceConfigurationDecorator)
     {
         $this->configuratorReturnClosureFactory = $configuratorReturnClosureFactory;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;

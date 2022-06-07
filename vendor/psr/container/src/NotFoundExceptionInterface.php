@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202206077\Psr\Container;
+namespace ConfigTransformer202206072\Psr\Container;
 
 /**
  * No entry was found in the container.

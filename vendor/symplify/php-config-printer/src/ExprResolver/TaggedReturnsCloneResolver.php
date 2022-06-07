@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\ExprResolver;
+namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206077\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206077\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206077\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206072\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202206072\Symfony\Component\Yaml\Tag\TaggedValue;
+use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedReturnsCloneResolver
 {
     /**
      * @var \Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver
      */
     private $serviceReferenceExprResolver;
-    public function __construct(ServiceReferenceExprResolver $serviceReferenceExprResolver)
+    public function __construct(\Symplify\PhpConfigPrinter\ExprResolver\ServiceReferenceExprResolver $serviceReferenceExprResolver)
     {
         $this->serviceReferenceExprResolver = $serviceReferenceExprResolver;
     }

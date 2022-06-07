@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206077\Symfony\Component\Yaml;
+namespace ConfigTransformer202206072\Symfony\Component\Yaml;
 
-use ConfigTransformer202206077\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202206072\Symfony\Component\Yaml\Exception\ParseException;
 /**
  * Unescaper encapsulates unescaping rules for single and double-quoted
  * YAML strings.

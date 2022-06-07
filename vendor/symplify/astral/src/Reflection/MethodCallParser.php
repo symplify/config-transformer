@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\Astral\Reflection;
+namespace ConfigTransformer202206072\Symplify\Astral\Reflection;
 
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202206077\PHPStan\Analyser\Scope;
-use ConfigTransformer202206077\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer202206077\PHPStan\Type\ObjectType;
-use ConfigTransformer202206077\PHPStan\Type\ThisType;
-use ConfigTransformer202206077\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202206072\PHPStan\Analyser\Scope;
+use ConfigTransformer202206072\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer202206072\PHPStan\Type\ObjectType;
+use ConfigTransformer202206072\PHPStan\Type\ThisType;
+use ConfigTransformer202206072\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @api
  */

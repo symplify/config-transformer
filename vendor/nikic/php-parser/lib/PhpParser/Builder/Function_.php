@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\PhpParser\Builder;
+namespace ConfigTransformer202206072\PhpParser\Builder;
 
-use ConfigTransformer202206077\PhpParser;
-use ConfigTransformer202206077\PhpParser\BuilderHelpers;
-use ConfigTransformer202206077\PhpParser\Node;
-use ConfigTransformer202206077\PhpParser\Node\Stmt;
+use ConfigTransformer202206072\PhpParser;
+use ConfigTransformer202206072\PhpParser\BuilderHelpers;
+use ConfigTransformer202206072\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node\Stmt;
 class Function_ extends FunctionLike
 {
     protected $name;

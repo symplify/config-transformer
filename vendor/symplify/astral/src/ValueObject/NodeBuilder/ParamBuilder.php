@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\Astral\ValueObject\NodeBuilder;
+namespace ConfigTransformer202206072\Symplify\Astral\ValueObject\NodeBuilder;
 
-use ConfigTransformer202206077\PhpParser\Builder\Param;
+use ConfigTransformer202206072\PhpParser\Builder\Param;
 /**
  * @api
  * Fixed duplicated naming in php-parser and prevents confusion

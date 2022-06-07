@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206077\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202206077\Symfony\Component\ExpressionLanguage\ExpressionFunction;
-use ConfigTransformer202206077\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use ConfigTransformer202206072\Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use ConfigTransformer202206072\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 /**
  * Define some ExpressionLanguage functions.
  *

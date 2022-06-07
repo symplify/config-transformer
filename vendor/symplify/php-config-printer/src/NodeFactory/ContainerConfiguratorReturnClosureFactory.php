@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory;
+namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206077\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206077\PhpParser\Node\Stmt;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\Return_;
-use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Assign;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206072\PhpParser\Node\Stmt;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;
+use Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class ContainerConfiguratorReturnClosureFactory
 {
     /**
@@ -32,7 +32,7 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param CaseConverterInterface[] $caseConverters
      */
-    public function __construct(ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, ContainerNestedNodesFactory $containerNestedNodesFactory)
+    public function __construct(ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, \Symplify\PhpConfigPrinter\NodeFactory\ContainerNestedNodesFactory $containerNestedNodesFactory)
     {
         $this->configuratorClosureNodeFactory = $configuratorClosureNodeFactory;
         $this->caseConverters = $caseConverters;

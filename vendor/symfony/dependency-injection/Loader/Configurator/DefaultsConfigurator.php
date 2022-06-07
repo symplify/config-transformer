@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206077\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202206072\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206077\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206072\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

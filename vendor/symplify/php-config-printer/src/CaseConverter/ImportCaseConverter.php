@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\Symplify\PhpConfigPrinter\CaseConverter;
+namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202206077\Nette\Utils\Strings;
-use ConfigTransformer202206077\PhpParser\BuilderHelpers;
-use ConfigTransformer202206077\PhpParser\Node\Arg;
-use ConfigTransformer202206077\PhpParser\Node\Expr;
-use ConfigTransformer202206077\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202206077\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206077\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206077\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206077\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206077\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202206077\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206072\Nette\Utils\Strings;
+use ConfigTransformer202206072\PhpParser\BuilderHelpers;
+use ConfigTransformer202206072\PhpParser\Node\Arg;
+use ConfigTransformer202206072\PhpParser\Node\Expr;
+use ConfigTransformer202206072\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206072\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206072\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206072\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206072\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206072\PhpParser\Node\Stmt\Expression;
+use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
+use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use Symplify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
+use Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**
  * Handles this part:
  *

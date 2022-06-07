@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206077\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206072\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206077\PhpParser\Node;
+use ConfigTransformer202206072\PhpParser\Node;
 abstract class TraitUseAdaptation extends Node\Stmt
 {
     /** @var Node\Name|null Trait name */
