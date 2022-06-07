@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202206075\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202206075\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * Represents a node in the AST.
  *
@@ -48,7 +48,7 @@ class Node
         }
         return \implode("\n", $repr);
     }
-    public function compile(\ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         foreach ($this->nodes as $node) {
             $node->compile($compiler);
@@ -76,7 +76,7 @@ class Node
     }
     protected function dumpString(string $value)
     {
-        return \sprintf('"%s"', \addcslashes($value, "\0\t\"\\"));
+        return \sprintf('"%s"', \addcslashes($value, "\x00\t\"\\"));
     }
     protected function isHash(array $value)
     {

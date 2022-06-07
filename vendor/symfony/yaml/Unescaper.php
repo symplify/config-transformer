@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Yaml;
+namespace ConfigTransformer202206075\Symfony\Component\Yaml;
 
-use ConfigTransformer202206079\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202206075\Symfony\Component\Yaml\Exception\ParseException;
 /**
  * Unescaper encapsulates unescaping rules for single and double-quoted
  * YAML strings.
@@ -56,11 +56,11 @@ class Unescaper
     {
         switch ($value[1]) {
             case '0':
-                return "\0";
+                return "\x00";
             case 'a':
-                return "\7";
+                return "\x07";
             case 'b':
-                return "\10";
+                return "\x08";
             case 't':
                 return "\t";
             case "\t":
@@ -74,7 +74,7 @@ class Unescaper
             case 'r':
                 return "\r";
             case 'e':
-                return "\33";
+                return "\x1b";
             case ' ':
                 return ' ';
             case '"':
@@ -102,7 +102,7 @@ class Unescaper
             case 'U':
                 return self::utf8chr(\hexdec(\substr($value, 2, 8)));
             default:
-                throw new \ConfigTransformer202206079\Symfony\Component\Yaml\Exception\ParseException(\sprintf('Found unknown escape character "%s".', $value));
+                throw new ParseException(\sprintf('Found unknown escape character "%s".', $value));
         }
     }
     /**

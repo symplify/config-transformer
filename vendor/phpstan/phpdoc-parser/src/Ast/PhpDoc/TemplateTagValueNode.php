@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
-class TemplateTagValueNode implements \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class TemplateTagValueNode implements PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string */
@@ -15,7 +15,7 @@ class TemplateTagValueNode implements \ConfigTransformer202206079\PHPStan\PhpDoc
     public $bound;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(string $name, ?\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $bound, string $description)
+    public function __construct(string $name, ?TypeNode $bound, string $description)
     {
         $this->name = $name;
         $this->bound = $bound;
@@ -24,6 +24,6 @@ class TemplateTagValueNode implements \ConfigTransformer202206079\PHPStan\PhpDoc
     public function __toString() : string
     {
         $bound = $this->bound !== null ? " of {$this->bound}" : '';
-        return \trim("{$this->name}{$bound} {$this->description}");
+        return trim("{$this->name}{$bound} {$this->description}");
     }
 }

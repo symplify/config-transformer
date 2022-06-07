@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202206075\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206079\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202206075\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202206075\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class OutputFormatterStyleStack implements \ConfigTransformer202206079\Symfony\Contracts\Service\ResetInterface
+class OutputFormatterStyleStack implements ResetInterface
 {
     /**
      * @var OutputFormatterStyleInterface[]
      */
     private $styles = [];
     private $emptyStyle;
-    public function __construct(\ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
+    public function __construct(OutputFormatterStyleInterface $emptyStyle = null)
     {
-        $this->emptyStyle = $emptyStyle ?? new \ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $this->emptyStyle = $emptyStyle ?? new OutputFormatterStyle();
         $this->reset();
     }
     /**
@@ -37,7 +37,7 @@ class OutputFormatterStyleStack implements \ConfigTransformer202206079\Symfony\C
     /**
      * Pushes a style in the stack.
      */
-    public function push(\ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
+    public function push(OutputFormatterStyleInterface $style)
     {
         $this->styles[] = $style;
     }
@@ -46,7 +46,7 @@ class OutputFormatterStyleStack implements \ConfigTransformer202206079\Symfony\C
      *
      * @throws InvalidArgumentException When style tags incorrectly nested
      */
-    public function pop(\ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style = null) : \ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    public function pop(OutputFormatterStyleInterface $style = null) : OutputFormatterStyleInterface
     {
         if (empty($this->styles)) {
             return $this->emptyStyle;
@@ -60,12 +60,12 @@ class OutputFormatterStyleStack implements \ConfigTransformer202206079\Symfony\C
                 return $stackedStyle;
             }
         }
-        throw new \ConfigTransformer202206079\Symfony\Component\Console\Exception\InvalidArgumentException('Incorrectly nested style tag found.');
+        throw new InvalidArgumentException('Incorrectly nested style tag found.');
     }
     /**
      * Computes current style with stacks top codes.
      */
-    public function getCurrent() : \ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyle
+    public function getCurrent() : OutputFormatterStyle
     {
         if (empty($this->styles)) {
             return $this->emptyStyle;
@@ -75,12 +75,12 @@ class OutputFormatterStyleStack implements \ConfigTransformer202206079\Symfony\C
     /**
      * @return $this
      */
-    public function setEmptyStyle(\ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle)
+    public function setEmptyStyle(OutputFormatterStyleInterface $emptyStyle)
     {
         $this->emptyStyle = $emptyStyle;
         return $this;
     }
-    public function getEmptyStyle() : \ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    public function getEmptyStyle() : OutputFormatterStyleInterface
     {
         return $this->emptyStyle;
     }

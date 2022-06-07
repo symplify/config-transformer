@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\Service;
+namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202206079\PhpParser\BuilderHelpers;
-use ConfigTransformer202206079\PhpParser\Node\Arg;
-use ConfigTransformer202206079\PhpParser\Node\Expr;
-use ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206079\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206079\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use ConfigTransformer202206075\PhpParser\BuilderHelpers;
+use ConfigTransformer202206075\PhpParser\Node\Arg;
+use ConfigTransformer202206075\PhpParser\Node\Expr;
+use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206075\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206075\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 final class SingleServicePhpNodeFactory
 {
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
@@ -24,11 +24,11 @@ final class SingleServicePhpNodeFactory
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      * @param array<string, mixed> $properties
      */
-    public function createProperties(\ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall
+    public function createProperties(MethodCall $methodCall, array $properties) : MethodCall
     {
         foreach ($properties as $name => $value) {
             $args = $this->argsNodeFactory->createFromValues([$name, $value]);
-            $methodCall = new \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall($methodCall, 'property', $args);
+            $methodCall = new MethodCall($methodCall, 'property', $args);
         }
         return $methodCall;
     }
@@ -36,7 +36,7 @@ final class SingleServicePhpNodeFactory
      * @param mixed[] $calls
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      */
-    public function createCalls(\ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall $methodCall, array $calls) : \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall
+    public function createCalls(MethodCall $methodCall, array $calls) : MethodCall
     {
         foreach ($calls as $call) {
             $methodCall = $this->createCallMethodCall($call, $methodCall);
@@ -46,14 +46,14 @@ final class SingleServicePhpNodeFactory
     /**
      * @param mixed[] $call
      */
-    private function resolveCallMethod(array $call) : \ConfigTransformer202206079\PhpParser\Node\Scalar\String_
+    private function resolveCallMethod(array $call) : String_
     {
-        return new \ConfigTransformer202206079\PhpParser\Node\Scalar\String_($call[0] ?? $call['method'] ?? \key($call));
+        return new String_($call[0] ?? $call['method'] ?? \key($call));
     }
     /**
      * @param mixed[] $call
      */
-    private function resolveCallArguments(array $call) : \ConfigTransformer202206079\PhpParser\Node\Expr
+    private function resolveCallArguments(array $call) : Expr
     {
         $arguments = $call[1] ?? $call['arguments'] ?? \current($call);
         return $this->argsNodeFactory->resolveExpr($arguments);
@@ -61,32 +61,32 @@ final class SingleServicePhpNodeFactory
     /**
      * @param mixed[] $call
      */
-    private function resolveCallReturnClone(array $call) : ?\ConfigTransformer202206079\PhpParser\Node\Expr
+    private function resolveCallReturnClone(array $call) : ?Expr
     {
         if (isset($call[2]) || isset($call['returns_clone'])) {
             $returnsCloneValue = $call[2] ?? $call['returns_clone'];
-            return \ConfigTransformer202206079\PhpParser\BuilderHelpers::normalizeValue($returnsCloneValue);
+            return BuilderHelpers::normalizeValue($returnsCloneValue);
         }
         return null;
     }
     /**
      * @param mixed $call
      */
-    private function createCallMethodCall($call, \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall $methodCall) : \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall
+    private function createCallMethodCall($call, MethodCall $methodCall) : MethodCall
     {
         $args = [];
         $string = $this->resolveCallMethod($call);
-        $args[] = new \ConfigTransformer202206079\PhpParser\Node\Arg($string);
+        $args[] = new Arg($string);
         $argumentsExpr = $this->resolveCallArguments($call);
-        $args[] = new \ConfigTransformer202206079\PhpParser\Node\Arg($argumentsExpr);
+        $args[] = new Arg($argumentsExpr);
         $returnCloneExpr = $this->resolveCallReturnClone($call);
         if ($returnCloneExpr !== null) {
-            $args[] = new \ConfigTransformer202206079\PhpParser\Node\Arg($returnCloneExpr);
+            $args[] = new Arg($returnCloneExpr);
         }
         $currentArray = \current($call);
-        if ($currentArray instanceof \ConfigTransformer202206079\Symfony\Component\Yaml\Tag\TaggedValue) {
-            $args[] = new \ConfigTransformer202206079\PhpParser\Node\Arg(\ConfigTransformer202206079\PhpParser\BuilderHelpers::normalizeValue(\true));
+        if ($currentArray instanceof TaggedValue) {
+            $args[] = new Arg(BuilderHelpers::normalizeValue(\true));
         }
-        return new \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
+        return new MethodCall($methodCall, 'call', $args);
     }
 }

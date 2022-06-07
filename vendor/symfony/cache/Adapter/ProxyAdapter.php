@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206075\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206079\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202206079\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202206079\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202206079\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202206079\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202206079\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202206079\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202206075\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202206075\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202206075\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202206075\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202206075\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202206075\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202206075\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202206075\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface, \ConfigTransformer202206079\Symfony\Component\Cache\PruneableInterface, \ConfigTransformer202206079\Symfony\Component\Cache\ResettableInterface
+class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     use ContractsTrait;
     use ProxyTrait;
@@ -31,18 +31,18 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
     private int $defaultLifetime;
     private static \Closure $createCacheItem;
     private static \Closure $setInnerItem;
-    public function __construct(\ConfigTransformer202206079\Psr\Cache\CacheItemPoolInterface $pool, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(CacheItemPoolInterface $pool, string $namespace = '', int $defaultLifetime = 0)
     {
         $this->pool = $pool;
         $this->poolHash = \spl_object_hash($pool);
         if ('' !== $namespace) {
-            \assert('' !== \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::validateKey($namespace));
+            \assert('' !== CacheItem::validateKey($namespace));
             $this->namespace = $namespace;
         }
         $this->namespaceLen = \strlen($namespace);
         $this->defaultLifetime = $defaultLifetime;
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $innerItem, $poolHash) {
-            $item = new \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem();
+            $item = new CacheItem();
             $item->key = $key;
             if (null === $innerItem) {
                 return $item;
@@ -54,35 +54,35 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
             // Detect wrapped values that encode for their expiry and creation duration
             // For compactness, these values are packed in the key of an array using
             // magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F
-            if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = (string) \array_key_first($v)) && "" === $k[0] && "\0" === $k[5] && "_" === $k[9]) {
+            if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = (string) \array_key_first($v)) && "\x9d" === $k[0] && "\x00" === $k[5] && "_" === $k[9]) {
                 $item->value = $v[$k];
                 $v = \unpack('Ve/Nc', \substr($k, 1, -1));
-                $item->metadata[\ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
-                $item->metadata[\ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
-            } elseif ($innerItem instanceof \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem) {
+                $item->metadata[CacheItem::METADATA_EXPIRY] = $v['e'] + CacheItem::METADATA_EXPIRY_OFFSET;
+                $item->metadata[CacheItem::METADATA_CTIME] = $v['c'];
+            } elseif ($innerItem instanceof CacheItem) {
                 $item->metadata = $innerItem->metadata;
             }
             $innerItem->set(null);
             return $item;
-        }, null, \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::class));
+        }, null, CacheItem::class));
         self::$setInnerItem ?? (self::$setInnerItem = \Closure::bind(
             /**
              * @param array $item A CacheItem cast to (array); accessing protected properties requires adding the "\0*\0" PHP prefix
              */
-            static function (\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $innerItem, array $item) {
+            static function (CacheItemInterface $innerItem, array $item) {
                 // Tags are stored separately, no need to account for them when considering this item's newly set metadata
-                if (isset(($metadata = $item["\0*\0newMetadata"])[\ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
-                    unset($metadata[\ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+                if (isset(($metadata = $item["\x00*\x00newMetadata"])[CacheItem::METADATA_TAGS])) {
+                    unset($metadata[CacheItem::METADATA_TAGS]);
                 }
                 if ($metadata) {
                     // For compactness, expiry and creation duration are packed in the key of an array, using magic numbers as separators
-                    $item["\0*\0value"] = ["" . \pack('VN', (int) (0.1 + $metadata[self::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[self::METADATA_CTIME]) . "_" => $item["\0*\0value"]];
+                    $item["\x00*\x00value"] = ["\x9d" . \pack('VN', (int) (0.1 + $metadata[self::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[self::METADATA_CTIME]) . "_" => $item["\x00*\x00value"]];
                 }
-                $innerItem->set($item["\0*\0value"]);
-                $innerItem->expiresAt(null !== $item["\0*\0expiry"] ? \DateTime::createFromFormat('U.u', \sprintf('%.6F', $item["\0*\0expiry"])) : null);
+                $innerItem->set($item["\x00*\x00value"]);
+                $innerItem->expiresAt(null !== $item["\x00*\x00expiry"] ? \DateTime::createFromFormat('U.u', \sprintf('%.6F', $item["\x00*\x00expiry"])) : null);
             },
             null,
-            \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::class
+            CacheItem::class
         ));
     }
     /**
@@ -90,7 +90,7 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
-        if (!$this->pool instanceof \ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface) {
+        if (!$this->pool instanceof CacheInterface) {
             return $this->doGet($this, $key, $callback, $beta, $metadata);
         }
         return $this->pool->get($this->getId($key), function ($innerItem, bool &$save) use($key, $callback) {
@@ -103,7 +103,7 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : CacheItem
     {
         $item = $this->pool->getItem($this->getId($key));
         return (self::$createCacheItem)($key, $item, $this->poolHash);
@@ -132,7 +132,7 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
      */
     public function clear(string $prefix = '') : bool
     {
-        if ($this->pool instanceof \ConfigTransformer202206079\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof AdapterInterface) {
             return $this->pool->clear($this->namespace . $prefix);
         }
         return $this->pool->clear();
@@ -159,14 +159,14 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(CacheItemInterface $item) : bool
     {
         return $this->doSave($item, __FUNCTION__);
     }
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(CacheItemInterface $item) : bool
     {
         return $this->doSave($item, __FUNCTION__);
     }
@@ -177,23 +177,23 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
     {
         return $this->pool->commit();
     }
-    private function doSave(\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $item, string $method) : bool
+    private function doSave(CacheItemInterface $item, string $method) : bool
     {
-        if (!$item instanceof \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof CacheItem) {
             return \false;
         }
         $item = (array) $item;
-        if (null === $item["\0*\0expiry"] && 0 < $this->defaultLifetime) {
-            $item["\0*\0expiry"] = \microtime(\true) + $this->defaultLifetime;
+        if (null === $item["\x00*\x00expiry"] && 0 < $this->defaultLifetime) {
+            $item["\x00*\x00expiry"] = \microtime(\true) + $this->defaultLifetime;
         }
-        if ($item["\0*\0poolHash"] === $this->poolHash && $item["\0*\0innerItem"]) {
-            $innerItem = $item["\0*\0innerItem"];
-        } elseif ($this->pool instanceof \ConfigTransformer202206079\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($item["\x00*\x00poolHash"] === $this->poolHash && $item["\x00*\x00innerItem"]) {
+            $innerItem = $item["\x00*\x00innerItem"];
+        } elseif ($this->pool instanceof AdapterInterface) {
             // this is an optimization specific for AdapterInterface implementations
             // so we can save a round-trip to the backend by just creating a new item
-            $innerItem = (self::$createCacheItem)($this->namespace . $item["\0*\0key"], null, $this->poolHash);
+            $innerItem = (self::$createCacheItem)($this->namespace . $item["\x00*\x00key"], null, $this->poolHash);
         } else {
-            $innerItem = $this->pool->getItem($this->namespace . $item["\0*\0key"]);
+            $innerItem = $this->pool->getItem($this->namespace . $item["\x00*\x00key"]);
         }
         (self::$setInnerItem)($innerItem, $item);
         return $this->pool->{$method}($innerItem);
@@ -210,7 +210,7 @@ class ProxyAdapter implements \ConfigTransformer202206079\Symfony\Component\Cach
     }
     private function getId(mixed $key) : string
     {
-        \assert('' !== \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::validateKey($key));
+        \assert('' !== CacheItem::validateKey($key));
         return $this->namespace . $key;
     }
 }

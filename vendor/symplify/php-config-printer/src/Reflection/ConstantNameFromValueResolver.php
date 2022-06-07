@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\Reflection;
+namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\Reflection;
 
 use ReflectionClass;
 final class ConstantNameFromValueResolver
@@ -11,7 +11,7 @@ final class ConstantNameFromValueResolver
      */
     public function resolveFromValueAndClass($constantValue, string $class) : ?string
     {
-        $reflectionClass = new \ReflectionClass($class);
+        $reflectionClass = new ReflectionClass($class);
         /** @var array<string, mixed> $constants */
         $constants = $reflectionClass->getConstants();
         foreach ($constants as $name => $value) {

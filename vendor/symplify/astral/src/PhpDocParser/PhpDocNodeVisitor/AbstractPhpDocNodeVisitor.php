@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer202206075\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer202206079\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202206075\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
 /**
  * Inspired by https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/NodeVisitorAbstract.php
  */
-abstract class AbstractPhpDocNodeVisitor implements \ConfigTransformer202206079\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface
+abstract class AbstractPhpDocNodeVisitor implements PhpDocNodeVisitorInterface
 {
-    public function beforeTraverse(\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function beforeTraverse(Node $node) : void
     {
     }
     /**
      * @return int|\PHPStan\PhpDocParser\Ast\Node|null
      */
-    public function enterNode(\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Node $node)
+    public function enterNode(Node $node)
     {
         return null;
     }
     /**
      * @return int|\PhpParser\Node|mixed[]|null Replacement node (or special return)
      */
-    public function leaveNode(\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Node $node)
+    public function leaveNode(Node $node)
     {
         return null;
     }
-    public function afterTraverse(\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Node $node) : void
+    public function afterTraverse(Node $node) : void
     {
     }
 }

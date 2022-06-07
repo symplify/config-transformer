@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PackageBuilder\Reflection;
+namespace ConfigTransformer202206075\Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
 /**
@@ -39,7 +39,7 @@ final class ClassLikeExistenceChecker
         if (\in_array($classLikeName, $this->sensitiveNonExistingClasses, \true)) {
             return \false;
         }
-        $reflectionClass = new \ReflectionClass($classLikeName);
+        $reflectionClass = new ReflectionClass($classLikeName);
         if ($classLikeName !== $reflectionClass->getName()) {
             $this->sensitiveNonExistingClasses[] = $classLikeName;
             return \false;

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Cache;
+namespace ConfigTransformer202206075\Symfony\Component\Cache;
 
-use ConfigTransformer202206079\Psr\Log\LoggerInterface;
-use ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202206079\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202206075\Psr\Log\LoggerInterface;
+use ConfigTransformer202206075\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202206075\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *
@@ -50,7 +50,7 @@ final class LockRegistry
         self::$openedFiles = self::$lockedFiles = [];
         return $previousFiles;
     }
-    public static function compute(callable $callback, \ConfigTransformer202206079\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \ConfigTransformer202206079\Psr\Log\LoggerInterface $logger = null)
+    public static function compute(callable $callback, ItemInterface $item, bool &$save, CacheInterface $pool, \Closure $setMetadata = null, LoggerInterface $logger = null)
     {
         if ('\\' === \DIRECTORY_SEPARATOR && null === self::$lockedFiles) {
             // disable locking on Windows by default
@@ -60,7 +60,7 @@ final class LockRegistry
         if ($key < 0 || self::$lockedFiles || !($lock = self::open($key))) {
             return $callback($item, $save);
         }
-        self::$signalingException ??= \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
+        self::$signalingException ??= \unserialize("O:9:\"Exception\":1:{s:16:\"\x00Exception\x00trace\";a:0:{}}");
         self::$signalingCallback ??= function () {
             throw self::$signalingException;
         };

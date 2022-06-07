@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\AutowireArrayParameter\TypeResolver;
+namespace ConfigTransformer202206075\Symplify\AutowireArrayParameter\TypeResolver;
 
-use ConfigTransformer202206079\Nette\Utils\Reflection;
+use ConfigTransformer202206075\Nette\Utils\Reflection;
 use ReflectionMethod;
-use ConfigTransformer202206079\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
+use ConfigTransformer202206075\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 final class ParameterTypeResolver
 {
     /**
@@ -16,11 +16,11 @@ final class ParameterTypeResolver
      * @var \Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver
      */
     private $paramTypeDocBlockResolver;
-    public function __construct(\ConfigTransformer202206079\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver $paramTypeDocBlockResolver)
+    public function __construct(ParamTypeDocBlockResolver $paramTypeDocBlockResolver)
     {
         $this->paramTypeDocBlockResolver = $paramTypeDocBlockResolver;
     }
-    public function resolveParameterType(string $parameterName, \ReflectionMethod $reflectionMethod) : ?string
+    public function resolveParameterType(string $parameterName, ReflectionMethod $reflectionMethod) : ?string
     {
         $docComment = $reflectionMethod->getDocComment();
         if ($docComment === \false) {
@@ -39,7 +39,7 @@ final class ParameterTypeResolver
         if (\ctype_lower($resolvedType[0])) {
             return null;
         }
-        $resolvedClass = \ConfigTransformer202206079\Nette\Utils\Reflection::expandClassName($resolvedType, $declaringReflectionClass);
+        $resolvedClass = Reflection::expandClassName($resolvedType, $declaringReflectionClass);
         $this->resolvedParameterTypesCached[$uniqueKey] = $resolvedClass;
         return $resolvedClass;
     }

@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\SebastianBergmann\Diff\Output;
+namespace ConfigTransformer202206075\SebastianBergmann\Diff\Output;
 
 use function count;
-abstract class AbstractChunkOutputBuilder implements \ConfigTransformer202206079\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
+abstract class AbstractChunkOutputBuilder implements DiffOutputBuilderInterface
 {
     /**
      * Takes input of the diff array and returns the common parts.
@@ -20,7 +20,7 @@ abstract class AbstractChunkOutputBuilder implements \ConfigTransformer202206079
      */
     protected function getCommonChunks(array $diff, int $lineThreshold = 5) : array
     {
-        $diffSize = \count($diff);
+        $diffSize = count($diff);
         $capturing = \false;
         $chunkStart = 0;
         $chunkSize = 0;

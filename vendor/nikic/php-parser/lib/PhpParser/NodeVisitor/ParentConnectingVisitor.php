@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PhpParser\NodeVisitor;
+namespace ConfigTransformer202206075\PhpParser\NodeVisitor;
 
 use function array_pop;
 use function count;
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202206075\PhpParser\Node;
+use ConfigTransformer202206075\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node.
  *
  * On the child node, the parent node can be accessed through
  * <code>$node->getAttribute('parent')</code>.
  */
-final class ParentConnectingVisitor extends \ConfigTransformer202206079\PhpParser\NodeVisitorAbstract
+final class ParentConnectingVisitor extends NodeVisitorAbstract
 {
     /**
      * @var Node[]
@@ -23,15 +23,15 @@ final class ParentConnectingVisitor extends \ConfigTransformer202206079\PhpParse
     {
         $this->stack = [];
     }
-    public function enterNode(\ConfigTransformer202206079\PhpParser\Node $node)
+    public function enterNode(Node $node)
     {
         if (!empty($this->stack)) {
-            $node->setAttribute('parent', $this->stack[\count($this->stack) - 1]);
+            $node->setAttribute('parent', $this->stack[count($this->stack) - 1]);
         }
         $this->stack[] = $node;
     }
-    public function leaveNode(\ConfigTransformer202206079\PhpParser\Node $node)
+    public function leaveNode(Node $node)
     {
-        \array_pop($this->stack);
+        array_pop($this->stack);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079;
+namespace ConfigTransformer202206075;
 
-use ConfigTransformer202206079\Symplify\EasyTesting\Kernel\EasyTestingKernel;
-use ConfigTransformer202206079\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use ConfigTransformer202206075\Symplify\EasyTesting\Kernel\EasyTestingKernel;
+use ConfigTransformer202206075\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
     // dependency
     __DIR__ . '/../../../autoload.php',
@@ -19,5 +19,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
         break;
     }
 }
-$kernelBootAndApplicationRun = new \ConfigTransformer202206079\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun(\ConfigTransformer202206079\Symplify\EasyTesting\Kernel\EasyTestingKernel::class);
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(EasyTestingKernel::class);
 $kernelBootAndApplicationRun->run();

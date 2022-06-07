@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer202206075\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202206079\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer202206075\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -36,7 +36,7 @@ class Exporter
         $refs = $values;
         foreach ($values as $k => $value) {
             if (\is_resource($value)) {
-                throw new \ConfigTransformer202206079\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException(\get_resource_type($value) . ' resource');
+                throw new NotInstantiableTypeException(\get_resource_type($value) . ' resource');
             }
             $refs[$k] = $objectsPool;
             if ($isRef = !($valueIsStatic = $values[$k] !== $objectsPool)) {
@@ -45,30 +45,30 @@ class Exporter
                 unset($value);
                 // independent from the original structure
                 $refs[$k] = $value = $values[$k];
-                if ($value instanceof \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference && 0 > $value->id) {
+                if ($value instanceof Reference && 0 > $value->id) {
                     $valuesAreStatic = \false;
                     ++$value->count;
                     continue;
                 }
                 $refsPool[] = [&$refs[$k], $value, &$value];
-                $refs[$k] = $values[$k] = new \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference(-\count($refsPool), $value);
+                $refs[$k] = $values[$k] = new Reference(-\count($refsPool), $value);
             }
             if (\is_array($value)) {
                 if ($value) {
                     $value = self::prepare($value, $objectsPool, $refsPool, $objectsCount, $valueIsStatic);
                 }
                 goto handle_value;
-            } elseif (!\is_object($value) || $value instanceof \ConfigTransformer202206079\UnitEnum) {
+            } elseif (!\is_object($value) || $value instanceof \UnitEnum) {
                 goto handle_value;
             }
             $valueIsStatic = \false;
             if (isset($objectsPool[$value])) {
                 ++$objectsCount;
-                $value = new \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference($objectsPool[$value][0]);
+                $value = new Reference($objectsPool[$value][0]);
                 goto handle_value;
             }
             $class = \get_class($value);
-            $reflector = \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+            $reflector = Registry::$reflectors[$class] ?? Registry::getClassReflector($class);
             if ($reflector->hasMethod('__serialize')) {
                 if (!$reflector->getMethod('__serialize')->isPublic()) {
                     throw new \Error(\sprintf('Call to %s method "%s::__serialize()".', $reflector->getMethod('__serialize')->isProtected() ? 'protected' : 'private', $class));
@@ -80,26 +80,26 @@ class Exporter
             }
             $properties = [];
             $sleep = null;
-            $proto = \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class];
+            $proto = Registry::$prototypes[$class];
             if (($value instanceof \ArrayIterator || $value instanceof \ArrayObject) && null !== $proto) {
                 // ArrayIterator and ArrayObject need special care because their "flags"
                 // option changes the behavior of the (array) casting operator.
                 [$arrayValue, $properties] = self::getArrayObjectProperties($value, $proto);
                 // populates Registry::$prototypes[$class] with a new instance
-                \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class, \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class], \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]);
-            } elseif ($value instanceof \SplObjectStorage && \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class] && null !== $proto) {
+                Registry::getClassReflector($class, Registry::$instantiableWithoutConstructor[$class], Registry::$cloneable[$class]);
+            } elseif ($value instanceof \SplObjectStorage && Registry::$cloneable[$class] && null !== $proto) {
                 // By implementing Serializable, SplObjectStorage breaks
                 // internal references; let's deal with it on our own.
                 foreach (clone $value as $v) {
                     $properties[] = $v;
                     $properties[] = $value[$v];
                 }
-                $properties = ['SplObjectStorage' => ["\0" => $properties]];
+                $properties = ['SplObjectStorage' => ["\x00" => $properties]];
                 $arrayValue = (array) $value;
             } elseif ($value instanceof \Serializable || $value instanceof \__PHP_Incomplete_Class || \PHP_VERSION_ID < 80200 && $value instanceof \DatePeriod) {
                 ++$objectsCount;
                 $objectsPool[$value] = [$id = \count($objectsPool), \serialize($value), [], 0];
-                $value = new \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference($id);
+                $value = new Reference($id);
                 goto handle_value;
             } else {
                 if (\method_exists($class, '__sleep')) {
@@ -116,7 +116,7 @@ class Exporter
             foreach ($arrayValue as $name => $v) {
                 $i = 0;
                 $n = (string) $name;
-                if ('' === $n || "\0" !== $n[0]) {
+                if ('' === $n || "\x00" !== $n[0]) {
                     $c = \PHP_VERSION_ID >= 80100 && $reflector->hasProperty($n) && ($p = $reflector->getProperty($n))->isReadOnly() ? $p->class : 'stdClass';
                 } elseif ('*' === $n[1]) {
                     $n = \substr($n, 3);
@@ -127,7 +127,7 @@ class Exporter
                         $c = 'ErrorException';
                     }
                 } else {
-                    $i = \strpos($n, "\0", 2);
+                    $i = \strpos($n, "\x00", 2);
                     $c = \substr($n, 1, $i - 1);
                     $n = \substr($n, 1 + $i);
                 }
@@ -137,7 +137,7 @@ class Exporter
                     }
                     $sleep[$n] = \false;
                 }
-                if (!\array_key_exists($name, $proto) || $proto[$name] !== $v || "\0Error\0trace" === $name || "\0Exception\0trace" === $name) {
+                if (!\array_key_exists($name, $proto) || $proto[$name] !== $v || "\x00Error\x00trace" === $name || "\x00Exception\x00trace" === $name) {
                     $properties[$c][$n] = $v;
                 }
             }
@@ -153,7 +153,7 @@ class Exporter
             $properties = self::prepare($properties, $objectsPool, $refsPool, $objectsCount, $valueIsStatic);
             ++$objectsCount;
             $objectsPool[$value] = [$id, $class, $properties, \method_exists($class, '__unserialize') ? -$objectsCount : (\method_exists($class, '__wakeup') ? $objectsCount : 0)];
-            $value = new \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference($id);
+            $value = new Reference($id);
             handle_value:
             if ($isRef) {
                 unset($value);
@@ -180,10 +180,10 @@ class Exporter
                 return 'null';
             case '' === $value:
                 return "''";
-            case $value instanceof \ConfigTransformer202206079\UnitEnum:
+            case $value instanceof \UnitEnum:
                 return \ltrim(\var_export($value, \true), '\\');
         }
-        if ($value instanceof \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Reference) {
+        if ($value instanceof Reference) {
             if (0 <= $value->id) {
                 return '$o[' . $value->id . ']';
             }
@@ -197,7 +197,7 @@ class Exporter
         if (\is_string($value)) {
             $code = \sprintf("'%s'", \addcslashes($value, "'\\"));
             $code = \preg_replace_callback("/((?:[\\0\\r\\n]|‪|‫|‭|‮|⁦|⁧|⁨|‬|⁩)++)(.)/", function ($m) use($subIndent) {
-                $m[1] = \sprintf('\'."%s".\'', \str_replace(["\0", "\r", "\n", "‪", "‫", "‭", "‮", "⁦", "⁧", "⁨", "‬", "⁩", '\\n\\'], ['\\0', '\\r', '\\n', '\\u{202A}', '\\u{202B}', '\\u{202D}', '\\u{202E}', '\\u{2066}', '\\u{2067}', '\\u{2068}', '\\u{202C}', '\\u{2069}', '\\n"' . "\n" . $subIndent . '."\\'], $m[1]));
+                $m[1] = \sprintf('\'."%s".\'', \str_replace(["\x00", "\r", "\n", "‪", "‫", "‭", "‮", "⁦", "⁧", "⁨", "‬", "⁩", '\\n\\'], ['\\0', '\\r', '\\n', '\\u{202A}', '\\u{202B}', '\\u{202D}', '\\u{202E}', '\\u{2066}', '\\u{2067}', '\\u{2068}', '\\u{202C}', '\\u{2069}', '\\n"' . "\n" . $subIndent . '."\\'], $m[1]));
                 if ("'" === $m[2]) {
                     return \substr($m[1], 0, -2);
                 }
@@ -226,43 +226,43 @@ class Exporter
             }
             return "[\n" . $code . $indent . ']';
         }
-        if ($value instanceof \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Values) {
+        if ($value instanceof Values) {
             $code = $subIndent . "\$r = [],\n";
             foreach ($value->values as $k => $v) {
                 $code .= $subIndent . '$r[' . $k . '] = ' . self::export($v, $subIndent) . ",\n";
             }
             return "[\n" . $code . $indent . ']';
         }
-        if ($value instanceof \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry) {
+        if ($value instanceof Registry) {
             return self::exportRegistry($value, $indent, $subIndent);
         }
-        if ($value instanceof \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Hydrator) {
+        if ($value instanceof Hydrator) {
             return self::exportHydrator($value, $indent, $subIndent);
         }
         throw new \UnexpectedValueException(\sprintf('Cannot export value of type "%s".', \get_debug_type($value)));
     }
-    private static function exportRegistry(\ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry $value, string $indent, string $subIndent) : string
+    private static function exportRegistry(Registry $value, string $indent, string $subIndent) : string
     {
         $code = '';
         $serializables = [];
         $seen = [];
         $prototypesAccess = 0;
         $factoriesAccess = 0;
-        $r = '\\' . \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::class;
+        $r = '\\' . Registry::class;
         $j = -1;
         foreach ($value->classes as $k => $class) {
             if (':' === ($class[1] ?? null)) {
                 $serializables[$k] = $class;
                 continue;
             }
-            if (!\ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
+            if (!Registry::$instantiableWithoutConstructor[$class]) {
                 if (\is_subclass_of($class, 'Serializable') && !\method_exists($class, '__unserialize')) {
                     $serializables[$k] = 'C:' . \strlen($class) . ':"' . $class . '":0:{}';
                 } else {
                     $serializables[$k] = 'O:' . \strlen($class) . ':"' . $class . '":0:{}';
                 }
                 if (\is_subclass_of($class, 'Throwable')) {
-                    $eol = \is_subclass_of($class, 'Error') ? "\0Error\0" : "\0Exception\0";
+                    $eol = \is_subclass_of($class, 'Error') ? "\x00Error\x00" : "\x00Exception\x00";
                     $serializables[$k] = \substr_replace($serializables[$k], '1:{s:' . (5 + \strlen($eol)) . ':"' . $eol . 'trace";a:0:{}}', -4);
                 }
                 continue;
@@ -272,7 +272,7 @@ class Exporter
             $eol = ",\n";
             $c = '[' . self::export($class) . ']';
             if ($seen[$class] ?? \false) {
-                if (\ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+                if (Registry::$cloneable[$class]) {
                     ++$prototypesAccess;
                     $code .= 'clone $p' . $c;
                 } else {
@@ -281,7 +281,7 @@ class Exporter
                 }
             } else {
                 $seen[$class] = \true;
-                if (\ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+                if (Registry::$cloneable[$class]) {
                     $code .= 'clone (' . ($prototypesAccess++ ? '$p' : '($p = &' . $r . '::$prototypes)') . $c . ' ?? ' . $r . '::p';
                 } else {
                     $code .= '(' . ($factoriesAccess++ ? '$f' : '($f = &' . $r . '::$factories)') . $c . ' ?? ' . $r . '::f';
@@ -307,7 +307,7 @@ class Exporter
         }
         return '$o = ' . $code;
     }
-    private static function exportHydrator(\ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Hydrator $value, string $indent, string $subIndent) : string
+    private static function exportHydrator(Hydrator $value, string $indent, string $subIndent) : string
     {
         $code = '';
         foreach ($value->properties as $class => $properties) {
@@ -323,7 +323,7 @@ class Exporter
     private static function getArrayObjectProperties($value, $proto) : array
     {
         $reflector = $value instanceof \ArrayIterator ? 'ArrayIterator' : 'ArrayObject';
-        $reflector = \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector] ?? \ConfigTransformer202206079\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($reflector);
+        $reflector = Registry::$reflectors[$reflector] ?? Registry::getClassReflector($reflector);
         $properties = [$arrayValue = (array) $value, $reflector->getMethod('getFlags')->invoke($value), $value instanceof \ArrayObject ? $reflector->getMethod('getIteratorClass')->invoke($value) : 'ArrayIterator'];
         $reflector = $reflector->getMethod('setFlags');
         $reflector->invoke($proto, \ArrayObject::STD_PROP_LIST);
@@ -341,7 +341,7 @@ class Exporter
             if ('ArrayIterator' === $properties[2]) {
                 unset($properties[2]);
             }
-            $properties = [$reflector->class => ["\0" => $properties]];
+            $properties = [$reflector->class => ["\x00" => $properties]];
         }
         return [$arrayValue, $properties];
     }

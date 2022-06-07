@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\SymplifyKernel\Exception;
+namespace ConfigTransformer202206075\Symplify\SymplifyKernel\Exception;
 
 use Exception;
 /**
  * @api
  */
-final class ShouldNotHappenException extends \Exception
+final class ShouldNotHappenException extends Exception
 {
 }

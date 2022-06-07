@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\Astral\TypeAnalyzer;
+namespace ConfigTransformer202206075\Symplify\Astral\TypeAnalyzer;
 
-use ConfigTransformer202206079\PhpParser\Node\Expr;
-use ConfigTransformer202206079\PHPStan\Analyser\Scope;
-use ConfigTransformer202206079\PHPStan\Type\ArrayType;
-use ConfigTransformer202206079\PHPStan\Type\IntersectionType;
-use ConfigTransformer202206079\PHPStan\Type\Type;
-use ConfigTransformer202206079\PHPStan\Type\TypeWithClassName;
-use ConfigTransformer202206079\PHPStan\Type\UnionType;
+use ConfigTransformer202206075\PhpParser\Node\Expr;
+use ConfigTransformer202206075\PHPStan\Analyser\Scope;
+use ConfigTransformer202206075\PHPStan\Type\ArrayType;
+use ConfigTransformer202206075\PHPStan\Type\IntersectionType;
+use ConfigTransformer202206075\PHPStan\Type\Type;
+use ConfigTransformer202206075\PHPStan\Type\TypeWithClassName;
+use ConfigTransformer202206075\PHPStan\Type\UnionType;
 final class ContainsTypeAnalyser
 {
     /**
      * @param class-string[] $types
      */
-    public function containsExprTypes(\ConfigTransformer202206079\PhpParser\Node\Expr $expr, \ConfigTransformer202206079\PHPStan\Analyser\Scope $scope, array $types) : bool
+    public function containsExprTypes(Expr $expr, Scope $scope, array $types) : bool
     {
         foreach ($types as $type) {
             if (!$this->containsExprType($expr, $scope, $type)) {
@@ -28,7 +28,7 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string[] $types
      */
-    public function containsTypeExprTypes(\ConfigTransformer202206079\PHPStan\Type\Type $exprType, array $types) : bool
+    public function containsTypeExprTypes(Type $exprType, array $types) : bool
     {
         foreach ($types as $type) {
             if ($this->containsTypeExprType($exprType, $type)) {
@@ -40,9 +40,9 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string $type
      */
-    public function containsTypeExprType(\ConfigTransformer202206079\PHPStan\Type\Type $exprType, string $type) : bool
+    public function containsTypeExprType(Type $exprType, string $type) : bool
     {
-        if ($exprType instanceof \ConfigTransformer202206079\PHPStan\Type\IntersectionType) {
+        if ($exprType instanceof IntersectionType) {
             $intersectionedTypes = $exprType->getTypes();
             foreach ($intersectionedTypes as $intersectionedType) {
                 if ($this->isExprTypeOfType($intersectionedType, $type)) {
@@ -55,7 +55,7 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string $type
      */
-    public function containsExprType(\ConfigTransformer202206079\PhpParser\Node\Expr $expr, \ConfigTransformer202206079\PHPStan\Analyser\Scope $scope, string $type) : bool
+    public function containsExprType(Expr $expr, Scope $scope, string $type) : bool
     {
         $exprType = $scope->getType($expr);
         return $this->containsTypeExprType($exprType, $type);
@@ -63,14 +63,14 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string $class
      */
-    private function isUnionTypeWithClass(\ConfigTransformer202206079\PHPStan\Type\Type $type, string $class) : bool
+    private function isUnionTypeWithClass(Type $type, string $class) : bool
     {
-        if (!$type instanceof \ConfigTransformer202206079\PHPStan\Type\UnionType) {
+        if (!$type instanceof UnionType) {
             return \false;
         }
         $unionedTypes = $type->getTypes();
         foreach ($unionedTypes as $unionedType) {
-            if (!$unionedType instanceof \ConfigTransformer202206079\PHPStan\Type\TypeWithClassName) {
+            if (!$unionedType instanceof TypeWithClassName) {
                 continue;
             }
             if (\is_a($unionedType->getClassName(), $class, \true)) {
@@ -82,13 +82,13 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string $type
      */
-    private function isArrayWithItemType(\ConfigTransformer202206079\PHPStan\Type\Type $propertyType, string $type) : bool
+    private function isArrayWithItemType(Type $propertyType, string $type) : bool
     {
-        if (!$propertyType instanceof \ConfigTransformer202206079\PHPStan\Type\ArrayType) {
+        if (!$propertyType instanceof ArrayType) {
             return \false;
         }
         $arrayItemType = $propertyType->getItemType();
-        if (!$arrayItemType instanceof \ConfigTransformer202206079\PHPStan\Type\TypeWithClassName) {
+        if (!$arrayItemType instanceof TypeWithClassName) {
             return \false;
         }
         return \is_a($arrayItemType->getClassName(), $type, \true);
@@ -96,9 +96,9 @@ final class ContainsTypeAnalyser
     /**
      * @param class-string $type
      */
-    private function isExprTypeOfType(\ConfigTransformer202206079\PHPStan\Type\Type $exprType, string $type) : bool
+    private function isExprTypeOfType(Type $exprType, string $type) : bool
     {
-        if ($exprType instanceof \ConfigTransformer202206079\PHPStan\Type\TypeWithClassName) {
+        if ($exprType instanceof TypeWithClassName) {
             return \is_a($exprType->getClassName(), $type, \true);
         }
         if ($this->isUnionTypeWithClass($exprType, $type)) {

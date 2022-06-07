@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
-class ConstExprArrayNode implements \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstExprArrayNode implements ConstExprNode
 {
     use NodeAttributes;
     /** @var ConstExprArrayItemNode[] */
@@ -19,6 +19,6 @@ class ConstExprArrayNode implements \ConfigTransformer202206079\PHPStan\PhpDocPa
     }
     public function __toString() : string
     {
-        return '[' . \implode(', ', $this->items) . ']';
+        return '[' . implode(', ', $this->items) . ']';
     }
 }

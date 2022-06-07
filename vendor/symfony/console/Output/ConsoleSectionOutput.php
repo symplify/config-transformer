@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Console\Output;
+namespace ConfigTransformer202206075\Symfony\Component\Console\Output;
 
-use ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer202206079\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer202206079\Symfony\Component\Console\Terminal;
+use ConfigTransformer202206075\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202206075\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202206075\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class ConsoleSectionOutput extends \ConfigTransformer202206079\Symfony\Component\Console\Output\StreamOutput
+class ConsoleSectionOutput extends StreamOutput
 {
     /**
      * @var mixed[]
@@ -36,12 +36,12 @@ class ConsoleSectionOutput extends \ConfigTransformer202206079\Symfony\Component
      * @param resource               $stream
      * @param ConsoleSectionOutput[] $sections
      */
-    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, \ConfigTransformer202206079\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, OutputFormatterInterface $formatter)
     {
         parent::__construct($stream, $verbosity, $decorated, $formatter);
         \array_unshift($sections, $this);
         $this->sections =& $sections;
-        $this->terminal = new \ConfigTransformer202206079\Symfony\Component\Console\Terminal();
+        $this->terminal = new Terminal();
     }
     /**
      * Clears previous output for this section.
@@ -118,14 +118,14 @@ class ConsoleSectionOutput extends \ConfigTransformer202206079\Symfony\Component
         }
         if ($numberOfLinesToClear > 0) {
             // move cursor up n lines
-            parent::doWrite(\sprintf("\33[%dA", $numberOfLinesToClear), \false);
+            parent::doWrite(\sprintf("\x1b[%dA", $numberOfLinesToClear), \false);
             // erase to end of screen
-            parent::doWrite("\33[0J", \false);
+            parent::doWrite("\x1b[0J", \false);
         }
         return \implode('', \array_reverse($erasedContent));
     }
     private function getDisplayLength(string $text) : int
     {
-        return \ConfigTransformer202206079\Symfony\Component\Console\Helper\Helper::width(\ConfigTransformer202206079\Symfony\Component\Console\Helper\Helper::removeDecoration($this->getFormatter(), \str_replace("\t", '        ', $text)));
+        return Helper::width(Helper::removeDecoration($this->getFormatter(), \str_replace("\t", '        ', $text)));
     }
 }

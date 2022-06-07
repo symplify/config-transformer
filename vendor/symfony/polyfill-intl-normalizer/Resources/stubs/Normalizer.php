@@ -1,8 +1,8 @@
 <?php
 
+namespace ConfigTransformer202206075;
 
-
-class Normalizer extends \ConfigTransformer202206079\Symfony\Polyfill\Intl\Normalizer\Normalizer
+class Normalizer extends Symfony\Polyfill\Intl\Normalizer\Normalizer
 {
     /**
      * @deprecated since ICU 56 and removed in PHP 8
@@ -17,4 +17,3 @@ class Normalizer extends \ConfigTransformer202206079\Symfony\Polyfill\Intl\Norma
     public const NFC = 16;
     public const NFKC = 32;
 }
-

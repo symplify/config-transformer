@@ -8,32 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202206075\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202206075\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @internal
  */
-class ArrayNode extends \ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node\Node
+class ArrayNode extends Node
 {
     protected $index;
     public function __construct()
     {
         $this->index = -1;
     }
-    public function addElement(\ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node\Node $value, \ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node\Node $key = null)
+    public function addElement(Node $value, Node $key = null)
     {
         if (null === $key) {
-            $key = new \ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node\ConstantNode(++$this->index);
+            $key = new ConstantNode(++$this->index);
         }
         \array_push($this->nodes, $key, $value);
     }
     /**
      * Compiles the node to PHP.
      */
-    public function compile(\ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         $compiler->raw('[');
         $this->compileArguments($compiler);
@@ -57,7 +57,7 @@ class ArrayNode extends \ConfigTransformer202206079\Symfony\Component\Expression
         if ($this->isHash($value)) {
             foreach ($value as $k => $v) {
                 $array[] = ', ';
-                $array[] = new \ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Node\ConstantNode($k);
+                $array[] = new ConstantNode($k);
                 $array[] = ': ';
                 $array[] = $v;
             }
@@ -81,7 +81,7 @@ class ArrayNode extends \ConfigTransformer202206079\Symfony\Component\Expression
         }
         return $pairs;
     }
-    protected function compileArguments(\ConfigTransformer202206079\Symfony\Component\ExpressionLanguage\Compiler $compiler, bool $withKeys = \true)
+    protected function compileArguments(Compiler $compiler, bool $withKeys = \true)
     {
         $first = \true;
         foreach ($this->getKeyValuePairs() as $pair) {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Polyfill\Mbstring;
+namespace ConfigTransformer202206075\Symfony\Polyfill\Mbstring;
 
 /**
  * Partial mbstring implementation in PHP, iconv based, UTF-8 centric.
@@ -197,13 +197,13 @@ final class Mbstring
         } else {
             $s = \iconv($encoding, 'UTF-8//IGNORE', $s);
         }
-        static $ulenMask = ["À" => 2, "Ð" => 2, "à" => 3, "ð" => 4];
+        static $ulenMask = ["\xc0" => 2, "\xd0" => 2, "\xe0" => 3, "\xf0" => 4];
         $cnt = \floor(\count($convmap) / 4) * 4;
         $i = 0;
         $len = \strlen($s);
         $result = '';
         while ($i < $len) {
-            $ulen = $s[$i] < "€" ? 1 : $ulenMask[$s[$i] & "ð"];
+            $ulen = $s[$i] < "\x80" ? 1 : $ulenMask[$s[$i] & "\xf0"];
             $uchr = \substr($s, $i, $ulen);
             $i += $ulen;
             $c = self::mb_ord($uchr);
@@ -259,11 +259,11 @@ final class Mbstring
                 }
                 $map = $lower;
             }
-            static $ulenMask = ["À" => 2, "Ð" => 2, "à" => 3, "ð" => 4];
+            static $ulenMask = ["\xc0" => 2, "\xd0" => 2, "\xe0" => 3, "\xf0" => 4];
             $i = 0;
             $len = \strlen($s);
             while ($i < $len) {
-                $ulen = $s[$i] < "€" ? 1 : $ulenMask[$s[$i] & "ð"];
+                $ulen = $s[$i] < "\x80" ? 1 : $ulenMask[$s[$i] & "\xf0"];
                 $uchr = \substr($s, $i, $ulen);
                 $i += $ulen;
                 if (isset($map[$uchr])) {

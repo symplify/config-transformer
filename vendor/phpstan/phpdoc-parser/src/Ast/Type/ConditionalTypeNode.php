@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type;
+namespace ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\Type;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function sprintf;
-class ConditionalTypeNode implements \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ConditionalTypeNode implements TypeNode
 {
     use NodeAttributes;
     /** @var TypeNode */
@@ -18,7 +18,7 @@ class ConditionalTypeNode implements \ConfigTransformer202206079\PHPStan\PhpDocP
     public $else;
     /** @var bool */
     public $negated;
-    public function __construct(\ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $subjectType, \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $targetType, \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $if, \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $else, bool $negated)
+    public function __construct(TypeNode $subjectType, TypeNode $targetType, TypeNode $if, TypeNode $else, bool $negated)
     {
         $this->subjectType = $subjectType;
         $this->targetType = $targetType;
@@ -28,6 +28,6 @@ class ConditionalTypeNode implements \ConfigTransformer202206079\PHPStan\PhpDocP
     }
     public function __toString() : string
     {
-        return \sprintf('(%s %s %s ? %s : %s)', $this->subjectType, $this->negated ? 'is not' : 'is', $this->targetType, $this->if, $this->else);
+        return sprintf('(%s %s %s ? %s : %s)', $this->subjectType, $this->negated ? 'is not' : 'is', $this->targetType, $this->if, $this->else);
     }
 }

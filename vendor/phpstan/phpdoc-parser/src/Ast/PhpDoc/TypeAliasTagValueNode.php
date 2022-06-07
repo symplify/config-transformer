@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
-class TypeAliasTagValueNode implements \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class TypeAliasTagValueNode implements PhpDocTagValueNode
 {
     use NodeAttributes;
     /** @var string */
     public $alias;
     /** @var TypeNode */
     public $type;
-    public function __construct(string $alias, \ConfigTransformer202206079\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
+    public function __construct(string $alias, TypeNode $type)
     {
         $this->alias = $alias;
         $this->type = $type;
     }
     public function __toString() : string
     {
-        return \trim("{$this->alias} {$this->type}");
+        return trim("{$this->alias} {$this->type}");
     }
 }

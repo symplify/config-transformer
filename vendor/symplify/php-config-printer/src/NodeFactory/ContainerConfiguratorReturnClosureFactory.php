@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory;
+namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202206079\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206079\PhpParser\Node\Stmt;
-use ConfigTransformer202206079\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206079\PhpParser\Node\Stmt\Return_;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableName;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use ConfigTransformer202206075\PhpParser\Node\Expr\Assign;
+use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206075\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206075\PhpParser\Node\Stmt;
+use ConfigTransformer202206075\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206075\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class ContainerConfiguratorReturnClosureFactory
 {
     /**
@@ -32,7 +32,7 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param CaseConverterInterface[] $caseConverters
      */
-    public function __construct(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, \ConfigTransformer202206079\Symplify\PhpConfigPrinter\NodeFactory\ContainerNestedNodesFactory $containerNestedNodesFactory)
+    public function __construct(ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, ContainerNestedNodesFactory $containerNestedNodesFactory)
     {
         $this->configuratorClosureNodeFactory = $configuratorClosureNodeFactory;
         $this->caseConverters = $caseConverters;
@@ -41,11 +41,11 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param array<string, mixed[]> $arrayData
      */
-    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = \Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator::class) : \ConfigTransformer202206079\PhpParser\Node\Stmt\Return_
+    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = ContainerConfigurator::class) : Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts, $containerConfiguratorClass);
-        return new \ConfigTransformer202206079\PhpParser\Node\Stmt\Return_($closure);
+        return new Return_($closure);
     }
     /**
      * @param mixed[] $yamlData
@@ -75,7 +75,7 @@ final class ContainerConfiguratorReturnClosureFactory
                     continue;
                 }
                 $expression = $this->resolveExpression($key, $nestedKey, $nestedValues);
-                if (!$expression instanceof \ConfigTransformer202206079\PhpParser\Node\Stmt\Expression) {
+                if (!$expression instanceof Expression) {
                     continue;
                 }
                 $nodes[] = $expression;
@@ -86,12 +86,12 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param VariableMethodName::* $variableMethodName
      */
-    private function createInitializeAssign(string $variableMethodName) : \ConfigTransformer202206079\PhpParser\Node\Stmt\Expression
+    private function createInitializeAssign(string $variableMethodName) : Expression
     {
-        $servicesVariable = new \ConfigTransformer202206079\PhpParser\Node\Expr\Variable($variableMethodName);
-        $containerConfiguratorVariable = new \ConfigTransformer202206079\PhpParser\Node\Expr\Variable(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $assign = new \ConfigTransformer202206079\PhpParser\Node\Expr\Assign($servicesVariable, new \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $variableMethodName));
-        return new \ConfigTransformer202206079\PhpParser\Node\Stmt\Expression($assign);
+        $servicesVariable = new Variable($variableMethodName);
+        $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
+        $assign = new Assign($servicesVariable, new MethodCall($containerConfiguratorVariable, $variableMethodName));
+        return new Expression($assign);
     }
     /**
      * @param Expression[] $nodes
@@ -99,12 +99,12 @@ final class ContainerConfiguratorReturnClosureFactory
      */
     private function createInitializeNode(string $key, array $nodes) : array
     {
-        if ($key === \ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
-            $nodes[] = $this->createInitializeAssign(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableMethodName::SERVICES);
+        if ($key === YamlKey::SERVICES) {
+            $nodes[] = $this->createInitializeAssign(VariableMethodName::SERVICES);
             return $nodes;
         }
-        if ($key === \ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS) {
-            $nodes[] = $this->createInitializeAssign(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableMethodName::PARAMETERS);
+        if ($key === YamlKey::PARAMETERS) {
+            $nodes[] = $this->createInitializeAssign(VariableMethodName::PARAMETERS);
             return $nodes;
         }
         return $nodes;
@@ -113,7 +113,7 @@ final class ContainerConfiguratorReturnClosureFactory
      * @param int|string $nestedKey
      * @param mixed $nestedValues
      */
-    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?\ConfigTransformer202206079\PhpParser\Node\Stmt\Expression
+    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?Expression
     {
         foreach ($this->caseConverters as $caseConverter) {
             if (!$caseConverter->match($key, $nestedKey, $nestedValues)) {

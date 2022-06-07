@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\Astral\PhpDocParser;
+namespace ConfigTransformer202206075\Symplify\Astral\PhpDocParser;
 
-use ConfigTransformer202206079\PhpParser\Comment\Doc;
-use ConfigTransformer202206079\PhpParser\Node;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\TokenIterator;
-use ConfigTransformer202206079\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode;
+use ConfigTransformer202206075\PhpParser\Comment\Doc;
+use ConfigTransformer202206075\PhpParser\Node;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer202206075\PHPStan\PhpDocParser\Parser\TokenIterator;
+use ConfigTransformer202206075\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode;
 /**
  * @see \Symplify\Astral\Tests\PhpDocParser\SimplePhpDocParser\SimplePhpDocParserTest
  */
@@ -22,24 +22,24 @@ final class SimplePhpDocParser
      * @var \PHPStan\PhpDocParser\Lexer\Lexer
      */
     private $lexer;
-    public function __construct(\ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\PhpDocParser $phpDocParser, \ConfigTransformer202206079\PHPStan\PhpDocParser\Lexer\Lexer $lexer)
+    public function __construct(PhpDocParser $phpDocParser, Lexer $lexer)
     {
         $this->phpDocParser = $phpDocParser;
         $this->lexer = $lexer;
     }
-    public function parseNode(\ConfigTransformer202206079\PhpParser\Node $node) : ?\ConfigTransformer202206079\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode
+    public function parseNode(Node $node) : ?SimplePhpDocNode
     {
         $docComment = $node->getDocComment();
-        if (!$docComment instanceof \ConfigTransformer202206079\PhpParser\Comment\Doc) {
+        if (!$docComment instanceof Doc) {
             return null;
         }
         return $this->parseDocBlock($docComment->getText());
     }
-    public function parseDocBlock(string $docBlock) : \ConfigTransformer202206079\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode
+    public function parseDocBlock(string $docBlock) : SimplePhpDocNode
     {
         $tokens = $this->lexer->tokenize($docBlock);
-        $tokenIterator = new \ConfigTransformer202206079\PHPStan\PhpDocParser\Parser\TokenIterator($tokens);
+        $tokenIterator = new TokenIterator($tokens);
         $phpDocNode = $this->phpDocParser->parse($tokenIterator);
-        return new \ConfigTransformer202206079\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode($phpDocNode->children);
+        return new SimplePhpDocNode($phpDocNode->children);
     }
 }

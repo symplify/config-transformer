@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206079\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206075\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202206079\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202206079\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202206075\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202206075\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202206075\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \ConfigTransformer202206079\Symfony\Component\Cache\Adapter\AdapterInterface, \ConfigTransformer202206079\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements AdapterInterface, CacheInterface
 {
     private static $createCacheItem;
     public function __construct()
     {
         self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key) {
-            $item = new \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem();
+            $item = new CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, null, \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem::class));
+        }, null, CacheItem::class));
     }
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class NullAdapter implements \ConfigTransformer202206079\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      */
-    public function getItem(mixed $key) : \ConfigTransformer202206079\Symfony\Component\Cache\CacheItem
+    public function getItem(mixed $key) : CacheItem
     {
         return (self::$createCacheItem)($key);
     }
@@ -81,14 +81,14 @@ class NullAdapter implements \ConfigTransformer202206079\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      */
-    public function save(\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $item) : bool
+    public function save(CacheItemInterface $item) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(\ConfigTransformer202206079\Psr\Cache\CacheItemInterface $item) : bool
+    public function saveDeferred(CacheItemInterface $item) : bool
     {
         return \true;
     }

@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\ConfigTransformer\DependencyInjection;
+namespace ConfigTransformer202206075\Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer202206079\Nette\Utils\Strings;
-use ConfigTransformer202206079\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202206079\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202206075\Nette\Utils\Strings;
+use ConfigTransformer202206075\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206075\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202206075\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206075\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 final class ContainerBuilderCleaner
 {
     /**
@@ -20,11 +20,11 @@ final class ContainerBuilderCleaner
      * @var \Symplify\PackageBuilder\Reflection\PrivatesAccessor
      */
     private $privatesAccessor;
-    public function __construct(\ConfigTransformer202206079\Symplify\PackageBuilder\Reflection\PrivatesAccessor $privatesAccessor)
+    public function __construct(PrivatesAccessor $privatesAccessor)
     {
         $this->privatesAccessor = $privatesAccessor;
     }
-    public function cleanContainerBuilder(\ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function cleanContainerBuilder(ContainerBuilder $containerBuilder) : void
     {
         $this->removeSymfonyInternalServices($containerBuilder);
         $this->removeTemporaryAnonymousIds($containerBuilder);
@@ -32,13 +32,13 @@ final class ContainerBuilderCleaner
             $this->resolvePolyfillForNameTag($definition);
         }
     }
-    private function removeSymfonyInternalServices(\ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private function removeSymfonyInternalServices(ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->removeDefinition('service_container');
-        $containerBuilder->removeAlias(\ConfigTransformer202206079\Psr\Container\ContainerInterface::class);
-        $containerBuilder->removeAlias(\ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerInterface::class);
+        $containerBuilder->removeAlias(PsrContainerInterface::class);
+        $containerBuilder->removeAlias(ContainerInterface::class);
     }
-    private function removeTemporaryAnonymousIds(\ConfigTransformer202206079\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private function removeTemporaryAnonymousIds(ContainerBuilder $containerBuilder) : void
     {
         $definitions = $this->privatesAccessor->getPrivateProperty($containerBuilder, 'definitions');
         foreach ($definitions as $name => $definition) {
@@ -55,9 +55,9 @@ final class ContainerBuilderCleaner
     }
     private function isGeneratedKeyForAnonymousClass(string $name) : bool
     {
-        return (bool) \ConfigTransformer202206079\Nette\Utils\Strings::match($name, self::ANONYMOUS_CLASS_REGEX);
+        return (bool) Strings::match($name, self::ANONYMOUS_CLASS_REGEX);
     }
-    private function resolvePolyfillForNameTag(\ConfigTransformer202206079\Symfony\Component\DependencyInjection\Definition $definition) : void
+    private function resolvePolyfillForNameTag(Definition $definition) : void
     {
         if ($definition->getTags() === []) {
             return;

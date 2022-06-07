@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206079\Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
+namespace ConfigTransformer202206075\Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
 
-use ConfigTransformer202206079\PhpParser\Node\Arg;
-use ConfigTransformer202206079\PhpParser\Node\Expr;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206079\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206079\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206079\PhpParser\Node\Identifier;
-use ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206079\PhpParser\Node\Param;
-use ConfigTransformer202206079\PhpParser\Node\Stmt;
-use ConfigTransformer202206079\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206079\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202206079\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202206079\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
-use ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableName;
+use ConfigTransformer202206075\PhpParser\Node\Arg;
+use ConfigTransformer202206075\PhpParser\Node\Expr;
+use ConfigTransformer202206075\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206075\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202206075\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202206075\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206075\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206075\PhpParser\Node\Identifier;
+use ConfigTransformer202206075\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206075\PhpParser\Node\Param;
+use ConfigTransformer202206075\PhpParser\Node\Stmt;
+use ConfigTransformer202206075\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206075\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202206075\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202206075\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
+use ConfigTransformer202206075\Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
 {
     /**
@@ -34,7 +34,7 @@ final class ConfiguratorClosureNodeFactory
      * @var \Symplify\PhpConfigPrinter\Naming\VariableNameResolver
      */
     private $variableNameResolver;
-    public function __construct(\ConfigTransformer202206079\Symplify\Astral\Naming\SimpleNameResolver $simpleNameResolver, \ConfigTransformer202206079\Symplify\Astral\NodeValue\NodeValueResolver $nodeValueResolver, \ConfigTransformer202206079\Symplify\PhpConfigPrinter\Naming\VariableNameResolver $variableNameResolver)
+    public function __construct(SimpleNameResolver $simpleNameResolver, NodeValueResolver $nodeValueResolver, VariableNameResolver $variableNameResolver)
     {
         $this->simpleNameResolver = $simpleNameResolver;
         $this->nodeValueResolver = $nodeValueResolver;
@@ -43,7 +43,7 @@ final class ConfiguratorClosureNodeFactory
     /**
      * @param Stmt[] $stmts
      */
-    public function createContainerClosureFromStmts(array $stmts, string $containerConfiguratorClass) : \ConfigTransformer202206079\PhpParser\Node\Expr\Closure
+    public function createContainerClosureFromStmts(array $stmts, string $containerConfiguratorClass) : Closure
     {
         $param = $this->createContainerConfiguratorParam($containerConfiguratorClass);
         return $this->createClosureFromParamAndStmts($param, $stmts);
@@ -51,33 +51,33 @@ final class ConfiguratorClosureNodeFactory
     /**
      * @param Stmt[] $stmts
      */
-    public function createRoutingClosureFromStmts(array $stmts) : \ConfigTransformer202206079\PhpParser\Node\Expr\Closure
+    public function createRoutingClosureFromStmts(array $stmts) : Closure
     {
         $param = $this->createRoutingConfiguratorParam();
         return $this->createClosureFromParamAndStmts($param, $stmts);
     }
-    private function createContainerConfiguratorParam(string $containerConfiguratorClass) : \ConfigTransformer202206079\PhpParser\Node\Param
+    private function createContainerConfiguratorParam(string $containerConfiguratorClass) : Param
     {
         $variableName = $this->variableNameResolver->resolveFromType($containerConfiguratorClass);
-        $containerConfiguratorVariable = new \ConfigTransformer202206079\PhpParser\Node\Expr\Variable($variableName);
-        $fullyQualified = new \ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified($containerConfiguratorClass);
-        return new \ConfigTransformer202206079\PhpParser\Node\Param($containerConfiguratorVariable, null, $fullyQualified);
+        $containerConfiguratorVariable = new Variable($variableName);
+        $fullyQualified = new FullyQualified($containerConfiguratorClass);
+        return new Param($containerConfiguratorVariable, null, $fullyQualified);
     }
-    private function createRoutingConfiguratorParam() : \ConfigTransformer202206079\PhpParser\Node\Param
+    private function createRoutingConfiguratorParam() : Param
     {
-        $containerConfiguratorVariable = new \ConfigTransformer202206079\PhpParser\Node\Expr\Variable(\ConfigTransformer202206079\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $containerConfiguratorVariable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         // @note must be string to avoid prefixing class
-        $classNameFullyQualified = new \ConfigTransformer202206079\PhpParser\Node\Name\FullyQualified('ConfigTransformer202206079\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
-        return new \ConfigTransformer202206079\PhpParser\Node\Param($containerConfiguratorVariable, null, $classNameFullyQualified);
+        $classNameFullyQualified = new FullyQualified('ConfigTransformer202206075\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
+        return new Param($containerConfiguratorVariable, null, $classNameFullyQualified);
     }
     /**
      * @param Stmt[] $stmts
      */
-    private function createClosureFromParamAndStmts(\ConfigTransformer202206079\PhpParser\Node\Param $param, array $stmts) : \ConfigTransformer202206079\PhpParser\Node\Expr\Closure
+    private function createClosureFromParamAndStmts(Param $param, array $stmts) : Closure
     {
         $stmts = $this->mergeStmtsFromSameClosure($stmts);
-        $closure = new \ConfigTransformer202206079\PhpParser\Node\Expr\Closure(['params' => [$param], 'stmts' => $stmts, 'static' => \true]);
-        $closure->returnType = new \ConfigTransformer202206079\PhpParser\Node\Identifier('void');
+        $closure = new Closure(['params' => [$param], 'stmts' => $stmts, 'static' => \true]);
+        $closure->returnType = new Identifier('void');
         return $closure;
     }
     /**
@@ -90,11 +90,11 @@ final class ConfiguratorClosureNodeFactory
     {
         $extensionNodes = [];
         foreach ($stmts as $stmtKey => $stmt) {
-            if (!$stmt instanceof \ConfigTransformer202206079\PhpParser\Node\Stmt\Expression) {
+            if (!$stmt instanceof Expression) {
                 continue;
             }
             $stmt = $stmt->expr;
-            if (!$stmt instanceof \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall) {
+            if (!$stmt instanceof MethodCall) {
                 continue;
             }
             $extensionName = $this->matchExtensionName($stmt);
@@ -102,7 +102,7 @@ final class ConfiguratorClosureNodeFactory
                 continue;
             }
             $secondArgOrVariadicPlaceholder = $stmt->args[1];
-            if (!$secondArgOrVariadicPlaceholder instanceof \ConfigTransformer202206079\PhpParser\Node\Arg) {
+            if (!$secondArgOrVariadicPlaceholder instanceof Arg) {
                 continue;
             }
             $extensionNodes[$extensionName][] = [$stmtKey => $secondArgOrVariadicPlaceholder->value];
@@ -131,15 +131,15 @@ final class ConfiguratorClosureNodeFactory
             }
             // replace first extension argument
             $expression = $stmts[$firstStmtKey];
-            if (!$expression instanceof \ConfigTransformer202206079\PhpParser\Node\Stmt\Expression) {
+            if (!$expression instanceof Expression) {
                 continue;
             }
             $methodCall = $expression->expr;
-            if (!$methodCall instanceof \ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall) {
+            if (!$methodCall instanceof MethodCall) {
                 continue;
             }
-            $array = new \ConfigTransformer202206079\PhpParser\Node\Expr\Array_($newArrayItems);
-            $methodCall->args[1] = new \ConfigTransformer202206079\PhpParser\Node\Arg($array);
+            $array = new Array_($newArrayItems);
+            $methodCall->args[1] = new Arg($array);
         }
         return $stmts;
     }
@@ -152,7 +152,7 @@ final class ConfiguratorClosureNodeFactory
         $newArrayItems = [];
         foreach ($extensionExprs as $extensionExpr) {
             foreach ($extensionExpr as $singleExtensionExpr) {
-                if (!$singleExtensionExpr instanceof \ConfigTransformer202206079\PhpParser\Node\Expr\Array_) {
+                if (!$singleExtensionExpr instanceof Array_) {
                     continue;
                 }
                 $newArrayItems = \array_merge($newArrayItems, $singleExtensionExpr->items);
@@ -169,7 +169,7 @@ final class ConfiguratorClosureNodeFactory
             \reset($extensionStmt);
             return (int) \key($extensionStmt);
         }
-        throw new \ConfigTransformer202206079\Symplify\Astral\Exception\ShouldNotHappenException();
+        throw new ShouldNotHappenException();
     }
     /**
      * @param Expr[][] $extensionStmts
@@ -191,13 +191,13 @@ final class ConfiguratorClosureNodeFactory
         }
         return $stmtKeysToRemove;
     }
-    private function matchExtensionName(\ConfigTransformer202206079\PhpParser\Node\Expr\MethodCall $methodCall) : ?string
+    private function matchExtensionName(MethodCall $methodCall) : ?string
     {
         if (!$this->simpleNameResolver->isName($methodCall->name, 'extension')) {
             return null;
         }
         $firstArg = $methodCall->args[0];
-        if (!$firstArg instanceof \ConfigTransformer202206079\PhpParser\Node\Arg) {
+        if (!$firstArg instanceof Arg) {
             return null;
         }
         $extensionName = $this->nodeValueResolver->resolve($firstArg->value, '');
