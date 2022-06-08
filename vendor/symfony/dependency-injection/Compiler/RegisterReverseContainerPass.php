@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220608\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

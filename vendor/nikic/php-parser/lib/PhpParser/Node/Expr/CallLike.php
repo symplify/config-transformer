@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Node\Expr;
+namespace ConfigTransformer20220608\PhpParser\Node\Expr;
 
-use ConfigTransformer20220607\PhpParser\Node\Arg;
-use ConfigTransformer20220607\PhpParser\Node\Expr;
-use ConfigTransformer20220607\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer20220608\PhpParser\Node\Arg;
+use ConfigTransformer20220608\PhpParser\Node\Expr;
+use ConfigTransformer20220608\PhpParser\Node\VariadicPlaceholder;
 abstract class CallLike extends Expr
 {
     /**

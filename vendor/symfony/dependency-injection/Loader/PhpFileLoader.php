@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer20220608\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer20220607\Symfony\Component\Config\Builder\ConfigBuilderGenerator;
-use ConfigTransformer20220607\Symfony\Component\Config\Builder\ConfigBuilderGeneratorInterface;
-use ConfigTransformer20220607\Symfony\Component\Config\Builder\ConfigBuilderInterface;
-use ConfigTransformer20220607\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Attribute\When;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer20220608\Symfony\Component\Config\Builder\ConfigBuilderGenerator;
+use ConfigTransformer20220608\Symfony\Component\Config\Builder\ConfigBuilderGeneratorInterface;
+use ConfigTransformer20220608\Symfony\Component\Config\Builder\ConfigBuilderInterface;
+use ConfigTransformer20220608\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Attribute\When;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 /**
  * PhpFileLoader loads service definitions from a PHP file.
  *

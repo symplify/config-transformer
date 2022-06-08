@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer20220608\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer20220607\PhpParser\Lexer\Emulative;
+use ConfigTransformer20220608\PhpParser\Lexer\Emulative;
 class ExplicitOctalEmulator extends TokenEmulator
 {
     public function getPhpVersion() : string

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\Cache\Messenger;
+namespace ConfigTransformer20220608\Symfony\Component\Cache\Messenger;
 
-use ConfigTransformer20220607\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ReverseContainer;
-use ConfigTransformer20220607\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use ConfigTransformer20220608\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ReverseContainer;
+use ConfigTransformer20220608\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /**
  * Computes cached values sent to a message bus.
  */

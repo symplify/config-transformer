@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220608\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220607\PhpParser\Node;
-use ConfigTransformer20220607\PhpParser\Node\FunctionLike;
+use ConfigTransformer20220608\PhpParser\Node;
+use ConfigTransformer20220608\PhpParser\Node\FunctionLike;
 class ClassMethod extends Node\Stmt implements FunctionLike
 {
     /** @var int Flags */

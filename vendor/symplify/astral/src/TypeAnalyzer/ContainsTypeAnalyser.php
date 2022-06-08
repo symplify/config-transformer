@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\Symplify\Astral\TypeAnalyzer;
+namespace ConfigTransformer20220608\Symplify\Astral\TypeAnalyzer;
 
-use ConfigTransformer20220607\PhpParser\Node\Expr;
-use ConfigTransformer20220607\PHPStan\Analyser\Scope;
-use ConfigTransformer20220607\PHPStan\Type\ArrayType;
-use ConfigTransformer20220607\PHPStan\Type\IntersectionType;
-use ConfigTransformer20220607\PHPStan\Type\Type;
-use ConfigTransformer20220607\PHPStan\Type\TypeWithClassName;
-use ConfigTransformer20220607\PHPStan\Type\UnionType;
+use ConfigTransformer20220608\PhpParser\Node\Expr;
+use ConfigTransformer20220608\PHPStan\Analyser\Scope;
+use ConfigTransformer20220608\PHPStan\Type\ArrayType;
+use ConfigTransformer20220608\PHPStan\Type\IntersectionType;
+use ConfigTransformer20220608\PHPStan\Type\Type;
+use ConfigTransformer20220608\PHPStan\Type\TypeWithClassName;
+use ConfigTransformer20220608\PHPStan\Type\UnionType;
 final class ContainsTypeAnalyser
 {
     /**

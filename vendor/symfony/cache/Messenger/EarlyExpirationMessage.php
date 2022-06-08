@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\Cache\Messenger;
+namespace ConfigTransformer20220608\Symfony\Component\Cache\Messenger;
 
-use ConfigTransformer20220607\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer20220607\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ReverseContainer;
+use ConfigTransformer20220608\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer20220608\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ReverseContainer;
 /**
  * Conveys a cached value that needs to be computed.
  */

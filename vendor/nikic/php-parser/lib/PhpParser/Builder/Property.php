@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Builder;
+namespace ConfigTransformer20220608\PhpParser\Builder;
 
-use ConfigTransformer20220607\PhpParser;
-use ConfigTransformer20220607\PhpParser\BuilderHelpers;
-use ConfigTransformer20220607\PhpParser\Node;
-use ConfigTransformer20220607\PhpParser\Node\Identifier;
-use ConfigTransformer20220607\PhpParser\Node\Name;
-use ConfigTransformer20220607\PhpParser\Node\Stmt;
-use ConfigTransformer20220607\PhpParser\Node\ComplexType;
+use ConfigTransformer20220608\PhpParser;
+use ConfigTransformer20220608\PhpParser\BuilderHelpers;
+use ConfigTransformer20220608\PhpParser\Node;
+use ConfigTransformer20220608\PhpParser\Node\Identifier;
+use ConfigTransformer20220608\PhpParser\Node\Name;
+use ConfigTransformer20220608\PhpParser\Node\Stmt;
+use ConfigTransformer20220608\PhpParser\Node\ComplexType;
 class Property implements PhpParser\Builder
 {
     protected $name;

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Node\Expr;
+namespace ConfigTransformer20220608\PhpParser\Node\Expr;
 
-use ConfigTransformer20220607\PhpParser\Node\Expr;
-use ConfigTransformer20220607\PhpParser\Node\Identifier;
+use ConfigTransformer20220608\PhpParser\Node\Expr;
+use ConfigTransformer20220608\PhpParser\Node\Identifier;
 class NullsafePropertyFetch extends Expr
 {
     /** @var Expr Variable holding object */

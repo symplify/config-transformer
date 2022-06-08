@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\Node\Scalar;
+namespace ConfigTransformer20220608\PhpParser\Node\Scalar;
 
-use ConfigTransformer20220607\PhpParser\Node\Scalar;
+use ConfigTransformer20220608\PhpParser\Node\Scalar;
 abstract class MagicConst extends Scalar
 {
     /**

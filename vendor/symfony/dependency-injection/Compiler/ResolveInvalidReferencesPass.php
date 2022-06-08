@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220608\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220607\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220608\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Emulates the invalid behavior if the reference is not found within the
  * container.

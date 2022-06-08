@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PhpParser\NodeVisitor;
+namespace ConfigTransformer20220608\PhpParser\NodeVisitor;
 
-use ConfigTransformer20220607\PhpParser\Node;
-use ConfigTransformer20220607\PhpParser\NodeTraverser;
-use ConfigTransformer20220607\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer20220608\PhpParser\Node;
+use ConfigTransformer20220608\PhpParser\NodeTraverser;
+use ConfigTransformer20220608\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find the first node satisfying some criterion determined by
  * a filter callback.

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\Symplify\SmartFileSystem\Finder;
+namespace ConfigTransformer20220608\Symplify\SmartFileSystem\Finder;
 
-use ConfigTransformer20220607\Symfony\Component\Finder\Finder;
-use ConfigTransformer20220607\Symplify\SmartFileSystem\FileSystemFilter;
-use ConfigTransformer20220607\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220608\Symfony\Component\Finder\Finder;
+use ConfigTransformer20220608\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer20220608\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @api
  * @see \Symplify\SmartFileSystem\Tests\Finder\SmartFinder\SmartFinderTest

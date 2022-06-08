@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Yaml;
 
-use ConfigTransformer20220607\Nette\Utils\Strings;
-use ConfigTransformer20220607\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer20220608\Nette\Utils\Strings;
+use ConfigTransformer20220608\Symplify\PackageBuilder\Strings\StringFormatConverter;
 /**
  * @api
  * @copy of https://github.com/symplify/symplify/blob/d4beda1b1af847599aa035ead755e03db81c7247/packages/easy-coding-standard/src/Yaml/CheckerServiceParametersShifter.php

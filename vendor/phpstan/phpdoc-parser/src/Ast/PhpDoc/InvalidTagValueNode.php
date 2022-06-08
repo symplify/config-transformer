@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220607\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer20220608\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer20220607\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer20220607\PHPStan\PhpDocParser\Parser\ParserException;
+use ConfigTransformer20220608\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer20220608\PHPStan\PhpDocParser\Parser\ParserException;
 use function sprintf;
 use function trigger_error;
 use const E_USER_WARNING;

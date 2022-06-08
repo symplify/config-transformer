@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220607\Symfony\Component\Yaml;
+namespace ConfigTransformer20220608\Symfony\Component\Yaml;
 
-use ConfigTransformer20220607\Symfony\Component\Yaml\Exception\DumpException;
-use ConfigTransformer20220607\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer20220607\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer20220608\Symfony\Component\Yaml\Exception\DumpException;
+use ConfigTransformer20220608\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer20220608\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Inline implements a YAML parser/dumper for the YAML inline syntax.
  *
