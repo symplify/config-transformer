@@ -3,13 +3,12 @@
 declare (strict_types=1);
 namespace ConfigTransformer20220609\Symplify\Astral\NodeValue\NodeValueResolver;
 
+use ConfigTransformer20220609\PhpParser\ConstExprEvaluationException;
 use ConfigTransformer20220609\PhpParser\Node\Expr;
 use ConfigTransformer20220609\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer20220609\PhpParser\Node\Stmt\ClassLike;
 use ReflectionClassConstant;
 use ConfigTransformer20220609\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
 use ConfigTransformer20220609\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer20220609\Symplify\Astral\NodeFinder\SimpleNodeFinder;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
@@ -21,14 +20,9 @@ final class ClassConstFetchValueResolver implements NodeValueResolverInterface
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
     private $simpleNameResolver;
-    /**
-     * @var \Symplify\Astral\NodeFinder\SimpleNodeFinder
-     */
-    private $simpleNodeFinder;
-    public function __construct(SimpleNameResolver $simpleNameResolver, SimpleNodeFinder $simpleNodeFinder)
+    public function __construct(SimpleNameResolver $simpleNameResolver)
     {
         $this->simpleNameResolver = $simpleNameResolver;
-        $this->simpleNodeFinder = $simpleNodeFinder;
     }
     public function getType() : string
     {
@@ -42,11 +36,8 @@ final class ClassConstFetchValueResolver implements NodeValueResolverInterface
     {
         $className = $this->simpleNameResolver->getName($expr->class);
         if ($className === 'self') {
-            $classLike = $this->simpleNodeFinder->findFirstParentByType($expr, ClassLike::class);
-            if (!$classLike instanceof ClassLike) {
-                return null;
-            }
-            $className = $this->simpleNameResolver->getName($classLike);
+            // unable to resolve
+            throw new ConstExprEvaluationException('Unable to resolve self class constant');
         }
         if ($className === null) {
             return null;

@@ -6,6 +6,9 @@ namespace ConfigTransformer20220609\Symplify\Astral\NodeFinder;
 use ConfigTransformer20220609\PhpParser\Node;
 use ConfigTransformer20220609\PhpParser\NodeFinder;
 use ConfigTransformer20220609\Symplify\Astral\ValueObject\AttributeKey;
+/**
+ * @api
+ */
 final class SimpleNodeFinder
 {
     /**
