@@ -67,4 +67,8 @@ final class AttributeKey
      * @var string
      */
     public const ASSIGNED_TO = 'assigned_to';
+    /**
+     * @var string
+     */
+    public const NULLSAFE_CHECKED = 'nullsafe_checked';
 }
