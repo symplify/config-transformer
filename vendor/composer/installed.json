@@ -1956,7 +1956,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/astral",
-                "reference": "4851f86317cf105186dc4d397d03f165c35fc631"
+                "reference": "0e6dd51a19bed80bee6d26e63f1e063a5015f7d5"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -2003,7 +2003,6 @@
                 },
                 "phpstan": {
                     "includes": [
-                        "config\/config.neon",
                         "config\/services.neon"
                     ]
                 }
