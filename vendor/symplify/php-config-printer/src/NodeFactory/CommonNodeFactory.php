@@ -28,7 +28,7 @@ final class CommonNodeFactory
         }
         $argumentValue = BuilderHelpers::normalizeValue($argument);
         if ($argumentValue instanceof String_) {
-            $argumentValue = new Concat(new Dir(), $argumentValue);
+            return new Concat(new Dir(), $argumentValue);
         }
         return $argumentValue;
     }

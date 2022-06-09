@@ -17,10 +17,8 @@ final class ParentLazyServiceOptionKeyYamlToPhpFactory implements ServiceOptions
      */
     public function decorateServiceMethodCall($key, $yaml, $values, MethodCall $methodCall) : MethodCall
     {
-        $method = $key;
-        $methodCall = new MethodCall($methodCall, $method);
-        $methodCall->args[] = new Arg(BuilderHelpers::normalizeValue($values[$key]));
-        return $methodCall;
+        $args = [new Arg(BuilderHelpers::normalizeValue($values[$key]))];
+        return new MethodCall($methodCall, $key, $args);
     }
     /**
      * @param mixed $key
