@@ -51,7 +51,7 @@ final class MethodCallParser
         if (!$classReflection->hasNativeMethod($methodName)) {
             return null;
         }
-        $methodReflection = $classReflection->getNativeMethod($methodName);
-        return $this->reflectionParser->parsePHPStanMethodReflection($methodReflection);
+        $extendedMethodReflection = $classReflection->getNativeMethod($methodName);
+        return $this->reflectionParser->parsePHPStanMethodReflection($extendedMethodReflection);
     }
 }
