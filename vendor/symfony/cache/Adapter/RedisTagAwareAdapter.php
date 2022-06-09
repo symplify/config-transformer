@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220609\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220608\Predis\Connection\Aggregate\ClusterInterface;
-use ConfigTransformer20220608\Predis\Connection\Aggregate\PredisCluster;
-use ConfigTransformer20220608\Predis\Connection\Aggregate\ReplicationInterface;
-use ConfigTransformer20220608\Predis\Response\ErrorInterface;
-use ConfigTransformer20220608\Predis\Response\Status;
-use ConfigTransformer20220608\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\LogicException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use ConfigTransformer20220608\Symfony\Component\Cache\Traits\RedisClusterProxy;
-use ConfigTransformer20220608\Symfony\Component\Cache\Traits\RedisProxy;
-use ConfigTransformer20220608\Symfony\Component\Cache\Traits\RedisTrait;
+use ConfigTransformer20220609\Predis\Connection\Aggregate\ClusterInterface;
+use ConfigTransformer20220609\Predis\Connection\Aggregate\PredisCluster;
+use ConfigTransformer20220609\Predis\Connection\Aggregate\ReplicationInterface;
+use ConfigTransformer20220609\Predis\Response\ErrorInterface;
+use ConfigTransformer20220609\Predis\Response\Status;
+use ConfigTransformer20220609\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\LogicException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use ConfigTransformer20220609\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use ConfigTransformer20220609\Symfony\Component\Cache\Traits\RedisProxy;
+use ConfigTransformer20220609\Symfony\Component\Cache\Traits\RedisTrait;
 /**
  * Stores tag id <> cache id relationship as a Redis Set.
  *
@@ -56,9 +56,9 @@ class RedisTagAwareAdapter extends AbstractTagAwareAdapter
      */
     private string $redisEvictionPolicy;
     private string $namespace;
-    public function __construct(\Redis|\RedisArray|\RedisCluster|\ConfigTransformer20220608\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    public function __construct(\Redis|\RedisArray|\RedisCluster|\ConfigTransformer20220609\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
-        if ($redis instanceof \ConfigTransformer20220608\Predis\ClientInterface && $redis->getConnection() instanceof ClusterInterface && !$redis->getConnection() instanceof PredisCluster) {
+        if ($redis instanceof \ConfigTransformer20220609\Predis\ClientInterface && $redis->getConnection() instanceof ClusterInterface && !$redis->getConnection() instanceof PredisCluster) {
             throw new InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', PredisCluster::class, \get_debug_type($redis->getConnection())));
         }
         if (\defined('Redis::OPT_COMPRESSION') && ($redis instanceof \Redis || $redis instanceof \RedisArray || $redis instanceof \RedisCluster)) {
@@ -136,7 +136,7 @@ class RedisTagAwareAdapter extends AbstractTagAwareAdapter
 EOLUA;
         $results = $this->pipeline(function () use($ids, $lua) {
             foreach ($ids as $id) {
-                (yield 'eval' => $this->redis instanceof \ConfigTransformer20220608\Predis\ClientInterface ? [$lua, 1, $id] : [$lua, [$id], 1]);
+                (yield 'eval' => $this->redis instanceof \ConfigTransformer20220609\Predis\ClientInterface ? [$lua, 1, $id] : [$lua, [$id], 1]);
             }
         });
         foreach ($results as $id => $result) {
@@ -204,13 +204,13 @@ EOLUA;
             return redis.call('SSCAN', '{'..id..'}'..id, '0', 'COUNT', 5000)
 EOLUA;
         $results = $this->pipeline(function () use($tagIds, $lua) {
-            if ($this->redis instanceof \ConfigTransformer20220608\Predis\ClientInterface) {
+            if ($this->redis instanceof \ConfigTransformer20220609\Predis\ClientInterface) {
                 $prefix = $this->redis->getOptions()->prefix ? $this->redis->getOptions()->prefix->getPrefix() : '';
             } elseif (\is_array($prefix = $this->redis->getOption(\Redis::OPT_PREFIX) ?? '')) {
                 $prefix = \current($prefix);
             }
             foreach ($tagIds as $id) {
-                (yield 'eval' => $this->redis instanceof \ConfigTransformer20220608\Predis\ClientInterface ? [$lua, 1, $id, $prefix] : [$lua, [$id, $prefix], 1]);
+                (yield 'eval' => $this->redis instanceof \ConfigTransformer20220609\Predis\ClientInterface ? [$lua, 1, $id, $prefix] : [$lua, [$id, $prefix], 1]);
             }
         });
         $lua = <<<'EOLUA'
@@ -234,7 +234,7 @@ EOLUA;
                 $this->doDelete($ids);
                 $evalArgs = [$id, $cursor];
                 \array_splice($evalArgs, 1, 0, $ids);
-                if ($this->redis instanceof \ConfigTransformer20220608\Predis\ClientInterface) {
+                if ($this->redis instanceof \ConfigTransformer20220609\Predis\ClientInterface) {
                     \array_unshift($evalArgs, $lua, 1);
                 } else {
                     $evalArgs = [$lua, $evalArgs, 1];
@@ -256,7 +256,7 @@ EOLUA;
         }
         $hosts = $this->getHosts();
         $host = \reset($hosts);
-        if ($host instanceof \ConfigTransformer20220608\Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
+        if ($host instanceof \ConfigTransformer20220609\Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
             // Predis supports info command only on the master in replication environments
             $hosts = [$host->getClientFor('master')];
         }

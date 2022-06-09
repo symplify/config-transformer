@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608\Symplify\PackageBuilder\Composer;
+namespace ConfigTransformer20220609\Symplify\PackageBuilder\Composer;
 
-use ConfigTransformer20220608\Composer\Autoload\ClassLoader;
+use ConfigTransformer20220609\Composer\Autoload\ClassLoader;
 use ReflectionClass;
 /**
  * @api

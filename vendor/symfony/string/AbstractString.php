@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\String;
+namespace ConfigTransformer20220609\Symfony\Component\String;
 
-use ConfigTransformer20220608\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer20220608\Symfony\Component\String\Exception\InvalidArgumentException;
-use ConfigTransformer20220608\Symfony\Component\String\Exception\RuntimeException;
+use ConfigTransformer20220609\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer20220609\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer20220609\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract characters.
  *

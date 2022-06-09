@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer20220608\Nette\Utils\Strings;
-use ConfigTransformer20220608\PhpParser\Node\Expr;
-use ConfigTransformer20220608\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer20220608\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer20220608\PhpParser\Node\Name;
-use ConfigTransformer20220608\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer20220609\Nette\Utils\Strings;
+use ConfigTransformer20220609\PhpParser\Node\Expr;
+use ConfigTransformer20220609\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer20220609\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer20220609\PhpParser\Node\Name;
+use ConfigTransformer20220609\PhpParser\Node\Name\FullyQualified;
 use Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 /**
  * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:

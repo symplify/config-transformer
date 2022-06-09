@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220609\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  * @author Nicolas Grekas <p@tchwork.com>

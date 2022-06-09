@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608;
+namespace ConfigTransformer20220609;
 
-use ConfigTransformer20220608\PhpParser\BuilderFactory;
-use ConfigTransformer20220608\PhpParser\NodeFinder;
-use ConfigTransformer20220608\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer20220608\Symfony\Component\Yaml\Parser;
-use ConfigTransformer20220608\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer20220608\Symplify\Astral\NodeFinder\SimpleNodeFinder;
-use ConfigTransformer20220608\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer20220608\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
-use ConfigTransformer20220608\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer20220608\Symplify\PackageBuilder\Php\TypeChecker;
-use ConfigTransformer20220608\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use function ConfigTransformer20220608\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer20220609\PhpParser\BuilderFactory;
+use ConfigTransformer20220609\PhpParser\NodeFinder;
+use ConfigTransformer20220609\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer20220609\Symfony\Component\Yaml\Parser;
+use ConfigTransformer20220609\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer20220609\Symplify\Astral\NodeFinder\SimpleNodeFinder;
+use ConfigTransformer20220609\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer20220609\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
+use ConfigTransformer20220609\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer20220609\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer20220609\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use function ConfigTransformer20220609\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

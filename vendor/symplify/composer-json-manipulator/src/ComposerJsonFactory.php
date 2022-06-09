@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608\Symplify\ComposerJsonManipulator;
+namespace ConfigTransformer20220609\Symplify\ComposerJsonManipulator;
 
-use ConfigTransformer20220608\Nette\Utils\Json;
-use ConfigTransformer20220608\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
-use ConfigTransformer20220608\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
-use ConfigTransformer20220608\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
-use ConfigTransformer20220608\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220609\Nette\Utils\Json;
+use ConfigTransformer20220609\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
+use ConfigTransformer20220609\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
+use ConfigTransformer20220609\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
+use ConfigTransformer20220609\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @api
  * @see \Symplify\ComposerJsonManipulator\Tests\ComposerJsonFactory\ComposerJsonFactoryTest

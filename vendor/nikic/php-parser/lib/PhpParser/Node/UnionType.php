@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608\PhpParser\Node;
+namespace ConfigTransformer20220609\PhpParser\Node;
 
 class UnionType extends ComplexType
 {

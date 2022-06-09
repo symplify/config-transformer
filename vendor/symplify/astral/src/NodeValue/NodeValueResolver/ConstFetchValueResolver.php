@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer20220609\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer20220608\PhpParser\Node\Expr;
-use ConfigTransformer20220608\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer20220608\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer20220608\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer20220609\PhpParser\Node\Expr;
+use ConfigTransformer20220609\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer20220609\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer20220609\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *

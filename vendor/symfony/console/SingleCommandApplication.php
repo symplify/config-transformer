@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Console;
+namespace ConfigTransformer20220609\Symfony\Component\Console;
 
-use ConfigTransformer20220608\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220608\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer20220608\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220609\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220609\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220609\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */

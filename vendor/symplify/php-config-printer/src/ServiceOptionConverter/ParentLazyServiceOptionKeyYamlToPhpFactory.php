@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer20220608\PhpParser\BuilderHelpers;
-use ConfigTransformer20220608\PhpParser\Node\Arg;
-use ConfigTransformer20220608\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220609\PhpParser\BuilderHelpers;
+use ConfigTransformer20220609\PhpParser\Node\Arg;
+use ConfigTransformer20220609\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class ParentLazyServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface

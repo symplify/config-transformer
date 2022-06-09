@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Config\Loader;
+namespace ConfigTransformer20220609\Symfony\Component\Config\Loader;
 
-use ConfigTransformer20220608\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
-use ConfigTransformer20220608\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use ConfigTransformer20220608\Symfony\Component\Config\Exception\LoaderLoadException;
-use ConfigTransformer20220608\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer20220608\Symfony\Component\Config\Resource\FileExistenceResource;
-use ConfigTransformer20220608\Symfony\Component\Config\Resource\GlobResource;
+use ConfigTransformer20220609\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
+use ConfigTransformer20220609\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ConfigTransformer20220609\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer20220609\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer20220609\Symfony\Component\Config\Resource\FileExistenceResource;
+use ConfigTransformer20220609\Symfony\Component\Config\Resource\GlobResource;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *

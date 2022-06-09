@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Console\Helper;
+namespace ConfigTransformer20220609\Symfony\Component\Console\Helper;
 
-use ConfigTransformer20220608\Symfony\Component\Console\Cursor;
-use ConfigTransformer20220608\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer20220608\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer20220608\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use ConfigTransformer20220608\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer20220608\Symfony\Component\Console\Terminal;
+use ConfigTransformer20220609\Symfony\Component\Console\Cursor;
+use ConfigTransformer20220609\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer20220609\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer20220609\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use ConfigTransformer20220609\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220609\Symfony\Component\Console\Terminal;
 /**
  * The ProgressBar provides helpers to display progress output.
  *

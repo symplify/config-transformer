@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220609\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer20220608\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */
@@ -25,7 +25,7 @@ class CouchbaseBucketAdapter extends AbstractAdapter
     private const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
     private $bucket;
     private $marshaller;
-    public function __construct(\ConfigTransformer20220608\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    public function __construct(\ConfigTransformer20220609\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
             throw new CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
@@ -36,7 +36,7 @@ class CouchbaseBucketAdapter extends AbstractAdapter
         $this->enableVersioning();
         $this->marshaller = $marshaller ?? new DefaultMarshaller();
     }
-    public static function createConnection(array|string $servers, array $options = []) : \ConfigTransformer20220608\CouchbaseBucket
+    public static function createConnection(array|string $servers, array $options = []) : \ConfigTransformer20220609\CouchbaseBucket
     {
         if (\is_string($servers)) {
             $servers = [$servers];
@@ -71,7 +71,7 @@ class CouchbaseBucketAdapter extends AbstractAdapter
                 $newServers[] = $matches['host'];
             }
             $connectionString = $protocol . '://' . \implode(',', $newServers);
-            $client = new \ConfigTransformer20220608\CouchbaseCluster($connectionString);
+            $client = new \ConfigTransformer20220609\CouchbaseCluster($connectionString);
             $client->authenticateAs($username, $password);
             $bucket = $client->openBucket($matches['bucketName']);
             unset($options['username'], $options['password']);

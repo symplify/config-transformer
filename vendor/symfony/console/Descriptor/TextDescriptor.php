@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220608\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer20220609\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer20220608\Symfony\Component\Console\Application;
-use ConfigTransformer20220608\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220608\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer20220608\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer20220608\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer20220608\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer20220608\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer20220609\Symfony\Component\Console\Application;
+use ConfigTransformer20220609\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220609\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer20220609\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer20220609\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer20220609\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer20220609\Symfony\Component\Console\Input\InputOption;
 /**
  * Text descriptor.
  *

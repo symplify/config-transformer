@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220608\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc;
+namespace ConfigTransformer20220609\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc;
 
-use ConfigTransformer20220608\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
-use ConfigTransformer20220608\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
-use ConfigTransformer20220608\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
+use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
+use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 /**
  * @noRector final on purpose, so it can be extended by 3rd party
  */

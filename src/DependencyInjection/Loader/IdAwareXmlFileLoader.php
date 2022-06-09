@@ -9,17 +9,17 @@ use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use InvalidArgumentException;
-use ConfigTransformer20220608\Nette\Utils\Strings;
-use ConfigTransformer20220608\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer20220608\Symfony\Component\Config\Util\Exception\XmlParsingException;
-use ConfigTransformer20220608\Symfony\Component\Config\Util\XmlUtils;
-use ConfigTransformer20220608\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220608\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ConfigTransformer20220609\Nette\Utils\Strings;
+use ConfigTransformer20220609\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer20220609\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use ConfigTransformer20220609\Symfony\Component\Config\Util\XmlUtils;
+use ConfigTransformer20220609\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symplify\ConfigTransformer\Collector\XmlImportCollector;
 use Symplify\ConfigTransformer\Naming\UniqueNaming;
 use Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasAndNamespaceConfigurableExtension;
-use ConfigTransformer20220608\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer20220609\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * Mimics https://github.com/symfony/symfony/commit/b8c68da0107a4f433dd414a355ea5589da0da0e8 for Symfony 3.3-
  *
