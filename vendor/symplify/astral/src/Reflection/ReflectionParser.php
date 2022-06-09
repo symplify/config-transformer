@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace ConfigTransformer20220609\Symplify\Astral\Reflection;
 
 use ConfigTransformer20220609\PhpParser\Node;
-use ConfigTransformer20220609\PhpParser\Node\Stmt\Class_;
+use ConfigTransformer20220609\PhpParser\Node\Stmt\ClassLike;
 use ConfigTransformer20220609\PhpParser\Node\Stmt\ClassMethod;
 use ConfigTransformer20220609\PhpParser\Node\Stmt\Property;
 use ConfigTransformer20220609\PhpParser\NodeFinder;
@@ -21,7 +21,7 @@ use Throwable;
 final class ReflectionParser
 {
     /**
-     * @var array<string, Class_>
+     * @var array<string, ClassLike>
      */
     private $classesByFilename = [];
     /**
@@ -55,21 +55,21 @@ final class ReflectionParser
      */
     public function parseMethodReflection($reflectionMethod) : ?ClassMethod
     {
-        $class = $this->parseNativeClassReflection($reflectionMethod->getDeclaringClass());
-        if (!$class instanceof Class_) {
+        $classLike = $this->parseNativeClassReflection($reflectionMethod->getDeclaringClass());
+        if (!$classLike instanceof ClassLike) {
             return null;
         }
-        return $class->getMethod($reflectionMethod->getName());
+        return $classLike->getMethod($reflectionMethod->getName());
     }
     public function parsePropertyReflection(ReflectionProperty $reflectionProperty) : ?Property
     {
         $class = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
-        if (!$class instanceof Class_) {
+        if (!$class instanceof ClassLike) {
             return null;
         }
         return $class->getProperty($reflectionProperty->getName());
     }
-    public function parseClassReflection(ClassReflection $classReflection) : ?Class_
+    public function parseClassReflection(ClassReflection $classReflection) : ?ClassLike
     {
         $filename = $classReflection->getFileName();
         if ($filename === null) {
@@ -80,7 +80,7 @@ final class ReflectionParser
     /**
      * @param \ReflectionClass|\PHPStan\Reflection\ClassReflection $reflectionClass
      */
-    private function parseNativeClassReflection($reflectionClass) : ?Class_
+    private function parseNativeClassReflection($reflectionClass) : ?ClassLike
     {
         $fileName = $reflectionClass->getFileName();
         if ($fileName === \false) {
@@ -92,7 +92,7 @@ final class ReflectionParser
         return $this->parseFilenameToClass($fileName);
     }
     /**
-     * @return \PhpParser\Node\Stmt\Class_|null
+     * @return \PhpParser\Node\Stmt\ClassLike|null
      */
     private function parseFilenameToClass(string $fileName)
     {
@@ -105,8 +105,8 @@ final class ReflectionParser
             // not reachable
             return null;
         }
-        $class = $this->nodeFinder->findFirstInstanceOf($stmts, Class_::class);
-        if (!$class instanceof Class_) {
+        $class = $this->nodeFinder->findFirstInstanceOf($stmts, ClassLike::class);
+        if (!$class instanceof ClassLike) {
             return null;
         }
         $this->classesByFilename[$fileName] = $class;

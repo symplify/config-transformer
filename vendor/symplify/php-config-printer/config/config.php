@@ -9,7 +9,6 @@ use ConfigTransformer20220609\PhpParser\NodeVisitor\ParentConnectingVisitor;
 use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use ConfigTransformer20220609\Symfony\Component\Yaml\Parser;
 use ConfigTransformer20220609\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer20220609\Symplify\Astral\NodeFinder\SimpleNodeFinder;
 use ConfigTransformer20220609\Symplify\Astral\NodeValue\NodeValueResolver;
 use ConfigTransformer20220609\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
 use ConfigTransformer20220609\Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -24,7 +23,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(Parser::class);
     $services->set(BuilderFactory::class);
     $services->set(ParentConnectingVisitor::class);
-    $services->set(SimpleNodeFinder::class);
     $services->set(TypeChecker::class);
     $services->set(NodeValueResolver::class);
     $services->set(SimpleNameResolver::class)->factory(SimpleNameResolverStaticFactory::class . '::create');
