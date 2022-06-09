@@ -8,6 +8,7 @@ use ConfigTransformer20220609\PhpParser\Node\Stmt\Class_;
 use ConfigTransformer20220609\PhpParser\Node\Stmt\ClassMethod;
 use ConfigTransformer20220609\PhpParser\Node\Stmt\Property;
 use ConfigTransformer20220609\PhpParser\NodeFinder;
+use ConfigTransformer20220609\PHPStan\Reflection\ClassReflection;
 use ConfigTransformer20220609\PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
@@ -19,6 +20,10 @@ use Throwable;
  */
 final class ReflectionParser
 {
+    /**
+     * @var array<string, Class_>
+     */
+    private $classesByFilename = [];
     /**
      * @var \Symplify\Astral\PhpParser\SmartPhpParser
      */
@@ -61,6 +66,14 @@ final class ReflectionParser
         }
         return $class->getProperty($reflectionProperty->getName());
     }
+    public function parseClassReflection(ClassReflection $classReflection) : ?Class_
+    {
+        $filename = $classReflection->getFileName();
+        if ($filename === null) {
+            return null;
+        }
+        return $this->parseFilenameToClass($filename);
+    }
     private function parseNativeClassReflection(ReflectionClass $reflectionClass) : ?Class_
     {
         $fileName = $reflectionClass->getFileName();
@@ -74,6 +87,9 @@ final class ReflectionParser
      */
     private function parseFilenameToClass(string $fileName)
     {
+        if (isset($this->classesByFilename[$fileName])) {
+            return $this->classesByFilename[$fileName];
+        }
         try {
             $stmts = $this->smartPhpParser->parseFile($fileName);
         } catch (Throwable $exception) {
@@ -84,6 +100,7 @@ final class ReflectionParser
         if (!$class instanceof Class_) {
             return null;
         }
+        $this->classesByFilename[$fileName] = $class;
         return $class;
     }
 }
