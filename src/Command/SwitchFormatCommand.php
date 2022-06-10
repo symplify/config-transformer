@@ -13,7 +13,6 @@ use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\Option;
 use ConfigTransformer20220610\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer20220610\Symplify\PackageBuilder\Console\Command\CommandNaming;
 use ConfigTransformer20220610\Symplify\SmartFileSystem\SmartFileInfo;
 final class SwitchFormatCommand extends AbstractSymplifyCommand
 {
@@ -38,7 +37,7 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
     }
     protected function configure() : void
     {
-        $this->setName(CommandNaming::classToName(self::class));
+        $this->setName('switch-format');
         $this->setDescription('Converts XML/YAML configs to PHP format');
         $this->addArgument(Option::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to directory with configs');
         $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
