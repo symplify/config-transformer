@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer20220609\Psr\Log;
+namespace ConfigTransformer20220610\Psr\Log;
 
 /**
  * This is a simple Logger trait that classes unable to extend AbstractLogger

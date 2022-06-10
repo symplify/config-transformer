@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220610\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220609\PhpParser\Node;
+use ConfigTransformer20220610\PhpParser\Node;
 /** Nop/empty statement (;). */
 class Nop extends Node\Stmt
 {

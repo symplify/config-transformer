@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220610\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220609\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer20220610\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  */

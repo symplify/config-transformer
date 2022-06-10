@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Node\Scalar;
+namespace ConfigTransformer20220610\PhpParser\Node\Scalar;
 
-use ConfigTransformer20220609\PhpParser\Error;
-use ConfigTransformer20220609\PhpParser\Node\Scalar;
+use ConfigTransformer20220610\PhpParser\Error;
+use ConfigTransformer20220610\PhpParser\Node\Scalar;
 class LNumber extends Scalar
 {
     /* For use in "kind" attribute */

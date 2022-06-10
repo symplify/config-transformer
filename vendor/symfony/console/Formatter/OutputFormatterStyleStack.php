@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer20220610\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer20220609\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer20220609\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer20220610\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer20220610\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */

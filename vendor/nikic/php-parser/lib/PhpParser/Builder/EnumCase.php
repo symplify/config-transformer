@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Builder;
+namespace ConfigTransformer20220610\PhpParser\Builder;
 
-use ConfigTransformer20220609\PhpParser;
-use ConfigTransformer20220609\PhpParser\BuilderHelpers;
-use ConfigTransformer20220609\PhpParser\Node;
-use ConfigTransformer20220609\PhpParser\Node\Identifier;
-use ConfigTransformer20220609\PhpParser\Node\Stmt;
+use ConfigTransformer20220610\PhpParser;
+use ConfigTransformer20220610\PhpParser\BuilderHelpers;
+use ConfigTransformer20220610\PhpParser\Node;
+use ConfigTransformer20220610\PhpParser\Node\Identifier;
+use ConfigTransformer20220610\PhpParser\Node\Stmt;
 class EnumCase implements PhpParser\Builder
 {
     protected $name;

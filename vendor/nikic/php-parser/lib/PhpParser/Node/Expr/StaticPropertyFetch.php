@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Node\Expr;
+namespace ConfigTransformer20220610\PhpParser\Node\Expr;
 
-use ConfigTransformer20220609\PhpParser\Node\Expr;
-use ConfigTransformer20220609\PhpParser\Node\Name;
-use ConfigTransformer20220609\PhpParser\Node\VarLikeIdentifier;
+use ConfigTransformer20220610\PhpParser\Node\Expr;
+use ConfigTransformer20220610\PhpParser\Node\Name;
+use ConfigTransformer20220610\PhpParser\Node\VarLikeIdentifier;
 class StaticPropertyFetch extends Expr
 {
     /** @var Name|Expr Class name */

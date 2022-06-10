@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\Symplify\ComposerJsonManipulator\Sorter;
+namespace ConfigTransformer20220610\Symplify\ComposerJsonManipulator\Sorter;
 
-use ConfigTransformer20220609\Nette\Utils\Strings;
+use ConfigTransformer20220610\Nette\Utils\Strings;
 /**
  * Mostly inspired by https://github.com/composer/composer/blob/master/src/Composer/Json/JsonManipulator.php
  *

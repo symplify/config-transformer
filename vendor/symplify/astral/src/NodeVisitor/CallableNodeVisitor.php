@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\Symplify\Astral\NodeVisitor;
+namespace ConfigTransformer20220610\Symplify\Astral\NodeVisitor;
 
-use ConfigTransformer20220609\PhpParser\Node;
-use ConfigTransformer20220609\PhpParser\Node\Expr;
-use ConfigTransformer20220609\PhpParser\Node\Stmt;
-use ConfigTransformer20220609\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer20220609\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer20220610\PhpParser\Node;
+use ConfigTransformer20220610\PhpParser\Node\Expr;
+use ConfigTransformer20220610\PhpParser\Node\Stmt;
+use ConfigTransformer20220610\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220610\PhpParser\NodeVisitorAbstract;
 final class CallableNodeVisitor extends NodeVisitorAbstract
 {
     /**

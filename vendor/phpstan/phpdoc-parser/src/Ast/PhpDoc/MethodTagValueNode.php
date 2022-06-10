@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer20220610\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer20220610\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer20220610\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function implode;
 class MethodTagValueNode implements PhpDocTagValueNode
 {

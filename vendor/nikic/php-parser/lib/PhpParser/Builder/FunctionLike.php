@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Builder;
+namespace ConfigTransformer20220610\PhpParser\Builder;
 
-use ConfigTransformer20220609\PhpParser\BuilderHelpers;
-use ConfigTransformer20220609\PhpParser\Node;
+use ConfigTransformer20220610\PhpParser\BuilderHelpers;
+use ConfigTransformer20220610\PhpParser\Node;
 abstract class FunctionLike extends Declaration
 {
     protected $returnByRef = \false;

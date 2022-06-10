@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer20220610\PHPStan\PhpDocParser\Parser;
 
-use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast;
-use ConfigTransformer20220609\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use ConfigTransformer20220609\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer20220609\PHPStan\ShouldNotHappenException;
+use ConfigTransformer20220610\PHPStan\PhpDocParser\Ast;
+use ConfigTransformer20220610\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use ConfigTransformer20220610\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer20220610\PHPStan\ShouldNotHappenException;
 use function array_values;
 use function count;
 use function trim;

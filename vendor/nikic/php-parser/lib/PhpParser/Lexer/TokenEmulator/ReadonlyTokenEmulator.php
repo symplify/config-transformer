@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer20220610\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer20220609\PhpParser\Lexer\Emulative;
+use ConfigTransformer20220610\PhpParser\Lexer\Emulative;
 final class ReadonlyTokenEmulator extends KeywordEmulator
 {
     public function getPhpVersion() : string

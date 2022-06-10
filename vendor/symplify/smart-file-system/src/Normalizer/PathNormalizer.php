@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\Symplify\SmartFileSystem\Normalizer;
+namespace ConfigTransformer20220610\Symplify\SmartFileSystem\Normalizer;
 
-use ConfigTransformer20220609\Nette\Utils\Strings;
+use ConfigTransformer20220610\Nette\Utils\Strings;
 /**
  * @api
  *

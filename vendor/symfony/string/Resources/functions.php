@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\String;
+namespace ConfigTransformer20220610\Symfony\Component\String;
 
 if (!\function_exists(u::class)) {
     function u(?string $string = '') : UnicodeString

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\Config\Loader;
+namespace ConfigTransformer20220610\Symfony\Component\Config\Loader;
 
-use ConfigTransformer20220609\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer20220610\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * DelegatingLoader delegates loading to other loaders using a loader resolver.
  *

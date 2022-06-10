@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220610\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Attribute\Target;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220609\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Attribute\Target;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220610\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * @author Guilhem Niot <guilhem.niot@gmail.com>
  */

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220609\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220610\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer20220609\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer20220609\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer20220609\Symfony\Component\Cache\Traits\FilesystemTrait;
+use ConfigTransformer20220610\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer20220610\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220610\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer20220610\Symfony\Component\Cache\Traits\FilesystemTrait;
 class FilesystemAdapter extends AbstractAdapter implements PruneableInterface
 {
     use FilesystemTrait;

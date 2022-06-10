@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Node\Expr;
+namespace ConfigTransformer20220610\PhpParser\Node\Expr;
 
-use ConfigTransformer20220609\PhpParser\Node\Expr;
+use ConfigTransformer20220610\PhpParser\Node\Expr;
 class PreDec extends Expr
 {
     /** @var Expr Variable */

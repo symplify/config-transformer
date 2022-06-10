@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220609\PhpParser\Node;
+namespace ConfigTransformer20220610\PhpParser\Node;
 
-use ConfigTransformer20220609\PhpParser\Node;
+use ConfigTransformer20220610\PhpParser\Node;
 interface FunctionLike extends Node
 {
     /**
