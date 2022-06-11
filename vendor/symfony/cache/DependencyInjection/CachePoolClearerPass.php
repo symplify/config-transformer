@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer20220611\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

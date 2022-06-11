@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer20220611\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer20220610\PhpParser\Node;
-use ConfigTransformer20220610\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer20220610\Symplify\Astral\Contract\NodeNameResolverInterface;
+use ConfigTransformer20220611\PhpParser\Node;
+use ConfigTransformer20220611\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer20220611\Symplify\Astral\Contract\NodeNameResolverInterface;
 final class ClassLikeNodeNameResolver implements NodeNameResolverInterface
 {
     public function match(Node $node) : bool

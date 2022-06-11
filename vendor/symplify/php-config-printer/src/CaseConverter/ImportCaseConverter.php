@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer20220610\Nette\Utils\Strings;
-use ConfigTransformer20220610\PhpParser\BuilderHelpers;
-use ConfigTransformer20220610\PhpParser\Node\Arg;
-use ConfigTransformer20220610\PhpParser\Node\Expr;
-use ConfigTransformer20220610\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer20220610\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220610\PhpParser\Node\Expr\Variable;
-use ConfigTransformer20220610\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer20220610\PhpParser\Node\Scalar\String_;
-use ConfigTransformer20220610\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220611\Nette\Utils\Strings;
+use ConfigTransformer20220611\PhpParser\BuilderHelpers;
+use ConfigTransformer20220611\PhpParser\Node\Arg;
+use ConfigTransformer20220611\PhpParser\Node\Expr;
+use ConfigTransformer20220611\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer20220611\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220611\PhpParser\Node\Expr\Variable;
+use ConfigTransformer20220611\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer20220611\PhpParser\Node\Scalar\String_;
+use ConfigTransformer20220611\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;

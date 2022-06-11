@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer20220610\PhpParser\BuilderHelpers;
-use ConfigTransformer20220610\PhpParser\Node\Arg;
-use ConfigTransformer20220610\PhpParser\Node\Expr;
-use ConfigTransformer20220610\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220610\PhpParser\Node\Scalar\String_;
-use ConfigTransformer20220610\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer20220611\PhpParser\BuilderHelpers;
+use ConfigTransformer20220611\PhpParser\Node\Arg;
+use ConfigTransformer20220611\PhpParser\Node\Expr;
+use ConfigTransformer20220611\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220611\PhpParser\Node\Scalar\String_;
+use ConfigTransformer20220611\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 final class SingleServicePhpNodeFactory
 {

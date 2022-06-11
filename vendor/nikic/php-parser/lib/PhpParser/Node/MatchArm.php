@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\PhpParser\Node;
+namespace ConfigTransformer20220611\PhpParser\Node;
 
-use ConfigTransformer20220610\PhpParser\Node;
-use ConfigTransformer20220610\PhpParser\NodeAbstract;
+use ConfigTransformer20220611\PhpParser\Node;
+use ConfigTransformer20220611\PhpParser\NodeAbstract;
 class MatchArm extends NodeAbstract
 {
     /** @var null|Node\Expr[] */

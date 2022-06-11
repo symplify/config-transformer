@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Cache;
+namespace ConfigTransformer20220611\Symfony\Component\Cache;
 
-use ConfigTransformer20220610\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer20220611\Symfony\Contracts\Service\ResetInterface;
 /**
  * Resets a pool's local state.
  */

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer20220611\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait ParentTrait
 {
     /**

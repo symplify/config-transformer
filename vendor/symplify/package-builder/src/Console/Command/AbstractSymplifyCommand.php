@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\Symplify\PackageBuilder\Console\Command;
+namespace ConfigTransformer20220611\Symplify\PackageBuilder\Console\Command;
 
-use ConfigTransformer20220610\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer20220610\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer20220610\Symfony\Contracts\Service\Attribute\Required;
-use ConfigTransformer20220610\Symplify\PackageBuilder\ValueObject\Option;
-use ConfigTransformer20220610\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer20220610\Symplify\SmartFileSystem\Finder\SmartFinder;
-use ConfigTransformer20220610\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer20220611\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer20220611\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer20220611\Symfony\Contracts\Service\Attribute\Required;
+use ConfigTransformer20220611\Symplify\PackageBuilder\ValueObject\Option;
+use ConfigTransformer20220611\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer20220611\Symplify\SmartFileSystem\Finder\SmartFinder;
+use ConfigTransformer20220611\Symplify\SmartFileSystem\SmartFileSystem;
 abstract class AbstractSymplifyCommand extends Command
 {
     /**

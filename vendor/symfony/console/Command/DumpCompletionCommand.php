@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Console\Command;
+namespace ConfigTransformer20220611\Symfony\Component\Console\Command;
 
-use ConfigTransformer20220610\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer20220610\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer20220610\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer20220610\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer20220610\Symfony\Component\Process\Process;
+use ConfigTransformer20220611\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer20220611\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer20220611\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer20220611\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220611\Symfony\Component\Process\Process;
 /**
  * Dumps the completion script for the current shell.
  *

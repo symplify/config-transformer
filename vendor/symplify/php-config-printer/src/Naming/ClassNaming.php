@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer20220610\Nette\Utils\Strings;
+use ConfigTransformer20220611\Nette\Utils\Strings;
 final class ClassNaming
 {
     public function getShortName(string $class) : string

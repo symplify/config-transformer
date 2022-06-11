@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer20220611\PHPStan\PhpDocParser\Parser;
 
-use ConfigTransformer20220610\PHPStan\PhpDocParser\Ast;
-use ConfigTransformer20220610\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer20220611\PHPStan\PhpDocParser\Ast;
+use ConfigTransformer20220611\PHPStan\PhpDocParser\Lexer\Lexer;
 use function strtolower;
 use function trim;
 class ConstExprParser

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Config;
+namespace ConfigTransformer20220611\Symfony\Component\Config;
 
-use ConfigTransformer20220610\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ConfigTransformer20220611\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * FileLocator uses an array of pre-defined paths to find files.
  *

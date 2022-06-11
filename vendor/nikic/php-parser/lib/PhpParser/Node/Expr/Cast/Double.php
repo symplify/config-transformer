@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\PhpParser\Node\Expr\Cast;
+namespace ConfigTransformer20220611\PhpParser\Node\Expr\Cast;
 
-use ConfigTransformer20220610\PhpParser\Node\Expr\Cast;
+use ConfigTransformer20220611\PhpParser\Node\Expr\Cast;
 class Double extends Cast
 {
     // For use in "kind" attribute

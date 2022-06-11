@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer20220610\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220611\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;

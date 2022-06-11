@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220611\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220610\PhpParser\Node;
-use ConfigTransformer20220610\PhpParser\Node\FunctionLike;
+use ConfigTransformer20220611\PhpParser\Node;
+use ConfigTransformer20220611\PhpParser\Node\FunctionLike;
 class Function_ extends Node\Stmt implements FunctionLike
 {
     /** @var bool Whether function returns by reference */

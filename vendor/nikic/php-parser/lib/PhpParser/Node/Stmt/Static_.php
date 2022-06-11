@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220611\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220610\PhpParser\Node\Stmt;
+use ConfigTransformer20220611\PhpParser\Node\Stmt;
 class Static_ extends Stmt
 {
     /** @var StaticVar[] Variable definitions */

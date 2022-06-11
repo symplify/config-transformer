@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection\LoaderFactory;
 
-use ConfigTransformer20220610\Symfony\Component\Config\FileLocator;
-use ConfigTransformer20220610\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220611\Symfony\Component\Config\FileLocator;
+use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\ConfigTransformer\Collector\XmlImportCollector;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\IdAwareXmlFileLoader;
 use Symplify\ConfigTransformer\Naming\UniqueNaming;

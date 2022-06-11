@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220611\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220610\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer20220610\Symfony\Component\Cache\Traits\RedisClusterProxy;
-use ConfigTransformer20220610\Symfony\Component\Cache\Traits\RedisProxy;
-use ConfigTransformer20220610\Symfony\Component\Cache\Traits\RedisTrait;
+use ConfigTransformer20220611\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220611\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use ConfigTransformer20220611\Symfony\Component\Cache\Traits\RedisProxy;
+use ConfigTransformer20220611\Symfony\Component\Cache\Traits\RedisTrait;
 class RedisAdapter extends AbstractAdapter
 {
     use RedisTrait;
-    public function __construct(\Redis|\RedisArray|\RedisCluster|\ConfigTransformer20220610\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    public function __construct(\Redis|\RedisArray|\RedisCluster|\ConfigTransformer20220611\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         $this->init($redis, $namespace, $defaultLifetime, $marshaller);
     }

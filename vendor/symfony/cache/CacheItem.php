@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220610\Symfony\Component\Cache;
+namespace ConfigTransformer20220611\Symfony\Component\Cache;
 
-use ConfigTransformer20220610\Psr\Log\LoggerInterface;
-use ConfigTransformer20220610\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220610\Symfony\Component\Cache\Exception\LogicException;
-use ConfigTransformer20220610\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer20220611\Psr\Log\LoggerInterface;
+use ConfigTransformer20220611\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220611\Symfony\Component\Cache\Exception\LogicException;
+use ConfigTransformer20220611\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

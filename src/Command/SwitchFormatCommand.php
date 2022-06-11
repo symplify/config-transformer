@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Command;
 
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer20220610\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer20220610\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220611\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer20220611\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\Option;
-use ConfigTransformer20220610\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use ConfigTransformer20220610\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220611\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+use ConfigTransformer20220611\Symplify\SmartFileSystem\SmartFileInfo;
 final class SwitchFormatCommand extends AbstractSymplifyCommand
 {
     /**

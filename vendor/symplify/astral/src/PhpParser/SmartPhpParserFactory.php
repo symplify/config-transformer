@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610\Symplify\Astral\PhpParser;
+namespace ConfigTransformer20220611\Symplify\Astral\PhpParser;
 
-use ConfigTransformer20220610\PhpParser\Lexer\Emulative;
-use ConfigTransformer20220610\PhpParser\NodeVisitor\NameResolver;
-use ConfigTransformer20220610\PhpParser\Parser;
-use ConfigTransformer20220610\PhpParser\ParserFactory;
-use ConfigTransformer20220610\PHPStan\Parser\CachedParser;
-use ConfigTransformer20220610\PHPStan\Parser\SimpleParser;
+use ConfigTransformer20220611\PhpParser\Lexer\Emulative;
+use ConfigTransformer20220611\PhpParser\NodeVisitor\NameResolver;
+use ConfigTransformer20220611\PhpParser\Parser;
+use ConfigTransformer20220611\PhpParser\ParserFactory;
+use ConfigTransformer20220611\PHPStan\Parser\CachedParser;
+use ConfigTransformer20220611\PHPStan\Parser\SimpleParser;
 /**
  * Based on PHPStan-based PHP-Parser best practices:
  *

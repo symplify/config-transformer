@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220610;
+namespace ConfigTransformer20220611;
 
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
-use ConfigTransformer20220610\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use ConfigTransformer20220611\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
     // monorepo
     __DIR__ . '/../../../vendor/autoload.php',
