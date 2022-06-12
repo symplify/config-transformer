@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Alias;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

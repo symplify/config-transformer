@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Nette\Utils;
+namespace ConfigTransformer20220612\Nette\Utils;
 
-use ConfigTransformer20220611\Nette;
+use ConfigTransformer20220612\Nette;
 /**
  * Nette\Object behaviour mixin.
  * @deprecated

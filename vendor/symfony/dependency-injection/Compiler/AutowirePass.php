@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220611\Symfony\Component\Config\Resource\ClassExistenceResource;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Attribute\Target;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer20220612\Symfony\Component\Config\Resource\ClassExistenceResource;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Attribute\Target;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Inspects existing service definitions and wires the autowired ones using the type hints of their classes.
  *

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer20220612\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer20220611\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer20220612\PHPStan\PhpDocParser\Ast\NodeAttributes;
 class GenericTagValueNode implements PhpDocTagValueNode
 {
     use NodeAttributes;

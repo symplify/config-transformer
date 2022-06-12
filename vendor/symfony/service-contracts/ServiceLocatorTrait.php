@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Contracts\Service;
+namespace ConfigTransformer20220612\Symfony\Contracts\Service;
 
-use ConfigTransformer20220611\Psr\Container\ContainerExceptionInterface;
-use ConfigTransformer20220611\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer20220612\Psr\Container\ContainerExceptionInterface;
+use ConfigTransformer20220612\Psr\Container\NotFoundExceptionInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ContainerExceptionInterface::class);
 \class_exists(NotFoundExceptionInterface::class);

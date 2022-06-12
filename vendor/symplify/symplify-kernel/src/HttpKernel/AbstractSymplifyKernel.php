@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\SymplifyKernel\HttpKernel;
+namespace ConfigTransformer20220612\Symplify\SymplifyKernel\HttpKernel;
 
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer20220611\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\ContainerBuilderFactory;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Contract\LightKernelInterface;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer20220612\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Config\Loader\ParameterMergingLoaderFactory;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\ContainerBuilderFactory;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Contract\LightKernelInterface;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\ValueObject\SymplifyKernelConfig;
 /**
  * @api
  */
@@ -37,7 +37,7 @@ abstract class AbstractSymplifyKernel implements LightKernelInterface
         $this->container = $containerBuilder;
         return $containerBuilder;
     }
-    public function getContainer() : \ConfigTransformer20220611\Psr\Container\ContainerInterface
+    public function getContainer() : \ConfigTransformer20220612\Psr\Container\ContainerInterface
     {
         if (!$this->container instanceof Container) {
             throw new ShouldNotHappenException();

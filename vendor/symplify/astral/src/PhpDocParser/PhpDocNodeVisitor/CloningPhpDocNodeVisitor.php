@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer20220612\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer20220611\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer20220611\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
+use ConfigTransformer20220612\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer20220612\Symplify\Astral\PhpDocParser\ValueObject\PhpDocAttributeKey;
 /**
  * @api
  *

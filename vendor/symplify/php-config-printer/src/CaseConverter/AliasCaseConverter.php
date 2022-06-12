@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer20220611\Nette\Utils\Strings;
-use ConfigTransformer20220611\PhpParser\Node\Arg;
-use ConfigTransformer20220611\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer20220611\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Variable;
-use ConfigTransformer20220611\PhpParser\Node\Scalar\String_;
-use ConfigTransformer20220611\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer20220611\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer20220612\Nette\Utils\Strings;
+use ConfigTransformer20220612\PhpParser\Node\Arg;
+use ConfigTransformer20220612\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer20220612\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Variable;
+use ConfigTransformer20220612\PhpParser\Node\Scalar\String_;
+use ConfigTransformer20220612\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220612\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
@@ -18,7 +18,7 @@ use Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class AliasCaseConverter implements CaseConverterInterface
 {
     /**

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer20220612\Symplify\EasyTesting\ValueObject;
 
-use ConfigTransformer20220611\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ExpectedAndOutputFileInfoPair
 {
     /**

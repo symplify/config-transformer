@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\Astral\NodeTraverser;
+namespace ConfigTransformer20220612\Symplify\Astral\NodeTraverser;
 
-use ConfigTransformer20220611\PhpParser\Node;
-use ConfigTransformer20220611\PhpParser\NodeTraverser;
-use ConfigTransformer20220611\Symplify\Astral\NodeVisitor\CallableNodeVisitor;
+use ConfigTransformer20220612\PhpParser\Node;
+use ConfigTransformer20220612\PhpParser\NodeTraverser;
+use ConfigTransformer20220612\Symplify\Astral\NodeVisitor\CallableNodeVisitor;
 /**
  * @api
  */

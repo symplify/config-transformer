@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\Console\Command;
+namespace ConfigTransformer20220612\Symfony\Component\Console\Command;
 
-use ConfigTransformer20220611\Symfony\Component\Console\Application;
-use ConfigTransformer20220611\Symfony\Component\Console\Attribute\AsCommand;
-use ConfigTransformer20220611\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer20220611\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer20220611\Symfony\Component\Console\Exception\ExceptionInterface;
-use ConfigTransformer20220611\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer20220611\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer20220611\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer20220611\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer20220611\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer20220611\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer20220611\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer20220611\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer20220612\Symfony\Component\Console\Application;
+use ConfigTransformer20220612\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer20220612\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer20220612\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer20220612\Symfony\Component\Console\Exception\ExceptionInterface;
+use ConfigTransformer20220612\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer20220612\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer20220612\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer20220612\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer20220612\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer20220612\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220612\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer20220612\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Base class for all commands.
  *
@@ -260,7 +260,7 @@ class Command
                         \cli_set_process_title($this->processTitle);
                     }
                 }
-            } elseif (\function_exists('ConfigTransformer20220611\\setproctitle')) {
+            } elseif (\function_exists('ConfigTransformer20220612\\setproctitle')) {
                 setproctitle($this->processTitle);
             } elseif (OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
                 $output->writeln('<comment>Install the proctitle PECL to be able to change the process title.</comment>');

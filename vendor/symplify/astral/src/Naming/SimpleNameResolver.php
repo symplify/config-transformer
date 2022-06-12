@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\Astral\Naming;
+namespace ConfigTransformer20220612\Symplify\Astral\Naming;
 
-use ConfigTransformer20220611\Nette\Utils\Strings;
-use ConfigTransformer20220611\PhpParser\Node;
-use ConfigTransformer20220611\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Variable;
-use ConfigTransformer20220611\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer20220611\PhpParser\Node\Stmt\Property;
-use ConfigTransformer20220611\PHPStan\Analyser\Scope;
-use ConfigTransformer20220611\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer20220611\Symplify\Astral\Contract\NodeNameResolverInterface;
+use ConfigTransformer20220612\Nette\Utils\Strings;
+use ConfigTransformer20220612\PhpParser\Node;
+use ConfigTransformer20220612\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Variable;
+use ConfigTransformer20220612\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer20220612\PhpParser\Node\Stmt\Property;
+use ConfigTransformer20220612\PHPStan\Analyser\Scope;
+use ConfigTransformer20220612\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer20220612\Symplify\Astral\Contract\NodeNameResolverInterface;
 /**
  * @see \Symplify\Astral\Tests\Naming\SimpleNameResolverTest
  */

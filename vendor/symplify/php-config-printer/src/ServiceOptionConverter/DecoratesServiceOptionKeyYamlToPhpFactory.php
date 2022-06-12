@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer20220611\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220612\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;

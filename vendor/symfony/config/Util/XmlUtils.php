@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\Config\Util;
+namespace ConfigTransformer20220612\Symfony\Component\Config\Util;
 
-use ConfigTransformer20220611\Symfony\Component\Config\Util\Exception\InvalidXmlException;
-use ConfigTransformer20220611\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use ConfigTransformer20220612\Symfony\Component\Config\Util\Exception\InvalidXmlException;
+use ConfigTransformer20220612\Symfony\Component\Config\Util\Exception\XmlParsingException;
 /**
  * XMLUtils is a bunch of utility methods to XML operations.
  *

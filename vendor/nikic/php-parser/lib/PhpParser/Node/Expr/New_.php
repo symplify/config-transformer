@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\PhpParser\Node\Expr;
+namespace ConfigTransformer20220612\PhpParser\Node\Expr;
 
-use ConfigTransformer20220611\PhpParser\Node;
-use ConfigTransformer20220611\PhpParser\Node\Arg;
-use ConfigTransformer20220611\PhpParser\Node\Expr;
-use ConfigTransformer20220611\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer20220612\PhpParser\Node;
+use ConfigTransformer20220612\PhpParser\Node\Arg;
+use ConfigTransformer20220612\PhpParser\Node\Expr;
+use ConfigTransformer20220612\PhpParser\Node\VariadicPlaceholder;
 class New_ extends CallLike
 {
     /** @var Node\Name|Expr|Node\Stmt\Class_ Class name */

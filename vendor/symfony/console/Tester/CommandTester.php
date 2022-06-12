@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\Console\Tester;
+namespace ConfigTransformer20220612\Symfony\Component\Console\Tester;
 
-use ConfigTransformer20220611\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220611\Symfony\Component\Console\Input\ArrayInput;
+use ConfigTransformer20220612\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220612\Symfony\Component\Console\Input\ArrayInput;
 /**
  * Eases the testing of console commands.
  *

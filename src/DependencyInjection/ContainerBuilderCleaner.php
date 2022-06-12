@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer20220611\Nette\Utils\Strings;
-use ConfigTransformer20220611\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220611\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer20220612\Nette\Utils\Strings;
+use ConfigTransformer20220612\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220612\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 final class ContainerBuilderCleaner
 {
     /**

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220611\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate the "container.no_preload" tag.
  *

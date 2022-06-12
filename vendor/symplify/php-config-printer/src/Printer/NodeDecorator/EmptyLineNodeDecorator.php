@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use ConfigTransformer20220611\PhpParser\Node;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Assign;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Closure;
-use ConfigTransformer20220611\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220611\PhpParser\Node\Stmt;
-use ConfigTransformer20220611\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer20220611\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer20220611\PhpParser\NodeFinder;
-use ConfigTransformer20220611\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer20220612\PhpParser\Node;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Assign;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Closure;
+use ConfigTransformer20220612\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer20220612\PhpParser\Node\Stmt;
+use ConfigTransformer20220612\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer20220612\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer20220612\PhpParser\NodeFinder;
+use ConfigTransformer20220612\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\Symplify\PackageBuilder\Console\Output;
+namespace ConfigTransformer20220612\Symplify\PackageBuilder\Console\Output;
 
-use ConfigTransformer20220611\SebastianBergmann\Diff\Differ;
-use ConfigTransformer20220611\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
+use ConfigTransformer20220612\SebastianBergmann\Diff\Differ;
+use ConfigTransformer20220612\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
 /**
  * @api
  */

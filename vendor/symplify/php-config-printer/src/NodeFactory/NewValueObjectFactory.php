@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer20220611\MyCLabs\Enum\Enum;
-use ConfigTransformer20220611\PhpParser\BuilderHelpers;
-use ConfigTransformer20220611\PhpParser\Node\Arg;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Array_;
-use ConfigTransformer20220611\PhpParser\Node\Expr\New_;
-use ConfigTransformer20220611\PhpParser\Node\Expr\StaticCall;
-use ConfigTransformer20220611\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer20220612\MyCLabs\Enum\Enum;
+use ConfigTransformer20220612\PhpParser\BuilderHelpers;
+use ConfigTransformer20220612\PhpParser\Node\Arg;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Array_;
+use ConfigTransformer20220612\PhpParser\Node\Expr\New_;
+use ConfigTransformer20220612\PhpParser\Node\Expr\StaticCall;
+use ConfigTransformer20220612\PhpParser\Node\Name\FullyQualified;
 use ReflectionClass;
 final class NewValueObjectFactory
 {

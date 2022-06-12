@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220611\Symfony\Component\DependencyInjection\Exception;
+namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception;
 
-use ConfigTransformer20220611\Psr\Container\NotFoundExceptionInterface;
+use ConfigTransformer20220612\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent parameter is used.
  *

@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220611\PhpParser;
+namespace ConfigTransformer20220612\PhpParser;
 
-use ConfigTransformer20220611\PhpParser\Internal\DiffElem;
-use ConfigTransformer20220611\PhpParser\Internal\PrintableNewAnonClassNode;
-use ConfigTransformer20220611\PhpParser\Internal\TokenStream;
-use ConfigTransformer20220611\PhpParser\Node\Expr;
-use ConfigTransformer20220611\PhpParser\Node\Expr\AssignOp;
-use ConfigTransformer20220611\PhpParser\Node\Expr\BinaryOp;
-use ConfigTransformer20220611\PhpParser\Node\Expr\Cast;
-use ConfigTransformer20220611\PhpParser\Node\Scalar;
-use ConfigTransformer20220611\PhpParser\Node\Stmt;
+use ConfigTransformer20220612\PhpParser\Internal\DiffElem;
+use ConfigTransformer20220612\PhpParser\Internal\PrintableNewAnonClassNode;
+use ConfigTransformer20220612\PhpParser\Internal\TokenStream;
+use ConfigTransformer20220612\PhpParser\Node\Expr;
+use ConfigTransformer20220612\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer20220612\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer20220612\PhpParser\Node\Expr\Cast;
+use ConfigTransformer20220612\PhpParser\Node\Scalar;
+use ConfigTransformer20220612\PhpParser\Node\Stmt;
 abstract class PrettyPrinterAbstract
 {
     const FIXUP_PREC_LEFT = 0;
