@@ -23,7 +23,7 @@ final class SimpleNodeFinder
     /**
      * @template T of Node
      * @param class-string<T> $nodeClass
-     * @return T[]
+     * @return array<T>
      */
     public function findByType(Node $node, string $nodeClass) : array
     {
