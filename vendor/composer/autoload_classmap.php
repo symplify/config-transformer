@@ -987,7 +987,6 @@ return array(
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Composer\\VendorDirProvider' => $vendorDir . '/symplify/package-builder/src/Composer/VendorDirProvider.php',
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Configuration\\StaticEolConfiguration' => $vendorDir . '/symplify/package-builder/src/Configuration/StaticEolConfiguration.php',
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Console\\Command\\AbstractSymplifyCommand' => $vendorDir . '/symplify/package-builder/src/Console/Command/AbstractSymplifyCommand.php',
-    'ConfigTransformer202206\\Symplify\\PackageBuilder\\Console\\Command\\CommandNaming' => $vendorDir . '/symplify/package-builder/src/Console/Command/CommandNaming.php',
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Console\\Formatter\\ColorConsoleDiffFormatter' => $vendorDir . '/symplify/package-builder/src/Console/Formatter/ColorConsoleDiffFormatter.php',
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Console\\Input\\StaticInputDetector' => $vendorDir . '/symplify/package-builder/src/Console/Input/StaticInputDetector.php',
     'ConfigTransformer202206\\Symplify\\PackageBuilder\\Console\\Output\\ConsoleDiffer' => $vendorDir . '/symplify/package-builder/src/Console/Output/ConsoleDiffer.php',
