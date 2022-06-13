@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\VarExporter\Exception;
+namespace ConfigTransformer20220613\Symfony\Component\VarExporter\Exception;
 
 class ClassNotFoundException extends \Exception implements ExceptionInterface
 {

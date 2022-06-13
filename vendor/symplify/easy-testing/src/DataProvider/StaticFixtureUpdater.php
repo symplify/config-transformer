@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\EasyTesting\DataProvider;
+namespace ConfigTransformer20220613\Symplify\EasyTesting\DataProvider;
 
-use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @api
  */

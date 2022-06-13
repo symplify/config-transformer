@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
+namespace ConfigTransformer20220613\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor;
 
-use ConfigTransformer20220612\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer20220612\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
+use ConfigTransformer20220613\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer20220613\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
 /**
  * Inspired by https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/NodeVisitorAbstract.php
  */

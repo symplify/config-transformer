@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\PackageBuilder\Console\Input;
+namespace ConfigTransformer20220613\Symplify\PackageBuilder\Console\Input;
 
-use ConfigTransformer20220612\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer20220613\Symfony\Component\Console\Input\ArgvInput;
 /**
  * @api
  */

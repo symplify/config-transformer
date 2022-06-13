@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\ComposerJsonManipulator\Printer;
+namespace ConfigTransformer20220613\Symplify\ComposerJsonManipulator\Printer;
 
-use ConfigTransformer20220612\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
-use ConfigTransformer20220612\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220613\Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
+use ConfigTransformer20220613\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @api
  */

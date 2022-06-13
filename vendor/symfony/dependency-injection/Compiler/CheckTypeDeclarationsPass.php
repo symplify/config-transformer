@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Container;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ServiceLocator;
-use ConfigTransformer20220612\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ServiceLocator;
+use ConfigTransformer20220613\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * Checks whether injected parameters are compatible with type declarations.
  *

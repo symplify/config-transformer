@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612;
+namespace ConfigTransformer20220613;
 
-use ConfigTransformer20220612\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer20220612\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer20220612\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer20220612\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\FileSystemFilter;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\Finder\SmartFinder;
-use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileSystem;
-use function ConfigTransformer20220612\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer20220613\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer20220613\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer20220613\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer20220613\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\Finder\SmartFinder;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileSystem;
+use function ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

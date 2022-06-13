@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\Astral\NodeValue\NodeValueResolver;
+namespace ConfigTransformer20220613\Symplify\Astral\NodeValue\NodeValueResolver;
 
-use ConfigTransformer20220612\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer20220612\PhpParser\Node\Expr;
-use ConfigTransformer20220612\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer20220613\PhpParser\ConstExprEvaluationException;
+use ConfigTransformer20220613\PhpParser\Node\Expr;
+use ConfigTransformer20220613\PhpParser\Node\Expr\ClassConstFetch;
 use ReflectionClassConstant;
-use ConfigTransformer20220612\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer20220612\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer20220613\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer20220613\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *

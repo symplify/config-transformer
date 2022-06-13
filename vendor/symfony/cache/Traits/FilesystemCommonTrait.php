@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer20220613\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer20220612\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220613\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

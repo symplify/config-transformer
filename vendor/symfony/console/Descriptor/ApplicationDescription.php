@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer20220613\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer20220612\Symfony\Component\Console\Application;
-use ConfigTransformer20220612\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220612\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer20220613\Symfony\Component\Console\Application;
+use ConfigTransformer20220613\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220613\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220613\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220612\Psr\Cache\CacheItemInterface;
-use ConfigTransformer20220612\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer20220612\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer20220612\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer20220612\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer20220612\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer20220613\Psr\Cache\CacheItemInterface;
+use ConfigTransformer20220613\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220613\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer20220613\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer20220613\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer20220613\Symfony\Contracts\Service\ResetInterface;
 /**
  * An adapter that collects data about all cache calls.
  *

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220613\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220612\Psr\Cache\CacheItemInterface;
-use ConfigTransformer20220612\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer20220612\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer20220612\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer20220612\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220612\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer20220612\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer20220613\Psr\Cache\CacheItemInterface;
+use ConfigTransformer20220613\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer20220613\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer20220613\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer20220613\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220613\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer20220613\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *

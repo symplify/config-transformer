@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer20220613\Symplify\EasyTesting\ValueObject;
 
-use ConfigTransformer20220612\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileInfo;
 final class IncorrectAndMissingSkips
 {
     /**

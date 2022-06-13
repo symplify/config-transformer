@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220612\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

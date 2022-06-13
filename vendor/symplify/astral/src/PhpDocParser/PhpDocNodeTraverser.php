@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\Astral\PhpDocParser;
+namespace ConfigTransformer20220613\Symplify\Astral\PhpDocParser;
 
-use ConfigTransformer20220612\PHPStan\PhpDocParser\Ast\Node;
-use ConfigTransformer20220612\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
-use ConfigTransformer20220612\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException;
-use ConfigTransformer20220612\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor;
+use ConfigTransformer20220613\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer20220613\Symplify\Astral\PhpDocParser\Contract\PhpDocNodeVisitorInterface;
+use ConfigTransformer20220613\Symplify\Astral\PhpDocParser\Exception\InvalidTraverseException;
+use ConfigTransformer20220613\Symplify\Astral\PhpDocParser\PhpDocNodeVisitor\CallablePhpDocNodeVisitor;
 /**
  * @api
  *

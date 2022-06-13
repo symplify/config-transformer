@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer20220613\Symfony\Component\Cache\Adapter;
 
 use Couchbase\Bucket;
 use Couchbase\Cluster;
@@ -16,10 +16,10 @@ use Couchbase\ClusterOptions;
 use Couchbase\Collection;
 use Couchbase\DocumentNotFoundException;
 use Couchbase\UpsertOptions;
-use ConfigTransformer20220612\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer20220612\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer20220612\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer20220612\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer20220613\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer20220613\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer20220613\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer20220613\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */

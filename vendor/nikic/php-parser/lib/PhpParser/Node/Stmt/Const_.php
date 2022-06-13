@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\PhpParser\Node\Stmt;
+namespace ConfigTransformer20220613\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220612\PhpParser\Node;
+use ConfigTransformer20220613\PhpParser\Node;
 class Const_ extends Node\Stmt
 {
     /** @var Node\Const_[] Constant declarations */

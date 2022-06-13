@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\Astral\TypeAnalyzer;
+namespace ConfigTransformer20220613\Symplify\Astral\TypeAnalyzer;
 
-use ConfigTransformer20220612\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer20220612\PHPStan\Analyser\Scope;
-use ConfigTransformer20220612\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer20220612\PHPStan\Reflection\FunctionVariant;
-use ConfigTransformer20220612\PHPStan\Reflection\ParametersAcceptorSelector;
-use ConfigTransformer20220612\PHPStan\Type\MixedType;
-use ConfigTransformer20220612\PHPStan\Type\Type;
-use ConfigTransformer20220612\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer20220612\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer20220613\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer20220613\PHPStan\Analyser\Scope;
+use ConfigTransformer20220613\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer20220613\PHPStan\Reflection\FunctionVariant;
+use ConfigTransformer20220613\PHPStan\Reflection\ParametersAcceptorSelector;
+use ConfigTransformer20220613\PHPStan\Type\MixedType;
+use ConfigTransformer20220613\PHPStan\Type\Type;
+use ConfigTransformer20220613\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer20220613\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @api
  */

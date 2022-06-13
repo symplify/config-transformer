@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Configuration;
 
-use ConfigTransformer20220612\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer20220613\Symfony\Component\Console\Input\InputInterface;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\Option;
 final class ConfigurationFactory

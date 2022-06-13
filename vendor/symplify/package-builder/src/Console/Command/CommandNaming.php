@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\PackageBuilder\Console\Command;
+namespace ConfigTransformer20220613\Symplify\PackageBuilder\Console\Command;
 
-use ConfigTransformer20220612\Nette\Utils\Strings;
-use ConfigTransformer20220612\Symfony\Component\Console\Command\Command;
+use ConfigTransformer20220613\Nette\Utils\Strings;
+use ConfigTransformer20220613\Symfony\Component\Console\Command\Command;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Console\Command\CommandNamingTest

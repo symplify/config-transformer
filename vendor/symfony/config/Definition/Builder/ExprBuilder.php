@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220612\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer20220613\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer20220612\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer20220613\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * This class builds an if expression.
  *

@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220612\Symplify\Astral\Reflection;
+namespace ConfigTransformer20220613\Symplify\Astral\Reflection;
 
-use ConfigTransformer20220612\PhpParser\Node;
-use ConfigTransformer20220612\PhpParser\Node\Stmt\ClassLike;
-use ConfigTransformer20220612\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer20220612\PhpParser\Node\Stmt\Property;
-use ConfigTransformer20220612\PhpParser\NodeFinder;
-use ConfigTransformer20220612\PHPStan\Reflection\ClassReflection;
-use ConfigTransformer20220612\PHPStan\Reflection\MethodReflection;
+use ConfigTransformer20220613\PhpParser\Node;
+use ConfigTransformer20220613\PhpParser\Node\Stmt\ClassLike;
+use ConfigTransformer20220613\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer20220613\PhpParser\Node\Stmt\Property;
+use ConfigTransformer20220613\PhpParser\NodeFinder;
+use ConfigTransformer20220613\PHPStan\Reflection\ClassReflection;
+use ConfigTransformer20220613\PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
-use ConfigTransformer20220612\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer20220613\Symplify\Astral\PhpParser\SmartPhpParser;
 use Throwable;
 /**
  * @api
