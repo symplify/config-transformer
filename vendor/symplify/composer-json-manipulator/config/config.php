@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613;
+namespace ConfigTransformer202206;
 
-use ConfigTransformer20220613\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer20220613\Symplify\ComposerJsonManipulator\ValueObject\Option;
-use ConfigTransformer20220613\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer20220613\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer20220613\Symplify\PackageBuilder\Reflection\PrivatesCaller;
-use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileSystem;
-use function ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202206\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202206\Symplify\ComposerJsonManipulator\ValueObject\Option;
+use ConfigTransformer202206\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer202206\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202206\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202206\Symplify\SmartFileSystem\SmartFileSystem;
+use function ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::INLINE_SECTIONS, ['keywords']);

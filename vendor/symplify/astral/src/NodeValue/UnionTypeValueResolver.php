@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\Symplify\Astral\NodeValue;
+namespace ConfigTransformer202206\Symplify\Astral\NodeValue;
 
-use ConfigTransformer20220613\PHPStan\Type\ConstantScalarType;
-use ConfigTransformer20220613\PHPStan\Type\UnionType;
+use ConfigTransformer202206\PHPStan\Type\ConstantScalarType;
+use ConfigTransformer202206\PHPStan\Type\UnionType;
 final class UnionTypeValueResolver
 {
     /**

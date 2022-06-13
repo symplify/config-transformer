@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220613\PhpParser\Node;
+use ConfigTransformer202206\PhpParser\Node;
 class Namespace_ extends Node\Stmt
 {
     /* For use in the "kind" attribute */

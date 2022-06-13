@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202206\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer20220613\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202206\Psr\Cache\InvalidArgumentException;
 /**
  * Interface for invalidating cached items using tags.
  *

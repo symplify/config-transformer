@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220613\Psr\Container\ContainerInterface as PsrContainerInterface;
-use ConfigTransformer20220613\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\TypedReference;
-use ConfigTransformer20220613\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use ConfigTransformer20220613\Symfony\Contracts\Service\ServiceProviderInterface;
-use ConfigTransformer20220613\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202206\Psr\Container\ContainerInterface as PsrContainerInterface;
+use ConfigTransformer202206\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202206\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use ConfigTransformer202206\Symfony\Contracts\Service\ServiceProviderInterface;
+use ConfigTransformer202206\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * Compiler pass to register tagged services that require a service locator.
  *

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
 /**
  * Run this pass before passes that need to know more about the relation of
  * your services.

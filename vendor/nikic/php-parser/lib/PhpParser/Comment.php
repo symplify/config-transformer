@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser;
+namespace ConfigTransformer202206\PhpParser;
 
 class Comment implements \JsonSerializable
 {

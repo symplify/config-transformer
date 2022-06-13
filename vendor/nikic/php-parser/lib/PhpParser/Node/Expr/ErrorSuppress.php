@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node\Expr;
+namespace ConfigTransformer202206\PhpParser\Node\Expr;
 
-use ConfigTransformer20220613\PhpParser\Node\Expr;
+use ConfigTransformer202206\PhpParser\Node\Expr;
 class ErrorSuppress extends Expr
 {
     /** @var Expr Expression */

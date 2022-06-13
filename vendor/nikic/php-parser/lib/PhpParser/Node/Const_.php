@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node;
+namespace ConfigTransformer202206\PhpParser\Node;
 
-use ConfigTransformer20220613\PhpParser\NodeAbstract;
+use ConfigTransformer202206\PhpParser\NodeAbstract;
 class Const_ extends NodeAbstract
 {
     /** @var Identifier Name */

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ServiceLocator;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ServiceLocator;
 /**
  * Applies the "container.service_locator" tag by wrapping references into ServiceClosureArgument instances.
  *

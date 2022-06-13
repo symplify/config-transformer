@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\Console\DependencyInjection;
+namespace ConfigTransformer202206\Symfony\Component\Console\DependencyInjection;
 
-use ConfigTransformer20220613\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220613\Symfony\Component\Console\Command\LazyCommand;
-use ConfigTransformer20220613\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202206\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202206\Symfony\Component\Console\Command\LazyCommand;
+use ConfigTransformer202206\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *

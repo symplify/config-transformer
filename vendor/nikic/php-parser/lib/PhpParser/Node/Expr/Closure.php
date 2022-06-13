@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node\Expr;
+namespace ConfigTransformer202206\PhpParser\Node\Expr;
 
-use ConfigTransformer20220613\PhpParser\Node;
-use ConfigTransformer20220613\PhpParser\Node\Expr;
-use ConfigTransformer20220613\PhpParser\Node\FunctionLike;
+use ConfigTransformer202206\PhpParser\Node;
+use ConfigTransformer202206\PhpParser\Node\Expr;
+use ConfigTransformer202206\PhpParser\Node\FunctionLike;
 class Closure extends Expr implements FunctionLike
 {
     /** @var bool Whether the closure is static */

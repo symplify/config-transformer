@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer20220613\PhpParser\Node\Expr;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202206\PhpParser\Node\Expr;
+use ConfigTransformer202206\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedServiceResolver
 {

@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer20220613\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Parser as YamlParser;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202206\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202206\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202206\Symfony\Component\Yaml\Parser as YamlParser;
+use ConfigTransformer202206\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202206\Symfony\Component\Yaml\Yaml;
 /**
  * YamlFileLoader loads YAML files service definitions.
  *
@@ -553,7 +553,7 @@ class YamlFileLoader extends FileLoader
      */
     protected function loadFile(string $file) : ?array
     {
-        if (!\class_exists(\ConfigTransformer20220613\Symfony\Component\Yaml\Parser::class)) {
+        if (!\class_exists(\ConfigTransformer202206\Symfony\Component\Yaml\Parser::class)) {
             throw new RuntimeException('Unable to load YAML config files as the Symfony Yaml Component is not installed.');
         }
         if (!\stream_is_local($file)) {

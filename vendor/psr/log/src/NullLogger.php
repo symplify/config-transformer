@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer20220613\Psr\Log;
+namespace ConfigTransformer202206\Psr\Log;
 
 /**
  * This Logger can be used to avoid conditional log calls.

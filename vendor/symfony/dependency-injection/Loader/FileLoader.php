@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer20220613\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use ConfigTransformer20220613\Symfony\Component\Config\Exception\LoaderLoadException;
-use ConfigTransformer20220613\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer20220613\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
-use ConfigTransformer20220613\Symfony\Component\Config\Loader\Loader;
-use ConfigTransformer20220613\Symfony\Component\Config\Resource\GlobResource;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Attribute\When;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Compiler\RegisterAutoconfigureAttributesPass;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202206\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ConfigTransformer202206\Symfony\Component\Config\Exception\LoaderLoadException;
+use ConfigTransformer202206\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202206\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
+use ConfigTransformer202206\Symfony\Component\Config\Loader\Loader;
+use ConfigTransformer202206\Symfony\Component\Config\Resource\GlobResource;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Attribute\When;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler\RegisterAutoconfigureAttributesPass;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *

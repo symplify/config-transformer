@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220613\PhpParser\Node\Name;
-use ConfigTransformer20220613\PhpParser\Node\Stmt;
+use ConfigTransformer202206\PhpParser\Node\Name;
+use ConfigTransformer202206\PhpParser\Node\Stmt;
 class GroupUse extends Stmt
 {
     /** @var int Type of group use */

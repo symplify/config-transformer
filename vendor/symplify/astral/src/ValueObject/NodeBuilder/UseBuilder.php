@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\Symplify\Astral\ValueObject\NodeBuilder;
+namespace ConfigTransformer202206\Symplify\Astral\ValueObject\NodeBuilder;
 
-use ConfigTransformer20220613\PhpParser\Builder\Use_;
-use ConfigTransformer20220613\PhpParser\Node\Name;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Use_ as UseStmt;
+use ConfigTransformer202206\PhpParser\Builder\Use_;
+use ConfigTransformer202206\PhpParser\Node\Name;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Use_ as UseStmt;
 /**
  * @api
  * Fixed duplicated naming in php-parser and prevents confusion

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\NodeVisitor;
+namespace ConfigTransformer202206\PhpParser\NodeVisitor;
 
-use ConfigTransformer20220613\PhpParser\Node;
-use ConfigTransformer20220613\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202206\PhpParser\Node;
+use ConfigTransformer202206\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node
  * as well as its sibling nodes.

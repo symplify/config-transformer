@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer20220613\Nette;
+namespace ConfigTransformer202206\Nette;
 
 /**
  * The exception that is thrown when the value of an argument is

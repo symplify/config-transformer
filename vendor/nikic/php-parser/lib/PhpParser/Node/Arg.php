@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node;
+namespace ConfigTransformer202206\PhpParser\Node;
 
-use ConfigTransformer20220613\PhpParser\Node\VariadicPlaceholder;
-use ConfigTransformer20220613\PhpParser\NodeAbstract;
+use ConfigTransformer202206\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer202206\PhpParser\NodeAbstract;
 class Arg extends NodeAbstract
 {
     /** @var Identifier|null Parameter name (for named parameters) */

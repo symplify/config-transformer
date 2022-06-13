@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer20220613\PhpParser\Node\Expr\Assign;
-use ConfigTransformer20220613\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220613\PhpParser\Node\Expr\Variable;
-use ConfigTransformer20220613\PhpParser\Node\Stmt;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202206\PhpParser\Node\Expr\Assign;
+use ConfigTransformer202206\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202206\PhpParser\Node\Stmt;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableMethodName;
@@ -40,7 +40,7 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param array<string, mixed[]> $arrayData
      */
-    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = 'ConfigTransformer20220613\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator') : Return_
+    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = 'ConfigTransformer202206\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator') : Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts, $containerConfiguratorClass);

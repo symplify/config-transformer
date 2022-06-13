@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202206\Symfony\Component\Console\Helper;
 
-use ConfigTransformer20220613\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use ConfigTransformer20220613\Symfony\Component\String\UnicodeString;
+use ConfigTransformer202206\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202206\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *

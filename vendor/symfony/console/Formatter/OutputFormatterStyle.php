@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202206\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer20220613\Symfony\Component\Console\Color;
+use ConfigTransformer202206\Symfony\Component\Console\Color;
 /**
  * Formatter style class for defining styles.
  *

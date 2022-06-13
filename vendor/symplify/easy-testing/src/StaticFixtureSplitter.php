@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\Symplify\EasyTesting;
+namespace ConfigTransformer202206\Symplify\EasyTesting;
 
-use ConfigTransformer20220613\Nette\Utils\Strings;
-use ConfigTransformer20220613\Symplify\EasyTesting\ValueObject\InputAndExpected;
-use ConfigTransformer20220613\Symplify\EasyTesting\ValueObject\InputFileInfoAndExpected;
-use ConfigTransformer20220613\Symplify\EasyTesting\ValueObject\InputFileInfoAndExpectedFileInfo;
-use ConfigTransformer20220613\Symplify\EasyTesting\ValueObject\SplitLine;
-use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer20220613\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202206\Nette\Utils\Strings;
+use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\InputAndExpected;
+use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\InputFileInfoAndExpected;
+use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\InputFileInfoAndExpectedFileInfo;
+use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\SplitLine;
+use ConfigTransformer202206\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202206\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @api
  */

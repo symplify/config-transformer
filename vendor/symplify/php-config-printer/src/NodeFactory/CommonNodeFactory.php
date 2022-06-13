@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer20220613\PhpParser\BuilderHelpers;
-use ConfigTransformer20220613\PhpParser\Node\Expr;
-use ConfigTransformer20220613\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer20220613\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer20220613\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer20220613\PhpParser\Node\Name;
-use ConfigTransformer20220613\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer20220613\PhpParser\Node\Scalar\MagicConst\Dir;
-use ConfigTransformer20220613\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202206\PhpParser\BuilderHelpers;
+use ConfigTransformer202206\PhpParser\Node\Expr;
+use ConfigTransformer202206\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202206\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202206\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202206\PhpParser\Node\Name;
+use ConfigTransformer202206\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202206\PhpParser\Node\Scalar\MagicConst\Dir;
+use ConfigTransformer202206\PhpParser\Node\Scalar\String_;
 final class CommonNodeFactory
 {
     /**

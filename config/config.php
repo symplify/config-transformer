@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613;
+namespace ConfigTransformer202206;
 
-use ConfigTransformer20220613\PhpParser\BuilderFactory;
-use ConfigTransformer20220613\PhpParser\NodeFinder;
-use ConfigTransformer20220613\Symfony\Component\Console\Application;
-use ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer20220613\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202206\PhpParser\BuilderFactory;
+use ConfigTransformer202206\PhpParser\NodeFinder;
+use ConfigTransformer202206\Symfony\Component\Console\Application;
+use ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202206\Symfony\Component\Yaml\Parser;
 use Symplify\ConfigTransformer\Command\SwitchFormatCommand;
-use ConfigTransformer20220613\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer20220613\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer20220613\Symplify\SmartFileSystem\FileSystemFilter;
-use function ConfigTransformer20220613\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202206\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202206\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202206\Symplify\SmartFileSystem\FileSystemFilter;
+use function ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

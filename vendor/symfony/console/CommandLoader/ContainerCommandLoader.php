@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202206\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer20220613\Psr\Container\ContainerInterface;
-use ConfigTransformer20220613\Symfony\Component\Console\Command\Command;
-use ConfigTransformer20220613\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202206\Psr\Container\ContainerInterface;
+use ConfigTransformer202206\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202206\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * Loads commands from a PSR-11 container.
  *

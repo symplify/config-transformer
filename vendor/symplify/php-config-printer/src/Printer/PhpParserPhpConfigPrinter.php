@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer;
 
-use ConfigTransformer20220613\Nette\Utils\Strings;
-use ConfigTransformer20220613\PhpParser\Node;
-use ConfigTransformer20220613\PhpParser\Node\Expr\Array_;
-use ConfigTransformer20220613\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer20220613\PhpParser\Node\Scalar\LNumber;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Declare_;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\DeclareDeclare;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer20220613\PhpParser\PrettyPrinter\Standard;
+use ConfigTransformer202206\Nette\Utils\Strings;
+use ConfigTransformer202206\PhpParser\Node;
+use ConfigTransformer202206\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202206\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202206\PhpParser\Node\Scalar\LNumber;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Declare_;
+use ConfigTransformer202206\PhpParser\Node\Stmt\DeclareDeclare;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202206\PhpParser\PrettyPrinter\Standard;
 use Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
 final class PhpParserPhpConfigPrinter extends Standard

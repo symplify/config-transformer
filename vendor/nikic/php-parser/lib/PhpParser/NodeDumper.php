@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser;
+namespace ConfigTransformer202206\PhpParser;
 
-use ConfigTransformer20220613\PhpParser\Node\Expr\Include_;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Class_;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\GroupUse;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\Use_;
-use ConfigTransformer20220613\PhpParser\Node\Stmt\UseUse;
+use ConfigTransformer202206\PhpParser\Node\Expr\Include_;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Class_;
+use ConfigTransformer202206\PhpParser\Node\Stmt\GroupUse;
+use ConfigTransformer202206\PhpParser\Node\Stmt\Use_;
+use ConfigTransformer202206\PhpParser\Node\Stmt\UseUse;
 class NodeDumper
 {
     private $dumpComments;

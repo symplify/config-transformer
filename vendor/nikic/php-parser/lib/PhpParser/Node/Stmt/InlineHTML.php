@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer20220613\PhpParser\Node\Stmt;
+namespace ConfigTransformer202206\PhpParser\Node\Stmt;
 
-use ConfigTransformer20220613\PhpParser\Node\Stmt;
+use ConfigTransformer202206\PhpParser\Node\Stmt;
 class InlineHTML extends Stmt
 {
     /** @var string String */

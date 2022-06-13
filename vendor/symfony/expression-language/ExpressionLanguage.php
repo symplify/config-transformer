@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer20220613\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202206\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer20220613\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer20220613\Symfony\Component\Cache\Adapter\ArrayAdapter;
+use ConfigTransformer202206\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202206\Symfony\Component\Cache\Adapter\ArrayAdapter;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ParsedExpression::class);
 /**
