@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit238b7811df89203519ed6ba9f0c10639
+class ComposerStaticInit1559890eca78cdfbf222706a8f3a9a90
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1087,7 +1087,6 @@ class ComposerStaticInit238b7811df89203519ed6ba9f0c10639
         'ConfigTransformer202206\\Symplify\\Astral\\Exception\\ShouldNotHappenException' => __DIR__ . '/..' . '/symplify/astral/src/Exception/ShouldNotHappenException.php',
         'ConfigTransformer202206\\Symplify\\Astral\\Naming\\SimpleNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/Naming/SimpleNameResolver.php',
         'ConfigTransformer202206\\Symplify\\Astral\\NodeAnalyzer\\NetteTypeAnalyzer' => __DIR__ . '/..' . '/symplify/astral/src/NodeAnalyzer/NetteTypeAnalyzer.php',
-        'ConfigTransformer202206\\Symplify\\Astral\\NodeFinder\\SimpleNodeFinder' => __DIR__ . '/..' . '/symplify/astral/src/NodeFinder/SimpleNodeFinder.php',
         'ConfigTransformer202206\\Symplify\\Astral\\NodeNameResolver\\ArgNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/ArgNodeNameResolver.php',
         'ConfigTransformer202206\\Symplify\\Astral\\NodeNameResolver\\AttributeNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/AttributeNodeNameResolver.php',
         'ConfigTransformer202206\\Symplify\\Astral\\NodeNameResolver\\ClassLikeNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/ClassLikeNodeNameResolver.php',
@@ -1119,7 +1118,6 @@ class ComposerStaticInit238b7811df89203519ed6ba9f0c10639
         'ConfigTransformer202206\\Symplify\\Astral\\PhpDocParser\\ValueObject\\PhpDocAttributeKey' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/ValueObject/PhpDocAttributeKey.php',
         'ConfigTransformer202206\\Symplify\\Astral\\PhpParser\\SmartPhpParser' => __DIR__ . '/..' . '/symplify/astral/src/PhpParser/SmartPhpParser.php',
         'ConfigTransformer202206\\Symplify\\Astral\\PhpParser\\SmartPhpParserFactory' => __DIR__ . '/..' . '/symplify/astral/src/PhpParser/SmartPhpParserFactory.php',
-        'ConfigTransformer202206\\Symplify\\Astral\\Reflection\\MethodCallParser' => __DIR__ . '/..' . '/symplify/astral/src/Reflection/MethodCallParser.php',
         'ConfigTransformer202206\\Symplify\\Astral\\Reflection\\ReflectionParser' => __DIR__ . '/..' . '/symplify/astral/src/Reflection/ReflectionParser.php',
         'ConfigTransformer202206\\Symplify\\Astral\\StaticFactory\\NodeValueResolverStaticFactory' => __DIR__ . '/..' . '/symplify/astral/src/StaticFactory/NodeValueResolverStaticFactory.php',
         'ConfigTransformer202206\\Symplify\\Astral\\StaticFactory\\SimpleNameResolverStaticFactory' => __DIR__ . '/..' . '/symplify/astral/src/StaticFactory/SimpleNameResolverStaticFactory.php',
@@ -1320,9 +1318,9 @@ class ComposerStaticInit238b7811df89203519ed6ba9f0c10639
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit238b7811df89203519ed6ba9f0c10639::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit238b7811df89203519ed6ba9f0c10639::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit238b7811df89203519ed6ba9f0c10639::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1559890eca78cdfbf222706a8f3a9a90::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1559890eca78cdfbf222706a8f3a9a90::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1559890eca78cdfbf222706a8f3a9a90::$classMap;
 
         }, null, ClassLoader::class);
     }
