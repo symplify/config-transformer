@@ -47,7 +47,7 @@ final class ContainerConfiguratorReturnClosureFactory
     /**
      * @param array<string, mixed[]> $arrayData
      */
-    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = 'ConfigTransformer202206\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator') : Return_
+    public function createFromYamlArray(array $arrayData, string $containerConfiguratorClass = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator') : Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts, $containerConfiguratorClass);
