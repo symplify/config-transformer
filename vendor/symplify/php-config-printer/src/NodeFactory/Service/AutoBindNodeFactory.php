@@ -70,7 +70,6 @@ final class AutoBindNodeFactory
         if ($value === \true) {
             return new MethodCall($methodCall, YamlKey::AUTOWIRE);
         }
-        // skip default false
         return $methodCall;
     }
     /**
