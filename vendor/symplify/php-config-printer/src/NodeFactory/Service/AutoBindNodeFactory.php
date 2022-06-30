@@ -3,26 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202206\PhpParser\Node\Arg;
 use ConfigTransformer202206\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class AutoBindNodeFactory
 {
-    /**
-     * @var string
-     */
-    public const TYPE_SERVICE = 'service';
-    /**
-     * @var string
-     */
-    public const TYPE_DEFAULTS = 'defaults';
-    /**
-     * @var \Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory
-     */
-    private $commonNodeFactory;
     /**
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
@@ -31,9 +17,8 @@ final class AutoBindNodeFactory
      * @var \Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory
      */
     private $tagsServiceOptionKeyYamlToPhpFactory;
-    public function __construct(CommonNodeFactory $commonNodeFactory, ArgsNodeFactory $argsNodeFactory, TagsServiceOptionKeyYamlToPhpFactory $tagsServiceOptionKeyYamlToPhpFactory)
+    public function __construct(ArgsNodeFactory $argsNodeFactory, TagsServiceOptionKeyYamlToPhpFactory $tagsServiceOptionKeyYamlToPhpFactory)
     {
-        $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->tagsServiceOptionKeyYamlToPhpFactory = $tagsServiceOptionKeyYamlToPhpFactory;
     }
@@ -44,19 +29,18 @@ final class AutoBindNodeFactory
      * ->bind()
      *
      * @param mixed[] $yaml
-     * @param AutoBindNodeFactory::* $type
      */
-    public function createAutoBindCalls(array $yaml, MethodCall $methodCall, string $type) : MethodCall
+    public function createAutoBindCalls(array $yaml, MethodCall $methodCall) : MethodCall
     {
         foreach ($yaml as $key => $value) {
             if ($key === YamlKey::AUTOWIRE) {
-                $methodCall = $this->createAutowire($value, $methodCall, $type);
+                $methodCall = $this->createAutowire($value, $methodCall);
             }
             if ($key === YamlKey::AUTOCONFIGURE) {
-                $methodCall = $this->createAutoconfigure($value, $methodCall, $type);
+                $methodCall = $this->createAutoconfigure($value, $methodCall);
             }
             if ($key === YamlKey::PUBLIC) {
-                $methodCall = $this->createPublicPrivate($value, $methodCall, $type);
+                $methodCall = $this->createPublicPrivate($value, $methodCall);
             }
             if ($key === YamlKey::BIND) {
                 $methodCall = $this->createBindMethodCall($methodCall, $yaml[YamlKey::BIND]);
@@ -81,46 +65,33 @@ final class AutoBindNodeFactory
     /**
      * @param mixed $value
      */
-    private function createAutowire($value, MethodCall $methodCall, string $type) : MethodCall
+    private function createAutowire($value, MethodCall $methodCall) : MethodCall
     {
         if ($value === \true) {
             return new MethodCall($methodCall, YamlKey::AUTOWIRE);
         }
         // skip default false
-        if ($type === self::TYPE_DEFAULTS) {
-            return $methodCall;
-        }
-        $args = [new Arg($this->commonNodeFactory->createFalse())];
-        return new MethodCall($methodCall, YamlKey::AUTOWIRE, $args);
+        return $methodCall;
     }
     /**
      * @param mixed $value
      */
-    private function createAutoconfigure($value, MethodCall $methodCall, string $type) : MethodCall
+    private function createAutoconfigure($value, MethodCall $methodCall) : MethodCall
     {
         if ($value === \true) {
             return new MethodCall($methodCall, YamlKey::AUTOCONFIGURE);
         }
-        // skip default false
-        if ($type === self::TYPE_DEFAULTS) {
-            return $methodCall;
-        }
-        $args = [new Arg($this->commonNodeFactory->createFalse())];
-        return new MethodCall($methodCall, YamlKey::AUTOCONFIGURE, $args);
+        return $methodCall;
     }
     /**
      * @param mixed $value
      */
-    private function createPublicPrivate($value, MethodCall $methodCall, string $type) : MethodCall
+    private function createPublicPrivate($value, MethodCall $methodCall) : MethodCall
     {
         if ($value !== \false) {
             return new MethodCall($methodCall, 'public');
         }
         // default value
-        if ($type === self::TYPE_DEFAULTS) {
-            return $methodCall;
-        }
-        $args = [new Arg($this->commonNodeFactory->createFalse())];
-        return new MethodCall($methodCall, 'public', $args);
+        return $methodCall;
     }
 }
