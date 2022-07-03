@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\Symplify\EasyTesting;
+namespace ConfigTransformer202207\Symplify\EasyTesting;
 
-use ConfigTransformer202206\Nette\Utils\Strings;
-use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\IncorrectAndMissingSkips;
-use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\Prefix;
-use ConfigTransformer202206\Symplify\EasyTesting\ValueObject\SplitLine;
-use ConfigTransformer202206\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202207\Nette\Utils\Strings;
+use ConfigTransformer202207\Symplify\EasyTesting\ValueObject\IncorrectAndMissingSkips;
+use ConfigTransformer202207\Symplify\EasyTesting\ValueObject\Prefix;
+use ConfigTransformer202207\Symplify\EasyTesting\ValueObject\SplitLine;
+use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyTesting\Tests\MissingSkipPrefixResolver\MissingSkipPrefixResolverTest
  */

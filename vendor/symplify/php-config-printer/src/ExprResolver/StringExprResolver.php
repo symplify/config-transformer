@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206\Nette\Utils\Strings;
-use ConfigTransformer202206\PhpParser\BuilderHelpers;
-use ConfigTransformer202206\PhpParser\Node\Arg;
-use ConfigTransformer202206\PhpParser\Node\Expr;
-use ConfigTransformer202206\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202206\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206\Symplify\Astral\ValueObject\AttributeKey;
+use ConfigTransformer202207\Nette\Utils\Strings;
+use ConfigTransformer202207\PhpParser\BuilderHelpers;
+use ConfigTransformer202207\PhpParser\Node\Arg;
+use ConfigTransformer202207\PhpParser\Node\Expr;
+use ConfigTransformer202207\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202207\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202207\Symplify\Astral\ValueObject\AttributeKey;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;

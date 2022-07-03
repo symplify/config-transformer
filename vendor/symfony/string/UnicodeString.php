@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\String;
+namespace ConfigTransformer202207\Symfony\Component\String;
 
-use ConfigTransformer202206\Symfony\Component\String\Exception\ExceptionInterface;
-use ConfigTransformer202206\Symfony\Component\String\Exception\InvalidArgumentException;
+use ConfigTransformer202207\Symfony\Component\String\Exception\ExceptionInterface;
+use ConfigTransformer202207\Symfony\Component\String\Exception\InvalidArgumentException;
 /**
  * Represents a string of Unicode grapheme clusters encoded as UTF-8.
  *

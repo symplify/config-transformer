@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206;
+namespace ConfigTransformer202207;
 
-use ConfigTransformer202206\PhpParser\BuilderFactory;
-use ConfigTransformer202206\PhpParser\NodeFinder;
-use ConfigTransformer202206\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202206\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202206\Symplify\Astral\NodeValue\NodeValueResolver;
-use ConfigTransformer202206\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
-use ConfigTransformer202206\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202206\Symplify\PackageBuilder\Php\TypeChecker;
-use ConfigTransformer202206\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use function ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202207\PhpParser\BuilderFactory;
+use ConfigTransformer202207\PhpParser\NodeFinder;
+use ConfigTransformer202207\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202207\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202207\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202207\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
+use ConfigTransformer202207\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202207\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202207\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use function ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

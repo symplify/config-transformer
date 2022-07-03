@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Node\Scalar\MagicConst;
+namespace ConfigTransformer202207\PhpParser\Node\Scalar\MagicConst;
 
-use ConfigTransformer202206\PhpParser\Node\Scalar\MagicConst;
+use ConfigTransformer202207\PhpParser\Node\Scalar\MagicConst;
 class File extends MagicConst
 {
     public function getName() : string

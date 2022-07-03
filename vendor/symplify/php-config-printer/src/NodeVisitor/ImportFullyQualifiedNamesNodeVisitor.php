@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeVisitor;
 
-use ConfigTransformer202206\PhpParser\Node;
-use ConfigTransformer202206\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202206\PhpParser\Node\Name;
-use ConfigTransformer202206\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202207\PhpParser\Node;
+use ConfigTransformer202207\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202207\PhpParser\Node\Name;
+use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202207\PhpParser\NodeVisitorAbstract;
 use Symplify\PhpConfigPrinter\Naming\ClassNaming;
 use Symplify\PhpConfigPrinter\ValueObject\AttributeKey;
 use Symplify\PhpConfigPrinter\ValueObject\FullyQualifiedImport;

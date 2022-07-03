@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Node;
+namespace ConfigTransformer202207\PhpParser\Node;
 
-use ConfigTransformer202206\PhpParser\NodeAbstract;
+use ConfigTransformer202207\PhpParser\NodeAbstract;
 /**
  * This is a base class for complex types, including nullable types and union types.
  *

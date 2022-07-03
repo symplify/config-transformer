@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use ConfigTransformer202206\PhpParser\Node\Arg;
-use ConfigTransformer202206\PhpParser\Node\Expr;
-use ConfigTransformer202206\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202206\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202207\PhpParser\Node\Arg;
+use ConfigTransformer202207\PhpParser\Node\Expr;
+use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;

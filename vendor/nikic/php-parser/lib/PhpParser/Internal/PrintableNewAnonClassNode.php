@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Internal;
+namespace ConfigTransformer202207\PhpParser\Internal;
 
-use ConfigTransformer202206\PhpParser\Node;
-use ConfigTransformer202206\PhpParser\Node\Expr;
+use ConfigTransformer202207\PhpParser\Node;
+use ConfigTransformer202207\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *

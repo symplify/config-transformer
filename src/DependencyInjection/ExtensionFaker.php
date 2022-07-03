@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection;
 
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202207\Symfony\Component\Yaml\Yaml;
 use Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension\AliasConfigurableExtension;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 /**

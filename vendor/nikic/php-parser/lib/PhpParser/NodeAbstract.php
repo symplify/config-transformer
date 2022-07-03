@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser;
+namespace ConfigTransformer202207\PhpParser;
 
 abstract class NodeAbstract implements Node, \JsonSerializable
 {

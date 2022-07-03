@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Filesystem;
+namespace ConfigTransformer202207\Symfony\Component\Filesystem;
 
-use ConfigTransformer202206\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use ConfigTransformer202206\Symfony\Component\Filesystem\Exception\RuntimeException;
+use ConfigTransformer202207\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use ConfigTransformer202207\Symfony\Component\Filesystem\Exception\RuntimeException;
 /**
  * Contains utility methods for handling path strings.
  *

@@ -3,21 +3,21 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
 
-use ConfigTransformer202206\PhpParser\Node\Arg;
-use ConfigTransformer202206\PhpParser\Node\Expr;
-use ConfigTransformer202206\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202206\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202206\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202206\PhpParser\Node\Identifier;
-use ConfigTransformer202206\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202206\PhpParser\Node\Param;
-use ConfigTransformer202206\PhpParser\Node\Stmt;
-use ConfigTransformer202206\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202206\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202206\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202206\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202207\PhpParser\Node\Arg;
+use ConfigTransformer202207\PhpParser\Node\Expr;
+use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202207\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202207\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Identifier;
+use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202207\PhpParser\Node\Param;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
+use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202207\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202207\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver;
 use Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
@@ -67,7 +67,7 @@ final class ConfiguratorClosureNodeFactory
     {
         $containerConfiguratorVariable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         // @note must be string to avoid prefixing class
-        $classNameFullyQualified = new FullyQualified('ConfigTransformer202206\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
+        $classNameFullyQualified = new FullyQualified('ConfigTransformer202207\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
         return new Param($containerConfiguratorVariable, null, $classNameFullyQualified);
     }
     /**

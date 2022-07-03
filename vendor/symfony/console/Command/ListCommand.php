@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Console\Command;
+namespace ConfigTransformer202207\Symfony\Component\Console\Command;
 
-use ConfigTransformer202206\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202206\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202206\Symfony\Component\Console\Descriptor\ApplicationDescription;
-use ConfigTransformer202206\Symfony\Component\Console\Helper\DescriptorHelper;
-use ConfigTransformer202206\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202206\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202206\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202206\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202207\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202207\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202207\Symfony\Component\Console\Descriptor\ApplicationDescription;
+use ConfigTransformer202207\Symfony\Component\Console\Helper\DescriptorHelper;
+use ConfigTransformer202207\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202207\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202207\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202207\Symfony\Component\Console\Output\OutputInterface;
 /**
  * ListCommand displays the list of all available commands for the application.
  *

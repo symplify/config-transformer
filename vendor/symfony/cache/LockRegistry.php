@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Cache;
+namespace ConfigTransformer202207\Symfony\Component\Cache;
 
-use ConfigTransformer202206\Psr\Log\LoggerInterface;
-use ConfigTransformer202206\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202206\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202207\Psr\Log\LoggerInterface;
+use ConfigTransformer202207\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202207\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *

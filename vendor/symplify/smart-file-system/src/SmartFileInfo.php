@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\Symplify\SmartFileSystem;
+namespace ConfigTransformer202207\Symplify\SmartFileSystem;
 
-use ConfigTransformer202206\Nette\Utils\Strings;
-use ConfigTransformer202206\Symfony\Component\Finder\SplFileInfo;
-use ConfigTransformer202206\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
-use ConfigTransformer202206\Symplify\EasyTesting\StaticFixtureSplitter;
-use ConfigTransformer202206\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
-use ConfigTransformer202206\Symplify\SmartFileSystem\Exception\FileNotFoundException;
+use ConfigTransformer202207\Nette\Utils\Strings;
+use ConfigTransformer202207\Symfony\Component\Finder\SplFileInfo;
+use ConfigTransformer202207\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use ConfigTransformer202207\Symplify\EasyTesting\StaticFixtureSplitter;
+use ConfigTransformer202207\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
+use ConfigTransformer202207\Symplify\SmartFileSystem\Exception\FileNotFoundException;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileInfo\SmartFileInfoTest
  */

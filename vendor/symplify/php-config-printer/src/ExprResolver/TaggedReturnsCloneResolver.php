@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202206\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202206\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202206\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202207\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202207\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedReturnsCloneResolver
 {

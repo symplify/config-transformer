@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\ErrorHandler;
+namespace ConfigTransformer202207\PhpParser\ErrorHandler;
 
-use ConfigTransformer202206\PhpParser\Error;
-use ConfigTransformer202206\PhpParser\ErrorHandler;
+use ConfigTransformer202207\PhpParser\Error;
+use ConfigTransformer202207\PhpParser\ErrorHandler;
 /**
  * Error handler that collects all errors into an array.
  *

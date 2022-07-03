@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202207\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202206\Symfony\Component\Config\Definition\Exception\Exception;
-use ConfigTransformer202206\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use ConfigTransformer202206\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer202206\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use ConfigTransformer202206\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer202207\Symfony\Component\Config\Definition\Exception\Exception;
+use ConfigTransformer202207\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use ConfigTransformer202207\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202207\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use ConfigTransformer202207\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * The base node class.
  *

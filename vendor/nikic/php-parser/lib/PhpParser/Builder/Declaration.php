@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Builder;
+namespace ConfigTransformer202207\PhpParser\Builder;
 
-use ConfigTransformer202206\PhpParser;
-use ConfigTransformer202206\PhpParser\BuilderHelpers;
+use ConfigTransformer202207\PhpParser;
+use ConfigTransformer202207\PhpParser\BuilderHelpers;
 abstract class Declaration implements PhpParser\Builder
 {
     protected $attributes = [];

@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206;
+namespace ConfigTransformer202207;
 
-use ConfigTransformer202206\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202206\PhpParser\NodeFinder;
-use ConfigTransformer202206\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202206\PHPStan\PhpDocParser\Parser\ConstExprParser;
-use ConfigTransformer202206\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202206\PHPStan\PhpDocParser\Parser\TypeParser;
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202206\Symplify\Astral\PhpParser\SmartPhpParser;
-use ConfigTransformer202206\Symplify\Astral\PhpParser\SmartPhpParserFactory;
-use ConfigTransformer202206\Symplify\PackageBuilder\Php\TypeChecker;
-use function ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202207\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202207\PhpParser\NodeFinder;
+use ConfigTransformer202207\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202207\PHPStan\PhpDocParser\Parser\ConstExprParser;
+use ConfigTransformer202207\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer202207\PHPStan\PhpDocParser\Parser\TypeParser;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202207\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer202207\Symplify\Astral\PhpParser\SmartPhpParserFactory;
+use ConfigTransformer202207\Symplify\PackageBuilder\Php\TypeChecker;
+use function ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->public();

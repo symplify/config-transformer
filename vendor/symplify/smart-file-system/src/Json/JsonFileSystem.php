@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\Symplify\SmartFileSystem\Json;
+namespace ConfigTransformer202207\Symplify\SmartFileSystem\Json;
 
-use ConfigTransformer202206\Nette\Utils\Arrays;
-use ConfigTransformer202206\Nette\Utils\Json;
-use ConfigTransformer202206\Symplify\SmartFileSystem\FileSystemGuard;
-use ConfigTransformer202206\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202207\Nette\Utils\Arrays;
+use ConfigTransformer202207\Nette\Utils\Json;
+use ConfigTransformer202207\Symplify\SmartFileSystem\FileSystemGuard;
+use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @api
  * @see \Symplify\SmartFileSystem\Tests\Json\JsonFileSystem\JsonFileSystemTest

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Node\Stmt;
+namespace ConfigTransformer202207\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206\PhpParser\Node\Stmt;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 class HaltCompiler extends Stmt
 {
     /** @var string Remaining text after halt compiler statement. */

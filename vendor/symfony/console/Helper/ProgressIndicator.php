@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202207\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202206\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202206\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer202206\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202207\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202207\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202207\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */

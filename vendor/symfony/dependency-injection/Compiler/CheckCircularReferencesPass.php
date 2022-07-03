@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 /**
  * Checks your services for circular references.
  *

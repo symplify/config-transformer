@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Config;
+namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Config;
 
-use ConfigTransformer202206\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202206\Symfony\Component\Config\ResourceCheckerInterface;
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202207\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202207\Symfony\Component\Config\ResourceCheckerInterface;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */

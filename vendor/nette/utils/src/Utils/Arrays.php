@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202206\Nette\Utils;
+namespace ConfigTransformer202207\Nette\Utils;
 
-use ConfigTransformer202206\Nette;
+use ConfigTransformer202207\Nette;
 use function is_array, is_int, is_object, count;
 /**
  * Array tools library.

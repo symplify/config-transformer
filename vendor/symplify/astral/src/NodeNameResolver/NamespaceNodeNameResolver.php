@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\Symplify\Astral\NodeNameResolver;
+namespace ConfigTransformer202207\Symplify\Astral\NodeNameResolver;
 
-use ConfigTransformer202206\PhpParser\Node;
-use ConfigTransformer202206\PhpParser\Node\Stmt\Namespace_;
-use ConfigTransformer202206\Symplify\Astral\Contract\NodeNameResolverInterface;
+use ConfigTransformer202207\PhpParser\Node;
+use ConfigTransformer202207\PhpParser\Node\Stmt\Namespace_;
+use ConfigTransformer202207\Symplify\Astral\Contract\NodeNameResolverInterface;
 final class NamespaceNodeNameResolver implements NodeNameResolverInterface
 {
     public function match(Node $node) : bool

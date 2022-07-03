@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Internal;
+namespace ConfigTransformer202207\PhpParser\Internal;
 
 /**
  * Implements the Myers diff algorithm.

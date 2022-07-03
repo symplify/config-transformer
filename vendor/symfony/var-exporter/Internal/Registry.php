@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer202207\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202206\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-use ConfigTransformer202206\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use ConfigTransformer202207\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use ConfigTransformer202207\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

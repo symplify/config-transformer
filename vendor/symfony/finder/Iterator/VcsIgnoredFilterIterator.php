@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\Finder\Iterator;
+namespace ConfigTransformer202207\Symfony\Component\Finder\Iterator;
 
-use ConfigTransformer202206\Symfony\Component\Finder\Gitignore;
+use ConfigTransformer202207\Symfony\Component\Finder\Gitignore;
 final class VcsIgnoredFilterIterator extends \FilterIterator
 {
     /**

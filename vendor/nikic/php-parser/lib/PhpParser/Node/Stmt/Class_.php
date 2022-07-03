@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Node\Stmt;
+namespace ConfigTransformer202207\PhpParser\Node\Stmt;
 
-use ConfigTransformer202206\PhpParser\Error;
-use ConfigTransformer202206\PhpParser\Node;
+use ConfigTransformer202207\PhpParser\Error;
+use ConfigTransformer202207\PhpParser\Node;
 class Class_ extends ClassLike
 {
     const MODIFIER_PUBLIC = 1;

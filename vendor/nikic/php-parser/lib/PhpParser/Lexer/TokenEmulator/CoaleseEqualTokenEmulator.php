@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202207\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202206\PhpParser\Lexer\Emulative;
+use ConfigTransformer202207\PhpParser\Lexer\Emulative;
 final class CoaleseEqualTokenEmulator extends TokenEmulator
 {
     public function getPhpVersion() : string

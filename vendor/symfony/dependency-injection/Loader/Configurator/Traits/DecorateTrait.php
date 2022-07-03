@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DecorateTrait
 {
     /**

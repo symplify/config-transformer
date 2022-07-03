@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202206\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace ConfigTransformer202207\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use ConfigTransformer202206\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\NodeAttributes;
 class ConstExprArrayItemNode implements ConstExprNode
 {
     use NodeAttributes;

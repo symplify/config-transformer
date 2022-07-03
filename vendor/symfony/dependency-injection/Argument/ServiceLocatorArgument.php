@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202206\Symfony\Component\DependencyInjection\Argument;
+namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument;
 
-use ConfigTransformer202206\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Reference;
 /**
  * Represents a closure acting as a service locator.
  *
