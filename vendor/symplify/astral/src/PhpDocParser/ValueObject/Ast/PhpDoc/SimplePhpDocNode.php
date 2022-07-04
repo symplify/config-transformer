@@ -8,6 +8,7 @@ use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 /**
  * @noRector final on purpose, so it can be extended by 3rd party
+ * @api
  */
 class SimplePhpDocNode extends PhpDocNode
 {
