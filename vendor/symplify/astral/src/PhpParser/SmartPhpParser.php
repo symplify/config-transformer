@@ -7,6 +7,8 @@ use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PHPStan\Parser\Parser;
 /**
  * @see \Symplify\Astral\PhpParser\SmartPhpParserFactory
+ *
+ * @api
  */
 final class SmartPhpParser
 {

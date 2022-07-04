@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e
+class ComposerStaticInit3372cda38aa50c3a1ff7a67d3d0bb6ac
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1103,7 +1103,6 @@ class ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e
         'ConfigTransformer202207\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\ConstFetchValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/NodeValueResolver/ConstFetchValueResolver.php',
         'ConfigTransformer202207\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\FuncCallValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/NodeValueResolver/FuncCallValueResolver.php',
         'ConfigTransformer202207\\Symplify\\Astral\\NodeValue\\NodeValueResolver\\MagicConstValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/NodeValueResolver/MagicConstValueResolver.php',
-        'ConfigTransformer202207\\Symplify\\Astral\\NodeValue\\UnionTypeValueResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeValue/UnionTypeValueResolver.php',
         'ConfigTransformer202207\\Symplify\\Astral\\NodeVisitor\\CallableNodeVisitor' => __DIR__ . '/..' . '/symplify/astral/src/NodeVisitor/CallableNodeVisitor.php',
         'ConfigTransformer202207\\Symplify\\Astral\\PhpDocParser\\Contract\\PhpDocNodeVisitorInterface' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/Contract/PhpDocNodeVisitorInterface.php',
         'ConfigTransformer202207\\Symplify\\Astral\\PhpDocParser\\Exception\\InvalidTraverseException' => __DIR__ . '/..' . '/symplify/astral/src/PhpDocParser/Exception/InvalidTraverseException.php',
@@ -1317,9 +1316,9 @@ class ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit484c228102ac5637c0ed9a92a88acd1e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3372cda38aa50c3a1ff7a67d3d0bb6ac::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3372cda38aa50c3a1ff7a67d3d0bb6ac::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3372cda38aa50c3a1ff7a67d3d0bb6ac::$classMap;
 
         }, null, ClassLoader::class);
     }
