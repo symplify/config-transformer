@@ -18,8 +18,8 @@ final class FullyQualifiedImportSorter
      */
     public function sortImports(array $imports) : array
     {
-        $sortByFullQualifiedCallback = static function (FullyQualifiedImport $left, FullyQualifiedImport $right) : int {
-            return \strcmp($left->getFullyQualified(), $right->getFullyQualified());
+        $sortByFullQualifiedCallback = static function (FullyQualifiedImport $firstFullyQualifiedImport, FullyQualifiedImport $secondFullyQualifiedImport) : int {
+            return \strcmp($firstFullyQualifiedImport->getFullyQualified(), $secondFullyQualifiedImport->getFullyQualified());
         };
         \usort($imports, $sortByFullQualifiedCallback);
         $sortByTypeCallback = static function (FullyQualifiedImport $left, FullyQualifiedImport $right) : int {
