@@ -7,7 +7,7 @@ use ReflectionClass;
 final class ConstantNameFromValueResolver
 {
     /**
-     * @param mixed $constantValue
+     * @param int|string $constantValue
      */
     public function resolveFromValueAndClass($constantValue, string $class) : ?string
     {

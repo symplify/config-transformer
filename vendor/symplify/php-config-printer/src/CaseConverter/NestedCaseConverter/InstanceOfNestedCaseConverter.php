@@ -40,7 +40,7 @@ final class InstanceOfNestedCaseConverter
         return new Expression($decoreatedInstanceofMethodCall);
     }
     /**
-     * @param mixed $subKey
+     * @param int|string $subKey
      */
     public function isMatch(string $rootKey, $subKey) : bool
     {
