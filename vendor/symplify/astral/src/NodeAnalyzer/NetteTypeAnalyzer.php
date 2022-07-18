@@ -3,6 +3,7 @@
 declare (strict_types=1);
 namespace ConfigTransformer202207\Symplify\Astral\NodeAnalyzer;
 
+use ConfigTransformer202207\Latte\Engine;
 use ConfigTransformer202207\Nette\Application\UI\Template;
 use ConfigTransformer202207\PhpParser\Node\Expr;
 use ConfigTransformer202207\PhpParser\Node\Expr\PropertyFetch;
@@ -15,9 +16,9 @@ use ConfigTransformer202207\Symplify\Astral\TypeAnalyzer\ContainsTypeAnalyser;
 final class NetteTypeAnalyzer
 {
     /**
-     * @var array<class-string<Template>>
+     * @var array<class-string<Engine|Template>>
      */
-    private const TEMPLATE_TYPES = ['ConfigTransformer202207\\Nette\\Application\\UI\\Template', 'ConfigTransformer202207\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer202207\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer202207\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
+    private const TEMPLATE_TYPES = ['ConfigTransformer202207\\Latte\\Engine', 'ConfigTransformer202207\\Nette\\Application\\UI\\Template', 'ConfigTransformer202207\\Nette\\Application\\UI\\ITemplate', 'ConfigTransformer202207\\Nette\\Bridges\\ApplicationLatte\\Template', 'ConfigTransformer202207\\Nette\\Bridges\\ApplicationLatte\\DefaultTemplate'];
     /**
      * @var \Symplify\Astral\Naming\SimpleNameResolver
      */
