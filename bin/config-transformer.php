@@ -6,12 +6,12 @@ namespace ConfigTransformer202207;
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
 use ConfigTransformer202207\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 $possibleAutoloadPaths = [
+    // dependency
+    __DIR__ . '/../../../autoload.php',
     // monorepo
     __DIR__ . '/../../../vendor/autoload.php',
     // after split package
     __DIR__ . '/../vendor/autoload.php',
-    // dependency
-    __DIR__ . '/../../../autoload.php',
 ];
 foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     if (\file_exists($possibleAutoloadPath)) {
