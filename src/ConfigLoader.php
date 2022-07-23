@@ -9,6 +9,7 @@ use ConfigTransformer202207\Symfony\Component\Config\Loader\DelegatingLoader;
 use ConfigTransformer202207\Symfony\Component\Config\Loader\Loader;
 use ConfigTransformer202207\Symfony\Component\Config\Loader\LoaderResolver;
 use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -84,6 +85,7 @@ final class ConfigLoader
         $globFileLoader = new GlobFileLoader($containerBuilder, new FileLocator());
         $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator());
         $checkerTolerantYamlFileLoader = new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator());
-        return new DelegatingLoader(new LoaderResolver([$globFileLoader, $phpFileLoader, $checkerTolerantYamlFileLoader, $loader]));
+        $directoryLoader = new DirectoryLoader($containerBuilder, new FileLocator());
+        return new DelegatingLoader(new LoaderResolver([$directoryLoader, $globFileLoader, $phpFileLoader, $checkerTolerantYamlFileLoader, $loader]));
     }
 }
