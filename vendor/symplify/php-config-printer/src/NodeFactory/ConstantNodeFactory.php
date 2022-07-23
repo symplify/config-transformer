@@ -21,6 +21,11 @@ use Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 final class ConstantNodeFactory
 {
     /**
+     * @see https://regex101.com/r/xrllDg/1
+     * @var string
+     */
+    private const CLASS_CONST_FETCH_REGEX = '#(.*?)::[A-Za-z_]#';
+    /**
      * @var \Symplify\PhpConfigPrinter\Dummy\YamlContentProvider
      */
     private $yamlContentProvider;
@@ -33,7 +38,8 @@ final class ConstantNodeFactory
      */
     public function createConstantIfValue(string $value) : ?Expr
     {
-        if (\strpos($value, '::') !== \false) {
+        $match = Strings::match($value, self::CLASS_CONST_FETCH_REGEX);
+        if ($match !== null) {
             [$class, $constant] = \explode('::', $value);
             // not uppercase → probably not a constant
             if (\strtoupper($constant) !== $constant) {

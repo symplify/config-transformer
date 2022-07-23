@@ -10,24 +10,24 @@ use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202207\PhpParser\NodeFinder;
+use ConfigTransformer202207\Symplify\Astral\TypeAwareNodeFinder;
 use ConfigTransformer202207\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**
-     * @var \PhpParser\NodeFinder
+     * @var \Symplify\Astral\TypeAwareNodeFinder
      */
-    private $nodeFinder;
-    public function __construct(NodeFinder $nodeFinder)
+    private $typeAwareNodeFinder;
+    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
     {
-        $this->nodeFinder = $nodeFinder;
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
     /**
      * @param Node[] $stmts
      */
     public function decorate(array $stmts) : void
     {
-        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, Closure::class);
+        $closure = $this->typeAwareNodeFinder->findFirstInstanceOf($stmts, Closure::class);
         if (!$closure instanceof Closure) {
             throw new ShouldNotHappenException();
         }

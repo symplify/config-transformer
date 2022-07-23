@@ -11,6 +11,7 @@ use ConfigTransformer202207\Symfony\Component\Yaml\Parser;
 use ConfigTransformer202207\Symplify\Astral\Naming\SimpleNameResolver;
 use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver;
 use ConfigTransformer202207\Symplify\Astral\StaticFactory\SimpleNameResolverStaticFactory;
+use ConfigTransformer202207\Symplify\Astral\TypeAwareNodeFinder;
 use ConfigTransformer202207\Symplify\PackageBuilder\Parameter\ParameterProvider;
 use ConfigTransformer202207\Symplify\PackageBuilder\Php\TypeChecker;
 use ConfigTransformer202207\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
@@ -23,6 +24,7 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(Parser::class);
     $services->set(BuilderFactory::class);
     $services->set(ParentConnectingVisitor::class);
+    $services->set(TypeAwareNodeFinder::class);
     $services->set(TypeChecker::class);
     $services->set(NodeValueResolver::class);
     $services->set(SimpleNameResolver::class)->factory(SimpleNameResolverStaticFactory::class . '::create');

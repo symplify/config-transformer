@@ -3,17 +3,16 @@
 declare (strict_types=1);
 namespace ConfigTransformer202207\Symplify\Astral\Reflection;
 
-use ConfigTransformer202207\PhpParser\Node;
 use ConfigTransformer202207\PhpParser\Node\Stmt\ClassLike;
 use ConfigTransformer202207\PhpParser\Node\Stmt\ClassMethod;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Property;
-use ConfigTransformer202207\PhpParser\NodeFinder;
 use ConfigTransformer202207\PHPStan\Reflection\ClassReflection;
 use ConfigTransformer202207\PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
 use ConfigTransformer202207\Symplify\Astral\PhpParser\SmartPhpParser;
+use ConfigTransformer202207\Symplify\Astral\TypeAwareNodeFinder;
 use Throwable;
 /**
  * @api
@@ -29,26 +28,13 @@ final class ReflectionParser
      */
     private $smartPhpParser;
     /**
-     * @var \PhpParser\NodeFinder
+     * @var \Symplify\Astral\TypeAwareNodeFinder
      */
-    private $nodeFinder;
-    public function __construct(SmartPhpParser $smartPhpParser, NodeFinder $nodeFinder)
+    private $typeAwareNodeFinder;
+    public function __construct(SmartPhpParser $smartPhpParser, TypeAwareNodeFinder $typeAwareNodeFinder)
     {
         $this->smartPhpParser = $smartPhpParser;
-        $this->nodeFinder = $nodeFinder;
-    }
-    public function parsePHPStanMethodReflection(MethodReflection $methodReflection) : ?ClassMethod
-    {
-        $classReflection = $methodReflection->getDeclaringClass();
-        $fileName = $classReflection->getFileName();
-        if ($fileName === null) {
-            return null;
-        }
-        $class = $this->parseFilenameToClass($fileName);
-        if (!$class instanceof Node) {
-            return null;
-        }
-        return $class->getMethod($methodReflection->getName());
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
     /**
      * @param \ReflectionMethod|\PHPStan\Reflection\MethodReflection $reflectionMethod
@@ -105,11 +91,11 @@ final class ReflectionParser
             // not reachable
             return null;
         }
-        $class = $this->nodeFinder->findFirstInstanceOf($stmts, ClassLike::class);
-        if (!$class instanceof ClassLike) {
+        $classLike = $this->typeAwareNodeFinder->findFirstInstanceOf($stmts, ClassLike::class);
+        if (!$classLike instanceof ClassLike) {
             return null;
         }
-        $this->classesByFilename[$fileName] = $class;
-        return $class;
+        $this->classesByFilename[$fileName] = $classLike;
+        return $classLike;
     }
 }

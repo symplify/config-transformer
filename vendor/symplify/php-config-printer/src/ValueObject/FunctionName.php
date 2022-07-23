@@ -3,6 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ValueObject;
 
+/**
+ * @api
+ */
 final class FunctionName
 {
     /**
