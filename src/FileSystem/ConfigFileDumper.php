@@ -6,6 +6,7 @@ namespace Symplify\ConfigTransformer\FileSystem;
 use ConfigTransformer202207\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
+use ConfigTransformer202207\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
@@ -17,28 +18,30 @@ final class ConfigFileDumper
      * @var \Symplify\SmartFileSystem\SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(SymfonyStyle $symfonyStyle, SmartFileSystem $smartFileSystem)
+    /**
+     * @var \Symplify\PackageBuilder\Console\Output\ConsoleDiffer
+     */
+    private $consoleDiffer;
+    public function __construct(SymfonyStyle $symfonyStyle, SmartFileSystem $smartFileSystem, ConsoleDiffer $consoleDiffer)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
+        $this->consoleDiffer = $consoleDiffer;
     }
     public function dumpFile(ConvertedContent $convertedContent, Configuration $configuration) : void
     {
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
-        $relativeFilePath = $this->getRelativePathOfNonExistingFile($newFileRealPath);
         if ($configuration->isDryRun()) {
-            $message = \sprintf('File "%s" would be dumped (is --dry-run)', $relativeFilePath);
-            $this->symfonyStyle->note($message);
+            $fileTitle = \sprintf('File "%s" would be renamed to "%s"', $convertedContent->getOriginalRelativeFilePath(), $convertedContent->getNewRelativeFilePath());
+            $this->symfonyStyle->title($fileTitle);
+            $consoleDiff = $this->consoleDiffer->diff($convertedContent->getOriginalContent(), $convertedContent->getConvertedContent());
+            $this->symfonyStyle->writeln($consoleDiff);
             return;
         }
+        // wet run - change the contents
+        $fileTitle = \sprintf('File "%s" was renamed to "%s"', $convertedContent->getOriginalRelativeFilePath(), $convertedContent->getNewRelativeFilePath());
+        $this->symfonyStyle->title($fileTitle);
         $this->smartFileSystem->dumpFile($newFileRealPath, $convertedContent->getConvertedContent());
-        $message = \sprintf('File "%s" was dumped', $relativeFilePath);
-        $this->symfonyStyle->note($message);
-    }
-    private function getRelativePathOfNonExistingFile(string $newFilePath) : string
-    {
-        $relativeFilePath = $this->smartFileSystem->makePathRelative($newFilePath, \getcwd());
-        return \rtrim($relativeFilePath, '/');
     }
 }

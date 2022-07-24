@@ -3,6 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
+use ConfigTransformer202207\Nette\Utils\Strings;
 use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
@@ -23,8 +24,22 @@ final class ConvertedContent
     {
         return $this->convertedContent;
     }
+    public function getNewRelativeFilePath() : string
+    {
+        $originalRelativeFilePath = $this->getOriginalRelativeFilePath();
+        $relativeFilePathWithoutSuffix = Strings::before($originalRelativeFilePath, '.', -1);
+        return $relativeFilePathWithoutSuffix . '.php';
+    }
     public function getOriginalFilePathWithoutSuffix() : string
     {
         return $this->originalFileInfo->getRealPathWithoutSuffix();
+    }
+    public function getOriginalRelativeFilePath() : string
+    {
+        return $this->originalFileInfo->getRelativeFilePathFromCwd();
+    }
+    public function getOriginalContent() : string
+    {
+        return $this->originalFileInfo->getContents();
     }
 }

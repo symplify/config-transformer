@@ -39,40 +39,37 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
     {
         $this->setName('switch-format');
         $this->setDescription('Converts XML/YAML configs to PHP format');
-        $this->addArgument(Option::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to directory with configs');
+        $this->addArgument(Option::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to directory/file with configs');
         $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $configuration = $this->configurationFactory->createFromInput($input);
-        $suffixes = $configuration->getInputSuffixes();
-        $suffixesRegex = '#\\.' . \implode('|', $suffixes) . '$#';
-        $fileInfos = $this->smartFinder->find($configuration->getSources(), $suffixesRegex);
-        $convertedContents = $this->convertedContentFactory->createFromFileInfos($fileInfos);
-        foreach ($convertedContents as $convertedContent) {
+        $fileInfos = $this->findFileInfos($configuration);
+        foreach ($fileInfos as $fileInfo) {
+            $convertedContent = $this->convertedContentFactory->createFromFileInfo($fileInfo);
             $this->configFileDumper->dumpFile($convertedContent, $configuration);
+            $this->removeFileInfo($configuration, $fileInfo);
         }
-        $this->removeFileInfos($configuration, $fileInfos);
-        $successMessage = \sprintf('Processed %d file(s) to "PHP" format', \count($fileInfos));
+        $successMessage = \sprintf('Processed %d file(s) to "PHP" format, congrats!', \count($fileInfos));
         $this->symfonyStyle->success($successMessage);
         return self::SUCCESS;
     }
     /**
-     * @param SmartFileInfo[] $fileInfos
+     * @return SmartFileInfo[]
      */
-    private function removeFileInfos(Configuration $configuration, array $fileInfos) : void
+    private function findFileInfos(Configuration $configuration) : array
     {
-        if (!$configuration->isDryRun()) {
-            $this->smartFileSystem->remove($fileInfos);
-            foreach ($fileInfos as $fileInfo) {
-                $message = \sprintf('File "%s" was be removed', $fileInfo->getRelativeFilePath());
-                $this->symfonyStyle->note($message);
-            }
-        } else {
-            foreach ($fileInfos as $fileInfo) {
-                $message = \sprintf('[dry-run] File "%s" would be removed', $fileInfo->getRelativeFilePath());
-                $this->symfonyStyle->note($message);
-            }
+        $suffixes = $configuration->getInputSuffixes();
+        $suffixesRegex = '#\\.' . \implode('|', $suffixes) . '$#';
+        return $this->smartFinder->find($configuration->getSources(), $suffixesRegex);
+    }
+    private function removeFileInfo(Configuration $configuration, SmartFileInfo $fileInfo) : void
+    {
+        // only dry run, nothing to remove
+        if ($configuration->isDryRun()) {
+            return;
         }
+        $this->smartFileSystem->remove($fileInfo->getRealPath());
     }
 }
