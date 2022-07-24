@@ -1050,6 +1050,7 @@ return array(
     'Symplify\\ConfigTransformer\\DependencyInjection\\LoaderFactory\\IdAwareXmlFileLoaderFactory' => $baseDir . '/src/DependencyInjection/LoaderFactory/IdAwareXmlFileLoaderFactory.php',
     'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\CheckerTolerantYamlFileLoader' => $baseDir . '/src/DependencyInjection/Loader/CheckerTolerantYamlFileLoader.php',
     'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\IdAwareXmlFileLoader' => $baseDir . '/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php',
+    'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\SkippingPhpFileLoader' => $baseDir . '/src/DependencyInjection/Loader/SkippingPhpFileLoader.php',
     'Symplify\\ConfigTransformer\\Enum\\Format' => $baseDir . '/src/Enum/Format.php',
     'Symplify\\ConfigTransformer\\Exception\\NotImplementedYetException' => $baseDir . '/src/Exception/NotImplementedYetException.php',
     'Symplify\\ConfigTransformer\\FileSystem\\ConfigFileDumper' => $baseDir . '/src/FileSystem/ConfigFileDumper.php',

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb9af002191851ff87919178f24943e83
+class ComposerStaticInitd9b63cfb9e9f2b18e00eecf25e9bc2a4
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1234,6 +1234,7 @@ class ComposerStaticInitb9af002191851ff87919178f24943e83
         'Symplify\\ConfigTransformer\\DependencyInjection\\LoaderFactory\\IdAwareXmlFileLoaderFactory' => __DIR__ . '/../..' . '/src/DependencyInjection/LoaderFactory/IdAwareXmlFileLoaderFactory.php',
         'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\CheckerTolerantYamlFileLoader' => __DIR__ . '/../..' . '/src/DependencyInjection/Loader/CheckerTolerantYamlFileLoader.php',
         'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\IdAwareXmlFileLoader' => __DIR__ . '/../..' . '/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php',
+        'Symplify\\ConfigTransformer\\DependencyInjection\\Loader\\SkippingPhpFileLoader' => __DIR__ . '/../..' . '/src/DependencyInjection/Loader/SkippingPhpFileLoader.php',
         'Symplify\\ConfigTransformer\\Enum\\Format' => __DIR__ . '/../..' . '/src/Enum/Format.php',
         'Symplify\\ConfigTransformer\\Exception\\NotImplementedYetException' => __DIR__ . '/../..' . '/src/Exception/NotImplementedYetException.php',
         'Symplify\\ConfigTransformer\\FileSystem\\ConfigFileDumper' => __DIR__ . '/../..' . '/src/FileSystem/ConfigFileDumper.php',
@@ -1317,9 +1318,9 @@ class ComposerStaticInitb9af002191851ff87919178f24943e83
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb9af002191851ff87919178f24943e83::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb9af002191851ff87919178f24943e83::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb9af002191851ff87919178f24943e83::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd9b63cfb9e9f2b18e00eecf25e9bc2a4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd9b63cfb9e9f2b18e00eecf25e9bc2a4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd9b63cfb9e9f2b18e00eecf25e9bc2a4::$classMap;
 
         }, null, ClassLoader::class);
     }

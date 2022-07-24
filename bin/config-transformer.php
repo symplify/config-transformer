@@ -23,6 +23,7 @@ $scoperAutoloadFilepath = __DIR__ . '/../vendor/scoper-autoload.php';
 if (\file_exists($scoperAutoloadFilepath)) {
     require_once $scoperAutoloadFilepath;
 }
+// this allows to easily convert ECS yaml to php configs
 $codeSnifferAutoload = \getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.php';
 if (\file_exists($codeSnifferAutoload)) {
     require_once $codeSnifferAutoload;
