@@ -101,6 +101,7 @@ class Definition
      * @var mixed[]
      */
     private $errors = [];
+    private $autowiringTypes = array();
     protected $arguments = [];
     /**
      * @internal
@@ -675,6 +676,42 @@ class Definition
     public function getConfigurator()
     {
         return $this->configurator;
+    }
+    /**
+     * Sets types that will default to this definition.
+     *
+     * @param string[] $types
+     *
+     * @return $this
+     */
+    public function setAutowiringTypes(array $types)
+    {
+        $this->autowiringTypes = array();
+        foreach ($types as $type) {
+            $this->autowiringTypes[$type] = \true;
+        }
+        return $this;
+    }
+    /**
+     * Gets autowiring types that will default to this definition.
+     *
+     * @return string[]
+     */
+    public function getAutowiringTypes()
+    {
+        return \array_keys($this->autowiringTypes);
+    }
+    /**
+     * Adds a type that will default to this definition.
+     *
+     * @param string $type
+     *
+     * @return $this
+     */
+    public function addAutowiringType($type)
+    {
+        $this->autowiringTypes[$type] = \true;
+        return $this;
     }
     /**
      * Is the definition autowired?

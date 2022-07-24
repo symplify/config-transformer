@@ -891,6 +891,12 @@
             },
             "time": "2022-06-26T13:01:22+00:00",
             "type": "library",
+            "extra": {
+                "patches_applied": [
+                    "patches\/symfony-dependency-injection-loader-yamlfileloader-php.patch",
+                    "patches\/symfony-dependency-injection-definition-php.patch"
+                ]
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {

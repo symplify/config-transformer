@@ -40,7 +40,7 @@ final class ConstantNodeFactory
     public function createConstant(string $value)
     {
         $classConstFetch = $this->createClassConstantIfValue($value, \false);
-        if ($classConstFetch !== null) {
+        if ($classConstFetch instanceof ClassConstFetch) {
             return $classConstFetch;
         }
         return new ConstFetch(new Name($value));

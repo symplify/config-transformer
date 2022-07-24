@@ -1106,6 +1106,7 @@ return array(
     'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\PathRoutingCaseConverter' => $vendorDir . '/symplify/php-config-printer/src/RoutingCaseConverter/PathRoutingCaseConverter.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionAnalyzer\\ServiceOptionAnalyzer' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionAnalyzer/ServiceOptionAnalyzer.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\ArgumentsServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionConverter/ArgumentsServiceOptionKeyYamlToPhpFactory.php',
+    'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\AutowiringTypesOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionConverter/AutowiringTypesOptionKeyYamlToPhpFactory.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionConverter/BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\CallsServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionConverter/CallsServiceOptionKeyYamlToPhpFactory.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\DecoratesServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionConverter/DecoratesServiceOptionKeyYamlToPhpFactory.php',

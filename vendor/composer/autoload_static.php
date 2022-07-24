@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181
+class ComposerStaticInit59d19dc9447230e4d6904b93e619179b
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1290,6 +1290,7 @@ class ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\PathRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/PathRoutingCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionAnalyzer\\ServiceOptionAnalyzer' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionAnalyzer/ServiceOptionAnalyzer.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\ArgumentsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/ArgumentsServiceOptionKeyYamlToPhpFactory.php',
+        'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\AutowiringTypesOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/AutowiringTypesOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\CallsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/CallsServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\DecoratesServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/DecoratesServiceOptionKeyYamlToPhpFactory.php',
@@ -1316,9 +1317,9 @@ class ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit59d19dc9447230e4d6904b93e619179b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit59d19dc9447230e4d6904b93e619179b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit59d19dc9447230e4d6904b93e619179b::$classMap;
 
         }, null, ClassLoader::class);
     }

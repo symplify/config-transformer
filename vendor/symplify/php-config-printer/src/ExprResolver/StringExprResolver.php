@@ -15,7 +15,6 @@ use ConfigTransformer202207\Symplify\Astral\ValueObject\AttributeKey;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
-use function str_contains;
 use function str_starts_with;
 final class StringExprResolver
 {
@@ -46,9 +45,9 @@ final class StringExprResolver
             $const = \substr($value, 7, -2);
             return $this->constantNodeFactory->createConstant($const);
         }
-        $ret = $this->constantNodeFactory->createClassConstantIfValue($value);
-        if ($ret) {
-            return $ret;
+        $classConstFetch = $this->constantNodeFactory->createClassConstantIfValue($value);
+        if ($classConstFetch instanceof ClassConstFetch) {
+            return $classConstFetch;
         }
         // do not print "\n" as empty space, but use string value instead
         if (\in_array($value, ["\r", "\n", "\r\n"], \true)) {

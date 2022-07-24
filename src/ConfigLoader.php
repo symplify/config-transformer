@@ -54,7 +54,7 @@ final class ConfigLoader
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
         if (\in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], \true)) {
-            $content = Strings::replace($content, self::PHP_CONST_REGEX, function ($match) : string {
+            $content = Strings::replace($content, self::PHP_CONST_REGEX, static function ($match) : string {
                 return '"%const(' . \str_replace('\\', '\\\\', $match[1]) . ')%"' . $match[2];
             });
             if ($content !== $smartFileInfo->getContents()) {

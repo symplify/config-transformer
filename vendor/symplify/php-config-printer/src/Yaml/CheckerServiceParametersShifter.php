@@ -41,7 +41,7 @@ final class CheckerServiceParametersShifter
      * @see \Symfony\Component\DependencyInjection\Loader\YamlFileLoader::SERVICE_KEYWORDS
      * @var string[]
      */
-    private const SERVICE_KEYWORDS = ['alias', 'parent', 'class', 'shared', 'synthetic', 'lazy', 'public', 'abstract', 'deprecated', 'factory', 'file', 'arguments', 'properties', 'configurator', 'calls', 'tags', 'decorates', 'decoration_inner_name', 'decoration_priority', 'decoration_on_invalid', 'autowire', 'autoconfigure', 'bind'];
+    private const SERVICE_KEYWORDS = ['alias', 'parent', 'class', 'shared', 'synthetic', 'lazy', 'public', 'abstract', 'deprecated', 'factory', 'file', 'arguments', 'properties', 'configurator', 'calls', 'tags', 'decorates', 'decoration_inner_name', 'decoration_priority', 'decoration_on_invalid', 'autowire', 'autoconfigure', 'bind', 'autowiring_types'];
     /**
      * @var \Symplify\PackageBuilder\Strings\StringFormatConverter
      */
