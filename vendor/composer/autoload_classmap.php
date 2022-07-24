@@ -1075,7 +1075,6 @@ return array(
     'Symplify\\PhpConfigPrinter\\Contract\\Converter\\ServiceOptionsKeyYamlToPhpFactoryInterface' => $vendorDir . '/symplify/php-config-printer/src/Contract/Converter/ServiceOptionsKeyYamlToPhpFactoryInterface.php',
     'Symplify\\PhpConfigPrinter\\Contract\\RoutingCaseConverterInterface' => $vendorDir . '/symplify/php-config-printer/src/Contract/RoutingCaseConverterInterface.php',
     'Symplify\\PhpConfigPrinter\\Converter\\ServiceOptionsKeyYamlToPhpFactory\\TagsServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/Converter/ServiceOptionsKeyYamlToPhpFactory/TagsServiceOptionKeyYamlToPhpFactory.php',
-    'Symplify\\PhpConfigPrinter\\Dummy\\YamlContentProvider' => $vendorDir . '/symplify/php-config-printer/src/Dummy/YamlContentProvider.php',
     'Symplify\\PhpConfigPrinter\\Exception\\NotImplementedYetException' => $vendorDir . '/symplify/php-config-printer/src/Exception/NotImplementedYetException.php',
     'Symplify\\PhpConfigPrinter\\ExprResolver\\ServiceReferenceExprResolver' => $vendorDir . '/symplify/php-config-printer/src/ExprResolver/ServiceReferenceExprResolver.php',
     'Symplify\\PhpConfigPrinter\\ExprResolver\\StringExprResolver' => $vendorDir . '/symplify/php-config-printer/src/ExprResolver/StringExprResolver.php',

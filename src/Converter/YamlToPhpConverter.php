@@ -5,7 +5,6 @@ namespace Symplify\ConfigTransformer\Converter;
 
 use ConfigTransformer202207\Symfony\Component\Yaml\Parser;
 use ConfigTransformer202207\Symfony\Component\Yaml\Yaml;
-use Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
@@ -39,25 +38,19 @@ final class YamlToPhpConverter
      */
     private $routingConfiguratorReturnClosureFactory;
     /**
-     * @var \Symplify\PhpConfigPrinter\Dummy\YamlContentProvider
-     */
-    private $yamlContentProvider;
-    /**
      * @var \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter
      */
     private $checkerServiceParametersShifter;
-    public function __construct(Parser $parser, PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, YamlContentProvider $yamlContentProvider, CheckerServiceParametersShifter $checkerServiceParametersShifter)
+    public function __construct(Parser $parser, PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, CheckerServiceParametersShifter $checkerServiceParametersShifter)
     {
         $this->parser = $parser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
         $this->containerConfiguratorReturnClosureFactory = $containerConfiguratorReturnClosureFactory;
         $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
-        $this->yamlContentProvider = $yamlContentProvider;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
     }
     public function convert(string $yaml) : string
     {
-        $this->yamlContentProvider->setContent($yaml);
         /** @var mixed[]|null $yamlArray */
         $yamlArray = $this->parser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
         if ($yamlArray === null) {

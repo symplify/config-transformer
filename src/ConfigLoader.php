@@ -24,10 +24,10 @@ use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigLoader
 {
     /**
-     * @see https://regex101.com/r/Mnd9vH/1
+     * @see https://regex101.com/r/4Uanps/2
      * @var string
      */
-    private const PHP_CONST_REGEX = '#\\!php\\/const\\:( )?#';
+    private const PHP_CONST_REGEX = '#!php/const[:\\s]\\s*(.*)(\\s*)#';
     /**
      * @var \Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory
      */
@@ -54,7 +54,9 @@ final class ConfigLoader
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
         if (\in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], \true)) {
-            $content = Strings::replace($content, self::PHP_CONST_REGEX, '!php/const ');
+            $content = Strings::replace($content, self::PHP_CONST_REGEX, function ($match) : string {
+                return '"%const(' . \str_replace('\\', '\\\\', $match[1]) . ')%"' . $match[2];
+            });
             if ($content !== $smartFileInfo->getContents()) {
                 $fileRealPath = \sys_get_temp_dir() . '/_migrify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
                 $this->smartFileSystem->dumpFile($fileRealPath, $content);

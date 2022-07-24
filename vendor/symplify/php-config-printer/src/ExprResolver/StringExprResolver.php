@@ -15,6 +15,8 @@ use ConfigTransformer202207\Symplify\Astral\ValueObject\AttributeKey;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
+use function str_contains;
+use function str_starts_with;
 final class StringExprResolver
 {
     /**
@@ -40,9 +42,13 @@ final class StringExprResolver
         if ($value === '') {
             return new String_($value);
         }
-        $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
-        if ($constFetch !== null) {
-            return $constFetch;
+        if (\strncmp($value, '%const(', \strlen('%const(')) === 0) {
+            $const = \substr($value, 7, -2);
+            return $this->constantNodeFactory->createConstant($const);
+        }
+        $ret = $this->constantNodeFactory->createClassConstantIfValue($value);
+        if ($ret) {
+            return $ret;
         }
         // do not print "\n" as empty space, but use string value instead
         if (\in_array($value, ["\r", "\n", "\r\n"], \true)) {
@@ -53,16 +59,20 @@ final class StringExprResolver
             return $this->resolveClassType($skipClassesToConstantReference, $value);
         }
         if (\strncmp($value, '@=', \strlen('@=')) === 0) {
-            $value = \ltrim($value, '@=');
-            $expr = $this->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
-            $args = [new Arg($expr)];
-            return new FuncCall(new FullyQualified(FunctionName::EXPR), $args);
+            return $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
         }
         // is service reference
         if (\strncmp($value, '@', \strlen('@')) === 0 && !$this->isFilePath($value)) {
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, FunctionName::SERVICE);
         }
         return BuilderHelpers::normalizeValue($value);
+    }
+    private function resolveExpr(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : FuncCall
+    {
+        $value = \ltrim($value, '@=');
+        $expr = $this->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
+        $args = [new Arg($expr)];
+        return new FuncCall(new FullyQualified(FunctionName::EXPR), $args);
     }
     private function keepNewline(string $value) : String_
     {

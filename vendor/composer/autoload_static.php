@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite36ab68935dd40a4faf13c12946f900f
+class ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1259,7 +1259,6 @@ class ComposerStaticInite36ab68935dd40a4faf13c12946f900f
         'Symplify\\PhpConfigPrinter\\Contract\\Converter\\ServiceOptionsKeyYamlToPhpFactoryInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/Converter/ServiceOptionsKeyYamlToPhpFactoryInterface.php',
         'Symplify\\PhpConfigPrinter\\Contract\\RoutingCaseConverterInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/RoutingCaseConverterInterface.php',
         'Symplify\\PhpConfigPrinter\\Converter\\ServiceOptionsKeyYamlToPhpFactory\\TagsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Converter/ServiceOptionsKeyYamlToPhpFactory/TagsServiceOptionKeyYamlToPhpFactory.php',
-        'Symplify\\PhpConfigPrinter\\Dummy\\YamlContentProvider' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Dummy/YamlContentProvider.php',
         'Symplify\\PhpConfigPrinter\\Exception\\NotImplementedYetException' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Exception/NotImplementedYetException.php',
         'Symplify\\PhpConfigPrinter\\ExprResolver\\ServiceReferenceExprResolver' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ExprResolver/ServiceReferenceExprResolver.php',
         'Symplify\\PhpConfigPrinter\\ExprResolver\\StringExprResolver' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ExprResolver/StringExprResolver.php',
@@ -1317,9 +1316,9 @@ class ComposerStaticInite36ab68935dd40a4faf13c12946f900f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite36ab68935dd40a4faf13c12946f900f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite36ab68935dd40a4faf13c12946f900f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite36ab68935dd40a4faf13c12946f900f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd0fd3573a0ed2b012bb25d5053c54181::$classMap;
 
         }, null, ClassLoader::class);
     }

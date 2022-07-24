@@ -4,16 +4,11 @@ declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
 use ConfigTransformer202207\Nette\Utils\Strings;
-use ConfigTransformer202207\PhpParser\Node\Expr;
 use ConfigTransformer202207\PhpParser\Node\Expr\ClassConstFetch;
 use ConfigTransformer202207\PhpParser\Node\Expr\ConstFetch;
 use ConfigTransformer202207\PhpParser\Node\Name;
 use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
-use Symplify\PhpConfigPrinter\Dummy\YamlContentProvider;
 /**
- * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:
- * https://github.com/symfony/symfony/blob/ba4d57bb5fc0e9a1b4f63ced66156296dea3687e/src/Symfony/Component/Yaml/Inline.php#L617
- *
  * @see https://github.com/symfony/symfony/pull/18626/files
  *
  * @see \Symplify\PhpConfigPrinter\Tests\NodeFactory\ConstantNodeFactoryTest
@@ -25,51 +20,29 @@ final class ConstantNodeFactory
      * @var string
      */
     private const CLASS_CONST_FETCH_REGEX = '#(.*?)::[A-Za-z_]#';
-    /**
-     * @var \Symplify\PhpConfigPrinter\Dummy\YamlContentProvider
-     */
-    private $yamlContentProvider;
-    public function __construct(YamlContentProvider $yamlContentProvider)
-    {
-        $this->yamlContentProvider = $yamlContentProvider;
-    }
-    /**
-     * @return ConstFetch|ClassConstFetch|null
-     */
-    public function createConstantIfValue(string $value) : ?Expr
+    public function createClassConstantIfValue(string $value, bool $checkExistence = \true) : ?ClassConstFetch
     {
         $match = Strings::match($value, self::CLASS_CONST_FETCH_REGEX);
         if ($match !== null) {
             [$class, $constant] = \explode('::', $value);
-            // not uppercase → probably not a constant
-            if (\strtoupper($constant) !== $constant) {
-                return null;
+            if (!$checkExistence) {
+                return new ClassConstFetch(new FullyQualified($class), $constant);
             }
-            return new ClassConstFetch(new FullyQualified($class), $constant);
-        }
-        $definedConstants = \get_defined_constants();
-        foreach (\array_keys($definedConstants) as $constantName) {
-            $constantValue = $this->getConstantValueIgnoringDeprecationWarnings($constantName);
-            if ($value !== $constantValue) {
-                continue;
+            if (\class_exists($class)) {
+                return new ClassConstFetch(new FullyQualified($class), $constant);
             }
-            $yamlContent = $this->yamlContentProvider->getYamlContent();
-            $constantDefinitionPattern = '#' . \preg_quote('!php/const', '#') . '(\\s)+' . $constantName . '#';
-            if (!Strings::match($yamlContent, $constantDefinitionPattern)) {
-                continue;
-            }
-            return new ConstFetch(new Name($constantName));
         }
         return null;
     }
     /**
-     * @return mixed
+     * @return \PhpParser\Node\Expr\ConstFetch|\PhpParser\Node\Expr\ClassConstFetch
      */
-    private function getConstantValueIgnoringDeprecationWarnings(string $constant)
+    public function createConstant(string $value)
     {
-        $previousLevel = \error_reporting(\E_ALL & ~\E_DEPRECATED);
-        $value = \constant($constant);
-        \error_reporting($previousLevel);
-        return $value;
+        $classConstFetch = $this->createClassConstantIfValue($value, \false);
+        if ($classConstFetch !== null) {
+            return $classConstFetch;
+        }
+        return new ConstFetch(new Name($value));
     }
 }
