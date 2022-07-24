@@ -29,10 +29,10 @@ final class ConfigLoader
      */
     private const PHP_CONST_REGEX = '#!php/const[:\\s]\\s*(.*)(\\s*)#';
     /**
-     * @see https://regex101.com/r/M0wxf2/1
+     * @see https://regex101.com/r/spi4ir/1
      * @var string
      */
-    private const UNQUOTED_PARAMETER_REGEX = '#(\\w+:\\s+)(\\%(.*?)%)#';
+    private const UNQUOTED_PARAMETER_REGEX = '#(\\w+:\\s+)(\\%(.*?)%)(.*?)?$#m';
     /**
      * @var \Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory
      */
@@ -59,8 +59,8 @@ final class ConfigLoader
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
         // fake quoting of parameter, as it was removed in Symfony 3.1: https://symfony.com/blog/new-in-symfony-3-1-yaml-deprecations
-        $content = Strings::replace($content, self::UNQUOTED_PARAMETER_REGEX, static function (array $match) {
-            return $match[1] . '"' . $match[2] . '"';
+        $content = Strings::replace($content, self::UNQUOTED_PARAMETER_REGEX, static function (array $match) : string {
+            return $match[1] . '"' . $match[2] . ($match[4] ?? '') . '"';
         });
         if (\in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], \true)) {
             $content = Strings::replace($content, self::PHP_CONST_REGEX, static function ($match) : string {

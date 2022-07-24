@@ -13,6 +13,10 @@ use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
  */
 final class ExtensionFaker
 {
+    /**
+     * @var string[]
+     */
+    private const COMMON_EXTENSION_NAMES = ['framework', 'assetic', 'doctrine', 'twig', 'monolog', 'security'];
     public function fakeInContainerBuilder(ContainerBuilder $containerBuilder, string $yamlContent) : void
     {
         $yaml = Yaml::parse($yamlContent, Yaml::PARSE_CUSTOM_TAGS);
@@ -28,6 +32,13 @@ final class ExtensionFaker
         }
         foreach ($extensionKeys as $extensionKey) {
             $aliasConfigurableExtension = new AliasConfigurableExtension($extensionKey);
+            $containerBuilder->registerExtension($aliasConfigurableExtension);
+        }
+    }
+    public function fakeGenericExtensionsInContainerBuilder(ContainerBuilder $containerBuilder) : void
+    {
+        foreach (self::COMMON_EXTENSION_NAMES as $extensionName) {
+            $aliasConfigurableExtension = new AliasConfigurableExtension($extensionName);
             $containerBuilder->registerExtension($aliasConfigurableExtension);
         }
     }
