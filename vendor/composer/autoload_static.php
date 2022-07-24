@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdf8511f7cacf71a6babeb47c47376160
+class ComposerStaticInit7708144365fcdc3183515a7ef2a2a1a4
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1224,6 +1224,7 @@ class ComposerStaticInitdf8511f7cacf71a6babeb47c47376160
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'Symplify\\ConfigTransformer\\Collector\\XmlImportCollector' => __DIR__ . '/../..' . '/src/Collector/XmlImportCollector.php',
         'Symplify\\ConfigTransformer\\Command\\SwitchFormatCommand' => __DIR__ . '/../..' . '/src/Command/SwitchFormatCommand.php',
+        'Symplify\\ConfigTransformer\\Composer\\SymfonyDependencyInjectionVersionResolver' => __DIR__ . '/../..' . '/src/Composer/SymfonyDependencyInjectionVersionResolver.php',
         'Symplify\\ConfigTransformer\\ConfigLoader' => __DIR__ . '/../..' . '/src/ConfigLoader.php',
         'Symplify\\ConfigTransformer\\Configuration\\ConfigurationFactory' => __DIR__ . '/../..' . '/src/Configuration/ConfigurationFactory.php',
         'Symplify\\ConfigTransformer\\Converter\\ConfigFormatConverter' => __DIR__ . '/../..' . '/src/Converter/ConfigFormatConverter.php',
@@ -1239,6 +1240,7 @@ class ComposerStaticInitdf8511f7cacf71a6babeb47c47376160
         'Symplify\\ConfigTransformer\\FileSystem\\ConfigFileDumper' => __DIR__ . '/../..' . '/src/FileSystem/ConfigFileDumper.php',
         'Symplify\\ConfigTransformer\\Kernel\\ConfigTransformerKernel' => __DIR__ . '/../..' . '/src/Kernel/ConfigTransformerKernel.php',
         'Symplify\\ConfigTransformer\\Naming\\UniqueNaming' => __DIR__ . '/../..' . '/src/Naming/UniqueNaming.php',
+        'Symplify\\ConfigTransformer\\NodeVisitor\\RefOrServiceFuncCallPrePrintNodeVisitor' => __DIR__ . '/../..' . '/src/NodeVisitor/RefOrServiceFuncCallPrePrintNodeVisitor.php',
         'Symplify\\ConfigTransformer\\ValueObject\\Configuration' => __DIR__ . '/../..' . '/src/ValueObject/Configuration.php',
         'Symplify\\ConfigTransformer\\ValueObject\\ContainerBuilderAndFileContent' => __DIR__ . '/../..' . '/src/ValueObject/ContainerBuilderAndFileContent.php',
         'Symplify\\ConfigTransformer\\ValueObject\\ConvertedContent' => __DIR__ . '/../..' . '/src/ValueObject/ConvertedContent.php',
@@ -1257,6 +1259,7 @@ class ComposerStaticInitdf8511f7cacf71a6babeb47c47376160
         'Symplify\\PhpConfigPrinter\\CaseConverter\\ServicesDefaultsCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/CaseConverter/ServicesDefaultsCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\Contract\\CaseConverterInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/CaseConverterInterface.php',
         'Symplify\\PhpConfigPrinter\\Contract\\Converter\\ServiceOptionsKeyYamlToPhpFactoryInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/Converter/ServiceOptionsKeyYamlToPhpFactoryInterface.php',
+        'Symplify\\PhpConfigPrinter\\Contract\\NodeVisitor\\PrePrintNodeVisitorInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/NodeVisitor/PrePrintNodeVisitorInterface.php',
         'Symplify\\PhpConfigPrinter\\Contract\\RoutingCaseConverterInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/RoutingCaseConverterInterface.php',
         'Symplify\\PhpConfigPrinter\\Converter\\ServiceOptionsKeyYamlToPhpFactory\\TagsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Converter/ServiceOptionsKeyYamlToPhpFactory/TagsServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\Exception\\NotImplementedYetException' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Exception/NotImplementedYetException.php',
@@ -1317,9 +1320,9 @@ class ComposerStaticInitdf8511f7cacf71a6babeb47c47376160
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdf8511f7cacf71a6babeb47c47376160::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdf8511f7cacf71a6babeb47c47376160::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitdf8511f7cacf71a6babeb47c47376160::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7708144365fcdc3183515a7ef2a2a1a4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7708144365fcdc3183515a7ef2a2a1a4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7708144365fcdc3183515a7ef2a2a1a4::$classMap;
 
         }, null, ClassLoader::class);
     }

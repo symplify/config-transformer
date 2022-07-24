@@ -28,4 +28,8 @@ final class FunctionName
      * @var string
      */
     public const TAGGED_LOCATOR = 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\tagged_locator';
+    /**
+     * @var string
+     */
+    public const REF = 'Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
 }

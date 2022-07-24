@@ -8,10 +8,13 @@ use ConfigTransformer202207\PhpParser\Node;
 use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Scalar\LNumber;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Declare_;
 use ConfigTransformer202207\PhpParser\Node\Stmt\DeclareDeclare;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202207\PhpParser\NodeTraverser;
 use ConfigTransformer202207\PhpParser\PrettyPrinter\Standard;
+use Symplify\PhpConfigPrinter\Contract\NodeVisitor\PrePrintNodeVisitorInterface;
 use Symplify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
 final class PhpParserPhpConfigPrinter extends Standard
@@ -48,19 +51,34 @@ final class PhpParserPhpConfigPrinter extends Standard
      * @var \Symplify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator
      */
     private $emptyLineNodeDecorator;
-    public function __construct(ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, EmptyLineNodeDecorator $emptyLineNodeDecorator)
+    /**
+     * @var PrePrintNodeVisitorInterface[]
+     */
+    private $prePrintNodeVisitors;
+    /**
+     * @param PrePrintNodeVisitorInterface[] $prePrintNodeVisitors
+     */
+    public function __construct(ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, EmptyLineNodeDecorator $emptyLineNodeDecorator, array $prePrintNodeVisitors)
     {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
         $this->emptyLineNodeDecorator = $emptyLineNodeDecorator;
+        $this->prePrintNodeVisitors = $prePrintNodeVisitors;
         parent::__construct();
     }
     /**
-     * @param Node\Stmt[] $stmts
+     * @param Stmt[] $stmts
      */
     public function prettyPrintFile(array $stmts) : string
     {
         $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
         $this->emptyLineNodeDecorator->decorate($stmts);
+        if ($this->prePrintNodeVisitors !== []) {
+            $nodeTraverser = new NodeTraverser();
+            foreach ($this->prePrintNodeVisitors as $prePrintNodeVisitor) {
+                $nodeTraverser->addVisitor($prePrintNodeVisitor);
+            }
+            $nodeTraverser->traverse($stmts);
+        }
         // adds "declare(strict_types=1);" to every file
         $stmts = $this->prependStrictTypesDeclare($stmts);
         $printedContent = parent::prettyPrintFile($stmts);
