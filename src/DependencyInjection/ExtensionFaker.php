@@ -14,9 +14,11 @@ use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 final class ExtensionFaker
 {
     /**
+     * Based mostly on symfony/demo packages @see https://github.com/symfony/demo/tree/main/config/packages
+     *
      * @var string[]
      */
-    private const COMMON_EXTENSION_NAMES = ['framework', 'assetic', 'doctrine', 'twig', 'monolog', 'security'];
+    private const COMMON_EXTENSION_NAMES = ['assetic', 'debug', 'doctrine', 'doctrine_migrations', 'framework', 'monolog', 'router', 'security', 'twig', 'web_profiler'];
     public function fakeInContainerBuilder(ContainerBuilder $containerBuilder, string $yamlContent) : void
     {
         $yaml = Yaml::parse($yamlContent, Yaml::PARSE_CUSTOM_TAGS);
