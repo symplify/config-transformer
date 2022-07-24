@@ -29,6 +29,11 @@ final class ConfigLoader
      */
     private const PHP_CONST_REGEX = '#!php/const[:\\s]\\s*(.*)(\\s*)#';
     /**
+     * @see https://regex101.com/r/M0wxf2/1
+     * @var string
+     */
+    private const UNQUOTED_PARAMETER_REGEX = '#(\\w+:\\s+)(\\%(.*?)%)#';
+    /**
      * @var \Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory
      */
     private $idAwareXmlFileLoaderFactory;
@@ -53,6 +58,10 @@ final class ConfigLoader
         $fileRealPath = $smartFileInfo->getRealPath();
         // correct old syntax of tags so we can parse it
         $content = $smartFileInfo->getContents();
+        // fake quoting of parameter, as it was removed in Symfony 3.1: https://symfony.com/blog/new-in-symfony-3-1-yaml-deprecations
+        $content = Strings::replace($content, self::UNQUOTED_PARAMETER_REGEX, static function (array $match) {
+            return $match[1] . '"' . $match[2] . '"';
+        });
         if (\in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], \true)) {
             $content = Strings::replace($content, self::PHP_CONST_REGEX, static function ($match) : string {
                 return '"%const(' . \str_replace('\\', '\\\\', $match[1]) . ')%"' . $match[2];
