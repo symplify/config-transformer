@@ -1043,7 +1043,6 @@ return array(
     'Symplify\\ConfigTransformer\\ConfigLoader' => $baseDir . '/src/ConfigLoader.php',
     'Symplify\\ConfigTransformer\\Configuration\\ConfigurationFactory' => $baseDir . '/src/Configuration/ConfigurationFactory.php',
     'Symplify\\ConfigTransformer\\Converter\\ConfigFormatConverter' => $baseDir . '/src/Converter/ConfigFormatConverter.php',
-    'Symplify\\ConfigTransformer\\Converter\\ConvertedContentFactory' => $baseDir . '/src/Converter/ConvertedContentFactory.php',
     'Symplify\\ConfigTransformer\\Converter\\YamlToPhpConverter' => $baseDir . '/src/Converter/YamlToPhpConverter.php',
     'Symplify\\ConfigTransformer\\DependencyInjection\\ContainerBuilderCleaner' => $baseDir . '/src/DependencyInjection/ContainerBuilderCleaner.php',
     'Symplify\\ConfigTransformer\\DependencyInjection\\ExtensionFaker' => $baseDir . '/src/DependencyInjection/ExtensionFaker.php',

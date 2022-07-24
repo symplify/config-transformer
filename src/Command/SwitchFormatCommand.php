@@ -8,9 +8,10 @@ use ConfigTransformer202207\Symfony\Component\Console\Input\InputInterface;
 use ConfigTransformer202207\Symfony\Component\Console\Input\InputOption;
 use ConfigTransformer202207\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
-use Symplify\ConfigTransformer\Converter\ConvertedContentFactory;
+use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
+use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 use Symplify\ConfigTransformer\ValueObject\Option;
 use ConfigTransformer202207\Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
@@ -25,14 +26,14 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
      */
     private $configFileDumper;
     /**
-     * @var \Symplify\ConfigTransformer\Converter\ConvertedContentFactory
+     * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
-    private $convertedContentFactory;
-    public function __construct(ConfigurationFactory $configurationFactory, ConfigFileDumper $configFileDumper, ConvertedContentFactory $convertedContentFactory)
+    private $configFormatConverter;
+    public function __construct(ConfigurationFactory $configurationFactory, ConfigFileDumper $configFileDumper, ConfigFormatConverter $configFormatConverter)
     {
         $this->configurationFactory = $configurationFactory;
         $this->configFileDumper = $configFileDumper;
-        $this->convertedContentFactory = $convertedContentFactory;
+        $this->configFormatConverter = $configFormatConverter;
         parent::__construct();
     }
     protected function configure() : void
@@ -47,7 +48,8 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
         $configuration = $this->configurationFactory->createFromInput($input);
         $fileInfos = $this->findFileInfos($configuration);
         foreach ($fileInfos as $fileInfo) {
-            $convertedContent = $this->convertedContentFactory->createFromFileInfo($fileInfo);
+            $convertedFileContent = $this->configFormatConverter->convert($fileInfo);
+            $convertedContent = new ConvertedContent($convertedFileContent, $fileInfo);
             $this->configFileDumper->dumpFile($convertedContent, $configuration);
             $this->removeFileInfo($configuration, $fileInfo);
             $this->symfonyStyle->newLine();
