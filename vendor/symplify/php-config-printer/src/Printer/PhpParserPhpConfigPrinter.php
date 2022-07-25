@@ -70,8 +70,6 @@ final class PhpParserPhpConfigPrinter extends Standard
      */
     public function prettyPrintFile(array $stmts) : string
     {
-        $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
-        $this->emptyLineNodeDecorator->decorate($stmts);
         if ($this->prePrintNodeVisitors !== []) {
             $nodeTraverser = new NodeTraverser();
             foreach ($this->prePrintNodeVisitors as $prePrintNodeVisitor) {
@@ -79,6 +77,8 @@ final class PhpParserPhpConfigPrinter extends Standard
             }
             $nodeTraverser->traverse($stmts);
         }
+        $stmts = $this->importFullyQualifiedNamesNodeTraverser->traverseNodes($stmts);
+        $this->emptyLineNodeDecorator->decorate($stmts);
         // adds "declare(strict_types=1);" to every file
         $stmts = $this->prependStrictTypesDeclare($stmts);
         $printedContent = parent::prettyPrintFile($stmts);
