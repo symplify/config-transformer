@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621
+class ComposerStaticInit2bab928a553885b9ec389f1b0c89bfc6
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1299,6 +1299,7 @@ class ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\DecoratesServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/DecoratesServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\DeprecatedServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/DeprecatedServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\FactoryConfiguratorServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/FactoryConfiguratorServiceOptionKeyYamlToPhpFactory.php',
+        'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\NodeModifier\\SingleFactoryReferenceNodeModifier' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/NodeModifier/SingleFactoryReferenceNodeModifier.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\ParentLazyServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/ParentLazyServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\PropertiesServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/PropertiesServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\SharedPublicServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/SharedPublicServiceOptionKeyYamlToPhpFactory.php',
@@ -1320,9 +1321,9 @@ class ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd2c9fd0fc0d320af1243bd89ca77a621::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2bab928a553885b9ec389f1b0c89bfc6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2bab928a553885b9ec389f1b0c89bfc6::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2bab928a553885b9ec389f1b0c89bfc6::$classMap;
 
         }, null, ClassLoader::class);
     }
