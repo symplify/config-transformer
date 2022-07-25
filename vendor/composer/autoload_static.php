@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77
+class ComposerStaticInitee58afc4dd06df7e692bb91a1964ff79
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1292,6 +1292,7 @@ class ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\ImportRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/ImportRoutingCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\PathRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/PathRoutingCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionAnalyzer\\ServiceOptionAnalyzer' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionAnalyzer/ServiceOptionAnalyzer.php',
+        'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\AbstractServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/AbstractServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\ArgumentsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/ArgumentsServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\AutowiringTypesOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/AutowiringTypesOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory.php',
@@ -1321,9 +1322,9 @@ class ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit26c957b0a4fad98179c6027d89f8ff77::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitee58afc4dd06df7e692bb91a1964ff79::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitee58afc4dd06df7e692bb91a1964ff79::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitee58afc4dd06df7e692bb91a1964ff79::$classMap;
 
         }, null, ClassLoader::class);
     }
