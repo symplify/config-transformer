@@ -6,6 +6,7 @@ namespace Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 use ConfigTransformer202207\Nette\Utils\Arrays;
 use ConfigTransformer202207\PhpParser\BuilderHelpers;
 use ConfigTransformer202207\PhpParser\Node\Arg;
+use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
@@ -54,6 +55,7 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYam
             }
             $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($flattenedYmlLine);
             $args = \array_merge($args, $restArgs);
+            $args = $this->removeEmptySecondArgArray($args);
             $methodCall = new MethodCall($methodCall, self::TAG, $args);
         }
         return $methodCall;
@@ -72,5 +74,24 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYam
     private function isSingleLineYamlLines(array $yamlLines) : bool
     {
         return \count($yamlLines) === 1 && \is_string($yamlLines[0]);
+    }
+    /**
+     * @param Arg[] $args
+     * @return Arg[]
+     */
+    private function removeEmptySecondArgArray(array $args) : array
+    {
+        if (!isset($args[1])) {
+            return $args;
+        }
+        $secondArgValue = $args[1]->value;
+        if (!$secondArgValue instanceof Array_) {
+            return $args;
+        }
+        if ($secondArgValue->items !== []) {
+            return $args;
+        }
+        unset($args[1]);
+        return $args;
     }
 }
