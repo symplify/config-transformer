@@ -67,7 +67,7 @@ final class ConfiguratorClosureNodeFactory
     {
         $containerConfiguratorVariable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         // @note must be string to avoid prefixing class
-        $classNameFullyQualified = new FullyQualified('ConfigTransformer202207\\Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator');
+        $classNameFullyQualified = new FullyQualified('Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator');
         return new Param($containerConfiguratorVariable, null, $classNameFullyQualified);
     }
     /**
