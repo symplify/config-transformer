@@ -122,7 +122,9 @@ final class ContainerConfiguratorReturnClosureFactory
                 throw new ShouldNotHappenException();
             }
             $newExpression = new Expression(new MethodCall($variable, 'extension', [new Arg($args[1]->value->items[0]->key), new Arg($args[1]->value->items[0]->value)]));
-            $identical = new Identical(new String_($explodeAt[1]), new MethodCall($variable, 'env'));
+            $environmentString = new String_($explodeAt[1]);
+            $envMethodCall = new MethodCall($variable, 'env');
+            $identical = new Identical($envMethodCall, $environmentString);
             if ($lastNode instanceof If_ && $this->isSameCond($lastNode->cond, $identical)) {
                 $lastNode->stmts[] = $newExpression;
                 return null;
