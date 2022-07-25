@@ -7,22 +7,33 @@ use Stringable;
 final class FullyQualifiedImport
 {
     /**
-     * @var string
+     * @var ImportType::*
      */
     private $type;
     /**
      * @var string
      */
     private $fullyQualified;
-    public function __construct(string $type, string $fullyQualified)
+    /**
+     * @var string
+     */
+    private $shortClassName;
+    /**
+     * @param ImportType::* $type
+     */
+    public function __construct(string $type, string $fullyQualified, string $shortClassName)
     {
         $this->type = $type;
         $this->fullyQualified = $fullyQualified;
+        $this->shortClassName = $shortClassName;
     }
     public function __toString() : string
     {
         return $this->fullyQualified;
     }
+    /**
+     * @return ImportType::*
+     */
     public function getType() : string
     {
         return $this->type;
@@ -30,5 +41,9 @@ final class FullyQualifiedImport
     public function getFullyQualified() : string
     {
         return $this->fullyQualified;
+    }
+    public function getShortClassName() : string
+    {
+        return $this->shortClassName;
     }
 }
