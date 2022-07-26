@@ -1043,6 +1043,7 @@ return array(
     'Symplify\\ConfigTransformer\\Composer\\SymfonyDependencyInjectionVersionResolver' => $baseDir . '/src/Composer/SymfonyDependencyInjectionVersionResolver.php',
     'Symplify\\ConfigTransformer\\ConfigLoader' => $baseDir . '/src/ConfigLoader.php',
     'Symplify\\ConfigTransformer\\Configuration\\ConfigurationFactory' => $baseDir . '/src/Configuration/ConfigurationFactory.php',
+    'Symplify\\ConfigTransformer\\Console\\ConfigTransformerApplication' => $baseDir . '/src/Console/ConfigTransformerApplication.php',
     'Symplify\\ConfigTransformer\\Converter\\ConfigFormatConverter' => $baseDir . '/src/Converter/ConfigFormatConverter.php',
     'Symplify\\ConfigTransformer\\Converter\\YamlToPhpConverter' => $baseDir . '/src/Converter/YamlToPhpConverter.php',
     'Symplify\\ConfigTransformer\\DependencyInjection\\ContainerBuilderCleaner' => $baseDir . '/src/DependencyInjection/ContainerBuilderCleaner.php',
