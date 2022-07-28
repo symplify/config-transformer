@@ -18,7 +18,7 @@ final class ExtensionFaker
      *
      * @var string[]
      */
-    private const COMMON_EXTENSION_NAMES = ['assetic', 'debug', 'doctrine', 'doctrine_migrations', 'framework', 'monolog', 'router', 'security', 'twig', 'web_profiler'];
+    private const COMMON_EXTENSION_NAMES = ['assetic', 'debug', 'doctrine', 'doctrine_migrations', 'framework', 'hautelook_alice', 'monolog', 'nelmio_alice', 'router', 'security', 'twig', 'web_profiler', 'zenstruck_foundry'];
     public function fakeInContainerBuilder(ContainerBuilder $containerBuilder, string $yamlContent) : void
     {
         $yaml = Yaml::parse($yamlContent, Yaml::PARSE_CUSTOM_TAGS);
