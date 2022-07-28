@@ -59,7 +59,7 @@ final class AliasCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt
+    public function convertToMethodCallStmt($key, $values) : Stmt
     {
         if (!\is_string($key)) {
             throw new ShouldNotHappenException();

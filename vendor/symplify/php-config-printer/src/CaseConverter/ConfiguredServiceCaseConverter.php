@@ -32,7 +32,7 @@ final class ConfiguredServiceCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt
+    public function convertToMethodCallStmt($key, $values) : Stmt
     {
         $valuesForArgs = [$key];
         if (isset($values[YamlKey::CLASS_KEY])) {

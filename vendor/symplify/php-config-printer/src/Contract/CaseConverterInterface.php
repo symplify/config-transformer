@@ -15,5 +15,5 @@ interface CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt;
+    public function convertToMethodCallStmt($key, $values) : Stmt;
 }

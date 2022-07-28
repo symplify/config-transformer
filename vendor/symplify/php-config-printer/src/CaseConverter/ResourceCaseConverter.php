@@ -21,7 +21,7 @@ final class ResourceCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt
+    public function convertToMethodCallStmt($key, $values) : Stmt
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($values['namespace'])) {

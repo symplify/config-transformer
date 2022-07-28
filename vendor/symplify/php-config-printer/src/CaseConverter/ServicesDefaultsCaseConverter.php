@@ -26,7 +26,7 @@ final class ServicesDefaultsCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt
+    public function convertToMethodCallStmt($key, $values) : Stmt
     {
         $methodCall = new MethodCall($this->createServicesVariable(), MethodName::DEFAULTS);
         $decoratedMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall);

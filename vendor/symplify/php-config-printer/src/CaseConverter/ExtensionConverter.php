@@ -30,7 +30,7 @@ final class ExtensionConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Stmt
+    public function convertToMethodCallStmt($key, $values) : Stmt
     {
         $args = $this->argsNodeFactory->createFromValues([$this->rootKey, [$key => $values]]);
         $containerConfiguratorVariable = new Variable(VariableName::CONTAINER_CONFIGURATOR);
