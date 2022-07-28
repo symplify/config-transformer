@@ -12,6 +12,7 @@ use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
 use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
 use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
@@ -56,7 +57,7 @@ final class ImportCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Expression
+    public function convertToMethodCall($key, $values) : Stmt
     {
         if (\is_array($values)) {
             $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [YamlKey::RESOURCE => '', 'type' => null, YamlKey::IGNORE_ERRORS => \false]);

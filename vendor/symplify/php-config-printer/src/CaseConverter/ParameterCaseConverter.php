@@ -6,6 +6,7 @@ namespace Symplify\PhpConfigPrinter\CaseConverter;
 use ConfigTransformer202207\PhpParser\Node\Expr;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
@@ -51,7 +52,7 @@ final class ParameterCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Expression
+    public function convertToMethodCall($key, $values) : Stmt
     {
         if (\is_string($values)) {
             $values = $this->prefixWithDirConstantIfExistingPath($values);

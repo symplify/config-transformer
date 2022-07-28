@@ -6,6 +6,7 @@ namespace Symplify\PhpConfigPrinter\RoutingCaseConverter;
 use ConfigTransformer202207\PhpParser\Node\Arg;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202207\Symplify\PackageBuilder\Strings\StringFormatConverter;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
@@ -72,7 +73,7 @@ final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
     /**
      * @param mixed $values
      */
-    public function convertToMethodCall(string $key, $values) : Expression
+    public function convertToMethodCall(string $key, $values) : Stmt
     {
         $variable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         $args = $this->createAddArgs(self::IMPORT_ARGS, $values);

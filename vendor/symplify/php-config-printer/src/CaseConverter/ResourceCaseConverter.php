@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
@@ -21,7 +21,7 @@ final class ResourceCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Expression
+    public function convertToMethodCall($key, $values) : Stmt
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($values['namespace'])) {

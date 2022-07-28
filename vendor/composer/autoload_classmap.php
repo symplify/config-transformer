@@ -1107,6 +1107,7 @@ return array(
     'Symplify\\PhpConfigPrinter\\Printer\\SmartPhpConfigPrinter' => $vendorDir . '/symplify/php-config-printer/src/Printer/SmartPhpConfigPrinter.php',
     'Symplify\\PhpConfigPrinter\\Provider\\CurrentFilePathProvider' => $vendorDir . '/symplify/php-config-printer/src/Provider/CurrentFilePathProvider.php',
     'Symplify\\PhpConfigPrinter\\Reflection\\ConstantNameFromValueResolver' => $vendorDir . '/symplify/php-config-printer/src/Reflection/ConstantNameFromValueResolver.php',
+    'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\ConditionalEnvRoutingCaseConverter' => $vendorDir . '/symplify/php-config-printer/src/RoutingCaseConverter/ConditionalEnvRoutingCaseConverter.php',
     'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\ImportRoutingCaseConverter' => $vendorDir . '/symplify/php-config-printer/src/RoutingCaseConverter/ImportRoutingCaseConverter.php',
     'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\PathRoutingCaseConverter' => $vendorDir . '/symplify/php-config-printer/src/RoutingCaseConverter/PathRoutingCaseConverter.php',
     'Symplify\\PhpConfigPrinter\\ServiceOptionAnalyzer\\ServiceOptionAnalyzer' => $vendorDir . '/symplify/php-config-printer/src/ServiceOptionAnalyzer/ServiceOptionAnalyzer.php',

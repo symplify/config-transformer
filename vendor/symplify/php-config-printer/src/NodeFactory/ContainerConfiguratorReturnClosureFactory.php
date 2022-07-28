@@ -62,13 +62,13 @@ final class ContainerConfiguratorReturnClosureFactory
     private function createClosureStmts(array $yamlData) : array
     {
         $yamlData = \array_filter($yamlData);
-        return $this->createNodesFromCaseConverters($yamlData);
+        return $this->createStmtsFromCaseConverters($yamlData);
     }
     /**
      * @param array<string, mixed[]> $yamlData
      * @return Stmt[]
      */
-    private function createNodesFromCaseConverters(array $yamlData) : array
+    private function createStmtsFromCaseConverters(array $yamlData) : array
     {
         $nodes = [];
         foreach ($yamlData as $key => $values) {
@@ -174,7 +174,7 @@ final class ContainerConfiguratorReturnClosureFactory
      * @param int|string $nestedKey
      * @param mixed $nestedValues
      */
-    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?Expression
+    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?Stmt
     {
         foreach ($this->caseConverters as $caseConverter) {
             if (!$caseConverter->match($key, $nestedKey, $nestedValues)) {

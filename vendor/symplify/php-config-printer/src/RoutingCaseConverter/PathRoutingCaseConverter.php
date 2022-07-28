@@ -6,6 +6,7 @@ namespace Symplify\PhpConfigPrinter\RoutingCaseConverter;
 use ConfigTransformer202207\PhpParser\Node\Arg;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\Enum\RouteOption;
@@ -31,7 +32,7 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
     /**
      * @param mixed $values
      */
-    public function convertToMethodCall(string $key, $values) : Expression
+    public function convertToMethodCall(string $key, $values) : Stmt
     {
         $variable = new Variable(VariableName::ROUTING_CONFIGURATOR);
         // @todo args

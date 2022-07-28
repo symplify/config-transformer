@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 interface RoutingCaseConverterInterface
 {
     /**
@@ -13,5 +13,5 @@ interface RoutingCaseConverterInterface
     /**
      * @param mixed $values
      */
-    public function convertToMethodCall(string $key, $values) : Expression;
+    public function convertToMethodCall(string $key, $values) : Stmt;
 }

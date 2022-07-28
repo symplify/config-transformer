@@ -9,6 +9,7 @@ use ConfigTransformer202207\PhpParser\Node\Expr\BinaryOp\Concat;
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
 use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202207\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
@@ -58,7 +59,7 @@ final class AliasCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Expression
+    public function convertToMethodCall($key, $values) : Stmt
     {
         if (!\is_string($key)) {
             throw new ShouldNotHappenException();

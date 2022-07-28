@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202207\PhpParser\Node;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
@@ -39,12 +39,12 @@ final class RoutingConfiguratorReturnClosureFactory
     }
     /**
      * @param mixed[] $arrayData
-     * @return mixed[]
+     * @return Stmt[]
      */
-    private function createClosureStmts(array $arrayData) : array
+    public function createClosureStmts(array $arrayData) : array
     {
         $arrayData = $this->removeEmptyValues($arrayData);
-        return $this->createNodesFromCaseConverters($arrayData);
+        return $this->createStmtsFromCaseConverters($arrayData);
     }
     /**
      * @param mixed[] $yamlData
@@ -56,25 +56,25 @@ final class RoutingConfiguratorReturnClosureFactory
     }
     /**
      * @param mixed[] $arrayData
-     * @return Node[]
+     * @return Stmt[]
      */
-    private function createNodesFromCaseConverters(array $arrayData) : array
+    private function createStmtsFromCaseConverters(array $arrayData) : array
     {
-        $nodes = [];
+        $stmts = [];
         foreach ($arrayData as $key => $values) {
-            $expression = null;
+            $stmt = null;
             foreach ($this->routingCaseConverters as $routingCaseConverter) {
                 if (!$routingCaseConverter->match($key, $values)) {
                     continue;
                 }
-                $expression = $routingCaseConverter->convertToMethodCall($key, $values);
+                $stmt = $routingCaseConverter->convertToMethodCall($key, $values);
                 break;
             }
-            if ($expression === null) {
+            if ($stmt === null) {
                 continue;
             }
-            $nodes[] = $expression;
+            $stmts[] = $stmt;
         }
-        return $nodes;
+        return $stmts;
     }
 }

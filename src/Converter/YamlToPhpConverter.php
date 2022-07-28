@@ -60,7 +60,6 @@ final class YamlToPhpConverter
      */
     public function convertYamlArray(array $yamlArray, string $filePath) : string
     {
-        // @todo improve here
         if ($this->isRouteYaml($yamlArray, $filePath)) {
             $return = $this->routingConfiguratorReturnClosureFactory->createFromArrayData($yamlArray);
         } else {
@@ -74,7 +73,11 @@ final class YamlToPhpConverter
      */
     private function isRouteYaml(array $yamlLines, string $filePath) : bool
     {
+        // if the paths contains this keyword, we assume it contains routes
         if (\strpos($filePath, 'routing') !== \false) {
+            return \true;
+        }
+        if (\strpos($filePath, 'routes') !== \false) {
             return \true;
         }
         foreach ($yamlLines as $yamlLine) {

@@ -5,6 +5,7 @@ namespace Symplify\PhpConfigPrinter\CaseConverter;
 
 use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202207\PhpParser\Node\Stmt;
 use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
@@ -25,7 +26,7 @@ final class ServicesDefaultsCaseConverter implements CaseConverterInterface
      * @param mixed $key
      * @param mixed $values
      */
-    public function convertToMethodCall($key, $values) : Expression
+    public function convertToMethodCall($key, $values) : Stmt
     {
         $methodCall = new MethodCall($this->createServicesVariable(), MethodName::DEFAULTS);
         $decoratedMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall);
