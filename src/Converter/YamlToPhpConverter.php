@@ -5,6 +5,7 @@ namespace Symplify\ConfigTransformer\Converter;
 
 use ConfigTransformer202207\Symfony\Component\Yaml\Parser;
 use ConfigTransformer202207\Symfony\Component\Yaml\Yaml;
+use Symplify\PhpConfigPrinter\Enum\RouteOption;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
@@ -17,10 +18,6 @@ use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
  */
 final class YamlToPhpConverter
 {
-    /**
-     * @var string[]
-     */
-    private const ROUTING_KEYS = ['resource', 'prefix', 'path', 'controller'];
     /**
      * @var \Symfony\Component\Yaml\Parser
      */
@@ -49,21 +46,22 @@ final class YamlToPhpConverter
         $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
     }
-    public function convert(string $yaml) : string
+    public function convert(string $yaml, string $filePath) : string
     {
         /** @var mixed[]|null $yamlArray */
         $yamlArray = $this->parser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
         if ($yamlArray === null) {
             return '';
         }
-        return $this->convertYamlArray($yamlArray);
+        return $this->convertYamlArray($yamlArray, $filePath);
     }
     /**
      * @param array<string, mixed> $yamlArray
      */
-    public function convertYamlArray(array $yamlArray) : string
+    public function convertYamlArray(array $yamlArray, string $filePath) : string
     {
-        if ($this->isRouteYaml($yamlArray)) {
+        // @todo improve here
+        if ($this->isRouteYaml($yamlArray, $filePath)) {
             $return = $this->routingConfiguratorReturnClosureFactory->createFromArrayData($yamlArray);
         } else {
             $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
@@ -74,10 +72,13 @@ final class YamlToPhpConverter
     /**
      * @param array<string, mixed> $yamlLines
      */
-    private function isRouteYaml(array $yamlLines) : bool
+    private function isRouteYaml(array $yamlLines, string $filePath) : bool
     {
+        if (\strpos($filePath, 'routing') !== \false) {
+            return \true;
+        }
         foreach ($yamlLines as $yamlLine) {
-            foreach (self::ROUTING_KEYS as $routeKey) {
+            foreach (RouteOption::ALL as $routeKey) {
                 if (isset($yamlLine[$routeKey])) {
                     return \true;
                 }

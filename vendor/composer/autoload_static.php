@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b
+class ComposerStaticInit13d8547e057e885a4e80e85fa797d418
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1263,6 +1263,7 @@ class ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b
         'Symplify\\PhpConfigPrinter\\Contract\\NodeVisitor\\PrePrintNodeVisitorInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/NodeVisitor/PrePrintNodeVisitorInterface.php',
         'Symplify\\PhpConfigPrinter\\Contract\\RoutingCaseConverterInterface' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Contract/RoutingCaseConverterInterface.php',
         'Symplify\\PhpConfigPrinter\\Converter\\ServiceOptionsKeyYamlToPhpFactory\\TagsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Converter/ServiceOptionsKeyYamlToPhpFactory/TagsServiceOptionKeyYamlToPhpFactory.php',
+        'Symplify\\PhpConfigPrinter\\Enum\\RouteOption' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Enum/RouteOption.php',
         'Symplify\\PhpConfigPrinter\\Exception\\NotImplementedYetException' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Exception/NotImplementedYetException.php',
         'Symplify\\PhpConfigPrinter\\ExprResolver\\ServiceReferenceExprResolver' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ExprResolver/ServiceReferenceExprResolver.php',
         'Symplify\\PhpConfigPrinter\\ExprResolver\\StringExprResolver' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ExprResolver/StringExprResolver.php',
@@ -1323,9 +1324,9 @@ class ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitef621299ed17ba477b8665cbaa43bc4b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit13d8547e057e885a4e80e85fa797d418::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit13d8547e057e885a4e80e85fa797d418::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit13d8547e057e885a4e80e85fa797d418::$classMap;
 
         }, null, ClassLoader::class);
     }

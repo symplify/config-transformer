@@ -64,12 +64,12 @@ final class ConfigFormatConverter
         if (\in_array($smartFileInfo->getSuffix(), [Format::YAML, Format::YML], \true)) {
             $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
             $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
-            return $this->yamlToPhpConverter->convert($dumpedYaml);
+            return $this->yamlToPhpConverter->convert($dumpedYaml, $smartFileInfo->getRealPath());
         }
         if ($smartFileInfo->getSuffix() === Format::XML) {
             $dumpedYaml = $this->dumpContainerBuilderToYaml($containerBuilder);
             $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
-            return $this->yamlToPhpConverter->convert($dumpedYaml);
+            return $this->yamlToPhpConverter->convert($dumpedYaml, $smartFileInfo->getRealPath());
         }
         $message = \sprintf('Suffix "%s" is not support yet', $smartFileInfo->getSuffix());
         throw new NotImplementedYetException($message);

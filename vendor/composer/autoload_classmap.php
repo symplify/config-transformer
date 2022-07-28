@@ -1079,6 +1079,7 @@ return array(
     'Symplify\\PhpConfigPrinter\\Contract\\NodeVisitor\\PrePrintNodeVisitorInterface' => $vendorDir . '/symplify/php-config-printer/src/Contract/NodeVisitor/PrePrintNodeVisitorInterface.php',
     'Symplify\\PhpConfigPrinter\\Contract\\RoutingCaseConverterInterface' => $vendorDir . '/symplify/php-config-printer/src/Contract/RoutingCaseConverterInterface.php',
     'Symplify\\PhpConfigPrinter\\Converter\\ServiceOptionsKeyYamlToPhpFactory\\TagsServiceOptionKeyYamlToPhpFactory' => $vendorDir . '/symplify/php-config-printer/src/Converter/ServiceOptionsKeyYamlToPhpFactory/TagsServiceOptionKeyYamlToPhpFactory.php',
+    'Symplify\\PhpConfigPrinter\\Enum\\RouteOption' => $vendorDir . '/symplify/php-config-printer/src/Enum/RouteOption.php',
     'Symplify\\PhpConfigPrinter\\Exception\\NotImplementedYetException' => $vendorDir . '/symplify/php-config-printer/src/Exception/NotImplementedYetException.php',
     'Symplify\\PhpConfigPrinter\\ExprResolver\\ServiceReferenceExprResolver' => $vendorDir . '/symplify/php-config-printer/src/ExprResolver/ServiceReferenceExprResolver.php',
     'Symplify\\PhpConfigPrinter\\ExprResolver\\StringExprResolver' => $vendorDir . '/symplify/php-config-printer/src/ExprResolver/StringExprResolver.php',
