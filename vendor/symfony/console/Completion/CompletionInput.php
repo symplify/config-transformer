@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202208\Symfony\Component\Console\Completion;
 
-use ConfigTransformer202207\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202207\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202207\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202207\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202208\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202208\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202208\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202208\Symfony\Component\Console\Input\InputOption;
 /**
  * An input specialized for shell completion.
  *

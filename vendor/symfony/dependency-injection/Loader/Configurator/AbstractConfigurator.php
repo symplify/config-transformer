@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202207\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202207\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202208\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202208\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';
     /**
-     * @var callable(mixed, bool $allowService)|null
+     * @var callable(mixed, bool)|null
      */
     public static $valuePreProcessor;
     /** @internal */

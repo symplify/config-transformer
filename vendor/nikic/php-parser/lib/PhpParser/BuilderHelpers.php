@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\PhpParser;
+namespace ConfigTransformer202208\PhpParser;
 
-use ConfigTransformer202207\PhpParser\Node\ComplexType;
-use ConfigTransformer202207\PhpParser\Node\Expr;
-use ConfigTransformer202207\PhpParser\Node\Identifier;
-use ConfigTransformer202207\PhpParser\Node\Name;
-use ConfigTransformer202207\PhpParser\Node\NullableType;
-use ConfigTransformer202207\PhpParser\Node\Scalar;
-use ConfigTransformer202207\PhpParser\Node\Stmt;
+use ConfigTransformer202208\PhpParser\Node\ComplexType;
+use ConfigTransformer202208\PhpParser\Node\Expr;
+use ConfigTransformer202208\PhpParser\Node\Identifier;
+use ConfigTransformer202208\PhpParser\Node\Name;
+use ConfigTransformer202208\PhpParser\Node\NullableType;
+use ConfigTransformer202208\PhpParser\Node\Scalar;
+use ConfigTransformer202208\PhpParser\Node\Stmt;
 /**
  * This class defines helpers used in the implementation of builders. Don't use it directly.
  *
@@ -69,7 +69,7 @@ final class BuilderHelpers
         if (\is_string($name)) {
             return new Identifier($name);
         }
-        throw new \LogicException('ConfigTransformer202207\\Expected string or instance of Node\\Identifier');
+        throw new \LogicException('ConfigTransformer202208\\Expected string or instance of Node\\Identifier');
     }
     /**
      * Normalizes strings to Identifier, also allowing expressions.
@@ -86,7 +86,7 @@ final class BuilderHelpers
         if (\is_string($name)) {
             return new Identifier($name);
         }
-        throw new \LogicException('ConfigTransformer202207\\Expected string or instance of Node\\Identifier or Node\\Expr');
+        throw new \LogicException('ConfigTransformer202208\\Expected string or instance of Node\\Identifier or Node\\Expr');
     }
     /**
      * Normalizes a name: Converts string names to Name nodes.
@@ -112,7 +112,7 @@ final class BuilderHelpers
             }
             return new Name($name);
         }
-        throw new \LogicException('ConfigTransformer202207\\Name must be a string or an instance of Node\\Name');
+        throw new \LogicException('ConfigTransformer202208\\Name must be a string or an instance of Node\\Name');
     }
     /**
      * Normalizes a name: Converts string names to Name nodes, while also allowing expressions.
@@ -127,7 +127,7 @@ final class BuilderHelpers
             return $name;
         }
         if (!\is_string($name) && !$name instanceof Name) {
-            throw new \LogicException('ConfigTransformer202207\\Name must be a string or an instance of Node\\Name or Node\\Expr');
+            throw new \LogicException('ConfigTransformer202208\\Name must be a string or an instance of Node\\Name or Node\\Expr');
         }
         return self::normalizeName($name);
     }
@@ -226,7 +226,7 @@ final class BuilderHelpers
         if (\is_string($docComment)) {
             return new Comment\Doc($docComment);
         }
-        throw new \LogicException('ConfigTransformer202207\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
+        throw new \LogicException('ConfigTransformer202208\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
     }
     /**
      * Normalizes a attribute: Converts attribute to the Attribute Group if needed.
@@ -241,7 +241,7 @@ final class BuilderHelpers
             return $attribute;
         }
         if (!$attribute instanceof Node\Attribute) {
-            throw new \LogicException('ConfigTransformer202207\\Attribute must be an instance of PhpParser\\Node\\Attribute or PhpParser\\Node\\AttributeGroup');
+            throw new \LogicException('ConfigTransformer202208\\Attribute must be an instance of PhpParser\\Node\\Attribute or PhpParser\\Node\\AttributeGroup');
         }
         return new Node\AttributeGroup([$attribute]);
     }

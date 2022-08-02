@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202208\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202207\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202207\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202208\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202208\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * Encrypt/decrypt values using Libsodium.
  *

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Console;
 
-use ConfigTransformer202207\Symfony\Component\Console\Application;
+use ConfigTransformer202208\Symfony\Component\Console\Application;
 use Symplify\ConfigTransformer\Command\SwitchFormatCommand;
 final class ConfigTransformerApplication extends Application
 {

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\PhpParser\Node\Stmt;
+namespace ConfigTransformer202208\PhpParser\Node\Stmt;
 
-use ConfigTransformer202207\PhpParser\Node;
+use ConfigTransformer202208\PhpParser\Node;
 class Enum_ extends ClassLike
 {
     /** @var null|Node\Identifier Scalar Type */

@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\ComposerJsonManipulator\FileSystem;
+namespace ConfigTransformer202208\Symplify\ComposerJsonManipulator\FileSystem;
 
-use ConfigTransformer202207\Nette\Utils\Json;
-use ConfigTransformer202207\Symplify\ComposerJsonManipulator\Json\JsonCleaner;
-use ConfigTransformer202207\Symplify\ComposerJsonManipulator\Json\JsonInliner;
-use ConfigTransformer202207\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
-use ConfigTransformer202207\Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202208\Nette\Utils\Json;
+use ConfigTransformer202208\Symplify\ComposerJsonManipulator\Json\JsonCleaner;
+use ConfigTransformer202208\Symplify\ComposerJsonManipulator\Json\JsonInliner;
+use ConfigTransformer202208\Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
+use ConfigTransformer202208\Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @see \Symplify\MonorepoBuilder\Tests\FileSystem\JsonFileManager\JsonFileManagerTest
  */

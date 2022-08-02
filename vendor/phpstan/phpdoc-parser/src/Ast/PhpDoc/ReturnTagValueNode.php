@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace ConfigTransformer202208\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\NodeAttributes;
-use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Ast\NodeAttributes;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
 class ReturnTagValueNode implements PhpDocTagValueNode
 {

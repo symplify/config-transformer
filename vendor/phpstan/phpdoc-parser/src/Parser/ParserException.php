@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\PHPStan\PhpDocParser\Parser;
+namespace ConfigTransformer202208\PHPStan\PhpDocParser\Parser;
 
 use Exception;
-use ConfigTransformer202207\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Lexer\Lexer;
 use function assert;
 use function json_encode;
 use function sprintf;

@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Dumper;
 
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202207\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer202207\Symfony\Component\Yaml\Dumper as YmlDumper;
-use ConfigTransformer202207\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202207\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202207\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202208\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202208\Symfony\Component\Yaml\Dumper as YmlDumper;
+use ConfigTransformer202208\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202208\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202208\Symfony\Component\Yaml\Yaml;
 /**
  * YamlDumper dumps a service container as a YAML string.
  *

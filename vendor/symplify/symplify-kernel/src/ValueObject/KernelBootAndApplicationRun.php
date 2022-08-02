@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\SymplifyKernel\ValueObject;
+namespace ConfigTransformer202208\Symplify\SymplifyKernel\ValueObject;
 
-use ConfigTransformer202207\Symfony\Component\Console\Application;
-use ConfigTransformer202207\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202207\Symfony\Component\HttpKernel\KernelInterface;
-use ConfigTransformer202207\Symplify\PackageBuilder\Console\Input\StaticInputDetector;
-use ConfigTransformer202207\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use ConfigTransformer202207\Symplify\SymplifyKernel\Contract\LightKernelInterface;
-use ConfigTransformer202207\Symplify\SymplifyKernel\Exception\BootException;
+use ConfigTransformer202208\Symfony\Component\Console\Application;
+use ConfigTransformer202208\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202208\Symfony\Component\HttpKernel\KernelInterface;
+use ConfigTransformer202208\Symplify\PackageBuilder\Console\Input\StaticInputDetector;
+use ConfigTransformer202208\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
+use ConfigTransformer202208\Symplify\SymplifyKernel\Contract\LightKernelInterface;
+use ConfigTransformer202208\Symplify\SymplifyKernel\Exception\BootException;
 use Throwable;
 /**
  * @api

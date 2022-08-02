@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter\NodeModifier;
 
-use ConfigTransformer202207\Nette\Utils\Strings;
-use ConfigTransformer202207\PhpParser\Node\Arg;
-use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202207\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202207\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202207\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202208\PhpParser\Node\Arg;
+use ConfigTransformer202208\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202208\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202208\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202208\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202208\PhpParser\Node\Scalar\String_;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class SingleFactoryReferenceNodeModifier

@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\Astral\PhpDocParser;
+namespace ConfigTransformer202208\Symplify\Astral\PhpDocParser;
 
-use ConfigTransformer202207\PhpParser\Comment\Doc;
-use ConfigTransformer202207\PhpParser\Node;
-use ConfigTransformer202207\PHPStan\PhpDocParser\Lexer\Lexer;
-use ConfigTransformer202207\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use ConfigTransformer202207\PHPStan\PhpDocParser\Parser\TokenIterator;
-use ConfigTransformer202207\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode;
+use ConfigTransformer202208\PhpParser\Comment\Doc;
+use ConfigTransformer202208\PhpParser\Node;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Lexer\Lexer;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Parser\TokenIterator;
+use ConfigTransformer202208\Symplify\Astral\PhpDocParser\ValueObject\Ast\PhpDoc\SimplePhpDocNode;
 /**
  * @see \Symplify\Astral\Tests\PhpDocParser\SimplePhpDocParser\SimplePhpDocParserTest
  */

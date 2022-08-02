@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\EasyTesting\ValueObject;
+namespace ConfigTransformer202208\Symplify\EasyTesting\ValueObject;
 
 final class SplitLine
 {

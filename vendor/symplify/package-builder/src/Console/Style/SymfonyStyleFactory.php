@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\PackageBuilder\Console\Style;
+namespace ConfigTransformer202208\Symplify\PackageBuilder\Console\Style;
 
-use ConfigTransformer202207\Symfony\Component\Console\Application;
-use ConfigTransformer202207\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202207\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202207\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202207\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202207\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
-use ConfigTransformer202207\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202208\Symfony\Component\Console\Application;
+use ConfigTransformer202208\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202208\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202208\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use ConfigTransformer202208\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * @api
  */

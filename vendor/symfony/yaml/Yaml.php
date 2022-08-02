@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Yaml;
+namespace ConfigTransformer202208\Symfony\Component\Yaml;
 
-use ConfigTransformer202207\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202208\Symfony\Component\Yaml\Exception\ParseException;
 /**
  * Yaml offers convenience methods to load and dump YAML.
  *

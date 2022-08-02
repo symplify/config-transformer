@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202207\Nette\Iterators;
+namespace ConfigTransformer202208\Nette\Iterators;
 
-use ConfigTransformer202207\Nette;
+use ConfigTransformer202208\Nette;
 /**
  * Smarter caching iterator.
  *

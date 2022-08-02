@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\ComposerJsonManipulator\ValueObject;
+namespace ConfigTransformer202208\Symplify\ComposerJsonManipulator\ValueObject;
 
-use ConfigTransformer202207\Nette\Utils\Arrays;
-use ConfigTransformer202207\Nette\Utils\Strings;
-use ConfigTransformer202207\Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202207\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202208\Nette\Utils\Arrays;
+use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202208\Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202208\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * @api
  * @see \Symplify\ComposerJsonManipulator\Tests\ValueObject\ComposerJsonTest

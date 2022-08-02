@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\Astral\PhpDocParser\Contract;
+namespace ConfigTransformer202208\Symplify\Astral\PhpDocParser\Contract;
 
-use ConfigTransformer202207\PHPStan\PhpDocParser\Ast\Node;
+use ConfigTransformer202208\PHPStan\PhpDocParser\Ast\Node;
 /**
  * Inspired by https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/NodeVisitor.php
  */

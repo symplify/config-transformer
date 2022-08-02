@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\ComposerJsonManipulator\Json;
+namespace ConfigTransformer202208\Symplify\ComposerJsonManipulator\Json;
 
-use ConfigTransformer202207\Nette\Utils\Strings;
-use ConfigTransformer202207\Symplify\ComposerJsonManipulator\ValueObject\Option;
-use ConfigTransformer202207\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202208\Symplify\ComposerJsonManipulator\ValueObject\Option;
+use ConfigTransformer202208\Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class JsonInliner
 {
     /**

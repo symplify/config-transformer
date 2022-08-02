@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202208\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202207\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202207\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202208\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202208\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
 \class_exists(CacheItem::class);
 /**

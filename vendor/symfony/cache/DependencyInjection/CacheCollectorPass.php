@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202208\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202207\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use ConfigTransformer202207\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use ConfigTransformer202207\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202208\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use ConfigTransformer202208\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ConfigTransformer202208\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inject a data collector to all the cache services to be able to get detailed statistics.
  *

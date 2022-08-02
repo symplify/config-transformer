@@ -3,21 +3,21 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
 
-use ConfigTransformer202207\PhpParser\Node\Arg;
-use ConfigTransformer202207\PhpParser\Node\Expr;
-use ConfigTransformer202207\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202207\PhpParser\Node\Expr\ArrayItem;
-use ConfigTransformer202207\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202207\PhpParser\Node\Identifier;
-use ConfigTransformer202207\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202207\PhpParser\Node\Param;
-use ConfigTransformer202207\PhpParser\Node\Stmt;
-use ConfigTransformer202207\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202207\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202207\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver;
+use ConfigTransformer202208\PhpParser\Node\Arg;
+use ConfigTransformer202208\PhpParser\Node\Expr;
+use ConfigTransformer202208\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202208\PhpParser\Node\Expr\ArrayItem;
+use ConfigTransformer202208\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202208\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202208\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202208\PhpParser\Node\Identifier;
+use ConfigTransformer202208\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202208\PhpParser\Node\Param;
+use ConfigTransformer202208\PhpParser\Node\Stmt;
+use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202208\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202208\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver;
 use Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory

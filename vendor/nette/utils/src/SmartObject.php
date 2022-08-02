@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202207\Nette;
+namespace ConfigTransformer202208\Nette;
 
-use ConfigTransformer202207\Nette\Utils\ObjectHelpers;
+use ConfigTransformer202208\Nette\Utils\ObjectHelpers;
 /**
  * Strict class for better experience.
  * - 'did you mean' hints

@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer;
 
-use ConfigTransformer202207\Nette\Utils\Strings;
-use ConfigTransformer202207\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202207\Symfony\Component\Config\Loader\DelegatingLoader;
-use ConfigTransformer202207\Symfony\Component\Config\Loader\Loader;
-use ConfigTransformer202207\Symfony\Component\Config\Loader\LoaderResolver;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202208\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202208\Symfony\Component\Config\Loader\DelegatingLoader;
+use ConfigTransformer202208\Symfony\Component\Config\Loader\Loader;
+use ConfigTransformer202208\Symfony\Component\Config\Loader\LoaderResolver;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\SkippingPhpFileLoader;
@@ -20,8 +20,8 @@ use Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileL
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
 use Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigLoader
 {
     /**

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202208\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202207\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202208\Symfony\Contracts\Service\ResetInterface;
 /**
  * Compiles a node to PHP code.
  *

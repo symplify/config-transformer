@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\SymplifyKernel\DependencyInjection;
+namespace ConfigTransformer202208\Symplify\SymplifyKernel\DependencyInjection;
 
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
-use ConfigTransformer202207\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass;
+use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Mimics @see \Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass without dependency on
  * symfony/http-kernel

@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\EasyTesting\PHPUnit\Behavior;
+namespace ConfigTransformer202208\Symplify\EasyTesting\PHPUnit\Behavior;
 
-use ConfigTransformer202207\Symfony\Component\Finder\Finder;
-use ConfigTransformer202207\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
-use ConfigTransformer202207\Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use ConfigTransformer202207\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202208\Symfony\Component\Finder\Finder;
+use ConfigTransformer202208\Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
+use ConfigTransformer202208\Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use ConfigTransformer202208\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * Use only in "\PHPUnit\Framework\TestCase"
  *

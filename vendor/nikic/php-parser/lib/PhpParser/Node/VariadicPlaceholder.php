@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\PhpParser\Node;
+namespace ConfigTransformer202208\PhpParser\Node;
 
-use ConfigTransformer202207\PhpParser\NodeAbstract;
+use ConfigTransformer202208\PhpParser\NodeAbstract;
 /**
  * Represents the "..." in "foo(...)" of the first-class callable syntax.
  */

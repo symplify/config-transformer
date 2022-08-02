@@ -1,24 +1,24 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202207\Symplify\Astral\NodeValue;
+namespace ConfigTransformer202208\Symplify\Astral\NodeValue;
 
-use ConfigTransformer202207\PhpParser\ConstExprEvaluationException;
-use ConfigTransformer202207\PhpParser\ConstExprEvaluator;
-use ConfigTransformer202207\PhpParser\Node\Expr;
-use ConfigTransformer202207\PhpParser\Node\Expr\Cast;
-use ConfigTransformer202207\PhpParser\Node\Expr\Instanceof_;
-use ConfigTransformer202207\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202207\PhpParser\Node\Expr\PropertyFetch;
-use ConfigTransformer202207\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202207\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202207\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202207\Symplify\Astral\Naming\SimpleNameResolver;
-use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
-use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
-use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
-use ConfigTransformer202207\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
-use ConfigTransformer202207\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202208\PhpParser\ConstExprEvaluationException;
+use ConfigTransformer202208\PhpParser\ConstExprEvaluator;
+use ConfigTransformer202208\PhpParser\Node\Expr;
+use ConfigTransformer202208\PhpParser\Node\Expr\Cast;
+use ConfigTransformer202208\PhpParser\Node\Expr\Instanceof_;
+use ConfigTransformer202208\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202208\PhpParser\Node\Expr\PropertyFetch;
+use ConfigTransformer202208\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202208\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
+use ConfigTransformer202208\Symplify\Astral\Exception\ShouldNotHappenException;
+use ConfigTransformer202208\Symplify\Astral\Naming\SimpleNameResolver;
+use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\ClassConstFetchValueResolver;
+use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\ConstFetchValueResolver;
+use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\FuncCallValueResolver;
+use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
+use ConfigTransformer202208\Symplify\PackageBuilder\Php\TypeChecker;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  */

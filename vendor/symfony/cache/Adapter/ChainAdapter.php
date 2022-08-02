@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202208\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202207\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202207\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202207\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202207\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202207\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202207\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202207\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202207\Symfony\Contracts\Cache\CacheInterface;
-use ConfigTransformer202207\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202208\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202208\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202208\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202208\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202208\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202208\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202208\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202208\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202208\Symfony\Contracts\Service\ResetInterface;
 /**
  * Chains several adapters together.
  *

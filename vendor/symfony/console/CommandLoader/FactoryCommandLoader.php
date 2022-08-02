@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202208\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202207\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202207\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202208\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202208\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *

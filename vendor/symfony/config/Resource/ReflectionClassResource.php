@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202207\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202208\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202207\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ConfigTransformer202207\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
-use ConfigTransformer202207\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202208\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ConfigTransformer202208\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use ConfigTransformer202208\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
