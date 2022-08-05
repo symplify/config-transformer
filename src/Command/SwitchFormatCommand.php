@@ -41,7 +41,7 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
         $this->setName('switch-format');
         $this->setDescription('Converts XML/YAML configs to PHP format');
         $this->addArgument(Option::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to directory/file with configs');
-        $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
