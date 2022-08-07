@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit80627c4c2eb287b821b5b182c52686da
+class ComposerStaticInitf687c10cf2a7d78fa1195c675a248e6e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1086,7 +1086,6 @@ class ComposerStaticInit80627c4c2eb287b821b5b182c52686da
         'ConfigTransformer202208\\Symplify\\Astral\\Contract\\NodeValueResolver\\NodeValueResolverInterface' => __DIR__ . '/..' . '/symplify/astral/src/Contract/NodeValueResolver/NodeValueResolverInterface.php',
         'ConfigTransformer202208\\Symplify\\Astral\\Exception\\ShouldNotHappenException' => __DIR__ . '/..' . '/symplify/astral/src/Exception/ShouldNotHappenException.php',
         'ConfigTransformer202208\\Symplify\\Astral\\Naming\\SimpleNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/Naming/SimpleNameResolver.php',
-        'ConfigTransformer202208\\Symplify\\Astral\\NodeAnalyzer\\NetteTypeAnalyzer' => __DIR__ . '/..' . '/symplify/astral/src/NodeAnalyzer/NetteTypeAnalyzer.php',
         'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\ArgNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/ArgNodeNameResolver.php',
         'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\AttributeNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/AttributeNodeNameResolver.php',
         'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\ClassLikeNodeNameResolver' => __DIR__ . '/..' . '/symplify/astral/src/NodeNameResolver/ClassLikeNodeNameResolver.php',
@@ -1325,9 +1324,9 @@ class ComposerStaticInit80627c4c2eb287b821b5b182c52686da
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit80627c4c2eb287b821b5b182c52686da::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit80627c4c2eb287b821b5b182c52686da::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit80627c4c2eb287b821b5b182c52686da::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf687c10cf2a7d78fa1195c675a248e6e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf687c10cf2a7d78fa1195c675a248e6e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf687c10cf2a7d78fa1195c675a248e6e::$classMap;
 
         }, null, ClassLoader::class);
     }

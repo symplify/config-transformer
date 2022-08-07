@@ -902,7 +902,6 @@ return array(
     'ConfigTransformer202208\\Symplify\\Astral\\Contract\\NodeValueResolver\\NodeValueResolverInterface' => $vendorDir . '/symplify/astral/src/Contract/NodeValueResolver/NodeValueResolverInterface.php',
     'ConfigTransformer202208\\Symplify\\Astral\\Exception\\ShouldNotHappenException' => $vendorDir . '/symplify/astral/src/Exception/ShouldNotHappenException.php',
     'ConfigTransformer202208\\Symplify\\Astral\\Naming\\SimpleNameResolver' => $vendorDir . '/symplify/astral/src/Naming/SimpleNameResolver.php',
-    'ConfigTransformer202208\\Symplify\\Astral\\NodeAnalyzer\\NetteTypeAnalyzer' => $vendorDir . '/symplify/astral/src/NodeAnalyzer/NetteTypeAnalyzer.php',
     'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\ArgNodeNameResolver' => $vendorDir . '/symplify/astral/src/NodeNameResolver/ArgNodeNameResolver.php',
     'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\AttributeNodeNameResolver' => $vendorDir . '/symplify/astral/src/NodeNameResolver/AttributeNodeNameResolver.php',
     'ConfigTransformer202208\\Symplify\\Astral\\NodeNameResolver\\ClassLikeNodeNameResolver' => $vendorDir . '/symplify/astral/src/NodeNameResolver/ClassLikeNodeNameResolver.php',

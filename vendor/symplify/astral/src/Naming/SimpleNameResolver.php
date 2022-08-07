@@ -59,18 +59,6 @@ final class SimpleNameResolver
         return null;
     }
     /**
-     * @param string[] $desiredNames
-     */
-    public function isNames(Node $node, array $desiredNames) : bool
-    {
-        foreach ($desiredNames as $desiredName) {
-            if ($this->isName($node, $desiredName)) {
-                return \true;
-            }
-        }
-        return \false;
-    }
-    /**
      * @param string|\PhpParser\Node $node
      */
     public function isName($node, string $desiredName) : bool
@@ -120,12 +108,5 @@ final class SimpleNameResolver
             return \false;
         }
         return (bool) Strings::match($name, $desiredNameRegex);
-    }
-    public function resolveShortName(string $className) : string
-    {
-        if (\strpos($className, '\\') === \false) {
-            return $className;
-        }
-        return (string) Strings::after($className, '\\', -1);
     }
 }

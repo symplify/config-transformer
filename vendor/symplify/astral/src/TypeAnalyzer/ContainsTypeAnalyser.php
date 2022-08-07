@@ -10,6 +10,9 @@ use ConfigTransformer202208\PHPStan\Type\IntersectionType;
 use ConfigTransformer202208\PHPStan\Type\Type;
 use ConfigTransformer202208\PHPStan\Type\TypeWithClassName;
 use ConfigTransformer202208\PHPStan\Type\UnionType;
+/**
+ * @api
+ */
 final class ContainsTypeAnalyser
 {
     /**
