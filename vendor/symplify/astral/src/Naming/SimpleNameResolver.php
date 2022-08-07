@@ -8,8 +8,6 @@ use ConfigTransformer202208\PhpParser\Node;
 use ConfigTransformer202208\PhpParser\Node\Expr\ClassConstFetch;
 use ConfigTransformer202208\PhpParser\Node\Expr\Variable;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Property;
-use ConfigTransformer202208\PHPStan\Analyser\Scope;
-use ConfigTransformer202208\PHPStan\Reflection\ClassReflection;
 use ConfigTransformer202208\Symplify\Astral\Contract\NodeNameResolverInterface;
 /**
  * @see \Symplify\Astral\Tests\Naming\SimpleNameResolverTest
@@ -82,21 +80,6 @@ final class SimpleNameResolver
             return \false;
         }
         return $this->isName($secondNode, $firstName);
-    }
-    public function getClassNameFromScope(Scope $scope) : ?string
-    {
-        if ($scope->isInTrait()) {
-            $traitReflection = $scope->getTraitReflection();
-            if (!$traitReflection instanceof ClassReflection) {
-                return null;
-            }
-            return $traitReflection->getName();
-        }
-        $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof ClassReflection) {
-            return null;
-        }
-        return $classReflection->getName();
     }
     /**
      * @api
