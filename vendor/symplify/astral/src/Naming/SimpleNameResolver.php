@@ -84,6 +84,9 @@ final class SimpleNameResolver
         }
         return $name === $desiredName;
     }
+    /**
+     * @api
+     */
     public function areNamesEqual(Node $firstNode, Node $secondNode) : bool
     {
         $firstName = $this->getName($firstNode);
