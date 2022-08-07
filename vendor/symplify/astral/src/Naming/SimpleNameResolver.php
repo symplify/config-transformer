@@ -7,7 +7,6 @@ use ConfigTransformer202208\Nette\Utils\Strings;
 use ConfigTransformer202208\PhpParser\Node;
 use ConfigTransformer202208\PhpParser\Node\Expr\ClassConstFetch;
 use ConfigTransformer202208\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202208\PhpParser\Node\Stmt\ClassLike;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Property;
 use ConfigTransformer202208\PHPStan\Analyser\Scope;
 use ConfigTransformer202208\PHPStan\Reflection\ClassReflection;
@@ -92,18 +91,6 @@ final class SimpleNameResolver
             return \false;
         }
         return $this->isName($secondNode, $firstName);
-    }
-    public function resolveShortNameFromNode(ClassLike $classLike) : ?string
-    {
-        $className = $this->getName($classLike);
-        if ($className === null) {
-            return null;
-        }
-        // anonymous class return null name
-        if (Strings::match($className, self::ANONYMOUS_CLASS_REGEX)) {
-            return null;
-        }
-        return $this->resolveShortName($className);
     }
     public function getClassNameFromScope(Scope $scope) : ?string
     {
