@@ -148,116 +148,6 @@
             "install-path": "..\/nikic\/php-parser"
         },
         {
-            "name": "phpstan\/phpdoc-parser",
-            "version": "1.6.4",
-            "version_normalized": "1.6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https:\/\/github.com\/phpstan\/phpdoc-parser.git",
-                "reference": "135607f9ccc297d6923d49c2bcf309f509413215"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/phpstan\/phpdoc-parser\/zipball\/135607f9ccc297d6923d49c2bcf309f509413215",
-                "reference": "135607f9ccc297d6923d49c2bcf309f509413215",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "php-parallel-lint\/php-parallel-lint": "^1.2",
-                "phpstan\/extension-installer": "^1.0",
-                "phpstan\/phpstan": "^1.5",
-                "phpstan\/phpstan-phpunit": "^1.1",
-                "phpstan\/phpstan-strict-rules": "^1.0",
-                "phpunit\/phpunit": "^9.5",
-                "symfony\/process": "^5.2"
-            },
-            "time": "2022-06-26T13:09:08+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "ConfigTransformer202208\\PHPStan\\PhpDocParser\\": [
-                        "src\/"
-                    ]
-                }
-            },
-            "notification-url": "https:\/\/packagist.org\/downloads\/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPDoc parser with support for nullable, intersection and generic types",
-            "support": {
-                "issues": "https:\/\/github.com\/phpstan\/phpdoc-parser\/issues",
-                "source": "https:\/\/github.com\/phpstan\/phpdoc-parser\/tree\/1.6.4"
-            },
-            "install-path": "..\/phpstan\/phpdoc-parser"
-        },
-        {
-            "name": "phpstan\/phpstan",
-            "version": "1.8.2",
-            "version_normalized": "1.8.2.0",
-            "source": {
-                "type": "git",
-                "url": "https:\/\/github.com\/phpstan\/phpstan.git",
-                "reference": "c53312ecc575caf07b0e90dee43883fdf90ca67c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/phpstan\/phpstan\/zipball\/c53312ecc575caf07b0e90dee43883fdf90ca67c",
-                "reference": "c53312ecc575caf07b0e90dee43883fdf90ca67c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2|^8.0"
-            },
-            "conflict": {
-                "phpstan\/phpstan-shim": "*"
-            },
-            "time": "2022-07-20T09:57:31+00:00",
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https:\/\/packagist.org\/downloads\/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "support": {
-                "issues": "https:\/\/github.com\/phpstan\/phpstan\/issues",
-                "source": "https:\/\/github.com\/phpstan\/phpstan\/tree\/1.8.2"
-            },
-            "funding": [
-                {
-                    "url": "https:\/\/github.com\/ondrejmirtes",
-                    "type": "github"
-                },
-                {
-                    "url": "https:\/\/github.com\/phpstan",
-                    "type": "github"
-                },
-                {
-                    "url": "https:\/\/www.patreon.com\/phpstan",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https:\/\/tidelift.com\/funding\/github\/packagist\/phpstan\/phpstan",
-                    "type": "tidelift"
-                }
-            ],
-            "install-path": "..\/phpstan\/phpstan"
-        },
-        {
             "name": "psr\/cache",
             "version": "3.0.0",
             "version_normalized": "3.0.0.0",
@@ -1957,83 +1847,6 @@
             "install-path": "..\/symfony\/yaml"
         },
         {
-            "name": "symplify\/astral",
-            "version": "dev-main",
-            "version_normalized": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "..\/..\/packages\/astral",
-                "reference": "6503d3a5b89573ccff5980ae3f763f93f2eb657c"
-            },
-            "require": {
-                "nette\/utils": "^3.2",
-                "nikic\/php-parser": "^4.14.0",
-                "php": ">=8.0",
-                "phpstan\/phpdoc-parser": "^1.6.3",
-                "phpstan\/phpstan": "^1.8.1",
-                "symplify\/package-builder": "dev-main"
-            },
-            "conflict": {
-                "symplify\/autowire-array-parameter": "<11.0.9",
-                "symplify\/coding-standard": "<11.0.9",
-                "symplify\/composer-json-manipulator": "<11.0.9",
-                "symplify\/config-transformer": "<11.0.9",
-                "symplify\/easy-ci": "<11.0.9",
-                "symplify\/easy-coding-standard": "<11.0.9",
-                "symplify\/easy-parallel": "<11.0.9",
-                "symplify\/easy-testing": "<11.0.9",
-                "symplify\/monorepo-builder": "<11.0.9",
-                "symplify\/php-config-printer": "<11.0.9",
-                "symplify\/phpstan-extensions": "<11.0.9",
-                "symplify\/phpstan-rules": "<11.0.9",
-                "symplify\/rule-doc-generator": "<11.0.9",
-                "symplify\/rule-doc-generator-contracts": "<11.0.9",
-                "symplify\/skipper": "<11.0.9",
-                "symplify\/smart-file-system": "<9.4.70",
-                "symplify\/symfony-static-dumper": "<11.0.9",
-                "symplify\/symplify-kernel": "<9.4.70",
-                "symplify\/vendor-patches": "<11.0.9"
-            },
-            "require-dev": {
-                "phpunit\/phpunit": "^9.5.21",
-                "symfony\/config": "^6.0",
-                "symfony\/dependency-injection": "^6.0",
-                "symplify\/easy-testing": "dev-main",
-                "symplify\/symplify-kernel": "dev-main"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "11.1-dev"
-                },
-                "phpstan": {
-                    "includes": [
-                        "config\/services.neon"
-                    ]
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "ConfigTransformer202208\\Symplify\\Astral\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "ConfigTransformer202208\\Symplify\\Astral\\Tests\\": "tests"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Toolking for smart daily work with AST",
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            },
-            "install-path": "..\/symplify\/astral"
-        },
-        {
             "name": "symplify\/autowire-array-parameter",
             "version": "dev-main",
             "version_normalized": "dev-main",
@@ -2316,14 +2129,13 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "d7304141b1f0e72ca4434e3ad26db7257a974ed3"
+                "reference": "796c830ef5066c3308c733ec7c431605e0c48821"
             },
             "require": {
                 "nette\/utils": "^3.2",
                 "nikic\/php-parser": "^4.14.0",
                 "php": ">=8.0",
                 "symfony\/yaml": "^6.0",
-                "symplify\/astral": "dev-main",
                 "symplify\/symplify-kernel": "dev-main"
             },
             "conflict": {

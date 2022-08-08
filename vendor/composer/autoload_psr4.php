@@ -20,7 +20,6 @@ return array(
     'ConfigTransformer202208\\Symplify\\EasyTesting\\' => array($vendorDir . '/symplify/easy-testing/src'),
     'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\' => array($vendorDir . '/symplify/composer-json-manipulator/src'),
     'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\' => array($vendorDir . '/symplify/autowire-array-parameter/src'),
-    'ConfigTransformer202208\\Symplify\\Astral\\' => array($vendorDir . '/symplify/astral/src'),
     'ConfigTransformer202208\\Symfony\\Contracts\\Service\\' => array($vendorDir . '/symfony/service-contracts'),
     'ConfigTransformer202208\\Symfony\\Contracts\\Cache\\' => array($vendorDir . '/symfony/cache-contracts'),
     'ConfigTransformer202208\\Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
@@ -37,5 +36,4 @@ return array(
     'ConfigTransformer202208\\Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'ConfigTransformer202208\\Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'ConfigTransformer202208\\PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
-    'ConfigTransformer202208\\PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
 );

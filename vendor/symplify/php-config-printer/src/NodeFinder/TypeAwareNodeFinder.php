@@ -1,12 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\Symplify\Astral;
+namespace Symplify\PhpConfigPrinter\NodeFinder;
 
 use ConfigTransformer202208\PhpParser\Node;
 use ConfigTransformer202208\PhpParser\NodeFinder;
 /**
  * @api
+ * @todo remove after https://github.com/nikic/PHP-Parser/pull/869 is released
  */
 final class TypeAwareNodeFinder
 {

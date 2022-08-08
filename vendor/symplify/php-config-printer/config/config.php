@@ -8,7 +8,6 @@ use ConfigTransformer202208\PhpParser\NodeFinder;
 use ConfigTransformer202208\PhpParser\NodeVisitor\ParentConnectingVisitor;
 use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use ConfigTransformer202208\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202208\Symplify\Astral\TypeAwareNodeFinder;
 use ConfigTransformer202208\Symplify\PackageBuilder\Parameter\ParameterProvider;
 use ConfigTransformer202208\Symplify\PackageBuilder\Php\TypeChecker;
 use ConfigTransformer202208\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
@@ -21,7 +20,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(Parser::class);
     $services->set(BuilderFactory::class);
     $services->set(ParentConnectingVisitor::class);
-    $services->set(TypeAwareNodeFinder::class);
     $services->set(TypeChecker::class);
     $services->set(ParameterProvider::class)->args([service('service_container')]);
     $services->set(ClassLikeExistenceChecker::class);

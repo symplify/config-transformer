@@ -10,12 +10,12 @@ use ConfigTransformer202208\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202208\PhpParser\Node\Stmt;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Nop;
-use ConfigTransformer202208\Symplify\Astral\TypeAwareNodeFinder;
+use Symplify\PhpConfigPrinter\NodeFinder\TypeAwareNodeFinder;
 use ConfigTransformer202208\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**
-     * @var \Symplify\Astral\TypeAwareNodeFinder
+     * @var \Symplify\PhpConfigPrinter\NodeFinder\TypeAwareNodeFinder
      */
     private $typeAwareNodeFinder;
     public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
