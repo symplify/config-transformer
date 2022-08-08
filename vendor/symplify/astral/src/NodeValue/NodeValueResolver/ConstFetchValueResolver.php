@@ -5,8 +5,8 @@ namespace ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver;
 
 use ConfigTransformer202208\PhpParser\Node\Expr;
 use ConfigTransformer202208\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202208\PhpParser\Node\Name;
 use ConfigTransformer202208\Symplify\Astral\Contract\NodeValueResolver\NodeValueResolverInterface;
-use ConfigTransformer202208\Symplify\Astral\Naming\SimpleNameResolver;
 /**
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  *
@@ -14,14 +14,6 @@ use ConfigTransformer202208\Symplify\Astral\Naming\SimpleNameResolver;
  */
 final class ConstFetchValueResolver implements NodeValueResolverInterface
 {
-    /**
-     * @var \Symplify\Astral\Naming\SimpleNameResolver
-     */
-    private $simpleNameResolver;
-    public function __construct(SimpleNameResolver $simpleNameResolver)
-    {
-        $this->simpleNameResolver = $simpleNameResolver;
-    }
     public function getType() : string
     {
         return ConstFetch::class;
@@ -32,10 +24,10 @@ final class ConstFetchValueResolver implements NodeValueResolverInterface
      */
     public function resolve(Expr $expr, string $currentFilePath)
     {
-        $constFetchName = $this->simpleNameResolver->getName($expr);
-        if ($constFetchName === null) {
+        if (!$expr->name instanceof Name) {
             return null;
         }
+        $constFetchName = $expr->name->toString();
         return \constant($constFetchName);
     }
 }

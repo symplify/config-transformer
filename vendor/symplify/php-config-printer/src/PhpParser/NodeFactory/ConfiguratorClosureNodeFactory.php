@@ -15,17 +15,12 @@ use ConfigTransformer202208\PhpParser\Node\Name\FullyQualified;
 use ConfigTransformer202208\PhpParser\Node\Param;
 use ConfigTransformer202208\PhpParser\Node\Stmt;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202208\Symplify\Astral\Exception\ShouldNotHappenException;
-use ConfigTransformer202208\Symplify\Astral\Naming\SimpleNameResolver;
 use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver;
+use Symplify\PhpConfigPrinter\Exception\ShouldNotHappenException;
 use Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
 {
-    /**
-     * @var \Symplify\Astral\Naming\SimpleNameResolver
-     */
-    private $simpleNameResolver;
     /**
      * @var \Symplify\Astral\NodeValue\NodeValueResolver
      */
@@ -34,9 +29,8 @@ final class ConfiguratorClosureNodeFactory
      * @var \Symplify\PhpConfigPrinter\Naming\VariableNameResolver
      */
     private $variableNameResolver;
-    public function __construct(SimpleNameResolver $simpleNameResolver, NodeValueResolver $nodeValueResolver, VariableNameResolver $variableNameResolver)
+    public function __construct(NodeValueResolver $nodeValueResolver, VariableNameResolver $variableNameResolver)
     {
-        $this->simpleNameResolver = $simpleNameResolver;
         $this->nodeValueResolver = $nodeValueResolver;
         $this->variableNameResolver = $variableNameResolver;
     }
@@ -193,7 +187,11 @@ final class ConfiguratorClosureNodeFactory
     }
     private function matchExtensionName(MethodCall $methodCall) : ?string
     {
-        if (!$this->simpleNameResolver->isName($methodCall->name, 'extension')) {
+        if (!$methodCall->name instanceof Identifier) {
+            return null;
+        }
+        $methodCallName = $methodCall->name->toString();
+        if ($methodCallName !== 'extension') {
             return null;
         }
         $firstArg = $methodCall->args[0];
