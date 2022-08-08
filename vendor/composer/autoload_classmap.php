@@ -981,7 +981,6 @@ return array(
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Exception\\HttpKernel\\MissingInterfaceException' => $vendorDir . '/symplify/package-builder/src/Exception/HttpKernel/MissingInterfaceException.php',
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Exception\\InvalidPrivatePropertyTypeException' => $vendorDir . '/symplify/package-builder/src/Exception/InvalidPrivatePropertyTypeException.php',
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Exception\\MissingPrivatePropertyException' => $vendorDir . '/symplify/package-builder/src/Exception/MissingPrivatePropertyException.php',
-    'ConfigTransformer202208\\Symplify\\PackageBuilder\\Matcher\\ArrayStringAndFnMatcher' => $vendorDir . '/symplify/package-builder/src/Matcher/ArrayStringAndFnMatcher.php',
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Parameter\\ParameterProvider' => $vendorDir . '/symplify/package-builder/src/Parameter/ParameterProvider.php',
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Php\\TypeChecker' => $vendorDir . '/symplify/package-builder/src/Php/TypeChecker.php',
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\Reflection\\ClassLikeExistenceChecker' => $vendorDir . '/symplify/package-builder/src/Reflection/ClassLikeExistenceChecker.php',
