@@ -19,6 +19,7 @@ use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\FuncCall
 use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver\MagicConstValueResolver;
 use ConfigTransformer202208\Symplify\PackageBuilder\Php\TypeChecker;
 /**
+ * @api
  * @see \Symplify\Astral\Tests\NodeValue\NodeValueResolverTest
  */
 final class NodeValueResolver
