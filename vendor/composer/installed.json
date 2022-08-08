@@ -1963,7 +1963,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/astral",
-                "reference": "d6fc443f7aede1b407042f26347721b3a132e215"
+                "reference": "7528db6650cc14048d67eb833f187cdaa223e988"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -1972,8 +1972,7 @@
                 "phpstan\/phpdoc-parser": "^1.6.3",
                 "phpstan\/phpstan": "^1.8.1",
                 "symplify\/package-builder": "dev-main",
-                "symplify\/smart-file-system": "dev-main",
-                "symplify\/symplify-kernel": "dev-main"
+                "symplify\/smart-file-system": "dev-main"
             },
             "conflict": {
                 "symplify\/autowire-array-parameter": "<11.0.9",
@@ -2000,7 +1999,8 @@
                 "phpunit\/phpunit": "^9.5.21",
                 "symfony\/config": "^6.0",
                 "symfony\/dependency-injection": "^6.0",
-                "symplify\/easy-testing": "dev-main"
+                "symplify\/easy-testing": "dev-main",
+                "symplify\/symplify-kernel": "dev-main"
             },
             "type": "phpstan-extension",
             "extra": {
