@@ -922,7 +922,6 @@ return array(
     'ConfigTransformer202208\\Symplify\\Astral\\PhpParser\\SmartPhpParserFactory' => $vendorDir . '/symplify/astral/src/PhpParser/SmartPhpParserFactory.php',
     'ConfigTransformer202208\\Symplify\\Astral\\Reflection\\ReflectionParser' => $vendorDir . '/symplify/astral/src/Reflection/ReflectionParser.php',
     'ConfigTransformer202208\\Symplify\\Astral\\TypeAnalyzer\\ClassMethodReturnTypeResolver' => $vendorDir . '/symplify/astral/src/TypeAnalyzer/ClassMethodReturnTypeResolver.php',
-    'ConfigTransformer202208\\Symplify\\Astral\\TypeAnalyzer\\ContainsTypeAnalyser' => $vendorDir . '/symplify/astral/src/TypeAnalyzer/ContainsTypeAnalyser.php',
     'ConfigTransformer202208\\Symplify\\Astral\\TypeAwareNodeFinder' => $vendorDir . '/symplify/astral/src/TypeAwareNodeFinder.php',
     'ConfigTransformer202208\\Symplify\\Astral\\ValueObject\\AstralConfig' => $vendorDir . '/symplify/astral/src/ValueObject/AstralConfig.php',
     'ConfigTransformer202208\\Symplify\\Astral\\ValueObject\\AttributeKey' => $vendorDir . '/symplify/astral/src/ValueObject/AttributeKey.php',
