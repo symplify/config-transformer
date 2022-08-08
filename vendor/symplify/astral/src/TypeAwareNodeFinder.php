@@ -5,6 +5,9 @@ namespace ConfigTransformer202208\Symplify\Astral;
 
 use ConfigTransformer202208\PhpParser\Node;
 use ConfigTransformer202208\PhpParser\NodeFinder;
+/**
+ * @api
+ */
 final class TypeAwareNodeFinder
 {
     /**

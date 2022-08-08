@@ -11,11 +11,9 @@ use ConfigTransformer202208\PhpParser\Node\Expr\ClassConstFetch;
 use ConfigTransformer202208\PhpParser\Node\Expr\FuncCall;
 use ConfigTransformer202208\PhpParser\Node\Name\FullyQualified;
 use ConfigTransformer202208\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202208\Symplify\Astral\ValueObject\AttributeKey;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
-use function str_starts_with;
 final class StringExprResolver
 {
     /**
@@ -76,7 +74,7 @@ final class StringExprResolver
     private function keepNewline(string $value) : String_
     {
         $string = new String_($value);
-        $string->setAttribute(AttributeKey::KIND, String_::KIND_DOUBLE_QUOTED);
+        $string->setAttribute('kind', String_::KIND_DOUBLE_QUOTED);
         return $string;
     }
     private function isFilePath(string $value) : bool
