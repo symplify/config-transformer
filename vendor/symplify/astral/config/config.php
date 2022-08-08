@@ -12,7 +12,6 @@ use ConfigTransformer202208\PHPStan\PhpDocParser\Parser\TypeParser;
 use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use ConfigTransformer202208\Symplify\Astral\PhpParser\SmartPhpParser;
 use ConfigTransformer202208\Symplify\Astral\PhpParser\SmartPhpParserFactory;
-use ConfigTransformer202208\Symplify\PackageBuilder\Php\TypeChecker;
 use function ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
@@ -20,7 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->load('Symplify\\Astral\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/StaticFactory', __DIR__ . '/../src/ValueObject', __DIR__ . '/../src/NodeVisitor', __DIR__ . '/../src/PhpParser/SmartPhpParser.php', __DIR__ . '/../src/PhpDocParser/PhpDocNodeVisitor/CallablePhpDocNodeVisitor.php']);
     $services->set(SmartPhpParser::class)->factory([service(SmartPhpParserFactory::class), 'create']);
     $services->set(ConstExprEvaluator::class);
-    $services->set(TypeChecker::class);
     $services->set(NodeFinder::class);
     // phpdoc parser
     $services->set(PhpDocParser::class);
