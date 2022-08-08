@@ -1044,6 +1044,7 @@ return array(
     'Symplify\\ConfigTransformer\\Kernel\\ConfigTransformerKernel' => $baseDir . '/src/Kernel/ConfigTransformerKernel.php',
     'Symplify\\ConfigTransformer\\Naming\\UniqueNaming' => $baseDir . '/src/Naming/UniqueNaming.php',
     'Symplify\\ConfigTransformer\\NodeVisitor\\RefOrServiceFuncCallPrePrintNodeVisitor' => $baseDir . '/src/NodeVisitor/RefOrServiceFuncCallPrePrintNodeVisitor.php',
+    'Symplify\\ConfigTransformer\\Routing\\RoutingConfigDetector' => $baseDir . '/src/Routing/RoutingConfigDetector.php',
     'Symplify\\ConfigTransformer\\ValueObject\\Configuration' => $baseDir . '/src/ValueObject/Configuration.php',
     'Symplify\\ConfigTransformer\\ValueObject\\ContainerBuilderAndFileContent' => $baseDir . '/src/ValueObject/ContainerBuilderAndFileContent.php',
     'Symplify\\ConfigTransformer\\ValueObject\\ConvertedContent' => $baseDir . '/src/ValueObject/ConvertedContent.php',

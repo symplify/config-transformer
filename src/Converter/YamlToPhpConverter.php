@@ -5,6 +5,7 @@ namespace Symplify\ConfigTransformer\Converter;
 
 use ConfigTransformer202208\Symfony\Component\Yaml\Parser;
 use ConfigTransformer202208\Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\Routing\RoutingConfigDetector;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
@@ -37,13 +38,18 @@ final class YamlToPhpConverter
      * @var \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter
      */
     private $checkerServiceParametersShifter;
-    public function __construct(Parser $parser, PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, CheckerServiceParametersShifter $checkerServiceParametersShifter)
+    /**
+     * @var \Symplify\ConfigTransformer\Routing\RoutingConfigDetector
+     */
+    private $routingConfigDetector;
+    public function __construct(Parser $parser, PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory, RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, CheckerServiceParametersShifter $checkerServiceParametersShifter, RoutingConfigDetector $routingConfigDetector)
     {
         $this->parser = $parser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
         $this->containerConfiguratorReturnClosureFactory = $containerConfiguratorReturnClosureFactory;
         $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
+        $this->routingConfigDetector = $routingConfigDetector;
     }
     public function convert(string $yaml, string $filePath) : string
     {
@@ -59,17 +65,12 @@ final class YamlToPhpConverter
      */
     public function convertYamlArray(array $yamlArray, string $filePath) : string
     {
-        if ($this->isRouteYaml($filePath)) {
+        if ($this->routingConfigDetector->isRoutingFilePath($filePath)) {
             $return = $this->routingConfiguratorReturnClosureFactory->createFromArrayData($yamlArray);
         } else {
             $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
             $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         }
         return $this->phpParserPhpConfigPrinter->prettyPrintFile([$return]);
-    }
-    private function isRouteYaml(string $filePath) : bool
-    {
-        // if the paths contains this keyword, we assume it contains routes
-        return \strpos($filePath, 'routing') !== \false || \strpos($filePath, 'routes') !== \false;
     }
 }
