@@ -13,25 +13,20 @@ use ConfigTransformer202208\PhpParser\Node\Expr\Variable;
 use ConfigTransformer202208\PhpParser\Node\Identifier;
 use ConfigTransformer202208\PhpParser\Node\Name\FullyQualified;
 use ConfigTransformer202208\PhpParser\Node\Param;
+use ConfigTransformer202208\PhpParser\Node\Scalar\String_;
 use ConfigTransformer202208\PhpParser\Node\Stmt;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202208\Symplify\Astral\NodeValue\NodeValueResolver;
 use Symplify\PhpConfigPrinter\Exception\ShouldNotHappenException;
 use Symplify\PhpConfigPrinter\Naming\VariableNameResolver;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
 {
     /**
-     * @var \Symplify\Astral\NodeValue\NodeValueResolver
-     */
-    private $nodeValueResolver;
-    /**
      * @var \Symplify\PhpConfigPrinter\Naming\VariableNameResolver
      */
     private $variableNameResolver;
-    public function __construct(NodeValueResolver $nodeValueResolver, VariableNameResolver $variableNameResolver)
+    public function __construct(VariableNameResolver $variableNameResolver)
     {
-        $this->nodeValueResolver = $nodeValueResolver;
         $this->variableNameResolver = $variableNameResolver;
     }
     /**
@@ -198,10 +193,9 @@ final class ConfiguratorClosureNodeFactory
         if (!$firstArg instanceof Arg) {
             return null;
         }
-        $extensionName = $this->nodeValueResolver->resolve($firstArg->value, '');
-        if (!\is_string($extensionName)) {
+        if (!$firstArg->value instanceof String_) {
             return null;
         }
-        return $extensionName;
+        return $firstArg->value->value;
     }
 }
