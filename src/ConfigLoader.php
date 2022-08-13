@@ -13,9 +13,9 @@ use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuild
 use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
+use Symplify\ConfigTransformer\DependencyInjection\Loader\MissingAutodiscoveryDirectoryTolerantYamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\SkippingPhpFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Symplify\ConfigTransformer\Enum\Format;
@@ -69,7 +69,7 @@ final class ConfigLoader
                 return '"%const(' . \str_replace('\\', '\\\\', $match[1]) . ')%"' . $match[2];
             });
             if ($content !== $smartFileInfo->getContents()) {
-                $fileRealPath = \sys_get_temp_dir() . '/_migrify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
+                $fileRealPath = \sys_get_temp_dir() . '/__symplify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
                 $this->smartFileSystem->dumpFile($fileRealPath, $content);
             }
             $this->extensionFaker->fakeInContainerBuilder($containerBuilder, $content);
@@ -89,8 +89,8 @@ final class ConfigLoader
             return $this->wrapToDelegatingLoader($idAwareXmlFileLoader, $containerBuilder);
         }
         if (\in_array($suffix, [Format::YML, Format::YAML], \true)) {
-            $yamlFileLoader = new YamlFileLoader($containerBuilder, new FileLocator());
-            return $this->wrapToDelegatingLoader($yamlFileLoader, $containerBuilder);
+            $missingAutodiscoveryDirectoryTolerantYamlFileLoader = new MissingAutodiscoveryDirectoryTolerantYamlFileLoader($containerBuilder, new FileLocator());
+            return $this->wrapToDelegatingLoader($missingAutodiscoveryDirectoryTolerantYamlFileLoader, $containerBuilder);
         }
         if ($suffix === Format::PHP) {
             $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator());
