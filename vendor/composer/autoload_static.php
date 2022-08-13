@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita8cc7aa75edcc1a3a1a068f967c9fa46
+class ComposerStaticInitf49cd9da963aa0407266ee517aafc884
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1208,9 +1208,9 @@ class ComposerStaticInita8cc7aa75edcc1a3a1a068f967c9fa46
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita8cc7aa75edcc1a3a1a068f967c9fa46::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita8cc7aa75edcc1a3a1a068f967c9fa46::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita8cc7aa75edcc1a3a1a068f967c9fa46::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf49cd9da963aa0407266ee517aafc884::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf49cd9da963aa0407266ee517aafc884::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf49cd9da963aa0407266ee517aafc884::$classMap;
 
         }, null, ClassLoader::class);
     }
