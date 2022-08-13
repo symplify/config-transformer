@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Symplify\ConfigTransformer;
 
 use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202208\Symfony\Component\Config\Exception\LoaderLoadException;
 use ConfigTransformer202208\Symfony\Component\Config\FileLocator;
 use ConfigTransformer202208\Symfony\Component\Config\Loader\DelegatingLoader;
 use ConfigTransformer202208\Symfony\Component\Config\Loader\Loader;
@@ -73,7 +74,12 @@ final class ConfigLoader
             }
             $this->extensionFaker->fakeInContainerBuilder($containerBuilder, $content);
         }
-        $delegatingLoader->load($fileRealPath);
+        try {
+            $delegatingLoader->load($fileRealPath);
+        } catch (LoaderLoadException $exception) {
+            // ignore exception for maybe import of non-existing files
+            // usefull in gradual upgrade of configs
+        }
         return new ContainerBuilderAndFileContent($containerBuilder, $content);
     }
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix) : DelegatingLoader

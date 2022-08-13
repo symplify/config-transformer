@@ -96,6 +96,13 @@ final class StringExprResolver
         if (!\ctype_upper($value[0])) {
             return \false;
         }
+        // to avoid autoload in case of missing code sniffer dependency
+        if (\substr_compare($value, 'Sniff', -\strlen('Sniff')) === 0) {
+            return \true;
+        }
+        if (\substr_compare($value, 'Fixer', -\strlen('Fixer')) === 0) {
+            return \true;
+        }
         if (\class_exists($value)) {
             return \true;
         }
