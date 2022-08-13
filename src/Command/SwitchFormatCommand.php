@@ -10,6 +10,7 @@ use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
+use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 use Symplify\ConfigTransformer\ValueObject\Option;
@@ -29,11 +30,16 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
      * @var \Symplify\ConfigTransformer\Converter\ConfigFormatConverter
      */
     private $configFormatConverter;
-    public function __construct(ConfigurationFactory $configurationFactory, ConfigFileDumper $configFileDumper, ConfigFormatConverter $configFormatConverter)
+    /**
+     * @var \Symplify\ConfigTransformer\Finder\ConfigFileFinder
+     */
+    private $configFileFinder;
+    public function __construct(ConfigurationFactory $configurationFactory, ConfigFileDumper $configFileDumper, ConfigFormatConverter $configFormatConverter, ConfigFileFinder $configFileFinder)
     {
         $this->configurationFactory = $configurationFactory;
         $this->configFileDumper = $configFileDumper;
         $this->configFormatConverter = $configFormatConverter;
+        $this->configFileFinder = $configFileFinder;
         parent::__construct();
     }
     protected function configure() : void
@@ -46,7 +52,7 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $configuration = $this->configurationFactory->createFromInput($input);
-        $fileInfos = $this->findFileInfos($configuration);
+        $fileInfos = $this->configFileFinder->findFileInfos($configuration);
         foreach ($fileInfos as $fileInfo) {
             $convertedFileContent = $this->configFormatConverter->convert($fileInfo);
             $convertedContent = new ConvertedContent($convertedFileContent, $fileInfo);
@@ -57,15 +63,6 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
         $successMessage = \sprintf('Processed %d file(s) to "PHP" format, congrats!', \count($fileInfos));
         $this->symfonyStyle->success($successMessage);
         return self::SUCCESS;
-    }
-    /**
-     * @return SmartFileInfo[]
-     */
-    private function findFileInfos(Configuration $configuration) : array
-    {
-        $suffixes = $configuration->getInputSuffixes();
-        $suffixesRegex = '#\\.' . \implode('|', $suffixes) . '$#';
-        return $this->smartFinder->find($configuration->getSources(), $suffixesRegex);
     }
     private function removeFileInfo(Configuration $configuration, SmartFileInfo $fileInfo) : void
     {

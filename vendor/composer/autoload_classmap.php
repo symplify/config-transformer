@@ -946,6 +946,7 @@ return array(
     'Symplify\\ConfigTransformer\\Enum\\Format' => $baseDir . '/src/Enum/Format.php',
     'Symplify\\ConfigTransformer\\Exception\\NotImplementedYetException' => $baseDir . '/src/Exception/NotImplementedYetException.php',
     'Symplify\\ConfigTransformer\\FileSystem\\ConfigFileDumper' => $baseDir . '/src/FileSystem/ConfigFileDumper.php',
+    'Symplify\\ConfigTransformer\\Finder\\ConfigFileFinder' => $baseDir . '/src/Finder/ConfigFileFinder.php',
     'Symplify\\ConfigTransformer\\Kernel\\ConfigTransformerKernel' => $baseDir . '/src/Kernel/ConfigTransformerKernel.php',
     'Symplify\\ConfigTransformer\\Naming\\UniqueNaming' => $baseDir . '/src/Naming/UniqueNaming.php',
     'Symplify\\ConfigTransformer\\NodeVisitor\\RefOrServiceFuncCallPrePrintNodeVisitor' => $baseDir . '/src/NodeVisitor/RefOrServiceFuncCallPrePrintNodeVisitor.php',

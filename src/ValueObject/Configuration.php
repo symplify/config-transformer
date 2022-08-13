@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use Symplify\ConfigTransformer\Enum\Format;
 final class Configuration
 {
     /**
@@ -32,12 +31,5 @@ final class Configuration
     public function isDryRun() : bool
     {
         return $this->isDryRun;
-    }
-    /**
-     * @return string[]
-     */
-    public function getInputSuffixes() : array
-    {
-        return [Format::YAML, Format::YML, Format::XML];
     }
 }
