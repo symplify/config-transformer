@@ -76,12 +76,12 @@ final class ArgsNodeFactory
      * @return mixed[]|Arg[]
      * @param mixed $values
      */
-    public function createFromValues($values, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false, bool $isForConfig = \false) : array
+    public function createFromValues($values, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false, bool $isForConfig = \false, bool $isRoutingImport = \false) : array
     {
         if (\is_array($values)) {
             $args = [];
             foreach ($values as $key => $value) {
-                $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
+                $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference, $isRoutingImport);
                 $args = $this->resolveArgs($args, $key, $expr, $isForConfig);
             }
             return $args;
@@ -103,10 +103,10 @@ final class ArgsNodeFactory
     /**
      * @param mixed $value
      */
-    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : Expr
+    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false, bool $isRoutingImport = \false) : Expr
     {
         if (\is_string($value)) {
-            return $this->stringExprResolver->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
+            return $this->stringExprResolver->resolve($value, $skipServiceReference, $skipClassesToConstantReference, $isRoutingImport);
         }
         if ($value instanceof Expr) {
             return $value;

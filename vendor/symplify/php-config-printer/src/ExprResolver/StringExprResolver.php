@@ -34,7 +34,7 @@ final class StringExprResolver
         $this->constantNodeFactory = $constantNodeFactory;
         $this->commonNodeFactory = $commonNodeFactory;
     }
-    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : Expr
+    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference, bool $isRoutingImport = \false) : Expr
     {
         if ($value === '') {
             return new String_($value);
@@ -60,7 +60,7 @@ final class StringExprResolver
         }
         // is service reference
         if (\strncmp($value, '@', \strlen('@')) === 0 && !$this->isFilePath($value)) {
-            return $this->resolveServiceReferenceExpr($value, $skipServiceReference, FunctionName::SERVICE);
+            return $this->resolveServiceReferenceExpr($value, $skipServiceReference, FunctionName::SERVICE, $isRoutingImport);
         }
         return BuilderHelpers::normalizeValue($value);
     }
@@ -104,11 +104,15 @@ final class StringExprResolver
     /**
      * @param FunctionName::* $functionName
      */
-    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : Expr
+    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName, bool $isRoutingImport = \false) : Expr
     {
         $value = \ltrim($value, '@');
         $expr = $this->resolve($value, $skipServiceReference, \false);
         if ($skipServiceReference) {
+            // return the `@` back
+            if ($isRoutingImport && $expr instanceof String_) {
+                $expr->value = '@' . $expr->value;
+            }
             return $expr;
         }
         $args = [new Arg($expr)];
