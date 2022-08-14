@@ -11,6 +11,8 @@ use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\Enum\RouteOption;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Symplify\PhpConfigPrinter\Routing\ControllerSplitter;
+use Symplify\PhpConfigPrinter\ValueObject\Routing\RouteDefaults;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
 {
@@ -18,9 +20,14 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(ArgsNodeFactory $argsNodeFactory)
+    /**
+     * @var \Symplify\PhpConfigPrinter\Routing\ControllerSplitter
+     */
+    private $controllerSplitter;
+    public function __construct(ArgsNodeFactory $argsNodeFactory, ControllerSplitter $controllerSplitter)
     {
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->controllerSplitter = $controllerSplitter;
     }
     /**
      * @param mixed $values
@@ -48,11 +55,13 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
             }
             // if default and controller, replace with controller() method
             // @see https://github.com/symfony/symfony/pull/24180/files#r141346267
-            if ($this->hasControllerDefaults($nestedKey, $nestedValues)) {
-                $controllerValue = $nestedValues['_controller'];
+            if ($this->controllerSplitter->hasControllerDefaults($nestedKey, $nestedValues)) {
+                $controllerValue = $nestedValues[RouteDefaults::CONTROLLER];
+                // split to class + method for better readability
+                $controllerValue = $this->controllerSplitter->splitControllerClassAndMethod($controllerValue);
                 $args = $this->argsNodeFactory->createFromValues([$controllerValue]);
                 $methodCall = new MethodCall($methodCall, 'controller', $args);
-                unset($nestedValues['_controller']);
+                unset($nestedValues[RouteDefaults::CONTROLLER]);
             }
             if (!\is_array($nestedValues) || \is_array($nestedValues) && $nestedValues !== []) {
                 $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
@@ -73,15 +82,5 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
             $argumentValues[] = $values[RouteOption::PATH];
         }
         return $this->argsNodeFactory->createFromValues($argumentValues);
-    }
-    /**
-     * @param mixed $nestedValues
-     */
-    private function hasControllerDefaults(string $nestedKey, $nestedValues) : bool
-    {
-        if ($nestedKey !== RouteOption::DEFAULTS) {
-            return \false;
-        }
-        return \array_key_exists('_controller', $nestedValues);
     }
 }

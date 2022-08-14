@@ -10,14 +10,16 @@ use ConfigTransformer202208\PhpParser\Node\Stmt;
 use ConfigTransformer202208\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202208\Symplify\PackageBuilder\Strings\StringFormatConverter;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use Symplify\PhpConfigPrinter\Enum\RouteOption;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Symplify\PhpConfigPrinter\Routing\ControllerSplitter;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
 {
     /**
      * @var string[]
      */
-    private const NESTED_KEYS = ['name_prefix', 'defaults', 'requirements', 'options', 'utf8', 'condition', 'host', 'schemes', self::METHODS, 'controller', 'locale', 'format', 'stateless'];
+    private const NESTED_KEYS = ['name_prefix', RouteOption::DEFAULTS, 'requirements', 'options', 'utf8', 'condition', 'host', 'schemes', self::METHODS, RouteOption::CONTROLLER, 'locale', 'format', 'stateless'];
     /**
      * @var string[]
      */
@@ -58,9 +60,14 @@ final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
      * @var \Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(ArgsNodeFactory $argsNodeFactory)
+    /**
+     * @var \Symplify\PhpConfigPrinter\Routing\ControllerSplitter
+     */
+    private $controllerSplitter;
+    public function __construct(ArgsNodeFactory $argsNodeFactory, ControllerSplitter $controllerSplitter)
     {
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->controllerSplitter = $controllerSplitter;
         $this->stringFormatConverter = new StringFormatConverter();
     }
     /**
@@ -88,6 +95,9 @@ final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
                 continue;
             }
             $nestedValues = $values[$nestedKey];
+            if ($nestedKey === RouteOption::CONTROLLER) {
+                $nestedValues = $this->controllerSplitter->splitControllerClassAndMethod($nestedValues);
+            }
             // Transform methods as string GET|HEAD to array
             if ($nestedKey === self::METHODS && \is_string($nestedValues)) {
                 $nestedValues = \explode('|', $nestedValues);

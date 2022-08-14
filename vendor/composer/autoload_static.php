@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a
+class ComposerStaticInit53debf7775b04681728dcbe25d65e918
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1179,6 +1179,7 @@ class ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\ConditionalEnvRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/ConditionalEnvRoutingCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\ImportRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/ImportRoutingCaseConverter.php',
         'Symplify\\PhpConfigPrinter\\RoutingCaseConverter\\PathRoutingCaseConverter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/RoutingCaseConverter/PathRoutingCaseConverter.php',
+        'Symplify\\PhpConfigPrinter\\Routing\\ControllerSplitter' => __DIR__ . '/..' . '/symplify/php-config-printer/src/Routing/ControllerSplitter.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionAnalyzer\\ServiceOptionAnalyzer' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionAnalyzer/ServiceOptionAnalyzer.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\AbstractServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/AbstractServiceOptionKeyYamlToPhpFactory.php',
         'Symplify\\PhpConfigPrinter\\ServiceOptionConverter\\ArgumentsServiceOptionKeyYamlToPhpFactory' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ServiceOptionConverter/ArgumentsServiceOptionKeyYamlToPhpFactory.php',
@@ -1200,6 +1201,7 @@ class ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a
         'Symplify\\PhpConfigPrinter\\ValueObject\\ImportType' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/ImportType.php',
         'Symplify\\PhpConfigPrinter\\ValueObject\\MethodName' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/MethodName.php',
         'Symplify\\PhpConfigPrinter\\ValueObject\\PhpConfigPrinterConfig' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/PhpConfigPrinterConfig.php',
+        'Symplify\\PhpConfigPrinter\\ValueObject\\Routing\\RouteDefaults' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/Routing/RouteDefaults.php',
         'Symplify\\PhpConfigPrinter\\ValueObject\\VariableMethodName' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/VariableMethodName.php',
         'Symplify\\PhpConfigPrinter\\ValueObject\\VariableName' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/VariableName.php',
         'Symplify\\PhpConfigPrinter\\ValueObject\\YamlKey' => __DIR__ . '/..' . '/symplify/php-config-printer/src/ValueObject/YamlKey.php',
@@ -1210,9 +1212,9 @@ class ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcf33f87c1ad36d3747786c590c052a7a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit53debf7775b04681728dcbe25d65e918::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit53debf7775b04681728dcbe25d65e918::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit53debf7775b04681728dcbe25d65e918::$classMap;
 
         }, null, ClassLoader::class);
     }
