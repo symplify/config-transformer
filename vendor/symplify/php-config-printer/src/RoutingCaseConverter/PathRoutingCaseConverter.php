@@ -35,7 +35,6 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
     public function convertToMethodCall(string $key, $values) : Stmt
     {
         $variable = new Variable(VariableName::ROUTING_CONFIGURATOR);
-        // @todo args
         $args = $this->createAddArgs($key, $values);
         $methodCall = new MethodCall($variable, 'add', $args);
         foreach (RouteOption::ALL as $nestedKey) {
@@ -47,8 +46,18 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
             if ($nestedKey === RouteOption::METHODS && \is_string($nestedValues)) {
                 $nestedValues = \explode('|', $nestedValues);
             }
-            $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
-            $methodCall = new MethodCall($methodCall, $nestedKey, $args);
+            // if default and controller, replace with controller() method
+            // @see https://github.com/symfony/symfony/pull/24180/files#r141346267
+            if ($this->hasControllerDefaults($nestedKey, $nestedValues)) {
+                $controllerValue = $nestedValues['_controller'];
+                $args = $this->argsNodeFactory->createFromValues([$controllerValue]);
+                $methodCall = new MethodCall($methodCall, 'controller', $args);
+                unset($nestedValues['_controller']);
+            }
+            if (!\is_array($nestedValues) || \is_array($nestedValues) && $nestedValues !== []) {
+                $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
+                $methodCall = new MethodCall($methodCall, $nestedKey, $args);
+            }
         }
         return new Expression($methodCall);
     }
@@ -64,5 +73,15 @@ final class PathRoutingCaseConverter implements RoutingCaseConverterInterface
             $argumentValues[] = $values[RouteOption::PATH];
         }
         return $this->argsNodeFactory->createFromValues($argumentValues);
+    }
+    /**
+     * @param mixed $nestedValues
+     */
+    private function hasControllerDefaults(string $nestedKey, $nestedValues) : bool
+    {
+        if ($nestedKey !== RouteOption::DEFAULTS) {
+            return \false;
+        }
+        return \array_key_exists('_controller', $nestedValues);
     }
 }
