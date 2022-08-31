@@ -30,7 +30,7 @@ final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements Servi
      */
     public function decorateServiceMethodCall($key, $yaml, $values, MethodCall $methodCall) : MethodCall
     {
-        $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
+        $args = \is_array($yaml) || \strpos($yaml, ':') !== \false ? $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml) : $this->argsNodeFactory->createFromValues($yaml);
         $this->singleFactoryReferenceNodeModifier->modifyArgs($args);
         return new MethodCall($methodCall, 'factory', $args);
     }
