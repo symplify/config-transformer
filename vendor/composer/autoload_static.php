@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit64869be592471b17170955cda69e598e
+class ComposerStaticInit0097b7dbd955965a34d2755eaf46ac9a
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -33,7 +33,6 @@ class ComposerStaticInit64869be592471b17170955cda69e598e
             'ConfigTransformer202208\\Symplify\\SymplifyKernel\\' => 48,
             'ConfigTransformer202208\\Symplify\\SmartFileSystem\\' => 49,
             'ConfigTransformer202208\\Symplify\\PackageBuilder\\' => 48,
-            'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\' => 57,
             'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\' => 56,
             'ConfigTransformer202208\\Symfony\\Contracts\\Service\\' => 50,
             'ConfigTransformer202208\\Symfony\\Contracts\\Cache\\' => 48,
@@ -98,10 +97,6 @@ class ComposerStaticInit64869be592471b17170955cda69e598e
         'ConfigTransformer202208\\Symplify\\PackageBuilder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symplify/package-builder/src',
-        ),
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src',
         ),
         'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\' => 
         array (
@@ -1014,16 +1009,6 @@ class ComposerStaticInit64869be592471b17170955cda69e598e
         'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\Exception\\DependencyInjection\\DefinitionForTypeNotFoundException' => __DIR__ . '/..' . '/symplify/autowire-array-parameter/src/Exception/DependencyInjection/DefinitionForTypeNotFoundException.php',
         'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\Skipper\\ParameterSkipper' => __DIR__ . '/..' . '/symplify/autowire-array-parameter/src/Skipper/ParameterSkipper.php',
         'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\TypeResolver\\ParameterTypeResolver' => __DIR__ . '/..' . '/symplify/autowire-array-parameter/src/TypeResolver/ParameterTypeResolver.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\ComposerJsonFactory' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/ComposerJsonFactory.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\FileSystem\\JsonFileManager' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/FileSystem/JsonFileManager.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\Json\\JsonCleaner' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/Json/JsonCleaner.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\Json\\JsonInliner' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/Json/JsonInliner.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\Printer\\ComposerJsonPrinter' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/Printer/ComposerJsonPrinter.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\Sorter\\ComposerPackageSorter' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/Sorter/ComposerPackageSorter.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\ValueObject\\ComposerJson' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/ValueObject/ComposerJson.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\ValueObject\\ComposerJsonManipulatorConfig' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/ValueObject/ComposerJsonManipulatorConfig.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\ValueObject\\ComposerJsonSection' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/ValueObject/ComposerJsonSection.php',
-        'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\ValueObject\\Option' => __DIR__ . '/..' . '/symplify/composer-json-manipulator/src/ValueObject/Option.php',
         'ConfigTransformer202208\\Symplify\\PackageBuilder\\Composer\\VendorDirProvider' => __DIR__ . '/..' . '/symplify/package-builder/src/Composer/VendorDirProvider.php',
         'ConfigTransformer202208\\Symplify\\PackageBuilder\\Configuration\\StaticEolConfiguration' => __DIR__ . '/..' . '/symplify/package-builder/src/Configuration/StaticEolConfiguration.php',
         'ConfigTransformer202208\\Symplify\\PackageBuilder\\Console\\Command\\AbstractSymplifyCommand' => __DIR__ . '/..' . '/symplify/package-builder/src/Console/Command/AbstractSymplifyCommand.php',
@@ -1188,9 +1173,9 @@ class ComposerStaticInit64869be592471b17170955cda69e598e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit64869be592471b17170955cda69e598e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit64869be592471b17170955cda69e598e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit64869be592471b17170955cda69e598e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0097b7dbd955965a34d2755eaf46ac9a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0097b7dbd955965a34d2755eaf46ac9a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0097b7dbd955965a34d2755eaf46ac9a::$classMap;
 
         }, null, ClassLoader::class);
     }

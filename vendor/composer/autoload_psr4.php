@@ -17,7 +17,6 @@ return array(
     'ConfigTransformer202208\\Symplify\\SymplifyKernel\\' => array($vendorDir . '/symplify/symplify-kernel/src'),
     'ConfigTransformer202208\\Symplify\\SmartFileSystem\\' => array($vendorDir . '/symplify/smart-file-system/src'),
     'ConfigTransformer202208\\Symplify\\PackageBuilder\\' => array($vendorDir . '/symplify/package-builder/src'),
-    'ConfigTransformer202208\\Symplify\\ComposerJsonManipulator\\' => array($vendorDir . '/symplify/composer-json-manipulator/src'),
     'ConfigTransformer202208\\Symplify\\AutowireArrayParameter\\' => array($vendorDir . '/symplify/autowire-array-parameter/src'),
     'ConfigTransformer202208\\Symfony\\Contracts\\Service\\' => array($vendorDir . '/symfony/service-contracts'),
     'ConfigTransformer202208\\Symfony\\Contracts\\Cache\\' => array($vendorDir . '/symfony/cache-contracts'),
