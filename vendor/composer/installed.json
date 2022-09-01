@@ -1987,14 +1987,13 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "f5a1221257fcd1ebb892c8d3d820444bbce1a9cd"
+                "reference": "d5b48a886803c11c877a1110a9cdc10d6ebf1f77"
             },
             "require": {
                 "nette\/utils": "^3.2",
                 "nikic\/php-parser": "^4.14.0",
                 "php": ">=8.0",
-                "symfony\/yaml": "^6.0",
-                "symplify\/symplify-kernel": "dev-main"
+                "symfony\/yaml": "^6.0"
             },
             "conflict": {
                 "symplify\/autowire-array-parameter": "<11.1.7",
@@ -2017,7 +2016,8 @@
             },
             "require-dev": {
                 "phpunit\/phpunit": "^9.5.23",
-                "symplify\/easy-testing": "dev-main"
+                "symplify\/easy-testing": "dev-main",
+                "symplify\/symplify-kernel": "dev-main"
             },
             "type": "library",
             "extra": {

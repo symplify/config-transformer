@@ -10,8 +10,8 @@ use ConfigTransformer202209\PhpParser\Node\Expr\MethodCall;
 use ConfigTransformer202209\PhpParser\Node\Stmt;
 use ConfigTransformer202209\PhpParser\Node\Stmt\Expression;
 use ConfigTransformer202209\PhpParser\Node\Stmt\Nop;
+use Symplify\PhpConfigPrinter\Exception\ShouldNotHappenException;
 use Symplify\PhpConfigPrinter\NodeFinder\TypeAwareNodeFinder;
-use ConfigTransformer202209\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
     /**
