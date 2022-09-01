@@ -14,7 +14,6 @@ use ConfigTransformer202209\Symplify\AutowireArrayParameter\DependencyInjection\
 use ConfigTransformer202209\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 use ConfigTransformer202209\Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
 use ConfigTransformer202209\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
-use ConfigTransformer202209\Symplify\PackageBuilder\ValueObject\MethodName;
 /**
  * @inspiration https://github.com/nette/di/pull/178
  * @see \Symplify\AutowireArrayParameter\Tests\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPassTest
@@ -99,7 +98,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
         if (!$reflectionClass instanceof ReflectionClass) {
             return \true;
         }
-        if (!$reflectionClass->hasMethod(MethodName::CONSTRUCTOR)) {
+        if (!$reflectionClass->hasMethod('__construct')) {
             return \true;
         }
         /** @var ReflectionMethod $constructorReflectionMethod */
