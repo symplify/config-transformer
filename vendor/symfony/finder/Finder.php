@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Finder;
+namespace ConfigTransformer202209\Symfony\Component\Finder;
 
-use ConfigTransformer202208\Symfony\Component\Finder\Comparator\DateComparator;
-use ConfigTransformer202208\Symfony\Component\Finder\Comparator\NumberComparator;
-use ConfigTransformer202208\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\CustomFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\LazyIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
-use ConfigTransformer202208\Symfony\Component\Finder\Iterator\SortableIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Comparator\DateComparator;
+use ConfigTransformer202209\Symfony\Component\Finder\Comparator\NumberComparator;
+use ConfigTransformer202209\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\CustomFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\LazyIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
+use ConfigTransformer202209\Symfony\Component\Finder\Iterator\SortableIterator;
 /**
  * Finder allows to build rules to find files and directories.
  *

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202208\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202208\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
+use ConfigTransformer202209\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202209\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
 if (!\class_exists(BaseExpressionLanguage::class)) {
     return;
 }

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202209\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202208\Symfony\Component\Process\Exception\ProcessFailedException;
-use ConfigTransformer202208\Symfony\Component\Process\Process;
+use ConfigTransformer202209\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202209\Symfony\Component\Process\Exception\ProcessFailedException;
+use ConfigTransformer202209\Symfony\Component\Process\Process;
 /**
  * The ProcessHelper class provides helpers to run external processes.
  *

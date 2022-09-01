@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202209\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202208\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202209\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>

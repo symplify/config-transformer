@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Node\Expr;
+namespace ConfigTransformer202209\PhpParser\Node\Expr;
 
-use ConfigTransformer202208\PhpParser\Node\Expr;
+use ConfigTransformer202209\PhpParser\Node\Expr;
 class ClosureUse extends Expr
 {
     /** @var Expr\Variable Variable to use */

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Console\Tester;
+namespace ConfigTransformer202209\Symfony\Component\Console\Tester;
 
-use ConfigTransformer202208\PHPUnit\Framework\Assert;
-use ConfigTransformer202208\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\StreamOutput;
-use ConfigTransformer202208\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
+use ConfigTransformer202209\PHPUnit\Framework\Assert;
+use ConfigTransformer202209\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202209\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\StreamOutput;
+use ConfigTransformer202209\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>
  */

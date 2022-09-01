@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Alexander M. Turek <me@derrabus.de>
  */

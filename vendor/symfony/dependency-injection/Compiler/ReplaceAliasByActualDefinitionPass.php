@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.

@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202208\Nette\Utils;
+namespace ConfigTransformer202209\Nette\Utils;
 
-use ConfigTransformer202208\Nette;
-use ConfigTransformer202208\Nette\HtmlStringable;
+use ConfigTransformer202209\Nette;
+use ConfigTransformer202209\Nette\HtmlStringable;
 use function is_array, is_float, is_object, is_string;
 /**
  * HTML helper.

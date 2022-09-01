@@ -1,10 +1,10 @@
 <?php
 
-namespace ConfigTransformer202208\PhpParser;
+namespace ConfigTransformer202209\PhpParser;
 
 use function array_merge;
-use ConfigTransformer202208\PhpParser\Node\Expr;
-use ConfigTransformer202208\PhpParser\Node\Scalar;
+use ConfigTransformer202209\PhpParser\Node\Expr;
+use ConfigTransformer202209\PhpParser\Node\Scalar;
 /**
  * Evaluates constant expressions.
  *

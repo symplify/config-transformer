@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Console\Output;
+namespace ConfigTransformer202209\Symfony\Component\Console\Output;
 
-use ConfigTransformer202208\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202208\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202209\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * A BufferedOutput that keeps only the last N chars.
  *

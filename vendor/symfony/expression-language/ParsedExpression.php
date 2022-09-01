@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202209\Symfony\Component\ExpressionLanguage;
 
-use ConfigTransformer202208\Symfony\Component\ExpressionLanguage\Node\Node;
+use ConfigTransformer202209\Symfony\Component\ExpressionLanguage\Node\Node;
 /**
  * Represents an already parsed expression.
  *

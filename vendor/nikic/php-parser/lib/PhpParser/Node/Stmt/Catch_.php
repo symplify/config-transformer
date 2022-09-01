@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Node\Stmt;
+namespace ConfigTransformer202209\PhpParser\Node\Stmt;
 
-use ConfigTransformer202208\PhpParser\Node;
-use ConfigTransformer202208\PhpParser\Node\Expr;
+use ConfigTransformer202209\PhpParser\Node;
+use ConfigTransformer202209\PhpParser\Node\Expr;
 class Catch_ extends Node\Stmt
 {
     /** @var Node\Name[] Types of exceptions to catch */

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Dumper;
 
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Reference;
 /**
  * GraphvizDumper dumps a service container as a graphviz file.
  *

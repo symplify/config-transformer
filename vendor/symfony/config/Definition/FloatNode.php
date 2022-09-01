@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202209\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202208\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use ConfigTransformer202209\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents a float value in the config tree.
  *

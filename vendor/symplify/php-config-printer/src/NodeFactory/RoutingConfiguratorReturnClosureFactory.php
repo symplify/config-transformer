@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202208\PhpParser\Node\Stmt;
-use ConfigTransformer202208\PhpParser\Node\Stmt\Return_;
+use ConfigTransformer202209\PhpParser\Node\Stmt;
+use ConfigTransformer202209\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 /**

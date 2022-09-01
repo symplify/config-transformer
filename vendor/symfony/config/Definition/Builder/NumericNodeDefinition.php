@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202209\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202208\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202209\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * Abstract class that contains common code of integer and float node definitions.
  *

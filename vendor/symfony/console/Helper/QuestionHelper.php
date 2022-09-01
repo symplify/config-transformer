@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202209\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202208\Symfony\Component\Console\Cursor;
-use ConfigTransformer202208\Symfony\Component\Console\Exception\MissingInputException;
-use ConfigTransformer202208\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202208\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202208\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use ConfigTransformer202208\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Input\StreamableInputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202208\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202208\Symfony\Component\Console\Terminal;
-use function ConfigTransformer202208\Symfony\Component\String\s;
+use ConfigTransformer202209\Symfony\Component\Console\Cursor;
+use ConfigTransformer202209\Symfony\Component\Console\Exception\MissingInputException;
+use ConfigTransformer202209\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202209\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202209\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use ConfigTransformer202209\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Input\StreamableInputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use ConfigTransformer202209\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer202209\Symfony\Component\Console\Question\Question;
+use ConfigTransformer202209\Symfony\Component\Console\Terminal;
+use function ConfigTransformer202209\Symfony\Component\String\s;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  *

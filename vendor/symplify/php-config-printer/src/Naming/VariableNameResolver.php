@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Naming;
 
-use ConfigTransformer202208\Nette\Utils\Strings;
+use ConfigTransformer202209\Nette\Utils\Strings;
 final class VariableNameResolver
 {
     public function resolveFromType(string $classType) : string

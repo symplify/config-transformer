@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Console\Logger;
+namespace ConfigTransformer202209\Symfony\Component\Console\Logger;
 
-use ConfigTransformer202208\Psr\Log\AbstractLogger;
-use ConfigTransformer202208\Psr\Log\InvalidArgumentException;
-use ConfigTransformer202208\Psr\Log\LogLevel;
-use ConfigTransformer202208\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202208\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202209\Psr\Log\AbstractLogger;
+use ConfigTransformer202209\Psr\Log\InvalidArgumentException;
+use ConfigTransformer202209\Psr\Log\LogLevel;
+use ConfigTransformer202209\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202209\Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  *

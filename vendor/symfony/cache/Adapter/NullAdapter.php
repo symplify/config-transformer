@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202209\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202208\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202208\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202208\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202209\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202209\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202209\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */

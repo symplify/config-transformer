@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Container;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

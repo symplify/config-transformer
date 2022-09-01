@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202208\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202208\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202209\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202209\Symfony\Component\Yaml\Yaml;
 use Symplify\ConfigTransformer\Routing\RoutingConfigDetector;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;

@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Builder;
+namespace ConfigTransformer202209\PhpParser\Builder;
 
-use ConfigTransformer202208\PhpParser;
-use ConfigTransformer202208\PhpParser\BuilderHelpers;
-use ConfigTransformer202208\PhpParser\Node;
-use ConfigTransformer202208\PhpParser\Node\Const_;
-use ConfigTransformer202208\PhpParser\Node\Identifier;
-use ConfigTransformer202208\PhpParser\Node\Stmt;
+use ConfigTransformer202209\PhpParser;
+use ConfigTransformer202209\PhpParser\BuilderHelpers;
+use ConfigTransformer202209\PhpParser\Node;
+use ConfigTransformer202209\PhpParser\Node\Const_;
+use ConfigTransformer202209\PhpParser\Node\Identifier;
+use ConfigTransformer202209\PhpParser\Node\Stmt;
 class ClassConst implements PhpParser\Builder
 {
     protected $flags = 0;

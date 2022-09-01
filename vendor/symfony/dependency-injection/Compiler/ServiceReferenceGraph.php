@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202208\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202208\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202209\Symfony\Component\DependencyInjection\Reference;
 /**
  * This is a directed graph of your services.
  *

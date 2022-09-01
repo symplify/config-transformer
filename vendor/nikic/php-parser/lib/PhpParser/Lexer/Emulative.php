@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Lexer;
+namespace ConfigTransformer202209\PhpParser\Lexer;
 
-use ConfigTransformer202208\PhpParser\Error;
-use ConfigTransformer202208\PhpParser\ErrorHandler;
-use ConfigTransformer202208\PhpParser\Lexer;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
-use ConfigTransformer202208\PhpParser\Lexer\TokenEmulator\TokenEmulator;
+use ConfigTransformer202209\PhpParser\Error;
+use ConfigTransformer202209\PhpParser\ErrorHandler;
+use ConfigTransformer202209\PhpParser\Lexer;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\EnumTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
+use ConfigTransformer202209\PhpParser\Lexer\TokenEmulator\TokenEmulator;
 class Emulative extends Lexer
 {
     const PHP_7_3 = '7.3dev';

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Node\Expr;
+namespace ConfigTransformer202209\PhpParser\Node\Expr;
 
-use ConfigTransformer202208\PhpParser\Node;
+use ConfigTransformer202209\PhpParser\Node;
 class Throw_ extends Node\Expr
 {
     /** @var Node\Expr Expression */

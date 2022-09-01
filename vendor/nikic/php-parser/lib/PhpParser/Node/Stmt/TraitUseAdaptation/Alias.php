@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202208\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace ConfigTransformer202209\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use ConfigTransformer202208\PhpParser\Node;
+use ConfigTransformer202209\PhpParser\Node;
 class Alias extends Node\Stmt\TraitUseAdaptation
 {
     /** @var null|int New modifier */
