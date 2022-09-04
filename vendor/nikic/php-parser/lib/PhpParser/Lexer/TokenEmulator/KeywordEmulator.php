@@ -28,7 +28,7 @@ abstract class KeywordEmulator extends TokenEmulator
     }
     /**
      * @param mixed[] $tokens
-     * @return mixed[]|null
+     * @return array|string|null
      */
     private function getPreviousNonSpaceToken(array $tokens, int $start)
     {
