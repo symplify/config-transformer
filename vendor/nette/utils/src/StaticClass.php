@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202209\Nette;
+namespace ConfigTransformer202210\Nette;
 
 /**
  * Static class.

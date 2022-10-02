@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node\Expr;
+namespace ConfigTransformer202210\PhpParser\Node\Expr;
 
-use ConfigTransformer202209\PhpParser\Node\Expr;
+use ConfigTransformer202210\PhpParser\Node\Expr;
 class PostInc extends Expr
 {
     /** @var Expr Variable */

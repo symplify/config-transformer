@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Cache\Messenger;
+namespace ConfigTransformer202210\Symfony\Component\Cache\Messenger;
 
-use ConfigTransformer202209\Psr\Log\LoggerInterface;
-use ConfigTransformer202209\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer202209\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ReverseContainer;
-use ConfigTransformer202209\Symfony\Component\Messenger\MessageBusInterface;
-use ConfigTransformer202209\Symfony\Component\Messenger\Stamp\HandledStamp;
+use ConfigTransformer202210\Psr\Log\LoggerInterface;
+use ConfigTransformer202210\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer202210\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ReverseContainer;
+use ConfigTransformer202210\Symfony\Component\Messenger\MessageBusInterface;
+use ConfigTransformer202210\Symfony\Component\Messenger\Stamp\HandledStamp;
 /**
  * Sends the computation of cached values to a message bus.
  */

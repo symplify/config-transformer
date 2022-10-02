@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node;
+namespace ConfigTransformer202210\PhpParser\Node;
 
-use ConfigTransformer202209\PhpParser\NodeAbstract;
+use ConfigTransformer202210\PhpParser\NodeAbstract;
 /**
  * Represents a non-namespaced name. Namespaced names are represented using Name nodes.
  */

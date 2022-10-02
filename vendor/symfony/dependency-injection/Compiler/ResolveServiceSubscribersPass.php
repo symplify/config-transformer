@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202209\Psr\Container\ContainerInterface;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202209\Symfony\Contracts\Service\ServiceProviderInterface;
+use ConfigTransformer202210\Psr\Container\ContainerInterface;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202210\Symfony\Contracts\Service\ServiceProviderInterface;
 /**
  * Compiler pass to inject their service locator to service subscribers.
  *

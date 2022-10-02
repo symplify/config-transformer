@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Webmozart\Assert;
+namespace ConfigTransformer202210\Webmozart\Assert;
 
 use ArrayAccess;
 use BadMethodCallException;

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Attribute;
 
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * An attribute to tell how a dependency is used and hint named autowiring aliases.
  *

@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\FileSystem;
 
-use ConfigTransformer202209\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202210\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use ConfigTransformer202209\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use ConfigTransformer202209\Symplify\SmartFileSystem\SmartFileSystem;
+use ConfigTransformer202210\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use ConfigTransformer202210\Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     /**

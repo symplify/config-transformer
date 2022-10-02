@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node\Stmt;
+namespace ConfigTransformer202210\PhpParser\Node\Stmt;
 
-use ConfigTransformer202209\PhpParser\Node;
+use ConfigTransformer202210\PhpParser\Node;
 class Break_ extends Node\Stmt
 {
     /** @var null|Node\Expr Number of loops to break */

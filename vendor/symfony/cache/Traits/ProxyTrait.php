@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202210\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202209\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202209\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202210\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202210\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

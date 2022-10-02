@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202210\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202209\Doctrine\DBAL\Connection;
-use ConfigTransformer202209\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use ConfigTransformer202209\Doctrine\DBAL\DriverManager;
-use ConfigTransformer202209\Doctrine\DBAL\Exception as DBALException;
-use ConfigTransformer202209\Doctrine\DBAL\Exception\TableNotFoundException;
-use ConfigTransformer202209\Doctrine\DBAL\ParameterType;
-use ConfigTransformer202209\Doctrine\DBAL\Schema\Schema;
-use ConfigTransformer202209\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202209\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202209\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202209\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202210\Doctrine\DBAL\Connection;
+use ConfigTransformer202210\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use ConfigTransformer202210\Doctrine\DBAL\DriverManager;
+use ConfigTransformer202210\Doctrine\DBAL\Exception as DBALException;
+use ConfigTransformer202210\Doctrine\DBAL\Exception\TableNotFoundException;
+use ConfigTransformer202210\Doctrine\DBAL\ParameterType;
+use ConfigTransformer202210\Doctrine\DBAL\Schema\Schema;
+use ConfigTransformer202210\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202210\Symfony\Component\Cache\PruneableInterface;
 class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;
@@ -279,18 +279,18 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         $platform = $this->conn->getDatabasePlatform();
         switch (\true) {
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\MySQLPlatform:
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\MySQL57Platform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQLPlatform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQL57Platform:
                 return $this->platformName = 'mysql';
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\SqlitePlatform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SqlitePlatform:
                 return $this->platformName = 'sqlite';
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\PostgreSQLPlatform:
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\PostgreSQL94Platform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQLPlatform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQL94Platform:
                 return $this->platformName = 'pgsql';
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\OraclePlatform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\OraclePlatform:
                 return $this->platformName = 'oci';
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\SQLServerPlatform:
-            case $platform instanceof \ConfigTransformer202209\Doctrine\DBAL\Platforms\SQLServer2012Platform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServerPlatform:
+            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServer2012Platform:
                 return $this->platformName = 'sqlsrv';
             default:
                 return $this->platformName = \get_class($platform);

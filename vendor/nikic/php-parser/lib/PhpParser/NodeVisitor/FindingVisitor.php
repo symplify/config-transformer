@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\NodeVisitor;
+namespace ConfigTransformer202210\PhpParser\NodeVisitor;
 
-use ConfigTransformer202209\PhpParser\Node;
-use ConfigTransformer202209\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202210\PhpParser\Node;
+use ConfigTransformer202210\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find and collect all nodes satisfying some criterion determined by
  * a filter callback.

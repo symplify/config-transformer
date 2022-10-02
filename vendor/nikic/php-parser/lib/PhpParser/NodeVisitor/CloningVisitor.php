@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\NodeVisitor;
+namespace ConfigTransformer202210\PhpParser\NodeVisitor;
 
-use ConfigTransformer202209\PhpParser\Node;
-use ConfigTransformer202209\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202210\PhpParser\Node;
+use ConfigTransformer202210\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor cloning all nodes and linking to the original nodes using an attribute.
  *

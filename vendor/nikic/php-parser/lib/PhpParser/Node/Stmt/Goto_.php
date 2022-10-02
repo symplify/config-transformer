@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node\Stmt;
+namespace ConfigTransformer202210\PhpParser\Node\Stmt;
 
-use ConfigTransformer202209\PhpParser\Node\Identifier;
-use ConfigTransformer202209\PhpParser\Node\Stmt;
+use ConfigTransformer202210\PhpParser\Node\Identifier;
+use ConfigTransformer202210\PhpParser\Node\Stmt;
 class Goto_ extends Stmt
 {
     /** @var Identifier Name of label to jump to */

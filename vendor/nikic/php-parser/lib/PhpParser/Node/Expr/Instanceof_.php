@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node\Expr;
+namespace ConfigTransformer202210\PhpParser\Node\Expr;
 
-use ConfigTransformer202209\PhpParser\Node\Expr;
-use ConfigTransformer202209\PhpParser\Node\Name;
+use ConfigTransformer202210\PhpParser\Node\Expr;
+use ConfigTransformer202210\PhpParser\Node\Name;
 class Instanceof_ extends Expr
 {
     /** @var Expr Expression */

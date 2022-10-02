@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202209\PhpParser\Node\Expr\BinaryOp;
+namespace ConfigTransformer202210\PhpParser\Node\Expr\BinaryOp;
 
-use ConfigTransformer202209\PhpParser\Node\Expr\BinaryOp;
+use ConfigTransformer202210\PhpParser\Node\Expr\BinaryOp;
 class NotEqual extends BinaryOp
 {
     public function getOperatorSigil() : string

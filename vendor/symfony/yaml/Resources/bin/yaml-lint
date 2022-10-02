@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace ConfigTransformer202209;
+namespace ConfigTransformer202210;
 
 /*
  * This file is part of the Symfony package.
@@ -15,8 +15,8 @@ namespace ConfigTransformer202209;
  *
  * @author Jan Schädlich <jan.schaedlich@sensiolabs.de>
  */
-use ConfigTransformer202209\Symfony\Component\Console\Application;
-use ConfigTransformer202209\Symfony\Component\Yaml\Command\LintCommand;
+use ConfigTransformer202210\Symfony\Component\Console\Application;
+use ConfigTransformer202210\Symfony\Component\Yaml\Command\LintCommand;
 function includeIfExists(string $file) : bool
 {
     return \file_exists($file) && (include $file);

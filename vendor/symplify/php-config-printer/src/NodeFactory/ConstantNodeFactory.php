@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use ConfigTransformer202209\Nette\Utils\Strings;
-use ConfigTransformer202209\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202209\PhpParser\Node\Expr\ConstFetch;
-use ConfigTransformer202209\PhpParser\Node\Name;
-use ConfigTransformer202209\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202210\Nette\Utils\Strings;
+use ConfigTransformer202210\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202210\PhpParser\Node\Expr\ConstFetch;
+use ConfigTransformer202210\PhpParser\Node\Name;
+use ConfigTransformer202210\PhpParser\Node\Name\FullyQualified;
 /**
  * @see https://github.com/symfony/symfony/pull/18626/files
  *

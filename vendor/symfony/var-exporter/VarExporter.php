@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\VarExporter;
+namespace ConfigTransformer202210\Symfony\Component\VarExporter;
 
-use ConfigTransformer202209\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use ConfigTransformer202209\Symfony\Component\VarExporter\Internal\Exporter;
-use ConfigTransformer202209\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer202209\Symfony\Component\VarExporter\Internal\Registry;
-use ConfigTransformer202209\Symfony\Component\VarExporter\Internal\Values;
+use ConfigTransformer202210\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer202210\Symfony\Component\VarExporter\Internal\Exporter;
+use ConfigTransformer202210\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer202210\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer202210\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *

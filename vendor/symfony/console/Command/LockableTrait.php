@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Console\Command;
+namespace ConfigTransformer202210\Symfony\Component\Console\Command;
 
-use ConfigTransformer202209\Symfony\Component\Console\Exception\LogicException;
-use ConfigTransformer202209\Symfony\Component\Lock\LockFactory;
-use ConfigTransformer202209\Symfony\Component\Lock\Store\FlockStore;
-use ConfigTransformer202209\Symfony\Component\Lock\Store\SemaphoreStore;
+use ConfigTransformer202210\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202210\Symfony\Component\Lock\LockFactory;
+use ConfigTransformer202210\Symfony\Component\Lock\Store\FlockStore;
+use ConfigTransformer202210\Symfony\Component\Lock\Store\SemaphoreStore;
 /**
  * Basic lock feature for commands.
  *

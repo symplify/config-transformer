@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 
-use ConfigTransformer202209\Nette\Utils\Arrays;
-use ConfigTransformer202209\PhpParser\BuilderHelpers;
-use ConfigTransformer202209\PhpParser\Node\Arg;
-use ConfigTransformer202209\PhpParser\Node\Expr\Array_;
-use ConfigTransformer202209\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202209\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202210\Nette\Utils\Arrays;
+use ConfigTransformer202210\PhpParser\BuilderHelpers;
+use ConfigTransformer202210\PhpParser\Node\Arg;
+use ConfigTransformer202210\PhpParser\Node\Expr\Array_;
+use ConfigTransformer202210\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202210\PhpParser\Node\Scalar\String_;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;

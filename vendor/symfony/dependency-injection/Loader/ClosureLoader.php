@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer202209\Symfony\Component\Config\Loader\Loader;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202210\Symfony\Component\Config\Loader\Loader;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ClosureLoader loads service definitions from a PHP closure.
  *

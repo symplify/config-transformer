@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Contracts\Cache;
+namespace ConfigTransformer202210\Symfony\Contracts\Cache;
 
-use ConfigTransformer202209\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202210\Psr\Cache\CacheItemInterface;
 /**
  * Computes and returns the cached value of an item.
  *

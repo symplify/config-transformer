@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Console\Command;
+namespace ConfigTransformer202210\Symfony\Component\Console\Command;
 
-use ConfigTransformer202209\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202209\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202209\Symfony\Component\Console\Completion\Output\BashCompletionOutput;
-use ConfigTransformer202209\Symfony\Component\Console\Completion\Output\CompletionOutputInterface;
-use ConfigTransformer202209\Symfony\Component\Console\Exception\CommandNotFoundException;
-use ConfigTransformer202209\Symfony\Component\Console\Exception\ExceptionInterface;
-use ConfigTransformer202209\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202209\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202209\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202210\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202210\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202210\Symfony\Component\Console\Completion\Output\BashCompletionOutput;
+use ConfigTransformer202210\Symfony\Component\Console\Completion\Output\CompletionOutputInterface;
+use ConfigTransformer202210\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202210\Symfony\Component\Console\Exception\ExceptionInterface;
+use ConfigTransformer202210\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202210\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202210\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Responsible for providing the values to the shell completion.
  *

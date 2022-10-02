@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class ContainerBuilderAndFileContent
 {
     /**

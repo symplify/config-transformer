@@ -1,7 +1,7 @@
 {
     "name": "symfony\/cache",
     "type": "library",
-    "description": "Provides an extended PSR-6, PSR-16 (and tags) implementation",
+    "description": "Provides extended PSR-6, PSR-16 (and tags) implementations",
     "keywords": [
         "caching",
         "psr6"
@@ -51,7 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202209\\Symfony\\Component\\Cache\\": ""
+            "ConfigTransformer202210\\Symfony\\Component\\Cache\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

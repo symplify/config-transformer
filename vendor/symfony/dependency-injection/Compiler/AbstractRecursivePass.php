@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use ConfigTransformer202209\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202209\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202210\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

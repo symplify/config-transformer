@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer202209\PhpParser\Node\Stmt;
+use ConfigTransformer202210\PhpParser\Node\Stmt;
 interface RoutingCaseConverterInterface
 {
     /**

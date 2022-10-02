@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Filesystem;
+namespace ConfigTransformer202210\Symfony\Component\Filesystem;
 
-use ConfigTransformer202209\Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use ConfigTransformer202209\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use ConfigTransformer202209\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202210\Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use ConfigTransformer202210\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use ConfigTransformer202210\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * Provides basic utility to manipulate the file system.
  *

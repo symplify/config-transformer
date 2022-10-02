@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202209\Symfony\Component\Console\Completion;
+namespace ConfigTransformer202210\Symfony\Component\Console\Completion;
 
-use ConfigTransformer202209\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202210\Symfony\Component\Console\Input\InputOption;
 /**
  * Stores all completion suggestions for the current input.
  *
