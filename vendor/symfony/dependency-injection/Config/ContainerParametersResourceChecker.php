@@ -18,6 +18,9 @@ use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerInter
  */
 class ContainerParametersResourceChecker implements ResourceCheckerInterface
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     private $container;
     public function __construct(ContainerInterface $container)
     {

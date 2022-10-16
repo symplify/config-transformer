@@ -11,6 +11,7 @@
 namespace ConfigTransformer202210\Symfony\Component\Cache\Traits;
 
 use ConfigTransformer202210\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -20,7 +21,7 @@ use ConfigTransformer202210\Symfony\Component\Cache\Exception\CacheException;
 trait FilesystemTrait
 {
     use FilesystemCommonTrait;
-    private $marshaller;
+    private MarshallerInterface $marshaller;
     public function prune() : bool
     {
         $time = \time();

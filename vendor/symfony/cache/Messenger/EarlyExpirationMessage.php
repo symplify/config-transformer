@@ -18,7 +18,7 @@ use ConfigTransformer202210\Symfony\Component\DependencyInjection\ReverseContain
  */
 final class EarlyExpirationMessage
 {
-    private $item;
+    private CacheItem $item;
     private string $pool;
     private string|array $callback;
     public static function create(ReverseContainer $reverseContainer, callable $callback, CacheItem $item, AdapterInterface $pool) : ?self
@@ -26,7 +26,7 @@ final class EarlyExpirationMessage
         try {
             $item = clone $item;
             $item->set(null);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return null;
         }
         $pool = $reverseContainer->getId($pool);

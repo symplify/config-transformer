@@ -29,9 +29,9 @@ class MemcachedAdapter extends AbstractAdapter
     private const RESERVED_PSR6 = '@()\\{}/';
     protected $maxIdLength = 250;
     private const DEFAULT_CLIENT_OPTIONS = ['persistent_id' => null, 'username' => null, 'password' => null, \Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_PHP];
-    private $marshaller;
-    private $client;
-    private $lazyClient;
+    private MarshallerInterface $marshaller;
+    private \Memcached $client;
+    private \Memcached $lazyClient;
     /**
      * Using a MemcachedAdapter with a TagAwareAdapter for storing tags is discouraged.
      * Using a RedisAdapter is recommended instead. If you cannot do otherwise, be aware that:

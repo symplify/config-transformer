@@ -10,11 +10,14 @@
  */
 namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument;
 
+trigger_deprecation('symfony/dependency-injection', '6.1', '"%s" is deprecated.', ReferenceSetArgumentTrait::class);
 use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
+ *
+ * @deprecated since Symfony 6.1
  */
 trait ReferenceSetArgumentTrait
 {

@@ -27,6 +27,9 @@ use ConfigTransformer202210\Symfony\Component\Console\Formatter\OutputFormatterI
  */
 class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
 {
+    /**
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
     private $stderr;
     /**
      * @var mixed[]

@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Symplify\\PhpConfigPrinter\\' => array($vendorDir . '/symplify/php-config-printer/src'),
     'Symplify\\ConfigTransformer\\' => array($baseDir . '/src'),
-    'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Intl\\Normalizer\\' => array($vendorDir . '/symfony/polyfill-intl-normalizer'),
     'Symfony\\Polyfill\\Intl\\Grapheme\\' => array($vendorDir . '/symfony/polyfill-intl-grapheme'),

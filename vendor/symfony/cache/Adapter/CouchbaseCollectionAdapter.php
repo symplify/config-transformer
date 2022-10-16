@@ -26,8 +26,8 @@ use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\MarshallerInterfa
 class CouchbaseCollectionAdapter extends AbstractAdapter
 {
     private const MAX_KEY_LENGTH = 250;
-    private $connection;
-    private $marshaller;
+    private Collection $connection;
+    private MarshallerInterface $marshaller;
     public function __construct(Collection $connection, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
@@ -57,7 +57,7 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
             $username = $options['username'] ?? '';
             $password = $options['password'] ?? '';
             foreach ($dsn as $server) {
-                if (0 !== \strpos($server, 'couchbase:')) {
+                if (!\str_starts_with($server, 'couchbase:')) {
                     throw new InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $server));
                 }
                 \preg_match($dsnPattern, $server, $matches);
@@ -111,7 +111,7 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
         foreach ($ids as $id) {
             try {
                 $resultCouchbase = $this->connection->get($id);
-            } catch (DocumentNotFoundException $exception) {
+            } catch (DocumentNotFoundException) {
                 continue;
             }
             $content = $resultCouchbase->value ?? $resultCouchbase->content();
@@ -145,7 +145,7 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
                 if (null === $result->mutationToken()) {
                     $idsErrors[] = $id;
                 }
-            } catch (DocumentNotFoundException $exception) {
+            } catch (DocumentNotFoundException) {
             }
         }
         return 0 === \count($idsErrors);
@@ -164,7 +164,7 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
         foreach ($values as $key => $value) {
             try {
                 $this->connection->upsert($key, $value, $upsertOptions);
-            } catch (\Exception $exception) {
+            } catch (\Exception) {
                 $ko[$key] = '';
             }
         }

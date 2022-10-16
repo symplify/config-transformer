@@ -29,8 +29,8 @@ use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\MarshallerInterfa
 trait RedisTrait
 {
     private static array $defaultConnectionOptions = ['class' => null, 'persistent' => 0, 'persistent_id' => null, 'timeout' => 30, 'read_timeout' => 0, 'retry_interval' => 0, 'tcp_keepalive' => 0, 'lazy' => null, 'redis_cluster' => \false, 'redis_sentinel' => null, 'dbindex' => 0, 'failover' => 'none', 'ssl' => null];
-    private $redis;
-    private $marshaller;
+    private \Redis|\RedisArray|\RedisCluster|\ConfigTransformer202210\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis;
+    private MarshallerInterface $marshaller;
     private function init(\Redis|\RedisArray|\RedisCluster|\ConfigTransformer202210\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis, string $namespace, int $defaultLifetime, ?MarshallerInterface $marshaller)
     {
         parent::__construct($namespace, $defaultLifetime);
@@ -73,9 +73,13 @@ trait RedisTrait
         if (!\extension_loaded('redis') && !\class_exists(\ConfigTransformer202210\Predis\Client::class)) {
             throw new CacheException(\sprintf('Cannot find the "redis" extension nor the "predis/predis" package: "%s".', $dsn));
         }
-        $params = \preg_replace_callback('#^' . $scheme . ':(//)?(?:(?:[^:@]*+:)?([^@]*+)@)?#', function ($m) use(&$auth) {
-            if (isset($m[2])) {
-                $auth = $m[2];
+        $params = \preg_replace_callback('#^' . $scheme . ':(//)?(?:(?:(?<user>[^:@]*+):)?(?<password>[^@]*+)@)?#', function ($m) use(&$auth) {
+            if (isset($m['password'])) {
+                if (\in_array($m['user'], ['', 'default'], \true)) {
+                    $auth = $m['password'];
+                } else {
+                    $auth = [$m['user'], $m['password']];
+                }
                 if ('' === $auth) {
                     $auth = null;
                 }
@@ -198,16 +202,11 @@ trait RedisTrait
             }
         } elseif (\is_a($class, \RedisArray::class, \true)) {
             foreach ($hosts as $i => $host) {
-                switch ($host['scheme']) {
-                    case 'tcp':
-                        $hosts[$i] = $host['host'] . ':' . $host['port'];
-                        break;
-                    case 'tls':
-                        $hosts[$i] = 'tls://' . $host['host'] . ':' . $host['port'];
-                        break;
-                    default:
-                        $hosts[$i] = $host['path'];
-                }
+                $hosts[$i] = match ($host['scheme']) {
+                    'tcp' => $host['host'] . ':' . $host['port'],
+                    'tls' => 'tls://' . $host['host'] . ':' . $host['port'],
+                    default => $host['path'],
+                };
             }
             $params['lazy_connect'] = $params['lazy'] ?? \true;
             $params['connect_timeout'] = $params['timeout'];
@@ -222,16 +221,11 @@ trait RedisTrait
         } elseif (\is_a($class, \RedisCluster::class, \true)) {
             $initializer = static function () use($class, $params, $dsn, $hosts) {
                 foreach ($hosts as $i => $host) {
-                    switch ($host['scheme']) {
-                        case 'tcp':
-                            $hosts[$i] = $host['host'] . ':' . $host['port'];
-                            break;
-                        case 'tls':
-                            $hosts[$i] = 'tls://' . $host['host'] . ':' . $host['port'];
-                            break;
-                        default:
-                            $hosts[$i] = $host['path'];
-                    }
+                    $hosts[$i] = match ($host['scheme']) {
+                        'tcp' => $host['host'] . ':' . $host['port'],
+                        'tls' => 'tls://' . $host['host'] . ':' . $host['port'],
+                        default => $host['path'],
+                    };
                 }
                 try {
                     $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent'], $params['auth'] ?? '', ...\defined('Redis::SCAN_PREFIX') ? [$params['ssl'] ?? null] : []);
@@ -268,7 +262,13 @@ trait RedisTrait
                 $params['parameters']['database'] = $params['dbindex'];
             }
             if (null !== $auth) {
-                $params['parameters']['password'] = $auth;
+                if (\is_array($auth)) {
+                    // ACL
+                    $params['parameters']['username'] = $auth[0];
+                    $params['parameters']['password'] = $auth[1];
+                } else {
+                    $params['parameters']['password'] = $auth;
+                }
             }
             if (1 === \count($hosts) && !($params['redis_cluster'] || $params['redis_sentinel'])) {
                 $hosts = $hosts[0];
@@ -390,7 +390,7 @@ trait RedisTrait
         }
         if ($this->redis instanceof \ConfigTransformer202210\Predis\ClientInterface && $this->redis->getConnection() instanceof ClusterInterface) {
             static $del;
-            $del = $del ?? (\class_exists(UNLINK::class) ? 'unlink' : 'del');
+            $del ??= \class_exists(UNLINK::class) ? 'unlink' : 'del';
             $this->pipeline(function () use($ids, $del) {
                 foreach ($ids as $id) {
                     (yield $del => [$id]);
@@ -401,7 +401,7 @@ trait RedisTrait
             if ($unlink) {
                 try {
                     $unlink = \false !== $this->redis->unlink($ids);
-                } catch (\Throwable $e) {
+                } catch (\Throwable) {
                     $unlink = \false;
                 }
             }
@@ -438,7 +438,7 @@ trait RedisTrait
     private function pipeline(\Closure $generator, object $redis = null) : \Generator
     {
         $ids = [];
-        $redis = $redis ?? $this->redis;
+        $redis ??= $this->redis;
         if ($redis instanceof RedisClusterProxy || $redis instanceof \RedisCluster || $redis instanceof \ConfigTransformer202210\Predis\ClientInterface && $redis->getConnection() instanceof RedisCluster) {
             // phpredis & predis don't support pipelining with RedisCluster
             // see https://github.com/phpredis/phpredis/blob/develop/cluster.markdown#pipelining

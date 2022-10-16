@@ -36,8 +36,9 @@ class UnaryNode extends Node
                 return !$value;
             case '-':
                 return -$value;
+            default:
+                return $value;
         }
-        return $value;
     }
     public function toArray() : array
     {

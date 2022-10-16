@@ -146,7 +146,7 @@ EOLUA;
             }
             try {
                 (yield $id => !\is_string($result) || '' === $result ? [] : $this->marshaller->unmarshall($result));
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 (yield $id => []);
             }
         }

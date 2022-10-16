@@ -24,7 +24,7 @@ namespace ConfigTransformer202210\Symfony\Component\Cache\Traits;
 class RedisClusterNodeProxy
 {
     private array $host;
-    private $redis;
+    private \RedisCluster|RedisClusterProxy $redis;
     public function __construct(array $host, \RedisCluster|RedisClusterProxy $redis)
     {
         $this->host = $host;

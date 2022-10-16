@@ -49,8 +49,8 @@ class ExpressionFunction
     public function __construct(string $name, callable $compiler, callable $evaluator)
     {
         $this->name = $name;
-        $this->compiler = $compiler instanceof \Closure ? $compiler : \Closure::fromCallable($compiler);
-        $this->evaluator = $evaluator instanceof \Closure ? $evaluator : \Closure::fromCallable($evaluator);
+        $this->compiler = \Closure::fromCallable($compiler);
+        $this->evaluator = \Closure::fromCallable($evaluator);
     }
     public function getName() : string
     {

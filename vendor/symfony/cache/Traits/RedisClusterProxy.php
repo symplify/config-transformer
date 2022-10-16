@@ -17,7 +17,7 @@ namespace ConfigTransformer202210\Symfony\Component\Cache\Traits;
  */
 class RedisClusterProxy
 {
-    private $redis;
+    private \Redis|\RedisArray|\RedisCluster|\ConfigTransformer202210\Predis\ClientInterface|RedisProxy $redis;
     private \Closure $initializer;
     public function __construct(\Closure $initializer)
     {

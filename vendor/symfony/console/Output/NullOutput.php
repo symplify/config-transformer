@@ -22,6 +22,9 @@ use ConfigTransformer202210\Symfony\Component\Console\Formatter\OutputFormatterI
  */
 class NullOutput implements OutputInterface
 {
+    /**
+     * @var \Symfony\Component\Console\Formatter\NullOutputFormatter
+     */
     private $formatter;
     /**
      * {@inheritdoc}

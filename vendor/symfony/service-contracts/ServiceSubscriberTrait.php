@@ -11,6 +11,7 @@
 namespace ConfigTransformer202210\Symfony\Contracts\Service;
 
 use ConfigTransformer202210\Psr\Container\ContainerInterface;
+use ConfigTransformer202210\Symfony\Contracts\Service\Attribute\Required;
 use ConfigTransformer202210\Symfony\Contracts\Service\Attribute\SubscribedService;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from

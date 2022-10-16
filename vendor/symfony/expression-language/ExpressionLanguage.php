@@ -21,9 +21,21 @@ use ConfigTransformer202210\Symfony\Component\Cache\Adapter\ArrayAdapter;
  */
 class ExpressionLanguage
 {
+    /**
+     * @var \Psr\Cache\CacheItemPoolInterface
+     */
     private $cache;
+    /**
+     * @var \Symfony\Component\ExpressionLanguage\Lexer
+     */
     private $lexer;
+    /**
+     * @var \Symfony\Component\ExpressionLanguage\Parser
+     */
     private $parser;
+    /**
+     * @var \Symfony\Component\ExpressionLanguage\Compiler
+     */
     private $compiler;
     /**
      * @var mixed[]

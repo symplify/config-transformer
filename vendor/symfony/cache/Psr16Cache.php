@@ -25,9 +25,9 @@ use ConfigTransformer202210\Symfony\Component\Cache\Traits\ProxyTrait;
 class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterface
 {
     use ProxyTrait;
-    private const METADATA_EXPIRY_OFFSET = 1527506807;
     private ?\Closure $createCacheItem = null;
-    private $cacheItemPrototype = null;
+    private ?CacheItem $cacheItemPrototype = null;
+    private static \Closure $packCacheItem;
     public function __construct(CacheItemPoolInterface $pool)
     {
         $this->pool = $pool;
@@ -55,6 +55,10 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
             $this->createCacheItem = $createCacheItem;
             return $createCacheItem($key, null, $allowInt)->set($value);
         };
+        self::$packCacheItem ??= \Closure::bind(static function (CacheItem $item) {
+            $item->newMetadata = $item->metadata;
+            return $item->pack();
+        }, null, CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -140,18 +144,7 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
             return $values;
         }
         foreach ($items as $key => $item) {
-            if (!$item->isHit()) {
-                $values[$key] = $default;
-                continue;
-            }
-            $values[$key] = $item->get();
-            if (!($metadata = $item->getMetadata())) {
-                continue;
-            }
-            unset($metadata[CacheItem::METADATA_TAGS]);
-            if ($metadata) {
-                $values[$key] = ["\x9d" . \pack('VN', (int) (0.1 + $metadata[CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
-            }
+            $values[$key] = $item->isHit() ? (self::$packCacheItem)($item) : $default;
         }
         return $values;
     }

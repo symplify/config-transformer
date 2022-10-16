@@ -23,8 +23,17 @@ use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\PhpFile
 class ServicesConfigurator extends AbstractConfigurator
 {
     public const FACTORY = 'services';
+    /**
+     * @var \Symfony\Component\DependencyInjection\Definition
+     */
     private $defaults;
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+     */
     private $container;
+    /**
+     * @var \Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+     */
     private $loader;
     /**
      * @var mixed[]

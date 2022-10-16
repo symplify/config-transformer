@@ -88,7 +88,7 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
             if ($value instanceof \Closure) {
                 return $value();
             }
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             unset($this->keys[$key]);
             goto get_from_pool;
         }
@@ -115,7 +115,7 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         } elseif ($value instanceof \Closure) {
             try {
                 $value = $value();
-            } catch (\Throwable $e) {
+            } catch (\Throwable) {
                 $value = null;
                 $isHit = \false;
             }
@@ -339,7 +339,7 @@ EOF;
                 } elseif ($value instanceof \Closure) {
                     try {
                         (yield $key => $f($key, $value(), \true));
-                    } catch (\Throwable $e) {
+                    } catch (\Throwable) {
                         (yield $key => $f($key, null, \false));
                     }
                 } else {

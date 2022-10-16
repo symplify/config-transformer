@@ -18,7 +18,7 @@ use ConfigTransformer202210\Symfony\Component\Cache\Exception\CacheException;
  */
 class DeflateMarshaller implements MarshallerInterface
 {
-    private $marshaller;
+    private MarshallerInterface $marshaller;
     public function __construct(MarshallerInterface $marshaller)
     {
         if (!\function_exists('gzdeflate')) {

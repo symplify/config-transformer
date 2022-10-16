@@ -20,6 +20,9 @@ use ConfigTransformer202210\Symfony\Component\Console\Exception\CommandNotFoundE
  */
 class ContainerCommandLoader implements CommandLoaderInterface
 {
+    /**
+     * @var \Psr\Container\ContainerInterface
+     */
     private $container;
     /**
      * @var mixed[]

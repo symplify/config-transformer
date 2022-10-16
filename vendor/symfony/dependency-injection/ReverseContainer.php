@@ -19,7 +19,13 @@ use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\Serv
  */
 final class ReverseContainer
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\Container
+     */
     private $serviceContainer;
+    /**
+     * @var \Psr\Container\ContainerInterface
+     */
     private $reversibleLocator;
     /**
      * @var string

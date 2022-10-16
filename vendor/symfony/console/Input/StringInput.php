@@ -22,6 +22,9 @@ use ConfigTransformer202210\Symfony\Component\Console\Exception\InvalidArgumentE
  */
 class StringInput extends ArgvInput
 {
+    /**
+     * @deprecated since Symfony 6.1
+     */
     public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
     public const REGEX_UNQUOTED_STRING = '([^\\s\\\\]+?)';
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';

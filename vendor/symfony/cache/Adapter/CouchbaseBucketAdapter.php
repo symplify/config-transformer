@@ -23,8 +23,8 @@ class CouchbaseBucketAdapter extends AbstractAdapter
     private const MAX_KEY_LENGTH = 250;
     private const KEY_NOT_FOUND = 13;
     private const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
-    private $bucket;
-    private $marshaller;
+    private \ConfigTransformer202210\CouchbaseBucket $bucket;
+    private MarshallerInterface $marshaller;
     public function __construct(\ConfigTransformer202210\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
@@ -55,7 +55,7 @@ class CouchbaseBucketAdapter extends AbstractAdapter
             $username = $options['username'];
             $password = $options['password'];
             foreach ($servers as $dsn) {
-                if (0 !== \strpos($dsn, 'couchbase:')) {
+                if (!\str_starts_with($dsn, 'couchbase:')) {
                     throw new InvalidArgumentException(\sprintf('Invalid Couchbase DSN: "%s" does not start with "couchbase:".', $dsn));
                 }
                 \preg_match($dsnPattern, $dsn, $matches);

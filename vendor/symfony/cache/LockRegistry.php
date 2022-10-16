@@ -70,7 +70,7 @@ final class LockRegistry
                 // race to get the lock in non-blocking mode
                 $locked = \flock($lock, \LOCK_EX | \LOCK_NB, $wouldBlock);
                 if ($locked || !$wouldBlock) {
-                    $logger && $logger->info(\sprintf('Lock %s, now computing item "{key}"', $locked ? 'acquired' : 'not supported'), ['key' => $item->getKey()]);
+                    $logger?->info(\sprintf('Lock %s, now computing item "{key}"', $locked ? 'acquired' : 'not supported'), ['key' => $item->getKey()]);
                     self::$lockedFiles[$key] = \true;
                     $value = $callback($item, $save);
                     if ($save) {
@@ -83,7 +83,7 @@ final class LockRegistry
                     return $value;
                 }
                 // if we failed the race, retry locking in blocking mode to wait for the winner
-                $logger && $logger->info('Item "{key}" is locked, waiting for it to be released', ['key' => $item->getKey()]);
+                $logger?->info('Item "{key}" is locked, waiting for it to be released', ['key' => $item->getKey()]);
                 \flock($lock, \LOCK_SH);
             } finally {
                 \flock($lock, \LOCK_UN);
@@ -91,14 +91,14 @@ final class LockRegistry
             }
             try {
                 $value = $pool->get($item->getKey(), self::$signalingCallback, 0);
-                $logger && $logger->info('Item "{key}" retrieved after lock was released', ['key' => $item->getKey()]);
+                $logger?->info('Item "{key}" retrieved after lock was released', ['key' => $item->getKey()]);
                 $save = \false;
                 return $value;
             } catch (\Exception $e) {
                 if (self::$signalingException !== $e) {
                     throw $e;
                 }
-                $logger && $logger->info('Item "{key}" not found while lock was released, now retrying', ['key' => $item->getKey()]);
+                $logger?->info('Item "{key}" not found while lock was released, now retrying', ['key' => $item->getKey()]);
             }
         }
         return null;

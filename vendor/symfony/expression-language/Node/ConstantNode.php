@@ -19,15 +19,21 @@ use ConfigTransformer202210\Symfony\Component\ExpressionLanguage\Compiler;
 class ConstantNode extends Node
 {
     /**
+     * @readonly
+     * @var bool
+     */
+    public $isNullSafe;
+    /**
      * @var bool
      */
     private $isIdentifier;
     /**
      * @param mixed $value
      */
-    public function __construct($value, bool $isIdentifier = \false)
+    public function __construct($value, bool $isIdentifier = \false, bool $isNullSafe = \false)
     {
         $this->isIdentifier = $isIdentifier;
+        $this->isNullSafe = $isNullSafe;
         parent::__construct([], ['value' => $value]);
     }
     public function compile(Compiler $compiler)

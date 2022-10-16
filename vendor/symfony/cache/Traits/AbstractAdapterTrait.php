@@ -148,7 +148,7 @@ trait AbstractAdapterTrait
             if ($this->doDelete($ids)) {
                 return \true;
             }
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
         $ok = \true;
         // When bulk-delete failed, retry each item individually

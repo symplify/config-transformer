@@ -18,7 +18,7 @@ use ConfigTransformer202210\Symfony\Component\Cache\Marshaller\MarshallerInterfa
  */
 class ApcuAdapter extends AbstractAdapter
 {
-    private $marshaller;
+    private ?MarshallerInterface $marshaller;
     /**
      * @throws CacheException if APCu is not enabled
      */

@@ -118,7 +118,7 @@ class PhpFilesAdapter extends AbstractAdapter implements PruneableInterface
             $getExpiry = \true;
             foreach ($missingIds as $k => $id) {
                 try {
-                    $file = $this->files[$id] ?? ($this->files[$id] = $this->getFile($id));
+                    $file = $this->files[$id] ??= $this->getFile($id);
                     if (isset(self::$valuesCache[$file])) {
                         [$expiresAt, $this->values[$id]] = self::$valuesCache[$file];
                     } elseif (\is_array($expiresAt = (include $file))) {
@@ -153,7 +153,7 @@ class PhpFilesAdapter extends AbstractAdapter implements PruneableInterface
         }
         \set_error_handler($this->includeHandler);
         try {
-            $file = $this->files[$id] ?? ($this->files[$id] = $this->getFile($id));
+            $file = $this->files[$id] ??= $this->getFile($id);
             $getExpiry = \true;
             if (isset(self::$valuesCache[$file])) {
                 [$expiresAt, $value] = self::$valuesCache[$file];
@@ -165,7 +165,7 @@ class PhpFilesAdapter extends AbstractAdapter implements PruneableInterface
             } elseif ($this->appendOnly) {
                 $value = new LazyValue($file);
             }
-        } catch (\ErrorException $e) {
+        } catch (\ErrorException) {
             return \false;
         } finally {
             \restore_error_handler();

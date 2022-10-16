@@ -17,7 +17,7 @@ namespace ConfigTransformer202210\Symfony\Component\Cache\Traits;
  */
 class RedisProxy
 {
-    private $redis;
+    private \Redis $redis;
     private \Closure $initializer;
     private bool $ready = \false;
     public function __construct(\Redis $redis, \Closure $initializer)

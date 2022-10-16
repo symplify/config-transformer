@@ -24,8 +24,8 @@ use ConfigTransformer202210\Symfony\Component\Cache\PruneableInterface;
 class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;
-    private $marshaller;
-    private $conn;
+    private MarshallerInterface $marshaller;
+    private Connection $conn;
     private string $platformName;
     private string $serverVersion;
     private string $table = 'cache_items';
@@ -117,7 +117,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         try {
             $this->conn->executeStatement($deleteSql, $params, $paramTypes);
-        } catch (TableNotFoundException $e) {
+        } catch (TableNotFoundException) {
         }
         return \true;
     }
@@ -167,7 +167,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         try {
             $this->conn->executeStatement($sql);
-        } catch (TableNotFoundException $e) {
+        } catch (TableNotFoundException) {
         }
         return \true;
     }
@@ -179,7 +179,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} IN (?)";
         try {
             $this->conn->executeStatement($sql, [\array_values($ids)], [Connection::PARAM_STR_ARRAY]);
-        } catch (TableNotFoundException $e) {
+        } catch (TableNotFoundException) {
         }
         return \true;
     }
@@ -221,7 +221,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         $lifetime = $lifetime ?: null;
         try {
             $stmt = $this->conn->prepare($sql);
-        } catch (TableNotFoundException $e) {
+        } catch (TableNotFoundException) {
             if (!$this->conn->isTransactionActive() || \in_array($platformName, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                 $this->createTable();
             }
@@ -256,7 +256,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         foreach ($values as $id => $data) {
             try {
                 $rowCount = $stmt->executeStatement();
-            } catch (TableNotFoundException $e) {
+            } catch (TableNotFoundException) {
                 if (!$this->conn->isTransactionActive() || \in_array($platformName, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                     $this->createTable();
                 }
@@ -265,7 +265,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             if (null === $platformName && 0 === $rowCount) {
                 try {
                     $insertStmt->executeStatement();
-                } catch (DBALException $e) {
+                } catch (DBALException) {
                     // A concurrent write won, let it be
                 }
             }
@@ -278,23 +278,14 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             return $this->platformName;
         }
         $platform = $this->conn->getDatabasePlatform();
-        switch (\true) {
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQLPlatform:
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQL57Platform:
-                return $this->platformName = 'mysql';
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SqlitePlatform:
-                return $this->platformName = 'sqlite';
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQLPlatform:
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQL94Platform:
-                return $this->platformName = 'pgsql';
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\OraclePlatform:
-                return $this->platformName = 'oci';
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServerPlatform:
-            case $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServer2012Platform:
-                return $this->platformName = 'sqlsrv';
-            default:
-                return $this->platformName = \get_class($platform);
-        }
+        return match (\true) {
+            $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQLPlatform, $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\MySQL57Platform => $this->platformName = 'mysql',
+            $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SqlitePlatform => $this->platformName = 'sqlite',
+            $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQLPlatform, $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\PostgreSQL94Platform => $this->platformName = 'pgsql',
+            $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\OraclePlatform => $this->platformName = 'oci',
+            $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServerPlatform, $platform instanceof \ConfigTransformer202210\Doctrine\DBAL\Platforms\SQLServer2012Platform => $this->platformName = 'sqlsrv',
+            default => $this->platformName = \get_class($platform),
+        };
     }
     private function getServerVersion() : string
     {

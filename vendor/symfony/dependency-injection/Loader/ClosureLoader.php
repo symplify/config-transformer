@@ -21,6 +21,9 @@ use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuild
  */
 class ClosureLoader extends Loader
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+     */
     private $container;
     public function __construct(ContainerBuilder $container, string $env = null)
     {

@@ -20,7 +20,7 @@ use ConfigTransformer202210\Symfony\Component\ExpressionLanguage\SyntaxError;
 class BinaryNode extends Node
 {
     private const OPERATORS = ['~' => '.', 'and' => '&&', 'or' => '||'];
-    private const FUNCTIONS = ['**' => 'pow', '..' => 'range', 'in' => 'in_array', 'not in' => '!in_array'];
+    private const FUNCTIONS = ['**' => 'pow', '..' => 'range', 'in' => 'in_array', 'not in' => '!in_array', 'contains' => 'str_contains', 'starts with' => 'str_starts_with', 'ends with' => 'str_ends_with'];
     public function __construct(string $operator, Node $left, Node $right)
     {
         parent::__construct(['left' => $left, 'right' => $right], ['operator' => $operator]);

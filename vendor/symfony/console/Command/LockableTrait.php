@@ -12,6 +12,7 @@ namespace ConfigTransformer202210\Symfony\Component\Console\Command;
 
 use ConfigTransformer202210\Symfony\Component\Console\Exception\LogicException;
 use ConfigTransformer202210\Symfony\Component\Lock\LockFactory;
+use ConfigTransformer202210\Symfony\Component\Lock\LockInterface;
 use ConfigTransformer202210\Symfony\Component\Lock\Store\FlockStore;
 use ConfigTransformer202210\Symfony\Component\Lock\Store\SemaphoreStore;
 /**
@@ -21,7 +22,10 @@ use ConfigTransformer202210\Symfony\Component\Lock\Store\SemaphoreStore;
  */
 trait LockableTrait
 {
-    private $lock = null;
+    /**
+     * @var \Symfony\Component\Lock\LockInterface|null
+     */
+    private $lock;
     /**
      * Locks a command.
      */

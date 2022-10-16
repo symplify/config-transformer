@@ -112,7 +112,6 @@ class Hydrator
         $propertySetters = [];
         foreach ($classReflector->getProperties() as $propertyReflector) {
             if (!$propertyReflector->isStatic()) {
-                $propertyReflector->setAccessible(\true);
                 $propertySetters[$propertyReflector->name] = \Closure::fromCallable([$propertyReflector, 'setValue']);
             }
         }
