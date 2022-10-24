@@ -39,7 +39,7 @@ class EnumNodeDefinition extends ScalarNodeDefinition
      *
      * @throws \RuntimeException
      */
-    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\ScalarNode
+    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\VariableNode
     {
         if (!isset($this->values)) {
             throw new \RuntimeException('You must call ->values() on enum nodes.');

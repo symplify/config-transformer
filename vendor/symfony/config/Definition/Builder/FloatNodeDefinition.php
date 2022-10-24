@@ -21,7 +21,7 @@ class FloatNodeDefinition extends NumericNodeDefinition
     /**
      * Instantiates a Node.
      */
-    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\ScalarNode
+    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\VariableNode
     {
         return new FloatNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
     }
