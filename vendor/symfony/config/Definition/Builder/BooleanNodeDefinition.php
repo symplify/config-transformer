@@ -30,7 +30,7 @@ class BooleanNodeDefinition extends ScalarNodeDefinition
     /**
      * Instantiate a Node.
      */
-    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\VariableNode
+    protected function instantiateNode() : \ConfigTransformer202210\Symfony\Component\Config\Definition\ScalarNode
     {
         return new BooleanNode($this->name, $this->parent, $this->pathSeparator);
     }
