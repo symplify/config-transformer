@@ -379,17 +379,17 @@
         },
         {
             "name": "symfony\/cache",
-            "version": "v6.1.5",
-            "version_normalized": "6.1.5.0",
+            "version": "v6.1.7",
+            "version_normalized": "6.1.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/cache.git",
-                "reference": "9ae74e40fde37aba127ad5db65c5193f41f86f95"
+                "reference": "ee5d5b88162684a1377706f9c25125e97685ee61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/9ae74e40fde37aba127ad5db65c5193f41f86f95",
-                "reference": "9ae74e40fde37aba127ad5db65c5193f41f86f95",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/ee5d5b88162684a1377706f9c25125e97685ee61",
+                "reference": "ee5d5b88162684a1377706f9c25125e97685ee61",
                 "shasum": ""
             },
             "require": {
@@ -423,7 +423,7 @@
                 "symfony\/messenger": "^5.4|^6.0",
                 "symfony\/var-dumper": "^5.4|^6.0"
             },
-            "time": "2022-09-08T09:34:40+00:00",
+            "time": "2022-10-28T16:23:08+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -458,7 +458,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v6.1.5"
+                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v6.1.7"
             },
             "funding": [
                 {
@@ -640,17 +640,17 @@
         },
         {
             "name": "symfony\/console",
-            "version": "v6.1.6",
-            "version_normalized": "6.1.6.0",
+            "version": "v6.1.7",
+            "version_normalized": "6.1.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/console.git",
-                "reference": "7fa3b9cf17363468795e539231a5c91b02b608fc"
+                "reference": "a1282bd0c096e0bdb8800b104177e2ce404d8815"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/7fa3b9cf17363468795e539231a5c91b02b608fc",
-                "reference": "7fa3b9cf17363468795e539231a5c91b02b608fc",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/a1282bd0c096e0bdb8800b104177e2ce404d8815",
+                "reference": "a1282bd0c096e0bdb8800b104177e2ce404d8815",
                 "shasum": ""
             },
             "require": {
@@ -685,7 +685,7 @@
                 "symfony\/lock": "",
                 "symfony\/process": ""
             },
-            "time": "2022-10-07T08:04:03+00:00",
+            "time": "2022-10-26T21:42:49+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -719,7 +719,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/console\/tree\/v6.1.6"
+                "source": "https:\/\/github.com\/symfony\/console\/tree\/v6.1.7"
             },
             "funding": [
                 {
@@ -1534,17 +1534,17 @@
         },
         {
             "name": "symfony\/string",
-            "version": "v6.1.6",
-            "version_normalized": "6.1.6.0",
+            "version": "v6.1.7",
+            "version_normalized": "6.1.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/string.git",
-                "reference": "7e7e0ff180d4c5a6636eaad57b65092014b61864"
+                "reference": "823f143370880efcbdfa2dbca946b3358c4707e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/string\/zipball\/7e7e0ff180d4c5a6636eaad57b65092014b61864",
-                "reference": "7e7e0ff180d4c5a6636eaad57b65092014b61864",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/string\/zipball\/823f143370880efcbdfa2dbca946b3358c4707e5",
+                "reference": "823f143370880efcbdfa2dbca946b3358c4707e5",
                 "shasum": ""
             },
             "require": {
@@ -1602,7 +1602,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/string\/tree\/v6.1.6"
+                "source": "https:\/\/github.com\/symfony\/string\/tree\/v6.1.7"
             },
             "funding": [
                 {
