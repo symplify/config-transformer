@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use ConfigTransformer202210\PhpParser\Node\Arg;
-use ConfigTransformer202210\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202210\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202210\PhpParser\Node\Stmt;
-use ConfigTransformer202210\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202210\Symplify\PackageBuilder\Strings\StringFormatConverter;
+use ConfigTransformer202211\PhpParser\Node\Arg;
+use ConfigTransformer202211\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202211\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202211\PhpParser\Node\Stmt;
+use ConfigTransformer202211\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202211\Symplify\PackageBuilder\Strings\StringFormatConverter;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\Enum\RouteOption;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;

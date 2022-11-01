@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\Symplify\SymplifyKernel\Exception;
+namespace ConfigTransformer202211\Symplify\SymplifyKernel\Exception;
 
 use Exception;
 /**

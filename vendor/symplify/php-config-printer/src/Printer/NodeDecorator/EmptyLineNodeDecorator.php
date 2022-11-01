@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use ConfigTransformer202210\PhpParser\Node;
-use ConfigTransformer202210\PhpParser\Node\Expr\Assign;
-use ConfigTransformer202210\PhpParser\Node\Expr\Closure;
-use ConfigTransformer202210\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202210\PhpParser\Node\Stmt;
-use ConfigTransformer202210\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202210\PhpParser\Node\Stmt\Nop;
+use ConfigTransformer202211\PhpParser\Node;
+use ConfigTransformer202211\PhpParser\Node\Expr\Assign;
+use ConfigTransformer202211\PhpParser\Node\Expr\Closure;
+use ConfigTransformer202211\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202211\PhpParser\Node\Stmt;
+use ConfigTransformer202211\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202211\PhpParser\Node\Stmt\Nop;
 use Symplify\PhpConfigPrinter\Exception\ShouldNotHappenException;
 use Symplify\PhpConfigPrinter\NodeFinder\TypeAwareNodeFinder;
 final class EmptyLineNodeDecorator

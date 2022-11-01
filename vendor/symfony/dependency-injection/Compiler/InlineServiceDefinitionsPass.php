@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inline service definitions where this is possible.
  *

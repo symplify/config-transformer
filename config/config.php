@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210;
+namespace ConfigTransformer202211;
 
-use ConfigTransformer202210\PhpParser\BuilderFactory;
-use ConfigTransformer202210\PhpParser\NodeFinder;
-use ConfigTransformer202210\SebastianBergmann\Diff\Differ;
-use ConfigTransformer202210\Symfony\Component\Console\Application;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202210\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202211\PhpParser\BuilderFactory;
+use ConfigTransformer202211\PhpParser\NodeFinder;
+use ConfigTransformer202211\SebastianBergmann\Diff\Differ;
+use ConfigTransformer202211\Symfony\Component\Console\Application;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202211\Symfony\Component\Yaml\Parser;
 use Symplify\ConfigTransformer\Console\ConfigTransformerApplication;
-use ConfigTransformer202210\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
-use ConfigTransformer202210\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use ConfigTransformer202210\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use ConfigTransformer202210\Symplify\PackageBuilder\Yaml\ParametersMerger;
-use ConfigTransformer202210\Symplify\SmartFileSystem\FileSystemFilter;
+use ConfigTransformer202211\Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
+use ConfigTransformer202211\Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use ConfigTransformer202211\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202211\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202211\Symplify\SmartFileSystem\FileSystemFilter;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

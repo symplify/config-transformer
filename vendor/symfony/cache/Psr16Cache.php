@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Cache;
+namespace ConfigTransformer202211\Symfony\Component\Cache;
 
-use ConfigTransformer202210\Psr\Cache\CacheException as Psr6CacheException;
-use ConfigTransformer202210\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202210\Psr\SimpleCache\CacheException as SimpleCacheException;
-use ConfigTransformer202210\Psr\SimpleCache\CacheInterface;
-use ConfigTransformer202210\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer202210\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202210\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202211\Psr\Cache\CacheException as Psr6CacheException;
+use ConfigTransformer202211\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202211\Psr\SimpleCache\CacheException as SimpleCacheException;
+use ConfigTransformer202211\Psr\SimpleCache\CacheInterface;
+use ConfigTransformer202211\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202211\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-6 cache into a PSR-16 one.
  *

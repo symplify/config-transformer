@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use ConfigTransformer202210\Nette\Utils\Strings;
-use ConfigTransformer202210\PhpParser\BuilderHelpers;
-use ConfigTransformer202210\PhpParser\Node\Arg;
-use ConfigTransformer202210\PhpParser\Node\Expr;
-use ConfigTransformer202210\PhpParser\Node\Expr\ClassConstFetch;
-use ConfigTransformer202210\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202210\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202210\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202211\Nette\Utils\Strings;
+use ConfigTransformer202211\PhpParser\BuilderHelpers;
+use ConfigTransformer202211\PhpParser\Node\Arg;
+use ConfigTransformer202211\PhpParser\Node\Expr;
+use ConfigTransformer202211\PhpParser\Node\Expr\ClassConstFetch;
+use ConfigTransformer202211\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202211\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202211\PhpParser\Node\Scalar\String_;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;

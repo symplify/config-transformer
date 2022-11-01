@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Yaml;
+namespace ConfigTransformer202211\Symfony\Component\Yaml;
 
-use ConfigTransformer202210\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202210\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202211\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202211\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Parser parses YAML strings to convert them to PHP arrays.
  *

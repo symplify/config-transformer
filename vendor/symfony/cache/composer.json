@@ -51,7 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ConfigTransformer202210\\Symfony\\Component\\Cache\\": ""
+            "ConfigTransformer202211\\Symfony\\Component\\Cache\\": ""
         },
         "classmap": [
             "Traits\/ValueWrapper.php"

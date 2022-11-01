@@ -3,19 +3,19 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Converter;
 
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
-use ConfigTransformer202210\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Dumper\YamlDumper;
+use ConfigTransformer202211\Symfony\Component\Yaml\Yaml;
 use Symplify\ConfigTransformer\Collector\XmlImportCollector;
 use Symplify\ConfigTransformer\ConfigLoader;
 use Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
-use ConfigTransformer202210\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use ConfigTransformer202210\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202211\Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use ConfigTransformer202211\Symplify\PackageBuilder\Yaml\ParametersMerger;
 use Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use ConfigTransformer202210\Symplify\SmartFileSystem\SmartFileInfo;
-use ConfigTransformer202210\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
+use ConfigTransformer202211\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202211\Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ConfigFormatConverter
 {
     /**

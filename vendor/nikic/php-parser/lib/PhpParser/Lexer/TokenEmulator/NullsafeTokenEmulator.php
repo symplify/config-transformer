@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202211\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202210\PhpParser\Lexer\Emulative;
+use ConfigTransformer202211\PhpParser\Lexer\Emulative;
 final class NullsafeTokenEmulator extends TokenEmulator
 {
     public function getPhpVersion() : string

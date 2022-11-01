@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use ConfigTransformer202210\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202210\PhpParser\Node\Identifier;
+use ConfigTransformer202211\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202211\PhpParser\Node\Identifier;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;

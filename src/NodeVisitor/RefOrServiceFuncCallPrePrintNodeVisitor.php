@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\NodeVisitor;
 
-use ConfigTransformer202210\PhpParser\Node;
-use ConfigTransformer202210\PhpParser\Node\Expr\FuncCall;
-use ConfigTransformer202210\PhpParser\Node\Name;
-use ConfigTransformer202210\PhpParser\Node\Name\FullyQualified;
-use ConfigTransformer202210\PhpParser\Node\Stmt;
-use ConfigTransformer202210\PhpParser\NodeVisitorAbstract;
+use ConfigTransformer202211\PhpParser\Node;
+use ConfigTransformer202211\PhpParser\Node\Expr\FuncCall;
+use ConfigTransformer202211\PhpParser\Node\Name;
+use ConfigTransformer202211\PhpParser\Node\Name\FullyQualified;
+use ConfigTransformer202211\PhpParser\Node\Stmt;
+use ConfigTransformer202211\PhpParser\NodeVisitorAbstract;
 use Symplify\ConfigTransformer\Composer\SymfonyDependencyInjectionVersionResolver;
 use Symplify\PhpConfigPrinter\Contract\NodeVisitor\PrePrintNodeVisitorInterface;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;

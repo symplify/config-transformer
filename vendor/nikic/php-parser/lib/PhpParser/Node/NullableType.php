@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Node;
+namespace ConfigTransformer202211\PhpParser\Node;
 
 class NullableType extends ComplexType
 {

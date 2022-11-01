@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Extension;
+namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Extension;
 
-use ConfigTransformer202210\Symfony\Component\Config\Builder\ConfigBuilderGenerator;
-use ConfigTransformer202210\Symfony\Component\Config\FileLocator;
-use ConfigTransformer202210\Symfony\Component\Config\Loader\DelegatingLoader;
-use ConfigTransformer202210\Symfony\Component\Config\Loader\LoaderResolver;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202211\Symfony\Component\Config\Builder\ConfigBuilderGenerator;
+use ConfigTransformer202211\Symfony\Component\Config\FileLocator;
+use ConfigTransformer202211\Symfony\Component\Config\Loader\DelegatingLoader;
+use ConfigTransformer202211\Symfony\Component\Config\Loader\LoaderResolver;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Config\Definition\Builder;
+namespace ConfigTransformer202211\Symfony\Component\Config\Definition\Builder;
 
-use ConfigTransformer202210\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This class provides a fluent interface for defining a node.
  *

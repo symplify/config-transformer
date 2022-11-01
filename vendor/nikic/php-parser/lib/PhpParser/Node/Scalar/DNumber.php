@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Node\Scalar;
+namespace ConfigTransformer202211\PhpParser\Node\Scalar;
 
-use ConfigTransformer202210\PhpParser\Node\Scalar;
+use ConfigTransformer202211\PhpParser\Node\Scalar;
 class DNumber extends Scalar
 {
     /** @var float Number value */

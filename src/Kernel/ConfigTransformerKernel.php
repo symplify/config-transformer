@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Kernel;
 
-use ConfigTransformer202210\Psr\Container\ContainerInterface;
+use ConfigTransformer202211\Psr\Container\ContainerInterface;
 use Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig;
-use ConfigTransformer202210\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+use ConfigTransformer202211\Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class ConfigTransformerKernel extends AbstractSymplifyKernel
 {
     /**

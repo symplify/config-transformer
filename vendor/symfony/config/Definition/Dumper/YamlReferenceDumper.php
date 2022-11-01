@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Config\Definition\Dumper;
+namespace ConfigTransformer202211\Symfony\Component\Config\Definition\Dumper;
 
-use ConfigTransformer202210\Symfony\Component\Config\Definition\ArrayNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\EnumNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\ScalarNode;
-use ConfigTransformer202210\Symfony\Component\Config\Definition\VariableNode;
-use ConfigTransformer202210\Symfony\Component\Yaml\Inline;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\ArrayNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\EnumNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\ScalarNode;
+use ConfigTransformer202211\Symfony\Component\Config\Definition\VariableNode;
+use ConfigTransformer202211\Symfony\Component\Yaml\Inline;
 /**
  * Dumps a Yaml reference configuration for the given configuration/node instance.
  *

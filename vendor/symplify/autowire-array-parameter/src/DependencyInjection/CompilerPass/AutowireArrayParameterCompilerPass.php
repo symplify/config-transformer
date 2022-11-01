@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
+namespace ConfigTransformer202211\Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
 
-use ConfigTransformer202210\Nette\Utils\Strings;
+use ConfigTransformer202211\Nette\Utils\Strings;
 use ReflectionClass;
 use ReflectionMethod;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202210\Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder;
-use ConfigTransformer202210\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
-use ConfigTransformer202210\Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
-use ConfigTransformer202210\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202211\Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder;
+use ConfigTransformer202211\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
+use ConfigTransformer202211\Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
+use ConfigTransformer202211\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
 /**
  * @inspiration https://github.com/nette/di/pull/178
  * @see \Symplify\AutowireArrayParameter\Tests\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPassTest
@@ -33,7 +33,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      * @noRector \Rector\Privatization\Rector\Property\ChangeReadOnlyPropertyWithDefaultValueToConstantRector
      * @noRector \Rector\Php55\Rector\String_\StringClassNameToClassConstantRector
      */
-    private $excludedFatalClasses = ['ConfigTransformer202210\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202210\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202210\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202210\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202210\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202210\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202210\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202210\\Sonata\\Twig\\Extension\\TemplateExtension', 'ConfigTransformer202210\\Symfony\\Component\\HttpKernel\\KernelInterface'];
+    private $excludedFatalClasses = ['ConfigTransformer202211\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202211\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202211\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202211\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202211\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202211\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202211\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202211\\Sonata\\Twig\\Extension\\TemplateExtension', 'ConfigTransformer202211\\Symfony\\Component\\HttpKernel\\KernelInterface'];
     /**
      * @var \Symplify\AutowireArrayParameter\DependencyInjection\DefinitionFinder
      */

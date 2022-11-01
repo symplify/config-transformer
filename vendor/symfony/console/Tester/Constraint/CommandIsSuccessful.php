@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Console\Tester\Constraint;
+namespace ConfigTransformer202211\Symfony\Component\Console\Tester\Constraint;
 
-use ConfigTransformer202210\PHPUnit\Framework\Constraint\Constraint;
-use ConfigTransformer202210\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202211\PHPUnit\Framework\Constraint\Constraint;
+use ConfigTransformer202211\Symfony\Component\Console\Command\Command;
 final class CommandIsSuccessful extends Constraint
 {
     /**

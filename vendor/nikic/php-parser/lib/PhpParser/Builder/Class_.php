@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Builder;
+namespace ConfigTransformer202211\PhpParser\Builder;
 
-use ConfigTransformer202210\PhpParser;
-use ConfigTransformer202210\PhpParser\BuilderHelpers;
-use ConfigTransformer202210\PhpParser\Node;
-use ConfigTransformer202210\PhpParser\Node\Name;
-use ConfigTransformer202210\PhpParser\Node\Stmt;
+use ConfigTransformer202211\PhpParser;
+use ConfigTransformer202211\PhpParser\BuilderHelpers;
+use ConfigTransformer202211\PhpParser\Node;
+use ConfigTransformer202211\PhpParser\Node\Name;
+use ConfigTransformer202211\PhpParser\Node\Stmt;
 class Class_ extends Declaration
 {
     protected $name;

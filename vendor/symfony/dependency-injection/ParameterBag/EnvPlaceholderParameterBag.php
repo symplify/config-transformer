@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

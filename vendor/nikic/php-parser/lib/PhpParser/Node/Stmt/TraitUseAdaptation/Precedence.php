@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace ConfigTransformer202211\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use ConfigTransformer202210\PhpParser\Node;
+use ConfigTransformer202211\PhpParser\Node;
 class Precedence extends Node\Stmt\TraitUseAdaptation
 {
     /** @var Node\Name[] Overwritten traits */

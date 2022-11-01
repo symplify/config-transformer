@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\Symplify\SymplifyKernel;
+namespace ConfigTransformer202211\Symplify\SymplifyKernel;
 
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202210\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface;
-use ConfigTransformer202210\Symplify\SymplifyKernel\DependencyInjection\LoadExtensionConfigsCompilerPass;
-use ConfigTransformer202210\Webmozart\Assert\Assert;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202211\Symplify\SymplifyKernel\Contract\Config\LoaderFactoryInterface;
+use ConfigTransformer202211\Symplify\SymplifyKernel\DependencyInjection\LoadExtensionConfigsCompilerPass;
+use ConfigTransformer202211\Webmozart\Assert\Assert;
 /**
  * @see \Symplify\SymplifyKernel\Tests\ContainerBuilderFactory\ContainerBuilderFactoryTest
  */

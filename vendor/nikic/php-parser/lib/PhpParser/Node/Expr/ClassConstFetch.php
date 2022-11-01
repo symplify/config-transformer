@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Node\Expr;
+namespace ConfigTransformer202211\PhpParser\Node\Expr;
 
-use ConfigTransformer202210\PhpParser\Node\Expr;
-use ConfigTransformer202210\PhpParser\Node\Identifier;
-use ConfigTransformer202210\PhpParser\Node\Name;
+use ConfigTransformer202211\PhpParser\Node\Expr;
+use ConfigTransformer202211\PhpParser\Node\Identifier;
+use ConfigTransformer202211\PhpParser\Node\Name;
 class ClassConstFetch extends Expr
 {
     /** @var Name|Expr Class name */

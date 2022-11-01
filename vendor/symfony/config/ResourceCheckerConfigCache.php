@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Config;
+namespace ConfigTransformer202211\Symfony\Component\Config;
 
-use ConfigTransformer202210\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202210\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202210\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202211\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202211\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202211\Symfony\Component\Filesystem\Filesystem;
 /**
  * ResourceCheckerConfigCache uses instances of ResourceCheckerInterface
  * to check whether cached data is still fresh.

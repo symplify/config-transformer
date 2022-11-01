@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202210\Nette\Utils;
+namespace ConfigTransformer202211\Nette\Utils;
 
-use ConfigTransformer202210\Nette;
-use ConfigTransformer202210\Nette\MemberAccessException;
+use ConfigTransformer202211\Nette;
+use ConfigTransformer202211\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */

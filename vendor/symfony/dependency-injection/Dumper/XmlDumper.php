@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\DependencyInjection\Dumper;
+namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Dumper;
 
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202210\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * XmlDumper dumps a service container as an XML string.
  *

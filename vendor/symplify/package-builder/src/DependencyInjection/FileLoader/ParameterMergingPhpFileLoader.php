@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\Symplify\PackageBuilder\DependencyInjection\FileLoader;
+namespace ConfigTransformer202211\Symplify\PackageBuilder\DependencyInjection\FileLoader;
 
-use ConfigTransformer202210\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202210\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202210\Symplify\PackageBuilder\Yaml\ParametersMerger;
+use ConfigTransformer202211\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202211\Symplify\PackageBuilder\Yaml\ParametersMerger;
 /**
  * @api
  *

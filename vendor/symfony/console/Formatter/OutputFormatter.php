@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202211\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202210\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Formatter class for console output.
  *

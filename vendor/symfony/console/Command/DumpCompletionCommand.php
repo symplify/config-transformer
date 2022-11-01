@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202210\Symfony\Component\Console\Command;
+namespace ConfigTransformer202211\Symfony\Component\Console\Command;
 
-use ConfigTransformer202210\Symfony\Component\Console\Attribute\AsCommand;
-use ConfigTransformer202210\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202210\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202210\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202210\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202210\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202210\Symfony\Component\Process\Process;
+use ConfigTransformer202211\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer202211\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202211\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202211\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202211\Symfony\Component\Process\Process;
 /**
  * Dumps the completion script for the current shell.
  *

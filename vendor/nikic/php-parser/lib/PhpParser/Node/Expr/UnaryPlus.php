@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202210\PhpParser\Node\Expr;
+namespace ConfigTransformer202211\PhpParser\Node\Expr;
 
-use ConfigTransformer202210\PhpParser\Node\Expr;
+use ConfigTransformer202211\PhpParser\Node\Expr;
 class UnaryPlus extends Expr
 {
     /** @var Expr Expression */
