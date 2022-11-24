@@ -133,9 +133,9 @@ final class ImportCaseConverter implements CaseConverterInterface
      */
     private function resolveExpr($value) : Expr
     {
-        $normalizedValue = $this->processNormalizedValue($value);
-        if ($normalizedValue instanceof Expr) {
-            return $normalizedValue;
+        $expr = $this->processNormalizedValue($value);
+        if ($expr instanceof Expr) {
+            return $expr;
         }
         if ($value === 'not_found') {
             return new String_('not_found');
@@ -144,11 +144,11 @@ final class ImportCaseConverter implements CaseConverterInterface
             [$className, $constantName] = \explode('::', $value);
             return new ClassConstFetch(new FullyQualified($className), $constantName);
         }
-        if (\is_string($value) && (\strncmp($value, '@', \strlen('@')) === 0) !== \false) {
+        if (\is_string($value) && \strncmp($value, '@', \strlen('@')) === 0) {
             return new String_($value);
         }
         $value = $this->replaceImportedFileSuffix($value);
-        if (\is_string($value) && (\strncmp($value, '%', \strlen('%')) === 0) !== \false) {
+        if (\is_string($value) && \strncmp($value, '%', \strlen('%')) === 0) {
             return new String_($value);
         }
         return $this->commonNodeFactory->createAbsoluteDirExpr($value);
