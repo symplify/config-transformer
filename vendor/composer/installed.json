@@ -1906,11 +1906,11 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "ab3ddf5284c9ceeaebda566e2429f7733514b566"
+                "reference": "6b9a8f9c87f6c33b65f665f11cf7ef1b5e14fb6f"
             },
             "require": {
                 "nette\/utils": "^3.2",
-                "nikic\/php-parser": "^4.15.1",
+                "nikic\/php-parser": "^4.15.2",
                 "php": ">=8.1",
                 "symfony\/yaml": "^6.1"
             },
