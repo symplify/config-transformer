@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Descriptor;
+namespace ConfigTransformer202212\Symfony\Component\Console\Descriptor;
 
-use ConfigTransformer202211\Symfony\Component\Console\Application;
-use ConfigTransformer202211\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Application;
+use ConfigTransformer202212\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
@@ -28,9 +28,6 @@ abstract class Descriptor implements DescriptorInterface
      * @var OutputInterface
      */
     protected $output;
-    /**
-     * {@inheritdoc}
-     */
     public function describe(OutputInterface $output, object $object, array $options = [])
     {
         $this->output = $output;

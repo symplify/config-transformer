@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Finder;
 
 use Symplify\ConfigTransformer\ValueObject\Configuration;
-use ConfigTransformer202211\Symplify\SmartFileSystem\Finder\SmartFinder;
-use ConfigTransformer202211\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202212\Symplify\SmartFileSystem\Finder\SmartFinder;
+use ConfigTransformer202212\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConfigFileFinder
 {
     /**

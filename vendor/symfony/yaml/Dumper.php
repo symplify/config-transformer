@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Yaml;
+namespace ConfigTransformer202212\Symfony\Component\Yaml;
 
-use ConfigTransformer202211\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202212\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Dumper dumps PHP variables to YAML strings.
  *

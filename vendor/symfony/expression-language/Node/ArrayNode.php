@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Node;
+namespace ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Node;
 
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Compiler;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Compiler;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
@@ -25,9 +25,7 @@ class ArrayNode extends Node
     }
     public function addElement(Node $value, Node $key = null)
     {
-        if (null === $key) {
-            $key = new ConstantNode(++$this->index);
-        }
+        $key = $key ?? new ConstantNode(++$this->index);
         \array_push($this->nodes, $key, $value);
     }
     /**

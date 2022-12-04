@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\PhpParser\Node\Expr;
+namespace ConfigTransformer202212\PhpParser\Node\Expr;
 
-use ConfigTransformer202211\PhpParser\Node\Expr;
+use ConfigTransformer202212\PhpParser\Node\Expr;
 class Yield_ extends Expr
 {
     /** @var null|Expr Key expression */

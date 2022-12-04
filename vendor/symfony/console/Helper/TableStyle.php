@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202212\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\LogicException;
 /**
  * Defines the styles for a Table.
  *

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202211\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202212\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';
@@ -48,7 +48,7 @@ abstract class AbstractConfigurator
     /**
      * Checks that a value is valid, optionally replacing Definition and Reference configurators by their configure value.
      *
-     * @param bool $allowServices whether Definition and Reference are allowed; by default, only scalars and arrays are
+     * @param bool $allowServices whether Definition and Reference are allowed; by default, only scalars, arrays and enum are
      *
      * @return mixed the value, optionally cast to a Definition/Reference
      * @param mixed $value
@@ -82,6 +82,7 @@ abstract class AbstractConfigurator
         switch (\true) {
             case null === $value:
             case \is_scalar($value):
+            case $value instanceof \UnitEnum:
                 return $value;
             case $value instanceof ArgumentInterface:
             case $value instanceof Definition:

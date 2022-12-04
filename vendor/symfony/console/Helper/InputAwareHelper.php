@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202212\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputAwareInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputAwareInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
 /**
  * An implementation of InputAwareInterface for Helpers.
  *
@@ -20,9 +20,6 @@ use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
 abstract class InputAwareHelper extends Helper implements InputAwareInterface
 {
     protected $input;
-    /**
-     * {@inheritdoc}
-     */
     public function setInput(InputInterface $input)
     {
         $this->input = $input;

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\VarExporter;
+namespace ConfigTransformer202212\Symfony\Component\VarExporter;
 
-use ConfigTransformer202211\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use ConfigTransformer202211\Symfony\Component\VarExporter\Internal\Exporter;
-use ConfigTransformer202211\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer202211\Symfony\Component\VarExporter\Internal\Registry;
-use ConfigTransformer202211\Symfony\Component\VarExporter\Internal\Values;
+use ConfigTransformer202212\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Exporter;
+use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Registry;
+use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *
@@ -31,7 +31,7 @@ final class VarExporter
      * Exports a serializable PHP value to PHP code.
      *
      * @param bool &$isStaticValue Set to true after execution if the provided value is static, false otherwise
-     * @param bool &$classes       Classes found in the value are added to this list as both keys and values
+     * @param bool &$foundClasses  Classes found in the value are added to this list as both keys and values
      *
      * @throws ExceptionInterface When the provided value cannot be serialized
      * @param mixed $value

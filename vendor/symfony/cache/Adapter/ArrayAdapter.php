@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202211\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202211\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -50,7 +50,7 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         $this->storeSerialized = $storeSerialized;
         $this->maxLifetime = $maxLifetime;
         $this->maxItems = $maxItems;
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit, $tags) {
+        self::$createCacheItem ??= \Closure::bind(static function ($key, $value, $isHit, $tags) {
             $item = new CacheItem();
             $item->key = $key;
             $item->value = $value;
@@ -59,11 +59,8 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
                 $item->metadata[CacheItem::METADATA_TAGS] = $tags;
             }
             return $item;
-        }, null, CacheItem::class));
+        }, null, CacheItem::class);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
         $item = $this->getItem($key);
@@ -78,16 +75,10 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         }
         return $item->get();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function delete(string $key) : bool
     {
         return $this->deleteItem($key);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function hasItem(mixed $key) : bool
     {
         if (\is_string($key) && isset($this->expiries[$key]) && $this->expiries[$key] > \microtime(\true)) {
@@ -102,9 +93,6 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         \assert('' !== CacheItem::validateKey($key));
         return isset($this->expiries[$key]) && !$this->deleteItem($key);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem
     {
         if (!($isHit = $this->hasItem($key))) {
@@ -118,26 +106,17 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         }
         return (self::$createCacheItem)($key, $value, $isHit, $this->tags[$key] ?? null);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItems(array $keys = []) : iterable
     {
         \assert(self::validateKeys($keys));
         return $this->generateItems($keys, \microtime(\true), self::$createCacheItem);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItem(mixed $key) : bool
     {
         \assert('' !== CacheItem::validateKey($key));
         unset($this->values[$key], $this->tags[$key], $this->expiries[$key]);
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         foreach ($keys as $key) {
@@ -145,9 +124,6 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function save(CacheItemInterface $item) : bool
     {
         if (!$item instanceof CacheItem) {
@@ -192,23 +168,14 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function saveDeferred(CacheItemInterface $item) : bool
     {
         return $this->save($item);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool
     {
         if ('' !== $prefix) {
@@ -244,9 +211,6 @@ class ArrayAdapter implements AdapterInterface, CacheInterface, LoggerAwareInter
         }
         return $values;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $this->clear();

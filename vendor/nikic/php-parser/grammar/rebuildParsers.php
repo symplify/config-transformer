@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202211;
+namespace ConfigTransformer202212;
 
 require __DIR__ . '/phpyLang.php';
 $grammarFileToName = [__DIR__ . '/php5.y' => 'Php5', __DIR__ . '/php7.y' => 'Php7'];

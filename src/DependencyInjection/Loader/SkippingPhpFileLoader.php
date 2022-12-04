@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * This is needed to avoid loading the PHP file.
  */

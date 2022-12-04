@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\Symplify\SmartFileSystem\Finder;
+namespace ConfigTransformer202212\Symplify\SmartFileSystem\Finder;
 
 use SplFileInfo;
-use ConfigTransformer202211\Symfony\Component\Finder\Finder as SymfonyFinder;
-use ConfigTransformer202211\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
-use ConfigTransformer202211\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202212\Symfony\Component\Finder\Finder as SymfonyFinder;
+use ConfigTransformer202212\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use ConfigTransformer202212\Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer\FinderSanitizerTest
  */

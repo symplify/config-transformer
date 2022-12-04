@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Yaml\Command;
+namespace ConfigTransformer202212\Symfony\Component\Yaml\Command;
 
-use ConfigTransformer202211\Symfony\Component\Console\Attribute\AsCommand;
-use ConfigTransformer202211\Symfony\Component\Console\CI\GithubActionReporter;
-use ConfigTransformer202211\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202211\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202211\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202211\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202211\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202211\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202212\Symfony\Component\Console\Attribute\AsCommand;
+use ConfigTransformer202212\Symfony\Component\Console\CI\GithubActionReporter;
+use ConfigTransformer202212\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202212\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202212\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202212\Symfony\Component\Yaml\Yaml;
 /**
  * Validates YAML files syntax and outputs encountered errors.
  *
@@ -60,9 +60,6 @@ class LintCommand extends Command
         $this->directoryIteratorProvider = null === $directoryIteratorProvider ? null : \Closure::fromCallable($directoryIteratorProvider);
         $this->isReadableProvider = null === $isReadableProvider ? null : \Closure::fromCallable($isReadableProvider);
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         $this->addArgument('filename', InputArgument::IS_ARRAY, 'A file, a directory or "-" for reading from STDIN')->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format')->addOption('exclude', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Path(s) to exclude')->addOption('parse-tags', null, InputOption::VALUE_NEGATABLE, 'Parse custom tags', null)->setHelp(<<<EOF

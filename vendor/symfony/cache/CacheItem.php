@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache;
+namespace ConfigTransformer202212\Symfony\Component\Cache;
 
-use ConfigTransformer202211\Psr\Log\LoggerInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\LogicException;
-use ConfigTransformer202211\Symfony\Contracts\Cache\ItemInterface;
+use ConfigTransformer202212\Psr\Log\LoggerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\LogicException;
+use ConfigTransformer202212\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -30,30 +30,19 @@ final class CacheItem implements ItemInterface
     protected ?ItemInterface $innerItem = null;
     protected ?string $poolHash = null;
     protected bool $isTaggable = \false;
-    /**
-     * {@inheritdoc}
-     */
     public function getKey() : string
     {
         return $this->key;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get() : mixed
     {
         return $this->value;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function isHit() : bool
     {
         return $this->isHit;
     }
     /**
-     * {@inheritdoc}
-     *
      * @return $this
      */
     public function set($value) : static
@@ -62,8 +51,6 @@ final class CacheItem implements ItemInterface
         return $this;
     }
     /**
-     * {@inheritdoc}
-     *
      * @return $this
      */
     public function expiresAt(?\DateTimeInterface $expiration) : static
@@ -72,8 +59,6 @@ final class CacheItem implements ItemInterface
         return $this;
     }
     /**
-     * {@inheritdoc}
-     *
      * @return $this
      */
     public function expiresAfter(mixed $time) : static
@@ -81,7 +66,7 @@ final class CacheItem implements ItemInterface
         if (null === $time) {
             $this->expiry = null;
         } elseif ($time instanceof \DateInterval) {
-            $this->expiry = \microtime(\true) + \DateTime::createFromFormat('U', 0)->add($time)->format('U.u');
+            $this->expiry = \microtime(\true) + \DateTimeImmutable::createFromFormat('U', 0)->add($time)->format('U.u');
         } elseif (\is_int($time)) {
             $this->expiry = $time + \microtime(\true);
         } else {
@@ -89,9 +74,6 @@ final class CacheItem implements ItemInterface
         }
         return $this;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function tag(mixed $tags) : static
     {
         if (!$this->isTaggable) {
@@ -119,9 +101,6 @@ final class CacheItem implements ItemInterface
         }
         return $this;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getMetadata() : array
     {
         return $this->metadata;

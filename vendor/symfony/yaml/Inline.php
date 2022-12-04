@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Yaml;
+namespace ConfigTransformer202212\Symfony\Component\Yaml;
 
-use ConfigTransformer202211\Symfony\Component\Yaml\Exception\DumpException;
-use ConfigTransformer202211\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202211\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202212\Symfony\Component\Yaml\Exception\DumpException;
+use ConfigTransformer202212\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202212\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Inline implements a YAML parser/dumper for the YAML inline syntax.
  *
@@ -86,7 +86,7 @@ class Inline
                 ++$i;
                 break;
             default:
-                $result = self::parseScalar($value, $flags, null, $i, null === $tag, $references);
+                $result = self::parseScalar($value, $flags, null, $i, \true, $references);
         }
         // some comments are allowed at the end
         if (\preg_replace('/\\s*#.*$/A', '', \substr($value, $i))) {
@@ -125,11 +125,7 @@ class Inline
                     return '!php/object ' . self::dump(\serialize($value));
                 }
                 if (Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \stdClass || $value instanceof \ArrayObject)) {
-                    $output = [];
-                    foreach ($value as $key => $val) {
-                        $output[] = \sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
-                    }
-                    return \sprintf('{ %s }', \implode(', ', $output));
+                    return self::dumpHashArray($value, $flags);
                 }
                 if (Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE & $flags) {
                     throw new DumpException('Object support when dumping a YAML file has been disabled.');
@@ -222,7 +218,16 @@ class Inline
             }
             return \sprintf('[%s]', \implode(', ', $output));
         }
-        // hash
+        return self::dumpHashArray($value, $flags);
+    }
+    /**
+     * Dumps hash array to a YAML string.
+     *
+     * @param array|\ArrayObject|\stdClass $value The hash array to dump
+     * @param int                          $flags A bit field of Yaml::DUMP_* constants to customize the dumped YAML string
+     */
+    private static function dumpHashArray($value, int $flags) : string
+    {
         $output = [];
         foreach ($value as $key => $val) {
             $output[] = \sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
@@ -392,7 +397,7 @@ class Inline
             if ($offsetBeforeKeyParsing === $i) {
                 throw new ParseException('Missing mapping key.', self::$parsedLineNumber + 1, $mapping);
             }
-            if ('!php/const' === $key) {
+            if ('!php/const' === $key || '!php/enum' === $key) {
                 $key .= ' ' . self::parseScalar($mapping, $flags, [':'], $i, \false);
                 $key = self::evaluateScalar($key, $flags);
             }
@@ -559,6 +564,35 @@ class Inline
                             throw new ParseException(\sprintf('The string "%s" could not be parsed as a constant. Did you forget to pass the "Yaml::PARSE_CONSTANT" flag to the parser?', $scalar), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
                         return null;
+                    case \strncmp($scalar, '!php/enum', \strlen('!php/enum')) === 0:
+                        if (self::$constantSupport) {
+                            if (!isset($scalar[11])) {
+                                throw new ParseException('Missing value for tag "!php/enum".', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            }
+                            $i = 0;
+                            $enum = self::parseScalar(\substr($scalar, 10), 0, null, $i, \false);
+                            if ($useValue = \substr_compare($enum, '->value', -\strlen('->value')) === 0) {
+                                $enum = \substr($enum, 0, -7);
+                            }
+                            if (!\defined($enum)) {
+                                throw new ParseException(\sprintf('The enum "%s" is not defined.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            }
+                            $value = \constant($enum);
+                            if (!$value instanceof \UnitEnum) {
+                                throw new ParseException(\sprintf('The string "%s" is not the name of a valid enum.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            }
+                            if (!$useValue) {
+                                return $value;
+                            }
+                            if (!$value instanceof \BackedEnum) {
+                                throw new ParseException(\sprintf('The enum "%s" defines no value next to its name.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            }
+                            return $value->value;
+                        }
+                        if (self::$exceptionOnInvalidType) {
+                            throw new ParseException(\sprintf('The string "%s" could not be parsed as an enum. Did you forget to pass the "Yaml::PARSE_CONSTANT" flag to the parser?', $scalar), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                        }
+                        return null;
                     case \strncmp($scalar, '!!float ', \strlen('!!float ')) === 0:
                         return (float) \substr($scalar, 8);
                     case \strncmp($scalar, '!!binary ', \strlen('!!binary ')) === 0:
@@ -571,7 +605,6 @@ class Inline
                     return -\octdec($value);
                 }
                 return \octdec($value);
-            // Optimize for returning strings.
             case \in_array($scalar[0], ['+', '-', '.'], \true) || \is_numeric($scalar[0]):
                 if (Parser::preg_match('{^[+-]?[0-9][0-9_]*$}', $scalar)) {
                     $scalar = \str_replace('_', '', $scalar);
@@ -594,7 +627,7 @@ class Inline
                         return (float) \str_replace('_', '', $scalar);
                     case Parser::preg_match(self::getTimestampRegex(), $scalar):
                         // When no timezone is provided in the parsed date, YAML spec says we must assume UTC.
-                        $time = new \DateTime($scalar, new \DateTimeZone('UTC'));
+                        $time = new \DateTimeImmutable($scalar, new \DateTimeZone('UTC'));
                         if (Yaml::PARSE_DATETIME & $flags) {
                             return $time;
                         }
@@ -623,7 +656,7 @@ class Inline
             throw new ParseException('Using the unquoted scalar value "!" is not supported. You must quote it.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
         // Is followed by a scalar and is a built-in tag
-        if ('' !== $tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], ['[', '{'], \true)) && ('!' === $tag[0] || 'str' === $tag || 'php/const' === $tag || 'php/object' === $tag)) {
+        if ('' !== $tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], ['[', '{'], \true)) && ('!' === $tag[0] || \in_array($tag, ['str', 'php/const', 'php/enum', 'php/object'], \true))) {
             // Manage in {@link self::evaluateScalar()}
             return null;
         }

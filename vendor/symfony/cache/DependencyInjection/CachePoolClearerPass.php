@@ -8,19 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\DependencyInjection;
+namespace ConfigTransformer202212\Symfony\Component\Cache\DependencyInjection;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
 class CachePoolClearerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         $container->getParameterBag()->remove('cache.prefix.seed');

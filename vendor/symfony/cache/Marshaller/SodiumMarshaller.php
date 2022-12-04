@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * Encrypt/decrypt values using Libsodium.
  *
@@ -41,9 +41,6 @@ class SodiumMarshaller implements MarshallerInterface
     {
         return \function_exists('sodium_crypto_box_seal');
     }
-    /**
-     * {@inheritdoc}
-     */
     public function marshall(array $values, ?array &$failed) : array
     {
         $encryptionKey = \sodium_crypto_box_publickey($this->decryptionKeys[0]);
@@ -53,9 +50,6 @@ class SodiumMarshaller implements MarshallerInterface
         }
         return $encryptedValues;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function unmarshall(string $value) : mixed
     {
         foreach ($this->decryptionKeys as $k) {

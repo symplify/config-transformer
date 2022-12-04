@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
 trait BindTrait
 {
     /**

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\PhpParser\Lexer\TokenEmulator;
+namespace ConfigTransformer202212\PhpParser\Lexer\TokenEmulator;
 
-use ConfigTransformer202211\PhpParser\Lexer\Emulative;
+use ConfigTransformer202212\PhpParser\Lexer\Emulative;
 final class AttributeEmulator extends TokenEmulator
 {
     public function getPhpVersion() : string

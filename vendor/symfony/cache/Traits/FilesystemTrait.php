@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -39,9 +39,6 @@ trait FilesystemTrait
         }
         return $pruned;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetch(array $ids) : iterable
     {
         $values = [];
@@ -65,17 +62,11 @@ trait FilesystemTrait
         }
         return $values;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doHave(string $id) : bool
     {
         $file = $this->getFile($id);
         return \is_file($file) && (@\filemtime($file) > \time() || $this->doFetch([$id]));
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doSave(array $values, int $lifetime) : array|bool
     {
         $expiresAt = $lifetime ? \time() + $lifetime : 0;

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
 \class_exists(CacheItem::class);
 /**
@@ -21,18 +21,10 @@ use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
  */
 interface AdapterInterface extends CacheItemPoolInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem;
     /**
-     * {@inheritdoc}
-     *
      * @return iterable<string, CacheItem>
      */
     public function getItems(array $keys = []) : iterable;
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool;
 }

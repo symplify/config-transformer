@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
-use ConfigTransformer202211\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ConfigTransformer202212\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
 use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 /**

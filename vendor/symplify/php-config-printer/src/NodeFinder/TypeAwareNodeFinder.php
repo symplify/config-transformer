@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFinder;
 
-use ConfigTransformer202211\PhpParser\Node;
-use ConfigTransformer202211\PhpParser\NodeFinder;
+use ConfigTransformer202212\PhpParser\Node;
+use ConfigTransformer202212\PhpParser\NodeFinder;
 /**
  * @api
  * @todo remove after https://github.com/nikic/PHP-Parser/pull/869 is released

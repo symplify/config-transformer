@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\PhpParser\Node\Expr;
+namespace ConfigTransformer202212\PhpParser\Node\Expr;
 
-use ConfigTransformer202211\PhpParser\Node;
-use ConfigTransformer202211\PhpParser\Node\Arg;
-use ConfigTransformer202211\PhpParser\Node\Expr;
-use ConfigTransformer202211\PhpParser\Node\Identifier;
-use ConfigTransformer202211\PhpParser\Node\VariadicPlaceholder;
+use ConfigTransformer202212\PhpParser\Node;
+use ConfigTransformer202212\PhpParser\Node\Arg;
+use ConfigTransformer202212\PhpParser\Node\Expr;
+use ConfigTransformer202212\PhpParser\Node\Identifier;
+use ConfigTransformer202212\PhpParser\Node\VariadicPlaceholder;
 class StaticCall extends CallLike
 {
     /** @var Node\Name|Expr Class name */

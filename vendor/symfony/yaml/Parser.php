@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Yaml;
+namespace ConfigTransformer202212\Symfony\Component\Yaml;
 
-use ConfigTransformer202211\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202211\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202212\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202212\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Parser parses YAML strings to convert them to PHP arrays.
  *
@@ -130,9 +130,7 @@ class Parser
         $this->lines = \explode("\n", $value);
         $this->numberOfParsedLines = \count($this->lines);
         $this->locallySkippedLineNumbers = [];
-        if (null === $this->totalNumberOfLines) {
-            $this->totalNumberOfLines = $this->numberOfParsedLines;
-        }
+        $this->totalNumberOfLines = $this->totalNumberOfLines ?? $this->numberOfParsedLines;
         if (!$this->moveToNextLine()) {
             return null;
         }
@@ -200,6 +198,9 @@ class Parser
                     \array_pop($this->refsBeingParsed);
                 }
             } elseif (self::preg_match('#^(?P<key>(?:![^\\s]++\\s++)?(?:' . Inline::REGEX_QUOTED_STRING . '|(?:!?!php/const:)?[^ \'"\\[\\{!].*?)) *\\:(( |\\t)++(?P<value>.+))?$#u', \rtrim($this->currentLine), $values) && (\strpos($values['key'], ' #') === \false || \in_array($values['key'][0], ['"', "'"]))) {
+                if (\strncmp($values['key'], '!php/const:', \strlen('!php/const:')) === 0) {
+                    trigger_deprecation('symfony/yaml', '6.2', 'YAML syntax for key "%s" is deprecated and replaced by "!php/const %s".', $values['key'], \substr($values['key'], 11));
+                }
                 if ($context && 'sequence' == $context) {
                     throw new ParseException('You cannot define a mapping item when in a sequence.', $this->currentLineNb + 1, $this->currentLine, $this->filename);
                 }
@@ -882,34 +883,12 @@ class Parser
      *
      * @throws ParseException on a PCRE internal error
      *
-     * @see preg_last_error()
-     *
      * @internal
      */
     public static function preg_match(string $pattern, string $subject, array &$matches = null, int $flags = 0, int $offset = 0) : int
     {
         if (\false === ($ret = \preg_match($pattern, $subject, $matches, $flags, $offset))) {
-            switch (\preg_last_error()) {
-                case \PREG_INTERNAL_ERROR:
-                    $error = 'Internal PCRE error.';
-                    break;
-                case \PREG_BACKTRACK_LIMIT_ERROR:
-                    $error = 'pcre.backtrack_limit reached.';
-                    break;
-                case \PREG_RECURSION_LIMIT_ERROR:
-                    $error = 'pcre.recursion_limit reached.';
-                    break;
-                case \PREG_BAD_UTF8_ERROR:
-                    $error = 'Malformed UTF-8 data.';
-                    break;
-                case \PREG_BAD_UTF8_OFFSET_ERROR:
-                    $error = 'Offset doesn\'t correspond to the begin of a valid UTF-8 code point.';
-                    break;
-                default:
-                    $error = 'Error.';
-                    break;
-            }
-            throw new ParseException($error);
+            throw new ParseException(\preg_last_error_msg());
         }
         return $ret;
     }

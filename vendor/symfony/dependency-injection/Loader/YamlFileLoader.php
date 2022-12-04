@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer202211\Symfony\Component\Yaml\Exception\ParseException;
-use ConfigTransformer202211\Symfony\Component\Yaml\Parser as YamlParser;
-use ConfigTransformer202211\Symfony\Component\Yaml\Tag\TaggedValue;
-use ConfigTransformer202211\Symfony\Component\Yaml\Yaml;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202212\Symfony\Component\Yaml\Exception\ParseException;
+use ConfigTransformer202212\Symfony\Component\Yaml\Parser as YamlParser;
+use ConfigTransformer202212\Symfony\Component\Yaml\Tag\TaggedValue;
+use ConfigTransformer202212\Symfony\Component\Yaml\Yaml;
 /**
  * YamlFileLoader loads YAML files service definitions.
  *
@@ -55,7 +55,6 @@ class YamlFileLoader extends FileLoader
     private $anonymousServicesSuffix;
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = \false;
     /**
-     * {@inheritdoc}
      * @param mixed $resource
      * @return mixed
      */
@@ -111,7 +110,6 @@ class YamlFileLoader extends FileLoader
         }
     }
     /**
-     * {@inheritdoc}
      * @param mixed $resource
      */
     public function supports($resource, string $type = null) : bool
@@ -215,11 +213,7 @@ class YamlFileLoader extends FileLoader
                 if (!\is_string($name) || '' === $name) {
                     throw new InvalidArgumentException(\sprintf('The tag name in "_defaults" must be a non-empty string in "%s".', $file));
                 }
-                foreach ($tag as $attribute => $value) {
-                    if (!\is_scalar($value) && null !== $value) {
-                        throw new InvalidArgumentException(\sprintf('Tag "%s", attribute "%s" in "_defaults" must be of a scalar-type in "%s". Check your YAML syntax.', $name, $attribute, $file));
-                    }
-                }
+                $this->validateAttributes(\sprintf('Tag "%s", attribute "%s" in "_defaults" must be of a scalar-type in "%s". Check your YAML syntax.', $name, '%s', $file), $tag);
             }
         }
         if (isset($defaults['bind'])) {
@@ -260,10 +254,7 @@ class YamlFileLoader extends FileLoader
         if (\is_array($service) && $this->isUsingShortSyntax($service)) {
             $service = ['arguments' => $service];
         }
-        if (null === $service) {
-            $service = [];
-        }
-        if (!\is_array($service)) {
+        if (!\is_array($service = $service ?? [])) {
             throw new InvalidArgumentException(\sprintf('A service definition must be an array or a string starting with "@" but "%s" found for service "%s" in "%s". Check your YAML syntax.', \get_debug_type($service), $id, $file));
         }
         if (isset($service['stack'])) {
@@ -466,11 +457,7 @@ class YamlFileLoader extends FileLoader
             if (!\is_string($name) || '' === $name) {
                 throw new InvalidArgumentException(\sprintf('The tag name for service "%s" in "%s" must be a non-empty string.', $id, $file));
             }
-            foreach ($tag as $attribute => $value) {
-                if (!\is_scalar($value) && null !== $value) {
-                    throw new InvalidArgumentException(\sprintf('A "tags" attribute must be of a scalar-type for service "%s", tag "%s", attribute "%s" in "%s". Check your YAML syntax.', $id, $name, $attribute, $file));
-                }
-            }
+            $this->validateAttributes(\sprintf('A "tags" attribute must be of a scalar-type for service "%s", tag "%s", attribute "%s" in "%s". Check your YAML syntax.', $id, $name, '%s', $file), $tag);
             $definition->addTag($name, $tag);
         }
         if (null !== ($decorates = $service['decorates'] ?? null)) {
@@ -532,7 +519,7 @@ class YamlFileLoader extends FileLoader
             }
             $exclude = $service['exclude'] ?? null;
             $namespace = $service['namespace'] ?? $id;
-            $this->registerClasses($definition, $namespace, $service['resource'], $exclude);
+            $this->registerClasses($definition, $namespace, $service['resource'], $exclude, $file);
         } else {
             $this->setDefinition($id, $definition);
         }
@@ -580,7 +567,7 @@ class YamlFileLoader extends FileLoader
      */
     protected function loadFile(string $file) : ?array
     {
-        if (!\class_exists(\ConfigTransformer202211\Symfony\Component\Yaml\Parser::class)) {
+        if (!\class_exists(\ConfigTransformer202212\Symfony\Component\Yaml\Parser::class)) {
             throw new RuntimeException('Unable to load YAML config files as the Symfony Yaml Component is not installed.');
         }
         if (!\stream_is_local($file)) {
@@ -657,10 +644,10 @@ class YamlFileLoader extends FileLoader
             if (\in_array($value->getTag(), ['tagged', 'tagged_iterator', 'tagged_locator'], \true)) {
                 $forLocator = 'tagged_locator' === $value->getTag();
                 if (\is_array($argument) && isset($argument['tag']) && $argument['tag']) {
-                    if ($diff = \array_diff(\array_keys($argument), ['tag', 'index_by', 'default_index_method', 'default_priority_method'])) {
-                        throw new InvalidArgumentException(\sprintf('"!%s" tag contains unsupported key "%s"; supported ones are "tag", "index_by", "default_index_method", and "default_priority_method".', $value->getTag(), \implode('", "', $diff)));
+                    if ($diff = \array_diff(\array_keys($argument), $supportedKeys = ['tag', 'index_by', 'default_index_method', 'default_priority_method', 'exclude'])) {
+                        throw new InvalidArgumentException(\sprintf('"!%s" tag contains unsupported key "%s"; supported ones are "%s".', $value->getTag(), \implode('", "', $diff), \implode('", "', $supportedKeys)));
                     }
-                    $argument = new TaggedIteratorArgument($argument['tag'], $argument['index_by'] ?? null, $argument['default_index_method'] ?? null, $forLocator, $argument['default_priority_method'] ?? null);
+                    $argument = new TaggedIteratorArgument($argument['tag'], $argument['index_by'] ?? null, $argument['default_index_method'] ?? null, $forLocator, $argument['default_priority_method'] ?? null, (array) ($argument['exclude'] ?? null));
                 } elseif (\is_string($argument) && $argument) {
                     $argument = new TaggedIteratorArgument($argument, null, null, $forLocator);
                 } else {
@@ -750,6 +737,16 @@ class YamlFileLoader extends FileLoader
         foreach ($definition as $key => $value) {
             if (!isset($keywords[$key])) {
                 throw new InvalidArgumentException(\sprintf('The configuration key "%s" is unsupported for definition "%s" in "%s". Allowed configuration keys are "%s".', $key, $id, $file, \implode('", "', $keywords)));
+            }
+        }
+    }
+    private function validateAttributes(string $message, array $attributes, string $prefix = '') : void
+    {
+        foreach ($attributes as $attribute => $value) {
+            if (\is_array($value)) {
+                $this->validateAttributes($message, $value, $attribute . '.');
+            } elseif (!\is_scalar($value ?? '')) {
+                throw new InvalidArgumentException(\sprintf($message, $prefix . $attribute));
             }
         }
     }

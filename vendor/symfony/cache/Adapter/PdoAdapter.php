@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Doctrine\DBAL\Connection;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Doctrine\DBAL\Connection;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
 class PdoAdapter extends AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;
@@ -107,9 +107,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
         };
         $conn->exec($sql);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function prune() : bool
     {
         $deleteSql = "DELETE FROM {$this->table} WHERE {$this->lifetimeCol} + {$this->timeCol} <= :time";
@@ -132,9 +129,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
             return \true;
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetch(array $ids) : iterable
     {
         $connection = $this->getConnection();
@@ -172,9 +166,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
             $stmt->execute();
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doHave(string $id) : bool
     {
         $connection = $this->getConnection();
@@ -185,9 +176,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
         $stmt->execute();
         return (bool) $stmt->fetchColumn();
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doClear(string $namespace) : bool
     {
         $conn = $this->getConnection();
@@ -206,9 +194,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doDelete(array $ids) : bool
     {
         $sql = \str_pad('', (\count($ids) << 1) - 1, '?,');
@@ -220,9 +205,6 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doSave(array $values, int $lifetime) : array|bool
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {

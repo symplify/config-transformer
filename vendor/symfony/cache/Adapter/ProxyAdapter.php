@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202211\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202211\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202212\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -59,12 +59,9 @@ class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterfa
         }, null, CacheItem::class);
         self::$setInnerItem ??= \Closure::bind(static function (CacheItemInterface $innerItem, CacheItem $item, $expiry = null) {
             $innerItem->set($item->pack());
-            $innerItem->expiresAt($expiry ?? $item->expiry ? \DateTime::createFromFormat('U.u', \sprintf('%.6F', $expiry ?? $item->expiry)) : null);
+            $innerItem->expiresAt($expiry ?? $item->expiry ? \DateTimeImmutable::createFromFormat('U.u', \sprintf('%.6F', $expiry ?? $item->expiry)) : null);
         }, null, CacheItem::class);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
         if (!$this->pool instanceof CacheInterface) {
@@ -77,17 +74,11 @@ class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterfa
             return $value;
         }, $beta, $metadata);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem
     {
         $item = $this->pool->getItem($this->getId($key));
         return (self::$createCacheItem)($key, $item, $this->poolHash);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItems(array $keys = []) : iterable
     {
         if ($this->namespaceLen) {
@@ -97,16 +88,10 @@ class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterfa
         }
         return $this->generateItems($this->pool->getItems($keys));
     }
-    /**
-     * {@inheritdoc}
-     */
     public function hasItem(mixed $key) : bool
     {
         return $this->pool->hasItem($this->getId($key));
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool
     {
         if ($this->pool instanceof AdapterInterface) {
@@ -114,16 +99,10 @@ class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterfa
         }
         return $this->pool->clear();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItem(mixed $key) : bool
     {
         return $this->pool->deleteItem($this->getId($key));
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         if ($this->namespaceLen) {
@@ -133,23 +112,14 @@ class ProxyAdapter implements AdapterInterface, CacheInterface, PruneableInterfa
         }
         return $this->pool->deleteItems($keys);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function save(CacheItemInterface $item) : bool
     {
         return $this->doSave($item, __FUNCTION__);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function saveDeferred(CacheItemInterface $item) : bool
     {
         return $this->doSave($item, __FUNCTION__);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         return $this->pool->commit();

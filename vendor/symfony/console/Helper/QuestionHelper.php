@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202212\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202211\Symfony\Component\Console\Cursor;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\MissingInputException;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202211\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202211\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Input\StreamableInputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202211\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202211\Symfony\Component\Console\Terminal;
-use function ConfigTransformer202211\Symfony\Component\String\s;
+use ConfigTransformer202212\Symfony\Component\Console\Cursor;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\MissingInputException;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202212\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202212\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Input\StreamableInputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer202212\Symfony\Component\Console\Question\Question;
+use ConfigTransformer202212\Symfony\Component\Console\Terminal;
+use function ConfigTransformer202212\Symfony\Component\String\s;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  *
@@ -77,9 +77,6 @@ class QuestionHelper extends Helper
             return $fallbackOutput;
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getName() : string
     {
         return 'question';
@@ -128,6 +125,8 @@ class QuestionHelper extends Helper
             $ret = $question->isTrimmable() ? \trim($autocomplete) : $autocomplete;
         }
         if ($output instanceof ConsoleSectionOutput) {
+            $output->addContent('');
+            // add EOL to the question
             $output->addContent($ret);
         }
         $ret = \strlen($ret) > 0 ? $ret : $question->getDefault();
@@ -361,6 +360,10 @@ class QuestionHelper extends Helper
             throw new RuntimeException('Unable to hide the response.');
         }
         $value = \fgets($inputStream, 4096);
+        if (4095 === \strlen($value)) {
+            $errOutput = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output;
+            $errOutput->warning('The value was possibly truncated by your shell or terminal emulator');
+        }
         if (self::$stty && Terminal::hasSttyAvailable()) {
             \shell_exec('stty ' . $sttyMode);
         }

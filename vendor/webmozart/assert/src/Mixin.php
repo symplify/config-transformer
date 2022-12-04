@@ -1,6 +1,6 @@
 <?php
 
-namespace ConfigTransformer202211\Webmozart\Assert;
+namespace ConfigTransformer202212\Webmozart\Assert;
 
 use ArrayAccess;
 use Closure;

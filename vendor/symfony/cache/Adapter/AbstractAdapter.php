@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202211\Psr\Log\LoggerInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202211\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202212\Psr\Log\LoggerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202212\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -38,15 +38,15 @@ abstract class AbstractAdapter implements AdapterInterface, CacheInterface, Logg
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
             throw new InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s").', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
+        self::$createCacheItem ??= \Closure::bind(static function ($key, $value, $isHit) {
             $item = new CacheItem();
             $item->key = $key;
             $item->value = $v = $value;
             $item->isHit = $isHit;
             $item->unpack();
             return $item;
-        }, null, CacheItem::class));
-        self::$mergeByLifetime ?? (self::$mergeByLifetime = \Closure::bind(static function ($deferred, $namespace, &$expiredIds, $getId, $defaultLifetime) {
+        }, null, CacheItem::class);
+        self::$mergeByLifetime ??= \Closure::bind(static function ($deferred, $namespace, &$expiredIds, $getId, $defaultLifetime) {
             $byLifetime = [];
             $now = \microtime(\true);
             $expiredIds = [];
@@ -63,7 +63,7 @@ abstract class AbstractAdapter implements AdapterInterface, CacheInterface, Logg
                 $byLifetime[$ttl][$getId($key)] = $item->pack();
             }
             return $byLifetime;
-        }, null, CacheItem::class));
+        }, null, CacheItem::class);
     }
     /**
      * Returns the best possible adapter that your runtime supports.
@@ -76,10 +76,10 @@ abstract class AbstractAdapter implements AdapterInterface, CacheInterface, Logg
         if (null !== $logger) {
             $opcache->setLogger($logger);
         }
-        if (!(self::$apcuSupported = self::$apcuSupported ?? ApcuAdapter::isSupported())) {
+        if (!(self::$apcuSupported ??= ApcuAdapter::isSupported())) {
             return $opcache;
         }
-        if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
+        if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOL)) {
             return $opcache;
         }
         $apcu = new ApcuAdapter($namespace, \intdiv($defaultLifetime, 5), $version);
@@ -104,9 +104,6 @@ abstract class AbstractAdapter implements AdapterInterface, CacheInterface, Logg
         }
         throw new InvalidArgumentException(\sprintf('Unsupported DSN: "%s".', $dsn));
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         $ok = \true;

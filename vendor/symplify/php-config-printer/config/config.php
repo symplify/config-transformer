@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211;
+namespace ConfigTransformer202212;
 
-use ConfigTransformer202211\PhpParser\BuilderFactory;
-use ConfigTransformer202211\PhpParser\NodeFinder;
-use ConfigTransformer202211\PhpParser\NodeVisitor\ParentConnectingVisitor;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use ConfigTransformer202211\Symfony\Component\Yaml\Parser;
-use ConfigTransformer202211\Symplify\PackageBuilder\Parameter\ParameterProvider;
-use ConfigTransformer202211\Symplify\PackageBuilder\Php\TypeChecker;
-use ConfigTransformer202211\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-use function ConfigTransformer202211\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ConfigTransformer202212\PhpParser\BuilderFactory;
+use ConfigTransformer202212\PhpParser\NodeFinder;
+use ConfigTransformer202212\PhpParser\NodeVisitor\ParentConnectingVisitor;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ConfigTransformer202212\Symfony\Component\Yaml\Parser;
+use ConfigTransformer202212\Symplify\PackageBuilder\Parameter\ParameterProvider;
+use ConfigTransformer202212\Symplify\PackageBuilder\Php\TypeChecker;
+use ConfigTransformer202212\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use function ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire();

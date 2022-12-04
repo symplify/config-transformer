@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202211\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ProxyTrait;
-use ConfigTransformer202211\Symfony\Component\VarExporter\VarExporter;
-use ConfigTransformer202211\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202212\Symfony\Component\VarExporter\VarExporter;
+use ConfigTransformer202212\Symfony\Contracts\Cache\CacheInterface;
 /**
  * Caches items at warm up time using a PHP array that is stored in shared memory by OPCache since PHP 7.0.
  * Warmed up items are read-only and run-time discovered items are cached using a fallback adapter.
@@ -44,13 +44,13 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
+        self::$createCacheItem ??= \Closure::bind(static function ($key, $value, $isHit) {
             $item = new CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->isHit = $isHit;
             return $item;
-        }, null, CacheItem::class));
+        }, null, CacheItem::class);
     }
     /**
      * This adapter takes advantage of how PHP stores arrays in its latest versions.
@@ -65,9 +65,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return new static($file, $fallbackPool);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null) : mixed
     {
         if (!isset($this->values)) {
@@ -94,9 +91,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return $value;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem
     {
         if (!\is_string($key)) {
@@ -122,9 +116,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return (self::$createCacheItem)($key, $value, $isHit);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItems(array $keys = []) : iterable
     {
         foreach ($keys as $key) {
@@ -137,9 +128,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return $this->generateItems($keys);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function hasItem(mixed $key) : bool
     {
         if (!\is_string($key)) {
@@ -150,9 +138,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return isset($this->keys[$key]) || $this->pool->hasItem($key);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItem(mixed $key) : bool
     {
         if (!\is_string($key)) {
@@ -163,9 +148,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return !isset($this->keys[$key]) && $this->pool->deleteItem($key);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         $deleted = \true;
@@ -188,9 +170,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return $deleted;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function save(CacheItemInterface $item) : bool
     {
         if (!isset($this->values)) {
@@ -198,9 +177,6 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return !isset($this->keys[$item->getKey()]) && $this->pool->save($item);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function saveDeferred(CacheItemInterface $item) : bool
     {
         if (!isset($this->values)) {
@@ -208,16 +184,10 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         }
         return !isset($this->keys[$item->getKey()]) && $this->pool->saveDeferred($item);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         return $this->pool->commit();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool
     {
         $this->keys = $this->values = [];

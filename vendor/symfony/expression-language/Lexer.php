@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\ExpressionLanguage;
+namespace ConfigTransformer202212\Symfony\Component\ExpressionLanguage;
 
 /**
  * Lexes an expression.
@@ -47,7 +47,7 @@ class Lexer
                 ++$cursor;
             } elseif (\strpos(')]}', $expression[$cursor]) !== \false) {
                 // closing bracket
-                if (empty($brackets)) {
+                if (!$brackets) {
                     throw new SyntaxError(\sprintf('Unexpected "%s".', $expression[$cursor]), $cursor, $expression);
                 }
                 [$expect, $cur] = \array_pop($brackets);
@@ -68,6 +68,10 @@ class Lexer
                 // null-safe
                 $tokens[] = new Token(Token::PUNCTUATION_TYPE, '?.', ++$cursor);
                 ++$cursor;
+            } elseif ('?' === $expression[$cursor] && '?' === ($expression[$cursor + 1] ?? '')) {
+                // null-coalescing
+                $tokens[] = new Token(Token::PUNCTUATION_TYPE, '??', ++$cursor);
+                ++$cursor;
             } elseif (\strpos('.,?:', $expression[$cursor]) !== \false) {
                 // punctuation
                 $tokens[] = new Token(Token::PUNCTUATION_TYPE, $expression[$cursor], $cursor + 1);
@@ -82,7 +86,7 @@ class Lexer
             }
         }
         $tokens[] = new Token(Token::EOF_TYPE, null, $cursor + 1);
-        if (!empty($brackets)) {
+        if ($brackets) {
             [$expect, $cur] = \array_pop($brackets);
             throw new SyntaxError(\sprintf('Unclosed "%s".', $expect), $cur, $expression);
         }

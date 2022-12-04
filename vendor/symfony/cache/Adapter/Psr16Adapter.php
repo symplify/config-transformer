@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\SimpleCache\CacheInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202212\Psr\SimpleCache\CacheInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-16 cache into a PSR-6 one.
  *
@@ -33,9 +33,6 @@ class Psr16Adapter extends AbstractAdapter implements PruneableInterface, Resett
         $this->pool = $pool;
         $this->miss = new \stdClass();
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetch(array $ids) : iterable
     {
         foreach ($this->pool->getMultiple($ids, $this->miss) as $key => $value) {
@@ -44,30 +41,18 @@ class Psr16Adapter extends AbstractAdapter implements PruneableInterface, Resett
             }
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doHave(string $id) : bool
     {
         return $this->pool->has($id);
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doClear(string $namespace) : bool
     {
         return $this->pool->clear();
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doDelete(array $ids) : bool
     {
         return $this->pool->deleteMultiple($ids);
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doSave(array $values, int $lifetime) : array|bool
     {
         return $this->pool->setMultiple($values, 0 === $lifetime ? null : $lifetime);

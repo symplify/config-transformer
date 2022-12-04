@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\CommandLoader;
+namespace ConfigTransformer202212\Symfony\Component\Console\CommandLoader;
 
-use ConfigTransformer202211\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ConfigTransformer202212\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *
@@ -30,16 +30,10 @@ class FactoryCommandLoader implements CommandLoaderInterface
     {
         $this->factories = $factories;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function has(string $name) : bool
     {
         return isset($this->factories[$name]);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $name) : Command
     {
         if (!isset($this->factories[$name])) {
@@ -48,9 +42,6 @@ class FactoryCommandLoader implements CommandLoaderInterface
         $factory = $this->factories[$name];
         return $factory();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getNames() : array
     {
         return \array_keys($this->factories);

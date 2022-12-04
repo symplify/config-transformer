@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 /**
  * Resolves all parameter placeholders "%somevalue%" to their real values.
  *
@@ -39,8 +39,6 @@ class ResolveParameterPlaceHoldersPass extends AbstractRecursivePass
         $this->throwOnResolveException = $throwOnResolveException;
     }
     /**
-     * {@inheritdoc}
-     *
      * @throws ParameterNotFoundException
      */
     public function process(ContainerBuilder $container)

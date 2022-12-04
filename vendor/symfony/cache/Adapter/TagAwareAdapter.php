@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202211\Psr\Cache\InvalidArgumentException;
-use ConfigTransformer202211\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202211\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202211\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer202212\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202212\Psr\Cache\InvalidArgumentException;
+use ConfigTransformer202212\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202212\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Implements simple and robust tag-based invalidation suitable for use with volatile caches.
  *
@@ -86,9 +86,6 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
             return $tagsAdapter->commit();
         }, null, CacheItem::class);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function invalidateTags(array $tags) : bool
     {
         $ids = [];
@@ -99,25 +96,16 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         }
         return !$tags || $this->tags->deleteItems($ids);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function hasItem(mixed $key) : bool
     {
         return $this->getItem($key)->isHit();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem
     {
         foreach ($this->getItems([$key]) as $item) {
             return $item;
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItems(array $keys = []) : iterable
     {
         $tagKeys = [];
@@ -166,9 +154,6 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         $tagVersions = null;
         return (self::$setCacheItemTags)($bufferedItems, $itemTags);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool
     {
         if ('' !== $prefix) {
@@ -185,16 +170,10 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         }
         return $this->pool->clear();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItem(mixed $key) : bool
     {
         return $this->deleteItems([$key]);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         foreach ($keys as $key) {
@@ -205,9 +184,6 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         }
         return $this->pool->deleteItems($keys);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function save(CacheItemInterface $item) : bool
     {
         if (!$item instanceof CacheItem) {
@@ -216,9 +192,6 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         $this->deferred[$item->getKey()] = $item;
         return $this->commit();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function saveDeferred(CacheItemInterface $item) : bool
     {
         if (!$item instanceof CacheItem) {
@@ -227,9 +200,6 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         $this->deferred[$item->getKey()] = $item;
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         if (!($items = $this->deferred)) {
@@ -250,16 +220,10 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         (self::$setTagVersions)($items, \array_combine($tagVersions, $tagVersions));
         return $ok;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function prune() : bool
     {
         return $this->pool instanceof PruneableInterface && $this->pool->prune();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $this->commit();

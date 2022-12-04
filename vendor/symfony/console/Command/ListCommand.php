@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Command;
+namespace ConfigTransformer202212\Symfony\Component\Console\Command;
 
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\ApplicationDescription;
-use ConfigTransformer202211\Symfony\Component\Console\Helper\DescriptorHelper;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputArgument;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Input\InputOption;
-use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\ApplicationDescription;
+use ConfigTransformer202212\Symfony\Component\Console\Helper\DescriptorHelper;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputArgument;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Input\InputOption;
+use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
 /**
  * ListCommand displays the list of all available commands for the application.
  *
@@ -23,9 +23,6 @@ use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
  */
 class ListCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         $this->setName('list')->setDefinition([new InputArgument('namespace', InputArgument::OPTIONAL, 'The namespace name', null, function () {
@@ -51,9 +48,6 @@ It's also possible to get raw list of commands (useful for embedding command run
 EOF
 );
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $helper = new DescriptorHelper();

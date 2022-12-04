@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
 use Couchbase\Bucket;
 use Couchbase\Cluster;
@@ -16,10 +16,10 @@ use Couchbase\ClusterOptions;
 use Couchbase\Collection;
 use Couchbase\DocumentNotFoundException;
 use Couchbase\UpsertOptions;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */
@@ -102,9 +102,6 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
         }
         return $results;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetch(array $ids) : array
     {
         $results = [];
@@ -119,23 +116,14 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
         }
         return $results;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doHave($id) : bool
     {
         return $this->connection->exists($id)->exists();
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doClear($namespace) : bool
     {
         return \false;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doDelete(array $ids) : bool
     {
         $idsErrors = [];
@@ -150,9 +138,6 @@ class CouchbaseCollectionAdapter extends AbstractAdapter
         }
         return 0 === \count($idsErrors);
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doSave(array $values, $lifetime) : array|bool
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {

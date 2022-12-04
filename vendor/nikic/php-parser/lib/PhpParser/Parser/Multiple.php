@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\PhpParser\Parser;
+namespace ConfigTransformer202212\PhpParser\Parser;
 
-use ConfigTransformer202211\PhpParser\Error;
-use ConfigTransformer202211\PhpParser\ErrorHandler;
-use ConfigTransformer202211\PhpParser\Parser;
+use ConfigTransformer202212\PhpParser\Error;
+use ConfigTransformer202212\PhpParser\ErrorHandler;
+use ConfigTransformer202212\PhpParser\Parser;
 class Multiple implements Parser
 {
     /** @var Parser[] List of parsers to try, in order of preference */

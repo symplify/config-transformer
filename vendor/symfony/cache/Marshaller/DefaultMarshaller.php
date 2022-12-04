@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
@@ -30,9 +30,6 @@ class DefaultMarshaller implements MarshallerInterface
         $this->useIgbinarySerialize = $useIgbinarySerialize;
         $this->throwOnSerializationFailure = $throwOnSerializationFailure;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function marshall(array $values, ?array &$failed) : array
     {
         $serialized = $failed = [];
@@ -52,9 +49,6 @@ class DefaultMarshaller implements MarshallerInterface
         }
         return $serialized;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function unmarshall(string $value) : mixed
     {
         if ('b:0;' === $value) {

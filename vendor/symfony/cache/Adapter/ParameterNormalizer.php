@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
 /**
  * @author Lars Strojny <lars@strojny.net>
@@ -24,7 +24,7 @@ final class ParameterNormalizer
             return $time;
         }
         try {
-            return \DateTime::createFromFormat('U', 0)->add(new \DateInterval($duration))->getTimestamp();
+            return \DateTimeImmutable::createFromFormat('U', 0)->add(new \DateInterval($duration))->getTimestamp();
         } catch (\Exception $e) {
             throw new \InvalidArgumentException(\sprintf('Cannot parse date interval "%s".', $duration), 0, $e);
         }

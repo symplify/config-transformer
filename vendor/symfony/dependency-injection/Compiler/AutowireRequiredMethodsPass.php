@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Contracts\Service\Attribute\Required;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Contracts\Service\Attribute\Required;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" methods as setters.
  *
@@ -20,7 +20,6 @@ use ConfigTransformer202211\Symfony\Contracts\Service\Attribute\Required;
 class AutowireRequiredMethodsPass extends AbstractRecursivePass
 {
     /**
-     * {@inheritdoc}
      * @param mixed $value
      * @return mixed
      */

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Marshaller;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Marshaller;
 
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Compresses values using gzdeflate().
  *
@@ -26,16 +26,10 @@ class DeflateMarshaller implements MarshallerInterface
         }
         $this->marshaller = $marshaller;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function marshall(array $values, ?array &$failed) : array
     {
         return \array_map('gzdeflate', $this->marshaller->marshall($values, $failed));
     }
-    /**
-     * {@inheritdoc}
-     */
     public function unmarshall(string $value) : mixed
     {
         if (\false !== ($inflatedValue = @\gzinflate($value))) {

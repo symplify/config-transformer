@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202212\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\DescriptorInterface;
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\JsonDescriptor;
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\TextDescriptor;
-use ConfigTransformer202211\Symfony\Component\Console\Descriptor\XmlDescriptor;
-use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\DescriptorInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\JsonDescriptor;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\TextDescriptor;
+use ConfigTransformer202212\Symfony\Component\Console\Descriptor\XmlDescriptor;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class adds helper method to describe objects in various formats.
  *
@@ -60,9 +60,6 @@ class DescriptorHelper extends Helper
         $this->descriptors[$format] = $descriptor;
         return $this;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getName() : string
     {
         return 'descriptor';

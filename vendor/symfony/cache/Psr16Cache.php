@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache;
+namespace ConfigTransformer202212\Symfony\Component\Cache;
 
-use ConfigTransformer202211\Psr\Cache\CacheException as Psr6CacheException;
-use ConfigTransformer202211\Psr\Cache\CacheItemPoolInterface;
-use ConfigTransformer202211\Psr\SimpleCache\CacheException as SimpleCacheException;
-use ConfigTransformer202211\Psr\SimpleCache\CacheInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Adapter\AdapterInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ProxyTrait;
+use ConfigTransformer202212\Psr\Cache\CacheException as Psr6CacheException;
+use ConfigTransformer202212\Psr\Cache\CacheItemPoolInterface;
+use ConfigTransformer202212\Psr\SimpleCache\CacheException as SimpleCacheException;
+use ConfigTransformer202212\Psr\SimpleCache\CacheInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-6 cache into a PSR-16 one.
  *
@@ -60,9 +60,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
             return $item->pack();
         }, null, CacheItem::class);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function get($key, $default = null) : mixed
     {
         try {
@@ -78,9 +75,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
         return $item->isHit() ? $item->get() : $default;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function set($key, $value, $ttl = null) : bool
     {
         try {
@@ -99,9 +93,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
         return $this->pool->save($item);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function delete($key) : bool
     {
         try {
@@ -112,16 +103,10 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear() : bool
     {
         return $this->pool->clear();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getMultiple($keys, $default = null) : iterable
     {
         if ($keys instanceof \Traversable) {
@@ -148,9 +133,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
         return $values;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function setMultiple($values, $ttl = null) : bool
     {
         $valuesIsArray = \is_array($values);
@@ -195,9 +177,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
         return $this->pool->commit() && $ok;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteMultiple($keys) : bool
     {
         if ($keys instanceof \Traversable) {
@@ -213,9 +192,6 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function has($key) : bool
     {
         try {

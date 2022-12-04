@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Doctrine\DBAL\Connection;
-use ConfigTransformer202211\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use ConfigTransformer202211\Doctrine\DBAL\DriverManager;
-use ConfigTransformer202211\Doctrine\DBAL\Exception as DBALException;
-use ConfigTransformer202211\Doctrine\DBAL\Exception\TableNotFoundException;
-use ConfigTransformer202211\Doctrine\DBAL\ParameterType;
-use ConfigTransformer202211\Doctrine\DBAL\Schema\Schema;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use ConfigTransformer202211\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\PruneableInterface;
+use ConfigTransformer202212\Doctrine\DBAL\Connection;
+use ConfigTransformer202212\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use ConfigTransformer202212\Doctrine\DBAL\DriverManager;
+use ConfigTransformer202212\Doctrine\DBAL\Exception as DBALException;
+use ConfigTransformer202212\Doctrine\DBAL\Exception\TableNotFoundException;
+use ConfigTransformer202212\Doctrine\DBAL\ParameterType;
+use ConfigTransformer202212\Doctrine\DBAL\Schema\Schema;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\PruneableInterface;
 class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;
@@ -88,9 +88,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             $this->conn->executeStatement($sql);
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function configureSchema(Schema $schema, Connection $forConnection) : void
     {
         // only update the schema for this connection
@@ -102,9 +99,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         $this->addTableToSchema($schema);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function prune() : bool
     {
         $deleteSql = "DELETE FROM {$this->table} WHERE {$this->lifetimeCol} + {$this->timeCol} <= ?";
@@ -121,9 +115,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doFetch(array $ids) : iterable
     {
         $now = \time();
@@ -142,18 +133,12 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             $this->conn->executeStatement($sql, [$now, $expired], [ParameterType::INTEGER, Connection::PARAM_STR_ARRAY]);
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doHave(string $id) : bool
     {
         $sql = "SELECT 1 FROM {$this->table} WHERE {$this->idCol} = ? AND ({$this->lifetimeCol} IS NULL OR {$this->lifetimeCol} + {$this->timeCol} > ?)";
         $result = $this->conn->executeQuery($sql, [$id, \time()], [ParameterType::STRING, ParameterType::INTEGER]);
         return (bool) $result->fetchOne();
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doClear(string $namespace) : bool
     {
         if ('' === $namespace) {
@@ -171,9 +156,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doDelete(array $ids) : bool
     {
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} IN (?)";
@@ -183,9 +165,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         return \true;
     }
-    /**
-     * {@inheritdoc}
-     */
     protected function doSave(array $values, int $lifetime) : array|bool
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {
@@ -279,12 +258,12 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
         $platform = $this->conn->getDatabasePlatform();
         return match (\true) {
-            $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\MySQLPlatform, $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\MySQL57Platform => $this->platformName = 'mysql',
-            $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\SqlitePlatform => $this->platformName = 'sqlite',
-            $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\PostgreSQLPlatform, $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\PostgreSQL94Platform => $this->platformName = 'pgsql',
-            $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\OraclePlatform => $this->platformName = 'oci',
-            $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\SQLServerPlatform, $platform instanceof \ConfigTransformer202211\Doctrine\DBAL\Platforms\SQLServer2012Platform => $this->platformName = 'sqlsrv',
-            default => $this->platformName = \get_class($platform),
+            $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\MySQLPlatform, $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\MySQL57Platform => $this->platformName = 'mysql',
+            $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\SqlitePlatform => $this->platformName = 'sqlite',
+            $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\PostgreSQLPlatform, $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\PostgreSQL94Platform => $this->platformName = 'pgsql',
+            $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\OraclePlatform => $this->platformName = 'oci',
+            $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\SQLServerPlatform, $platform instanceof \ConfigTransformer202212\Doctrine\DBAL\Platforms\SQLServer2012Platform => $this->platformName = 'sqlsrv',
+            default => $this->platformName = $platform::class,
         };
     }
     private function getServerVersion() : string

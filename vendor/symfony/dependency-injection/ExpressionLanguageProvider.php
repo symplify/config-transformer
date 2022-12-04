@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\ExpressionFunction;
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 /**
  * Define some ExpressionLanguage functions.
  *

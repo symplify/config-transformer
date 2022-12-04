@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202211\Psr\Cache\CacheItemInterface;
-use ConfigTransformer202211\Psr\Log\LoggerAwareTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Psr\Cache\CacheItemInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -75,9 +75,6 @@ trait AbstractAdapterTrait
      * @return array|bool The identifiers that failed to be cached or a boolean stating if caching succeeded or not
      */
     protected abstract function doSave(array $values, int $lifetime) : array|bool;
-    /**
-     * {@inheritdoc}
-     */
     public function hasItem(mixed $key) : bool
     {
         $id = $this->getId($key);
@@ -91,9 +88,6 @@ trait AbstractAdapterTrait
             return \false;
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function clear(string $prefix = '') : bool
     {
         $this->deferred = [];
@@ -127,16 +121,10 @@ trait AbstractAdapterTrait
             return \false;
         }
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItem(mixed $key) : bool
     {
         return $this->deleteItems([$key]);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         $ids = [];
@@ -166,9 +154,6 @@ trait AbstractAdapterTrait
         }
         return $ok;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItem(mixed $key) : CacheItem
     {
         $id = $this->getId($key);
@@ -187,9 +172,6 @@ trait AbstractAdapterTrait
         }
         return (self::$createCacheItem)($key, null, \false);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function getItems(array $keys = []) : iterable
     {
         $ids = [];
@@ -210,9 +192,6 @@ trait AbstractAdapterTrait
         $ids = \array_combine($ids, $keys);
         return $this->generateItems($items, $ids);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function save(CacheItemInterface $item) : bool
     {
         if (!$item instanceof CacheItem) {
@@ -221,9 +200,6 @@ trait AbstractAdapterTrait
         $this->deferred[$item->getKey()] = $item;
         return $this->commit();
     }
-    /**
-     * {@inheritdoc}
-     */
     public function saveDeferred(CacheItemInterface $item) : bool
     {
         if (!$item instanceof CacheItem) {
@@ -250,9 +226,6 @@ trait AbstractAdapterTrait
         $this->ids = [];
         return $wasEnabled;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         if ($this->deferred) {

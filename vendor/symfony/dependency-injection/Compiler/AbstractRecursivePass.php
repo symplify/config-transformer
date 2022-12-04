@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202211\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -41,9 +41,6 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
      * @var bool
      */
     private $inExpression = \false;
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         $this->container = $container;
@@ -76,6 +73,9 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
         if (\is_array($value)) {
             foreach ($value as $k => $v) {
                 if ($isRoot) {
+                    if ($v->hasTag('container.excluded')) {
+                        continue;
+                    }
                     $this->currentId = $k;
                 }
                 if ($v !== ($processedValue = $this->processValue($v, $isRoot))) {
@@ -143,8 +143,8 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
                 }
             } elseif ($class instanceof Definition) {
                 $class = $class->getClass();
-            } elseif (null === $class) {
-                $class = $definition->getClass();
+            } else {
+                $class = $class ?? $definition->getClass();
             }
             return $this->getReflectionMethod(new Definition($class), $method);
         }

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Config;
+namespace ConfigTransformer202212\Symfony\Component\Config;
 
-use ConfigTransformer202211\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202212\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ResourceCheckers.
  *

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202211\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Processor;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Processor;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *
@@ -29,9 +29,6 @@ class ValidateEnvPlaceholdersPass implements CompilerPassInterface
      * @var mixed[]
      */
     private $extensionConfig = [];
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         $this->extensionConfig = [];

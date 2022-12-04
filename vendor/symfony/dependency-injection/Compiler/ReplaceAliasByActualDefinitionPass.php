@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.
@@ -80,7 +80,6 @@ class ReplaceAliasByActualDefinitionPass extends AbstractRecursivePass
         $this->replacements = [];
     }
     /**
-     * {@inheritdoc}
      * @param mixed $value
      * @return mixed
      */

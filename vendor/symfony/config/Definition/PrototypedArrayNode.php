@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202212\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Exception\Exception;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Exception\Exception;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * Represents a prototyped Array node in the config tree.
  *
@@ -82,9 +82,6 @@ class PrototypedArrayNode extends ArrayNode
     {
         $this->defaultValue = $value;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function hasDefaultValue() : bool
     {
         return \true;
@@ -103,8 +100,6 @@ class PrototypedArrayNode extends ArrayNode
         }
     }
     /**
-     * {@inheritdoc}
-     *
      * The default value could be either explicited or derived from the prototype
      * default value.
      * @return mixed
@@ -145,7 +140,6 @@ class PrototypedArrayNode extends ArrayNode
         throw new Exception('A prototyped array node cannot have concrete children.');
     }
     /**
-     * {@inheritdoc}
      * @param mixed $value
      * @return mixed
      */
@@ -170,8 +164,6 @@ class PrototypedArrayNode extends ArrayNode
         return $value;
     }
     /**
-     * {@inheritdoc}
-     *
      * @throws DuplicateKeyException
      * @param mixed $value
      * @return mixed
@@ -246,7 +238,6 @@ class PrototypedArrayNode extends ArrayNode
         return $normalized;
     }
     /**
-     * {@inheritdoc}
      * @param mixed $leftSide
      * @param mixed $rightSide
      * @return mixed

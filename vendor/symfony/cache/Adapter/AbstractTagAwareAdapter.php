@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202211\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202211\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use ConfigTransformer202211\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202211\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use ConfigTransformer202212\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202212\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Abstract for native TagAware adapters.
  *
@@ -40,7 +40,7 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
             throw new InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s").', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
-        self::$createCacheItem ?? (self::$createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
+        self::$createCacheItem ??= \Closure::bind(static function ($key, $value, $isHit) {
             $item = new CacheItem();
             $item->key = $key;
             $item->isTaggable = \true;
@@ -59,8 +59,8 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
                 $item->metadata[CacheItem::METADATA_CTIME] = $v['c'];
             }
             return $item;
-        }, null, CacheItem::class));
-        self::$mergeByLifetime ?? (self::$mergeByLifetime = \Closure::bind(static function ($deferred, &$expiredIds, $getId, $tagPrefix, $defaultLifetime) {
+        }, null, CacheItem::class);
+        self::$mergeByLifetime ??= \Closure::bind(static function ($deferred, &$expiredIds, $getId, $tagPrefix, $defaultLifetime) {
             $byLifetime = [];
             $now = \microtime(\true);
             $expiredIds = [];
@@ -99,7 +99,7 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
                 $item->metadata = $item->newMetadata;
             }
             return $byLifetime;
-        }, null, CacheItem::class));
+        }, null, CacheItem::class);
     }
     /**
      * Persists several cache items immediately.
@@ -140,9 +140,6 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         }
         $this->doDelete($ids);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function commit() : bool
     {
         $ok = \true;
@@ -200,9 +197,6 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         }
         return $ok;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function deleteItems(array $keys) : bool
     {
         if (!$keys) {
@@ -245,12 +239,9 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         }
         return $ok;
     }
-    /**
-     * {@inheritdoc}
-     */
     public function invalidateTags(array $tags) : bool
     {
-        if (empty($tags)) {
+        if (!$tags) {
             return \false;
         }
         $tagIds = [];

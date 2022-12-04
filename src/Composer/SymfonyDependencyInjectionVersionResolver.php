@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Composer;
 
-use ConfigTransformer202211\Nette\Utils\FileSystem;
-use ConfigTransformer202211\Nette\Utils\Json;
-use ConfigTransformer202211\Nette\Utils\Strings;
+use ConfigTransformer202212\Nette\Utils\FileSystem;
+use ConfigTransformer202212\Nette\Utils\Json;
+use ConfigTransformer202212\Nette\Utils\Strings;
 final class SymfonyDependencyInjectionVersionResolver
 {
     /**

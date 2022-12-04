@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Config\Definition\Configurator;
+namespace ConfigTransformer202212\Symfony\Component\Config\Definition\Configurator;
 
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Builder\NodeDefinition;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use ConfigTransformer202211\Symfony\Component\Config\Definition\Loader\DefinitionFileLoader;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use ConfigTransformer202212\Symfony\Component\Config\Definition\Loader\DefinitionFileLoader;
 /**
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */

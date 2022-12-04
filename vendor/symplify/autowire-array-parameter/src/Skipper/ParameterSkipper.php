@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202211\Symplify\AutowireArrayParameter\Skipper;
+namespace ConfigTransformer202212\Symplify\AutowireArrayParameter\Skipper;
 
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionParameter;
-use ConfigTransformer202211\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202211\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
+use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202212\Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
 final class ParameterSkipper
 {
     /**
@@ -15,7 +15,7 @@ final class ParameterSkipper
      *
      * @var string[]
      */
-    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['ConfigTransformer202211\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202211\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202211\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202211\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202211\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202211\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202211\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202211\\Sonata\\Twig\\Extension\\TemplateExtension'];
+    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['ConfigTransformer202212\\Symfony\\Component\\Form\\FormExtensionInterface', 'ConfigTransformer202212\\Symfony\\Component\\Asset\\PackageInterface', 'ConfigTransformer202212\\Symfony\\Component\\Config\\Loader\\LoaderInterface', 'ConfigTransformer202212\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', 'ConfigTransformer202212\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', 'ConfigTransformer202212\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', 'ConfigTransformer202212\\Sonata\\Doctrine\\Adapter\\AdapterChain', 'ConfigTransformer202212\\Sonata\\Twig\\Extension\\TemplateExtension'];
     /**
      * @var string[]
      */

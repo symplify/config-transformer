@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202211\Symfony\Component\Console\Formatter;
+namespace ConfigTransformer202212\Symfony\Component\Console\Formatter;
 
-use ConfigTransformer202211\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202211\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202212\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
@@ -51,7 +51,7 @@ class OutputFormatterStyleStack implements ResetInterface
      */
     public function pop(OutputFormatterStyleInterface $style = null) : OutputFormatterStyleInterface
     {
-        if (empty($this->styles)) {
+        if (!$this->styles) {
             return $this->emptyStyle;
         }
         if (null === $style) {
@@ -70,7 +70,7 @@ class OutputFormatterStyleStack implements ResetInterface
      */
     public function getCurrent() : OutputFormatterStyleInterface
     {
-        if (empty($this->styles)) {
+        if (!$this->styles) {
             return $this->emptyStyle;
         }
         return $this->styles[\count($this->styles) - 1];
