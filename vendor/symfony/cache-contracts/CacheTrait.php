@@ -23,16 +23,12 @@ use ConfigTransformer202212\Psr\Log\LoggerInterface;
 trait CacheTrait
 {
     /**
-     * {@inheritdoc}
      * @return mixed
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         return $this->doGet($this, $key, $callback, $beta, $metadata);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function delete(string $key) : bool
     {
         return $this->deleteItem($key);
