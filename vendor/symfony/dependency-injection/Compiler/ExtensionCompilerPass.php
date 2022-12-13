@@ -19,6 +19,9 @@ use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuild
  */
 class ExtensionCompilerPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         foreach ($container->getExtensions() as $extension) {

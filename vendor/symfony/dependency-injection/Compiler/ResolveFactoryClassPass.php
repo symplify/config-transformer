@@ -18,6 +18,7 @@ use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\Runt
 class ResolveFactoryClassPass extends AbstractRecursivePass
 {
     /**
+     * {@inheritdoc}
      * @param mixed $value
      * @return mixed
      */

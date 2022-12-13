@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2
+class ComposerStaticInit3a7aac2e2c8c2a3d452d9a2f3ff83789
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -857,10 +857,8 @@ class ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionTrait' => __DIR__ . '/..' . '/symfony/dependency-injection/Extension/ExtensionTrait.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\Extension\\PrependExtensionInterface' => __DIR__ . '/..' . '/symfony/dependency-injection/Extension/PrependExtensionInterface.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\Instantiator\\InstantiatorInterface' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/Instantiator/InstantiatorInterface.php',
-        'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\Instantiator\\LazyServiceInstantiator' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/Instantiator/LazyServiceInstantiator.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\Instantiator\\RealServiceInstantiator' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/Instantiator/RealServiceInstantiator.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\PhpDumper\\DumperInterface' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/PhpDumper/DumperInterface.php',
-        'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\PhpDumper\\LazyServiceDumper' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/PhpDumper/LazyServiceDumper.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\PhpDumper\\NullDumper' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/PhpDumper/NullDumper.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\LazyProxy\\ProxyHelper' => __DIR__ . '/..' . '/symfony/dependency-injection/LazyProxy/ProxyHelper.php',
         'ConfigTransformer202212\\Symfony\\Component\\DependencyInjection\\Loader\\ClosureLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/ClosureLoader.php',
@@ -1196,9 +1194,9 @@ class ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6538d0c78bc453902e8396fcae1c8aa2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3a7aac2e2c8c2a3d452d9a2f3ff83789::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3a7aac2e2c8c2a3d452d9a2f3ff83789::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3a7aac2e2c8c2a3d452d9a2f3ff83789::$classMap;
 
         }, null, ClassLoader::class);
     }

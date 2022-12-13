@@ -18,6 +18,9 @@ use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\Inva
  */
 class ResolveClassPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         foreach ($container->getDefinitions() as $id => $definition) {
