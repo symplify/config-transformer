@@ -461,7 +461,10 @@ trait RedisTrait
             $e = new \RedisException($redis->getLastError());
             $results = \array_map(function ($v) use($e) {
                 return \false === $v ? $e : $v;
-            }, $results);
+            }, (array) $results);
+        }
+        if (\is_bool($results)) {
+            return;
         }
         foreach ($ids as $k => $id) {
             (yield $id => $results[$k]);

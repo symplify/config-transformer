@@ -166,15 +166,31 @@ trait LazyGhostTrait
             \trigger_error(\sprintf('Undefined property: %s::$%s in %s on line %s', \get_class($this), $name, $frame['file'], $frame['line']), \E_USER_NOTICE);
         }
         get_in_scope:
-        if (null === $scope) {
-            if (null === $readonlyScope) {
-                return $this->{$name};
+        try {
+            if (null === $scope) {
+                if (null === $readonlyScope) {
+                    return $this->{$name};
+                }
+                $value = $this->{$name};
+                return $value;
             }
-            $value = $this->{$name};
-            return $value;
+            $accessor = Registry::$classAccessors[$scope] = Registry::$classAccessors[$scope] ?? Registry::getClassAccessors($scope);
+            return $accessor['get']($this, $name, null !== $readonlyScope);
+        } catch (\Error $e) {
+            if (\Error::class !== \get_class($e) || \strncmp($e->getMessage(), 'Cannot access uninitialized non-nullable property', \strlen('Cannot access uninitialized non-nullable property')) !== 0) {
+                throw $e;
+            }
+            try {
+                if (null === $scope) {
+                    $this->{$name} = [];
+                    return $this->{$name};
+                }
+                $accessor['set']($this, $name, []);
+                return $accessor['get']($this, $name, null !== $readonlyScope);
+            } catch (\Error $exception) {
+                throw $e;
+            }
         }
-        $accessor = Registry::$classAccessors[$scope] = Registry::$classAccessors[$scope] ?? Registry::getClassAccessors($scope);
-        return $accessor['get']($this, $name, null !== $readonlyScope);
     }
     public function __set($name, $value) : void
     {

@@ -105,4 +105,14 @@ class GetAttrNode extends Node
                 return [$this->nodes['node'], '[', $this->nodes['attribute'], ']'];
         }
     }
+    /**
+     * Provides BC with instances serialized before v6.2
+     */
+    public function __unserialize(array $data) : void
+    {
+        $this->nodes = $data['nodes'];
+        $this->attributes = $data['attributes'];
+        $this->attributes['is_null_coalesce'] = $this->attributes['is_null_coalesce'] ?? \false;
+        $this->attributes['is_short_circuited'] = $this->attributes['is_short_circuited'] ?? $data["\x00Symfony\\Component\\ExpressionLanguage\\Node\\GetAttrNode\x00isShortCircuited"] ?? \false;
+    }
 }

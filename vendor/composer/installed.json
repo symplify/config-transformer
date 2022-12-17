@@ -379,17 +379,17 @@
         },
         {
             "name": "symfony\/cache",
-            "version": "v6.2.0",
-            "version_normalized": "6.2.0.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/cache.git",
-                "reference": "64cb231dfb25677097d18503d1ad4d016b19f19c"
+                "reference": "68625530468c5ff4557fc8825dcfa478b94a8309"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/64cb231dfb25677097d18503d1ad4d016b19f19c",
-                "reference": "64cb231dfb25677097d18503d1ad4d016b19f19c",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/68625530468c5ff4557fc8825dcfa478b94a8309",
+                "reference": "68625530468c5ff4557fc8825dcfa478b94a8309",
                 "shasum": ""
             },
             "require": {
@@ -423,7 +423,7 @@
                 "symfony\/messenger": "^5.4|^6.0",
                 "symfony\/var-dumper": "^5.4|^6.0"
             },
-            "time": "2022-11-24T11:58:37+00:00",
+            "time": "2022-12-16T12:37:34+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -458,7 +458,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v6.2.0"
+                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v6.2.2"
             },
             "funding": [
                 {
@@ -640,17 +640,17 @@
         },
         {
             "name": "symfony\/console",
-            "version": "v6.2.1",
-            "version_normalized": "6.2.1.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/console.git",
-                "reference": "58f6cef5dc5f641b7bbdbf8b32b44cc926c35f3f"
+                "reference": "5a9bd5c543f00157c55face973c149957467db31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/58f6cef5dc5f641b7bbdbf8b32b44cc926c35f3f",
-                "reference": "58f6cef5dc5f641b7bbdbf8b32b44cc926c35f3f",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/5a9bd5c543f00157c55face973c149957467db31",
+                "reference": "5a9bd5c543f00157c55face973c149957467db31",
                 "shasum": ""
             },
             "require": {
@@ -685,7 +685,7 @@
                 "symfony\/lock": "",
                 "symfony\/process": ""
             },
-            "time": "2022-12-01T13:44:20+00:00",
+            "time": "2022-12-16T15:08:36+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -719,7 +719,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/console\/tree\/v6.2.1"
+                "source": "https:\/\/github.com\/symfony\/console\/tree\/v6.2.2"
             },
             "funding": [
                 {
@@ -905,17 +905,17 @@
         },
         {
             "name": "symfony\/expression-language",
-            "version": "v6.2.0",
-            "version_normalized": "6.2.0.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/expression-language.git",
-                "reference": "e1f77901361f287c5b7d99b80c9ea8d3afe7d2cd"
+                "reference": "e558680a661eddd31f8718f968e75c9c3c8bdad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/expression-language\/zipball\/e1f77901361f287c5b7d99b80c9ea8d3afe7d2cd",
-                "reference": "e1f77901361f287c5b7d99b80c9ea8d3afe7d2cd",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/expression-language\/zipball\/e558680a661eddd31f8718f968e75c9c3c8bdad1",
+                "reference": "e558680a661eddd31f8718f968e75c9c3c8bdad1",
                 "shasum": ""
             },
             "require": {
@@ -923,7 +923,7 @@
                 "symfony\/cache": "^5.4|^6.0",
                 "symfony\/service-contracts": "^1.1|^2|^3"
             },
-            "time": "2022-11-02T09:08:04+00:00",
+            "time": "2022-12-13T15:46:14+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -951,7 +951,7 @@
             "description": "Provides an engine that can compile and evaluate expressions",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/expression-language\/tree\/v6.2.0"
+                "source": "https:\/\/github.com\/symfony\/expression-language\/tree\/v6.2.2"
             },
             "funding": [
                 {
@@ -1446,17 +1446,17 @@
         },
         {
             "name": "symfony\/service-contracts",
-            "version": "v3.1.1",
-            "version_normalized": "3.1.1.0",
+            "version": "v3.2.0",
+            "version_normalized": "3.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/service-contracts.git",
-                "reference": "925e713fe8fcacf6bc05e936edd8dd5441a21239"
+                "reference": "aac98028c69df04ee77eb69b96b86ee51fbf4b75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/service-contracts\/zipball\/925e713fe8fcacf6bc05e936edd8dd5441a21239",
-                "reference": "925e713fe8fcacf6bc05e936edd8dd5441a21239",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/service-contracts\/zipball\/aac98028c69df04ee77eb69b96b86ee51fbf4b75",
+                "reference": "aac98028c69df04ee77eb69b96b86ee51fbf4b75",
                 "shasum": ""
             },
             "require": {
@@ -1469,11 +1469,11 @@
             "suggest": {
                 "symfony\/service-implementation": ""
             },
-            "time": "2022-05-30T19:18:58+00:00",
+            "time": "2022-11-25T10:21:52+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1-dev"
+                    "dev-main": "3.3-dev"
                 },
                 "thanks": {
                     "name": "symfony\/contracts",
@@ -1514,7 +1514,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/service-contracts\/tree\/v3.1.1"
+                "source": "https:\/\/github.com\/symfony\/service-contracts\/tree\/v3.2.0"
             },
             "funding": [
                 {
@@ -1534,17 +1534,17 @@
         },
         {
             "name": "symfony\/string",
-            "version": "v6.2.0",
-            "version_normalized": "6.2.0.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/string.git",
-                "reference": "145702685e0d12f81d755c71127bfff7582fdd36"
+                "reference": "863219fd713fa41cbcd285a79723f94672faff4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/string\/zipball\/145702685e0d12f81d755c71127bfff7582fdd36",
-                "reference": "145702685e0d12f81d755c71127bfff7582fdd36",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/string\/zipball\/863219fd713fa41cbcd285a79723f94672faff4d",
+                "reference": "863219fd713fa41cbcd285a79723f94672faff4d",
                 "shasum": ""
             },
             "require": {
@@ -1564,7 +1564,7 @@
                 "symfony\/translation-contracts": "^2.0|^3.0",
                 "symfony\/var-exporter": "^5.4|^6.0"
             },
-            "time": "2022-11-30T17:13:47+00:00",
+            "time": "2022-12-14T16:11:27+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1603,7 +1603,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/string\/tree\/v6.2.0"
+                "source": "https:\/\/github.com\/symfony\/string\/tree\/v6.2.2"
             },
             "funding": [
                 {
@@ -1623,17 +1623,17 @@
         },
         {
             "name": "symfony\/var-exporter",
-            "version": "v6.2.1",
-            "version_normalized": "6.2.1.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/var-exporter.git",
-                "reference": "8a3f442d48567a5447e984ce9e86875ed768304a"
+                "reference": "ada947160cf9444d17d9ac0b2df46c06941b5526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/var-exporter\/zipball\/8a3f442d48567a5447e984ce9e86875ed768304a",
-                "reference": "8a3f442d48567a5447e984ce9e86875ed768304a",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/var-exporter\/zipball\/ada947160cf9444d17d9ac0b2df46c06941b5526",
+                "reference": "ada947160cf9444d17d9ac0b2df46c06941b5526",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
             "require-dev": {
                 "symfony\/var-dumper": "^5.4|^6.0"
             },
-            "time": "2022-12-03T22:32:58+00:00",
+            "time": "2022-12-12T08:57:11+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1680,7 +1680,7 @@
                 "serialize"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/var-exporter\/tree\/v6.2.1"
+                "source": "https:\/\/github.com\/symfony\/var-exporter\/tree\/v6.2.2"
             },
             "funding": [
                 {
@@ -1700,17 +1700,17 @@
         },
         {
             "name": "symfony\/yaml",
-            "version": "v6.2.0",
-            "version_normalized": "6.2.0.0",
+            "version": "v6.2.2",
+            "version_normalized": "6.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/yaml.git",
-                "reference": "f2570f21bd4adc3589aa3133323273995109bae0"
+                "reference": "6ed8243aa5f2cb5a57009f826b5e7fb3c4200cf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/yaml\/zipball\/f2570f21bd4adc3589aa3133323273995109bae0",
-                "reference": "f2570f21bd4adc3589aa3133323273995109bae0",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/yaml\/zipball\/6ed8243aa5f2cb5a57009f826b5e7fb3c4200cf3",
+                "reference": "6ed8243aa5f2cb5a57009f826b5e7fb3c4200cf3",
                 "shasum": ""
             },
             "require": {
@@ -1726,7 +1726,7 @@
             "suggest": {
                 "symfony\/console": "For validating YAML files using the lint command"
             },
-            "time": "2022-11-25T19:00:27+00:00",
+            "time": "2022-12-14T16:11:27+00:00",
             "bin": [
                 "Resources\/bin\/yaml-lint"
             ],
@@ -1757,7 +1757,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/yaml\/tree\/v6.2.0"
+                "source": "https:\/\/github.com\/symfony\/yaml\/tree\/v6.2.2"
             },
             "funding": [
                 {
