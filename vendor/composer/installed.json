@@ -1782,7 +1782,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/autowire-array-parameter",
-                "reference": "a79fb059aba39601276bd1b787db54649f7fbac9"
+                "reference": "94db55f363a894c490a34ad7c0dec6f36cc965b7"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -1791,7 +1791,6 @@
             },
             "conflict": {
                 "symplify\/coding-standard": "<11.1.18",
-                "symplify\/composer-json-manipulator": "<11.1.18",
                 "symplify\/config-transformer": "<11.1.18",
                 "symplify\/easy-ci": "<11.1.18",
                 "symplify\/easy-coding-standard": "<11.1.18",
@@ -1848,7 +1847,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/package-builder",
-                "reference": "300577aa880f0e2fbc6a53a6835779805f019db5"
+                "reference": "06fd76a6af6b0cc1649a313b9720ec2555f2f93e"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -1862,7 +1861,6 @@
             "conflict": {
                 "symplify\/autowire-array-parameter": "<11.1.18",
                 "symplify\/coding-standard": "<11.1.18",
-                "symplify\/composer-json-manipulator": "<11.1.18",
                 "symplify\/config-transformer": "<11.1.18",
                 "symplify\/easy-ci": "<11.1.18",
                 "symplify\/easy-coding-standard": "<11.1.18",
@@ -1917,7 +1915,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "d0c6cd9790e83044dc5f214cc3bee901efb9aa34"
+                "reference": "05a5292a7f68eca0f7f80838514451be97b51cd3"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -1928,7 +1926,6 @@
             "conflict": {
                 "symplify\/autowire-array-parameter": "<11.1.18",
                 "symplify\/coding-standard": "<11.1.18",
-                "symplify\/composer-json-manipulator": "<11.1.18",
                 "symplify\/config-transformer": "<11.1.18",
                 "symplify\/easy-ci": "<11.1.18",
                 "symplify\/easy-coding-standard": "<11.1.18",
@@ -1988,7 +1985,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/smart-file-system",
-                "reference": "fcef05ad6623bf5415869c52ac46d5876181aa20"
+                "reference": "8f1f107b1bd9fdf79e56d1e877561242af4b311e"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -1999,7 +1996,6 @@
             "conflict": {
                 "symplify\/autowire-array-parameter": "<11.1.18",
                 "symplify\/coding-standard": "<11.1.18",
-                "symplify\/composer-json-manipulator": "<11.1.18",
                 "symplify\/config-transformer": "<11.1.18",
                 "symplify\/easy-ci": "<11.1.18",
                 "symplify\/easy-coding-standard": "<11.1.18",
@@ -2053,7 +2049,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/symplify-kernel",
-                "reference": "bc0b0c9e515fb7b49a9b8cc9cf5720b7002b0c7a"
+                "reference": "dde7aedcb7caf1da95303a6de08d07fd25a2cc0f"
             },
             "require": {
                 "php": ">=8.1",
@@ -2066,7 +2062,6 @@
             },
             "conflict": {
                 "symplify\/coding-standard": "<11.1.18",
-                "symplify\/composer-json-manipulator": "<11.1.18",
                 "symplify\/config-transformer": "<11.1.18",
                 "symplify\/easy-ci": "<11.1.18",
                 "symplify\/easy-coding-standard": "<11.1.18",
