@@ -70,7 +70,7 @@ final class RoutingConfiguratorReturnClosureFactory
                 $stmt = $routingCaseConverter->convertToMethodCall($key, $values);
                 break;
             }
-            if ($stmt === null) {
+            if (!$stmt instanceof Stmt) {
                 continue;
             }
             $stmts[] = $stmt;
