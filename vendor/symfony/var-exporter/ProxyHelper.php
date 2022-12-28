@@ -115,7 +115,7 @@ EOPHP;
             break;
         }
         foreach ($methodReflectors as $method) {
-            if ($method->isStatic() || isset($methods[$lcName = \strtolower($method->name)])) {
+            if ($method->isStatic() && !$method->isAbstract() || isset($methods[$lcName = \strtolower($method->name)])) {
                 continue;
             }
             if ($method->isFinal()) {
@@ -129,7 +129,9 @@ EOPHP;
             }
             $signature = self::exportSignature($method);
             $parentCall = $method->isAbstract() ? "throw new \\BadMethodCallException('Cannot forward abstract method \"{$method->class}::{$method->name}()\".')" : "parent::{$method->name}(...\\func_get_args())";
-            if (\substr_compare($signature, '): never', -\strlen('): never')) === 0 || \substr_compare($signature, '): void', -\strlen('): void')) === 0) {
+            if ($method->isStatic()) {
+                $body = "        {$parentCall};";
+            } elseif (\substr_compare($signature, '): never', -\strlen('): never')) === 0 || \substr_compare($signature, '): void', -\strlen('): void')) === 0) {
                 $body = <<<EOPHP
         if (isset(\$this->lazyObjectReal)) {
             \$this->lazyObjectReal->{$method->name}(...\\func_get_args());

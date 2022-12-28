@@ -161,7 +161,7 @@ trait RedisTrait
                     if (!isset($params['redis_sentinel'])) {
                         break;
                     }
-                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
+                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::OPT_NULL_MULTIBULK_AS_NULL') ? [$params['auth'] ?? ''] : []);
                     if ($address = $sentinel->getMasterAddrByName($params['redis_sentinel'])) {
                         [$host, $port] = $address;
                     }
@@ -170,7 +170,7 @@ trait RedisTrait
                     throw new InvalidArgumentException(\sprintf('Failed to retrieve master information from sentinel "%s" and dsn "%s".', $params['redis_sentinel'], $dsn));
                 }
                 try {
-                    @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [['stream' => $params['ssl'] ?? null]] : []);
+                    @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [['auth' => $params['auth'] ?? '', 'stream' => $params['ssl'] ?? null]] : []);
                     \set_error_handler(function ($type, $msg) use(&$error) {
                         $error = $msg;
                     });
