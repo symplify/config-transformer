@@ -161,7 +161,11 @@ trait RedisTrait
                     if (!isset($params['redis_sentinel'])) {
                         break;
                     }
-                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::OPT_NULL_MULTIBULK_AS_NULL') ? [$params['auth'] ?? ''] : []);
+                    $extra = [];
+                    if (\defined('Redis::OPT_NULL_MULTIBULK_AS_NULL') && isset($params['auth'])) {
+                        $extra = [$params['auth']];
+                    }
+                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...$extra);
                     if ($address = $sentinel->getMasterAddrByName($params['redis_sentinel'])) {
                         [$host, $port] = $address;
                     }
@@ -170,7 +174,11 @@ trait RedisTrait
                     throw new InvalidArgumentException(\sprintf('Failed to retrieve master information from sentinel "%s" and dsn "%s".', $params['redis_sentinel'], $dsn));
                 }
                 try {
-                    @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [['auth' => $params['auth'] ?? '', 'stream' => $params['ssl'] ?? null]] : []);
+                    $extra = ['stream' => $params['ssl'] ?? null];
+                    if (isset($params['auth'])) {
+                        $extra['auth'] = $params['auth'];
+                    }
+                    @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [$extra] : []);
                     \set_error_handler(function ($type, $msg) use(&$error) {
                         $error = $msg;
                     });
@@ -180,7 +188,7 @@ trait RedisTrait
                         \restore_error_handler();
                     }
                     if (!$isConnected) {
-                        $error = \preg_match('/^Redis::p?connect\\(\\): (.*)/', $error ?? $redis->getLastError(), $error) ? \sprintf(' (%s)', $error[1]) : '';
+                        $error = \preg_match('/^Redis::p?connect\\(\\): (.*)/', $error ?? $redis->getLastError() ?? '', $error) ? \sprintf(' (%s)', $error[1]) : '';
                         throw new InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $error . '.');
                     }
                     if (null !== $auth && !$redis->auth($auth) || $params['dbindex'] && !$redis->select($params['dbindex'])) {
