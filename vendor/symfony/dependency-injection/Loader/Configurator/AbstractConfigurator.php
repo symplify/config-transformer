@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202212\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Parameter;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202301\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Parameter;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202301\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console\Input;
+namespace ConfigTransformer202301\Symfony\Component\Console\Input;
 
-use ConfigTransformer202212\Symfony\Component\Console\Command\Command;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\Suggestion;
-use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202301\Symfony\Component\Console\Command\Command;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\Suggestion;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line argument.
  *

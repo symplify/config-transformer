@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\PhpParser\Node\Stmt;
+namespace ConfigTransformer202301\PhpParser\Node\Stmt;
 
-use ConfigTransformer202212\PhpParser\Node;
-use ConfigTransformer202212\PhpParser\Node\ComplexType;
-use ConfigTransformer202212\PhpParser\Node\Identifier;
-use ConfigTransformer202212\PhpParser\Node\Name;
+use ConfigTransformer202301\PhpParser\Node;
+use ConfigTransformer202301\PhpParser\Node\ComplexType;
+use ConfigTransformer202301\PhpParser\Node\Identifier;
+use ConfigTransformer202301\PhpParser\Node\Name;
 class Property extends Node\Stmt
 {
     /** @var int Modifiers */

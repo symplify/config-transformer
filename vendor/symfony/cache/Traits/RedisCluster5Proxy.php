@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202301\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202212\Symfony\Component\VarExporter\LazyObjectInterface;
-use ConfigTransformer202212\Symfony\Component\VarExporter\LazyProxyTrait;
-use ConfigTransformer202212\Symfony\Contracts\Service\ResetInterface;
+use ConfigTransformer202301\Symfony\Component\VarExporter\LazyObjectInterface;
+use ConfigTransformer202301\Symfony\Component\VarExporter\LazyProxyTrait;
+use ConfigTransformer202301\Symfony\Contracts\Service\ResetInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Hydrator::class);
-\class_exists(\ConfigTransformer202212\Symfony\Component\VarExporter\Internal\LazyObjectRegistry::class);
-\class_exists(\ConfigTransformer202212\Symfony\Component\VarExporter\Internal\LazyObjectState::class);
+\class_exists(\ConfigTransformer202301\Symfony\Component\VarExporter\Internal\Hydrator::class);
+\class_exists(\ConfigTransformer202301\Symfony\Component\VarExporter\Internal\LazyObjectRegistry::class);
+\class_exists(\ConfigTransformer202301\Symfony\Component\VarExporter\Internal\LazyObjectState::class);
 /**
  * @internal
  */

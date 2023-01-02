@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\Symplify\PackageBuilder\Console\Formatter;
+namespace ConfigTransformer202301\Symplify\PackageBuilder\Console\Formatter;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
-use ConfigTransformer202212\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202301\Nette\Utils\Strings;
+use ConfigTransformer202301\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Inspired by @see https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/src/Differ/DiffConsoleFormatter.php to be
  * used as standalone class, without need to require whole package by Dariusz Rumiński <dariusz.ruminski@gmail.com>

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202212\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202212\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202212\PhpParser\Node\Stmt;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202301\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202301\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202301\PhpParser\Node\Stmt;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;

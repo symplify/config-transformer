@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\ParameterBag;
 
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *

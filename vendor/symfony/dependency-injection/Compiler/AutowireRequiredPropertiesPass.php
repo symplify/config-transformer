@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\TypedReference;
-use ConfigTransformer202212\Symfony\Contracts\Service\Attribute\Required;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202301\Symfony\Contracts\Service\Attribute\Required;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" properties.
  *

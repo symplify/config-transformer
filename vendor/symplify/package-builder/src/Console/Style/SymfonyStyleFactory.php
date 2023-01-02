@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\Symplify\PackageBuilder\Console\Style;
+namespace ConfigTransformer202301\Symplify\PackageBuilder\Console\Style;
 
-use ConfigTransformer202212\Symfony\Component\Console\Application;
-use ConfigTransformer202212\Symfony\Component\Console\Input\ArgvInput;
-use ConfigTransformer202212\Symfony\Component\Console\Output\ConsoleOutput;
-use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Style\SymfonyStyle;
-use ConfigTransformer202212\Symplify\PackageBuilder\Reflection\PrivatesCaller;
+use ConfigTransformer202301\Symfony\Component\Console\Application;
+use ConfigTransformer202301\Symfony\Component\Console\Input\ArgvInput;
+use ConfigTransformer202301\Symfony\Component\Console\Output\ConsoleOutput;
+use ConfigTransformer202301\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202301\Symplify\PackageBuilder\Reflection\PrivatesCaller;
 /**
  * @api
  */
@@ -47,6 +47,6 @@ final class SymfonyStyleFactory
      */
     private function isPHPUnitRun() : bool
     {
-        return \defined('ConfigTransformer202212\\PHPUNIT_COMPOSER_INSTALL') || \defined('ConfigTransformer202212\\__PHPUNIT_PHAR__');
+        return \defined('ConfigTransformer202301\\PHPUNIT_COMPOSER_INSTALL') || \defined('ConfigTransformer202301\\__PHPUNIT_PHAR__');
     }
 }

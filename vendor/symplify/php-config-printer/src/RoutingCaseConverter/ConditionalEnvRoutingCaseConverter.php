@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
-use ConfigTransformer202212\PhpParser\Node\Expr\BinaryOp\Identical;
-use ConfigTransformer202212\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202212\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202212\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202212\PhpParser\Node\Stmt;
-use ConfigTransformer202212\PhpParser\Node\Stmt\If_;
-use ConfigTransformer202212\Symfony\Contracts\Service\Attribute\Required;
+use ConfigTransformer202301\Nette\Utils\Strings;
+use ConfigTransformer202301\PhpParser\Node\Expr\BinaryOp\Identical;
+use ConfigTransformer202301\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202301\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202301\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202301\PhpParser\Node\Stmt;
+use ConfigTransformer202301\PhpParser\Node\Stmt\If_;
+use ConfigTransformer202301\Symfony\Contracts\Service\Attribute\Required;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;

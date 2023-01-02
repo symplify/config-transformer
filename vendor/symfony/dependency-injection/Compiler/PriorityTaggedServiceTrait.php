@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler;
 
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\TypedReference;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Trait that allows a generic method to find and sort service by priority option in the tag.
  *

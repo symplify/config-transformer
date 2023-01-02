@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Attribute;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Attribute;
 
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Reference;
-use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Reference;
+use ConfigTransformer202301\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * Attribute to tell a parameter how to be autowired.
  *

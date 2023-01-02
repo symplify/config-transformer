@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract;
 
-use ConfigTransformer202212\PhpParser\Node\Stmt;
+use ConfigTransformer202301\PhpParser\Node\Stmt;
 interface CaseConverterInterface
 {
     /**

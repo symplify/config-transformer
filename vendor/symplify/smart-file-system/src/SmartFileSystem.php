@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\Symplify\SmartFileSystem;
+namespace ConfigTransformer202301\Symplify\SmartFileSystem;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
-use ConfigTransformer202212\Symfony\Component\Filesystem\Exception\IOException;
-use ConfigTransformer202212\Symfony\Component\Filesystem\Filesystem;
+use ConfigTransformer202301\Nette\Utils\Strings;
+use ConfigTransformer202301\Symfony\Component\Filesystem\Exception\IOException;
+use ConfigTransformer202301\Symfony\Component\Filesystem\Filesystem;
 final class SmartFileSystem extends Filesystem
 {
     /**

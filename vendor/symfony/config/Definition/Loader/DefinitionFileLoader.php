@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Config\Definition\Loader;
+namespace ConfigTransformer202301\Symfony\Component\Config\Definition\Loader;
 
-use ConfigTransformer202212\Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
-use ConfigTransformer202212\Symfony\Component\Config\FileLocatorInterface;
-use ConfigTransformer202212\Symfony\Component\Config\Loader\FileLoader;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
+use ConfigTransformer202301\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformer202301\Symfony\Component\Config\Loader\FileLoader;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * DefinitionFileLoader loads config definitions from a PHP file.
  *

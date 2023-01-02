@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console\Question;
+namespace ConfigTransformer202301\Symfony\Component\Console\Question;
 
-use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\Console\Exception\LogicException;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a Question.
  *

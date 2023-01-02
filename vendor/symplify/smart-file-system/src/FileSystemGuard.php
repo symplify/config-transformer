@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\Symplify\SmartFileSystem;
+namespace ConfigTransformer202301\Symplify\SmartFileSystem;
 
-use ConfigTransformer202212\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
-use ConfigTransformer202212\Symplify\SmartFileSystem\Exception\FileNotFoundException;
+use ConfigTransformer202301\Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
+use ConfigTransformer202301\Symplify\SmartFileSystem\Exception\FileNotFoundException;
 final class FileSystemGuard
 {
     public function ensureFileExists(string $file, string $location) : void

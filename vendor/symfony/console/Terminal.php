@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console;
+namespace ConfigTransformer202301\Symfony\Component\Console;
 
-use ConfigTransformer202212\Symfony\Component\Console\Output\AnsiColorMode;
+use ConfigTransformer202301\Symfony\Component\Console\Output\AnsiColorMode;
 class Terminal
 {
     public const DEFAULT_COLOR_MODE = AnsiColorMode::Ansi4;
@@ -69,9 +69,8 @@ class Terminal
     }
     /**
      * Force a terminal color mode rendering.
-     * @param ?\Symfony\Component\Console\Output\AnsiColorMode::* $colorMode
      */
-    public static function setColorMode($colorMode) : void
+    public static function setColorMode(?AnsiColorMode $colorMode) : void
     {
         self::$colorMode = $colorMode;
     }

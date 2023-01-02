@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Cache\Adapter;
+namespace ConfigTransformer202301\Symfony\Component\Cache\Adapter;
 
-use ConfigTransformer202212\Psr\Log\LoggerAwareInterface;
-use ConfigTransformer202212\Psr\Log\LoggerInterface;
-use ConfigTransformer202212\Symfony\Component\Cache\CacheItem;
-use ConfigTransformer202212\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\Cache\ResettableInterface;
-use ConfigTransformer202212\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use ConfigTransformer202212\Symfony\Component\Cache\Traits\ContractsTrait;
-use ConfigTransformer202212\Symfony\Contracts\Cache\CacheInterface;
+use ConfigTransformer202301\Psr\Log\LoggerAwareInterface;
+use ConfigTransformer202301\Psr\Log\LoggerInterface;
+use ConfigTransformer202301\Symfony\Component\Cache\CacheItem;
+use ConfigTransformer202301\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\Cache\ResettableInterface;
+use ConfigTransformer202301\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use ConfigTransformer202301\Symfony\Component\Cache\Traits\ContractsTrait;
+use ConfigTransformer202301\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

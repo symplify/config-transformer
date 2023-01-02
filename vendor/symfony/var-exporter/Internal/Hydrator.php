@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\VarExporter\Internal;
+namespace ConfigTransformer202301\Symfony\Component\VarExporter\Internal;
 
-use ConfigTransformer202212\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use ConfigTransformer202301\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console\Helper;
+namespace ConfigTransformer202301\Symfony\Component\Console\Helper;
 
-use ConfigTransformer202212\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202212\Symfony\Component\Console\Question\ConfirmationQuestion;
-use ConfigTransformer202212\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202212\Symfony\Component\Console\Style\SymfonyStyle;
+use ConfigTransformer202301\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202301\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer202301\Symfony\Component\Console\Question\ConfirmationQuestion;
+use ConfigTransformer202301\Symfony\Component\Console\Question\Question;
+use ConfigTransformer202301\Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Symfony Style Guide compliant question helper.
  *

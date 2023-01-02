@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\VarExporter;
+namespace ConfigTransformer202301\Symfony\Component\VarExporter;
 
-use ConfigTransformer202212\Symfony\Component\VarExporter\Exception\LogicException;
-use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\Hydrator;
-use ConfigTransformer202212\Symfony\Component\VarExporter\Internal\LazyObjectRegistry;
+use ConfigTransformer202301\Symfony\Component\VarExporter\Exception\LogicException;
+use ConfigTransformer202301\Symfony\Component\VarExporter\Internal\Hydrator;
+use ConfigTransformer202301\Symfony\Component\VarExporter\Internal\LazyObjectRegistry;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -199,7 +199,7 @@ EOPHP;
     {
         $parameters = [];
         foreach ($function->getParameters() as $param) {
-            $parameters[] = ((\method_exists($param, 'getAttributes') ? $param->getAttributes(\ConfigTransformer202212\SensitiveParameter::class) : []) ? '#[\\SensitiveParameter] ' : '') . ($withParameterTypes && $param->hasType() ? self::exportType($param) . ' ' : '') . ($param->isPassedByReference() ? '&' : '') . ($param->isVariadic() ? '...' : '') . '$' . $param->name . ($param->isOptional() && !$param->isVariadic() ? ' = ' . self::exportDefault($param) : '');
+            $parameters[] = ((\method_exists($param, 'getAttributes') ? $param->getAttributes(\ConfigTransformer202301\SensitiveParameter::class) : []) ? '#[\\SensitiveParameter] ' : '') . ($withParameterTypes && $param->hasType() ? self::exportType($param) . ' ' : '') . ($param->isPassedByReference() ? '&' : '') . ($param->isVariadic() ? '...' : '') . '$' . $param->name . ($param->isOptional() && !$param->isVariadic() ? ' = ' . self::exportDefault($param) : '');
         }
         $signature = 'function ' . ($function->returnsReference() ? '&' : '') . ($function->isClosure() ? '' : $function->name) . '(' . \implode(', ', $parameters) . ')';
         if ($function instanceof \ReflectionMethod) {

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Contracts\Service\Attribute;
+namespace ConfigTransformer202301\Symfony\Contracts\Service\Attribute;
 
-use ConfigTransformer202212\Symfony\Contracts\Service\ServiceSubscriberInterface;
-use ConfigTransformer202212\Symfony\Contracts\Service\ServiceSubscriberTrait;
+use ConfigTransformer202301\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use ConfigTransformer202301\Symfony\Contracts\Service\ServiceSubscriberTrait;
 /**
  * For use as the return value for {@see ServiceSubscriberInterface}.
  *

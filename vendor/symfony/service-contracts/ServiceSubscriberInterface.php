@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Contracts\Service;
+namespace ConfigTransformer202301\Symfony\Contracts\Service;
 
-use ConfigTransformer202212\Symfony\Contracts\Service\Attribute\SubscribedService;
+use ConfigTransformer202301\Symfony\Contracts\Service\Attribute\SubscribedService;
 /**
  * A ServiceSubscriber exposes its dependencies via the static {@link getSubscribedServices} method.
  *

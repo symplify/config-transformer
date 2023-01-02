@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Cache\Traits;
+namespace ConfigTransformer202301\Symfony\Component\Cache\Traits;
 
-use ConfigTransformer202212\Symfony\Component\Cache\Exception\CacheException;
-use ConfigTransformer202212\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use ConfigTransformer202301\Symfony\Component\Cache\Exception\CacheException;
+use ConfigTransformer202301\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>

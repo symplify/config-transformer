@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
-use ConfigTransformer202212\PhpParser\Node\Arg;
-use ConfigTransformer202212\PhpParser\Node\Expr\BinaryOp\Concat;
-use ConfigTransformer202212\PhpParser\Node\Expr\MethodCall;
-use ConfigTransformer202212\PhpParser\Node\Expr\Variable;
-use ConfigTransformer202212\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202212\PhpParser\Node\Stmt;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Expression;
-use ConfigTransformer202212\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
+use ConfigTransformer202301\Nette\Utils\Strings;
+use ConfigTransformer202301\PhpParser\Node\Arg;
+use ConfigTransformer202301\PhpParser\Node\Expr\BinaryOp\Concat;
+use ConfigTransformer202301\PhpParser\Node\Expr\MethodCall;
+use ConfigTransformer202301\PhpParser\Node\Expr\Variable;
+use ConfigTransformer202301\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202301\PhpParser\Node\Stmt;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Expression;
+use ConfigTransformer202301\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\Exception\ShouldNotHappenException;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\String\Slugger;
+namespace ConfigTransformer202301\Symfony\Component\String\Slugger;
 
-use ConfigTransformer202212\Symfony\Component\Intl\Transliterator\EmojiTransliterator;
-use ConfigTransformer202212\Symfony\Component\String\AbstractUnicodeString;
-use ConfigTransformer202212\Symfony\Component\String\UnicodeString;
-use ConfigTransformer202212\Symfony\Contracts\Translation\LocaleAwareInterface;
+use ConfigTransformer202301\Symfony\Component\Intl\Transliterator\EmojiTransliterator;
+use ConfigTransformer202301\Symfony\Component\String\AbstractUnicodeString;
+use ConfigTransformer202301\Symfony\Component\String\UnicodeString;
+use ConfigTransformer202301\Symfony\Contracts\Translation\LocaleAwareInterface;
 if (!\interface_exists(LocaleAwareInterface::class)) {
     throw new \LogicException('You cannot use the "Symfony\\Component\\String\\Slugger\\AsciiSlugger" as the "symfony/translation-contracts" package is not installed. Try running "composer require symfony/translation-contracts".');
 }

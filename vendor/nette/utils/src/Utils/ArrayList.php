@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202212\Nette\Utils;
+namespace ConfigTransformer202301\Nette\Utils;
 
-use ConfigTransformer202212\Nette;
+use ConfigTransformer202301\Nette;
 /**
  * Provides the base class for a generic list (items can be accessed by index).
  * @template T

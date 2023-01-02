@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console\Command;
+namespace ConfigTransformer202301\Symfony\Component\Console\Command;
 
-use ConfigTransformer202212\Symfony\Component\Console\Application;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionInput;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\CompletionSuggestions;
-use ConfigTransformer202212\Symfony\Component\Console\Completion\Suggestion;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\HelperInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\HelperSet;
-use ConfigTransformer202212\Symfony\Component\Console\Input\InputDefinition;
-use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Application;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\CompletionInput;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\CompletionSuggestions;
+use ConfigTransformer202301\Symfony\Component\Console\Completion\Suggestion;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\HelperInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\HelperSet;
+use ConfigTransformer202301\Symfony\Component\Console\Input\InputDefinition;
+use ConfigTransformer202301\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

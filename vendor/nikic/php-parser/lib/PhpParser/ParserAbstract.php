@@ -1,29 +1,29 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\PhpParser;
+namespace ConfigTransformer202301\PhpParser;
 
 /*
  * This parser is based on a skeleton written by Moriyoshi Koizumi, which in
  * turn is based on work by Masato Bito.
  */
-use ConfigTransformer202212\PhpParser\Node\Expr;
-use ConfigTransformer202212\PhpParser\Node\Expr\Cast\Double;
-use ConfigTransformer202212\PhpParser\Node\Name;
-use ConfigTransformer202212\PhpParser\Node\Param;
-use ConfigTransformer202212\PhpParser\Node\Scalar\Encapsed;
-use ConfigTransformer202212\PhpParser\Node\Scalar\LNumber;
-use ConfigTransformer202212\PhpParser\Node\Scalar\String_;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Class_;
-use ConfigTransformer202212\PhpParser\Node\Stmt\ClassConst;
-use ConfigTransformer202212\PhpParser\Node\Stmt\ClassMethod;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Enum_;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Interface_;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Namespace_;
-use ConfigTransformer202212\PhpParser\Node\Stmt\Property;
-use ConfigTransformer202212\PhpParser\Node\Stmt\TryCatch;
-use ConfigTransformer202212\PhpParser\Node\Stmt\UseUse;
-use ConfigTransformer202212\PhpParser\Node\VarLikeIdentifier;
+use ConfigTransformer202301\PhpParser\Node\Expr;
+use ConfigTransformer202301\PhpParser\Node\Expr\Cast\Double;
+use ConfigTransformer202301\PhpParser\Node\Name;
+use ConfigTransformer202301\PhpParser\Node\Param;
+use ConfigTransformer202301\PhpParser\Node\Scalar\Encapsed;
+use ConfigTransformer202301\PhpParser\Node\Scalar\LNumber;
+use ConfigTransformer202301\PhpParser\Node\Scalar\String_;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Class_;
+use ConfigTransformer202301\PhpParser\Node\Stmt\ClassConst;
+use ConfigTransformer202301\PhpParser\Node\Stmt\ClassMethod;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Enum_;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Interface_;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Namespace_;
+use ConfigTransformer202301\PhpParser\Node\Stmt\Property;
+use ConfigTransformer202301\PhpParser\Node\Stmt\TryCatch;
+use ConfigTransformer202301\PhpParser\Node\Stmt\UseUse;
+use ConfigTransformer202301\PhpParser\Node\VarLikeIdentifier;
 abstract class ParserAbstract implements Parser
 {
     const SYMBOL_NONE = -1;

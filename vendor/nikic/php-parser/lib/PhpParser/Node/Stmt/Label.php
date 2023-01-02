@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\PhpParser\Node\Stmt;
+namespace ConfigTransformer202301\PhpParser\Node\Stmt;
 
-use ConfigTransformer202212\PhpParser\Node\Identifier;
-use ConfigTransformer202212\PhpParser\Node\Stmt;
+use ConfigTransformer202301\PhpParser\Node\Identifier;
+use ConfigTransformer202301\PhpParser\Node\Stmt;
 class Label extends Stmt
 {
     /** @var Identifier Name */

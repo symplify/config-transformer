@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Config\Resource;
+namespace ConfigTransformer202301\Symfony\Component\Config\Resource;
 
-use ConfigTransformer202212\Symfony\Component\Finder\Finder;
-use ConfigTransformer202212\Symfony\Component\Finder\Glob;
+use ConfigTransformer202301\Symfony\Component\Finder\Finder;
+use ConfigTransformer202301\Symfony\Component\Finder\Glob;
 /**
  * GlobResource represents a set of resources stored on the filesystem.
  *

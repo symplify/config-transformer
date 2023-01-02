@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\Symplify\AutowireArrayParameter\DocBlock;
+namespace ConfigTransformer202301\Symplify\AutowireArrayParameter\DocBlock;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
+use ConfigTransformer202301\Nette\Utils\Strings;
 /**
  * @see \Symplify\AutowireArrayParameter\Tests\DocBlock\ParamTypeDocBlockResolverTest
  */

@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace ConfigTransformer202212\Nette\Localization;
+namespace ConfigTransformer202301\Nette\Localization;
 
 /**
  * Translator adapter.

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Alias;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ChildDefinition;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Alias;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ChildDefinition;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

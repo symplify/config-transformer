@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Config\Definition\Dumper;
+namespace ConfigTransformer202301\Symfony\Component\Config\Definition\Dumper;
 
-use ConfigTransformer202212\Symfony\Component\Config\Definition\ArrayNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\BaseNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\BooleanNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\ConfigurationInterface;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\EnumNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\FloatNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\IntegerNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\NodeInterface;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use ConfigTransformer202212\Symfony\Component\Config\Definition\ScalarNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\ArrayNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\BaseNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\BooleanNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\EnumNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\FloatNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\IntegerNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\NodeInterface;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\ScalarNode;
 /**
  * Dumps an XML reference configuration for the given configuration/node instance.
  *

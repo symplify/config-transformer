@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Config\Definition;
+namespace ConfigTransformer202301\Symfony\Component\Config\Definition;
 
-use ConfigTransformer202212\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use ConfigTransformer202301\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * Node which only allows a finite set of values.
  *

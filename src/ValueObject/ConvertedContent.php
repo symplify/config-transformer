@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use ConfigTransformer202212\Nette\Utils\Strings;
-use ConfigTransformer202212\Symplify\SmartFileSystem\SmartFileInfo;
+use ConfigTransformer202301\Nette\Utils\Strings;
+use ConfigTransformer202301\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
     /**

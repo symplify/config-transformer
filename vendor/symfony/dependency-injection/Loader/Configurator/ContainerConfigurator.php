@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ConfigTransformer202212\Symfony\Component\Config\Loader\ParamConfigurator;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ContainerBuilder;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Definition;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202301\Symfony\Component\Config\Loader\ParamConfigurator;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Definition;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformer202301\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

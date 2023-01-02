@@ -8,42 +8,42 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\DependencyInjection;
+namespace ConfigTransformer202301\Symfony\Component\DependencyInjection;
 
-use ConfigTransformer202212\Composer\InstalledVersions;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\ClassExistenceResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\ComposerResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\DirectoryResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\FileExistenceResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\FileResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\GlobResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\ReflectionClassResource;
-use ConfigTransformer202212\Symfony\Component\Config\Resource\ResourceInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Attribute\Target;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler\Compiler;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Compiler\ResolveEnvPlaceholdersPass;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\LogicException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\RealServiceInstantiator;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use ConfigTransformer202212\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\Expression;
-use ConfigTransformer202212\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use ConfigTransformer202301\Composer\InstalledVersions;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\ClassExistenceResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\ComposerResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\DirectoryResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\FileExistenceResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\FileResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\GlobResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\ReflectionClassResource;
+use ConfigTransformer202301\Symfony\Component\Config\Resource\ResourceInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Attribute\Target;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler\Compiler;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Compiler\ResolveEnvPlaceholdersPass;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\InstantiatorInterface;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\LazyProxy\Instantiator\RealServiceInstantiator;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use ConfigTransformer202301\Symfony\Component\ExpressionLanguage\Expression;
+use ConfigTransformer202301\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 /**
  * ContainerBuilder is a DI container that provides an API to easily describe services.
  *

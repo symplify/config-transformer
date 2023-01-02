@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace ConfigTransformer202212\PhpParser\Node\Expr\AssignOp;
+namespace ConfigTransformer202301\PhpParser\Node\Expr\AssignOp;
 
-use ConfigTransformer202212\PhpParser\Node\Expr\AssignOp;
+use ConfigTransformer202301\PhpParser\Node\Expr\AssignOp;
 class Mul extends AssignOp
 {
     public function getType() : string

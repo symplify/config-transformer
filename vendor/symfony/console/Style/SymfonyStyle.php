@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ConfigTransformer202212\Symfony\Component\Console\Style;
+namespace ConfigTransformer202301\Symfony\Component\Console\Style;
 
-use ConfigTransformer202212\Symfony\Component\Console\Exception\InvalidArgumentException;
-use ConfigTransformer202212\Symfony\Component\Console\Exception\RuntimeException;
-use ConfigTransformer202212\Symfony\Component\Console\Formatter\OutputFormatter;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\Helper;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\OutputWrapper;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\ProgressBar;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\Table;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\TableCell;
-use ConfigTransformer202212\Symfony\Component\Console\Helper\TableSeparator;
-use ConfigTransformer202212\Symfony\Component\Console\Input\InputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Output\OutputInterface;
-use ConfigTransformer202212\Symfony\Component\Console\Output\TrimmedBufferOutput;
-use ConfigTransformer202212\Symfony\Component\Console\Question\ChoiceQuestion;
-use ConfigTransformer202212\Symfony\Component\Console\Question\ConfirmationQuestion;
-use ConfigTransformer202212\Symfony\Component\Console\Question\Question;
-use ConfigTransformer202212\Symfony\Component\Console\Terminal;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ConfigTransformer202301\Symfony\Component\Console\Exception\RuntimeException;
+use ConfigTransformer202301\Symfony\Component\Console\Formatter\OutputFormatter;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\Helper;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\OutputWrapper;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\ProgressBar;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\Table;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\TableCell;
+use ConfigTransformer202301\Symfony\Component\Console\Helper\TableSeparator;
+use ConfigTransformer202301\Symfony\Component\Console\Input\InputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Output\OutputInterface;
+use ConfigTransformer202301\Symfony\Component\Console\Output\TrimmedBufferOutput;
+use ConfigTransformer202301\Symfony\Component\Console\Question\ChoiceQuestion;
+use ConfigTransformer202301\Symfony\Component\Console\Question\ConfirmationQuestion;
+use ConfigTransformer202301\Symfony\Component\Console\Question\Question;
+use ConfigTransformer202301\Symfony\Component\Console\Terminal;
 /**
  * Output decorator helpers for the Symfony Style Guide.
  *
