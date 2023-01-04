@@ -1,6 +1,7 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
+
 namespace Symplify\ConfigTransformer\Routing;
 
 /**
@@ -8,15 +9,17 @@ namespace Symplify\ConfigTransformer\Routing;
  */
 final class RoutingConfigDetector
 {
-    public function isRoutingFilePath(string $filePath) : bool
+    public function isRoutingFilePath(string $filePath): bool
     {
-        if (\strpos($filePath, \DIRECTORY_SEPARATOR . 'packages' . \DIRECTORY_SEPARATOR) !== \false) {
-            return \false;
+        if (str_contains($filePath, DIRECTORY_SEPARATOR . 'packages' . DIRECTORY_SEPARATOR)) {
+            return false;
         }
+
         // if the paths contains this keyword, we assume it contains routes
-        if (\strpos($filePath, 'routing') !== \false) {
-            return \true;
+        if (str_contains($filePath, 'routing')) {
+            return true;
         }
-        return \strpos($filePath, 'routes') !== \false;
+
+        return str_contains($filePath, 'routes');
     }
 }

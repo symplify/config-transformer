@@ -1,0 +1,11 @@
+parameters:
+    level: 8
+
+    paths:
+        - src
+        - config
+        - tests
+
+    excludePaths:
+        - '*/tests/**/Source/*'
+        - '*/tests/**/Fixture/*'

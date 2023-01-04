@@ -2,101 +2,94 @@
 
 declare(strict_types=1);
 
-use Nette\Utils\Strings;
+use Isolated\Symfony\Component\Finder\Finder;
 
 require __DIR__ . '/vendor/autoload.php';
 
-/**
- * @see https://regex101.com/r/LMDq0p/1
- * @var string
- */
-const POLYFILL_FILE_NAME_REGEX = '#vendor\/symfony\/polyfill\-(.*)\/bootstrap(.*?)\.php#';
+$timestamp = (new DateTime('now'))->format('Ym');
 
-/**
- * @see https://regex101.com/r/RBZ0bN/1
- * @var string
- */
-const POLYFILL_STUBS_NAME_REGEX = '#vendor\/symfony\/polyfill\-(.*)\/Resources\/stubs#';
+// @see https://github.com/humbug/php-scoper/blob/master/docs/further-reading.md
+use Nette\Utils\Strings;
 
-$timestamp = (new DateTime('now'))->format('Ymd');
+$polyfillsBootstraps = array_map(
+    static fn (SplFileInfo $fileInfo) => $fileInfo->getPathname(),
+    iterator_to_array(
+        Finder::create()
+            ->files()
+            ->in(__DIR__ . '/vendor/symfony/polyfill-*')
+            ->name('bootstrap*.php'),
+        false,
+    ),
+);
+
+$polyfillsStubs = array_map(
+    static fn (SplFileInfo $fileInfo) => $fileInfo->getPathname(),
+    iterator_to_array(
+        Finder::create()
+            ->files()
+            ->in(__DIR__ . '/vendor/symfony/polyfill-*/Resources/stubs')
+            ->name('*.php'),
+        false,
+    ),
+);
 
 // see https://github.com/humbug/php-scoper
 return [
-    'prefix' => 'ConfigTransformer' . $timestamp . random_int(0, 10),
-    'files-whitelist' => [
-        // do not prefix "trigger_deprecation" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
+    'prefix' => 'ConfigTransformer' . $timestamp,
+    'expose-constants' => ['#^SYMFONY\_[\p{L}_]+$#'],
+
+    // excluded
+    'exclude-namespaces' => [
+        '#^Symplify\\\\ConfigTransformer#',
+        '#^Symplify\\\\PhpConfigPrinter#',
+        '#^Symfony\\\\Polyfill#',
+    ],
+    'exclude-files' => [
         // these paths are relative to this file location, so it should be in the root directory
         'vendor/symfony/deprecation-contracts/function.php',
-        // for package versions - https://github.com/symplify/easy-coding-standard-prefixed/runs/2176047833
+        ...$polyfillsBootstraps,
+        ...$polyfillsStubs,
     ],
     'patchers' => [
-        // unprefix polyfill functions
-        // @see https://github.com/humbug/php-scoper/issues/440#issuecomment-795160132
+        // unprefix strings used for config printing
+        // fixes https://github.com/symplify/symplify/issues/3976
         function (string $filePath, string $prefix, string $content): string {
-            if (! Strings::match($filePath, POLYFILL_FILE_NAME_REGEX)) {
+            /** @see \Symplify\PhpConfigPrinter\ValueObject\FunctionName */
+            if (! str_ends_with($filePath, 'vendor/symplify/php-config-printer/src/ValueObject/FunctionName.php')) {
                 return $content;
             }
 
-            $content = Strings::replace($content, '#namespace ' . $prefix . ';#', '');
+            $pattern = sprintf('#public const (.*?) = \'%s\\\\\\\\#', $prefix);
 
-            // add missing use statements prefixes
-            // @see https://github.com/symplify/easy-coding-standard/commit/5c11eca46fbe341ac30d0d5da2c51e1596950299#diff-87ecc51ebcf33f4c2699c08f35403560ad1ea98d22771df83a29d00dc5f53a1cR12
-            return Strings::replace($content, '#use Symfony\\\\Polyfill#', 'use ' . $prefix . ' Symfony\Polyfill');
-        },
-        // remove namespace frompoly fill stubs
-        function (string $filePath, string $prefix, string $content): string {
-            if (! Strings::match($filePath, POLYFILL_STUBS_NAME_REGEX)) {
-                return $content;
-            }
-
-            // remove alias to class have origina PHP names - fix in
-            $content = Strings::replace($content, '#\\\\class_alias(.*?);#', '');
-
-            return Strings::replace($content, '#namespace ' . $prefix . ';#', '');
+            return Strings::replace($content, $pattern, 'public const $1 = \'');
         },
 
-        // scope symfony configs
+        // unprefix strings class, used for node factory
+        // fixes https://github.com/symplify/symplify/issues/3976
         function (string $filePath, string $prefix, string $content): string {
-            if (! Strings::match($filePath, '#(packages|config|services)\.php$#')) {
+            if (! str_ends_with($filePath, 'src/NodeFactory/ContainerConfiguratorReturnClosureFactory.php')) {
                 return $content;
             }
 
-            // fix symfony config load scoping, except CodingStandard and EasyCodingStandard
-            $content = Strings::replace(
-                $content,
-                '#load\(\'Symplify\\\\\\\\(?<package_name>[A-Za-z]+)#',
-                function (array $match) use ($prefix) {
-                    if (in_array($match['package_name'], ['CodingStandard', 'EasyCodingStandard'], true)) {
-                        // skip
-                        return $match[0];
-                    }
-
-                    return 'load(\'' . $prefix . '\Symplify\\' . $match['package_name'];
-                }
+            return str_replace(
+                $prefix . '\\\\Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\ContainerConfigurator',
+                'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
+                $content
             );
-
-            return $content;
         },
 
-        // fixes https://github.com/symplify/symplify/issues/3102
+        // unprefix strings class, used for node factory
+        // fixes https://github.com/symplify/symplify/issues/3976
         function (string $filePath, string $prefix, string $content): string {
-            if (! Strings::contains($filePath, 'vendor/')) {
+            if (! str_ends_with($filePath, '/PhpParser/NodeFactory/ConfiguratorClosureNodeFactory.php')) {
                 return $content;
             }
 
-            // @see https://regex101.com/r/lBV8IO/2
-            $fqcnReservedPattern = sprintf('#(\\\\)?%s\\\\(parent|self|static)#m', $prefix);
-            $matches = Strings::matchAll($content, $fqcnReservedPattern);
-
-            if (! $matches) {
-                return $content;
-            }
-
-            foreach ($matches as $match) {
-                $content = str_replace($match[0], $match[2], $content);
-            }
-
-            return $content;
+            return str_replace(
+                $prefix . '\\\\Symfony\\\\Component\\\\Routing\\\\Loader\\\\Configurator\\\\RoutingConfigurator',
+                'Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator',
+                $content
+            );
         },
     ],
 ];
