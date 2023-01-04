@@ -1,10 +1,10 @@
 <?php
 
-declare (strict_types=1);
-namespace ConfigTransformer202301;
+declare(strict_types=1);
 
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
-use ConfigTransformer202301\Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+use Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
+
 $possibleAutoloadPaths = [
     // dependency
     __DIR__ . '/../../../autoload.php',
@@ -13,20 +13,25 @@ $possibleAutoloadPaths = [
     // after split package
     __DIR__ . '/../vendor/autoload.php',
 ];
+
 foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
-    if (\file_exists($possibleAutoloadPath)) {
+    if (file_exists($possibleAutoloadPath)) {
         require_once $possibleAutoloadPath;
         break;
     }
 }
+
 $scoperAutoloadFilepath = __DIR__ . '/../vendor/scoper-autoload.php';
-if (\file_exists($scoperAutoloadFilepath)) {
+if (file_exists($scoperAutoloadFilepath)) {
     require_once $scoperAutoloadFilepath;
 }
+
+
 // this allows to easily convert ECS yaml to php configs
-$codeSnifferAutoload = \getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.php';
-if (\file_exists($codeSnifferAutoload)) {
+$codeSnifferAutoload = getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.php';
+if (file_exists($codeSnifferAutoload)) {
     require_once $codeSnifferAutoload;
 }
+
 $kernelBootAndApplicationRun = new KernelBootAndApplicationRun(ConfigTransformerKernel::class);
 $kernelBootAndApplicationRun->run();
