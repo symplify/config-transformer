@@ -42,7 +42,7 @@ note "Dumping Composer Autoload"
 composer dump-autoload --ansi --classmap-authoritative --no-dev
 
 # make bin/ecs runnable without "php"
-chmod 777 "bin/vendor-patches"
-chmod 777 "bin/vendor-patches.php"
+chmod 777 "bin/config-transformer"
+chmod 777 "bin/config-transformer.php"
 
 note "Finished"
