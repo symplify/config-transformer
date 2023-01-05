@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php 
+namespace ConfigTransformer202301;
+
+require_once __DIR__ . '/monorepo-builder.php';

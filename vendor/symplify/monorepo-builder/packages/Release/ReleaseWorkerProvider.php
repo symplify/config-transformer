@@ -1,0 +1,46 @@
+<?php
+
+declare (strict_types=1);
+namespace ConfigTransformer202301\Symplify\MonorepoBuilder\Release;
+
+use ConfigTransformer202301\Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use ConfigTransformer202301\Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\StageAwareInterface;
+use ConfigTransformer202301\Symplify\MonorepoBuilder\Release\ValueObject\Stage;
+/**
+ * @see \Symplify\MonorepoBuilder\Tests\Release\ReleaseWorkerProvider\ReleaseWorkerProviderTest
+ */
+final class ReleaseWorkerProvider
+{
+    /**
+     * @var ReleaseWorkerInterface[]
+     */
+    private $releaseWorkers;
+    /**
+     * @param ReleaseWorkerInterface[] $releaseWorkers
+     */
+    public function __construct(array $releaseWorkers)
+    {
+        $this->releaseWorkers = $releaseWorkers;
+    }
+    /**
+     * @param Stage::*|string $stage
+     * @return ReleaseWorkerInterface[]|StageAwareInterface[]
+     */
+    public function provideByStage(string $stage) : array
+    {
+        if ($stage === Stage::MAIN) {
+            return $this->releaseWorkers;
+        }
+        $activeReleaseWorkers = [];
+        foreach ($this->releaseWorkers as $releaseWorker) {
+            if (!$releaseWorker instanceof StageAwareInterface) {
+                continue;
+            }
+            if ($stage !== $releaseWorker->getStage()) {
+                continue;
+            }
+            $activeReleaseWorkers[] = $releaseWorker;
+        }
+        return $activeReleaseWorkers;
+    }
+}

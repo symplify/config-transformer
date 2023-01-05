@@ -1,34 +1,37 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformer202301\Symfony\Component\DependencyInjection\Extension\Extension;
 final class AliasAndNamespaceConfigurableExtension extends Extension
 {
-    public function __construct(
-        private string $alias,
-        private string $namespace
-    ) {
+    /**
+     * @var string
+     */
+    private $alias;
+    /**
+     * @var string
+     */
+    private $namespace;
+    public function __construct(string $alias, string $namespace)
+    {
+        $this->alias = $alias;
+        $this->namespace = $namespace;
     }
-
-    public function getAlias(): string
+    public function getAlias() : string
     {
         return $this->alias;
     }
-
-    public function getNamespace(): string
+    public function getNamespace() : string
     {
         return $this->namespace;
     }
-
     /**
      * @param string[] $configs
      */
-    public function load(array $configs, ContainerBuilder $containerBuilder): void
+    public function load(array $configs, ContainerBuilder $containerBuilder) : void
     {
     }
 }
