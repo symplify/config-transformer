@@ -7,5 +7,10 @@
     },
     "bin": [
         "bin/config-transformer"
-    ]
+    ],
+    "autoload": {
+        "files": [
+            "bootstrap.php"
+        ]
+    }
 }

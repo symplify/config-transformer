@@ -35,7 +35,7 @@ $polyfillsStubs = array_map(
 
 // see https://github.com/humbug/php-scoper
 return [
-    'prefix' => 'ConfigTransformer' . $timestamp,
+    'prefix' => 'ConfigTransformerPrefix' . $timestamp,
     'expose-constants' => ['#^SYMFONY\_[\p{L}_]+$#'],
 
     // excluded
