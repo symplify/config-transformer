@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
 use Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;
 
+define('__CONFIG_TRANSFORMER_RUNNING__', true);
+
 $possibleAutoloadPaths = [
     // dependency
     __DIR__ . '/../../../autoload.php',
