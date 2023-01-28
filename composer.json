@@ -65,7 +65,5 @@
         "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
         "rector": "vendor/bin/rector process --dry-run --ansi",
         "release": "vendor/bin/monorepo-builder release patch --ansi"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
