@@ -51,9 +51,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-main": "11.2-dev"
-        },
         "patches": {
             "symfony/dependency-injection": [
                 "patches/symfony-dependency-injection-loader-yamlfileloader-php.patch",
