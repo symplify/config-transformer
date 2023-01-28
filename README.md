@@ -1,8 +1,8 @@
-# Config Format Converter
+# Convert Symfony XML/YAML configs to PHP
 
 [![Downloads total](https://img.shields.io/packagist/dt/symplify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/symplify/config-transformer/stats)
 
-Convert Symfony Config Formats From XML/YAML to PHP.
+<br>
 
 Why to PHP? It's the best format for PHP Symfony applications:
 
@@ -19,18 +19,16 @@ composer require symplify/config-transformer --dev
 
 ## Usage
 
-Provide paths to files/dirs you want to convert:
+By default, the command uses `/config` directory to transform all files in it:
 
 ```bash
-vendor/bin/config-transformer switch-format config/packages/ecs.yaml app/config
+vendor/bin/config-transformer
 ```
 
-The input file will be deleted automatically.
+Do you want to convert 1 files or directory at a time? Specify the paths as arguments:
 
-## Report Issues
+```bash
+vendor/bin/config-transformer transform config/parameters.yml
+```
 
-In case you are experiencing a bug or want to request a new feature head over to the [Symplify monorepo issue tracker](https://github.com/symplify/symplify/issues)
-
-## Contribute
-
-The sources of this package are contained in the Symplify monorepo. We welcome contributions for this package on [symplify/symplify](https://github.com/symplify/symplify).
+The input files are deleted automatically.

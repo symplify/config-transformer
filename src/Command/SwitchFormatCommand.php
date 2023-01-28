@@ -38,8 +38,10 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
 
         $this->addArgument(
             Option::SOURCES,
-            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-            'Path to directory/file with configs'
+            InputArgument::OPTIONAL | InputArgument::IS_ARRAY,
+            'Path to directory/file with configs',
+            // 99 % of symfony project has this directory
+            [getcwd() . '/config']
         );
 
         $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
