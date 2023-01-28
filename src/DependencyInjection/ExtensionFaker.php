@@ -46,13 +46,18 @@ final class ExtensionFaker
 
         $rootKeys = array_keys($yaml);
 
-        /** @var string[] $extensionKeys */
+        /** @var array<string|int> $extensionKeys */
         $extensionKeys = array_diff($rootKeys, YamlKey::provideRootKeys());
         if ($extensionKeys === []) {
             return;
         }
 
         foreach ($extensionKeys as $extensionKey) {
+            // make sure the extension key is a string
+            if (! is_string($extensionKey)) {
+                $extensionKey = (string) $extensionKey;
+            }
+
             $aliasConfigurableExtension = new AliasConfigurableExtension($extensionKey);
             $containerBuilder->registerExtension($aliasConfigurableExtension);
         }
