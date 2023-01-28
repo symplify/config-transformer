@@ -11,11 +11,13 @@ final class ConfigTransformerApplication extends Application
 {
     public function __construct(SwitchFormatCommand $switchFormatCommand)
     {
+        // must be run before adding commands
+        // otherwise the default command will be overridden to a "list" command
+        parent::__construct();
+
         $this->add($switchFormatCommand);
 
         // make single command application
         $this->setDefaultCommand('switch-format', true);
-
-        parent::__construct();
     }
 }
