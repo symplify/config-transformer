@@ -32,6 +32,7 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
     protected function configure(): void
     {
         $this->setName('switch-format');
+        $this->setAliases(['convert', 'transform']);
 
         $this->setDescription('Converts XML/YAML configs to PHP format');
 
