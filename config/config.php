@@ -13,7 +13,6 @@ use Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PackageBuilder\Yaml\ParametersMerger;
-use Symplify\SmartFileSystem\FileSystemFilter;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
@@ -41,7 +40,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(BuilderFactory::class);
     $services->set(NodeFinder::class);
     $services->set(Parser::class);
-    $services->set(FileSystemFilter::class);
 
     $services->set(ClassLikeExistenceChecker::class);
     $services->set(ParametersMerger::class);
