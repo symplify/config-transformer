@@ -14,7 +14,7 @@ final class ConfigTransformerApplication extends Application
         $this->addCommands([$switchFormatCommand]);
 
         // make single command application
-        $this->setDefaultCommand($switchFormatCommand->getName(), true);
+        $this->setDefaultCommand('switch-format', true);
 
         parent::__construct();
     }
