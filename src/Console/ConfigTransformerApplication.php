@@ -11,7 +11,7 @@ final class ConfigTransformerApplication extends Application
 {
     public function __construct(SwitchFormatCommand $switchFormatCommand)
     {
-        $this->addCommands([$switchFormatCommand]);
+        $this->add($switchFormatCommand);
 
         // make single command application
         $this->setDefaultCommand('switch-format', true);
