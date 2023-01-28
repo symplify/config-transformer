@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Command;
 
+use Nette\Utils\FileSystem;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
@@ -15,16 +18,16 @@ use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 use Symplify\ConfigTransformer\ValueObject\Option;
-use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class SwitchFormatCommand extends AbstractSymplifyCommand
+final class SwitchFormatCommand extends Command
 {
     public function __construct(
         private ConfigurationFactory $configurationFactory,
         private ConfigFileDumper $configFileDumper,
         private ConfigFormatConverter $configFormatConverter,
-        private ConfigFileFinder $configFileFinder
+        private ConfigFileFinder $configFileFinder,
+        private SymfonyStyle $symfonyStyle,
     ) {
         parent::__construct();
     }
@@ -77,6 +80,6 @@ final class SwitchFormatCommand extends AbstractSymplifyCommand
             return;
         }
 
-        $this->smartFileSystem->remove($fileInfo->getRealPath());
+        FileSystem::delete($fileInfo->getRealPath());
     }
 }
