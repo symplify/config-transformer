@@ -28,7 +28,7 @@
         "symplify/easy-ci": "^11.1",
         "symplify/easy-coding-standard": "^11.1",
         "symplify/easy-testing": "^11.2",
-        "symplify/monorepo-builder": "^11.1",
+        "symplify/monorepo-builder": "^11.2",
         "symplify/phpstan-extensions": "^11.1",
         "tomasvotruba/unused-public": "^0.0.34"
     },
