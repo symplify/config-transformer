@@ -61,10 +61,17 @@ final class SwitchFormatCommand extends Command
             $convertedContent = new ConvertedContent($convertedFileContent, $fileInfo);
 
             $this->configFileDumper->dumpFile($convertedContent, $configuration);
-
             $this->removeFileInfo($configuration, $fileInfo);
 
             $this->symfonyStyle->newLine();
+        }
+
+        // report fail in CI in case of changed files to notify the users about old configs
+        if ($configuration->isDryRun()) {
+            $successMessage = sprintf('%d file(s) should be switched to PHP', count($fileInfos));
+            $this->symfonyStyle->error($successMessage);
+
+            return self::FAILURE;
         }
 
         $successMessage = sprintf('Processed %d file(s) to "PHP" format, congrats!', count($fileInfos));
