@@ -14,7 +14,7 @@
         "symfony/dependency-injection": "6.1.*",
         "symfony/expression-language": "^6.2",
         "symfony/yaml": "^6.2",
-        "symplify/php-config-printer": "^11.1.25",
+        "symplify/php-config-printer": "^11.1",
         "symplify/symplify-kernel": "^11.1"
     },
     "require-dev": {
@@ -30,6 +30,7 @@
         "symplify/easy-testing": "^11.1",
         "symplify/monorepo-builder": "^11.2",
         "symplify/phpstan-extensions": "^11.1",
+        "symplify/vendor-patches": "11.2.0.72",
         "tomasvotruba/unused-public": "^0.0.34"
     },
     "autoload": {
@@ -52,6 +53,9 @@
     },
     "extra": {
         "patches": {
+            "symplify/php-config-printer": [
+                "patches/symplify-php-config-printer-src-enum-routeoption-php.patch"
+            ],
             "symfony/dependency-injection": [
                 "patches/symfony-dependency-injection-loader-yamlfileloader-php.patch",
                 "patches/symfony-dependency-injection-definition-php.patch"

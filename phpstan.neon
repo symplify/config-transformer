@@ -14,3 +14,8 @@ parameters:
         methods: true
         properties: true
         constants: true
+
+    ignoreErrors:
+        -
+            message: '#Parameter \#1 \$commandName of method Symfony\\Component\\Console\\Application\:\:setDefaultCommand\(\) expects string, string\|null given#'
+            path: src/Console/ConfigTransformerApplication.php
