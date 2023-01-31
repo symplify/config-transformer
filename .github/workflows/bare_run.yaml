@@ -1,9 +1,6 @@
-name: Bare Run on various PHP versions
+name: Bare Run
 
-on:
-    push:
-        tags:
-            - '*.72'
+on: [pull_request, push]
 
 jobs:
     bare_run:
@@ -18,7 +15,7 @@ jobs:
             -   uses: actions/checkout@v2
 
             -
-                uses: shivammathur/setup-php@v3
+                uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php_version }}
                     coverage: none
