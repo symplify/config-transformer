@@ -55,6 +55,11 @@ final class SwitchFormatCommand extends Command
         $configuration = $this->configurationFactory->createFromInput($input);
 
         $fileInfos = $this->configFileFinder->findFileInfos($configuration);
+        if ($fileInfos === []) {
+            $this->symfonyStyle->success('No YAML/XML configs found, good job!');
+
+            return self::SUCCESS;
+        }
 
         foreach ($fileInfos as $fileInfo) {
             $convertedFileContent = $this->configFormatConverter->convert($fileInfo);
