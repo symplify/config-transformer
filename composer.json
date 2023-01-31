@@ -14,7 +14,7 @@
         "symfony/dependency-injection": "6.1.*",
         "symfony/expression-language": "^6.2",
         "symfony/yaml": "^6.2",
-        "symplify/php-config-printer": "^11.1.25",
+        "symplify/php-config-printer": "dev-main",
         "symplify/symplify-kernel": "^11.1"
     },
     "require-dev": {
@@ -65,5 +65,7 @@
         "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
         "rector": "vendor/bin/rector process --dry-run --ansi",
         "release": "vendor/bin/monorepo-builder release patch --ansi"
-    }
+    },
+    "minimal-stability": "dev",
+    "prefer-stable": true
 }
