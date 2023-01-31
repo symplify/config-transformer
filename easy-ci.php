@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
+use Symfony\Component\Console\Application;
 use Symplify\EasyCI\Config\EasyCIConfig;
+use Symplify\PhpConfigPrinter\Contract\NodeVisitor\PrePrintNodeVisitorInterface;
 
 return static function (EasyCIConfig $easyCIConfig): void {
     $easyCIConfig->typesToSkip([
-        \Symplify\ConfigTransformer\NodeVisitor\RefOrServiceFuncCallPrePrintNodeVisitor::class,
-        \Symplify\ConfigTransformer\Console\ConfigTransformerApplication::class,
-        \Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel::class,
+        PrePrintNodeVisitorInterface::class,
+        Application::class,
     ]);
 };
