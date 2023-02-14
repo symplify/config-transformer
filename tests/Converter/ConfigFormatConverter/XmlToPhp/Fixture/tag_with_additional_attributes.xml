@@ -23,6 +23,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('mime_types')
-        ->tag('tag1', ['priority' => 1])
-        ->tag('tag2', ['priority' => 2]);
+        ->tag('tag1', [
+        'priority' => 1,
+    ])
+        ->tag('tag2', [
+        'priority' => 2,
+    ]);
 };

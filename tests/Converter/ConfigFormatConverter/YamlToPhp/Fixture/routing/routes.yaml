@@ -18,7 +18,13 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator->add('research_thank_you', 'research/thank-you')
         ->controller(TemplateController::class)
-        ->defaults(['template' => 'research/thank-you.twig'])
-        ->methods(['GET'])
-        ->options(['expose' => true]);
+        ->defaults([
+        'template' => 'research/thank-you.twig',
+    ])
+        ->methods([
+        'GET',
+    ])
+        ->options([
+        'expose' => true,
+    ]);
 };

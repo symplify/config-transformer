@@ -18,7 +18,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(FakeClass::class)
-        ->factory([service(SecondFakeClass::class), 'configure']);
+        ->factory([
+        service(SecondFakeClass::class),
+        'configure',
+    ]);
 
     $services->set(SecondFakeClass::class)
         ->factory(service(FakeClass::class));

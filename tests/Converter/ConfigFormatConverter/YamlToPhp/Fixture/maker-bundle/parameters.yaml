@@ -28,9 +28,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('app.enable_v2_protocol', true);
 
-    $parameters->set('app.supported_locales', ['en', 'es', 'fr']);
+    $parameters->set('app.supported_locales', [
+        'en',
+        'es',
+        'fr',
+    ]);
 
     $parameters->set('app.some_parameter', 'This is a Bell char ');
 
-    $parameters->set('my_multilang.language_fallback', ['en' => ['en', 'fr'], 'fr' => ['fr', 'en']]);
+    $parameters->set('my_multilang.language_fallback', [
+        'en' => [
+            'en',
+            'fr',
+        ],
+        'fr' => [
+            'fr',
+            'en',
+        ],
+    ]);
 };

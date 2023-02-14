@@ -14,5 +14,7 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator->add('site_root', '/{siteId}')
         ->controller('AppBundle\Controller\Site\IndexController')
-        ->requirements(['siteId' => '\d+']);
+        ->requirements([
+        'siteId' => '\d+',
+    ]);
 };

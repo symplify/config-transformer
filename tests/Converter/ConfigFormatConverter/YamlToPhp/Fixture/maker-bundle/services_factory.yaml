@@ -27,8 +27,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->factory(service('factory_service_invokable'));
 
     $services->set('array_service_factory', FakeClass::class)
-        ->factory([service('factory_service'), 'constructFoo']);
+        ->factory([
+        service('factory_service'),
+        'constructFoo',
+    ]);
 
     $services->set('array_static_factory', FakeClass::class)
-        ->factory([SecondFakeClass::class, 'create']);
+        ->factory([
+        SecondFakeClass::class,
+        'create',
+    ]);
 };

@@ -23,6 +23,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('app.mail_transport');
 
     $services->set(FakeClass::class)
-        ->tag('app.mail_transport', ['alias' => 'sendmail'])
-        ->tag('app.mail_sender', ['alias' => 'sender', 'priority' => 512]);
+        ->tag('app.mail_transport', [
+        'alias' => 'sendmail',
+    ])
+        ->tag('app.mail_sender', [
+        'alias' => 'sender',
+        'priority' => 512,
+    ]);
 };

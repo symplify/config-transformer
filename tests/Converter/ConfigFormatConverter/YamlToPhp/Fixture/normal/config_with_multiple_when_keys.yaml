@@ -19,12 +19,23 @@ declare(strict_types=1);
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('framework', ['test' => false]);
+    $containerConfigurator->extension('framework', [
+        'test' => false,
+    ]);
     if ($containerConfigurator->env() === 'test') {
-        $containerConfigurator->extension('not_framework', ['other_test' => true]);
-        $containerConfigurator->extension('framework', ['test' => true, 'session' => ['storage_factory_id' => 'session.storage.factory.mock_file']]);
+        $containerConfigurator->extension('not_framework', [
+            'other_test' => true,
+        ]);
+        $containerConfigurator->extension('framework', [
+            'test' => true,
+            'session' => [
+                'storage_factory_id' => 'session.storage.factory.mock_file',
+            ],
+        ]);
     }
     if ($containerConfigurator->env() === 'prod') {
-        $containerConfigurator->extension('oky', ['dokky' => false]);
+        $containerConfigurator->extension('oky', [
+            'dokky' => false,
+        ]);
     }
 };

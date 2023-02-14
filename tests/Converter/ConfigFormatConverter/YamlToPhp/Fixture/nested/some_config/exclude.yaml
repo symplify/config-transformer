@@ -23,5 +23,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->public();
 
     $services->load('Symplify\Autodiscovery\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/HttpKernel/*', __DIR__ . '/../src/That/*']);
+        ->exclude([
+        __DIR__ . '/../src/HttpKernel/*',
+        __DIR__ . '/../src/That/*',
+    ]);
 };

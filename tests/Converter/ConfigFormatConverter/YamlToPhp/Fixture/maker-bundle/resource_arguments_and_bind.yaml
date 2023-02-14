@@ -25,5 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->public()
         ->arg('$environment', '%kernel.environment%')
         ->bind('$debug', '%kernel.debug%')
-        ->exclude([__DIR__ . '/../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}']);
+        ->exclude([
+        __DIR__ . '/../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}',
+    ]);
 };

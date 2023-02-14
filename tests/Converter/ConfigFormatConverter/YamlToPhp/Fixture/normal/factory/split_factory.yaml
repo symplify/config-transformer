@@ -16,8 +16,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('SomeClass')
-        ->factory([service('some_name'), 'createMethod']);
+        ->factory([
+        service('some_name'),
+        'createMethod',
+    ]);
 
     $services->set('ExistingClass')
-        ->factory([StaticFactory::class, 'create']);
+        ->factory([
+        StaticFactory::class,
+        'create',
+    ]);
 };

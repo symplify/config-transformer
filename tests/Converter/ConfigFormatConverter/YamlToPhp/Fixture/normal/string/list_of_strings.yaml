@@ -13,5 +13,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    $parameters->set('key', ['hey', '::hi', 'hi::']);
+    $parameters->set('key', [
+        'hey',
+        '::hi',
+        'hi::',
+    ]);
 };

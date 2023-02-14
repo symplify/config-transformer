@@ -15,5 +15,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('some_name', 'SomeClass')
-        ->args([1 => '%first_param%', 2 => '%second_param%']);
+        ->args([
+        1 => '%first_param%',
+        2 => '%second_param%',
+    ]);
 };
