@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Finder\Finder;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
@@ -54,9 +55,12 @@ final class SwitchFormatCommand extends Command
     {
         $configuration = $this->configurationFactory->createFromInput($input);
 
+        $totalFileCount = $this->getTotalFileCount($configuration);
+
         $fileInfos = $this->configFileFinder->findFileInfos($configuration);
         if ($fileInfos === []) {
-            $this->symfonyStyle->success('No YAML/XML configs found, good job!');
+            $successMessage = sprintf('No YAML/XML configs found in %d files, good job!', $totalFileCount);
+            $this->symfonyStyle->success($successMessage);
 
             return self::SUCCESS;
         }
@@ -73,7 +77,7 @@ final class SwitchFormatCommand extends Command
 
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
-            $successMessage = sprintf('%d file(s) should be switched to PHP', count($fileInfos));
+            $successMessage = sprintf('%d file(s) out of %d should be switched to PHP', count($fileInfos), $totalFileCount);
             $this->symfonyStyle->error($successMessage);
 
             return self::FAILURE;
@@ -93,5 +97,13 @@ final class SwitchFormatCommand extends Command
         }
 
         FileSystem::delete($fileInfo->getRealPath());
+    }
+
+    private function getTotalFileCount(Configuration $configuration): int
+    {
+        return Finder::create()
+            ->files()
+            ->in($configuration->getSources())
+            ->count();
     }
 }
