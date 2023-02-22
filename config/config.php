@@ -11,8 +11,10 @@ use Symfony\Component\Yaml\Parser;
 use Symplify\ConfigTransformer\Console\ConfigTransformerApplication;
 use Symplify\PackageBuilder\Console\Formatter\ColorConsoleDiffFormatter;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Symplify\PackageBuilder\Diff\DifferFactory;
 use Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PackageBuilder\Yaml\ParametersMerger;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
@@ -33,8 +35,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(Application::class, ConfigTransformerApplication::class);
 
     // color diff
+    $services->set(DifferFactory::class);
+    $services->set(Differ::class)
+        ->factory([service(DifferFactory::class), 'create']);
+
     $services->set(ConsoleDiffer::class);
-    $services->set(Differ::class);
+
     $services->set(ColorConsoleDiffFormatter::class);
 
     $services->set(BuilderFactory::class);

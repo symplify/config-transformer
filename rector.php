@@ -9,6 +9,7 @@ use Rector\Set\ValueObject\SetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
+        PHPUnitSetList::PHPUNIT_100,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         // @todo bump to PHP 8.1

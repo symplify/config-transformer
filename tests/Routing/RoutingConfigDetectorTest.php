@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Tests\Routing;
 
 use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symplify\ConfigTransformer\Routing\RoutingConfigDetector;
 
@@ -17,9 +18,7 @@ final class RoutingConfigDetectorTest extends TestCase
         $this->routingConfigDetector = new RoutingConfigDetector();
     }
 
-    /**
-     * @dataProvider provideData()
-     */
+    #[DataProvider('provideData')]
     public function test(string $filePath, bool $expectedResult): void
     {
         $isRoutingFilePath = $this->routingConfigDetector->isRoutingFilePath($filePath);
@@ -29,7 +28,7 @@ final class RoutingConfigDetectorTest extends TestCase
     /**
      * @return Iterator<string[]|bool[]>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield ['my_app/config/routes.yaml', true];
         yield ['my_app/config/routing.yaml', true];
