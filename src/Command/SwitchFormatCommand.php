@@ -101,6 +101,13 @@ final class SwitchFormatCommand extends Command
 
     private function getTotalFileCount(Configuration $configuration): int
     {
+        if (count($configuration->getSources()) === 1) {
+            $sources = $configuration->getSources();
+            if (is_file($sources[0])) {
+                return 1;
+            }
+        }
+
         return Finder::create()
             ->files()
             ->in($configuration->getSources())
