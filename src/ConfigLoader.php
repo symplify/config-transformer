@@ -68,7 +68,7 @@ final class ConfigLoader
             $content = Strings::replace(
                 $content,
                 self::PHP_CONST_REGEX,
-                static fn ($match): string => '"%const(' . str_replace(
+                static fn (array $match): string => '"%const(' . str_replace(
                     '\\',
                     '\\\\',
                     $match[1]
