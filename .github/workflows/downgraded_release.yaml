@@ -45,7 +45,7 @@ jobs:
             -   run: cp -r build/target-repository/. .
 
             # clear the dev files
-            -   run: rm -rf build prefix-code.sh full-tool-build.sh easy-ci.php scoper.php rector.php rector-local
+            -   run: rm -rf build prefix-code.sh full-tool-build.sh scoper.php rector.php rector-local
 
             # setup git user
             -
