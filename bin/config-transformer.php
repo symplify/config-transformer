@@ -27,11 +27,5 @@ if (file_exists($scoperAutoloadFilepath)) {
 }
 
 
-// this allows to easily convert ECS yaml to php configs
-$codeSnifferAutoload = getcwd() . '/vendor/squizlabs/php_codesniffer/autoload.php';
-if (file_exists($codeSnifferAutoload)) {
-    require_once $codeSnifferAutoload;
-}
-
 $kernelBootAndApplicationRun = new KernelBootAndApplicationRun(ConfigTransformerKernel::class);
 $kernelBootAndApplicationRun->run();
