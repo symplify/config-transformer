@@ -1,6 +1,7 @@
 parameters:
     key: %value%
     nested: %kernel.cache_dir%/some_path
+    already_quoted: 'Message: %%message%%'
 -----
 <?php
 
@@ -14,4 +15,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set('key', '%value%');
 
     $parameters->set('nested', '%kernel.cache_dir%/some_path');
+
+    $parameters->set('already_quoted', 'Message: %%message%%');
 };
