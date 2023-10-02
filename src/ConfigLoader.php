@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
-use Symplify\ConfigTransformer\DependencyInjection\Loader\CheckerTolerantYamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\MissingAutodiscoveryDirectoryTolerantYamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\SkippingPhpFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
@@ -120,9 +119,12 @@ final class ConfigLoader
 
     private function wrapToDelegatingLoader(Loader $loader, ContainerBuilder $containerBuilder): DelegatingLoader
     {
+        // we need to fake extension before the file gets parsed, as
+        $extensionFaker = new ExtensionFaker();
+        $extensionFaker->fakeGenericExtensionsInContainerBuilder($containerBuilder);
+
         $globFileLoader = new GlobFileLoader($containerBuilder, new FileLocator());
         $skippingPhpFileLoader = new SkippingPhpFileLoader($containerBuilder, new FileLocator());
-        $checkerTolerantYamlFileLoader = new CheckerTolerantYamlFileLoader($containerBuilder, new FileLocator());
 
         $directoryLoader = new DirectoryLoader($containerBuilder, new FileLocator());
 
@@ -130,7 +132,6 @@ final class ConfigLoader
             $directoryLoader,
             $globFileLoader,
             $skippingPhpFileLoader,
-            $checkerTolerantYamlFileLoader,
             $loader,
         ]));
     }

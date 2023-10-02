@@ -62,19 +62,10 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
         $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested');
     }
 
-    #[DataProvider('provideDataEcs')]
     #[DataProvider('provideDataExtension')]
     public function testEcs(SmartFileInfo $fileInfo): void
     {
         $this->doTestOutputWithExtraDirectory($fileInfo, $fileInfo->getPath());
-    }
-
-    /**
-     * @return Iterator<mixed, SmartFileInfo[]>
-     */
-    public static function provideDataEcs(): Iterator
-    {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/ecs', '*');
     }
 
     /**
