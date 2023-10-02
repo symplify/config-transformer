@@ -9,8 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 final class ContainerBuilderAndFileContent
 {
     public function __construct(
-        private ContainerBuilder $containerBuilder,
-        private string $fileContent
+        private readonly ContainerBuilder $containerBuilder,
+        private readonly string $fileContent
     ) {
     }
 

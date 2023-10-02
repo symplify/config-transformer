@@ -24,11 +24,11 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class SwitchFormatCommand extends Command
 {
     public function __construct(
-        private ConfigurationFactory $configurationFactory,
-        private ConfigFileDumper $configFileDumper,
-        private ConfigFormatConverter $configFormatConverter,
-        private ConfigFileFinder $configFileFinder,
-        private SymfonyStyle $symfonyStyle,
+        private readonly ConfigurationFactory $configurationFactory,
+        private readonly ConfigFileDumper $configFileDumper,
+        private readonly ConfigFormatConverter $configFormatConverter,
+        private readonly ConfigFileFinder $configFileFinder,
+        private readonly SymfonyStyle $symfonyStyle,
     ) {
         parent::__construct();
     }

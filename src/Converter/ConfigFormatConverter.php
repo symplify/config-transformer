@@ -21,13 +21,13 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class ConfigFormatConverter
 {
     public function __construct(
-        private ConfigLoader $configLoader,
-        private YamlToPhpConverter $yamlToPhpConverter,
-        private CurrentFilePathProvider $currentFilePathProvider,
-        private XmlImportCollector $xmlImportCollector,
-        private ContainerBuilderCleaner $containerBuilderCleaner,
-        private PrivatesAccessor $privatesAccessor,
-        private ParametersMerger $parametersMerger
+        private readonly ConfigLoader $configLoader,
+        private readonly YamlToPhpConverter $yamlToPhpConverter,
+        private readonly CurrentFilePathProvider $currentFilePathProvider,
+        private readonly XmlImportCollector $xmlImportCollector,
+        private readonly ContainerBuilderCleaner $containerBuilderCleaner,
+        private readonly PrivatesAccessor $privatesAccessor,
+        private readonly ParametersMerger $parametersMerger
     ) {
     }
 

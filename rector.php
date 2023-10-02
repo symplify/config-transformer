@@ -12,8 +12,7 @@ return static function (RectorConfig $rectorConfig): void {
         PHPUnitSetList::PHPUNIT_100,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
-        // @todo bump to PHP 8.1
-        LevelSetList::UP_TO_PHP_80,
+        LevelSetList::UP_TO_PHP_81,
         SetList::CODING_STYLE,
         SetList::TYPE_DECLARATION,
         SetList::NAMING,

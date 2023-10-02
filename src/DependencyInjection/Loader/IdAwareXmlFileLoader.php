@@ -35,15 +35,15 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
      */
     private const ID = 'id';
 
-    private PrivatesCaller $privatesCaller;
+    private readonly PrivatesCaller $privatesCaller;
 
     private ?int $count = null;
 
     public function __construct(
         ContainerBuilder $containerBuilder,
         FileLocatorInterface $fileLocator,
-        private UniqueNaming $uniqueNaming,
-        private XmlImportCollector $xmlImportCollector
+        private readonly UniqueNaming $uniqueNaming,
+        private readonly XmlImportCollector $xmlImportCollector
     ) {
         parent::__construct($containerBuilder, $fileLocator);
 

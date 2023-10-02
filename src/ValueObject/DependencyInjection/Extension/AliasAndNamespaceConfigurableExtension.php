@@ -10,8 +10,8 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 final class AliasAndNamespaceConfigurableExtension extends Extension
 {
     public function __construct(
-        private string $alias,
-        private string $namespace
+        private readonly string $alias,
+        private readonly string $namespace
     ) {
     }
 

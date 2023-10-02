@@ -17,7 +17,7 @@ final class ConfigFileFinder
     private const CONFIG_SUFFIXES_REGEX = '#\.(yml|yaml|xml)$#';
 
     public function __construct(
-        private SmartFinder $smartFinder
+        private readonly SmartFinder $smartFinder
     ) {
     }
 
