@@ -36,7 +36,7 @@ final class ConfigLoader
      * @see https://regex101.com/r/spi4ir/1
      * @var string
      */
-    private const UNQUOTED_PARAMETER_REGEX = '#(\w+:\s+)(\%(.*?)%)(.*?)?$#m';
+    private const UNQUOTED_PARAMETER_REGEX = '#^(\s*\w+:\s+)(\%(.*?)%)(.*?)?$#m';
 
     public function __construct(
         private readonly IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
