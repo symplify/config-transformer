@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 final class AliasConfigurableExtension extends Extension
 {
     public function __construct(
-        private string $alias
+        private readonly string $alias
     ) {
     }
 

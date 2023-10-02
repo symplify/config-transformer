@@ -19,7 +19,7 @@ final class RefOrServiceFuncCallPrePrintNodeVisitor extends NodeVisitorAbstract 
     private ?bool $shouldReplaceWithRef = null;
 
     public function __construct(
-        private SymfonyDependencyInjectionVersionResolver $symfonyDependencyInjectionVersionResolver
+        private readonly SymfonyDependencyInjectionVersionResolver $symfonyDependencyInjectionVersionResolver
     ) {
     }
 

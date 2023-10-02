@@ -16,7 +16,7 @@ use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
  */
 final class CheckerTolerantYamlFileLoader extends YamlFileLoader
 {
-    private CheckerServiceParametersShifter $checkerServiceParametersShifter;
+    private readonly CheckerServiceParametersShifter $checkerServiceParametersShifter;
 
     public function __construct(ContainerBuilder $containerBuilder, FileLocatorInterface $fileLocator)
     {

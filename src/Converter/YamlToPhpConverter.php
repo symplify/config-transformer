@@ -21,12 +21,12 @@ use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 final class YamlToPhpConverter
 {
     public function __construct(
-        private Parser $parser,
-        private PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter,
-        private ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory,
-        private RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory,
-        private CheckerServiceParametersShifter $checkerServiceParametersShifter,
-        private RoutingConfigDetector $routingConfigDetector
+        private readonly Parser $parser,
+        private readonly PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter,
+        private readonly ContainerConfiguratorReturnClosureFactory $containerConfiguratorReturnClosureFactory,
+        private readonly RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory,
+        private readonly CheckerServiceParametersShifter $checkerServiceParametersShifter,
+        private readonly RoutingConfigDetector $routingConfigDetector
     ) {
     }
 

@@ -10,8 +10,8 @@ final class Configuration
      * @param string[] $sources
      */
     public function __construct(
-        private array $sources,
-        private bool $isDryRun
+        private readonly array $sources,
+        private readonly bool $isDryRun
     ) {
     }
 

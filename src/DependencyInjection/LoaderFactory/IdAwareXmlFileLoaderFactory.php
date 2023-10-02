@@ -13,8 +13,8 @@ use Symplify\ConfigTransformer\Naming\UniqueNaming;
 final class IdAwareXmlFileLoaderFactory
 {
     public function __construct(
-        private UniqueNaming $uniqueNaming,
-        private XmlImportCollector $xmlImportCollector
+        private readonly UniqueNaming $uniqueNaming,
+        private readonly XmlImportCollector $xmlImportCollector
     ) {
     }
 

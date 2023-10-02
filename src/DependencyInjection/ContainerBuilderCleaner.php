@@ -20,7 +20,7 @@ final class ContainerBuilderCleaner
     private const ANONYMOUS_CLASS_REGEX = '#^[\d]+\_[\w]{64}$#';
 
     public function __construct(
-        private PrivatesAccessor $privatesAccessor,
+        private readonly PrivatesAccessor $privatesAccessor,
     ) {
     }
 

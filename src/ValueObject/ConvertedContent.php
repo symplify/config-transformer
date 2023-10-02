@@ -10,8 +10,8 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
     public function __construct(
-        private string $convertedContent,
-        private SmartFileInfo $originalFileInfo
+        private readonly string $convertedContent,
+        private readonly SmartFileInfo $originalFileInfo
     ) {
     }
 

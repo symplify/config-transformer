@@ -40,9 +40,9 @@ final class ConfigLoader
     private const UNQUOTED_PARAMETER_REGEX = '#(\w+:\s+)(\%(.*?)%)(.*?)?$#m';
 
     public function __construct(
-        private IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
-        private SmartFileSystem $smartFileSystem,
-        private ExtensionFaker $extensionFaker
+        private readonly IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
+        private readonly SmartFileSystem $smartFileSystem,
+        private readonly ExtensionFaker $extensionFaker
     ) {
     }
 
@@ -71,7 +71,7 @@ final class ConfigLoader
                 static fn (array $match): string => '"%const(' . str_replace(
                     '\\',
                     '\\\\',
-                    $match[1]
+                    (string) $match[1]
                 ) . ')%"' . ($match[3] ?? '')
             );
             if ($content !== $smartFileInfo->getContents()) {

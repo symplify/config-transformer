@@ -13,9 +13,9 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 final class ConfigFileDumper
 {
     public function __construct(
-        private SymfonyStyle $symfonyStyle,
-        private SmartFileSystem $smartFileSystem,
-        private ConsoleDiffer $consoleDiffer
+        private readonly SymfonyStyle $symfonyStyle,
+        private readonly SmartFileSystem $smartFileSystem,
+        private readonly ConsoleDiffer $consoleDiffer
     ) {
     }
 
