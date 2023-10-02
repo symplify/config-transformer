@@ -1,44 +1,46 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use Nette\Utils\Strings;
-use Symplify\SmartFileSystem\SmartFileInfo;
-
+use ConfigTransformerPrefix202310\Nette\Utils\Strings;
+use ConfigTransformerPrefix202310\Symplify\SmartFileSystem\SmartFileInfo;
 final class ConvertedContent
 {
-    public function __construct(
-        private readonly string $convertedContent,
-        private readonly SmartFileInfo $originalFileInfo
-    ) {
+    /**
+     * @readonly
+     * @var string
+     */
+    private $convertedContent;
+    /**
+     * @readonly
+     * @var \Symplify\SmartFileSystem\SmartFileInfo
+     */
+    private $originalFileInfo;
+    public function __construct(string $convertedContent, SmartFileInfo $originalFileInfo)
+    {
+        $this->convertedContent = $convertedContent;
+        $this->originalFileInfo = $originalFileInfo;
     }
-
-    public function getConvertedContent(): string
+    public function getConvertedContent() : string
     {
         return $this->convertedContent;
     }
-
-    public function getNewRelativeFilePath(): string
+    public function getNewRelativeFilePath() : string
     {
         $originalRelativeFilePath = $this->getOriginalRelativeFilePath();
         $relativeFilePathWithoutSuffix = Strings::before($originalRelativeFilePath, '.', -1);
-
         return $relativeFilePathWithoutSuffix . '.php';
     }
-
-    public function getOriginalFilePathWithoutSuffix(): string
+    public function getOriginalFilePathWithoutSuffix() : string
     {
         return $this->originalFileInfo->getRealPathWithoutSuffix();
     }
-
-    public function getOriginalRelativeFilePath(): string
+    public function getOriginalRelativeFilePath() : string
     {
         return $this->originalFileInfo->getRelativeFilePathFromCwd();
     }
-
-    public function getOriginalContent(): string
+    public function getOriginalContent() : string
     {
         return $this->originalFileInfo->getContents();
     }
