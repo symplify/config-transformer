@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Kernel;
 
-use Psr\Container\ContainerInterface;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 use Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig;
-use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 
-final class ConfigTransformerKernel extends AbstractSymplifyKernel
+final class ConfigTransformerKernel extends Kernel
 {
-    /**
-     * @param string[] $configFiles
-     */
-    public function createFromConfigs(array $configFiles): ContainerInterface
+    public function __construct()
     {
-        $configFiles[] = __DIR__ . '/../../config/config.php';
-        $configFiles[] = PhpConfigPrinterConfig::FILE_PATH;
+        parent::__construct('dev', true);
+    }
 
-        return $this->create($configFiles);
+    public function registerBundles(): iterable
+    {
+        return [];
+    }
+
+    public function registerContainerConfiguration(LoaderInterface $loader): void
+    {
+        $loader->load(__DIR__ . '/../../config/config.php');
+        $loader->load(PhpConfigPrinterConfig::FILE_PATH);
     }
 }

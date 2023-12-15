@@ -7,13 +7,12 @@ namespace Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\XmlTo
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTestCase;
-use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\ConfigTransformer\Tests\Helper\FixtureFinder;
 
 final class XmlToPhpTest extends AbstractConfigFormatConverterTestCase
 {
     #[DataProvider('provideData')]
-    public function test(SmartFileInfo $fixtureFileInfo): void
+    public function test(\SplFileInfo $fixtureFileInfo): void
     {
         $this->smartFileSystem->copy(
             __DIR__ . '/Source/some.xml',
@@ -23,11 +22,8 @@ final class XmlToPhpTest extends AbstractConfigFormatConverterTestCase
         $this->doTestOutput($fixtureFileInfo);
     }
 
-    /**
-     * @return Iterator<mixed, SmartFileInfo[]>
-     */
     public static function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.xml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.xml');
     }
 }

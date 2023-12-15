@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Tests\Converter\YamlToPhpConverter;
 
 use Symplify\ConfigTransformer\Converter\YamlToPhpConverter;
-use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
-use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
+use Symplify\ConfigTransformer\Tests\AbstractTestCase;
 
-final class YamlToPhpConverterTest extends AbstractKernelTestCase
+final class YamlToPhpConverterTest extends AbstractTestCase
 {
     private YamlToPhpConverter $yamlToPhpConverter;
 
     protected function setUp(): void
     {
-        $this->bootKernel(ConfigTransformerKernel::class);
-        $this->yamlToPhpConverter = $this->getService(YamlToPhpConverter::class);
+        parent::setUp();
+
+        $this->yamlToPhpConverter = $this->container->get(YamlToPhpConverter::class);
     }
 
     public function test(): void

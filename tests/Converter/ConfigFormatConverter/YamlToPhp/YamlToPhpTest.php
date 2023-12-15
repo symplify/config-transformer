@@ -8,29 +8,27 @@ use Iterator;
 use Nette\Utils\FileSystem;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTestCase;
-use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
-use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\ConfigTransformer\Tests\Helper\FixtureFinder;
 
 final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
 {
     #[DataProvider('provideDataForRouting')]
-    public function testRouting(SmartFileInfo $fileInfo): void
+    public function testRouting(\SplFileInfo $fileInfo): void
     {
         $this->doTestOutput($fileInfo, true);
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideDataForRouting(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/routing', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/routing', '*.yaml');
     }
 
     #[DataProvider('provideData')]
     #[DataProvider('provideDataWithPhpImported')]
-    public function testNormal(SmartFileInfo $fixtureFileInfo): void
+    public function testNormal(\SplFileInfo $fixtureFileInfo): void
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
@@ -57,13 +55,13 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
     }
 
     #[DataProvider('provideDataWithDirectory')]
-    public function testSpecialCaseWithDirectory(SmartFileInfo $fileInfo): void
+    public function testSpecialCaseWithDirectory(\SplFileInfo $fileInfo): void
     {
         $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested');
     }
 
     #[DataProvider('provideDataExtension')]
-    public function testEcs(SmartFileInfo $fileInfo): void
+    public function testEcs(\SplFileInfo $fileInfo): void
     {
         $this->doTestOutputWithExtraDirectory($fileInfo, $fileInfo->getPath());
     }
@@ -72,7 +70,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
      * @source https://github.com/symfony/maker-bundle/pull/604
      */
     #[DataProvider('provideDataMakerBundle')]
-    public function testMakerBundle(SmartFileInfo $fileInfo): void
+    public function testMakerBundle(\SplFileInfo $fileInfo): void
     {
         // needed for all the included
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
@@ -82,56 +80,55 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
         );
         require_once $temporaryPath . '/../src/SomeClass.php';
 
-        $this->smartFileSystem->mkdir($temporaryPath . '/../src/Controller');
-        $this->smartFileSystem->mkdir($temporaryPath . '/../src/Domain');
+        FileSystem::createDir($temporaryPath . '/../src/Controller');
+        FileSystem::createDir($temporaryPath . '/../src/Domain');
 
         $this->doTestOutput($fileInfo);
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/normal', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/normal', '*.yaml');
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideDataWithPhpImported(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/skip-imported-php', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/skip-imported-php', '*.yaml');
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideDataExtension(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/extension', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/extension', '*.yaml');
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideDataWithDirectory(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/nested', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/nested', '*.yaml');
     }
 
     /**
-     * @return Iterator<mixed, SmartFileInfo[]>
+     * @return Iterator<mixed, \SplFileInfo[]>
      */
     public static function provideDataMakerBundle(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/maker-bundle', '*.yaml');
+        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/maker-bundle', '*.yaml');
     }
 
-    private function doTestOutputWithExtraDirectory(SmartFileInfo $fixtureFileInfo, string $extraDirectory): void
+    private function doTestOutputWithExtraDirectory(\SplFileInfo $fixtureFileInfo, string $extraDirectory): void
     {
         $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fixtureFileInfo);
-
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
 
         // copy /src to temp directory, so Symfony FileLocator knows about it
@@ -140,7 +137,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
         ]);
 
         $fileTemporaryPath = $temporaryPath . '/' . $fixtureFileInfo->getRelativeFilePathFromDirectory($extraDirectory);
-        $this->smartFileSystem->dumpFile($fileTemporaryPath, $inputAndExpected->getInput());
+        FileSystem::write($fileTemporaryPath, $inputAndExpected->getInput());
 
         // require class to autoload it
         $expectedFilePath = $temporaryPath . '/src/SomeClass.php';
@@ -148,7 +145,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTestCase
 
         require_once $expectedFilePath;
 
-        $inputFileInfo = new SmartFileInfo($fileTemporaryPath);
+        $inputFileInfo = new \SplFileInfo($fileTemporaryPath);
 
         $this->doTestFileInfo($inputFileInfo, $inputAndExpected->getExpected(), $fixtureFileInfo);
     }

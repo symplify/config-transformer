@@ -5,26 +5,38 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Tests\Finder\ConfigFileFinder;
 
 use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
+<<<<<<< HEAD
+<<<<<<< HEAD
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
+=======
+use Symplify\ConfigTransformer\Tests\AbstractTestCase;
+>>>>>>> cd67f40 (bump)
 use Symplify\ConfigTransformer\ValueObject\Configuration;
-use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
-final class ConfigFileFinderTest extends AbstractKernelTestCase
+final class ConfigFileFinderTest extends AbstractTestCase
 {
     private ConfigFileFinder $configFileFinder;
 
     protected function setUp(): void
     {
-        $this->bootKernel(ConfigTransformerKernel::class);
-
-        $this->configFileFinder = $this->getService(ConfigFileFinder::class);
+        $this->configFileFinder = $this->container->get(ConfigFileFinder::class);
     }
 
+=======
+use Symplify\ConfigTransformer\Tests\AbstractTestCase;
+
+/**
+ * @see \Symplify\ConfigTransformer\Finder\ConfigFileFinder
+ */
+final class ConfigFileFinderTest extends AbstractTestCase
+{
+>>>>>>> 8c52b6b (fixup! fixup! fixup! fixup! fixup! fixup! bump)
     public function test(): void
     {
-        $configuration = new Configuration([__DIR__ . '/Fixture'], true);
+        $configFileFinder = new ConfigFileFinder();
+        ;
 
-        $fileInfos = $this->configFileFinder->findFileInfos($configuration);
+        $fileInfos = $configFileFinder->findFileInfos([__DIR__ . '/Fixture']);
         $this->assertCount(1, $fileInfos);
     }
 }

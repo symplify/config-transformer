@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Finder;
 
-use Symplify\ConfigTransformer\ValueObject\Configuration;
-use Symplify\SmartFileSystem\Finder\SmartFinder;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use SplFileInfo;
+use Symfony\Component\Finder\Finder;
 
 final class ConfigFileFinder
 {
@@ -16,16 +15,17 @@ final class ConfigFileFinder
      */
     private const CONFIG_SUFFIXES_REGEX = '#\.(yml|yaml|xml)$#';
 
-    public function __construct(
-        private readonly SmartFinder $smartFinder
-    ) {
-    }
-
     /**
-     * @return SmartFileInfo[]
+     * @param string[] $sources
+     * @return SplFileInfo[]
      */
-    public function findFileInfos(Configuration $configuration): array
+    public function findFileInfos(array $sources): array
     {
-        return $this->smartFinder->find($configuration->getSources(), self::CONFIG_SUFFIXES_REGEX);
+        $finder = new Finder();
+        $finder->files()
+            ->in($sources)
+            ->name(self::CONFIG_SUFFIXES_REGEX);
+
+        return iterator_to_array($finder->getIterator());
     }
 }

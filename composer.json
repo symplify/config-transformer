@@ -9,15 +9,13 @@
         "php": ">=8.1",
         "ext-dom": "*",
         "nette/utils": "^3.2",
-        "nikic/php-parser": "^4.17.1",
-        "symfony/console": "^6.3",
+        "nikic/php-parser": "^4.18",
+        "symfony/console": "^6.4",
         "symfony/dependency-injection": "6.1.*",
-        "symfony/expression-language": "^6.2",
+        "symfony/expression-language": "^6.4",
         "symfony/finder": "^6.4",
-        "symfony/yaml": "^6.2",
-        "symplify/package-builder": "^11.3",
-        "symplify/php-config-printer": "^11.1",
-        "symplify/symplify-kernel": "^11.1"
+        "symfony/yaml": "^6.4",
+        "symplify/php-config-printer": "^11.2"
     },
     "require-dev": {
         "cweagans/composer-patches": "^1.7",
@@ -28,7 +26,6 @@
         "rector/rector": "^0.18",
         "symfony/framework-bundle": "^6.1",
         "symplify/easy-coding-standard": "^12.0",
-        "symplify/easy-testing": "^11.1",
         "symplify/phpstan-extensions": "^11.1",
         "symplify/vendor-patches": "^11.2",
         "tomasvotruba/class-leak": "^0.2"

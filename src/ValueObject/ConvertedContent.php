@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
 use Nette\Utils\Strings;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConvertedContent
 {
     public function __construct(
         private readonly string $convertedContent,
-        private readonly SmartFileInfo $originalFileInfo
+        private readonly \SplFileInfo $originalFileInfo
     ) {
     }
 
