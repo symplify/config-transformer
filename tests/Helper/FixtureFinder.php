@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Tests\Helper;
 
 use Iterator;
-use SplFileInfo;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 final class FixtureFinder
 {

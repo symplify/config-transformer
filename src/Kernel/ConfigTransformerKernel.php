@@ -8,6 +8,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\PhpConfigPrinter\ValueObject\PhpConfigPrinterConfig;
 
+/**
+ * @api used in tests and bin
+ */
 final class ConfigTransformerKernel extends Kernel
 {
     public function __construct()

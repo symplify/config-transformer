@@ -1,4 +1,4 @@
-# Convert Symfony XML/YAML configs to PHP
+# Convert Symfony YAML configs to PHP
 
 [![Downloads total](https://img.shields.io/packagist/dt/symplify/config-transformer.svg?style=flat-square)](https://packagist.org/packages/symplify/config-transformer/stats)
 

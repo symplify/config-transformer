@@ -15,7 +15,7 @@ final class YamlToPhpConverterTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->yamlToPhpConverter = $this->container->get(YamlToPhpConverter::class);
+        $this->yamlToPhpConverter = $this->getService(YamlToPhpConverter::class);
     }
 
     public function test(): void

@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\FileSystem;
 
+use Nette\Utils\FileSystem;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\ConfigTransformer\Console\ConsoleDiffer;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
-use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConfigFileDumper
 {
     public function __construct(
         private readonly SymfonyStyle $symfonyStyle,
-        private readonly SmartFileSystem $smartFileSystem,
         private readonly ConsoleDiffer $consoleDiffer
     ) {
     }
@@ -52,6 +51,6 @@ final class ConfigFileDumper
 
         $this->symfonyStyle->title($fileTitle);
 
-        $this->smartFileSystem->dumpFile($newFileRealPath, $convertedContent->getConvertedContent());
+        FileSystem::write($newFileRealPath, $convertedContent->getConvertedContent());
     }
 }

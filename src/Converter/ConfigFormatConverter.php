@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Converter;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Dumper\YamlDumper;
-use Symfony\Component\Yaml\Yaml;
-use Symplify\ConfigTransformer\Collector\XmlImportCollector;
+use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\ConfigLoader;
-use Symplify\ConfigTransformer\DependencyInjection\ContainerBuilderCleaner;
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
-use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use Symplify\PackageBuilder\Yaml\ParametersMerger;
 use Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class ConfigFormatConverter
 {
@@ -24,92 +16,23 @@ final class ConfigFormatConverter
         private readonly ConfigLoader $configLoader,
         private readonly YamlToPhpConverter $yamlToPhpConverter,
         private readonly CurrentFilePathProvider $currentFilePathProvider,
-        private readonly XmlImportCollector $xmlImportCollector,
-        private readonly ContainerBuilderCleaner $containerBuilderCleaner,
-        private readonly PrivatesAccessor $privatesAccessor,
-        private readonly ParametersMerger $parametersMerger
     ) {
     }
 
-    public function convert(SmartFileInfo $smartFileInfo): string
+    public function convert(SplFileInfo $fileInfo): string
     {
-        $this->currentFilePathProvider->setFilePath($smartFileInfo->getRealPath());
+        $this->currentFilePathProvider->setFilePath($fileInfo->getRealPath());
 
         $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo(
-            $smartFileInfo
+            $fileInfo
         );
 
-        $containerBuilder = $containerBuilderAndFileContent->getContainerBuilder();
-
-        if (in_array($smartFileInfo->getSuffix(), [Format::YAML, Format::YML], true)) {
+        if (in_array($fileInfo->getExtension(), [Format::YAML, Format::YML], true)) {
             $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
-            $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
-
-            return $this->yamlToPhpConverter->convert($dumpedYaml, $smartFileInfo->getRealPath());
+            return $this->yamlToPhpConverter->convert($dumpedYaml, $fileInfo->getRealPath());
         }
 
-        if ($smartFileInfo->getSuffix() === Format::XML) {
-            $dumpedYaml = $this->dumpContainerBuilderToYaml($containerBuilder);
-            $dumpedYaml = $this->decorateWithCollectedXmlImports($dumpedYaml);
-
-            return $this->yamlToPhpConverter->convert($dumpedYaml, $smartFileInfo->getRealPath());
-        }
-
-        $message = sprintf('Suffix "%s" is not support yet', $smartFileInfo->getSuffix());
+        $message = sprintf('Suffix "%s" is not support yet', $fileInfo->getExtension());
         throw new NotImplementedYetException($message);
-    }
-
-    private function dumpContainerBuilderToYaml(ContainerBuilder $containerBuilder): string
-    {
-        $yamlDumper = new YamlDumper($containerBuilder);
-        $this->containerBuilderCleaner->cleanContainerBuilder($containerBuilder);
-
-        // 1. services and parameters
-        $content = $yamlDumper->dump();
-        if (! is_string($content)) {
-            throw new ShouldNotHappenException();
-        }
-
-        // 2. append extension yaml too
-        /** @var array<string, string[]> $extensionsConfigs */
-        $extensionsConfigs = $this->privatesAccessor->getPrivateProperty($containerBuilder, 'extensionConfigs');
-        foreach ($extensionsConfigs as $namespace => $configs) {
-            $mergedConfig = [];
-            foreach ($configs as $config) {
-                $mergedConfig = $this->parametersMerger->merge($mergedConfig, $config);
-            }
-
-            $extensionsConfigs[$namespace] = $mergedConfig;
-        }
-
-        $extensionsContent = $this->dumpYaml($extensionsConfigs);
-
-        return $content . PHP_EOL . $extensionsContent;
-    }
-
-    private function decorateWithCollectedXmlImports(string $dumpedYaml): string
-    {
-        $collectedXmlImports = $this->xmlImportCollector->provide();
-        if ($collectedXmlImports === []) {
-            return $dumpedYaml;
-        }
-
-        /** @var array<string, mixed> $yamlArray */
-        $yamlArray = Yaml::parse($dumpedYaml, Yaml::PARSE_CUSTOM_TAGS);
-        $yamlArray['imports'] = array_merge($yamlArray['imports'] ?? [], $collectedXmlImports);
-
-        return $this->dumpYaml($yamlArray);
-    }
-
-    /**
-     * @param array<string, mixed> $yamlArray
-     */
-    private function dumpYaml(array $yamlArray): string
-    {
-        if ($yamlArray === []) {
-            return '';
-        }
-
-        return Yaml::dump($yamlArray, 10, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
     }
 }

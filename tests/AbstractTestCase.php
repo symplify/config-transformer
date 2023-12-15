@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
 
 abstract class AbstractTestCase extends TestCase
 {
-    protected \Symfony\Component\DependencyInjection\ContainerInterface $container;
+    private ContainerInterface $container;
 
     protected function setUp(): void
     {
@@ -17,5 +18,16 @@ abstract class AbstractTestCase extends TestCase
         $configTransformerKernel->boot();
 
         $this->container = $configTransformerKernel->getContainer();
+    }
+
+    /**
+     * @template T as object
+     *
+     * @param class-string<T> $type
+     * @return T
+     */
+    protected function getService(string $type): object
+    {
+        return $this->container->get($type);
     }
 }

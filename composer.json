@@ -15,7 +15,8 @@
         "symfony/expression-language": "^6.4",
         "symfony/finder": "^6.4",
         "symfony/yaml": "^6.4",
-        "symplify/php-config-printer": "^11.2"
+        "symplify/php-config-printer": "^11.3",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "cweagans/composer-patches": "^1.7",
@@ -61,7 +62,6 @@
         "check-cs": "vendor/bin/ecs check --ansi",
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
-        "rector": "vendor/bin/rector process --dry-run --ansi",
-        "release": "vendor/bin/monorepo-builder release patch --ansi"
+        "rector": "vendor/bin/rector process --dry-run --ansi"
     }
 }

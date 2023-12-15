@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer;
 
+use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\FileLocator;
@@ -14,15 +15,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\DependencyInjection\ExtensionFaker;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\MissingAutodiscoveryDirectoryTolerantYamlFileLoader;
 use Symplify\ConfigTransformer\DependencyInjection\Loader\SkippingPhpFileLoader;
-use Symplify\ConfigTransformer\DependencyInjection\LoaderFactory\IdAwareXmlFileLoaderFactory;
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
 use Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
-use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConfigLoader
 {
@@ -30,7 +29,7 @@ final class ConfigLoader
      * @see https://regex101.com/r/4Uanps/4
      * @var string
      */
-    private const PHP_CONST_REGEX = '#!php/const:?\s*([a-zA-Z0-9_\\\\]+(::[a-zA-Z0-9_]+)?)+(:\s*(.*))?#';
+    private const PHP_CONST_REGEX = '#!php/const:?\s*([a-zA-Z0-9_\\\]+(::\w+)?)+(:\s*(.*))?#';
 
     /**
      * @see https://regex101.com/r/spi4ir/1
@@ -39,18 +38,16 @@ final class ConfigLoader
     private const UNQUOTED_PARAMETER_REGEX = '#^(\s*\w+:\s+)(\%(.*?)%)(.*?)?$#m';
 
     public function __construct(
-        private readonly IdAwareXmlFileLoaderFactory $idAwareXmlFileLoaderFactory,
-        private readonly SmartFileSystem $smartFileSystem,
         private readonly ExtensionFaker $extensionFaker
     ) {
     }
 
     public function createAndLoadContainerBuilderFromFileInfo(
-        SmartFileInfo $smartFileInfo,
+        SplFileInfo $smartFileInfo,
     ): ContainerBuilderAndFileContent {
         $containerBuilder = new ContainerBuilder();
 
-        $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $smartFileInfo->getSuffix());
+        $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $smartFileInfo->getExtension());
         $fileRealPath = $smartFileInfo->getRealPath();
 
         // correct old syntax of tags so we can parse it
@@ -63,7 +60,7 @@ final class ConfigLoader
             static fn (array $match): string => $match[1] . '"' . $match[2] . ($match[4] ?? '') . '"'
         );
 
-        if (in_array($smartFileInfo->getSuffix(), [Format::YML, Format::YAML], true)) {
+        if (in_array($smartFileInfo->getExtension(), [Format::YML, Format::YAML], true)) {
             $content = Strings::replace(
                 $content,
                 self::PHP_CONST_REGEX,
@@ -75,7 +72,7 @@ final class ConfigLoader
             );
             if ($content !== $smartFileInfo->getContents()) {
                 $fileRealPath = sys_get_temp_dir() . '/__symplify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
-                $this->smartFileSystem->dumpFile($fileRealPath, $content);
+                FileSystem::write($fileRealPath, $content);
             }
 
             $this->extensionFaker->fakeInContainerBuilder($containerBuilder, $content);
@@ -93,11 +90,6 @@ final class ConfigLoader
 
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): DelegatingLoader
     {
-        if ($suffix === Format::XML) {
-            $idAwareXmlFileLoader = $this->idAwareXmlFileLoaderFactory->createFromContainerBuilder($containerBuilder);
-            return $this->wrapToDelegatingLoader($idAwareXmlFileLoader, $containerBuilder);
-        }
-
         if (in_array($suffix, [Format::YML, Format::YAML], true)) {
             $missingAutodiscoveryDirectoryTolerantYamlFileLoader = new MissingAutodiscoveryDirectoryTolerantYamlFileLoader(
                 $containerBuilder,

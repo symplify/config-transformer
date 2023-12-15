@@ -12,6 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
@@ -19,7 +20,6 @@ use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 use Symplify\ConfigTransformer\ValueObject\Option;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class SwitchFormatCommand extends Command
 {
@@ -38,14 +38,14 @@ final class SwitchFormatCommand extends Command
         $this->setName('switch-format');
         $this->setAliases(['convert', 'transform']);
 
-        $this->setDescription('Converts XML/YAML configs to PHP format');
+        $this->setDescription('Converts YAML configs to PHP format');
 
         $this->addArgument(
             Option::SOURCES,
             InputArgument::OPTIONAL | InputArgument::IS_ARRAY,
             'Path to directory/file with configs',
             // 99 % of symfony project has this directory
-            [getcwd() . '/config']
+            [getcwd() . '/config', getcwd() . '/app/config']
         );
 
         $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
@@ -57,9 +57,9 @@ final class SwitchFormatCommand extends Command
 
         $totalFileCount = $this->getTotalFileCount($configuration);
 
-        $fileInfos = $this->configFileFinder->findFileInfos($configuration);
+        $fileInfos = $this->configFileFinder->findFileInfos($configuration->getSources());
         if ($fileInfos === []) {
-            $successMessage = sprintf('No YAML/XML configs found in %d files, good job!', $totalFileCount);
+            $successMessage = sprintf('No YAML configs found in %d files, good job!', $totalFileCount);
             $this->symfonyStyle->success($successMessage);
 
             return self::SUCCESS;
@@ -89,7 +89,7 @@ final class SwitchFormatCommand extends Command
         return self::SUCCESS;
     }
 
-    private function removeFileInfo(Configuration $configuration, SmartFileInfo $fileInfo): void
+    private function removeFileInfo(Configuration $configuration, SplFileInfo $fileInfo): void
     {
         // only dry run, nothing to remove
         if ($configuration->isDryRun()) {
