@@ -7,7 +7,7 @@ namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symplify\VendorPatches\Utils\ParametersMerger;
+use Symplify\ConfigTransformer\Utils\ParametersMerger;
 
 /**
  * @api
