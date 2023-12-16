@@ -81,7 +81,7 @@ final class FixtureSplitter
         return sys_get_temp_dir() . '/_temp_fixture_easy_testing';
     }
 
-    public static function createTemporaryFileInfo(
+    private static function createTemporaryFileInfo(
         SplFileInfo $fixtureSmartFileInfo,
         string $prefix,
         string $fileContent
