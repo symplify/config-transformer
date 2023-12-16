@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ConfigTransformerPrefix202312\Symfony\Component\Config\FileLocatorInterface;
+use ConfigTransformerPrefix202312\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformerPrefix202312\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\ConfigTransformer\Utils\ParametersMerger;
-
 /**
  * @api
  *
@@ -20,34 +18,34 @@ use Symplify\ConfigTransformer\Utils\ParametersMerger;
  */
 final class ParameterMergingPhpFileLoader extends PhpFileLoader
 {
-    private readonly ParametersMerger $parametersMerger;
-
+    /**
+     * @readonly
+     * @var \Symplify\ConfigTransformer\Utils\ParametersMerger
+     */
+    private $parametersMerger;
     public function __construct(ContainerBuilder $containerBuilder, FileLocatorInterface $fileLocator)
     {
         $this->parametersMerger = new ParametersMerger();
         parent::__construct($containerBuilder, $fileLocator);
     }
-
     /**
      * Same as parent, just merging parameters instead overriding them
      *
      * @see https://github.com/symplify/symplify/pull/697
+     * @param mixed $resource
+     * @return mixed
      */
-    public function load(mixed $resource, string $type = null): mixed
+    public function load($resource, string $type = null)
     {
         // get old parameters
         $parameterBag = $this->container->getParameterBag();
         $oldParameters = $parameterBag->all();
-
         parent::load($resource);
-
         foreach ($oldParameters as $key => $oldValue) {
             $currentParameterValue = $this->container->getParameter($key);
             $newValue = $this->parametersMerger->merge($oldValue, $currentParameterValue);
-
             $this->container->setParameter($key, $newValue);
         }
-
         return null;
     }
 }

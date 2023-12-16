@@ -1,31 +1,25 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Finder;
 
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
-
+use ConfigTransformerPrefix202312\Symfony\Component\Finder\Finder;
+use ConfigTransformerPrefix202312\Symfony\Component\Finder\SplFileInfo;
 final class ConfigFileFinder
 {
     /**
      * @see https://regex101.com/r/jmxqCg/1
      * @var string
      */
-    private const CONFIG_SUFFIXES_REGEX = '#\.(yml|yaml|xml)$#';
-
+    private const CONFIG_SUFFIXES_REGEX = '#\\.(yml|yaml|xml)$#';
     /**
      * @param string[] $sources
      * @return SplFileInfo[]
      */
-    public function findFileInfos(array $sources): array
+    public function findFileInfos(array $sources) : array
     {
         $finder = new Finder();
-        $finder->files()
-            ->in($sources)
-            ->name(self::CONFIG_SUFFIXES_REGEX);
-
-        return iterator_to_array($finder->getIterator());
+        $finder->files()->in($sources)->name(self::CONFIG_SUFFIXES_REGEX);
+        return \iterator_to_array($finder->getIterator());
     }
 }
