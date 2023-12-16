@@ -48,7 +48,7 @@ final class SwitchFormatCommand extends Command
             [getcwd() . '/config', getcwd() . '/app/config']
         );
 
-        $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

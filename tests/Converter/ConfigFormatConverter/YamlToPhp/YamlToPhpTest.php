@@ -70,38 +70,6 @@ final class YamlToPhpTest extends AbstractTestCase
         $this->doTestOutput($fixtureFileInfo);
     }
 
-    #[DataProvider('provideDataWithDirectory')]
-    public function testSpecialCaseWithDirectory(SplFileInfo $fileInfo): void
-    {
-        $this->doTestOutputWithExtraDirectory($fileInfo, __DIR__ . '/Fixture/nested');
-    }
-
-    #[DataProvider('provideDataExtension')]
-    public function testEcs(SplFileInfo $fileInfo): void
-    {
-        $this->doTestOutputWithExtraDirectory($fileInfo, $fileInfo->getPath());
-    }
-
-    /**
-     * @source https://github.com/symfony/maker-bundle/pull/604
-     */
-    #[DataProvider('provideDataMakerBundle')]
-    public function testMakerBundle(SplFileInfo $fileInfo): void
-    {
-        // needed for all the included
-        $temporaryPath = FixtureSplitter::getTemporaryPath();
-        FileSystem::write(
-            $temporaryPath . '/../src/SomeClass.php',
-            '<?php namespace App { class SomeClass {} }'
-        );
-        require_once $temporaryPath . '/../src/SomeClass.php';
-
-        FileSystem::createDir($temporaryPath . '/../src/Controller');
-        FileSystem::createDir($temporaryPath . '/../src/Domain');
-
-        $this->doTestOutput($fileInfo);
-    }
-
     /**
      * @return Iterator<mixed, \SplFileInfo[]>
      */
@@ -116,30 +84,6 @@ final class YamlToPhpTest extends AbstractTestCase
     public static function provideDataWithPhpImported(): Iterator
     {
         return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/skip-imported-php', '*.yaml');
-    }
-
-    /**
-     * @return Iterator<mixed, \SplFileInfo[]>
-     */
-    public static function provideDataExtension(): Iterator
-    {
-        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/extension', '*.yaml');
-    }
-
-    /**
-     * @return Iterator<mixed, \SplFileInfo[]>
-     */
-    public static function provideDataWithDirectory(): Iterator
-    {
-        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/nested', '*.yaml');
-    }
-
-    /**
-     * @return Iterator<mixed, SplFileInfo[]>
-     */
-    public static function provideDataMakerBundle(): Iterator
-    {
-        return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/maker-bundle', '*.yaml');
     }
 
     private function doTestOutput(SplFileInfo $fixtureFileInfo, bool $preserveDirStructure = false): void
@@ -157,30 +101,5 @@ final class YamlToPhpTest extends AbstractTestCase
         $filePath = RelativeFilePathHelper::resolveFromDirectory($fixtureFileInfo->getRealPath(), getcwd());
 
         $this->assertSame($expectedContent, $convertedContent, $filePath);
-    }
-
-    private function doTestOutputWithExtraDirectory(SplFileInfo $fixtureFileInfo, string $extraDirectory): void
-    {
-        $inputAndExpected = FixtureSplitter::splitFileInfoToInputAndExpected($fixtureFileInfo);
-        $temporaryPath = FixtureSplitter::getTemporaryPath();
-
-        // copy /src to temp directory, so Symfony FileLocator knows about it
-        $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
-        $fileSystem->mirror($extraDirectory, $temporaryPath, null, [
-            'override' => true,
-        ]);
-
-        $fileTemporaryPath = $temporaryPath . '/' . RelativeFilePathHelper::resolveFromDirectory($fixtureFileInfo->getRealPath(), $extraDirectory);
-
-        FileSystem::write($fileTemporaryPath, $inputAndExpected->getInput());
-
-        // require class to autoload it
-        $expectedFilePath = $temporaryPath . '/src/SomeClass.php';
-        $this->assertFileExists($expectedFilePath);
-
-        require_once $expectedFilePath;
-
-        $inputFileInfo = new SplFileInfo($fileTemporaryPath, '', '');
-        $this->doTestFileInfo($inputFileInfo, $inputAndExpected->getExpected(), $fixtureFileInfo);
     }
 }

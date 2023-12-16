@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
 
 $possibleAutoloadPaths = [
@@ -31,4 +33,7 @@ $configTransformerKernel->boot();
 $container = $configTransformerKernel->getContainer();
 
 $configTransformerApplication = $container->get(\Symplify\ConfigTransformer\Console\ConfigTransformerApplication::class);
-$configTransformerApplication->run();
+
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+$configTransformerApplication->run($input, $output);
