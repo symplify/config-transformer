@@ -17,7 +17,7 @@ final class ConfigTransformerApplication extends Application
 
         $this->add($switchFormatCommand);
 
-        // hid unnecesary command
+        // hide unnecesary command
         $this->get('help')->setHidden();
         $this->get('completion')->setHidden();
 
