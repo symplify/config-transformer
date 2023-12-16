@@ -6,7 +6,7 @@ namespace Symplify\ConfigTransformer\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
+use Symplify\ConfigTransformer\Kernel\ConfigTransformerContainerFactory;
 
 abstract class AbstractTestCase extends TestCase
 {
@@ -14,10 +14,8 @@ abstract class AbstractTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $configTransformerKernel = new ConfigTransformerKernel();
-        $configTransformerKernel->boot();
-
-        $this->container = $configTransformerKernel->getContainer();
+        $configTransformerContainerFactory = new ConfigTransformerContainerFactory();
+        $this->container = $configTransformerContainerFactory->create();
     }
 
     /**

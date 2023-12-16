@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
+use Symplify\ConfigTransformer\Console\ConfigTransformerApplication;
+use Symplify\ConfigTransformer\Kernel\ConfigTransformerContainerFactory;
 
 $possibleAutoloadPaths = [
     // dependency
@@ -27,12 +28,11 @@ if (file_exists($scoperAutoloadFilepath)) {
     require_once $scoperAutoloadFilepath;
 }
 
-$configTransformerKernel = new ConfigTransformerKernel();
-$configTransformerKernel->boot();
+$configTransformerContainerFactory = new ConfigTransformerContainerFactory();
+$container = $configTransformerContainerFactory->create();
 
-$container = $configTransformerKernel->getContainer();
-
-$configTransformerApplication = $container->get(\Symplify\ConfigTransformer\Console\ConfigTransformerApplication::class);
+/** @var ConfigTransformerApplication $configTransformerApplication */
+$configTransformerApplication = $container->get(ConfigTransformerApplication::class);
 
 $input = new ArgvInput();
 $output = new ConsoleOutput();
