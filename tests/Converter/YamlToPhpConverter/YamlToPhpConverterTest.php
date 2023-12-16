@@ -9,20 +9,14 @@ use Symplify\ConfigTransformer\Tests\AbstractTestCase;
 
 final class YamlToPhpConverterTest extends AbstractTestCase
 {
-    private YamlToPhpConverter $yamlToPhpConverter;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->yamlToPhpConverter = $this->getService(YamlToPhpConverter::class);
-    }
-
     public function test(): void
     {
-        $printedPhpConfigContent = $this->yamlToPhpConverter->convertYamlArray([
+        $yamlToPhpConverter = $this->getService(YamlToPhpConverter::class);
+
+        $printedPhpConfigContent = $yamlToPhpConverter->convertYamlArray([
             'parameters' => [
                 'key' => 'value',
+                'format' => '\d+',
             ],
         ], 'file_path.yaml');
 

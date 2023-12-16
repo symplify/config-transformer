@@ -22,7 +22,6 @@ final class YamlToPhpTest extends AbstractTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->configFormatConverter = $this->getService(ConfigFormatConverter::class);
     }
 
@@ -32,9 +31,6 @@ final class YamlToPhpTest extends AbstractTestCase
         $this->doTestOutput($fileInfo, true);
     }
 
-    /**
-     * @return Iterator<mixed, \SplFileInfo[]>
-     */
     public static function provideDataForRouting(): Iterator
     {
         return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/routing', '*.yaml');
@@ -70,17 +66,11 @@ final class YamlToPhpTest extends AbstractTestCase
         $this->doTestOutput($fixtureFileInfo);
     }
 
-    /**
-     * @return Iterator<mixed, \SplFileInfo[]>
-     */
     public static function provideData(): Iterator
     {
         return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/normal', '*.yaml');
     }
 
-    /**
-     * @return Iterator<mixed, \SplFileInfo[]>
-     */
     public static function provideDataWithPhpImported(): Iterator
     {
         return FixtureFinder::yieldDirectory(__DIR__ . '/Fixture/skip-imported-php', '*.yaml');
@@ -90,16 +80,13 @@ final class YamlToPhpTest extends AbstractTestCase
     {
         $inputAndExpected = FixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos($fixtureFileInfo, false, $preserveDirStructure);
 
-        $this->doTestFileInfo($inputAndExpected->getInputFileInfo(), $inputAndExpected->getExpectedFileContent(), $fixtureFileInfo);
-    }
-
-    private function doTestFileInfo(SplFileInfo $inputFileInfo, string $expectedContent, SplFileInfo $fixtureFileInfo): void
-    {
+        $inputFileInfo = $inputAndExpected->getInputFileInfo();
         $convertedContent = $this->configFormatConverter->convert($inputFileInfo);
+
+        // run `UT=1 vendor/bin/phpunit` to update test fixtures content
         FixtureUpdater::updateFixtureContent($inputFileInfo, $convertedContent, $fixtureFileInfo);
 
         $filePath = RelativeFilePathHelper::resolveFromDirectory($fixtureFileInfo->getRealPath(), getcwd());
-
-        $this->assertSame($expectedContent, $convertedContent, $filePath);
+        $this->assertSame($inputAndExpected->getExpectedFileContent(), $convertedContent, $filePath);
     }
 }

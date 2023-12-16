@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\ConfigTransformer\Console\ConfigTransformerApplication;
 use Symplify\ConfigTransformer\Console\Style\SymfonyStyleFactory;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -24,9 +22,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/Enum',
             __DIR__ . '/../src/ValueObject',
         ]);
-
-    // console
-    $services->alias(Application::class, ConfigTransformerApplication::class);
 
     $services->set(SymfonyStyle::class)
         ->factory([service(SymfonyStyleFactory::class), 'create']);

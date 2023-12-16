@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Console;
 
 use Symfony\Component\Console\Application;
-use Symplify\ConfigTransformer\Command\SwitchFormatCommand;
+use Symplify\ConfigTransformer\Console\Command\SwitchFormatCommand;
 
 final class ConfigTransformerApplication extends Application
 {
