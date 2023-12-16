@@ -21,20 +21,22 @@ final class ConfigFileFinder
      */
     public function findFileInfos(array $sources): array
     {
-        if (count($sources) === 1 && is_file($sources[0])) {
-            $path = realpath($sources[0]);
-            return [
-                new SplFileInfo(
-                    $path,
-                    $sources[0],
-                    $sources[0]
-                )];
+        $fileInfos = [];
+        $directories = [];
+
+        foreach ($sources as $source) {
+            if (is_file($source)) {
+                $fileInfos[] = new SplFileInfo(realpath($source), $source, $source);
+            } else {
+                $directories[] = $source;
+            }
         }
 
         $finder = new Finder();
         $finder->files()
-            ->in($sources)
-            ->name(self::CONFIG_SUFFIXES_REGEX);
+            ->in($directories)
+            ->name(self::CONFIG_SUFFIXES_REGEX)
+            ->append($fileInfos);
 
         return iterator_to_array($finder->getIterator());
     }
