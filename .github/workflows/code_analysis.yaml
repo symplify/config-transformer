@@ -38,7 +38,7 @@ jobs:
 
                     -
                         name: 'Check Active Classes'
-                        run: vendor/bin/class-leak check src --ansi --skip-type="\Symplify\PhpConfigPrinter\Contract\NodeVisitor\PrePrintNodeVisitorInterface"
+                        run: vendor/bin/class-leak check bin src --ansi --skip-type="\Symplify\PhpConfigPrinter\Contract\NodeVisitor\PrePrintNodeVisitorInterface"
 
 
         name: ${{ matrix.actions.name }}

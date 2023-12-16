@@ -14,8 +14,6 @@ use Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
 
 /**
  * @api
- * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
- *
  * @see \Symplify\ConfigTransformer\Tests\Converter\YamlToPhpConverter\YamlToPhpConverterTest
  */
 final class YamlToPhpConverter
