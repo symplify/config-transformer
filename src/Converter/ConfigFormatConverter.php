@@ -1,38 +1,45 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Converter;
 
-use Symfony\Component\Finder\SplFileInfo;
+use ConfigTransformerPrefix202312\Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\ConfigLoader;
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
 use Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-
 final class ConfigFormatConverter
 {
-    public function __construct(
-        private readonly ConfigLoader $configLoader,
-        private readonly YamlToPhpConverter $yamlToPhpConverter,
-        private readonly CurrentFilePathProvider $currentFilePathProvider,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\ConfigTransformer\ConfigLoader
+     */
+    private $configLoader;
+    /**
+     * @readonly
+     * @var \Symplify\ConfigTransformer\Converter\YamlToPhpConverter
+     */
+    private $yamlToPhpConverter;
+    /**
+     * @readonly
+     * @var \Symplify\PhpConfigPrinter\Provider\CurrentFilePathProvider
+     */
+    private $currentFilePathProvider;
+    public function __construct(ConfigLoader $configLoader, \Symplify\ConfigTransformer\Converter\YamlToPhpConverter $yamlToPhpConverter, CurrentFilePathProvider $currentFilePathProvider)
+    {
+        $this->configLoader = $configLoader;
+        $this->yamlToPhpConverter = $yamlToPhpConverter;
+        $this->currentFilePathProvider = $currentFilePathProvider;
     }
-
-    public function convert(SplFileInfo $fileInfo): string
+    public function convert(SplFileInfo $fileInfo) : string
     {
         $this->currentFilePathProvider->setFilePath($fileInfo->getRealPath());
-
-        $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo(
-            $fileInfo
-        );
-
-        if (in_array($fileInfo->getExtension(), [Format::YAML, Format::YML], true)) {
+        $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo($fileInfo);
+        if (\in_array($fileInfo->getExtension(), [Format::YAML, Format::YML], \true)) {
             $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
             return $this->yamlToPhpConverter->convert($dumpedYaml, $fileInfo->getRealPath());
         }
-
-        $message = sprintf('Suffix "%s" is not support yet', $fileInfo->getExtension());
+        $message = \sprintf('Suffix "%s" is not support yet', $fileInfo->getExtension());
         throw new NotImplementedYetException($message);
     }
 }
