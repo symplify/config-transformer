@@ -63,7 +63,7 @@ final class YamlToPhpTest extends AbstractTestCase
             $temporaryPath . '/directory-with-unquoted-strings'
         );
 
-        $this->doTestOutput($fixtureFileInfo);
+        $this->doTestOutput($fixtureFileInfo, false);
     }
 
     public static function provideData(): Iterator

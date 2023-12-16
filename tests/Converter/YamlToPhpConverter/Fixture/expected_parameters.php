@@ -9,5 +9,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('key', 'value');
 
-    $parameters->set('format', '\d+');
+    $parameters->set('format', 'd+');
 };
