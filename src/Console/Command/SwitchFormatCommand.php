@@ -42,7 +42,7 @@ final class SwitchFormatCommand extends Command
 
         $this->addArgument(
             Option::SOURCES,
-            InputArgument::OPTIONAL | InputArgument::IS_ARRAY,
+            InputArgument::IS_ARRAY,
             'Path to directory/file with configs'
         );
 
