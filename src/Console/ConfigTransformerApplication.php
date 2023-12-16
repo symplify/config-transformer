@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Console;
 
 use Symfony\Component\Console\Application;
-use Symplify\ConfigTransformer\Command\SwitchFormatCommand;
+use Symplify\ConfigTransformer\Console\Command\SwitchFormatCommand;
 
 final class ConfigTransformerApplication extends Application
 {
@@ -17,7 +17,11 @@ final class ConfigTransformerApplication extends Application
 
         $this->add($switchFormatCommand);
 
-        // make single command application
-        $this->setDefaultCommand($switchFormatCommand->getName(), true);
+        // hid unnecesary command
+        $this->get('help')->setHidden();
+        $this->get('completion')->setHidden();
+
+        // make single command application for fast run
+        $this->setDefaultCommand($switchFormatCommand->getName());
     }
 }

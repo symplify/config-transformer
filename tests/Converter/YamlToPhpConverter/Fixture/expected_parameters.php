@@ -8,4 +8,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set('key', 'value');
+
+    $parameters->set('format', 'd+');
 };

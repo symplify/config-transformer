@@ -5,13 +5,20 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
 use Nette\Utils\Strings;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use Symfony\Component\Finder\SplFileInfo;
+use Symplify\ConfigTransformer\FileSystem\RelativeFilePathHelper;
 
 final class ConvertedContent
 {
+    /**
+     * @var string
+     * @see https://regex101.com/r/SYP00O/1
+     */
+    private const LAST_SUFFIX_REGEX = '#\.[^.]+$#';
+
     public function __construct(
         private readonly string $convertedContent,
-        private readonly SmartFileInfo $originalFileInfo
+        private readonly SplFileInfo $originalFileInfo
     ) {
     }
 
@@ -30,12 +37,12 @@ final class ConvertedContent
 
     public function getOriginalFilePathWithoutSuffix(): string
     {
-        return $this->originalFileInfo->getRealPathWithoutSuffix();
+        return Strings::replace($this->originalFileInfo->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
 
     public function getOriginalRelativeFilePath(): string
     {
-        return $this->originalFileInfo->getRelativeFilePathFromCwd();
+        return RelativeFilePathHelper::resolveFromDirectory($this->originalFileInfo->getRealPath(), getcwd());
     }
 
     public function getOriginalContent(): string

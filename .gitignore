@@ -2,3 +2,6 @@ composer.lock
 /vendor
 
 .phpunit.cache
+
+# kernel cache
+/var

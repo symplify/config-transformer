@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Tests\Finder\ConfigFileFinder;
 
+use PHPUnit\Framework\TestCase;
 use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
-use Symplify\ConfigTransformer\Kernel\ConfigTransformerKernel;
-use Symplify\ConfigTransformer\ValueObject\Configuration;
-use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
-final class ConfigFileFinderTest extends AbstractKernelTestCase
+/**
+ * @see \Symplify\ConfigTransformer\Finder\ConfigFileFinder
+ */
+final class ConfigFileFinderTest extends TestCase
 {
-    private ConfigFileFinder $configFileFinder;
-
-    protected function setUp(): void
-    {
-        $this->bootKernel(ConfigTransformerKernel::class);
-
-        $this->configFileFinder = $this->getService(ConfigFileFinder::class);
-    }
-
     public function test(): void
     {
-        $configuration = new Configuration([__DIR__ . '/Fixture'], true);
+        $configFileFinder = new ConfigFileFinder();
 
-        $fileInfos = $this->configFileFinder->findFileInfos($configuration);
+        $fileInfos = $configFileFinder->findFileInfos([__DIR__ . '/Fixture']);
         $this->assertCount(1, $fileInfos);
     }
 }

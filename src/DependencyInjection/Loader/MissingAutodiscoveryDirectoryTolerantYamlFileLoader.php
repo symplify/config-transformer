@@ -15,6 +15,6 @@ final class MissingAutodiscoveryDirectoryTolerantYamlFileLoader extends YamlFile
         string $resource,
         string|array $exclude = null
     ): void {
-        // skip laoding classes, as the resource might not exist and invoke autoloading
+        // skip loading classes, as the resource might not exist and invoke autoloading
     }
 }
