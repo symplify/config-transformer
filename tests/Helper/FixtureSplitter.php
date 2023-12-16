@@ -39,21 +39,21 @@ final class FixtureSplitter
     }
 
     public static function splitFileInfoToLocalInputAndExpectedFileInfos(
-        SplFileInfo $smartFileInfo,
-        bool $autoloadTestFixture = false,
-        bool $preserveDirStructure = false
+        SplFileInfo $fileInfo,
+        bool        $autoloadTestFixture = false,
+        bool        $preserveDirStructure = false
     ): InputFileInfoAndExpectedFileInfo {
-        $inputAndExpected = self::splitFileInfoToInputAndExpected($smartFileInfo);
+        $inputAndExpected = self::splitFileInfoToInputAndExpected($fileInfo);
 
         $prefix = '';
         if ($preserveDirStructure) {
-            $dir = explode('Fixture', $smartFileInfo->getRealPath(), 2);
+            $dir = explode('Fixture', $fileInfo->getRealPath(), 2);
             $prefix = isset($dir[1]) ? dirname($dir[1]) . '/' : '';
             $prefix = ltrim($prefix, '/\\');
         }
 
         $inputFileInfo = self::createTemporaryFileInfo(
-            $smartFileInfo,
+            $fileInfo,
             $prefix . 'input',
             $inputAndExpected->getInput()
         );
@@ -64,7 +64,7 @@ final class FixtureSplitter
         }
 
         $expectedFileInfo = self::createTemporaryFileInfo(
-            $smartFileInfo,
+            $fileInfo,
             $prefix . 'expected',
             $inputAndExpected->getExpected()
         );
@@ -96,11 +96,11 @@ final class FixtureSplitter
         return new SplFileInfo($temporaryFilePath, '', '');
     }
 
-    private static function createTemporaryPathWithPrefix(SplFileInfo $smartFileInfo, string $prefix): string
+    private static function createTemporaryPathWithPrefix(SplFileInfo $fileInfo, string $prefix): string
     {
-        $hash = Strings::substring(md5($smartFileInfo->getRealPath()), -20);
+        $hash = Strings::substring(md5($fileInfo->getRealPath()), -20);
 
-        $fileBasename = $smartFileInfo->getBasename('.inc');
+        $fileBasename = $fileInfo->getBasename('.inc');
 
         return self::getTemporaryPath() . sprintf('/%s_%s_%s', $prefix, $hash, $fileBasename);
     }

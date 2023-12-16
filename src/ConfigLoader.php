@@ -29,7 +29,7 @@ final class ConfigLoader
      * @see https://regex101.com/r/4Uanps/4
      * @var string
      */
-    private const PHP_CONST_REGEX = '#!php/const:?\s*([a-zA-Z0-9_\\\]+(::\w+)?)+(:\s*(.*))?#';
+    private const PHP_CONST_REGEX = '#!php/const:?\s*([a-zA-Z0-9_\\\\]+(::\w+)?)+(:\s*(.*))?#';
 
     /**
      * @see https://regex101.com/r/spi4ir/1
@@ -43,15 +43,15 @@ final class ConfigLoader
     }
 
     public function createAndLoadContainerBuilderFromFileInfo(
-        SplFileInfo $smartFileInfo,
+        SplFileInfo $fileInfo,
     ): ContainerBuilderAndFileContent {
         $containerBuilder = new ContainerBuilder();
 
-        $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $smartFileInfo->getExtension());
-        $fileRealPath = $smartFileInfo->getRealPath();
+        $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $fileInfo->getExtension());
+        $fileRealPath = $fileInfo->getRealPath();
 
         // correct old syntax of tags so we can parse it
-        $content = $smartFileInfo->getContents();
+        $content = $fileInfo->getContents();
 
         // fake quoting of parameter, as it was removed in Symfony 3.1: https://symfony.com/blog/new-in-symfony-3-1-yaml-deprecations
         $content = Strings::replace(
@@ -60,7 +60,7 @@ final class ConfigLoader
             static fn (array $match): string => $match[1] . '"' . $match[2] . ($match[4] ?? '') . '"'
         );
 
-        if (in_array($smartFileInfo->getExtension(), [Format::YML, Format::YAML], true)) {
+        if (in_array($fileInfo->getExtension(), [Format::YML, Format::YAML], true)) {
             $content = Strings::replace(
                 $content,
                 self::PHP_CONST_REGEX,
@@ -70,8 +70,8 @@ final class ConfigLoader
                     (string) $match[1]
                 ) . ')%"' . ($match[3] ?? '')
             );
-            if ($content !== $smartFileInfo->getContents()) {
-                $fileRealPath = sys_get_temp_dir() . '/__symplify_config_tranformer_clean_yaml/' . $smartFileInfo->getFilename();
+            if ($content !== $fileInfo->getContents()) {
+                $fileRealPath = sys_get_temp_dir() . '/__symplify_config_tranformer_clean_yaml/' . $fileInfo->getFilename();
                 FileSystem::write($fileRealPath, $content);
             }
 
