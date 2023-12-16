@@ -43,9 +43,7 @@ final class SwitchFormatCommand extends Command
         $this->addArgument(
             Option::SOURCES,
             InputArgument::OPTIONAL | InputArgument::IS_ARRAY,
-            'Path to directory/file with configs',
-            // 99 % of symfony project has this directory
-            [getcwd() . '/config', getcwd() . '/app/config']
+            'Path to directory/file with configs'
         );
 
         $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
