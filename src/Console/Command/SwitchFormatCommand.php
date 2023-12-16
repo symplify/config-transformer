@@ -54,7 +54,6 @@ final class SwitchFormatCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $configuration = $this->configurationFactory->createFromInput($input);
-
         $totalFileCount = $this->getTotalFileCount($configuration);
 
         $fileInfos = $this->configFileFinder->findFileInfos($configuration->getSources());
@@ -70,7 +69,7 @@ final class SwitchFormatCommand extends Command
             $convertedContent = new ConvertedContent($convertedFileContent, $fileInfo);
 
             $this->configFileDumper->dumpFile($convertedContent, $configuration);
-            $this->removeFileInfo($configuration, $fileInfo);
+            $this->removeOriginalYamlFileInfo($configuration, $fileInfo);
 
             $this->symfonyStyle->newLine();
         }
@@ -89,7 +88,7 @@ final class SwitchFormatCommand extends Command
         return self::SUCCESS;
     }
 
-    private function removeFileInfo(Configuration $configuration, SplFileInfo $fileInfo): void
+    private function removeOriginalYamlFileInfo(Configuration $configuration, SplFileInfo $fileInfo): void
     {
         // only dry run, nothing to remove
         if ($configuration->isDryRun()) {
