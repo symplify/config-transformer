@@ -21,6 +21,16 @@ final class ConfigFileFinder
      */
     public function findFileInfos(array $sources): array
     {
+        if (count($sources) === 1 && is_file($sources[0])) {
+            $path = realpath($sources[0]);
+            return [
+                new SplFileInfo(
+                    $path,
+                    $sources[0],
+                    $sources[0]
+                )];
+        }
+
         $finder = new Finder();
         $finder->files()
             ->in($sources)
