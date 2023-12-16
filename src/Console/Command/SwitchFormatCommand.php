@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
@@ -52,12 +51,11 @@ final class SwitchFormatCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $configuration = $this->configurationFactory->createFromInput($input);
-        $totalFileCount = $this->getTotalFileCount($configuration);
 
         $fileInfos = $this->configFileFinder->findFileInfos($configuration->getSources());
+
         if ($fileInfos === []) {
-            $successMessage = sprintf('No YAML configs found in %d files, good job!', $totalFileCount);
-            $this->symfonyStyle->success($successMessage);
+            $this->symfonyStyle->success('No YAML configs found, good job!');
 
             return self::SUCCESS;
         }
@@ -74,7 +72,7 @@ final class SwitchFormatCommand extends Command
 
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
-            $successMessage = sprintf('%d file(s) out of %d should be switched to PHP', count($fileInfos), $totalFileCount);
+            $successMessage = sprintf('%d file(s) should be switched to PHP', count($fileInfos));
             $this->symfonyStyle->error($successMessage);
 
             return self::FAILURE;
@@ -94,20 +92,5 @@ final class SwitchFormatCommand extends Command
         }
 
         FileSystem::delete($fileInfo->getRealPath());
-    }
-
-    private function getTotalFileCount(Configuration $configuration): int
-    {
-        if (count($configuration->getSources()) === 1) {
-            $sources = $configuration->getSources();
-            if (is_file($sources[0])) {
-                return 1;
-            }
-        }
-
-        return Finder::create()
-            ->files()
-            ->in($configuration->getSources())
-            ->count();
     }
 }
