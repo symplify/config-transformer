@@ -14,7 +14,6 @@
         "symfony/expression-language": "^6.4",
         "symfony/filesystem": "^6.4",
         "symfony/finder": "^6.4",
-        "symfony/http-kernel": "^6.1",
         "symfony/yaml": "^6.4",
         "symplify/php-config-printer": "^11.3.6",
         "webmozart/assert": "^1.11"
