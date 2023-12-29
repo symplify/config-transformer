@@ -28,7 +28,7 @@ vendor/bin/config-transformer
 Do you want to convert 1 files or directory at a time? Specify the paths as arguments:
 
 ```bash
-vendor/bin/config-transformer config/parameters.yml
+vendor/bin/config-transformer convert config/parameters.yml
 ```
 
 The input files are deleted automatically.
