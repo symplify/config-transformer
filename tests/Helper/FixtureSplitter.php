@@ -40,8 +40,8 @@ final class FixtureSplitter
 
     public static function splitFileInfoToLocalInputAndExpectedFileInfos(
         SplFileInfo $fileInfo,
-        bool        $autoloadTestFixture = false,
-        bool        $preserveDirStructure = false
+        bool $autoloadTestFixture = false,
+        bool $preserveDirStructure = false
     ): InputFileInfoAndExpectedFileInfo {
         $inputAndExpected = self::splitFileInfoToInputAndExpected($fileInfo);
 
