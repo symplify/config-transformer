@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Enum;
 
 final class SymfonyClass
@@ -9,30 +8,25 @@ final class SymfonyClass
     /**
      * @var string
      */
-    public const CONTAINER_BUILDER = 'Symfony\Component\DependencyInjection\ContainerBuilder';
-
+    public const CONTAINER_BUILDER = 'Symfony\\Component\\DependencyInjection\\ContainerBuilder';
     /**
      * @var string
      */
-    public const FRAMEWORK_EXTENSION = 'Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension';
-
+    public const FRAMEWORK_EXTENSION = 'Symfony\\Bundle\\FrameworkBundle\\DependencyInjection\\FrameworkExtension';
     /**
      * @var string
      */
-    public const MONOLOG_EXTENSION = 'Symfony\Bundle\MonologBundle\DependencyInjection\MonologExtension';
-
+    public const MONOLOG_EXTENSION = 'Symfony\\Bundle\\MonologBundle\\DependencyInjection\\MonologExtension';
     /**
      * @var string
      */
-    public const SECURITY_EXTENSION = 'Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension';
-
+    public const SECURITY_EXTENSION = 'Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\SecurityExtension';
     /**
      * @var string
      */
-    public const TWIG_EXTENSION = 'Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension';
-
+    public const TWIG_EXTENSION = 'Symfony\\Bundle\\TwigBundle\\DependencyInjection\\TwigExtension';
     /**
      * @var string
      */
-    public const DOCTRINE_EXTENSION = 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension';
+    public const DOCTRINE_EXTENSION = 'Doctrine\\Bundle\\DoctrineBundle\\DependencyInjection\\DoctrineExtension';
 }
