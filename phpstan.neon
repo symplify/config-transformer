@@ -8,8 +8,8 @@ parameters:
         - tests
 
     excludePaths:
-        - '*/tests/**/Source/*'
-        - '*/tests/**/Fixture/*'
+        - '*/Source/*'
+        - '*/Fixture/*'
 
     ignoreErrors:
         -
