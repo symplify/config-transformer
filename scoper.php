@@ -64,6 +64,17 @@ return [
             return Strings::replace($content, $pattern, 'public const $1 = \'');
         },
 
+        function (string $filePath, string $prefix, string $content): string {
+            /** @see \Symplify\ConfigTransformer\Enum\SymfonyClass */
+            if (! str_ends_with($filePath, 'src/Enum/SymfonyClass.php')) {
+                return $content;
+            }
+
+            $pattern = sprintf('#public const (.*?) = \'%s\\\\\\\\#', $prefix);
+
+            return Strings::replace($content, $pattern, 'public const $1 = \'');
+        },
+
         // unprefix strings class, used for node factory
         // fixes https://github.com/symplify/symplify/issues/3976
         function (string $filePath, string $prefix, string $content): string {

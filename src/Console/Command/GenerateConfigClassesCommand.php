@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symplify\ConfigTransformer\Enum\SymfonyClass;
 
 final class GenerateConfigClassesCommand extends Command
 {
@@ -19,11 +20,11 @@ final class GenerateConfigClassesCommand extends Command
      * @var string[]
      */
     private const EXTENSION_CLASSES = [
-        'Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension',
-        'Symfony\Bundle\MonologBundle\DependencyInjection\MonologExtension',
-        'Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension',
-        'Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension',
-        'Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension',
+        SymfonyClass::DOCTRINE_EXTENSION,
+        SymfonyClass::MONOLOG_EXTENSION,
+        SymfonyClass::SECURITY_EXTENSION,
+        SymfonyClass::TWIG_EXTENSION,
+        SymfonyClass::DOCTRINE_EXTENSION,
     ];
 
     private SymfonyStyle $symfonyStyle;
