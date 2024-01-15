@@ -72,4 +72,3 @@ final class GenerateConfigClassesCommand extends Command
         return $extension->getConfiguration([], $containerBuilder);
     }
 }
-
