@@ -40,7 +40,6 @@ return [
 
     // excluded
     'exclude-namespaces' => [
-        '#^Symfony\\\\Component\\\\Config#',
         '#^Symplify\\\\ConfigTransformer#',
         '#^Symplify\\\\PhpConfigPrinter#',
         '#^Symfony\\\\Polyfill#',
@@ -58,17 +57,6 @@ return [
         function (string $filePath, string $prefix, string $content): string {
             /** @see \Symplify\PhpConfigPrinter\ValueObject\FunctionName */
             if (! str_ends_with($filePath, 'vendor/symplify/php-config-printer/src/ValueObject/FunctionName.php')) {
-                return $content;
-            }
-
-            $pattern = sprintf('#public const (.*?) = \'%s\\\\\\\\#', $prefix);
-
-            return Strings::replace($content, $pattern, 'public const $1 = \'');
-        },
-
-        function (string $filePath, string $prefix, string $content): string {
-            /** @see \Symplify\ConfigTransformer\Enum\SymfonyClass */
-            if (! str_ends_with($filePath, 'src/Enum/SymfonyClass.php')) {
                 return $content;
             }
 
