@@ -40,9 +40,11 @@ return [
 
     // excluded
     'exclude-namespaces' => [
+        '#^Symfony\\\\Component\\\\Config#',
         '#^Symplify\\\\ConfigTransformer#',
         '#^Symplify\\\\PhpConfigPrinter#',
         '#^Symfony\\\\Polyfill#',
+        // used in generate-config-classes command
     ],
     'exclude-files' => [
         // these paths are relative to this file location, so it should be in the root directory
