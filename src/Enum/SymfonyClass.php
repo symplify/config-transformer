@@ -9,6 +9,11 @@ final class SymfonyClass
     /**
      * @var string
      */
+    public const CONTAINER_BUILDER = 'Symfony\Component\DependencyInjection\ContainerBuilder';
+
+    /**
+     * @var string
+     */
     public const FRAMEWORK_EXTENSION = 'Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension';
 
     /**

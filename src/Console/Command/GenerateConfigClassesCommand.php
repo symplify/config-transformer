@@ -10,7 +10,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symplify\ConfigTransformer\Enum\SymfonyClass;
 
@@ -64,7 +63,9 @@ final class GenerateConfigClassesCommand extends Command
      */
     private function createExtensionConfiguration(string $extensionClass): ?ConfigurationInterface
     {
-        $containerBuilder = new ContainerBuilder();
+        $containerBuilderClass = SymfonyClass::CONTAINER_BUILDER;
+
+        $containerBuilder = new $containerBuilderClass();
         $containerBuilder->setParameter('kernel.debug', false);
 
         /** @var Extension $extension */
