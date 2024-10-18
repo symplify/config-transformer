@@ -7,6 +7,9 @@ namespace Symplify\ConfigTransformer\Tests\Helper;
 use Nette\Utils\FileSystem;
 use Symfony\Component\Finder\SplFileInfo;
 
+/**
+ * @api used in tests
+ */
 final class FixtureUpdater
 {
     public static function updateFixtureContent(

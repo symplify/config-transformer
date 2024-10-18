@@ -10,6 +10,9 @@ use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\Tests\Helper\ValueObject\InputAndExpected;
 use Symplify\ConfigTransformer\Tests\Helper\ValueObject\InputFileInfoAndExpectedFileInfo;
 
+/**
+ * @api used in tests
+ */
 final class FixtureSplitter
 {
     /**

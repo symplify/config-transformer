@@ -21,7 +21,6 @@ use Symplify\ConfigTransformer\DependencyInjection\Loader\MissingAutodiscoveryDi
 use Symplify\ConfigTransformer\DependencyInjection\Loader\SkippingPhpFileLoader;
 use Symplify\ConfigTransformer\Enum\Format;
 use Symplify\ConfigTransformer\Exception\NotImplementedYetException;
-use Symplify\ConfigTransformer\ValueObject\ContainerBuilderAndFileContent;
 
 final class ConfigLoader
 {
@@ -44,7 +43,7 @@ final class ConfigLoader
 
     public function createAndLoadContainerBuilderFromFileInfo(
         SplFileInfo $fileInfo,
-    ): ContainerBuilderAndFileContent {
+    ): string {
         $containerBuilder = new ContainerBuilder();
 
         $delegatingLoader = $this->createLoaderBySuffix($containerBuilder, $fileInfo->getExtension());
@@ -85,7 +84,7 @@ final class ConfigLoader
             // usefull in gradual upgrade of configs
         }
 
-        return new ContainerBuilderAndFileContent($containerBuilder, $content);
+        return $content;
     }
 
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): DelegatingLoader
