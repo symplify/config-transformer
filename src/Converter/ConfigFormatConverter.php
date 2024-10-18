@@ -23,13 +23,12 @@ final class ConfigFormatConverter
     {
         $this->currentFilePathProvider->setFilePath($fileInfo->getRealPath());
 
-        $containerBuilderAndFileContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo(
+        $dumpedContainerContent = $this->configLoader->createAndLoadContainerBuilderFromFileInfo(
             $fileInfo
         );
 
         if (in_array($fileInfo->getExtension(), [Format::YAML, Format::YML], true)) {
-            $dumpedYaml = $containerBuilderAndFileContent->getFileContent();
-            return $this->yamlToPhpConverter->convert($dumpedYaml, $fileInfo->getRealPath());
+            return $this->yamlToPhpConverter->convert($dumpedContainerContent, $fileInfo->getRealPath());
         }
 
         $message = sprintf('Suffix "%s" is not support yet', $fileInfo->getExtension());

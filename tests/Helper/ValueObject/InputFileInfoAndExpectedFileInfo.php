@@ -6,6 +6,9 @@ namespace Symplify\ConfigTransformer\Tests\Helper\ValueObject;
 
 use Symfony\Component\Finder\SplFileInfo;
 
+/**
+ * @api used in tests
+ */
 final class InputFileInfoAndExpectedFileInfo
 {
     public function __construct(
@@ -19,18 +22,8 @@ final class InputFileInfoAndExpectedFileInfo
         return $this->inputFileInfo;
     }
 
-    public function getExpectedFileInfo(): SplFileInfo
-    {
-        return $this->expectedFileInfo;
-    }
-
     public function getExpectedFileContent(): string
     {
         return $this->expectedFileInfo->getContents();
-    }
-
-    public function getExpectedFileInfoRealPath(): string
-    {
-        return $this->expectedFileInfo->getRealPath();
     }
 }

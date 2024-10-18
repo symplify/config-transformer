@@ -11,6 +11,7 @@ use Symfony\Component\Finder\SplFileInfo;
 final class FixtureFinder
 {
     /**
+     * @api used in tests
      * @return Iterator<array<int, SplFileInfo>>
      */
     public static function yieldDirectory(string $directory, string $suffix = '*.php.inc'): Iterator
