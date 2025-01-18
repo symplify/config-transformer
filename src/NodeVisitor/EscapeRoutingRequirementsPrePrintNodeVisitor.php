@@ -6,7 +6,6 @@ namespace Symplify\ConfigTransformer\NodeVisitor;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Scalar\String_;
@@ -36,10 +35,6 @@ final class EscapeRoutingRequirementsPrePrintNodeVisitor extends NodeVisitorAbst
         }
 
         foreach ($firstArg->value->items as $arrayItem) {
-            if (! $arrayItem instanceof ArrayItem) {
-                continue;
-            }
-
             if (! $arrayItem->value instanceof String_) {
                 continue;
             }

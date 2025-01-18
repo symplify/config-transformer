@@ -7,8 +7,8 @@
     ],
     "require": {
         "php": ">=8.2",
-        "nette/utils": "^3.2",
-        "nikic/php-parser": "^4.19",
+        "nette/utils": "^3.2|^4.0",
+        "nikic/php-parser": "^5.4",
         "sebastian/diff": "^5.0",
         "symfony/config": "^6.4",
         "symfony/console": "^6.4",
@@ -17,22 +17,21 @@
         "symfony/filesystem": "^6.4",
         "symfony/finder": "^6.4",
         "symfony/yaml": "^6.4",
-        "symplify/php-config-printer": "^11.3.7",
+        "symplify/php-config-printer": "^12.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "cweagans/composer-patches": "^1.7",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.5",
-        "rector/rector": "^1.2",
-        "shipmonk/composer-dependency-analyser": "^1.7",
+        "rector/rector": "^2.0",
+        "shipmonk/composer-dependency-analyser": "^1.8",
         "symplify/easy-coding-standard": "^12.3",
-        "symplify/phpstan-extensions": "^11.4",
+        "symplify/phpstan-extensions": "^12.0",
         "symplify/vendor-patches": "^11.3",
-        "tomasvotruba/class-leak": "^1.0",
-        "tomasvotruba/unused-public": "^1.0"
+        "tomasvotruba/class-leak": "^2.0",
+        "tomasvotruba/unused-public": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -72,7 +71,7 @@
     "scripts": {
         "check-cs": "vendor/bin/ecs check --ansi",
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
+        "phpstan": "vendor/bin/phpstan analyse --ansi",
         "rector": "vendor/bin/rector process --dry-run --ansi"
     }
 }
