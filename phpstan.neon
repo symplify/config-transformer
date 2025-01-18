@@ -1,6 +1,8 @@
 parameters:
     level: 8
 
+    errorFormat: symplify
+
     paths:
         - bin
         - src
@@ -10,11 +12,6 @@ parameters:
     excludePaths:
         - '*/Source/*'
         - '*/Fixture/*'
-
-    unused_public:
-        constants: true
-        properties: true
-        methods: true
 
     ignoreErrors:
         -
