@@ -35,6 +35,7 @@ final class ConfigFileFinder
         $finder = new Finder();
         $finder->files()
             ->in($directories)
+            ->notPath('serializer')
             ->name(self::CONFIG_SUFFIXES_REGEX)
             ->append($fileInfos);
 
