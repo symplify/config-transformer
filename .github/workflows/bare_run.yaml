@@ -1,9 +1,6 @@
-name: Bare Run on various PHP versions
+name: Bare Run
 
-on:
-    push:
-        branches:
-            - 'main'
+on: [pull_request, push]
 
 jobs:
     bare_run:
@@ -23,11 +20,4 @@ jobs:
                     php-version: ${{ matrix.php_version }}
                     coverage: none
 
-            -   run: mkdir nested-dir
-
-
-            -   run: composer require symplify/config-transformer --dev --ansi
-                working-directory: nested-dir
-
-            -   run: vendor/bin/config-transformer list --ansi
-                working-directory: nested-dir
+            -   run: php bin/config-transformer list --ansi
