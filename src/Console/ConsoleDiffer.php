@@ -1,33 +1,32 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\Console;
 
-use SebastianBergmann\Diff\Differ;
-use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use ConfigTransformerPrefix202501\SebastianBergmann\Diff\Differ;
+use ConfigTransformerPrefix202501\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symplify\ConfigTransformer\Reflection\PrivatesAccessor;
-
 final class ConsoleDiffer
 {
-    public function __construct(
-        private readonly ColorConsoleDiffFormatter $colorConsoleDiffFormatter
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\ConfigTransformer\Console\ColorConsoleDiffFormatter
+     */
+    private $colorConsoleDiffFormatter;
+    public function __construct(\Symplify\ConfigTransformer\Console\ColorConsoleDiffFormatter $colorConsoleDiffFormatter)
+    {
+        $this->colorConsoleDiffFormatter = $colorConsoleDiffFormatter;
     }
-
-    public function diff(string $old, string $new): string
+    public function diff(string $old, string $new) : string
     {
         $differ = $this->createDiffer();
-
         $diff = $differ->diff($old, $new);
         return $this->colorConsoleDiffFormatter->format($diff);
     }
-
-    private function createDiffer(): Differ
+    private function createDiffer() : Differ
     {
         $unifiedDiffOutputBuilder = new UnifiedDiffOutputBuilder('');
         PrivatesAccessor::writePrivateProperty($unifiedDiffOutputBuilder, 'contextLines', 10000);
-
         return new Differ($unifiedDiffOutputBuilder);
     }
 }
