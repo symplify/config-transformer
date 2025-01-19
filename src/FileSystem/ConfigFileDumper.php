@@ -44,8 +44,9 @@ final class ConfigFileDumper
 
         // wet run - change the contents
         $fileTitle = sprintf(
-            'File "%s" was renamed to "%s"',
+            '"%s" was renamed to%s"%s"',
             $convertedContent->getOriginalRelativeFilePath(),
+            PHP_EOL,
             $convertedContent->getNewRelativeFilePath(),
         );
 
