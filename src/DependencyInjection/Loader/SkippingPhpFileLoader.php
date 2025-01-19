@@ -1,17 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\DependencyInjection\Loader;
 
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-
+use ConfigTransformerPrefix202501\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * This is needed to avoid loading the PHP file.
  */
 final class SkippingPhpFileLoader extends PhpFileLoader
 {
-    public function load(mixed $resource, string $type = null): string
+    /**
+     * @param mixed $resource
+     */
+    public function load($resource, string $type = null) : string
     {
         return '';
     }

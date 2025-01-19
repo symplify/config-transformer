@@ -1,77 +1,11 @@
 {
     "name": "symplify/config-transformer",
-    "description": "Convert Symfony YAML/XML format to PHP/YAML",
+    "description": "Prefixed version of Symfony YAML/XML to PHP/YAML config converter",
     "license": "MIT",
+    "require": {
+        "php": ">=7.2"
+    },
     "bin": [
         "bin/config-transformer"
-    ],
-    "require": {
-        "php": ">=8.2",
-        "nette/utils": "^3.2|^4.0",
-        "nikic/php-parser": "^5.4",
-        "sebastian/diff": "^5.0",
-        "symfony/config": "^6.4",
-        "symfony/console": "^6.4",
-        "symfony/dependency-injection": "6.1.*",
-        "symfony/expression-language": "^6.4",
-        "symfony/filesystem": "^6.4",
-        "symfony/finder": "^6.4",
-        "symfony/yaml": "^6.4",
-        "symplify/php-config-printer": "^12.0.2",
-        "webmozart/assert": "^1.11"
-    },
-    "require-dev": {
-        "php-parallel-lint/php-parallel-lint": "^1.4",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^10.5",
-        "rector/rector": "^2.0",
-        "shipmonk/composer-dependency-analyser": "^1.8",
-        "symplify/easy-coding-standard": "^12.3",
-        "symplify/phpstan-extensions": "^12.0",
-        "symplify/vendor-patches": "^11.3",
-        "tomasvotruba/class-leak": "^2.0",
-        "tomasvotruba/unused-public": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Symplify\\ConfigTransformer\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Symplify\\ConfigTransformer\\Tests\\": "tests"
-        }
-    },
-    "config": {
-        "sort-packages": true,
-        "platform-check": false,
-        "allow-plugins": {
-            "cweagans/composer-patches": true,
-            "phpstan/extension-installer": true
-        }
-    },
-    "extra": {
-        "patches": {
-            "symfony/dependency-injection": [
-                "patches/symfony-dependency-injection-loader-yamlfileloader-php.patch",
-                "patches/symfony-dependency-injection-definition-php.patch"
-            ]
-        },
-        "enable-patching": true
-    },
-    "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-intl-grapheme": "*",
-        "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*",
-        "symfony/polyfill-php82": "*"
-    },
-    "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse --ansi",
-        "rector": "vendor/bin/rector process --dry-run --ansi"
-    }
+    ]
 }
