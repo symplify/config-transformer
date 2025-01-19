@@ -23,6 +23,6 @@ final class ConfigTransformerApplication extends Application
         $this->get('completion')->setHidden();
 
         // make single command application for fast run
-        $this->setDefaultCommand($switchFormatCommand->getName());
+        $this->setDefaultCommand($switchFormatCommand->getName(), true);
     }
 }
