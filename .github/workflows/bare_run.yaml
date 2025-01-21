@@ -29,5 +29,5 @@ jobs:
             -   run: composer require symplify/config-transformer --dev --ansi
                 working-directory: nested-dir
 
-            -   run: vendor/bin/config-transformer list --ansi
+            -   run: vendor/bin/config-transformer -h --ansi
                 working-directory: nested-dir
