@@ -6,7 +6,6 @@ namespace Symplify\ConfigTransformer\FileSystem;
 
 use Nette\Utils\FileSystem;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\ConfigTransformer\Console\ConsoleDiffer;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 
@@ -14,7 +13,6 @@ final class ConfigFileDumper
 {
     public function __construct(
         private readonly SymfonyStyle $symfonyStyle,
-        private readonly ConsoleDiffer $consoleDiffer
     ) {
     }
 
@@ -31,14 +29,6 @@ final class ConfigFileDumper
                 $convertedContent->getNewRelativeFilePath(),
             );
             $this->symfonyStyle->title($fileTitle);
-
-            $consoleDiff = $this->consoleDiffer->diff(
-                $convertedContent->getOriginalContent(),
-                $convertedContent->getConvertedContent()
-            );
-
-            $this->symfonyStyle->writeln($consoleDiff);
-
             return;
         }
 
@@ -50,7 +40,7 @@ final class ConfigFileDumper
             $convertedContent->getNewRelativeFilePath(),
         );
 
-        $this->symfonyStyle->title($fileTitle);
+        $this->symfonyStyle->writeln($fileTitle);
 
         FileSystem::write($newFileRealPath, $convertedContent->getConvertedContent());
     }
