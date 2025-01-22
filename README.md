@@ -22,7 +22,9 @@ composer require symplify/config-transformer --dev
 
 ## Usage
 
-By default, the command uses `/config` directory to transform all files in it. At first, try to run it with `--dry-run`, just to see what files *would be* transformed:
+By default, the command uses `/config` directory to transform all files in it.
+
+At first, run it with `--dry-run` to see what files *would be* transformed:
 
 ```bash
 vendor/bin/config-transformer --dry-run
