@@ -19,16 +19,36 @@ composer require symplify/config-transformer --dev
 
 ## Usage
 
-By default, the command uses `/config` directory to transform all files in it:
+By default, the command uses `/config` directory to transform all files in it. At first, try to run it with `--dry-run`, just to see what files *would be* transformed:
+
+```bash
+vendor/bin/config-transformer --dry-run
+```
+
+<br>
+
+Do you want to convert single file or directory at a time? Specify the paths as arguments:
+
+```bash
+vendor/bin/config-transformer config/parameters.yml  --dry-run
+```
+
+<br>
+
+Are you ready to go? Remove `--dry-run`:
 
 ```bash
 vendor/bin/config-transformer
 ```
 
-Do you want to convert 1 files or directory at a time? Specify the paths as arguments:
+The input files are deleted automatically.
+
+<br>
+
+### Skip Routes at First
+
+It's typical to upgrade first services and then routes as follow up PR. To do that, use `--skip-routes` option:
 
 ```bash
-vendor/bin/config-transformer convert config/parameters.yml
+vendor/bin/config-transformer --skip-routes
 ```
-
-The input files are deleted automatically.

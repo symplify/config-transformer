@@ -32,6 +32,8 @@ final class ConfigTransformerApplication extends Application
         $defaultInputDefinition = parent::getDefaultInputDefinition();
 
         $options = $defaultInputDefinition->getOptions();
+
+        // allow using -n as --dry-run alias
         unset($options['quiet'], $options['no-interaction']);
         $defaultInputDefinition->setOptions($options);
 

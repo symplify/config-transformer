@@ -14,7 +14,8 @@ final class ConfigurationFactory
     {
         $source = (array) $input->getArgument(Option::SOURCES);
         $isDryRun = (bool) $input->getOption(Option::DRY_RUN);
+        $areRoutesIncluded = ! $input->getOption(Option::SKIP_ROUTES);
 
-        return new Configuration($source, $isDryRun);
+        return new Configuration($source, $isDryRun, $areRoutesIncluded);
     }
 }

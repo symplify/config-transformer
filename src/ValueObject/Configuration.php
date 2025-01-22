@@ -11,7 +11,8 @@ final class Configuration
      */
     public function __construct(
         private readonly array $sources,
-        private readonly bool $isDryRun
+        private readonly bool $isDryRun,
+        private readonly bool $areRoutesIncluded
     ) {
     }
 
@@ -26,5 +27,10 @@ final class Configuration
     public function isDryRun(): bool
     {
         return $this->isDryRun;
+    }
+
+    public function areRoutesIncluded(): bool
+    {
+        return $this->areRoutesIncluded;
     }
 }

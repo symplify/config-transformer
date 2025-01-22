@@ -16,6 +16,7 @@ use Symplify\ConfigTransformer\Configuration\ConfigurationFactory;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
 use Symplify\ConfigTransformer\FileSystem\ConfigFileDumper;
 use Symplify\ConfigTransformer\Finder\ConfigFileFinder;
+use Symplify\ConfigTransformer\Routing\RoutingConfigDetector;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;
 use Symplify\ConfigTransformer\ValueObject\Option;
@@ -28,6 +29,7 @@ final class SwitchFormatCommand extends Command
         private readonly ConfigFormatConverter $configFormatConverter,
         private readonly ConfigFileFinder $configFileFinder,
         private readonly SymfonyStyle $symfonyStyle,
+        private readonly RoutingConfigDetector $routingConfigDetector
     ) {
         parent::__construct();
     }
@@ -47,6 +49,7 @@ final class SwitchFormatCommand extends Command
         );
 
         $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addOption(Option::SKIP_ROUTES, null, InputOption::VALUE_NONE, 'Skip routing configs, e.g. to handle services first');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -54,6 +57,11 @@ final class SwitchFormatCommand extends Command
         $configuration = $this->configurationFactory->createFromInput($input);
 
         $fileInfos = $this->configFileFinder->findFileInfos($configuration->getSources());
+
+        if ($configuration->areRoutesIncluded() === false) {
+            // remove routing files if excluded
+            $fileInfos = array_filter($fileInfos, fn (SplFileInfo $fileInfo): bool => !$this->routingConfigDetector->isRoutingFilePath($fileInfo->getRealPath()));
+        }
 
         if ($fileInfos === []) {
             $this->symfonyStyle->success('No YAML configs found, good job!');
@@ -66,40 +74,39 @@ final class SwitchFormatCommand extends Command
             $convertedContent = new ConvertedContent($convertedFileContent, $fileInfo);
 
             $this->configFileDumper->dumpFile($convertedContent, $configuration);
-            $this->removeOriginalYamlFileInfo($configuration, $fileInfo);
+
+            if (! $configuration->isDryRun()) {
+                FileSystem::delete($fileInfo->getRealPath());
+            }
 
             $this->symfonyStyle->newLine();
         }
 
+        return $this->printResult($configuration, $fileInfos);
+    }
+
+    /**
+     * @param SplFileInfo[] $fileInfos
+     */
+    private function printResult(Configuration $configuration, array $fileInfos): int
+    {
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
-            $errorMessage = sprintf(
-                '%d file%s would be switched to PHP',
+            $this->symfonyStyle->error(sprintf(
+                '%d file%s would be transformed to PHP format',
                 count($fileInfos),
                 count($fileInfos) === 1 ? '' : 's'
-            );
-            $this->symfonyStyle->error($errorMessage);
+            ));
 
             return self::FAILURE;
         }
 
-        $successMessage = sprintf(
+        $this->symfonyStyle->success(sprintf(
             'Transformed %d file%s to PHP format',
             count($fileInfos),
             count($fileInfos) === 1 ? '' : 's'
-        );
-        $this->symfonyStyle->success($successMessage);
+        ));
 
         return self::SUCCESS;
-    }
-
-    private function removeOriginalYamlFileInfo(Configuration $configuration, SplFileInfo $fileInfo): void
-    {
-        // only dry run, nothing to remove
-        if ($configuration->isDryRun()) {
-            return;
-        }
-
-        FileSystem::delete($fileInfo->getRealPath());
     }
 }
