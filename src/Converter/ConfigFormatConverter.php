@@ -31,7 +31,7 @@ final class ConfigFormatConverter
             return $this->yamlToPhpConverter->convert($dumpedContainerContent, $fileInfo->getRealPath());
         }
 
-        $message = sprintf('Suffix "%s" is not support yet', $fileInfo->getExtension());
+        $message = sprintf('Suffix "%s" is not supported', $fileInfo->getExtension());
         throw new NotImplementedYetException($message);
     }
 }

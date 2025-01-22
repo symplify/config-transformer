@@ -18,29 +18,20 @@ final class ConfigFileDumper
 
     public function dumpFile(ConvertedContent $convertedContent, Configuration $configuration): void
     {
-        $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
-
-        $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
-
         if ($configuration->isDryRun()) {
-            $fileTitle = sprintf(
-                'File "%s" would be renamed to "%s"',
-                $convertedContent->getOriginalRelativeFilePath(),
-                $convertedContent->getNewRelativeFilePath(),
-            );
-            $this->symfonyStyle->title($fileTitle);
+            // report only
+            $this->symfonyStyle->writeln($convertedContent->getOriginalRelativeFilePath() . ' would be removed');
+            $this->symfonyStyle->writeln($convertedContent->getNewRelativeFilePath() . ' would be added');
+            $this->symfonyStyle->newLine();
             return;
         }
 
-        // wet run - change the contents
-        $fileTitle = sprintf(
-            '"%s" was renamed to%s"%s"',
-            $convertedContent->getOriginalRelativeFilePath(),
-            PHP_EOL,
-            $convertedContent->getNewRelativeFilePath(),
-        );
+        $this->symfonyStyle->writeln($convertedContent->getOriginalRelativeFilePath() . ' removed');
+        $this->symfonyStyle->writeln($convertedContent->getNewRelativeFilePath() . ' added');
+        $this->symfonyStyle->newLine();
 
-        $this->symfonyStyle->writeln($fileTitle);
+        $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
+        $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
 
         FileSystem::write($newFileRealPath, $convertedContent->getConvertedContent());
     }

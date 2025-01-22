@@ -74,7 +74,7 @@ final class SwitchFormatCommand extends Command
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
             $errorMessage = sprintf(
-                '%d file%s would be switched to PHP',
+                '%d file%s would be transformed to PHP format',
                 count($fileInfos),
                 count($fileInfos) === 1 ? '' : 's'
             );
