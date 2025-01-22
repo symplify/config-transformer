@@ -15,4 +15,10 @@ final class Option
      * @var string
      */
     public const SOURCES = 'sources';
+
+
+    /**
+     * @var string
+     */
+    public const SKIP_ROUTES = 'skip-routes';
 }
