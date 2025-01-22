@@ -44,9 +44,4 @@ final class ConvertedContent
     {
         return RelativeFilePathHelper::resolveFromDirectory($this->originalFileInfo->getRealPath(), getcwd());
     }
-
-    public function getOriginalContent(): string
-    {
-        return $this->originalFileInfo->getContents();
-    }
 }

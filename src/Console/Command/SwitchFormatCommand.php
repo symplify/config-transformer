@@ -46,7 +46,7 @@ final class SwitchFormatCommand extends Command
             [getcwd() . '/config']
         );
 
-        $this->addOption(Option::DRY_RUN, null, InputOption::VALUE_NONE, 'Dry run - no removal or config change');
+        $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -73,13 +73,21 @@ final class SwitchFormatCommand extends Command
 
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
-            $successMessage = sprintf('%d file(s) should be switched to PHP', count($fileInfos));
-            $this->symfonyStyle->error($successMessage);
+            $errorMessage = sprintf(
+                '%d file%s would be switched to PHP',
+                count($fileInfos),
+                count($fileInfos) === 1 ? '' : 's'
+            );
+            $this->symfonyStyle->error($errorMessage);
 
             return self::FAILURE;
         }
 
-        $successMessage = sprintf('Processed %d file(s) to "PHP" format, congrats!', count($fileInfos));
+        $successMessage = sprintf(
+            'Transformed %d file%s to PHP format',
+            count($fileInfos),
+            count($fileInfos) === 1 ? '' : 's'
+        );
         $this->symfonyStyle->success($successMessage);
 
         return self::SUCCESS;
