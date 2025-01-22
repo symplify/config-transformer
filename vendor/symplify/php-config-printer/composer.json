@@ -1,0 +1,49 @@
+{
+    "name": "symplify\/php-config-printer",
+    "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "nette\/utils": "^3.2",
+        "nikic\/php-parser": "^5.3",
+        "symfony\/yaml": "^6.4"
+    },
+    "require-dev": {
+        "myclabs\/php-enum": "^1.8",
+        "phpstan\/extension-installer": "^1.4",
+        "phpstan\/phpstan": "^2.1",
+        "phpunit\/phpunit": "^10.5",
+        "rector\/rector": "^2.0",
+        "phpecs\/phpecs": "^2.0",
+        "symplify\/easy-testing": "^11.1",
+        "symplify\/phpstan-extensions": "^12.0",
+        "tomasvotruba\/class-leak": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Symplify\\PhpConfigPrinter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+        },
+        "files": [
+            "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_objects_function.php",
+            "tests\/Printer\/SmartPhpConfigPrinter\/Source\/custom_inline_object_function.php"
+        ]
+    },
+    "scripts": {
+        "check-cs": "vendor\/bin\/ecs check --ansi",
+        "fix-cs": "vendor\/bin\/ecs check --fix --ansi",
+        "phpstan": "vendor\/bin\/phpstan analyse --ansi",
+        "rector": "vendor\/bin\/rector process --dry-run --ansi"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans\/composer-patches": true,
+            "phpstan\/extension-installer": true
+        }
+    }
+}
