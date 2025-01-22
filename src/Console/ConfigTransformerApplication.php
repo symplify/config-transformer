@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\Console;
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symplify\ConfigTransformer\Console\Command\SwitchFormatCommand;
 
 final class ConfigTransformerApplication extends Application
@@ -24,5 +25,16 @@ final class ConfigTransformerApplication extends Application
 
         // make single command application for fast run
         $this->setDefaultCommand($switchFormatCommand->getName(), true);
+    }
+
+    protected function getDefaultInputDefinition(): InputDefinition
+    {
+        $defaultInputDefinition = parent::getDefaultInputDefinition();
+
+        $options = $defaultInputDefinition->getOptions();
+        unset($options['quiet'], $options['no-interaction']);
+        $defaultInputDefinition->setOptions($options);
+
+        return $defaultInputDefinition;
     }
 }
