@@ -10,6 +10,8 @@ Why to PHP? It's the best format for PHP Symfony applications:
 * [10 Cool Features You Get after switching from YAML to PHP Configs](https://tomasvotruba.com/blog/2020/07/16/10-cool-features-you-get-after-switching-from-yaml-to-php-configs/)
 * [How to Switch from YAML/XML Configs to PHP Today with Symplify](https://tomasvotruba.com/blog/2020/07/27/how-to-switch-from-yaml-xml-configs-to-php-today-with-migrify/)
 
+<br>
+
 ## Install
 
 ```bash
