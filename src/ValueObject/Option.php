@@ -16,7 +16,6 @@ final class Option
      */
     public const SOURCES = 'sources';
 
-
     /**
      * @var string
      */

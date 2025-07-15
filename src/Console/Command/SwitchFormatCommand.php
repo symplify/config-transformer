@@ -59,7 +59,7 @@ final class SwitchFormatCommand extends Command
 
         if ($configuration->areRoutesIncluded() === false) {
             // remove routing files if excluded
-            $fileInfos = array_filter($fileInfos, fn (SplFileInfo $fileInfo): bool => !$this->routingConfigDetector->isRoutingFilePath($fileInfo->getRealPath()));
+            $fileInfos = array_filter($fileInfos, fn (SplFileInfo $fileInfo): bool => ! $this->routingConfigDetector->isRoutingFilePath($fileInfo->getRealPath()));
         }
 
         if ($fileInfos === []) {
