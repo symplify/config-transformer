@@ -19,13 +19,18 @@ final class ConfigFileDumper
     public function dumpFile(ConvertedContent $convertedContent, Configuration $configuration): void
     {
         $this->symfonyStyle->writeln(sprintf(
-            'Converting "<fg=yellow>%s</>"%sto"<fg=green>%s</>"%s',
+            'Converting "<fg=yellow>%s</>"%sto "<fg=green>%s</>"%s',
             $convertedContent->getOriginalRelativeFilePath(),
             PHP_EOL,
             $convertedContent->getNewRelativeFilePath(),
             $configuration->isDryRun() ? ' (dry run)' : ''
         ));
         $this->symfonyStyle->newLine();
+
+        // do not modify files
+        if ($configuration->isDryRun()) {
+            return;
+        }
 
         $originalFilePathWithoutSuffix = $convertedContent->getOriginalFilePathWithoutSuffix();
         $newFileRealPath = $originalFilePathWithoutSuffix . '.php';
