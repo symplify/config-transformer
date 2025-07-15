@@ -78,8 +78,6 @@ final class SwitchFormatCommand extends Command
             if (! $configuration->isDryRun()) {
                 FileSystem::delete($fileInfo->getRealPath());
             }
-
-            $this->symfonyStyle->newLine();
         }
 
         return $this->printResult($configuration, $fileInfos);
