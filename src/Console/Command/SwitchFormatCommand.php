@@ -45,7 +45,6 @@ final class SwitchFormatCommand extends Command
             Option::SOURCES,
             InputArgument::IS_ARRAY,
             'Path to directory/file with configs',
-            [getcwd() . '/config']
         );
 
         $this->addOption(Option::DRY_RUN, 'n', InputOption::VALUE_NONE, 'Dry run - no removal or config change');
