@@ -1,28 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject\DependencyInjection\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-
+use ConfigTransformerPrefix202507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ConfigTransformerPrefix202507\Symfony\Component\DependencyInjection\Extension\Extension;
 final class AliasConfigurableExtension extends Extension
 {
-    public function __construct(
-        private readonly string $alias
-    ) {
+    /**
+     * @readonly
+     * @var string
+     */
+    private $alias;
+    public function __construct(string $alias)
+    {
+        $this->alias = $alias;
     }
-
-    public function getAlias(): string
+    public function getAlias() : string
     {
         return $this->alias;
     }
-
     /**
      * @param string[] $configs
      */
-    public function load(array $configs, ContainerBuilder $containerBuilder): void
+    public function load(array $configs, ContainerBuilder $containerBuilder) : void
     {
     }
 }
