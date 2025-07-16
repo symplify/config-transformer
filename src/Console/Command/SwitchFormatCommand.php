@@ -89,7 +89,7 @@ final class SwitchFormatCommand extends Command
     {
         // report fail in CI in case of changed files to notify the users about old configs
         if ($configuration->isDryRun()) {
-            $this->symfonyStyle->error(sprintf(
+            $this->symfonyStyle->warning(sprintf(
                 '%d file%s would be transformed to PHP format',
                 count($fileInfos),
                 count($fileInfos) === 1 ? '' : 's'
