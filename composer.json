@@ -1,6 +1,6 @@
 {
     "name": "symplify/config-transformer",
-    "description": "Convert Symfony YAML/XML format to PHP/YAML",
+    "description": "Convert Symfony YAML configs to PHP",
     "license": "MIT",
     "bin": [
         "bin/config-transformer"
