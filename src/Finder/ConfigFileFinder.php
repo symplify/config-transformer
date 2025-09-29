@@ -13,7 +13,7 @@ final class ConfigFileFinder
      * @see https://regex101.com/r/jmxqCg/1
      * @var string
      */
-    private const CONFIG_SUFFIXES_REGEX = '#\.(yml|yaml|xml)$#';
+    private const CONFIG_SUFFIXES_REGEX = '#\.(yml|yaml)$#';
 
     /**
      * @param string[] $sources
