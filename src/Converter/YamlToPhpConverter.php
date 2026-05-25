@@ -32,11 +32,8 @@ final class YamlToPhpConverter
     {
         /** @var mixed[]|null $yamlArray */
         $yamlArray = $this->parser->parse($yaml, Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_CONSTANT);
-        if ($yamlArray === null) {
-            return '';
-        }
 
-        return $this->convertYamlArray($yamlArray, $filePath);
+        return $this->convertYamlArray($yamlArray ?? [], $filePath);
     }
 
     /**
