@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Converter;
 
+use PhpParser\Node\Stmt;
 use PhpParser\NodeTraverser;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
@@ -53,7 +54,7 @@ final class YamlToPhpConverter
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new StripDirInPathStartingWithParameterNodeVisitor());
 
-        /** @var \PhpParser\Node\Stmt[] $stmts */
+        /** @var Stmt[] $stmts */
         $stmts = $nodeTraverser->traverse([$return]);
 
         return $this->phpParserPhpConfigPrinter->prettyPrintFile($stmts);
