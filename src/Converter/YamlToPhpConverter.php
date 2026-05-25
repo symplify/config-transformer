@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Converter;
 
+use PhpParser\Node\Stmt;
+use PhpParser\NodeTraverser;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\ConfigTransformer\NodeVisitor\StripDirInPathStartingWithParameterNodeVisitor;
 use Symplify\ConfigTransformer\Routing\RoutingConfigDetector;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
@@ -48,6 +51,12 @@ final class YamlToPhpConverter
             $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         }
 
-        return $this->phpParserPhpConfigPrinter->prettyPrintFile([$return]);
+        $nodeTraverser = new NodeTraverser();
+        $nodeTraverser->addVisitor(new StripDirInPathStartingWithParameterNodeVisitor());
+
+        /** @var Stmt[] $stmts */
+        $stmts = $nodeTraverser->traverse([$return]);
+
+        return $this->phpParserPhpConfigPrinter->prettyPrintFile($stmts);
     }
 }
