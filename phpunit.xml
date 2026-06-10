@@ -3,6 +3,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>tests</directory>
+            <directory>packages/php-config-printer/tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

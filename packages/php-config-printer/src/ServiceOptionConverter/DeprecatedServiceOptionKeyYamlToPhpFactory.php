@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
+
+use PhpParser\Node\Expr\MethodCall;
+use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+
+final readonly class DeprecatedServiceOptionKeyYamlToPhpFactory implements ServiceOptionsKeyYamlToPhpFactoryInterface
+{
+    public function __construct(
+        private ArgsNodeFactory $argsNodeFactory
+    ) {
+    }
+
+    public function decorateServiceMethodCall(
+        mixed $key,
+        mixed $yaml,
+        mixed $values,
+        MethodCall $methodCall
+    ): MethodCall {
+        // the old, simple format
+        if (! is_array($yaml)) {
+            $args = $this->argsNodeFactory->createFromValues([$yaml]);
+        } else {
+            $items = [$yaml['package'] ?? '', $yaml['version'] ?? '', $yaml['message'] ?? ''];
+
+            $args = $this->argsNodeFactory->createFromValues($items);
+        }
+
+        return new MethodCall($methodCall, 'deprecate', $args);
+    }
+
+    public function isMatch(mixed $key, mixed $values): bool
+    {
+        return $key === YamlServiceKey::DEPRECATED;
+    }
+}
