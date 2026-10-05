@@ -103,7 +103,7 @@ final readonly class StringExprResolver
         return (bool) Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
     }
 
-    private function resolveClassType(bool $skipClassesToConstantReference, string $value): String_ | ClassConstFetch
+    private function resolveClassType(bool $skipClassesToConstantReference, string $value): String_|ClassConstFetch
     {
         if ($skipClassesToConstantReference) {
             return new String_($value);

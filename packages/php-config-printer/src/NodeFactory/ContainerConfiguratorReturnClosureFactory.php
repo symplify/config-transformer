@@ -209,7 +209,7 @@ final readonly class ContainerConfiguratorReturnClosureFactory
         return $stmts;
     }
 
-    private function resolveStmt(string $key, int | string $nestedKey, mixed $nestedValues): ?Stmt
+    private function resolveStmt(string $key, int|string $nestedKey, mixed $nestedValues): ?Stmt
     {
         foreach ($this->caseConverters as $caseConverter) {
             if (! $caseConverter->match($key, $nestedKey, $nestedValues)) {
