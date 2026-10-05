@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer;
 
-use Nette\Utils\FileSystem;
-use Nette\Utils\Strings;
+use Entropy\Utils\FileSystem;
+use Entropy\Utils\Regex;
 use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -53,14 +53,14 @@ final class ConfigLoader
         $content = $fileInfo->getContents();
 
         // fake quoting of parameter, as it was removed in Symfony 3.1: https://symfony.com/blog/new-in-symfony-3-1-yaml-deprecations
-        $content = Strings::replace(
+        $content = Regex::replace(
             $content,
             self::UNQUOTED_PARAMETER_REGEX,
             static fn (array $match): string => $match[1] . '"' . $match[2] . ($match[4] ?? '') . '"'
         );
 
         if (in_array($fileInfo->getExtension(), [Format::YML, Format::YAML], true)) {
-            $content = Strings::replace(
+            $content = Regex::replace(
                 $content,
                 self::PHP_CONST_REGEX,
                 static fn (array $match): string => '"%const(' . str_replace(
@@ -71,6 +71,7 @@ final class ConfigLoader
             );
             if ($content !== $fileInfo->getContents()) {
                 $fileRealPath = sys_get_temp_dir() . '/__symplify_config_tranformer_clean_yaml/' . $fileInfo->getFilename();
+                FileSystem::ensureDirectoryExists(dirname($fileRealPath));
                 FileSystem::write($fileRealPath, $content);
             }
 

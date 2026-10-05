@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
@@ -53,7 +54,10 @@ final readonly class AliasCaseConverter implements CaseConverterInterface
         }
 
         // handles: "SomeClass $someVariable: ..."
-        $fullClassName = Strings::before($key, ' $');
+        $variableSeparatorPosition = strpos($key, ' $');
+        $fullClassName = $variableSeparatorPosition === false
+            ? null
+            : substr($key, 0, $variableSeparatorPosition);
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
             return new Expression($methodCall);
@@ -82,7 +86,7 @@ final readonly class AliasCaseConverter implements CaseConverterInterface
             return true;
         }
 
-        if (Strings::match($key, self::NAMED_ALIAS_REGEX)) {
+        if (Regex::match($key, self::NAMED_ALIAS_REGEX) !== []) {
             return true;
         }
 
@@ -99,7 +103,7 @@ final readonly class AliasCaseConverter implements CaseConverterInterface
 
         $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
 
-        Strings::match($key, self::ARGUMENT_NAME_REGEX);
+        Regex::match($key, self::ARGUMENT_NAME_REGEX);
         $argumentName = '$' . Strings::after($key, '$');
 
         $concat = new Concat($classConstFetch, new String_(' ' . $argumentName));

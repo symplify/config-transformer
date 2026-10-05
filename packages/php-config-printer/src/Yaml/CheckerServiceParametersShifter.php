@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\Yaml;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use Symplify\PhpConfigPrinter\StringFormatConverter;
 
 /**
@@ -215,6 +215,6 @@ final class CheckerServiceParametersShifter
             return $value;
         }
 
-        return Strings::replace($value, '#^@#', '@@');
+        return Regex::replace($value, '#^@#', '@@');
     }
 }

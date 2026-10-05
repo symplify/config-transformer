@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Console\Command;
 
-use Nette\Utils\FileSystem;
+use Entropy\Utils\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

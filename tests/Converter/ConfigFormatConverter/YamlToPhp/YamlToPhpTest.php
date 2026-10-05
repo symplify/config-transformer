@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\YamlToPhp;
 
+use Entropy\Utils\FileSystem;
 use Iterator;
-use Nette\Utils\FileSystem;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\Converter\ConfigFormatConverter;
@@ -47,18 +47,18 @@ final class YamlToPhpTest extends AbstractTestCase
         $filesystem->mirror(__DIR__ . '/Fixture/normal', $temporaryPath);
 
         // for the "resource: items/"
-        FileSystem::createDir($temporaryPath . '/items');
+        FileSystem::ensureDirectoryExists($temporaryPath . '/items');
 
         // for the "resource: packages/" and assetic import
-        FileSystem::copy(__DIR__ . '/Fixture/normal/import_assetic/packages', $temporaryPath . '/packages');
+        $filesystem->mirror(__DIR__ . '/Fixture/normal/import_assetic/packages', $temporaryPath . '/packages');
 
         // for the "resource: directory-with-php/" and PHP config import
-        FileSystem::copy(
+        $filesystem->mirror(
             __DIR__ . '/Fixture/skip-imported-php/directory-with-php',
             $temporaryPath . '/directory-with-php'
         );
 
-        FileSystem::copy(
+        $filesystem->mirror(
             __DIR__ . '/Fixture/normal/directory-with-unquoted-strings',
             $temporaryPath . '/directory-with-unquoted-strings'
         );

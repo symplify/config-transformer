@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Tests\Helper;
 
-use Nette\Utils\FileSystem;
+use Entropy\Utils\FileSystem;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**

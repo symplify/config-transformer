@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\Naming;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Strings;
 
 final class ClassNaming
 {

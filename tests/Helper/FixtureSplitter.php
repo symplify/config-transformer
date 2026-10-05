@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\Tests\Helper;
 
-use Nette\Utils\FileSystem;
-use Nette\Utils\Strings;
+use Entropy\Utils\FileSystem;
+use Entropy\Utils\Regex;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\Tests\Helper\ValueObject\InputAndExpected;
 use Symplify\ConfigTransformer\Tests\Helper\ValueObject\InputFileInfoAndExpectedFileInfo;
@@ -25,12 +25,12 @@ final class FixtureSplitter
 
     public static function splitFileInfoToInputAndExpected(SplFileInfo $smartFileInfo): InputAndExpected
     {
-        $splitLineCount = count(Strings::matchAll($smartFileInfo->getContents(), self::SPLIT_LINE_REGEX));
+        $splitLineCount = count(Regex::matchAll($smartFileInfo->getContents(), self::SPLIT_LINE_REGEX));
 
         // if more or less, it could be a test cases for monorepo line in it
         if ($splitLineCount === 1) {
             // input → expected
-            [$input, $expected] = Strings::split($smartFileInfo->getContents(), self::SPLIT_LINE_REGEX);
+            [$input, $expected] = Regex::split($smartFileInfo->getContents(), self::SPLIT_LINE_REGEX);
 
             $expected = self::retypeExpected($expected);
 
@@ -101,7 +101,7 @@ final class FixtureSplitter
 
     private static function createTemporaryPathWithPrefix(SplFileInfo $fileInfo, string $prefix): string
     {
-        $hash = Strings::substring(md5($fileInfo->getRealPath()), -20);
+        $hash = substr(md5($fileInfo->getRealPath()), -20);
 
         $fileBasename = $fileInfo->getBasename('.inc');
 

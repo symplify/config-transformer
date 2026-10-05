@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use Nette\Utils\Json;
 use PhpParser\Node\Arg;
 use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr;
@@ -169,8 +168,8 @@ final readonly class ContainerConfiguratorReturnClosureFactory
     private function isSameCond(Expr $expr, Identical $identical): bool
     {
         if ($expr instanceof Identical) {
-            $val1 = Json::encode($expr);
-            $val2 = Json::encode($identical);
+            $val1 = json_encode($expr);
+            $val2 = json_encode($identical);
             return $val1 === $val2;
         }
 

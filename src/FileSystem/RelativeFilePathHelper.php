@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\FileSystem;
 
+use Entropy\Validation\Assert;
 use Symfony\Component\Filesystem\Filesystem;
-use Webmozart\Assert\Assert;
 
 final class RelativeFilePathHelper
 {
