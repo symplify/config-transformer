@@ -15,7 +15,7 @@ use ReflectionClass;
 
 final class NewValueObjectFactory
 {
-    public function create(object $valueObject): New_ | StaticCall
+    public function create(object $valueObject): New_|StaticCall
     {
         $valueObjectClass = $valueObject::class;
 
