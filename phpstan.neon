@@ -1,6 +1,3 @@
-includes:
-    - phpstan-baseline.neon
-
 parameters:
     level: 8
 
@@ -22,6 +19,16 @@ parameters:
         -
             identifier: shipmonk.deadMethod
             message: '#^Unused .*?::__construct$#'
+
+        # service() is a Symfony configurator function, resolved at runtime
+        -
+            identifier: function.notFound
+            message: '#^Function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service not found\.$#'
+            path: config/config.php
+        -
+            identifier: function.notFound
+            message: '#^Used function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service not found\.$#'
+            path: config/config.php
 
         -
             message: '#Parameter \#1 \$commandName of method Symfony\\Component\\Console\\Application\:\:setDefaultCommand\(\) expects string, string\|null given#'
