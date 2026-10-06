@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 
 /**
  * @api
@@ -61,7 +61,7 @@ final class StringFormatConverter
 
     private static function camelCaseToGlue(string $input, string $glue): string
     {
-        $matches = Strings::matchAll($input, self::BIG_LETTER_REGEX);
+        $matches = Regex::matchAll($input, self::BIG_LETTER_REGEX);
 
         $parts = [];
         foreach ($matches as $match) {

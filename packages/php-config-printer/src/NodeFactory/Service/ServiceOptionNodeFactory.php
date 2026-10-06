@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
+use Entropy\Validation\Assert;
 use PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-use Webmozart\Assert\Assert;
 
 final readonly class ServiceOptionNodeFactory
 {

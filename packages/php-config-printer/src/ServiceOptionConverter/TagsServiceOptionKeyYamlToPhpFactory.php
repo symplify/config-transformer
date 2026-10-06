@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use Nette\Utils\Arrays;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Array_;
@@ -48,7 +47,10 @@ final readonly class TagsServiceOptionKeyYamlToPhpFactory implements ServiceOpti
             }
 
             $args = [];
-            $flattenedYmlLine = Arrays::flatten($yamlLine, true);
+            $flattenedYmlLine = [];
+            array_walk_recursive($yamlLine, static function ($value, $key) use (&$flattenedYmlLine): void {
+                $flattenedYmlLine[$key] = $value;
+            });
             foreach ($flattenedYmlLine as $singleNestedKey => $singleNestedValue) {
                 if ($singleNestedKey === 'name') {
                     $args[] = new Arg(BuilderHelpers::normalizeValue($singleNestedValue));

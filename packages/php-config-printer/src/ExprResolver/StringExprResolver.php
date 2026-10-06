@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
@@ -100,7 +100,7 @@ final readonly class StringExprResolver
 
     private function isFilePath(string $value): bool
     {
-        return (bool) Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
+        return Regex::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX) !== [];
     }
 
     private function resolveClassType(bool $skipClassesToConstantReference, string $value): String_|ClassConstFetch

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\FileSystem;
 
-use Nette\Utils\FileSystem;
+use Entropy\Utils\FileSystem;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\ConfigTransformer\ValueObject\Configuration;
 use Symplify\ConfigTransformer\ValueObject\ConvertedContent;

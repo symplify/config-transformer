@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\ConfigTransformer\ValueObject;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\FileSystem\RelativeFilePathHelper;
 
@@ -30,14 +31,14 @@ final class ConvertedContent
     public function getNewRelativeFilePath(): string
     {
         $originalRelativeFilePath = $this->getOriginalRelativeFilePath();
-        $relativeFilePathWithoutSuffix = Strings::before($originalRelativeFilePath, '.', -1);
+        $relativeFilePathWithoutSuffix = Strings::before($originalRelativeFilePath, '.', -1) ?? $originalRelativeFilePath;
 
         return $relativeFilePathWithoutSuffix . '.php';
     }
 
     public function getOriginalFilePathWithoutSuffix(): string
     {
-        return Strings::replace($this->originalFileInfo->getRealPath(), self::LAST_SUFFIX_REGEX, '');
+        return Regex::replace($this->originalFileInfo->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
 
     public function getOriginalRelativeFilePath(): string

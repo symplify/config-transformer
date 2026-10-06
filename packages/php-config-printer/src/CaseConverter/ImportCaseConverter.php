@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\BuilderHelpers;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
@@ -128,7 +128,7 @@ final readonly class ImportCaseConverter implements CaseConverterInterface
             return $value;
         }
 
-        return Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
+        return Regex::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
     }
 
     private function resolveExpr(mixed $value): Expr

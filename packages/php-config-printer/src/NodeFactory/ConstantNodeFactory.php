@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
@@ -25,8 +25,8 @@ final class ConstantNodeFactory
 
     public function createClassConstantIfValue(string $value, bool $checkExistence = true): ?ClassConstFetch
     {
-        $match = Strings::match($value, self::CLASS_CONST_FETCH_REGEX);
-        if ($match !== null) {
+        $match = Regex::match($value, self::CLASS_CONST_FETCH_REGEX);
+        if ($match !== []) {
             [$class, $constant] = explode('::', $value);
 
             // Ignore static factories (FQCN::method)

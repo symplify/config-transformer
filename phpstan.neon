@@ -36,6 +36,3 @@ parameters:
         -
             message: '#Instanceof between PhpParser\\Node\\ArrayItem and PhpParser\\Node\\ArrayItem will always evaluate to true#'
             path: packages/php-config-printer/src/NodeFactory/ContainerConfiguratorReturnClosureFactory.php
-        -
-            message: '#Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with iterable<Symplify\\PhpConfigPrinter\\Contract\\Converter\\ServiceOptionsKeyYamlToPhpFactoryInterface> and .* will always evaluate to true#'
-            path: packages/php-config-printer/src/NodeFactory/Service/ServiceOptionNodeFactory.php

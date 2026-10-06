@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\Printer;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\MethodCall;
@@ -84,13 +84,13 @@ final class PhpParserPhpConfigPrinter extends Standard
         $printedContent = parent::prettyPrintFile($stmts);
 
         // remove trailing spaces
-        $printedContent = Strings::replace($printedContent, self::START_WITH_SPACE_REGEX, "\n");
+        $printedContent = Regex::replace($printedContent, self::START_WITH_SPACE_REGEX, "\n");
 
         // remove space before " :" in main closure
-        $printedContent = Strings::replace($printedContent, self::VOID_AFTER_FUNC_REGEX, '): void');
+        $printedContent = Regex::replace($printedContent, self::VOID_AFTER_FUNC_REGEX, '): void');
 
         // remove space between declare strict types
-        $printedContent = Strings::replace($printedContent, self::DECLARE_SPACE_STRICT_REGEX, 'declare(strict');
+        $printedContent = Regex::replace($printedContent, self::DECLARE_SPACE_STRICT_REGEX, 'declare(strict');
 
         return $printedContent . PHP_EOL;
     }
@@ -120,7 +120,7 @@ final class PhpParserPhpConfigPrinter extends Standard
      */
     protected function pSingleQuotedString(string $string): string
     {
-        return "'" . Strings::replace($string, self::QUOTE_SLASH_REGEX, '\\\\$0') . "'";
+        return "'" . Regex::replace($string, self::QUOTE_SLASH_REGEX, '\\\\$0') . "'";
     }
 
     protected function pExpr_MethodCall(MethodCall $methodCall): string
@@ -131,8 +131,8 @@ final class PhpParserPhpConfigPrinter extends Standard
 
     private function indentFluentCallToNewline(string $content): string
     {
-        $nextCallIndentReplacement = ')' . PHP_EOL . Strings::indent('->', 8, ' ');
-        return Strings::replace($content, '#\)->#', $nextCallIndentReplacement);
+        $nextCallIndentReplacement = ')' . PHP_EOL . str_repeat(' ', 8) . '->';
+        return Regex::replace($content, '#\)->#', $nextCallIndentReplacement);
     }
 
     /**

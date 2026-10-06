@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PhpConfigPrinter\NodeModifier;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\Node\Arg;
 use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\Array_;
@@ -53,8 +53,8 @@ final readonly class SingleFactoryReferenceNodeModifier
 
         $factoryValue = $singleArrayItem->value;
 
-        $match = Strings::match($factoryValue->value, self::FACTORY_REGEX);
-        if ($match === null) {
+        $match = Regex::match($factoryValue->value, self::FACTORY_REGEX);
+        if ($match === []) {
             return;
         }
 
