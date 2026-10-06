@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\ConfigTransformer\ValueObject;
 
 use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use Symfony\Component\Finder\SplFileInfo;
 use Symplify\ConfigTransformer\FileSystem\RelativeFilePathHelper;
 
@@ -30,10 +31,7 @@ final class ConvertedContent
     public function getNewRelativeFilePath(): string
     {
         $originalRelativeFilePath = $this->getOriginalRelativeFilePath();
-        $lastDotPosition = strrpos($originalRelativeFilePath, '.');
-        $relativeFilePathWithoutSuffix = $lastDotPosition === false
-            ? $originalRelativeFilePath
-            : substr($originalRelativeFilePath, 0, $lastDotPosition);
+        $relativeFilePathWithoutSuffix = Strings::before($originalRelativeFilePath, '.', -1) ?? $originalRelativeFilePath;
 
         return $relativeFilePathWithoutSuffix . '.php';
     }
