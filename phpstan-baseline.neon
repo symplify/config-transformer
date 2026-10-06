@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: config/config.php
+
+		-
+			message: '#^Used function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: config/config.php

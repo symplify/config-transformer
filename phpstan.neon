@@ -1,3 +1,6 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     level: 8
 
@@ -15,6 +18,11 @@ parameters:
         - '*/Fixture/*'
 
     ignoreErrors:
+        # services are instantiated via the DI container
+        -
+            identifier: shipmonk.deadMethod
+            message: '#^Unused .*?::__construct$#'
+
         -
             message: '#Parameter \#1 \$commandName of method Symfony\\Component\\Console\\Application\:\:setDefaultCommand\(\) expects string, string\|null given#'
             path: src/Console/ConfigTransformerApplication.php
