@@ -54,10 +54,7 @@ final readonly class AliasCaseConverter implements CaseConverterInterface
         }
 
         // handles: "SomeClass $someVariable: ..."
-        $variableSeparatorPosition = strpos($key, ' $');
-        $fullClassName = $variableSeparatorPosition === false
-            ? null
-            : substr($key, 0, $variableSeparatorPosition);
+        $fullClassName = Strings::before($key, ' $');
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
             return new Expression($methodCall);
