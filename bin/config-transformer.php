@@ -23,11 +23,6 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-$scoperAutoloadFilepath = __DIR__ . '/../vendor/scoper-autoload.php';
-if (file_exists($scoperAutoloadFilepath)) {
-    require_once $scoperAutoloadFilepath;
-}
-
 $configTransformerContainerFactory = new ConfigTransformerContainerFactory();
 $container = $configTransformerContainerFactory->create();
 
